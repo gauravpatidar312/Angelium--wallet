@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-xxl-12">
+    <div class="row">
+      <div class="col-md-3" id="curr1">
+        <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
+      </div>
+      <div class="col-md-3" id="curr2">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-md-3" id="curr3">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-md-3" id="curr4">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Reward Allocation</nb-card-header>
+      <nb-card-body>
+        <ngx-echarts-pie></ngx-echarts-pie>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Reward Heaven
+      </nb-card-header>
+      <nb-card-body>
+        <ngx-echarts-area-stack></ngx-echarts-area-stack>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<nb-card>
+  <nb-card-header>
+    Your Reward <span class="right-align">Today Week Month Total</span>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" >
+    </ng2-smart-table>
+</nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header>
+    DownLine Tree 
+    <span class="right-align">Today Week Month Total</span>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settingsnew" [source]="source" >
+    </ng2-smart-table>
+</nb-card-body>
+</nb-card>
+<ngx-bubble-map></ngx-bubble-map>

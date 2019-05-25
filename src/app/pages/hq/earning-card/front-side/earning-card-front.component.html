@@ -1,0 +1,26 @@
+<nb-card-header>
+  <div class="curre">{{ selectedCurrency }} </div>
+  <div class="dropdown ghost-dropdown" ngbDropdown>
+    <button nbButton size="small" class="btn btn-primary" type="button" ngbDropdownToggle>
+      MONTH
+    </button>
+    <ul class="dropdown-menu" ngbDropdownMenu>
+      <li class="dropdown-item">Icon Button</li>
+      <li class="dropdown-item">Hero Button</li>
+      <li class="dropdown-item">Default</li>
+    </ul>
+  </div>
+</nb-card-header>
+
+<nb-card-body>
+  <div class="chart-info">
+    <div class="title"><span class="color-green">$</span> 300</div>
+    <div class="value" style="float:right;">{{ earningLiveUpdateCardData.dailyIncome | ngxNumberWithCommas }}</div>
+    <div class="delta" [class.up]="earningLiveUpdateCardData.delta.up"
+      [class.down]="!earningLiveUpdateCardData.delta.up">
+      {{ earningLiveUpdateCardData.delta.value }}%
+    </div>
+  </div>
+  <ngx-earning-live-update-chart [liveUpdateChartData]="liveUpdateChartData">
+  </ngx-earning-live-update-chart>
+</nb-card-body>

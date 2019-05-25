@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <nb-card-header>
+           <div class="navigation"><h1 class="link" style="text-align: center">TRANSFER</h1></div> 
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row row-grid">
+              <form id="Form1" class="width-full">
+                <div class=" row form-group">
+                  <div class="col-md-4 labeldata" ><a (click)="trasfertoggle('send')">Send</a></div>
+                  <div class="col-md-4 labeldata" (click)="trasfertoggle('recieve')">Receive</div>
+                  <div class="col-md-4 labeldata" (click)="trasfertoggle('otc')" >OTC</div>
+
+                </div>
+                <div class="clear-fix"></div>
+                <div class="form-group row">
+                  <div class="col-md-2" id="fromid">
+                    <label for="exampleInputEmail1" class="text-link">From</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="ANX" value="ANX">
+                  </div>
+                  <div class="col-md-3" id="fromaccount">
+                    <label for="exampleInputEmail1" class="text-link">Amount</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Amount" value="0.1313">
+                  </div>
+                  <div class="col-md-1 arrowtransfer"><i class="fas fa-arrow-right"></i></div>
+                  <div class="col-md-2" id="toid">
+                    <label for="exampleInputEmail1" class="text-link">To</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1"
+                      placeholder="Enter destination Address" value="BTC">
+                  </div>
+                  <div class="col-md-3" id="toaccount">
+                      <label for="exampleInputEmail1" class="text-link">Amount</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Amount" value="1023">
+                  </div>
+                </div>
+                <div class="clear-fix"></div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="equdiasusdhgdjhdghs.iq" value="">
+                </div>
+                <div class="form-group">
+                  <button type="submit" style="width:100%" class="btn btn-demo btn-success" size="large">RUN</button>
+                </div>
+                <div class="form-group textcenter">testestestesttest</div>
+              </form>
+
+            </div>
+
+
+          </nb-card-body>
+        </div>
+
+        <div class="col-md-2">
+          <!-- <img src="assets/images/barcode.png" height="100" width="200"> -->
+        </div>
+      </div>
+    </nb-card>
+  </div>
+
+
+</div>

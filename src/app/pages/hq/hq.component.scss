@@ -1,0 +1,55 @@
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+  ngx-d3-bar,
+  ngx-d3-pie,
+  ngx-d3-advanced-pie,
+  ngx-d3-area-stack,
+  ngx-d3-line,
+  ngx-d3-polar {
+    display: block;
+    width: 100%;
+    height: nb-theme(card-height-medium);
+
+    /deep/ {
+      .pie-label {
+        fill: nb-theme(color-fg-heading);
+      }
+
+      .grid-line-path {
+        stroke: nb-theme(separator);
+      }
+
+      text {
+        fill: nb-theme(color-fg-heading);
+      }
+      
+
+      .chart-legend {
+        .legend-labels {
+          background: nb-theme(color-bg);
+        }
+        .legend-label {
+          color: nb-theme(color-fg-heading);
+          .active .legend-label-text {
+            color: nb-theme(color-fg-heading);
+          }
+        }
+      }
+    }
+  }
+}
+.headerhq{
+    margin: nb-theme(layout-padding);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .txtcenter{
+      text-align: center;
+  }
+  .txtnum{
+      font-size: 2.5em;
+      top:0;
+      right: 0;
+      text-align: center;
+  }
