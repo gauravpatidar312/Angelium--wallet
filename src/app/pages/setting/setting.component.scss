@@ -3,9 +3,42 @@
 @import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
+  .show-grid {
+    .row {
+      margin: -0.5rem;
+    }
 
+    div[class^=col-] {
+      padding: 0.5rem;
+      box-sizing: border-box;
+
+      div {
+        text-align: center;
+        background-color: nb-theme(color-bg-active);
+        padding: 0.75rem 0.25rem;
+        border-radius: 0.25rem;
+      }
+    }
+  }
+
+  .grid-h {
+    margin-top: 1.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .table-responsive {
+    margin-top: 1rem;
+  }
   nb-card-body {
     overflow: visible;
+  }
+  $auth-layout-padding: 0.5rem;
+
+  nb-card {
+    height: calc(70vh - 2 * #{$auth-layout-padding});
   }
 
   .input-group {
@@ -154,4 +187,9 @@
   }
 }
 
-  
+.borderless td, .borderless th {
+  border: none;
+}
+.mright{
+  margin-right: 1rem;
+}
