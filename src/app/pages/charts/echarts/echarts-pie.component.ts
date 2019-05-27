@@ -30,23 +30,23 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['USA', 'Germany', 'France', 'Canada', 'Russia'],
+          data: ['ANX', 'HEAVEN', 'ANL', 'XP', 'BTC'],
           textStyle: {
             color: echarts.textColor,
           },
         },
         series: [
           {
-            name: 'Countries',
+            name: 'Portfolio',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
             data: [
-              { value: 335, name: 'Germany' },
-              { value: 310, name: 'France' },
-              { value: 234, name: 'Canada' },
-              { value: 135, name: 'Russia' },
-              { value: 1548, name: 'USA' },
+              { value: 335, name: 'ANX' },
+              { value: 310, name: 'HEAVEN' },
+              { value: 234, name: 'ANL' },
+              { value: 135, name: 'XP' },
+              { value: 1548, name: 'BTC' },
             ],
             itemStyle: {
               emphasis: {

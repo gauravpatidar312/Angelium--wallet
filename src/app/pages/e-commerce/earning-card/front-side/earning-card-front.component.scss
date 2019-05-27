@@ -8,8 +8,6 @@
 
   nb-card-header {
     flex-direction: row;
-    padding-top: 0.45rem;
-    padding-bottom: 0.45rem;
   }
 
   .dropdown {
@@ -31,15 +29,22 @@
 
   .title {
     color: nb-theme(color-fg-heading);
+    font-size: 2rem;
   }
 
   .value {
-    color: nb-theme(color-success);
-    font-size: 1.5rem;
+    color: nb-theme(color-fg-heading);
+    font-size: 0.75rem;
+    padding-left: 1.5rem;
 
     @include nb-for-theme(corporate) {
       color: nb-theme(color-primary);
     }
+  }
+
+  .text-daily {
+    font-size: 2rem;
+    color: nb-theme(color-success);
   }
 
   .delta {
@@ -48,7 +53,7 @@
     color: nb-theme(color-fg-heading);
     padding-left: 0.5rem;
     font-size: 1rem;
-    top: 0;
+    top: 40px;
     right: 0;
     @include nb-rtl(left, 1.25rem);
     @include nb-rtl(right, inherit);

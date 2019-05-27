@@ -1,5 +1,8 @@
 @import '../../../@theme/styles/themes';
 @import '~@nebular/bootstrap/styles/hero-buttons';
+@import '~@nebular/theme/styles/global/typography/typography';
+
+$shadow-green: #00977e;
 
 @include nb-install-component() {
   nb-card {
@@ -15,6 +18,73 @@
     .icon-container {
       height: 100%;
       padding: 0.625rem;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .status-dd-week {
+      width: 50%;
+      float: right;
+    }
+
+    /deep/ nb-progress-bar {
+      height: 0.6rem;
+      margin-top: 1rem;
+
+      .progress-container {
+        height: 0.6rem;
+        border-radius: 0;
+        margin-top: 0.5rem;
+      }
+
+      .progress-value {
+        height: 0.6rem;
+        background: nb-theme(progress-bar-background);
+
+        @include nb-for-theme(cosmic) {
+          box-shadow: 0 0.2rem $shadow-green;
+        }
+
+        @include nb-for-theme(corporate) {
+          height: 100%;
+        }
+      }
+    }
+
+    .delta {
+      position: absolute;
+      display: inline-block;
+      color: nb-theme(color-fg-heading);
+      padding-left: 0.5rem;
+      font-size: 1rem;
+      top: 20px;
+      left: 28px;
+      @include nb-rtl(left, 1.25rem);
+      @include nb-rtl(right, inherit);
+
+      &::before {
+        position: absolute;
+        content: '';
+        right: 100%;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+      }
+
+      &.down {
+        &::before {
+          bottom: 4px;
+          border-top: 7px solid text-danger();
+        }
+      }
+
+      &.up {
+        &::before {
+          top: 4px;
+          border-bottom: 7px solid text-success();
+        }
+      }
     }
 
     .icon {
