@@ -4,12 +4,14 @@ import { takeWhile } from 'rxjs/operators' ;
 import { SolarData } from '../../@core/data/solar';
 interface CardSettings {
   title: string;
+  value: string;
   iconClass: string;
   type: string;
 }
 
 @Component({
   selector: 'ngx-ecommerce',
+  styleUrls: ['./e-dashboard.component.scss'],
   templateUrl: './e-commerce.component.html',
 })
 export class ECommerceComponent implements OnDestroy {
@@ -17,34 +19,24 @@ export class ECommerceComponent implements OnDestroy {
   private alive = true;
 
   solarValue: number;
-  lightCard: CardSettings = {
-    title: 'Light',
-    iconClass: 'nb-lightbulb',
+  assetCard: CardSettings = {
+    title: 'Total Assets',
+    value: '572,900',
+    iconClass: 'fa fa-university',
     type: 'primary',
   };
-  rollerShadesCard: CardSettings = {
-    title: 'Roller Shades',
-    iconClass: 'nb-roller-shades',
-    type: 'success',
-  };
-  wirelessAudioCard: CardSettings = {
-    title: 'Wireless Audio',
-    iconClass: 'nb-audio',
-    type: 'info',
-  };
-  coffeeMakerCard: CardSettings = {
-    title: 'Coffee Maker',
-    iconClass: 'nb-coffee-maker',
-    type: 'warning',
+  gainCard: CardSettings = {
+    title: 'Total Gain',
+    value: '572,900',
+    iconClass: 'fa fa-chart-line',
+    type: 'primary',
   };
 
   statusCards1: string;
 
   commonStatusCardsSet: CardSettings[] = [
-    this.lightCard,
-    this.rollerShadesCard,
-    this.wirelessAudioCard,
-    this.coffeeMakerCard,
+    this.assetCard,
+    this.gainCard,
   ];
 
   statusCardsByThemes: {
@@ -56,21 +48,13 @@ export class ECommerceComponent implements OnDestroy {
     cosmic: this.commonStatusCardsSet,
     corporate: [
       {
-        ...this.lightCard,
-        type: 'warning',
-      },
-      {
-        ...this.rollerShadesCard,
+        ...this.assetCard,
         type: 'primary',
       },
       {
-        ...this.wirelessAudioCard,
-        type: 'danger',
-      },
-      {
-        ...this.coffeeMakerCard,
-        type: 'secondary',
-      },
+        ...this.gainCard,
+        type: 'primary',
+      }
     ],
   };
 

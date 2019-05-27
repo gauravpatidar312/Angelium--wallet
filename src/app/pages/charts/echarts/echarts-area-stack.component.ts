@@ -33,7 +33,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           },
         },
         legend: {
-          data: ['Mail marketing', 'Affiliate advertising', 'Video ad', 'Direct interview', 'Search engine'],
+          data: ['ANX', 'HEAVEN', 'ANL', 'XP', 'BTC'],
           textStyle: {
             color: echarts.textColor,
           },
@@ -86,35 +86,35 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
         ],
         series: [
           {
-            name: 'Mail marketing',
+            name: 'ANX',
             type: 'line',
             stack: 'Total amount',
             areaStyle: { normal: { opacity: echarts.areaOpacity } },
             data: [120, 132, 101, 134, 90, 230, 210],
           },
           {
-            name: 'Affiliate advertising',
+            name: 'HEAVEN',
             type: 'line',
             stack: 'Total amount',
             areaStyle: { normal: { opacity: echarts.areaOpacity } },
             data: [220, 182, 191, 234, 290, 330, 310],
           },
           {
-            name: 'Video ad',
+            name: 'ANL',
             type: 'line',
             stack: 'Total amount',
             areaStyle: { normal: { opacity: echarts.areaOpacity } },
             data: [150, 232, 201, 154, 190, 330, 410],
           },
           {
-            name: 'Direct interview',
+            name: 'XP',
             type: 'line',
             stack: 'Total amount',
             areaStyle: { normal: { opacity: echarts.areaOpacity } },
             data: [320, 332, 301, 334, 390, 330, 320],
           },
           {
-            name: 'Search engine',
+            name: 'BTC',
             type: 'line',
             stack: 'Total amount',
             label: {
