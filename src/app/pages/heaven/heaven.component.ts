@@ -13,6 +13,7 @@ import { SmartTableData } from '../../@core/data/smart-table';
     transform: translate3d(0, 0, 0);
   }
 `],
+  styleUrls: ['./heaven.component.scss']
 })
 export class HeavenComponent  {
   private alive = true;
