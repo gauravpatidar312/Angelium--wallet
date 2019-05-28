@@ -1,6 +1,7 @@
 @import '../../../../@theme/styles/themes';
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
+@import '~@nebular/theme/styles/global/typography/typography';
 
 @include nb-install-component() {
   .summary-container {
@@ -17,6 +18,40 @@
       nb-theme(chart-panel-summary-border-color);
     border-left: none;
     border-right: none;
+  }
+
+  .delta {
+    position: relative;
+    display: inline-block;
+    color: nb-theme(color-fg-heading);
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    top: 5px;
+    right: -53px;
+    @include nb-rtl(left, 1.25rem);
+    @include nb-rtl(right, inherit);
+
+    &::before {
+      position: absolute;
+      content: '';
+      right: 100%;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    &.down {
+      &::before {
+        bottom: 4px;
+        border-top: 7px solid text-danger();
+      }
+    }
+
+    &.up {
+      &::before {
+        top: 4px;
+        border-bottom: 7px solid text-success();
+      }
+    }
   }
 
   .value {
