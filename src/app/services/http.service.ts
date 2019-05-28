@@ -12,7 +12,6 @@ export class HttpService {
   }
 
   post(data, endpoint) {
-    debugger
     return this.httpClient.post(
       `${environment.apiUrl}/${endpoint}`,
       data

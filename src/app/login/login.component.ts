@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe(res=>{
-      debugger
       this.router.navigate(['pages/setting']);
     }, err=>{
       console.log(err);
