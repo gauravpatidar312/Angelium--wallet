@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpService } from "../services/http.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {HttpService} from "../services/http.service";
 // import custom validator to validate that password and confirm password fields match
-import { MustMatch } from '../_helpers/must-match.validator';
+import {MustMatch} from '../_helpers/must-match.validator';
 
 @Component({
   selector: 'ngx-register',
@@ -14,33 +14,36 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   registerForm: FormGroup;
   submitted = false;
-  constructor(
-    private httpService: HttpService, 
-    private formBuilder: FormBuilder,
-    private router: Router) { }
+
+  constructor(private httpService: HttpService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-        invitation_code: ['', Validators.required],
-        username: ['', [Validators.required, Validators.email]],
-        phone: ['', Validators.required],
-        otp_code: ['', Validators.required],
-        full_name: ['', Validators.required],
-        password: ['', Validators.required],
-        confirm_password: ['', Validators.required],
+      invitation_code: ['', Validators.required],
+      username: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      otp_code: ['', Validators.required],
+      full_name: ['', Validators.required],
+      password: ['', Validators.required],
+      confirm_password: ['', Validators.required],
     }, {
-        validator: MustMatch('password', 'confirm_password')
+      validator: MustMatch('password', 'confirm_password')
     });
   }
 
-  get f() { return this.registerForm.controls; }
+  get f() {
+    return this.registerForm.controls;
+  }
 
-  onSubmitOtp(){
-    this.httpService.post(this.model, 'send-otp/').subscribe(res=>{
+  onSubmitOtp() {
+    this.httpService.post(this.model, 'send-otp/').subscribe(res => {
       if (res['status'] == true) {
-         alert("otp code has sent on your registered mobile no");
+        alert('otp code has sent on your registered mobile no');
       }
-    }, err=>{
+    }, err => {
       if (err.status == 400) {
         alert(err.error.phone[0]);
       }
@@ -51,11 +54,11 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        return;
+      return;
     }
-    this.httpService.post(this.registerForm.value, 'register/').subscribe(res=>{
+    this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.router.navigate(['pages/setting']);
-    }, err=>{
+    }, err => {
       console.log(err);
     });
   }
