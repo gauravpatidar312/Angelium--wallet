@@ -12,7 +12,7 @@ export class HttpService {
   }
 
   post(data, endpoint) {
-    return this.httpClient.post(
+    return this.httpClient.post<any>(
       `${environment.apiUrl}/${endpoint}`,
       data
     );

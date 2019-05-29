@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from "../services/http.service";
+import { SessionStorageService } from "../services/session-storage.service";
+import { ToastrService } from "../services/toastr.service";
 
 @Component({
   selector: 'ngx-login',
@@ -16,7 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private httpService: HttpService, 
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private sessionStorageService: SessionStorageService,
+    private toastrService: ToastrService) { 
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -34,8 +39,14 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe(res=>{
+      this.sessionStorageService.saveToSession("userInfo", res);
       this.router.navigate(['pages/setting']);
     }, err=>{
+      if (err.status == 400) {
+        if (err.error.non_field_errors[0] == "Unable to log in with provided credentials.") {
+          this.toastrService.toastrDanger('top-right', 'danger', err.error.non_field_errors[0]);
+        }
+      }
       console.log(err);
     });
   }

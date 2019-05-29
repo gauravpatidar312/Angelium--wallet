@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpService } from "../services/http.service";
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../_helpers/must-match.validator';
+// import services
+import { SessionStorageService } from "../services/session-storage.service";
 
 @Component({
   selector: 'ngx-register',
@@ -17,7 +19,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private httpService: HttpService, 
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private sessionStorageService: SessionStorageService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -37,7 +40,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmitOtp(){
     this.httpService.post(this.model, 'send-otp/').subscribe(res=>{
-      if (res['status'] == true) {
+      if (res.status == true) {
          alert("otp code has sent on your registered mobile no");
       }
     }, err=>{
@@ -54,9 +57,11 @@ export class RegisterComponent implements OnInit {
         return;
     }
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res=>{
+      this.sessionStorageService.saveToSession("userInfo", res);
       this.router.navigate(['pages/setting']);
     }, err=>{
       console.log(err);
     });
   }
+
 }
