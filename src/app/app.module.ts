@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
+import { FormsModule , ReactiveFormsModule}   from '@angular/forms';
+import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +28,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

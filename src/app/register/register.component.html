@@ -18,59 +18,95 @@
               <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                  <form>
-                    <div class="form-group row">
-                      <div class="col-md-4">
-                        <label for="exampleInputEmail1">Phone number</label>
-                        <nb-select placeholder="Country">
-                          <nb-option>Clean</nb-option>
-                          <nb-option value="1">Option 1</nb-option>
-                          <nb-option value="2">Option 2</nb-option>
-                          <nb-option value="3">Option 3</nb-option>
-                          <nb-option value="4">Option 4</nb-option>
-                        </nb-select>
-                      </div>
-                      <div class="col-md-4">
 
-                        <input type="email" class="form-control margint" id="exampleInputEmail1" placeholder="">
+                  <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()">
+                    <div class="form-group row">
+                      <div class="col-md-9">
+                        <label >Phone number</label>
+                        <international-phone-number 
+                          [(ngModel)]="model.phone" 
+                          placeholder="Enter phone number" 
+                          [maxlength]="20" [required]="true" 
+                          #phone="ngModel"
+                          name="phone"
+                          [defaultCountry]="'jp'">
+                        </international-phone-number>
                       </div>
-                      <div class="col-md-4">
+                      
+                      <div class="col-md-3 sent_btn">
                         <button type="submit" class="btn btn-demo btn-success margint btnregister" size="large">Send
                           SMS</button>
                       </div>
                     </div>
+                  </form>
+
+                  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Verification number</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1"
+                      <label>Verification number</label>
+                      <input type="text" class="form-control"
+                        formControlName="otp_code"
                         placeholder="Verification number">
+                        <div *ngIf="submitted && f.otp_code.errors" class="invalid-feedback">
+                          <div *ngIf="f.otp_code.errors.required">Verification number is required</div>
+                      </div>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                      <label>Email address</label>
+                      <input type="email" class="form-control" placeholder="Email" formControlName="username">
+                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                          <div *ngIf="f.username.errors.required">Email is required</div>
+                          <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Full Name</label>
+                      <input type="text" class="form-control" placeholder="Full Name" formControlName="full_name">
+                      <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
+                          <div *ngIf="f.full_name.errors.required">Full Name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
+                      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                          <div *ngIf="f.phone.errors.required">Phone is required</div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      <input type="password" class="form-control"  placeholder="Password"
+                      formControlName="password">
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                          <div *ngIf="f.password.errors.required">Password is required</div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Repeat password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1"
-                        placeholder="Repeat password">
+                      <input type="password" class="form-control" 
+                        placeholder="Repeat password"
+                        formControlName="confirm_password">
+                        <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                            <div *ngIf="f.confirm_password.errors.required">Repeat password is required</div>
+                            <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
+                        </div>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Invitation code</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1"
-                        placeholder="Invitation code">
+                      <input type="text" class="form-control" 
+                        placeholder="Invitation code"
+                        formControlName="invitation_code">
+                        <div *ngIf="submitted && f.invitation_code.errors" class="invalid-feedback">
+                          <div *ngIf="f.invitation_code.errors.required">Invitation code is required</div>
+                        </div>
                     </div>
                     <!-- <div class="form-group">
                         <label for="exampleInputPassword1">Slider captcha</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Slider captcha">
+                        <input type="password" class="form-control"  placeholder="Slider captcha">
                       </div> -->
                     <div class="form-group">
                       <nb-checkbox>Agree to Terms & Conditions</nb-checkbox>
                     </div>
-                    <button type="submit" class="btn btn-demo btn-success" size="large" style="width:100%"
-                      routerLink="../login">Register</button>
+                    <button type="submit" class="btn btn-demo btn-success" size="large" style="width:100%">Register</button>
                     <div class="form-group">
                       <section class="another-action" aria-label="Sign in">
                         Already have an account? <a class="text-link" routerLink="../login">Log in</a>
@@ -79,11 +115,7 @@
                   </form>
                 </div>
                 <div class="col-md-4"></div>
-
               </div>
-
-
-
             </nb-card-body>
           </div>
         </nb-card>

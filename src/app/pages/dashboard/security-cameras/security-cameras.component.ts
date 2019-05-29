@@ -20,7 +20,6 @@ export class SecurityCamerasComponent implements OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe((cameras: Camera[]) => {
         this.cameras = cameras;
-        debugger;
         this.selectedCamera = this.cameras[0];
       });
   }

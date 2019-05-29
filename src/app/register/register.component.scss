@@ -43,7 +43,8 @@
 
 
 .margint {  
-margin-top: 22px;
+margin-top: 25px;
+padding: 11px 10px;
 }
 .another-action{
     text-align: center;
@@ -54,4 +55,14 @@ width: 100%
 }
 .title{
     text-align: center
+}
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.sent_btn{
+  padding-left: 0;
 }
