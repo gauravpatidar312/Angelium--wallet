@@ -55,18 +55,14 @@
 
                     <div class="form-group">
                       <section class="another-action" aria-label="Sign in">
-                        Don't have an account? <a class="text-link" routerLink="../register">Register</a>
+                        Don't have an account? <a class="text-link" routerLink="../register"  [queryParams]="{ invitation_code: 'LXCGDWPU' }">Register</a>
                       </section>
                     </div>
                   </form>
                 </div>
                 <div class="col-md-4"></div>
               </div>
-
-
             </nb-card-body>
-
-
           </div>
         </nb-card>
       </div>
