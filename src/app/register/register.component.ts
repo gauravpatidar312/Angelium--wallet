@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  get ff() {
+  get otp_form() {
     return this.otpForm.controls;
   }
 

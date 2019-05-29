@@ -29,13 +29,9 @@
                           name="phone"
                           [defaultCountry]="'jp'">
                         </international-phone-number>
-                        <!-- <div *ngIf="otpForm.submitted || submitted && phone.invalid" 
-                            class="invalid-feedback">
-                            <div *ngIf="ff.phone.errors.required">First Name is required</div>
-                        </div> -->
 
-                        <div *ngIf="(otpForm.submitted || submittedOtp) && ff.phone.errors" class="invalid-feedback">
-                          <div *ngIf="ff.phone.errors.required">Phone number is required</div>
+                        <div *ngIf="(otpForm.submitted || submittedOtp) && otp_form.phone.errors" class="invalid-feedback">
+                          <div *ngIf="otp_form.phone.errors.required">Phone number is required</div>
                         </div>
                       </div>
                       <div class="col-md-3 sent_btn">
