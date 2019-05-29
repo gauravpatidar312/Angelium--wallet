@@ -29,16 +29,39 @@
     }
   }
 
-  .table-responsive {
-    margin-top: 1rem;
+  .table {
+    margin: 0 1rem;
+    tbody tr:nth-child(2n) {
+      background-color: #3a347a;
+    }
+    tr td, .table tr th {
+      border: 1px solid #342e73;
+      vertical-align: middle;
+    }
+    .title-col {
+      width: 30%;
+      font-size: 15px;
+    }
+    .value-col {
+      width: 60%;
+    }
+    .action-col {
+      width: 10%;
+      text-align: right;
+      i:hover {
+        color: nb-theme(color-success);
+        cursor: pointer;
+      }
+    }
   }
+
   nb-card-body {
     overflow: visible;
   }
   $auth-layout-padding: 0.5rem;
 
   nb-card {
-    height: calc(70vh - 2 * #{$auth-layout-padding});
+    height: calc(100% - #{$auth-layout-padding});
   }
 
   .input-group {
@@ -168,8 +191,12 @@
     font-size: 1.75rem;
   }
 
-  .icon-r{
-      float: right;
+  .icon-r {
+    float: right;
+  }
+
+  .borderless td, .borderless th {
+    border: none;
   }
 
   ngb-rating i {
@@ -179,17 +206,16 @@
     }
   }
 
+  @include media-breakpoint-down(sm) {
+    .table .title-col {
+      font-size: 13px;
+    }
+  }
+
   @include media-breakpoint-down(xs) {
     button:not(.btn-icon) {
       padding: 0.75rem 1rem;
       font-size: 0.75rem;
     }
   }
-}
-
-.borderless td, .borderless th {
-  border: none;
-}
-.mright{
-  margin-right: 1rem;
 }

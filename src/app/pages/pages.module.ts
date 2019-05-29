@@ -2,6 +2,7 @@ import { AngelModule } from './angel/angel.module';
 // import { HeavenModule } from './heaven/heaven.module';
 import { HQModule } from './hq/hq.module';
 import { NgModule } from '@angular/core';
+import { NbDialogModule } from '@nebular/theme';
 
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -14,8 +15,7 @@ import { TransferComponent } from './transfer/transfer.component';
 import { KYCComponent } from './kyc/kyc.component';
 import { HeavenComponent } from './heaven/heaven.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-
-
+import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -33,6 +33,7 @@ const PAGES_COMPONENTS = [
     // HeavenModule,
     ThemeModule,
     HQModule,
+    NbDialogModule.forChild(),
   ],
   declarations: [
     ...PAGES_COMPONENTS,
@@ -40,6 +41,10 @@ const PAGES_COMPONENTS = [
     TransferComponent,
     KYCComponent,
     HeavenComponent,
+    DialogNamePromptComponent,
+  ],
+  entryComponents: [
+    DialogNamePromptComponent,
   ],
 })
 export class PagesModule {

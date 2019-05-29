@@ -58,10 +58,10 @@ export class OrdersChartComponent implements AfterViewInit, OnDestroy, OnChanges
   setOptions(eTheme) {
     this.option = {
       grid: {
-        left: 40,
-        top: 20,
-        right: 0,
-        bottom: 40,
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true,
       },
       tooltip: {
         trigger: 'item',

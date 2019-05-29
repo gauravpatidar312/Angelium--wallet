@@ -1,4 +1,4 @@
-<nb-card (click)="on = !on" [ngClass]="{'off': !on}">
+<nb-card>
   <div class="icon-container">
     <div class="icon {{ type }}">
       <ng-content></ng-content>
@@ -6,11 +6,11 @@
   </div>
   <div class="details full-width">
     <div class="row">
-      <div class="col-6 mt-2">
+      <div class="col-5 mt-2">
         <div class="title">{{ title }}</div>
         <div class="status fs-30 text-white"><span class="text-success">$</span>{{ value }}</div>
       </div>
-      <div class="col-6">
+      <div class="col-7">
         <nb-select class="status-dd-week" placeholder="WEEK">
           <nb-option value="1">WEEK</nb-option>
           <nb-option value="2">MONTH</nb-option>

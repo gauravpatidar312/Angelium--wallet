@@ -79,7 +79,7 @@
 </div>
 <div class="row">
   <div class="col-lg-6">
-    <nb-card>
+    <nb-card class="card-portfolio">
       <nb-card-header>PORTFOLIO</nb-card-header>
       <nb-card-body>
         <ngx-echarts-pie></ngx-echarts-pie>
@@ -87,14 +87,14 @@
     </nb-card>
   </div>
   <div class="col-lg-6">
-    <nb-card class="card-assets">
+    <!--<nb-card class="card-assets">
       <nb-tabset fullWidth>
         <nb-tab tabTitle="Assets">
           <div class="chart-container mt-2">
-            <!--<ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
+            <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
             <ngx-chart-panel-header [type]="period"
                                     (periodChange)="setPeriodAndGetChartData($event)">
-            </ngx-chart-panel-header>-->
+            </ngx-chart-panel-header>
             <ngx-echarts-area-stack></ngx-echarts-area-stack>
           </div>
         </nb-tab>
@@ -102,36 +102,33 @@
 
         </nb-tab>
       </nb-tabset>
-    </nb-card>
-    <!--<nb-card>
-      <nb-card-header>ASSET</nb-card-header>
-      <nb-card-body>
-        <ngx-echarts-area-stack></ngx-echarts-area-stack>
-      </nb-card-body>
     </nb-card>-->
+    <ngx-ecommerce-charts></ngx-ecommerce-charts>
   </div>
 </div>
 
 <div class="row mb-4">
-  <div class="nebular-calendar col-xl-3 col-lg-4 col-md-12 col-sm-12">
+  <div class="nebular-calendar col-xl-4 col-lg-4 col-md-12 col-sm-12">
     <nb-calendar [boundingMonth]="true"></nb-calendar>
   </div>
-  <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
     <nb-card size="small" style="height: 100%;">
       <nb-card-header>
         <span class="fs-30">Article Title</span>
         <span class="col-4 btn-small pull-right">
-          <!--<ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item"> WEEK </li>
-            <li class="dropdown-item"> MONTH </li>
-            <li class="dropdown-item"> YEAR </li>
-          </ul>-->
-          <nb-select placeholder="dropdown">
-            <nb-option value="1">Option 1</nb-option>
-            <nb-option value="2">Option 2</nb-option>
-            <nb-option value="3">Option 3</nb-option>
-            <nb-option value="4">Option 4</nb-option>
-          </nb-select>
+          <div class="dropdown"
+               [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+               ngbDropdown>
+            <button type="button" ngbDropdownToggle class="btn btn-primary">
+              DropDown
+            </button>
+            <ul class="dropdown-menu" ngbDropdownMenu>
+              <li class="dropdown-item">Option 1</li>
+              <li class="dropdown-item">Option 2</li>
+              <li class="dropdown-item">Option 3</li>
+              <li class="dropdown-item">Option 4</li>
+            </ul>
+          </div>
         </span>
       </nb-card-header>
       <nb-card-body>
@@ -161,9 +158,9 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
   </div>
-  <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
     <nb-card>
       <nb-card-body>
         <div class="form-group">
