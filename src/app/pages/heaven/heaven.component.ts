@@ -8,12 +8,7 @@ import { SmartTableData } from '../../@core/data/smart-table';
 @Component({
   selector: 'ngx-heaven',
   templateUrl: './heaven.component.html',
-  styles: [`
-  nb-card {
-    transform: translate3d(0, 0, 0);
-  }
-`],
-  styleUrls: ['./heaven.component.scss']
+  styleUrls: ['./heaven.component.scss'],
 })
 export class HeavenComponent  {
   private alive = true;
