@@ -29,6 +29,14 @@
                           name="phone"
                           [defaultCountry]="'jp'">
                         </international-phone-number>
+                        <!-- <div *ngIf="otpForm.submitted || submitted && phone.invalid" 
+                            class="invalid-feedback">
+                            <div *ngIf="ff.phone.errors.required">First Name is required</div>
+                        </div> -->
+
+                        <div *ngIf="(otpForm.submitted || submittedOtp) && ff.phone.errors" class="invalid-feedback">
+                          <div *ngIf="ff.phone.errors.required">Phone number is required</div>
+                        </div>
                       </div>
                       <div class="col-md-3 sent_btn">
                         <button type="submit" class="btn btn-demo btn-success margint btnregister" size="large">Send SMS</button>
@@ -61,13 +69,7 @@
                         <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label>Phone:</label>
-                      <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
-                      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                        <div *ngIf="f.phone.errors.required">Phone is required</div>
-                      </div>
-                    </div>
+                    
                     <div class="form-group">
                       <label>Password:</label>
                       <input type="password" class="form-control" placeholder="Password"
