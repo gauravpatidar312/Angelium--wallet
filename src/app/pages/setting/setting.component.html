@@ -6,90 +6,94 @@
         <div class="row">
           <div class="col-md-12">
             <nb-card-body>
-              <nb-user [picture]="'assets/images/nick.png'" [name]="'Nick Jones'" [title]="'nick'" size="large">
+              <nb-user [picture]="'assets/images/nick.png'" [name]="'Nick Jones'" [title]="'Lv 3 In.2'" size="large">
               </nb-user>
             </nb-card-body>
           </div>
-  <table class="table borderless mright">
-    <thead>
-    </thead>
-    <tbody>
-      <tr class="spacer">
-        <td>USERNAME</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-      <tr class="spacer">
-        <td>USER ID</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-      <tr>
-        <td>REFFERAL LINK</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-      <tr>
-        <td>LEVEL</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-      <tr>
-        <td>KYC</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-      <tr>
-        <td>E-MAIL</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-      <tr>
-        <td>COUNTRY</td>
-        <td>texttext</td>
-        <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-      </tr>
-    </tbody>
-  </table>
+          <table class="table borderless">
+            <thead>
+            </thead>
+            <tbody>
+            <tr class="spacer">
+              <td class="title-col">USER NAME</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"></td>
+            </tr>
+            <tr class="spacer">
+              <td class="title-col">USER ID</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"></td>
+            </tr>
+            <tr>
+              <td class="title-col">REFFERAL LINK</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"></td>
+            </tr>
+            <tr>
+              <td class="title-col">LEVEL</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"></td>
+            </tr>
+            <tr>
+              <td class="title-col">KYC</td>
+              <td class="value-col">{{name}}</td>
+              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog()"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">E-MAIL</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">COUNTRY</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </nb-card-body>
     </nb-card>
   </div>
-
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <nb-card>
       <nb-card-header>SETTING</nb-card-header>
       <nb-card-body>
         <div class="row">
-          <table class="table borderless mright">
+          <table class="table borderless">
             <thead>
             </thead>
             <tbody>
-              <tr>
-                <td>PASSWORD</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>2FA</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>SECRET KEY</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>CURRENCY</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>LANGUAGE</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
+            <tr>
+              <td class="title-col">PASSWORD</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">2FA</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">SECRET KEY</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">CURRENCY</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">LANGUAGE</td>
+              <td>texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">MERGE</td>
+              <td>Merge your old data</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -104,40 +108,40 @@
       <nb-card-header>ABOUT</nb-card-header>
       <nb-card-body>
         <div class="row">
-          <table class="table borderless mright">
+          <table class="table borderless">
             <thead>
             </thead>
             <tbody>
-              <tr>
-                <td>ANGELIUM</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>ANX</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>ANL</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>WALLET</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>HEAVEN</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>REWARD</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
+            <tr>
+              <td class="title-col">ANGELIUM</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">ANX</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">ANL</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">WALLET</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">HEAVEN</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">REWARD</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -145,50 +149,50 @@
     </nb-card>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <nb-card>
       <nb-card-header>LINK</nb-card-header>
       <nb-card-body>
         <div class="row">
-          <table class="table borderless mright">
+          <table class="table borderless">
             <thead>
             </thead>
             <tbody>
-              <tr>
-                <td>OFFICAL SITE</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>APP IOS</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>APP ANDROID</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>TELEGRAM (En)</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>TELEGRAM (Jp)</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>TELEGRAM (Cn)</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
-              <tr>
-                <td>TELEGRAM (Kr)</td>
-                <td>texttext</td>
-                <td><span class="icon-r"><i class="far fa-edit"></i></span></td>
-              </tr>
+            <tr>
+              <td class="title-col">OFFICAL SITE</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">APP IOS</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">APP ANDROID</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">TELEGRAM (En)</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">TELEGRAM (Jp)</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">TELEGRAM (Cn)</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">TELEGRAM (Kr)</td>
+              <td class="value-col">texttext</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
             </tbody>
           </table>
         </div>

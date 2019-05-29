@@ -1,127 +1,147 @@
 <div class="row">
-    <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards1">
-      <ngx-status-card [title]="statusCard.title"
-                       [type]="statusCard.type">
-        <i [ngClass]="statusCard.iconClass"></i>
-      </ngx-status-card>
-    </div>
+  <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
+    <ngx-status-card [title]="statusCard.title"
+                     [type]="statusCard.type"
+                     [value]="statusCard.value">
+      <i [ngClass]="statusCard.iconClass"></i>
+    </ngx-status-card>
   </div>
+</div>
 <div class="lists row">
   <div class="col-md-12 col-lg-6 col-xxxl-6">
     <nb-card class="list-card">
       <nb-card-body>
-        <nb-list>
+        <nb-list class="text-white">
           <nb-list-item>
-            <span>New Walet release today</span> <span class="pull-right">2013.02.39</span>
-        </nb-list-item>
-        <nb-list-item>
-            <span>New Walet release today</span> <span class="pull-right">2013.02.39</span>        </nb-list-item>
+            <span>New wallet release today</span> <span class="pull-right">2013.02.39</span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>New wallet release today</span> <span class="pull-right">2013.02.39</span></nb-list-item>
         </nb-list>
       </nb-card-body>
     </nb-card>
   </div>
 
   <div class="col-md-12 col-lg-6 col-xxxl-6">
-      <nb-card class="list-card">
-          <nb-card-body>
-            <nb-list>
-              <nb-list-item>
-                  <span>New Walet release today</span> <span class="pull-right">2013.02.39</span>
-            </nb-list-item>
-            <nb-list-item>
-                <span>New Walet release today</span> <span class="pull-right">2013.02.39</span>
-            </nb-list-item>
-            </nb-list>
-          </nb-card-body>
-        </nb-card>
+    <nb-card class="list-card">
+      <nb-card-body>
+        <nb-list class="text-white">
+          <nb-list-item>
+            <span>New wallet release today</span> <span class="pull-right">2013.02.39</span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>New wallet release today</span> <span class="pull-right">2013.02.39</span>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
   </div>
 </div>
 
 <div class="row">
-<div class="col-xxxl-12 col-xxl-12 col-md-12">
-  <ngx-security-cameras></ngx-security-cameras>
-</div>
+  <div class="col-xxxl-12 col-xxl-12 col-md-12">
+    <ngx-security-cameras></ngx-security-cameras>
+  </div>
 </div>
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-        <div class="col-md-3" id ="curr1">
-            <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
-          </div>
-          <div class="col-md-3" id ="curr2">
-              <ngx-earning-card></ngx-earning-card>
-            </div>
-            <div class="col-md-3" id ="curr3" >
-                <ngx-earning-card></ngx-earning-card>
-              </div>
-              <div class="col-md-3" id ="curr4" >
-                  <ngx-earning-card></ngx-earning-card>
-                </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr1">
+        <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr2">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr3">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr4">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
     </div>
   </div>
   <div class="col-xxl-12">
-      <div class="row">
-          <div class="col-md-3" id ="curr5">
-              <ngx-earning-card></ngx-earning-card>
-            </div>
-            <div class="col-md-3" id ="curr6" >
-                <ngx-earning-card></ngx-earning-card>
-              </div>
-              <div class="col-md-3" id ="curr7">
-                  <ngx-earning-card></ngx-earning-card>
-                </div>
-                <div class="col-md-3" id ="curr8">
-                    <ngx-earning-card></ngx-earning-card>
-                  </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr5">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr6">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr7">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr8">
+        <ngx-earning-card></ngx-earning-card>
       </div>
     </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
-      <nb-card>
-        <nb-card-header>PORTFOLIO</nb-card-header>
-        <nb-card-body>
-          <ngx-echarts-pie></ngx-echarts-pie>
-        </nb-card-body>
-      </nb-card>
-    </div>
-    <div class="col-lg-6">
-        <nb-card>
-          <nb-card-header>ASSET</nb-card-header>
-          <nb-card-body>
-            <ngx-echarts-area-stack></ngx-echarts-area-stack>
-          </nb-card-body>
-        </nb-card>
-      </div>
+  <div class="col-lg-6">
+    <nb-card class="card-portfolio">
+      <nb-card-header>PORTFOLIO</nb-card-header>
+      <nb-card-body>
+        <ngx-echarts-pie></ngx-echarts-pie>
+      </nb-card-body>
+    </nb-card>
   </div>
+  <div class="col-lg-6">
+    <!--<nb-card class="card-assets">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Assets">
+          <div class="chart-container mt-2">
+            <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
+            <ngx-chart-panel-header [type]="period"
+                                    (periodChange)="setPeriodAndGetChartData($event)">
+            </ngx-chart-panel-header>
+            <ngx-echarts-area-stack></ngx-echarts-area-stack>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Profit" [lazyLoad]="true">
 
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>-->
+    <ngx-ecommerce-charts></ngx-ecommerce-charts>
+  </div>
+</div>
 
-<div class="row">
-  <div class="row">
-    <div class="nebular-calendar col-md-4 col-xxxl-6">
-      <nb-calendar  [boundingMonth]="true"></nb-calendar>
-    </div>
-    <div class="col-md-8 col-xxxl-6">
-    <nb-card size="small" style="height:392px;">
+<div class="row mb-4">
+  <div class="nebular-calendar col-xl-4 col-lg-4 col-md-12 col-sm-12">
+    <nb-calendar [boundingMonth]="true"></nb-calendar>
+  </div>
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+    <nb-card size="small" style="height: 100%;">
       <nb-card-header>
-        Article Example
-        <span class="col-md-2 col-xxxl-4 btn-small pull-right">
-          <nb-select placeholder="dropdown" >
-            <nb-option value="1">Option 1</nb-option>
-            <nb-option value="2">Option 2</nb-option>
-            <nb-option value="3">Option 3</nb-option>
-            <nb-option value="4">Option 4</nb-option>
-          </nb-select>
+        <span class="fs-30">Article Title</span>
+        <span class="col-4 btn-small pull-right">
+          <div class="dropdown"
+               [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+               ngbDropdown>
+            <button type="button" ngbDropdownToggle class="btn btn-primary">
+              DropDown
+            </button>
+            <ul class="dropdown-menu" ngbDropdownMenu>
+              <li class="dropdown-item">Option 1</li>
+              <li class="dropdown-item">Option 2</li>
+              <li class="dropdown-item">Option 3</li>
+              <li class="dropdown-item">Option 4</li>
+            </ul>
+          </div>
         </span>
       </nb-card-header>
-      <nb-card-body >
-        <h4>So what's About the grammar?</h4>
-        <p class="text-indent">
+      <nb-card-body>
+        <div class="row">
+          <div class="col-8"><h4>So what's About the grammar?</h4></div>
+          <div class="col-4 text-right"><span class="article-date">May 1, 2019</span></div>
+        </div>
+        <p class="article-text text-indent pt-1">
           Far far away, behind the word mountains, far from the countries <strong>Vokalia</strong> and <strong>Consonantia</strong>,
           there live the blind texts.
           They live in <strong>Bookmarksgrove</strong>.
         </p>
-        <p class="text-indent">
+        <p class="article-text text-indent pt-1">
           A small <strong>river named Duden</strong> flows by their place and supplies it with the
           necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly
           into your mouth.
@@ -135,52 +155,31 @@
         </p>
       </nb-card-body>
     </nb-card>
-    </div>
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-6">
-
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
   </div>
-  <div class="col-lg-6">
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
     <nb-card>
       <nb-card-body>
         <div class="form-group">
-          <input type="text" placeholder="Project" class="form-control" />
-          <small class="form-text">A block of help text that breaks into a new line and may extend beyond one line.
+          <input type="text" placeholder="Project" class="form-control"/>
+          <small class="form-text ml-2 mt-1">A block of help text that breaks into a new line and may extend beyond one
+            line.
           </small>
         </div>
-        <div class="input-group">
-          <input type="text" placeholder="Disabled input" class="form-control" disabled />
+        <div class="input-group mb-4">
+          <input type="text" placeholder="Disabled input" class="form-control" disabled/>
         </div>
-        <div class="input-group">
+        <div class="input-group mb-4">
           <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
         </div>
-        <div class="size-container" style="float:right;">
-            <div>
-              <button class="btn btn-primary btn-xs btn-demo btn-hero-secondary">Ghost</button>
-            </div>
-          </div>
-        <div class="size-container" style="float:right;">
-            <div>
-              <button class="btn btn-primary btn btn-hero-success btn-demo btn-xs">Success</button>
-            </div>
-          </div>
+        <div class="size-container text-right">
+          <button class="btn btn-primary btn btn-sm btn-demo btn-hero-secondary mr-2">Ghost</button>
+          <button class="btn btn-success btn btn-sm btn-demo btn-hero-success">Success</button>
+        </div>
       </nb-card-body>
     </nb-card>
-
   </div>
-
-
 </div>
-<style>
-  .nebular-calendar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 3rem;
-  }
-  .pull-right{
-  float :right;
-  }
-</style>

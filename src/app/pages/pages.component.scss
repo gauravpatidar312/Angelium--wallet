@@ -1,4 +1,5 @@
 @import '../@theme/styles/themes';
+@import '../@theme/styles/font-size';
 
 @include nb-install-component() {
   /deep/ router-outlet + * {
