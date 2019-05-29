@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService } from "../services/http.service";
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../_helpers/must-match.validator';
@@ -20,7 +20,10 @@ export class RegisterComponent implements OnInit {
     private httpService: HttpService, 
     private formBuilder: FormBuilder,
     private router: Router,
-    private sessionStorageService: SessionStorageService) { }
+    private activatedRoute: ActivatedRoute,
+    private sessionStorageService: SessionStorageService) { 
+    
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -33,6 +36,10 @@ export class RegisterComponent implements OnInit {
         confirm_password: ['', Validators.required],
     }, {
         validator: MustMatch('password', 'confirm_password')
+    });
+ 
+    this.activatedRoute.queryParams.subscribe(params => {
+        this.registerForm.controls.invitation_code.setValue(params.invitation_code);
     });
   }
 
