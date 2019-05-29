@@ -7,6 +7,7 @@ import { MustMatch } from '../_helpers/must-match.validator';
 // import services
 import { SessionStorageService } from "../services/session-storage.service";
 
+
 @Component({
   selector: 'ngx-register',
   templateUrl: './register.component.html',
@@ -16,6 +17,7 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   registerForm: FormGroup;
   submitted = false;
+
   constructor(
     private httpService: HttpService, 
     private formBuilder: FormBuilder,
@@ -27,15 +29,15 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-        invitation_code: ['', Validators.required],
-        username: ['', [Validators.required, Validators.email]],
-        phone: ['', Validators.required],
-        otp_code: ['', Validators.required],
-        full_name: ['', Validators.required],
-        password: ['', Validators.required],
-        confirm_password: ['', Validators.required],
+      invitation_code: ['', Validators.required],
+      username: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      otp_code: ['', Validators.required],
+      full_name: ['', Validators.required],
+      password: ['', Validators.required],
+      confirm_password: ['', Validators.required],
     }, {
-        validator: MustMatch('password', 'confirm_password')
+      validator: MustMatch('password', 'confirm_password')
     });
  
     this.activatedRoute.queryParams.subscribe(params => {
@@ -43,14 +45,17 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get f() { return this.registerForm.controls; }
+  get f() {
+    return this.registerForm.controls;
+  }
 
-  onSubmitOtp(){
-    this.httpService.post(this.model, 'send-otp/').subscribe(res=>{
-      if (res.status == true) {
-         alert("otp code has sent on your registered mobile no");
+
+  onSubmitOtp() {
+    this.httpService.post(this.model, 'send-otp/').subscribe(res => {
+      if (res['status'] == true) {
+        alert('otp code has sent on your registered mobile no');
       }
-    }, err=>{
+    }, err => {
       if (err.status == 400) {
         alert(err.error.phone[0]);
       }
@@ -61,12 +66,12 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        return;
+      return;
     }
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res=>{
-      this.sessionStorageService.saveToSession("userInfo", res);
+      this.sessionStorageService.saveToSession('userInfo', res);
       this.router.navigate(['pages/setting']);
-    }, err=>{
+    }, err => {
       console.log(err);
     });
   }

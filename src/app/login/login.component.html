@@ -2,31 +2,28 @@
   <nb-layout-column>
     <div class="row">
       <div class="col-md-12">
-
         <nb-card>
           <div class="row">
-
             <div class="col-md-12">
               <nb-card-header>
                 <nav class='navigation'>
                   <a routerLink="/register" class='link' aria-label='Back'>
                     <i class='icon nb-arrow-thin-left'></i></a>
                   <h1 id="title" class="title">Login</h1>
+                  <p class="sub-title title">Hello! Log in with your email.</p>
                 </nav>
               </nb-card-header>
             </div>
-
             <nb-card-body>
               <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-xl-4 col-lg-3 col-md-2 col-1"></div>
+                <div class="col-xl-4 col-lg-6 col-md-8 col-10">
                   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="width-full" aria-labelledby="title">
-                    <p class="sub-title title">Hello! Log in with your email.</p>
                     <div class="form-group">
                       <label class="label" for="input-email">Email address:</label>
-                      <input class="form-control" fullWidth 
-                        name="email"
-                        placeholder="Email address" autofocus formControlName="username">
+                      <input class="form-control" fullWidth
+                             name="email"
+                             placeholder="Email address" autofocus formControlName="username">
                       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Email is required</div>
                         <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
@@ -36,7 +33,7 @@
                     <div class="form-group">
                       <label class="label" for="input-password">Password:</label>
                       <input class="form-control" fullWidth name="password" type="password" formControlName="password"
-                        placeholder="Password">
+                             placeholder="Password">
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
                       </div>
@@ -44,11 +41,11 @@
 
                     <div class="form-group accept-group">
                       <nb-checkbox name="rememberMe">Remember me</nb-checkbox>
-                      <a class="forgot-password">Forgot Password?</a>
+                      <a class="forgot-password" routerLink="../forgetpassword">Forgot Password?</a>
                     </div>
-                    
+
                     <div class="form-group">
-                      <button nbButton class="form-control" fullWidth status="success" >
+                      <button nbButton class="form-control" fullWidth status="success">
                         <a>Log In</a>
                       </button>
                     </div>
@@ -60,7 +57,7 @@
                     </div>
                   </form>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-xl-4 col-lg-3 col-md-2 col-1"></div>
               </div>
             </nb-card-body>
           </div>

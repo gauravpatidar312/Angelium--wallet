@@ -1,4 +1,6 @@
+@import '../@theme/styles/themes';
 @import '~@nebular/theme/styles/global/breakpoints';
+
 :host {
   $auth-layout-padding: 2.5rem;
 
@@ -7,11 +9,19 @@
     height: calc(100vh - 2 * #{$auth-layout-padding});
   }
 
-  .navigation .link {
-    text-decoration: none;
+  .navigation {
+    .link {
+      text-decoration: none;
 
-    .icon {
-      font-size: 2rem;
+      .icon {
+        font-size: 2rem;
+      }
+    }
+
+    .sub-title {
+      font-size: 13px;
+      color: #d1d1ff;
+      margin: 1rem 0 0;
     }
   }
 
@@ -41,24 +51,28 @@
   }
 }
 
+.title {
+  text-align: center;
+}
 
-.title{
-    text-align: center
+.forgot-password {
+  float: right;
+  margin-top: 7px;
 }
-.forgot-password{
-    float:right;
+
+.width-full {
+  width: 100%;
 }
-.width-full{
-    width:100%;
-}
-.another-action{
+
+.another-action {
   text-align: center;
   margin: 1.8em;
 }
+
 .invalid-feedback {
-    display: block;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: #dc3545;
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: nb-theme(color-danger);
 }

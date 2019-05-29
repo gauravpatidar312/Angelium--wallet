@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   constructor(
-    private httpService: HttpService, 
+    private httpService: HttpService,
     private formBuilder: FormBuilder,
     private router: Router,
     private sessionStorageService: SessionStorageService,

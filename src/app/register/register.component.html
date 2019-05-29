@@ -6,90 +6,87 @@
           <div class="row">
             <div class="col-md-12">
               <nb-card-header>
-                  <nav class='navigation'>
-                      <a routerLink="/login" class='link' aria-label='Back'>
-                        <i class='icon nb-arrow-thin-left'></i></a>
-                      <h1 id="title" class="title">Register</h1>
-                    </nav>
+                <nav class='navigation'>
+                  <a routerLink="/login" class='link' aria-label='Back'>
+                    <i class='icon nb-arrow-thin-left'></i></a>
+                  <h1 id="title" class="title">Register</h1>
+                </nav>
               </nb-card-header>
-
             </div>
             <nb-card-body>
               <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-
+                <div class="col-xl-4 col-lg-3 col-md-2 col-1"></div>
+                <div class="col-xl-4 col-lg-6 col-md-8 col-10">
                   <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()">
                     <div class="form-group row">
                       <div class="col-md-9">
-                        <label >Phone number</label>
-                        <international-phone-number 
-                          [(ngModel)]="model.phone" 
-                          placeholder="Enter phone number" 
-                          [maxlength]="20" [required]="true" 
+                        <label>Phone number:</label>
+                        <international-phone-number
+                          [(ngModel)]="model.phone"
+                          placeholder="Enter phone number"
+                          [maxlength]="20" [required]="true"
                           #phone="ngModel"
                           name="phone"
                           [defaultCountry]="'jp'">
                         </international-phone-number>
                       </div>
-                      
                       <div class="col-md-3 sent_btn">
-                        <button type="submit" class="btn btn-demo btn-success margint btnregister" size="large">Send
-                          SMS</button>
+                        <button type="submit" class="btn btn-demo btn-success margint btnregister" size="large">Send SMS</button>
                       </div>
                     </div>
                   </form>
 
                   <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()">
                     <div class="form-group">
-                      <label>Verification number</label>
+                      <label>Verification number:</label>
                       <input type="text" class="form-control"
-                        formControlName="otp_code"
-                        placeholder="Verification number">
-                        <div *ngIf="submitted && f.otp_code.errors" class="invalid-feedback">
-                          <div *ngIf="f.otp_code.errors.required">Verification number is required</div>
+                             formControlName="otp_code"
+                             placeholder="Verification number">
+                      <div *ngIf="submitted && f.otp_code.errors" class="invalid-feedback">
+                        <div *ngIf="f.otp_code.errors.required">Verification number is required</div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label>Email address</label>
-                      <input type="email" class="form-control" placeholder="Email" formControlName="username">
-                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                          <div *ngIf="f.username.errors.required">Email is required</div>
-                          <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Full Name</label>
+                      <label>Full Name:</label>
                       <input type="text" class="form-control" placeholder="Full Name" formControlName="full_name">
                       <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
-                          <div *ngIf="f.full_name.errors.required">Full Name is required</div>
+                        <div *ngIf="f.full_name.errors.required">Full Name is required</div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label>Phone</label>
+                      <label>Email address:</label>
+                      <input type="email" class="form-control" placeholder="Email" formControlName="username">
+                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Email is required</div>
+                        <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Phone:</label>
                       <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
                       <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                          <div *ngIf="f.phone.errors.required">Phone is required</div>
+                        <div *ngIf="f.phone.errors.required">Phone is required</div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control"  placeholder="Password"
-                      formControlName="password">
+                      <label>Password:</label>
+                      <input type="password" class="form-control" placeholder="Password"
+                             formControlName="password">
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                          <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.required">Password is required</div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Repeat password</label>
-                      <input type="password" class="form-control" 
-                        placeholder="Repeat password"
-                        formControlName="confirm_password">
-                        <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                            <div *ngIf="f.confirm_password.errors.required">Repeat password is required</div>
-                            <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
-                        </div>
+                      <label>Repeat password:</label>
+                      <input type="password" class="form-control"
+                             placeholder="Repeat password"
+                             formControlName="confirm_password">
+                      <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirm_password.errors.required">Repeat password is required</div>
+                        <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
+                      </div>
                     </div>
+
                     <!-- <div class="form-group">
                         <label for="exampleInputPassword1">Slider captcha</label>
                         <input type="password" class="form-control"  placeholder="Slider captcha">
@@ -97,22 +94,21 @@
                     <div class="form-group">
                       <nb-checkbox>Agree to Terms & Conditions</nb-checkbox>
                     </div>
-                    <button type="submit" class="btn btn-demo btn-success" size="large" style="width:100%">Register</button>
+                    <button type="submit" class="btn btn-demo btn-success" size="large" style="width:100%">Register
+                    </button>
                     <div class="form-group">
                       <section class="another-action" aria-label="Sign in">
-                        Already have an account? <a class="text-link" routerLink="../login">Log in</a>
+                        Already have an account? <a class="text-link" routerLink="/login">Log in</a>
                       </section>
                     </div>
                   </form>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-xl-4 col-lg-3 col-md-2 col-1"></div>
               </div>
             </nb-card-body>
           </div>
         </nb-card>
       </div>
-
-
     </div>
   </nb-layout-column>
 </nb-layout>
