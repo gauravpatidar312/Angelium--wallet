@@ -19,6 +19,7 @@ export class ECommerceComponent implements OnDestroy {
   private alive = true;
 
   solarValue: number;
+  currentTheme: string;
   assetCard: CardSettings = {
     title: 'Total Assets',
     value: '572,900',
@@ -63,6 +64,7 @@ export class ECommerceComponent implements OnDestroy {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
+        this.currentTheme = theme.name;
         this.statusCards1 = this.statusCardsByThemes[theme.name];
     });
 
