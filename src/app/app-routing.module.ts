@@ -23,7 +23,7 @@ const routes: Routes = [
     component: ChangePasswordComponent,
   },
   {
-    path: 'register',
+    path: 'register/:invitation_code',
     component: RegisterComponent,
   },
   {
