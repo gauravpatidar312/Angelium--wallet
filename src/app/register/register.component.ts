@@ -46,9 +46,13 @@ export class RegisterComponent implements OnInit {
       validator: MustMatch('password', 'confirm_password'),
     });
 
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.params.subscribe( params => {
       this.registerForm.controls.invitation_code.setValue(params.invitation_code);
     });
+    
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+    // });
   }
 
   get f() {
