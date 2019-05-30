@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpService } from "../services/http.service";
 import { SessionStorageService } from "../services/session-storage.service";
 import { ToastrService } from "../services/toastr.service";
+import { AuthService } from '../_guards/auth.service';
 
 @Component({
   selector: 'ngx-login',
@@ -20,7 +21,12 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private sessionStorageService: SessionStorageService,
-    private toastrService: ToastrService) { 
+    private toastrService: ToastrService,
+    private authService: AuthService) { 
+    const currentUser = this.authService.isAuthenticated();
+    if (currentUser) {
+       this.router.navigate(['/pages/setting']);
+    }
   }
 
   ngOnInit() {
