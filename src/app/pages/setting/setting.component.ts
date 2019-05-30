@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { icons } from 'eva-icons';
-import { ToastrService } from "../../services/toastr.service";
 import { NbDialogService } from '@nebular/theme';
 import { DialogNamePromptComponent } from './dialog-prompt/dialog-prompt.component';
+import { ToastrService } from "../../services/toastr.service";
+import { HttpService } from "../../services/http.service";
 
 
 @Component({
@@ -12,9 +13,11 @@ import { DialogNamePromptComponent } from './dialog-prompt/dialog-prompt.compone
 })
 export class SettingComponent implements OnInit {
   evaIcons = [];
+  user: any;
   constructor(
     private toastrService: ToastrService, 
-    private dialogService: NbDialogService) {
+    private dialogService: NbDialogService,
+    private httpService: HttpService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
   }
 
@@ -22,6 +25,9 @@ export class SettingComponent implements OnInit {
 
   ngOnInit() {
     this.toastrService.toastrSuccess('top-right', 'success', 'Welcome on setting');
+    this.httpService.get('referral-link/').subscribe(data=>{
+      this.user = data;
+    });
   }
 
   openDialog() {
