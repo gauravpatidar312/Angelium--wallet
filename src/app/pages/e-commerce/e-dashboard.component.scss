@@ -16,6 +16,9 @@
   .pull-right {
     float :right;
   }
+  .article-title {
+    font-size: 30px;
+  }
   .article-date {
     font-size: 18px;
   }
@@ -35,6 +38,9 @@
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
+    }
+    .article-title {
+      font-size: 22px;
     }
   }
 
