@@ -10,6 +10,7 @@
       <nb-card-body>
         <nb-auth-block>
           <h1 id="title" class="title">Register</h1>
+          <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when enabled.</p>
           <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()">
             <div class="form-group row">
               <div class="col-md-9 col-12">
@@ -23,12 +24,14 @@
                   [defaultCountry]="'jp'">
                 </international-phone-number>
 
-                <div *ngIf="(otpForm.submitted || submittedOtp) && otp_form.phone.errors" class="invalid-feedback">
+                <div *ngIf="(otpForm.submitted || otpSubmitted) && otp_form.phone.errors" class="invalid-feedback">
                   <div *ngIf="otp_form.phone.errors.required">Phone number is required</div>
                 </div>
               </div>
               <div class="col-md-3 col-12 sent_btn">
-                <button type="submit" class="btn btn-demo btn-success margint btnregister" size="large">Send SMS
+                <button type="submit" [disabled]="otpSubmitting || otpSubmitted" class="btn btn-demo btn-success margint btnregister" size="large">
+                  <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' : 'Send SMS'}}</span>
+                  <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
                 </button>
               </div>
             </div>
@@ -77,7 +80,6 @@
                 <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
               </div>
             </div>
-
             <!-- <div class="form-group">
                 <label for="exampleInputPassword1">Slider captcha</label>
                 <input type="password" class="form-control"  placeholder="Slider captcha">

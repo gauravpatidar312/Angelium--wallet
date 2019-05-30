@@ -13,7 +13,7 @@ import { DialogNamePromptComponent } from './dialog-prompt/dialog-prompt.compone
 export class SettingComponent implements OnInit {
   evaIcons = [];
   constructor(
-    private toastrService: ToastrService, 
+    private toastrService: ToastrService,
     private dialogService: NbDialogService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
   }
@@ -21,7 +21,7 @@ export class SettingComponent implements OnInit {
   name: string = 'Nick Jones';
 
   ngOnInit() {
-    this.toastrService.toastrSuccess('top-right', 'success', 'Welcome on setting');
+    this.toastrService.success('Welcome on setting', 'Settings');
   }
 
   openDialog() {

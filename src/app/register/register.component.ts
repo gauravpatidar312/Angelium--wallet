@@ -1,32 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from "../services/http.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
 // import custom validator to validate that password and confirm password fields match
-import { MustMatch } from '../_helpers/must-match.validator';
+import {MustMatch} from '../_helpers/must-match.validator';
 // import services
-import { SessionStorageService } from "../services/session-storage.service";
-
+import {HttpService} from '../services/http.service';
+import {ToastrService} from '../services/toastr.service';
+import {SessionStorageService} from '../services/session-storage.service';
 
 @Component({
   selector: 'ngx-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
+
 export class RegisterComponent implements OnInit {
   model: any = {};
   registerForm: FormGroup;
-  submitted:boolean = false;
-  submittedOtp:boolean = false;
+  submitted: boolean = false;
+  otpSubmitted: boolean = false;
+  otpSubmitting: boolean = false;
+  isResubmit: boolean = false;
+  resubmitTime: number = 60 * 1000;
   @ViewChild('otpForm') otpForm: NgForm;
-  
-  constructor(
-    private httpService: HttpService, 
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private sessionStorageService: SessionStorageService) { 
-    
+
+  constructor(private httpService: HttpService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private toastrService: ToastrService,
+              private sessionStorageService: SessionStorageService) {
+
   }
 
   ngOnInit() {
@@ -39,11 +43,11 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
     }, {
-      validator: MustMatch('password', 'confirm_password')
+      validator: MustMatch('password', 'confirm_password'),
     });
- 
+
     this.activatedRoute.queryParams.subscribe(params => {
-        this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+      this.registerForm.controls.invitation_code.setValue(params.invitation_code);
     });
   }
 
@@ -55,19 +59,31 @@ export class RegisterComponent implements OnInit {
     return this.otpForm.controls;
   }
 
-
   onSubmitOtp() {
-    this.submittedOtp = true;
     if (this.otpForm.invalid) {
+      this.toastrService.warning('Phone number is invalid.', 'Send SMS');
       return;
     }
+
+    this.otpSubmitted = true;
+    this.otpSubmitting = true;
     this.httpService.post(this.model, 'send-otp/').subscribe(res => {
-      if (res['status'] == true) {
-        alert('otp code has sent on your registered mobile no');
+      this.otpSubmitting = false;
+      this.isResubmit = true;
+
+      if (res['status']) {
+        setTimeout(() => {
+          this.otpSubmitted = false;
+          this.resubmitTime += (60 * 1000);
+        }, this.resubmitTime);
+
+        this.toastrService.success('We\'ve sent an OTP code to your phone number.', 'Send SMS');
       }
     }, err => {
-      if (err.status == 400) {
-        alert(err.error.phone[0]);
+      this.otpSubmitting = false;
+      this.otpSubmitted = false;
+      if (err.status === 400) {
+        this.toastrService.danger('OTP code has been sent to your phone number.', 'Send SMS');
       }
     });
   }
@@ -75,8 +91,9 @@ export class RegisterComponent implements OnInit {
   onSubmitRegistration() {
     this.registerForm.controls.phone.setValue(this.model.phone);
     console.log(this.registerForm.value);
+
     this.submitted = true;
-    this.submittedOtp = true;
+    this.otpSubmitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid && this.otpForm.invalid) {
       return;
@@ -88,5 +105,4 @@ export class RegisterComponent implements OnInit {
     //   console.log(err);
     // });
   }
-
 }

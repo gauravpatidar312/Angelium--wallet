@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private sessionStorageService: SessionStorageService,
     private toastrService: ToastrService,
-    private authService: AuthService) { 
+    private authService: AuthService) {
     const currentUser = this.authService.isAuthenticated();
     if (currentUser) {
        this.router.navigate(['/pages/setting']);
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }, err=>{
       if (err.status == 400) {
         if (err.error.non_field_errors[0] == "Unable to log in with provided credentials.") {
-          this.toastrService.toastrDanger('top-right', 'danger', err.error.non_field_errors[0]);
+          this.toastrService.danger(err.error.non_field_errors[0], 'Login Failed');
         }
       }
       console.log(err);
