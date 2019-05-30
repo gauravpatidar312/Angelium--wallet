@@ -9,6 +9,31 @@
     height: calc(100vh - 2 * #{$auth-layout-padding});
   }
 
+  nb-card-body {
+    display: flex;
+    width: 100%;
+  }
+
+  nb-auth-block {
+    margin: auto;
+  }
+
+  @include media-breakpoint-down(sm) {
+    nb-card {
+      height: 100vh;
+    }
+  }
+
+  /deep/ {
+    nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding: $auth-layout-padding;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+      }
+    }
+  }
+
   .navigation {
     .link {
       text-decoration: none;
@@ -25,54 +50,29 @@
     }
   }
 
-  nb-card-body {
+  .title {
+    text-align: center;
+  }
+
+  .forgot-password {
+    float: right;
+    margin-top: 7px;
+  }
+
+  .width-full {
     width: 100%;
   }
 
-  nb-auth-block {
-    margin: auto;
+  .another-action {
+    text-align: center;
+    margin: 1.8em;
   }
 
-  @include media-breakpoint-down(sm) {
-    nb-card {
-      border-radius: 0;
-      height: 100vh;
-    }
+  .invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: nb-theme(color-danger);
   }
-
-  /deep/ {
-    nb-layout .layout .layout-container .content .columns nb-layout-column {
-      padding: $auth-layout-padding;
-
-      @include media-breakpoint-down(sm) {
-        padding: 0;
-      }
-    }
-  }
-}
-
-.title {
-  text-align: center;
-}
-
-.forgot-password {
-  float: right;
-  margin-top: 7px;
-}
-
-.width-full {
-  width: 100%;
-}
-
-.another-action {
-  text-align: center;
-  margin: 1.8em;
-}
-
-.invalid-feedback {
-  display: block;
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: nb-theme(color-danger);
 }

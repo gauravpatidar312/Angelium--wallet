@@ -4,20 +4,13 @@
 :host {
   $auth-layout-padding: 2.5rem;
 
-  //   nb-card {
-  //     margin: 0;
-  //     height: calc(100vh - 2 * #{$auth-layout-padding});
-  //   }
-
-  .navigation .link {
-    text-decoration: none;
-
-    .icon {
-      font-size: 2rem;
-    }
+  nb-card {
+    margin: 0;
+    height: calc(100vh - 2 * #{$auth-layout-padding});
   }
 
   nb-card-body {
+    display: flex;
     width: 100%;
   }
 
@@ -27,7 +20,6 @@
 
   @include media-breakpoint-down(sm) {
     nb-card {
-      border-radius: 0;
       height: 100vh;
     }
   }
@@ -41,34 +33,46 @@
       }
     }
   }
-}
 
-.margint {
-  margin-top: 25px;
-  padding: 11px 10px;
-}
+  .navigation {
+    .link {
+      text-decoration: none;
 
-.another-action {
-  text-align: center;
-  margin: 1.8em;
-}
+      .icon {
+        font-size: 2rem;
+      }
+    }
 
-.btnregister {
-  width: 100%;
-}
+    .sub-title {
+      font-size: 13px;
+      color: #d1d1ff;
+      margin: 1rem 0 0;
+    }
+  }
 
-.title {
-  text-align: center;
-}
+  .margint {
+    margin-top: 25px;
+    padding: 11px 10px;
+  }
 
-.invalid-feedback {
-  display: block;
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: nb-theme(color-danger);
-}
+  .another-action {
+    text-align: center;
+    margin: 1.8em;
+  }
 
-.sent_btn {
-  padding-left: 0;
+  .btnregister {
+    width: 100%;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: nb-theme(color-danger);
+  }
 }
