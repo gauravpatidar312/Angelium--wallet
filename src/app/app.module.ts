@@ -23,6 +23,8 @@ import { RegisterComponent } from './register/register.component';
 // services
 import { SessionStorageService } from "./services/session-storage.service";
 import { ToastrService } from "./services/toastr.service";
+import { AuthService } from "./_guards/auth.service";
+import { AuthGuard } from './_guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent],
@@ -38,7 +40,7 @@ import { ToastrService } from "./services/toastr.service";
   ],
   bootstrap: [AppComponent],
   providers: [
-    SessionStorageService, ToastrService,
+    SessionStorageService, ToastrService, AuthService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
