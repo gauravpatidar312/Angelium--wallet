@@ -100,7 +100,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    if (!this.otpSubmitted) {
+    if (!this.isResubmit) {
       this.toastrService.danger('Please submit OTP first.', 'Register');
       return;
     }
