@@ -24,8 +24,8 @@
                   [defaultCountry]="'jp'">
                 </international-phone-number>
 
-                <div *ngIf="(otpForm.submitted || otpSubmitted) && otp_form.phone.errors" class="invalid-feedback">
-                  <div *ngIf="otp_form.phone.errors.required">Phone number is required</div>
+                <div *ngIf="((otpForm.submitted || otpSubmitted) && otp_form.phone.errors) || (submitted && f.phone.errors)" class="invalid-feedback">
+                  <div *ngIf="otp_form.phone.errors.required || f.phone.errors.required">Phone number is required</div>
                 </div>
               </div>
               <div class="col-md-3 col-12 sent_btn">
@@ -87,7 +87,9 @@
             <div class="form-group">
               <nb-checkbox>Agree to Terms & Conditions</nb-checkbox>
             </div>
-            <button type="submit" class="btn btn-demo btn-success" size="large" style="width:100%">Register
+            <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success" size="large" style="width:100%">
+              <span *ngIf="!formSubmitting">Register</span>
+              <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
             </button>
             <div class="form-group">
               <section class="another-action" aria-label="Sign in">

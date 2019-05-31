@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   registerForm: FormGroup;
   submitted: boolean = false;
+  formSubmitting: boolean = false;
   otpSubmitted: boolean = false;
   otpSubmitting: boolean = false;
   isResubmit: boolean = false;
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      invitation_code: ['', Validators.required],
+      invitation_code: [''],
       username: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       otp_code: ['', Validators.required],
@@ -46,13 +47,9 @@ export class RegisterComponent implements OnInit {
       validator: MustMatch('password', 'confirm_password'),
     });
 
-    this.activatedRoute.params.subscribe( params => {
+    this.activatedRoute.params.subscribe(params => {
       this.registerForm.controls.invitation_code.setValue(params.invitation_code);
     });
-
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.registerForm.controls.invitation_code.setValue(params.invitation_code);
-    // });
   }
 
   get f() {
@@ -71,9 +68,9 @@ export class RegisterComponent implements OnInit {
 
     this.otpSubmitted = true;
     this.otpSubmitting = true;
-    this.httpService.post(this.model, 'send-otp/').subscribe(res => {
-      this.otpSubmitting = false;
+    this.httpService.post(this.model, 'send-otp/').subscribe((res) => {
       this.isResubmit = true;
+      this.otpSubmitting = false;
 
       if (res['status']) {
         setTimeout(() => {
@@ -87,7 +84,8 @@ export class RegisterComponent implements OnInit {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
       if (err.status === 400) {
-        this.toastrService.danger('OTP code has been sent to your phone number.', 'Send SMS');
+        const msg = (err.error && err.error.phone && err.error.phone[0]) || 'We are not able to send you OTP now. Please try after sometime!';
+        this.toastrService.danger(msg, 'Send SMS');
       }
     });
   }
@@ -97,16 +95,24 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
 
     this.submitted = true;
-    this.otpSubmitted = true;
     // stop here if form is invalid
-    if (this.registerForm.invalid && this.otpForm.invalid) {
+    if (this.registerForm.invalid || this.otpForm.invalid) {
       return;
     }
-    // this.httpService.post(this.registerForm.value, 'register/').subscribe(res=>{
-    //   this.sessionStorageService.saveToSession('userInfo', res);
-    //   this.router.navigate(['pages/setting']);
-    // }, err => {
-    //   console.log(err);
-    // });
+
+    if (!this.otpSubmitted) {
+      this.toastrService.danger('Please submit OTP first.', 'Register');
+      return;
+    }
+
+    this.formSubmitting = true;
+    this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
+      this.sessionStorageService.saveToSession('userInfo', res);
+      this.router.navigate(['pages/setting']);
+    }, err => {
+      this.formSubmitting = false;
+      this.toastrService.danger('Something went wrong. We request you to register again after sometime.', 'Register Failed');
+      console.log(err);
+    });
   }
 }
