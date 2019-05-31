@@ -34,7 +34,7 @@ export class HttpService {
   }
 
   get(endpoint) {
-    return this.httpClient.get(`${environment.apiUrl}/${endpoint}/`, {
+    return this.httpClient.get<any>(`${environment.apiUrl}/${endpoint}`, {
       headers: globle_header_token()
     });
   }
@@ -43,6 +43,13 @@ export class HttpService {
     return this.httpClient.delete(
       `${environment.apiUrl}/${endpoint}/${id}`,
       data
+    );
+  }
+
+  postWithToken(data, endpoint) {
+    return this.httpClient.post<any>(
+      `${environment.apiUrl}/${endpoint}`,
+      data, { headers: globle_header_token() }
     );
   }
 }

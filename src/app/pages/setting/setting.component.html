@@ -16,39 +16,39 @@
             <tbody>
             <tr class="spacer">
               <td class="title-col">USER NAME</td>
-              <td class="value-col">texttext</td>
+              <td class="value-col">{{userData?.username}}</td>
               <td class="action-col"></td>
             </tr>
             <tr class="spacer">
               <td class="title-col">USER ID</td>
-              <td class="value-col">texttext</td>
+              <td class="value-col">{{userData?.user_id}}</td>
               <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">REFFERAL LINK</td>
-              <td class="value-col">{{user?.link}}</td>
+              <td class="value-col">{{userData?.link}}</td>
               <td class="action-col"></td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td class="title-col">LEVEL</td>
               <td class="value-col">texttext</td>
               <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">KYC</td>
-              <td class="value-col">{{name}}</td>
+              <td class="value-col">texttext</td>
               <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog()"></i></td>
             </tr>
             <tr>
               <td class="title-col">E-MAIL</td>
               <td class="value-col">texttext</td>
               <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
-            <tr>
+            </tr> -->
+            <!-- <tr>
               <td class="title-col">COUNTRY</td>
-              <td class="value-col">texttext</td>
+              <td class="value-col">{{userData?.country}}</td>
               <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
+            </tr> -->
             </tbody>
           </table>
         </div>
@@ -66,10 +66,12 @@
             <tbody>
             <tr>
               <td class="title-col">PASSWORD</td>
-              <td class="value-col">texttext</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+              <td class="value-col">
+                Change password click on icon
+              </td>
+              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('password')"></i></td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td class="title-col">2FA</td>
               <td class="value-col">texttext</td>
               <td class="action-col"><i class="nb-edit fa-2x"></i></td>
@@ -93,7 +95,7 @@
               <td class="title-col">MERGE</td>
               <td>Merge your old data</td>
               <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
+            </tr> -->
             </tbody>
           </table>
         </div>
@@ -102,7 +104,7 @@
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-lg-6">
     <nb-card>
       <nb-card-header>ABOUT</nb-card-header>
@@ -199,4 +201,4 @@
       </nb-card-body>
     </nb-card>
   </div>
-</div>
+</div> -->

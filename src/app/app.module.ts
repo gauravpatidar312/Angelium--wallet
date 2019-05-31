@@ -25,6 +25,7 @@ import { SessionStorageService } from "./services/session-storage.service";
 import { ToastrService } from "./services/toastr.service";
 import { AuthService } from "./_guards/auth.service";
 import { AuthGuard } from './_guards/auth.guard';
+import { ShareDataService } from "./services/share-data.service";
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent],
@@ -41,6 +42,7 @@ import { AuthGuard } from './_guards/auth.guard';
   bootstrap: [AppComponent],
   providers: [
     SessionStorageService, ToastrService, AuthService,
+    ShareDataService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
