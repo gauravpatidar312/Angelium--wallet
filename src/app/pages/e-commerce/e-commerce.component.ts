@@ -55,7 +55,7 @@ export class ECommerceComponent implements OnDestroy {
       {
         ...this.gainCard,
         type: 'primary',
-      }
+      },
     ],
   };
 

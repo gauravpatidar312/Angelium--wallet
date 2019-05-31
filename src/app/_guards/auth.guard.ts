@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate  {
     excludingUrls: Array<string>;
 
     constructor(private authService: AuthService, private router: Router) {
-      this.excludingUrls = ["/login", "/register"];
+      this.excludingUrls = ['/login', '/register', 'forgot-password'];
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):boolean {

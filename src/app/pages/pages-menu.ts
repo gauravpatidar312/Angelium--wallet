@@ -1,7 +1,9 @@
 import { NbMenuItem } from '@nebular/theme';
+import { environment } from '../../environments/environment';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    hidden: environment.production,
     title: 'Home',
     icon: 'nb-star',
     children: [
@@ -20,6 +22,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    hidden: environment.production,
     title: 'Heaven',
     icon: 'nb-star',
     link: '/pages/heaven',
@@ -27,6 +30,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     // ],
   },
   {
+    hidden: environment.production,
     title: 'Reward',
     icon: 'nb-star',
     children: [
@@ -45,6 +49,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    hidden: environment.production,
     title: 'Transfer',
     icon: 'nb-star',
     link: '/pages/transfer',
@@ -55,6 +60,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/setting',
   },
   {
+    hidden: environment.production,
     title: 'Admin',
     icon: 'nb-star',
     children: [
