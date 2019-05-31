@@ -8,7 +8,6 @@ export class SessionStorageService {
 
   saveToSession = function(key, value) {
     sessionStorage[key] = JSON.stringify(value);
-    console.log(sessionStorage[key]);
   };
 
   getFromSession = function(key): any {
