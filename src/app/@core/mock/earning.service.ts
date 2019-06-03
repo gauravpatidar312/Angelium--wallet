@@ -25,6 +25,30 @@ export class EarningService extends EarningData {
   ];
 
   private liveUpdateChartData = {
+    BITCOIN: {
+      liveChart: [],
+      delta: {
+        up: true,
+        value: 4,
+      },
+      dailyIncome: 45895,
+    },
+    TETHER: {
+      liveChart: [],
+      delta: {
+        up: false,
+        value: 9,
+      },
+      dailyIncome: 5862,
+    },
+    ETHEREUM: {
+      liveChart: [],
+      delta: {
+        up: false,
+        value: 21,
+      },
+      dailyIncome: 584,
+    },
     ANX: {
       liveChart: [],
       delta: {
