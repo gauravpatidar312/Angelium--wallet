@@ -12,10 +12,10 @@ import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
 
-  @Input() selectedCurrency: string = 'Bitcoin';
+  @Input() selectedCurrency: string = 'ANX';
 
   intervalSubscription: Subscription;
-  currencies: string[] = ['Bitcoin', 'Tether', 'Ethereum'];
+  currencies: string[] = ['ANX', 'HEAVEN'];
   currentTheme: string;
   earningLiveUpdateCardData: LiveUpdateChart;
   liveUpdateChartData: { value: [string, number] }[];
@@ -31,22 +31,6 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.getEarningCardData(this.selectedCurrency);
-    let element1 = document.getElementById('curr1').getElementsByClassName('curre');
-    element1[0].innerHTML = 'ANX';
-    let element2 = document.getElementById('curr2').getElementsByClassName('curre');
-    element2[0].innerHTML = 'HEAVEN';
-    let element3 = document.getElementById('curr3').getElementsByClassName('curre');
-    element3[0].innerHTML = 'ANL';
-    let element4 = document.getElementById('curr4').getElementsByClassName('curre');
-    element4[0].innerHTML = 'XP';
-    let element5 = document.getElementById('curr5').getElementsByClassName('curre');
-    element5[0].innerHTML = 'BTC';
-    let element6 = document.getElementById('curr6').getElementsByClassName('curre');
-    element6[0].innerHTML = 'ETH';
-    let element7 = document.getElementById('curr7').getElementsByClassName('curre');
-    element7[0].innerHTML = 'EOS';
-    let element8 = document.getElementById('curr8').getElementsByClassName('curre');
-    element8[0].innerHTML = 'USDT';
   }
 
   // changeCurrency(currency) {

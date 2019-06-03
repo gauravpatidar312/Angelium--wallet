@@ -8,7 +8,7 @@ import { ShareDataService } from "../../../services/share-data.service";
   styleUrls: ['dialog-prompt.component.scss'],
 })
 export class DialogNamePromptComponent {
-
+  inputValue:any;
   constructor(protected ref: NbDialogRef<DialogNamePromptComponent>,
    private shareDataService: ShareDataService) {}
 
@@ -21,8 +21,8 @@ export class DialogNamePromptComponent {
   }
 
   ngOnInit() {
-    this.shareDataService.currentData.subscribe(message => {
-      
+    this.shareDataService.currentData.subscribe(data => {
+      this.inputValue = data;
     });
   }
 
