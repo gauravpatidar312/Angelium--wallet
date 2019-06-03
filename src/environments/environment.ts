@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://wallet.angelium.net/api',
+  apiUrl: 'http://52.77.247.144/api',
 };

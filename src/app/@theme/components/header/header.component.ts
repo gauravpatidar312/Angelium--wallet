@@ -25,10 +25,10 @@ export class HeaderComponent implements OnInit {
               private userService: UserData,
               private analyticsService: AnalyticsService,
               private layoutService: LayoutService,
-              private nbMenuService: NbMenuService, 
+              private nbMenuService: NbMenuService,
               private authService: AuthService) {
   }
-  
+
   ngOnInit() {
     this.userService.getUsers()
       .subscribe((users: any) => {

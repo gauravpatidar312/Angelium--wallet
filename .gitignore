@@ -2,6 +2,8 @@
 /dist
 /tmp
 /out-tsc
+/bazel-out
+/integration/bazel/bazel-*
 
 # dependencies
 /node_modules
@@ -14,6 +16,10 @@
 *.launch
 .settings/
 *.sublime-workspace
+.devcontainer/*
+!.devcontainer/recommended-devcontainer.json
+!.devcontainer/recommended-Dockerfile
+*.swo
 
 # IDE - VSCode
 .vscode/*
@@ -21,6 +27,9 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Don't check in secret files
+*secret.js
 
 # misc
 /.sass-cache
@@ -35,6 +44,20 @@ testem.log
 # e2e
 /e2e/*.js
 /e2e/*.map
+e2e_test.*
+
+# Ignore npm/yarn debug log
+npm-debug.log
+yarn-error.log
+
+# build-analytics
+.build-analytics
+
+# rollup-test output
+/modules/rollup-test/dist/
+
+# User specific bazel settings
+.bazelrc.user
 
 # System Files
 .DS_Store
