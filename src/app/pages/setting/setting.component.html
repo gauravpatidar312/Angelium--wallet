@@ -6,7 +6,8 @@
         <div class="row">
           <div class="col-md-12">
             <nb-card-body>
-              <nb-user [picture]="'assets/images/nick.png'" [name]="'Nick Jones'" [title]="'Lv 3 In.2'" size="large">
+              <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
+              <nb-user [picture]="userImage" [name]="'Nick Jones'" [title]="'Lv 3 In.2'" size="large">
               </nb-user>
             </nb-card-body>
           </div>
@@ -24,6 +25,7 @@
               <td class="value-col">{{userData?.user_id}}</td>
               <td class="action-col"></td>
             </tr>
+            
             <tr>
               <td class="title-col">REFFERAL LINK</td>
               <td class="value-col">{{userData?.link}}</td>
@@ -202,3 +204,34 @@
     </nb-card>
   </div>
 </div> -->
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      Upload image
+      <i class="nb-close nb-icon-left fa-2x" (click)="ref.close()"></i>
+    </nb-card-header>
+    <nb-card-body>
+      <input type="file" nbInput (change)="fileChangeEvent($event)" />
+      <br> <br>
+      <div>
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="16 / 9 "
+          [resizeToWidth]="200"
+          [cropperMinWidth]="200"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
+      <br>
+      <img [src]="croppedImage" />
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Upload</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+    

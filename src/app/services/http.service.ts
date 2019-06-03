@@ -11,6 +11,12 @@ function globle_header_token() {
   return headers;
 }
 
+function headerToken() {
+  let userInfo = sessionStorage.getItem("userInfo");
+  var _headers = new HttpHeaders().set('Authorization', 'JWT '+JSON.parse(userInfo).token);
+  return _headers;
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -50,6 +56,13 @@ export class HttpService {
     return this.httpClient.post<any>(
       `${environment.apiUrl}/${endpoint}`,
       data, { headers: globle_header_token() }
+    );
+  }
+
+  uploadImage(data, endpoint) {
+    return this.httpClient.post<any>(
+      `${environment.apiUrl}/${endpoint}`,
+      data, { headers: headerToken() }
     );
   }
 }

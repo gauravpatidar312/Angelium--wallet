@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { icons } from 'eva-icons';
 import { NbDialogService } from '@nebular/theme';
 import { DialogNamePromptComponent } from './dialog-prompt/dialog-prompt.component';
+import { ImageCroppedEvent } from './image-cropper/interfaces/image-cropped-event.interface';
 import { ToastrService } from "../../services/toastr.service";
 import { HttpService } from "../../services/http.service";
 import { ShareDataService } from "../../services/share-data.service";
@@ -14,8 +15,11 @@ import { ShareDataService } from "../../services/share-data.service";
 export class SettingComponent implements OnInit {
   evaIcons = [];
   userData: any = { 'username': '', 'link': '', 'user_id': '', 'country': '' };
-  urls = ['username/', 'referral-link/', 'user_id/', 'country/'];
-
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  croppedImageSize: any = '';
+  userImage: any;
+  userImageBase64: any;
   constructor(
     private toastrService: ToastrService,
     private dialogService: NbDialogService,
@@ -23,8 +27,6 @@ export class SettingComponent implements OnInit {
     private shareDataService: ShareDataService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
   }
-
-  name: string = 'Nick Jones';
 
   ngOnInit() {
     this.toastrService.success('Welcome on setting', 'Settings');
@@ -79,5 +81,41 @@ export class SettingComponent implements OnInit {
 
   newData(name: any) {
     this.shareDataService.changeData(name)
+  }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  
+  imageCropped(event: ImageCroppedEvent) {
+    this.userImageBase64 = event.base64;
+    this.croppedImage = event.base64;
+    this.croppedImageSize = event.file;
+  }
+
+  loadImageFailed() {
+    // show message
+  }
+
+  open(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog).onClose.subscribe(data=>{
+      this.imageChangedEvent = '';
+      this.croppedImage = '';
+    });
+  }
+
+  uploadPicture(ref){
+    const formData: FormData = new FormData();
+    let file = this.imageChangedEvent.target.files[0];
+    this.croppedImageSize;
+    let newfile = new File([this.croppedImageSize], file.name);
+    formData.append('avatar', newfile , newfile.name);
+    this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
+      if (res.status) {
+        ref.close();
+        this.userImage = this.userImageBase64;
+        this.toastrService.success('User image change successfully', 'Picture updated');
+      }
+    });
   }
 }
