@@ -13,9 +13,9 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { SettingComponent } from './setting/setting.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { KYCComponent } from './kyc/kyc.component';
-import { HeavenComponent } from './heaven/heaven.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt.component';
+import { HeavenModule } from './heaven/heaven.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -33,6 +33,7 @@ const PAGES_COMPONENTS = [
     // HeavenModule,
     ThemeModule,
     HQModule,
+    HeavenModule,
     NbDialogModule.forChild(),
   ],
   declarations: [
@@ -40,7 +41,6 @@ const PAGES_COMPONENTS = [
     SettingComponent,
     TransferComponent,
     KYCComponent,
-    HeavenComponent,
     DialogNamePromptComponent,
   ],
   entryComponents: [

@@ -1,38 +1,69 @@
-<div  class="row">
+<div class="row">
 	<div class="col-md-6">
-		<div class="card card_body">
-			<div class="image_div">
-				<img src="assets/images/card_img1.jpg" class="menu_img">
-				<div class="heaven_div">
-					<h6 class="">Heaven</h6>
-					<p><span>$</span> 572,900</p>
+		<nb-card class="top-content">
+			<div class="icon-container">
+				<div class="icon primary"> <i class="fa fa-university"></i></div>
+			</div>
+			<div class="details">
+				<label>Total Assets</label>
+				<label class="bigger-text"><span>$</span> 572,900</label>
+			</div>
+			<div class="actions">
+				<div class="select-box">
+					<div class="dropdown" ngbdropdown="">
+						<button aria-haspopup="true" class="btn dropdown-toggle btn-primary" ngbdropdowntoggle=""
+							type="button" aria-expanded="false" data-toggle="dropdown"> week
+						</button>
+						<ul class="dropdown-menu" ngbdropdownmenu="" x-placement="bottom-left">
+							<li class="dropdown-item"> week </li>
+							<li class="dropdown-item"> month </li>
+							<li class="dropdown-item"> year </li>
+						</ul>
+					</div>
 				</div>
-				<div class="btn_img">
-					<button class="image_btn">
-						<img src="assets/images/card_btnimg1.jpg" class="btn_img1">IN
-					</button>
+				<div class="progress-data ">
+					<div class="delta value up"> 4% </div>
+					<div class="progress-container">
+						<div class="progress-value " style="width: 70%;"></div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</nb-card>
 	</div>
 	<div class="col-md-6">
-		<div class="card card_body">
-			<div class="image_div">
-				<img src="assets/images/card_img1.jpg" class="menu_img">
-				<div class="heaven_div">
-					<h6 class="">Releasable</h6>
-					<p><span>$</span> 572,900</p>
-				</div>
-				<div class="btn_img">
-					<button class="image_btn image_btn1">
-						OUT<img src="assets/images/card_btnimg2.jpg" class="btn_img2">
-					</button>
-				</div>
+		<nb-card class="top-content">
+			<div class="icon-container">
+				<div class="icon primary"> <i class="nb-bar-chart"></i></div>
 			</div>
-		</div>
+			<div class="details">
+				<label>Heaven rate</label>
+				<label class="bigger-text">94%</label>
+			</div>
+			<div class="actions">
+				<div class="select-box">
+					<div class="dropdown" ngbdropdown="">
+						<button aria-haspopup="true" class="btn dropdown-toggle btn-primary" ngbdropdowntoggle=""
+							type="button" aria-expanded="false" data-toggle="dropdown"> week
+						</button>
+						<ul class="dropdown-menu" ngbdropdownmenu="" x-placement="bottom-left">
+							<li class="dropdown-item"> week </li>
+							<li class="dropdown-item"> month </li>
+							<li class="dropdown-item"> year </li>
+						</ul>
+					</div>
+				</div>
+				<div class="progress-data">
+					<div class="delta value up"> 4% </div>
+					<div class="progress-container">
+						<div class="progress-value " style="width: 70%;"></div>
+					</div>
+				</div>
+
+			</div>
+		</nb-card>
 	</div>
 </div>
-<div  class="row">
+<div class="row">
 	<div class="col-md-4">
 		<div class="card card_body">
 			<h6 class="card_heading">Heaven 30</h6>
@@ -58,54 +89,137 @@
 	<div class="col-md-4">
 		<div class="card card_body">
 			<h6 class="card_heading">Heaven 60</h6>
-      <table class="table">
+			<table class="table">
 				<tr>
-          <td rowspan="2" class="days-col">30</td>
-          <td class="monthly-col">Monthly</td>
-          <td class="daily-col">Daily</td>
+					<td rowspan="2" class="days-col">30</td>
+					<td class="monthly-col">Monthly</td>
+					<td class="daily-col">Daily</td>
 				</tr>
 				<tr>
-          <td class="monthly-val">14%</td>
-          <td class="daily-val">4%</td>
+					<td class="monthly-val">14%</td>
+					<td class="daily-val">4%</td>
 				</tr>
 				<tr>
 					<td>Days</td>
 					<td>$1013</td>
 					<td>$192</td>
 				</tr>
-      </table>
+			</table>
 			<button class="table_btn table_bg">Choose</button>
 		</div>
 	</div>
 	<div class="col-md-4">
 		<div class="card card_body">
 			<h6 class="card_heading">Heaven 90</h6>
-      <table class="table">
+			<table class="table">
 				<tr>
-          <td rowspan="2" class="days-col">30</td>
-          <td class="monthly-col">Monthly</td>
-          <td class="daily-col">Daily</td>
+					<td rowspan="2" class="days-col">30</td>
+					<td class="monthly-col">Monthly</td>
+					<td class="daily-col">Daily</td>
 				</tr>
 				<tr>
-          <td class="monthly-val">14%</td>
-          <td class="daily-val">4%</td>
+					<td class="monthly-val">14%</td>
+					<td class="daily-val">4%</td>
 				</tr>
 				<tr>
 					<td>Days</td>
 					<td>$1013</td>
 					<td>$192</td>
 				</tr>
-      </table>
+			</table>
 			<button class="table_btn table_bg">Choose</button>
 		</div>
 	</div>
 </div>
-<nb-card>
-  <nb-card-header>
-    Heaven History
-  </nb-card-header>
-  <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source">
-    </ng2-smart-table>
-  </nb-card-body>
-</nb-card>
+<div class="row">
+	<div class="col-md-12">
+		<nb-card>
+			<nb-card-body>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>From</label>
+							<select class="form-control">
+								<option>BTC</option>
+								<option>ETH</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+							<div class="form-group">
+									<label>Amount</label>
+							<input type="text" placeholder="Nick" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-4">
+							<div class="form-group">
+							<label></label>
+						<button class="btn btn-success btn-rectangle">RUN</button>
+						</div>
+
+					</div>
+				</div>
+
+			</nb-card-body>
+		</nb-card>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-8 col-xl-9">
+		<nb-card>
+			<nb-card-body>
+				<div class="chart-header">
+					<div class="legends">
+						<div class="legend">
+							<div class="legend-item-color"
+								style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
+							</div>
+							<div class="legend-title">ANX</div>
+						</div>
+						<div class="legend">
+							<div class="legend-item-color"
+								style="background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);">
+							</div>
+							<div class="legend-title">HEAVEN</div>
+						</div>
+					</div>
+					<div class="dropdown" ngbdropdown="">
+						<button aria-haspopup="true" class="btn dropdown-toggle btn-primary" ngbdropdowntoggle=""
+							type="button" aria-expanded="false"> Year </button>
+						<ul class="dropdown-menu" ngbdropdownmenu="" x-placement="bottom-left">
+							<li class="dropdown-item"> Week </li>
+							<li class="dropdown-item"> Month </li>
+							<li class="dropdown-item"> Year </li>
+						</ul>
+					</div>
+				</div>
+				<ngx-ecommerce-charts></ngx-ecommerce-charts>
+			</nb-card-body>
+		</nb-card>
+	</div>
+	<div class="col-md-4 col-xl-3">
+		<nb-card>
+			<nb-card-header>
+				ANX Price
+			</nb-card-header>
+			<nb-card-body>
+				<div class="progress-info">
+					<div class="value">572,900</div>
+					<div class="progress-container ">
+						<div class="progress-value " style="width: 70%;"> </div>
+					</div>
+					<div class="description"><bdi>Better than last week (70%)</bdi></div>
+				</div>
+			</nb-card-body>
+		</nb-card>
+		<ngx-solar [chartValue]="'42'"></ngx-solar>
+	</div>
+	<nb-card>
+		<nb-card-header>
+			Heaven History
+		</nb-card-header>
+		<nb-card-body>
+			<ng2-smart-table [settings]="settings" [source]="source">
+			</ng2-smart-table>
+		</nb-card-body>
+	</nb-card>
