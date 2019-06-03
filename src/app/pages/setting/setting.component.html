@@ -29,26 +29,26 @@
               <td class="value-col">{{userData?.link}}</td>
               <td class="action-col"></td>
             </tr>
-            <!-- <tr>
-              <td class="title-col">LEVEL</td>
-              <td class="value-col">texttext</td>
-              <td class="action-col"></td>
-            </tr>
-            <tr>
-              <td class="title-col">KYC</td>
-              <td class="value-col">texttext</td>
-              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog()"></i></td>
-            </tr>
             <tr>
               <td class="title-col">E-MAIL</td>
-              <td class="value-col">texttext</td>
+              <td class="value-col">admin@admin.com</td>
               <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
+              <td class="title-col">PHONE</td>
+              <td class="value-col">+918989000123</td>
+              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+            </tr>
+            <tr>
               <td class="title-col">COUNTRY</td>
               <td class="value-col">{{userData?.country}}</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr> -->
+              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">LEVEL</td>
+              <td class="value-col">Lv.3 / In.2</td>
+              <td class="action-col"></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -67,9 +67,9 @@
             <tr>
               <td class="title-col">PASSWORD</td>
               <td class="value-col">
-                Change password click on icon
+                **********
               </td>
-              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('password')"></i></td>
+              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('password', '')"></i></td>
             </tr>
             <!-- <tr>
               <td class="title-col">2FA</td>

@@ -45,20 +45,37 @@ export class SettingComponent implements OnInit {
     });
   }
 
-  openDialog(val: any) {
-    this.newData(val);
+  openDialog(type: any, value:any) {
+    this.newData(value);
     this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(data => {
-        if (val == 'password' && data!=undefined && data!='') {
-          this.httpService.postWithToken({ 'password': data }, 'password/')
-          .subscribe(data=>{
-            this.toastrService.success('Update password successfully', 'Password');
-          }, err=>{
-            console.log(err);
-          });
+        if (type == 'password' && data!=undefined && data!='') {
+          let endpoint = 'password/';
+          let apiData = { 'password' : data };
+          this.updateSettingPageData(apiData, endpoint);
+        }else if (type == 'country' && data!=undefined && data!='') {
+          let endpoint = 'country/';
+          let apiData = { 'country' : data };
+          this.updateSettingPageData(apiData, endpoint);
         }
     });
   }
+
+
+  updateSettingPageData(apiData: any, endpoint: string){
+    this.httpService.postWithToken(apiData, endpoint)
+    .subscribe(res=>{
+      if (res.status == 'password reset') {
+        this.toastrService.success('Password update successfully', 'Password');
+      }else if (res.status =='country updated') {
+        this.userData.country = apiData.country;
+        this.toastrService.success('Country update successfully', 'Country');
+      }
+    }, err=>{
+      console.log(err);
+    });
+  }
+
 
   newData(name: any) {
     this.shareDataService.changeData(name)
