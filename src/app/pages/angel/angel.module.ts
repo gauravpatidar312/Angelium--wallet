@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// import { NgTableComponent } from './table/ng-table.component';
-// import { NgTableFilteringDirective } from './table/ng-table-filtering.directive';
-// import { NgTablePagingDirective } from './table/ng-table-paging.directive';
-// import { NgTableSortingDirective } from './table/ng-table-sorting.directive';
-
 import { AngelComponent } from './angel.component';
 import { EarningCardComponent } from './earning-card/earning-card.component';
 import { EarningCardBackComponent } from './earning-card/back-side/earning-card-back.component';
@@ -30,12 +25,6 @@ import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/cha
 import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/chart-panel-summary.component';
 import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
 
-
-import {
-  MatToolbarModule,
-  MatTableModule,
-} from '@angular/material';
-
 @NgModule({
   declarations: [AngelComponent,
     EarningCardComponent,
@@ -55,8 +44,6 @@ import {
     ECommerceLegendChartComponent,
     ],
   imports: [
-    MatToolbarModule,
-    MatTableModule,
     CommonModule,
     ThemeModule,
     ChartModule,
