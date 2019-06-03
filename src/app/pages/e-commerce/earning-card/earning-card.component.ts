@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-earning-card',
@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './earning-card.component.html',
 })
 export class EarningCardComponent {
-
   flipped = false;
+
+  @Input() selectedCurrency: string = 'BTC';
 
   toggleFlipView() {
     this.flipped = !this.flipped;

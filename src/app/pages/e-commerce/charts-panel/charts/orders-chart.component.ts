@@ -132,7 +132,6 @@ export class OrdersChartComponent implements AfterViewInit, OnDestroy, OnChanges
       series: [
         this.getFirstLine(eTheme),
         this.getSecondLine(eTheme),
-        this.getThirdLine(eTheme),
       ],
     };
   }
