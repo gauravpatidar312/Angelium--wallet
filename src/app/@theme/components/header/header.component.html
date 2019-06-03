@@ -23,7 +23,7 @@
     [class.left]="position === 'inverse'">
     <nb-action *nbIsGranted="['view', 'user']" >
 
-      <nb-user  [name]="user?.username" [picture]="user?.picture"
+      <nb-user  [picture]="userImage" [name]="'Nick Jones'"
                 title=""
                 [nbContextMenu]="userMenu"
                 nbContextMenuTag="my-context-menu">

@@ -45,6 +45,10 @@ export class SettingComponent implements OnInit {
     this.httpService.get('country/').subscribe(data=>{
       this.userData.country = data.country;
     });
+
+    this.httpService.get('user-avatar/').subscribe(data=>{
+      this.userImage = data.url;
+    });
   }
 
   openDialog(type: any, value:any) {
@@ -106,16 +110,19 @@ export class SettingComponent implements OnInit {
 
   uploadPicture(ref){
     const formData: FormData = new FormData();
-    let file = this.imageChangedEvent.target.files[0];
-    this.croppedImageSize;
-    let newfile = new File([this.croppedImageSize], file.name);
-    formData.append('avatar', newfile , newfile.name);
-    this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
-      if (res.status) {
-        ref.close();
-        this.userImage = this.userImageBase64;
-        this.toastrService.success('User image change successfully', 'Picture updated');
-      }
-    });
+    if (this.imageChangedEvent!='') {
+      let file = this.imageChangedEvent.target.files[0];
+      this.croppedImageSize;
+      let newfile = new File([this.croppedImageSize], file.name);
+      formData.append('avatar', newfile , newfile.name);
+
+      this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
+        if (res.status) {
+          ref.close();
+          this.userImage = this.userImageBase64;
+          this.toastrService.success('User image change successfully', 'Picture updated');
+        }
+      });
+    }
   }
 }
