@@ -7,7 +7,7 @@ import {RegisterComponent} from './register/register.component';
 import {AuthGuard} from './_guards/auth.guard';
 
 const routes: Routes = [
-  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', canActivate: [AuthGuard]},
+  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule'}, // , canActivate: [AuthGuard]
   {path: 'login', component: LoginComponent},
 
   {

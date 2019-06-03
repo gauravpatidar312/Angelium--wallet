@@ -1,4 +1,12 @@
 <div class="row">
+  <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
+    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
+      <i [ngClass]="statusCard.iconClass"></i>
+    </ngx-status-card>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-xxl-12">
     <div class="row">
       <div class="col-md-3" id="curr1">
@@ -19,7 +27,7 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <nb-card>
+    <nb-card class="card-rewardAllocation">
       <nb-card-header>Reward Allocation</nb-card-header>
       <nb-card-body>
         <ngx-echarts-pie></ngx-echarts-pie>
@@ -27,34 +35,123 @@
     </nb-card>
   </div>
   <div class="col-lg-6">
-    <nb-card>
+    <!-- <nb-card>
       <nb-card-header>Reward Heaven
       </nb-card-header>
       <nb-card-body>
         <ngx-echarts-area-stack></ngx-echarts-area-stack>
       </nb-card-body>
-    </nb-card>
+    </nb-card> -->
+    <ngx-ecommerce-charts></ngx-ecommerce-charts>
   </div>
 </div>
-<nb-card>
+<!-- <nb-card>
   <nb-card-header>
     Your Reward <span class="right-align">Today Week Month Total</span>
   </nb-card-header>
-
   <nb-card-body>
     <ng2-smart-table [settings]="settings" [source]="source" >
     </ng2-smart-table>
 </nb-card-body>
-</nb-card>
-<nb-card>
+</nb-card> -->
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>
+        Your Reward
+        <nb-tabset>
+          <nb-tab tabTitle="Today">
+            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+          </nb-tab>
+          <nb-tab tabTitle="Week" [lazyLoad]="true">
+            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+          </nb-tab>
+          <nb-tab tabTitle="Month" [lazyLoad]="true">
+            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+          </nb-tab>
+          <nb-tab tabTitle="Total" [lazyLoad]="true">
+            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+          </nb-tab>
+        </nb-tabset>
+      </nb-card-header>
+    </nb-card>
+  </div>
+</div>
+<!-- <nb-card>
   <nb-card-header>
-    DownLine Tree 
+    DownLine Tree
     <span class="right-align">Today Week Month Total</span>
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settingsnew" [source]="source" >
+    <ng2-smart-table [settings]="settingsnew" [source]="source">
     </ng2-smart-table>
-</nb-card-body>
+  </nb-card-body>
+</nb-card> -->
+
+<nb-card>
+  <nb-card-header>
+    DownLine Tree
+    <nb-tabset>
+      <nb-tab tabTitle="Today">
+        <!-- <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table> -->
+
+        <table class="table table-hover table-bordered">
+          <thead style="background-color: #494299;">
+            <tr>
+              <th>Level</th>
+              <th>Username</th>
+              <th>Rank</th>
+              <th>Heaven</th>
+              <th>Your Reward</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let downline of downlineData;let i= index">
+              <tr data-toggle="collapse" [attr.data-target]="'#demo' + i" class="accordion-toggle">
+                <td> 
+                  {{ downline.level }} 
+                  <span class="expand"><span class="fa fa-caret-down"></span></span>
+                </td>
+                <td>
+                  {{ downline.username }}
+                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                </td>
+                <td>
+                  {{ downline.rank }}
+                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                </td>
+                <td>
+                  {{ downline.heaven }}
+                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                </td>
+                <td>
+                  {{ downline.yourreward }}
+                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="hiddenRow " colspan="6">
+                  <div class="expanddiv accordian-body collapse" [attr.id]="'demo' + i">
+                    Level: {{ downline.level }} &nbsp;
+                    Username: {{ downline.username }} &nbsp;
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </nb-tab>
+      <nb-tab tabTitle="Week" [lazyLoad]="true">
+        <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
+      </nb-tab>
+      <nb-tab tabTitle="Month" [lazyLoad]="true">
+        <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
+      </nb-tab>
+      <nb-tab tabTitle="Total" [lazyLoad]="true">
+        <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-header>
 </nb-card>
 <ngx-bubble-map></ngx-bubble-map>
