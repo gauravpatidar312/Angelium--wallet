@@ -33,21 +33,15 @@ export class SettingComponent implements OnInit {
   ngOnInit() {
     this.toastrService.success('Welcome on setting', 'Settings');
 
-    let userSettingInfo = this.sessionStorage.getFromSession('userSettingInfo');
-    if (userSettingInfo === "false") {
-      this.httpService.get('profile/').subscribe(data=>{
-        this.userData = data;
-      });
-    } else {
-      this.userData = userSettingInfo;
-    }
+    let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    this.userData = userSettingInfo;
   }
 
   r18mode(event){
     let data = { "r18mode": event.target.checked };
     this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
       if (res.status) {
-        this.sessionStorage.updateFromSession('userSettingInfo', data);
+        this.sessionStorage.updateFromSession('userInfo', data);
         this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode');
       }
     });
@@ -77,7 +71,7 @@ export class SettingComponent implements OnInit {
         this.toastrService.success('Password update successfully', 'Password');
       }else if (res.status =='country updated') {
         this.userData.country = apiData.country;
-        this.sessionStorage.updateFromSession('userSettingInfo', apiData);
+        this.sessionStorage.updateFromSession('userInfo', apiData);
         this.toastrService.success('Country update successfully', 'Country');
       }
     }, err=>{
@@ -124,7 +118,7 @@ export class SettingComponent implements OnInit {
           ref.close();
           this.shareDataService.changeData(res);
           this.userData.avatar = res.avatar;
-          this.sessionStorage.updateFromSession('userSettingInfo', res);
+          this.sessionStorage.updateFromSession('userInfo', res);
           this.toastrService.success('User image change successfully', 'Picture updated');
         }
       });

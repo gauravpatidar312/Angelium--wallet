@@ -20,7 +20,7 @@ export class SecurityCamerasComponent implements OnDestroy {
   constructor(
     private securityCamerasService: SecurityCamerasData, 
     private sessionStorage: SessionStorageService) {
-    let userSettingInfo = this.sessionStorage.getFromSession('userSettingInfo');
+    let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
     this.r18mode = userSettingInfo.r18mode;
 
     this.securityCamerasService.getCamerasData()
