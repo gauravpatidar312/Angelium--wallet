@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Camera, SecurityCamerasData } from '../../../@core/data/security-cameras';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, map } from 'rxjs/operators';
+import { SessionStorageService } from "../../../services/session-storage.service";
 
 @Component({
   selector: 'ngx-security-cameras',
@@ -13,14 +14,32 @@ export class SecurityCamerasComponent implements OnDestroy {
 
   cameras: Camera[];
   selectedCamera: Camera;
+  camerasData:any = [];
   isSingleView = false;
+  r18mode: boolean;
+  constructor(
+    private securityCamerasService: SecurityCamerasData, 
+    private sessionStorage: SessionStorageService) {
+    let userSettingInfo = this.sessionStorage.getFromSession('userSettingInfo');
+    this.r18mode = userSettingInfo.r18mode;
 
-  constructor(private securityCamerasService: SecurityCamerasData) {
     this.securityCamerasService.getCamerasData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((cameras: Camera[]) => {
-        this.cameras = cameras;
-        this.selectedCamera = this.cameras[0];
+        console.log(cameras)
+        // this.cameras = cameras;
+        let data = ['XTRAVEL', 'XMALL', 'XSCHOOL'];
+        if (this.r18mode) {
+          this.camerasData = cameras;
+        }else{
+          data.filter(x=>{
+            let cam = cameras.find(y =>{
+              return x == y.title;
+            });
+            this.camerasData.push(cam);
+          });
+        }
+        this.selectedCamera = cameras[0];
       });
   }
 
