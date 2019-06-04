@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     this.formSubmitting = true;
     this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);
+      this.getUserSettingInfo();
       this.router.navigate(['pages/setting']);
     }, err => {
       this.formSubmitting = false;
@@ -59,6 +60,12 @@ export class LoginComponent implements OnInit {
         }
       }
       console.log(err);
+    });
+  }
+
+  getUserSettingInfo(){
+    this.httpService.get('profile/').subscribe(data=>{
+      this.sessionStorageService.saveToSession('userSettingInfo', data);
     });
   }
 }

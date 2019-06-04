@@ -5,8 +5,9 @@ import { UserData } from '../../../@core/data/users';
 import { AnalyticsService } from '../../../@core/utils';
 import { LayoutService } from '../../../@core/utils';
 import { HttpService } from "../../../services/http.service";
-
+import { ShareDataService } from "../../../services/share-data.service";
 import { AuthService } from '../../../_guards/auth.service';
+import { SessionStorageService } from "../../../services/session-storage.service";
 
 @Component({
   selector: 'ngx-header',
@@ -14,7 +15,7 @@ import { AuthService } from '../../../_guards/auth.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  userImage: any;
+  userData: any;
   @Input() position = 'normal';
 
   user: any;
@@ -28,7 +29,9 @@ export class HeaderComponent implements OnInit {
               private layoutService: LayoutService,
               private nbMenuService: NbMenuService,
               private authService: AuthService,
-              private httpService: HttpService) {
+              private httpService: HttpService,
+              private shareDataService: ShareDataService,
+              private sessionStorage: SessionStorageService) {
   }
 
   ngOnInit() {
@@ -48,15 +51,25 @@ export class HeaderComponent implements OnInit {
         }
       });
 
-    this.httpService.get('user-avatar/').subscribe(data=>{
-      this.userImage = data.url;
+    let userSettingInfo = this.sessionStorage.getFromSession('userSettingInfo');
+    if (userSettingInfo === 'false') {
+      this.httpService.get('profile/').subscribe(data=>{
+        this.userData = data;
+      });
+    } else {
+      this.userData = userSettingInfo;
+    }
+
+    this.shareDataService.currentData.subscribe(data => {
+      if (data.avatar) {
+        this.userData.avatar = data.avatar;
+      }
     });
   }
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
-
     return false;
   }
 
