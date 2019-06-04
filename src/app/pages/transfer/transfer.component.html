@@ -1,64 +1,177 @@
-<div class="row">
-  <div class="col-md-12">
-    <nb-card>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <nb-card-header>
-           <div class="navigation"><h1 class="link" style="text-align: center">TRANSFER</h1></div> 
-          </nb-card-header>
-          <nb-card-body>
-            <div class="row row-grid">
-              <form id="Form1" class="width-full">
-                <div class=" row form-group">
-                  <div class="col-md-4 labeldata" ><a (click)="trasfertoggle('send')">Send</a></div>
-                  <div class="col-md-4 labeldata" (click)="trasfertoggle('recieve')">Receive</div>
-                  <div class="col-md-4 labeldata" (click)="trasfertoggle('otc')" >OTC</div>
-
-                </div>
-                <div class="clear-fix"></div>
-                <div class="form-group row">
-                  <div class="col-md-2" id="fromid">
-                    <label for="exampleInputEmail1" class="text-link">From</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="ANX" value="ANX">
-                  </div>
-                  <div class="col-md-3" id="fromaccount">
-                    <label for="exampleInputEmail1" class="text-link">Amount</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Amount" value="0.1313">
-                  </div>
-                  <div class="col-md-1 arrowtransfer"><i class="fas fa-arrow-right"></i></div>
-                  <div class="col-md-2" id="toid">
-                    <label for="exampleInputEmail1" class="text-link">To</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1"
-                      placeholder="Enter destination Address" value="BTC">
-                  </div>
-                  <div class="col-md-3" id="toaccount">
-                      <label for="exampleInputEmail1" class="text-link">Amount</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Amount" value="1023">
-                  </div>
-                </div>
-                <div class="clear-fix"></div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="equdiasusdhgdjhdghs.iq" value="">
-                </div>
-                <div class="form-group">
-                  <button type="submit" style="width:100%" class="btn btn-demo btn-success" size="large">RUN</button>
-                </div>
-                <div class="form-group textcenter">testestestesttest</div>
-              </form>
-
-            </div>
-
-
-          </nb-card-body>
-        </div>
-
-        <div class="col-md-2">
-          <!-- <img src="assets/images/barcode.png" height="100" width="200"> -->
-        </div>
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12 nb-card-outer">
+  <div class="col-md-8 offset-md-2 nb-card-wrap">
+    <nb-card-header>
+      <div class="navigation">
+        <h1 class="link" style="text-align: center">TRANSFER</h1>
       </div>
-    </nb-card>
+    </nb-card-header>
+    <nb-card-body class="col-md-12">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Send">
+          <form class="mt-5 transfer-form">
+            <div class="row d-sml-block">
+              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                      <label for="ANX" class="text-link">From</label>
+                      <input type="text" class="form-control" placeholder="ANX" value="ANX">
+                    </div>
+                  </div>
+                  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="form-group total-amount">
+                      <label for="Amount" class="text-link">Amount</label>
+                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                      <span>$1245</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center">
+                    <div class="form-group mt-4">
+                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center">
+                    <div class="form-group">
+                      <label for="BTC" class="text-link">To</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-5 mtb-0">
+                <div class="row justify-content-center">
+                  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                      <input type="text" class="form-control w-100" placeholder="enter your destination address"
+                        value="">
+                    </div>
+                    <div class="form-group mt-4">
+                      <button nbButton class="form-control pointer" fullWidth status="success">
+                        <span>RUN</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+                    <img class="img-fluid barcode" [src]="barcode" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </nb-tab>
+        <nb-tab tabTitle="Receive">
+          <form class="mt-5 transfer-form receive-form">
+            <div class="row ">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="row">
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                    <div class="form-group mt-4">
+                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                    <div class="form-group">
+                      <label for="ANX" class="text-link">From</label>
+                      <input type="text" class="form-control" placeholder="ANX" value="ANX">
+                    </div>
+                  </div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                    <div class="form-group total-amount">
+                      <label for="Amount" class="text-link">Amount</label>
+                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                      <span>$1245</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-5 mtb-0">
+                <div class="row justify-content-center">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                    <div class="form-group">
+                      <input type="text" class="form-control w-100" placeholder="enter your destination address"
+                        value="">
+                    </div>
+                    <div class="form-group mt-4">
+                      <button nbButton class="form-control pointer" fullWidth status="success">
+                        <span>RUN</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center">
+                    <img class="img-fluid barcode" [src]="barcode" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </nb-tab>
+        <nb-tab tabTitle="OTC">
+          <form class="mt-5 transfer-form receive-form">
+            <div class="row m-0">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="ANX" class="text-link">From</label>
+                      <input type="text" class="form-control" placeholder="ANX" value="ANX">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group total-amount">
+                      <label for="Amount" class="text-link">Amount</label>
+                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                      <span>$1245</span>
+                    </div>
+                  </div>
+                  <div class="col-1 text-center">
+                    <div class="form-group mt-4">
+                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="ANX" class="text-link">From</label>
+                      <input type="text" class="form-control" placeholder="ANX" value="ANX">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group total-amount">
+                      <label for="Amount" class="text-link">Amount</label>
+                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                      <span>$1245</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-5 mtb-0">
+                <div class="row justify-content-center">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                    <div class="form-group">
+                      <input type="text" class="form-control w-100" placeholder="enter your destination address"
+                        value="">
+                    </div>
+                    <div class="form-group mt-4">
+                      <button nbButton class="form-control pointer" fullWidth status="success">
+                        <span>RUN</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center">
+                    <img class="img-fluid barcode" [src]="barcode" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card-body>
   </div>
-
-
-</div>
+</nb-card>

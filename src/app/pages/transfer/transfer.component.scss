@@ -15,6 +15,35 @@
       }
     }
   
+  .barcode{
+    max-width: 150px;
+  }
+
+.transfer-form {
+  label{
+    justify-content: start;
+    margin: 0 0 10px 0;
+    color: #00bb66;
+  }
+  .col{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+.trans-receive {
+    justify-content: flex-end;
+}
+.total-amount{
+  position: relative;
+  span {
+    position: absolute;
+    right: 30px;
+    bottom: 13px;
+    color: #00bb66;
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
     nb-card-body {
       width: 100%;
     }
@@ -26,12 +55,11 @@
     @include media-breakpoint-down(sm) {
       nb-card {
         border-radius: 0;
-        height: 100vh;
+        height: auto;
       }
     }
-    .text-link{
-        color: #6d7e79;
-    }
+    
+
 
   .labeldata{
       font-size:1.6em;
@@ -43,7 +71,6 @@ text-align: center;
   .arrowtransfer{
     display: inline;
     font-size: 2.6em;
-    margin-left: 0.5em;
     margin-top: 0.5em;
     color: #14ffbe;
   }
@@ -56,4 +83,12 @@ text-align: center;
         }
       }
     }
+  }
+
+  @media (max-width:1430px){
+    .nb-card-wrap {margin: 0 auto;width: 80%;max-width: 80%;}
+  }
+
+  @media (max-width:1100px){
+    .nb-card-wrap {width: 100%;max-width: 100%;}
   }
