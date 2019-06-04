@@ -51,14 +51,8 @@ export class HeaderComponent implements OnInit {
         }
       });
 
-    let userSettingInfo = this.sessionStorage.getFromSession('userSettingInfo');
-    if (userSettingInfo === 'false') {
-      this.httpService.get('profile/').subscribe(data=>{
-        this.userData = data;
-      });
-    } else {
-      this.userData = userSettingInfo;
-    }
+    let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    this.userData = userSettingInfo;
 
     this.shareDataService.currentData.subscribe(data => {
       if (data.avatar) {
