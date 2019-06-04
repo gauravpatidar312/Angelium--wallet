@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { PieChart, EarningData } from '../../../../@core/data/earning';
 import { takeWhile } from 'rxjs/operators';
 
@@ -10,11 +10,13 @@ import { takeWhile } from 'rxjs/operators';
 export class EarningCardBackComponent implements OnDestroy {
   private alive = true;
 
+  @Input() selectedCurrency: string = 'ANX';
+
   earningPieChartData: PieChart[];
   name: string;
   color: string;
   value: number;
-  defaultSelectedCurrency: string = 'Bitcoin';
+  defaultSelectedCurrency: string = 'ANX';
 
   constructor(private earningService: EarningData ) {
     this.earningService.getEarningPieChartData()
