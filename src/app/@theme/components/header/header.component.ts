@@ -4,6 +4,7 @@ import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserData } from '../../../@core/data/users';
 import { AnalyticsService } from '../../../@core/utils';
 import { LayoutService } from '../../../@core/utils';
+import { HttpService } from "../../../services/http.service";
 
 import { AuthService } from '../../../_guards/auth.service';
 
@@ -13,7 +14,7 @@ import { AuthService } from '../../../_guards/auth.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-
+  userImage: any;
   @Input() position = 'normal';
 
   user: any;
@@ -25,10 +26,11 @@ export class HeaderComponent implements OnInit {
               private userService: UserData,
               private analyticsService: AnalyticsService,
               private layoutService: LayoutService,
-              private nbMenuService: NbMenuService, 
-              private authService: AuthService) {
+              private nbMenuService: NbMenuService,
+              private authService: AuthService,
+              private httpService: HttpService) {
   }
-  
+
   ngOnInit() {
     this.userService.getUsers()
       .subscribe((users: any) => {
@@ -45,6 +47,10 @@ export class HeaderComponent implements OnInit {
           this.authService.logout();
         }
       });
+
+    this.httpService.get('user-avatar/').subscribe(data=>{
+      this.userImage = data.url;
+    });
   }
 
   toggleSidebar(): boolean {

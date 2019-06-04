@@ -53,7 +53,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'shadow',
+          type: 'cross',
           shadowStyle: {
             color: 'rgba(0, 0, 0, 0.3)',
           },
@@ -68,6 +68,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
       xAxis: [
         {
           type: 'category',
+          boundaryGap: false,
           data: this.profitChartData.chartLabel,
           axisTick: {
             alignWithLabel: true,
@@ -104,12 +105,34 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
       ],
       series: [
         {
-          name: 'Canceled',
-          type: 'bar',
-          barGap: 0,
-          barWidth: '20%',
+          name: 'Anx',
+          type: 'line',
           itemStyle: {
             normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: eTheme.firstLineGradFrom,
+              }, {
+                offset: 1,
+                color: eTheme.firstLineGradTo,
+              }]),
+            },
+          },
+          areaStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: eTheme.firstLineGradFrom,
+              }, {
+                offset: 1,
+                color: eTheme.firstLineGradTo,
+              }]),
+            },
+          },
+          lineStyle: {
+            normal: {
+              width: eTheme.lineWidth,
+              type: eTheme.lineStyle,
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                 offset: 0,
                 color: eTheme.firstLineGradFrom,
@@ -122,9 +145,8 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
           data: this.profitChartData.data[0],
         },
         {
-          name: 'Payment',
-          type: 'bar',
-          barWidth: '20%',
+          name: 'Heaven',
+          type: 'line',
           itemStyle: {
             normal: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -136,24 +158,31 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
               }]),
             },
           },
-          data: this.profitChartData.data[1],
-        },
-        {
-          name: 'All orders',
-          type: 'bar',
-          barWidth: '20%',
-          itemStyle: {
+          areaStyle: {
             normal: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                 offset: 0,
-                color: eTheme.thirdLineGradFrom,
+                color: eTheme.secondLineGradFrom,
               }, {
                 offset: 1,
-                color: eTheme.thirdLineGradTo,
+                color: eTheme.secondLineGradTo,
               }]),
             },
           },
-          data: this.profitChartData.data[2],
+          lineStyle: {
+            normal: {
+              width: eTheme.lineWidth,
+              type: eTheme.lineStyle,
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: eTheme.secondLineGradFrom,
+              }, {
+                offset: 1,
+                color: eTheme.secondLineGradTo,
+              }]),
+            },
+          },
+          data: this.profitChartData.data[1],
         },
       ],
     };

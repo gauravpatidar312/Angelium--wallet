@@ -19,8 +19,7 @@
       </div>
     </div>
     <div class="cameras" *ngIf="!isSingleView">
-      <div class="camera col-md-4" *ngFor="let camera of cameras" [style.background-image]="'url(' + camera.source + ')'"
-           (click)="selectCamera(camera)">
+      <div class="camera col-md-4" *ngFor="let camera of cameras" [style.background-image]="'url(' + camera.source + ')'">
         <span>{{ camera.title }}</span>
       </div>
     </div>
