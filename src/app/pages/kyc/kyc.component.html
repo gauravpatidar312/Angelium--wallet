@@ -4,27 +4,14 @@
     <nb-stepper orientation="horizontal">
       <nb-step [label]="labelOne">
         <ng-template #labelOne>First step</ng-template>
-        <h3>Step content #1</h3>
-        <button nbButton disabled nbStepperNext>prev</button>
-        <button nbButton nbStepperNext>next</button>
       </nb-step>
       <nb-step [label]="labelTwo">
         <ng-template #labelTwo>Second step</ng-template>
-        <h3>Step content #2</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton nbStepperNext>next</button>
-      </nb-step>
-      <nb-step label="Third step">
-        <h3>Step content #3</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton nbStepperNext>next</button>
       </nb-step>
       <nb-step [label]="labelFour">
         <ng-template #labelFour>Fourth step</ng-template>
-        <h3>Step content #4</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton disabled nbStepperNext>next</button>
       </nb-step>
+
     </nb-stepper>
   </nb-card-body>
 </nb-card>
@@ -32,44 +19,69 @@
 <div class="row">
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Default Inputs</nb-card-header>
+      <nb-card-header>Information</nb-card-header>
       <nb-card-body>
-        <div class="input-group">
-          <input type="text" placeholder="Project" class="form-control" />
-        </div>
-        <div class="row full-name-inputs">
-          <div class="col-sm-6 input-group">
-            <input type="text" placeholder="Nick" class="form-control" />
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" placeholder="Project" class="form-control" />
           </div>
-          <div class="col-sm-6 input-group">
-            <input type="text" placeholder="Last Name" class="form-control" />
-          </div>
-        </div>
-        <div class="input-group">
-          <input type="password" placeholder="Password" class="form-control" />
-        </div>
-        <div class="input-group has-person-icon">
-          <input type="text" placeholder="With Icon" class="form-control" />
-        </div>
-        <div class="input-group input-group-rounded">
-          <input type="text" placeholder="Rounded border" class="form-control" />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="Project" class="form-control" />
-          <small class="form-text">A block of help text that breaks into a new line and may extend beyond one line.
-          </small>
+          <div class="row full-name-inputs">
+            <div class="col-sm-6 input-group">
+              <input type="text" placeholder="First Name" class="form-control" />
+            </div>
+            <div class="col-sm-6 input-group">
+              <input type="text" placeholder="Last Name" class="form-control" />
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <input type="text" placeholder="Disabled input" class="form-control" disabled />
+        <div class="form-group">
+          <div class="row full-name-inputs">
+            <div class="col-sm-4 input-group">
+              <select class="form-control">
+                <option>Day</option>
+                <option>Gomel</option>
+                <option>Brest</option>
+                <option>Grodno</option>
+                <option>Mogilev</option>
+              </select>
+            </div>
+            <div class="col-sm-4 input-group">
+              <select class="form-control">
+                <option>Month</option>
+                <option>Gomel</option>
+                <option>Brest</option>
+                <option>Grodno</option>
+                <option>Mogilev</option>
+              </select>
+            </div>
+            <div class="col-sm-4 input-group">
+              <select class="form-control">
+                <option>year</option>
+                <option>Gomel</option>
+                <option>Brest</option>
+                <option>Grodno</option>
+                <option>Mogilev</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
-        </div>
-        <div class="input-group input-group-sm">
-          <input type="text" placeholder="Small Input" class="form-control" />
-        </div>
-        <div class="input-group input-group-lg">
-          <input type="text" placeholder="Large Input" class="form-control" />
+        <div class="form-group">
+          <div class="row full-name-inputs">
+            <div class="col-sm-5 input-group">
+              <select class="form-control">
+                <option>Country</option>
+                <option>Gomel</option>
+                <option>Brest</option>
+                <option>Grodno</option>
+                <option>Mogilev</option>
+              </select>
+            </div>
+            <div class="col-sm-7 input-group">
+              <input type="text" placeholder="Mobile Number" class="form-control" />
+            </div>
+          </div>
         </div>
       </nb-card-body>
     </nb-card>
@@ -77,74 +89,64 @@
 
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Validation States</nb-card-header>
+      <nb-card-header>Upload</nb-card-header>
       <nb-card-body>
         <div class="form-group">
-          <input type="text" placeholder="Input with Success" class="form-control form-control-success">
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Input with Warning" class="form-control form-control-warning">
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Input with Danger" class="form-control form-control-danger">
-        </div>
-        <div class="form-group validation-checkboxes row">
-          <nb-checkbox status="success" class="col-sm-4">Checkbox with Success</nb-checkbox>
-          <nb-checkbox status="warning" class="col-sm-4">Checkbox with Warning</nb-checkbox>
-          <nb-checkbox status="danger" class="col-sm-4">Checkbox with Danger</nb-checkbox>
-        </div>
-        <div class="form-group has-success">
-          <input type="text" placeholder="Input with Success Icon" class="form-control form-control-success">
-        </div>
-        <div class="form-group has-warning">
-          <input type="text" placeholder="Input with Warning Icon" class="form-control form-control-warning">
-        </div>
-        <div class="form-group has-danger">
-          <input type="text" placeholder="Input with Danger Icon" class="form-control form-control-danger">
-        </div>
-      </nb-card-body>
-    </nb-card>
-
-    <nb-card>
-      <nb-card-header>Checkboxes & Radios</nb-card-header>
-      <nb-card-body>
-        <div class="row demo-checkboxes-radio">
-          <div class="demo-checkboxes col-sm-4">
-            <nb-checkbox>Checkbox 1</nb-checkbox>
-            <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
-
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="b-checkbox">
-              <label class="custom-control-label" for="b-checkbox">Bootstrap Checkbox</label>
+          <div class="row full-name-inputs">
+            <div class="col-sm-10 input-group">
+              <input type="text" placeholder="ID(front)" class="form-control" />
+            </div>
+            <div class="dropdown" ngbDropdown>
+              <button class="btn btn-primary" type="button" ngbDropdownToggle>
+                upload
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item">Icon Button</li>
+                <li class="dropdown-item">Hero Button</li>
+              </ul>
             </div>
           </div>
-          <div class="demo-radio col-sm-4">
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Radio 1</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio" checked>
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Radio 2</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Radio 3</span>
-            </label>
+        </div>
+        <div class="form-group">
+          <div class="row full-name-inputs">
+            <div class="col-sm-10 input-group">
+              <input type="text" placeholder="ID(back)" class="form-control" />
+            </div>
+            <div class="dropdown" ngbDropdown>
+              <button class="btn btn-primary" type="button" ngbDropdownToggle>
+                upload
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item">Icon Button</li>
+                <li class="dropdown-item">Hero Button</li>
+              </ul>
+            </div>
           </div>
-          <div class="demo-disabled-checkbox-radio col-sm-4">
-            <nb-checkbox disabled>Disabled Checkbox</nb-checkbox>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" disabled>
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Disabled Radio</span>
-            </label>
+        </div>
+        <div class="form-group">
+          <div class="row full-name-inputs">
+            <div class="col-sm-10 input-group">
+              <input type="text" placeholder="Proof of address" class="form-control" />
+            </div>
+            <div class="dropdown" ngbDropdown>
+              <button class="btn btn-primary" type="button" ngbDropdownToggle>
+                upload
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item">Icon Button</li>
+                <li class="dropdown-item">Hero Button</li>
+              </ul>
+            </div>
           </div>
         </div>
       </nb-card-body>
     </nb-card>
+  </div>
+  <div class="col-lg-6 offset-md-3">
+    <div class="form-group">
+      <button nbButton class="form-control pointer" fullWidth status="success">
+        <span>Submit</span>
+      </button>
+    </div>
   </div>
 </div>

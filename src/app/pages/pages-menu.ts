@@ -55,9 +55,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/transfer',
   },
   {
+    hidden: environment.production,
     title: 'Settings',
     icon: 'nb-star',
-    link: '/pages/setting',
+    children: [
+      {
+        title: 'Setting',
+        link: '/pages/setting',
+      },
+      {
+        title: 'KYC',
+        link: '/pages/kyc',
+      },
+    ],
   },
   {
     hidden: environment.production,
