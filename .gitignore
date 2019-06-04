@@ -62,7 +62,3 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Since no modules were added
-/package-lock.json
-/package.json
