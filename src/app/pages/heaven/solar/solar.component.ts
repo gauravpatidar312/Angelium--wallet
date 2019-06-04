@@ -9,13 +9,13 @@ declare const echarts: any;
   styleUrls: ['./solar.component.scss'],
   template: `
     <nb-card size="xsmall" class="solar-card">
-      <nb-card-header>Solar Energy Consumption</nb-card-header>
+      <nb-card-header>Total Heaven</nb-card-header>
       <nb-card-body>
         <div echarts [options]="option" class="echart">
         </div>
         <div class="info">
-          <div class="value">6. 421 kWh</div>
-          <div class="details"><span>out of</span> 8.421 kWh</div>
+          <div class="value">6.421 ANX</div>
+          <div class="details"><span>out of</span> 8.421 ANX</div>
         </div>
       </nb-card-body>
     </nb-card>

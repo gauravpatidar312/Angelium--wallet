@@ -7,6 +7,9 @@ import { LayoutService } from '../../../@core/utils';
   selector: 'ngx-traffic-chart',
   styleUrls: ['./traffic.component.scss'],
   template: `
+    <div class="chart-info">
+      <div class="title">300 <span class="title-price">%</span></div>
+    </div>
     <div echarts
          [options]="option"
          class="echart"

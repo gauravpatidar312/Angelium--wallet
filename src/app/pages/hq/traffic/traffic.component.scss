@@ -28,4 +28,19 @@
   .dropdown {
     min-width: 120px;
   }
+  .chart-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0 nb-theme(card-padding);
+    position: absolute;
+    top: 10px;
+  }
+  .chart-info .title {
+    color: nb-theme(color-fg-heading);
+    font-size: 1.5rem;
+  }
+  .chart-info .title span {
+    font-size: 1rem;
+  }
 }

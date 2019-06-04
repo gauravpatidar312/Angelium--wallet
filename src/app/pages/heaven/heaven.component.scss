@@ -306,7 +306,7 @@ label.bigger-text span {
   color: #00c39b;
 }
 .details label:last-child{
-  font-size: 40px;
+  font-size: 35px;
 }
 .actions a.btn-large.btn-hero {
   margin-bottom: 6px;
@@ -316,9 +316,12 @@ label.bigger-text span {
 }
 .actions {
   position: relative;
-  width: 270px;
+  width: 345px;
   padding: 0 15px 0px 0px;
   margin-left: auto;
+  display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 .actions input[type="range"] {
   display: block;
@@ -515,12 +518,15 @@ background-color: #9a905d;
   box-shadow: 0 0.2rem #00977e;
 }
 .select-box {
-  max-width: 120px;
-  margin-left: auto;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
 }
 .progress-data {
   position: relative;
   padding: 10px 0 0px 0px;
+  width: 100%;
 }
 .delta {
   display: -webkit-box;
@@ -533,8 +539,8 @@ background-color: #9a905d;
   color: #fff;
   font-size: 1.2rem;
   position: absolute;
-  top: -20px;
-  left: 15px;
+  top: -10px;
+  left: 0px;
 }
 .delta::before {
   content: '';
@@ -569,15 +575,44 @@ nb-card {
 .graph-container {
   padding-bottom: 15px;
 }
+span.progress-data-value {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: #fff;
+}
+.color-green {
+  color: #00d977;
+}
 
-
-
-@media (min-width:1200px) and (max-width:1480px){ 
+@media (min-width:1480px) and (max-width:1590px) { 
   .details label:last-child {
     font-size: 30px;
   }
+  .icon {
+    width: 6rem;
+    font-size: 3.5rem;
+  }
+  .actions {
+    width: 280px;
+  }
+}
+@media (min-width:1200px) and (max-width:1480px){ 
+  
   .legend {
     margin-left: 1.5rem;
+  }
+  span.progress-data-value {
+    font-size: 1rem;
+  }
+  .actions {
+    width: 270px;
+  }
+  .icon {
+    width: 6rem;
+    font-size: 3.5rem;
+  }
+  .details label:last-child {
+    font-size: 28px;
   }
 }
 @media (min-width:1200px) and (max-width:1367px){ 
@@ -610,6 +645,17 @@ nb-card {
 @media (max-width:1199.98px) {
   .summary-container {
     padding: 1.5rem 1rem 1rem;
+  }
+  span.progress-data-value {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+  .delta {
+    font-size: 1rem;
+    top: -10px;
+  }
+  .dropdown {
+    min-width: 100px;
   }
 }
 
@@ -644,9 +690,6 @@ nb-card {
 @media (min-width:768px) and (max-width: 991.98px) {
   .summary-container {
     padding: 1.5rem 1rem 1rem;
-  }
-  .value {
-    font-size: 1.5rem;
   }
 }
 
@@ -701,12 +744,9 @@ nb-card {
     margin-bottom: 10px;
   }
   .dropdown {
-    min-width: 80px;
+    min-width: 75px;
   }
-  .select-box {
-    max-width: 80px;
-    margin-left: auto;
-  }
+ 
   .dropdown .dropdown-toggle {
     padding: 8px;
   }
