@@ -16,6 +16,7 @@ import { KYCComponent } from './kyc/kyc.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt.component';
 import { HeavenModule } from './heaven/heaven.module';
+import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -31,6 +32,7 @@ const PAGES_COMPONENTS = [
     AngelModule,
     Ng2SmartTableModule,
     // HeavenModule,
+    ImageCropperModule,
     ThemeModule,
     HQModule,
     HeavenModule,

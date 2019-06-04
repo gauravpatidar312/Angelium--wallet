@@ -12,6 +12,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    nb-calendar {
+      width: 100%;
+
+      /deep/ nb-card {
+        width: 100%;
+      }
+    }
   }
   .pull-right {
     float :right;

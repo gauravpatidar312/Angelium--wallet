@@ -1,0 +1,25 @@
+<nb-card>
+  <div class="icon-container">
+    <div class="icon {{ type }}">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="details full-width">
+    <div class="row">
+      <div class="col-5 mt-2">
+        <div class="title">{{ title }}</div>
+        <div class="status text-white"><span class="text-success">$</span>{{ value }}</div>
+      </div>
+      <div class="col-7">
+        <nb-select class="status-dd-week" placeholder="WEEK">
+          <nb-option value="1">WEEK</nb-option>
+          <nb-option value="2">MONTH</nb-option>
+          <nb-option value="3">YEAR</nb-option>
+        </nb-select>
+        <div class="clearfix"></div>
+        <div class="delta up">4%</div>
+        <nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>
+      </div>
+    </div>
+  </div>
+</nb-card>

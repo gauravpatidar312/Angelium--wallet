@@ -1,7 +1,146 @@
 .nb-card {
-    transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.right-align {
+  float: right;
+}
+
+@import "../../@theme/styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .solar-card nb-card-header {
+    border: none;
+    padding-bottom: 0;
   }
 
-  .right-align{
-      float: right;
+  .nebular-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  .pull-right {
+    float: right;
+  }
+  .article-title {
+    font-size: 30px;
+  }
+  .article-date {
+    font-size: 18px;
+  }
+  .article-text {
+    font-size: 16px;
+    text-align: justify;
+  }
+  .size-container {
+    .btn-demo {
+      width: 120px;
+    }
+  }
+  .card-assets,
+  .card-rewardAllocation {
+    height: calc(100% - 1.5rem);
+  }
+
+  @include media-breakpoint-down(sm) {
+    ngx-traffic {
+      display: none;
+    }
+    .article-title {
+      font-size: 22px;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .nebular-calendar {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    /deep/ nb-card.large-card {
+      height: nb-theme(card-height-medium);
+    }
+  }
+
+  /deep/ .delta {
+    position: absolute;
+    display: inline-block;
+    color: nb-theme(color-fg-heading);
+    padding-left: 0.2rem;
+    font-size: 1rem;
+    // top: 20px;
+    right: 0px;
+    @include nb-rtl(left, 1.25rem);
+    @include nb-rtl(right, inherit);
+
+    &::before {
+      position: absolute;
+      content: "";
+      right: 100%;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    &.down {
+      &::before {
+        bottom: 4px;
+        border-top: 7px solid text-danger();
+      }
+    }
+
+    &.up {
+      &::before {
+        top: 4px;
+        border-bottom: 7px solid #26df8b;
+      }
+    }
+  }
+}
+
+.hiddenRow {
+  padding: 0 !important;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: #494299;
+}
+table.table-bordered > thead > tr > th {
+  border: 1px solid #2e296a;
+}
+table.table-bordered {
+  font-family: Exo;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #ffffff;
+}
+table.table-bordered > tbody > tr > td {
+  border: 1px solid #2e296a;
+}
+
+.caret {
+  float: right;
+  color: #ffffff;
+  right: 0px;
+}
+.caret span {
+  padding-right: 0.2rem;
+  font-size: 20px;
+  color: #26df8b;
+}
+.expand {
+  float: right;
+  color: #ffffff;
+  right: 0px;
+}
+.expand span {
+  font-size: 20px;
+  color: #fff;
+}
+.expanddiv {
+  margin: 12px;
+}

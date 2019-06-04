@@ -427,12 +427,12 @@ nb-card {
   .legend {
     margin-left: 1.2rem;
     margin-bottom: .5rem;
+    justify-content: center;
   }
   .legends[_ngcontent-c18] {
     flex-wrap: wrap;
+  }
 }
-}
-
 @media (min-width:768px) and (max-width: 991.98px) {
   .summary-container {
     padding: 1.5rem 1rem 1rem;
@@ -440,6 +440,23 @@ nb-card {
   .value {
     font-size: 1.5rem;
   }
+  .legends {
+    padding: 0 0 0 1rem;
+    justify-content: center;
+  }
+  .legend {
+    margin-left: 0.9rem;
+    margin-bottom: 0px;
+  }
+  .legend-item-color {
+    min-width: 10px;
+    min-height: 10px;
+  }
+  .legend-title {
+    padding: 0 .4rem;
+    font-size: 12px;
+  }
+  
 }
 
 @media (max-width: 767.98px) {
@@ -464,6 +481,21 @@ nb-card {
     -webkit-box-direction: reverse;
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
+  }
+  .legends {
+    padding: 0 0 0 1rem;
+    justify-content: center;
+  }
+  .legend {
+    margin-left: 0.9rem;
+  }
+  .legend-item-color {
+    min-width: 10px;
+    min-height: 10px;
+  }
+  .legend-title {
+    padding: 0 .4rem;
+    font-size: 12px;
   }
 }
 @media (min-width: 576px) and (max-width: 767.98px ){
@@ -514,6 +546,11 @@ nb-card {
   }
   .title {
     font-size: 12px;
+  }
+}
+@media (max-width: 340px) {
+  nb-tabset .tabset .tab a {
+    padding: 1.25rem 1rem;
   }
 }
 @media (max-width: 320px) {

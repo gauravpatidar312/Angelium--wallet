@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'HQ',
-        link: '',
+        link: '/pages/hq',
       },
     ],
   },
@@ -44,7 +44,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'HQ',
-        link: '',
+        link: '/pages/hq',
       },
     ],
   },

@@ -52,6 +52,13 @@ import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
 
+import { RewardsChartData } from './data/rewards-chart';
+import { RewardChartService } from './mock/rewards-chart.service';
+
+import { HeavenChartData } from './data/heaven-chart';
+import { HeavenChartService } from './mock/heaven-chart.service';
+import { HeavenSummaryChartData } from './data/heaven-summary-chart';
+import { HeavenSummaryChartService } from './mock/heaven-summary-chart.service';
 const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
@@ -90,6 +97,9 @@ const DATA_SERVICES = [
   { provide: StatsProgressBarData, useClass: StatsProgressBarService },
   { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
+  { provide: RewardsChartData, useClass: RewardChartService },
+  { provide: HeavenChartData, useClass: HeavenChartService },
+  { provide: HeavenSummaryChartData, useClass: HeavenSummaryChartService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

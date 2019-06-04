@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { AngelComponent } from './angel.component';
 import { EarningCardComponent } from './earning-card/earning-card.component';
 import { EarningCardBackComponent } from './earning-card/back-side/earning-card-back.component';
@@ -16,7 +17,13 @@ import { EchartsAreaStackComponent } from './echarts/echarts-area-stack.componen
 import { AgmCoreModule } from '@agm/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { BubbleMapComponent } from './bubble/bubble-map.component';
-
+import { StatusCardComponent } from './status-card/status-card.component';
+import { ECommerceChartsPanelComponent } from './charts-panel/charts-panel.component';
+import { RewardChartComponent } from './charts-panel/charts/rewards-chart.component';
+import { HeavenChartComponent } from './charts-panel/charts/heaven-chart.component';
+import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/chart-panel-header.component';
+import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/chart-panel-summary.component';
+import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
 
 @NgModule({
   declarations: [AngelComponent,
@@ -27,7 +34,14 @@ import { BubbleMapComponent } from './bubble/bubble-map.component';
     EarningLiveUpdateChartComponent,
     EchartsPieComponent,
     EchartsAreaStackComponent,
-    BubbleMapComponent
+    BubbleMapComponent,
+    StatusCardComponent,
+    ECommerceChartsPanelComponent,
+    RewardChartComponent,
+    HeavenChartComponent,
+    ChartPanelHeaderComponent,
+    ChartPanelSummaryComponent,
+    ECommerceLegendChartComponent,
     ],
   imports: [
     CommonModule,
@@ -41,7 +55,6 @@ import { BubbleMapComponent } from './bubble/bubble-map.component';
       libraries: ['places'],
     }),
     LeafletModule.forRoot(),
-
   ]
 })
 export class AngelModule { }

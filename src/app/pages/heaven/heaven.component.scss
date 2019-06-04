@@ -177,7 +177,7 @@ h6.card_heading {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin-bottom: 2.125rem;
+  // margin-bottom: 2.125rem;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -408,18 +408,7 @@ background-color: #9a905d;
   font-size: 2rem;
   color: #fff;
 }
-.chart-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin-bottom: 2.125rem;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
+
 .legends {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -684,6 +673,12 @@ nb-card {
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
+  nb-card.large-card {
+    height: 285px;
+  }
+  ngx-chart-panel-header, ngx-profit-chart, ngx-orders-chart {
+    padding: 0rem;
+  }
 }
 @media (min-width: 576px) and (max-width: 767.98px ){
   .actions {
@@ -735,16 +730,9 @@ nb-card {
     font-size: 12px;
   }
 }
+
 @media (max-width: 320px) {
   .icon {
       display: none;
-  }
-}
-@media (max-width:767.98px) {
-  nb-card.large-card {
-    height: 285px;
-  }
-  ngx-chart-panel-header, ngx-profit-chart, ngx-orders-chart {
-    padding: 0rem;
   }
 }

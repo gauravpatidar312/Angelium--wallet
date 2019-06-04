@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-12 col-lg-6">
 		<nb-card class="top-content">
 			<div class="icon-container">
 				<div class="icon primary"> <i class="fa fa-university"></i></div>
@@ -30,7 +30,7 @@
 			</div>
 		</nb-card>
 	</div>
-	<div class="col-md-6">
+	<div class="col-12 col-lg-6">
 		<nb-card class="top-content">
 			<div class="icon-container">
 				<div class="icon primary"> <i class="nb-bar-chart"></i></div>
@@ -138,7 +138,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label>From</label>
+							<label style="color: #00ff00">From</label>
 							<select class="form-control">
 								<option>BTC</option>
 								<option>ETH</option>
@@ -146,17 +146,16 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-							<div class="form-group">
-									<label>Amount</label>
+						<div class="form-group">
+							<label style="color: #00ff00">Amount</label>
 							<input type="text" placeholder="Nick" class="form-control" />
 						</div>
 					</div>
 					<div class="col-md-4">
-							<div class="form-group">
-							<label></label>
-						<button class="btn btn-success btn-rectangle">RUN</button>
+						<div class="form-group">
+							<label class="d-none d-md-block">&nbsp;</label>
+							<button class="btn btn-block btn-success btn-rectangle">RUN</button>
 						</div>
-
 					</div>
 				</div>
 
@@ -166,7 +165,7 @@
 </div>
 <div class="row">
 	<div class="col-md-8 col-xl-9">
-		<nb-card>
+		<nb-card size="medium">
 			<nb-card-body>
 				<div class="chart-header">
 					<div class="legends">
@@ -198,7 +197,7 @@
 		</nb-card>
 	</div>
 	<div class="col-md-4 col-xl-3">
-		<nb-card>
+		<nb-card size="xsmall">
 			<nb-card-header>
 				ANX Price
 			</nb-card-header>
@@ -214,12 +213,17 @@
 		</nb-card>
 		<ngx-solar [chartValue]="'42'"></ngx-solar>
 	</div>
-	<nb-card>
-		<nb-card-header>
-			Heaven History
-		</nb-card-header>
-		<nb-card-body>
-			<ng2-smart-table [settings]="settings" [source]="source">
-			</ng2-smart-table>
-		</nb-card-body>
-	</nb-card>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<nb-card>
+			<nb-card-header>
+				Heaven History
+			</nb-card-header>
+			<nb-card-body>
+				<ng2-smart-table [settings]="settings" [source]="source">
+				</ng2-smart-table>
+			</nb-card-body>
+		</nb-card>
+	</div>
+</div>
