@@ -18,10 +18,10 @@
                 <label class="label" for="input-email">Email address:</label>
                 <input class="form-control" fullWidth
                        name="email"
-                       placeholder="Email address" autofocus formControlName="username">
-                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">Email is required</div>
-                  <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
+                       placeholder="Email address" autofocus formControlName="email">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email is required</div>
+                  <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                 </div>
               </div>
               <div class="form-group">

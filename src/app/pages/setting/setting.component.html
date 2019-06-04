@@ -7,7 +7,11 @@
           <div class="col-md-12">
             <nb-card-body>
               <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
-              <nb-user [picture]="userImage" [name]="'Nick Jones'" [title]="'Lv 3 In.2'" size="large">
+              <nb-user 
+                [picture]="userData?.avatar" 
+                [name]="userData?.fullname" 
+                title="{{userData?.level}}"
+                size="large">
               </nb-user>
             </nb-card-body>
           </div>
@@ -28,18 +32,18 @@
             
             <tr>
               <td class="title-col">REFFERAL LINK</td>
-              <td class="value-col">{{userData?.link}}</td>
+              <td class="value-col">{{userData?.referral_link}}</td>
               <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">E-MAIL</td>
-              <td class="value-col">admin@admin.com</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+              <td class="value-col">{{userData?.email}}</td>
+              <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">PHONE</td>
-              <td class="value-col">+918989000123</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+              <td class="value-col">{{userData?.phone_number}}</td>
+              <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">COUNTRY</td>
@@ -48,7 +52,7 @@
             </tr>
             <tr>
               <td class="title-col">LEVEL</td>
-              <td class="value-col">Lv.3 / In.2</td>
+              <td class="value-col">{{userData?.level}}</td>
               <td class="action-col"></td>
             </tr>
             </tbody>
@@ -72,6 +76,16 @@
                 **********
               </td>
               <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('password', '')"></i></td>
+            </tr>
+            <tr>
+              <td class="title-col">R-18 MODE</td>
+              <td class="value-col">
+                <label class="switch">
+                  <input type="checkbox" name="r18mode" (change)="r18mode($event)" [checked]="userData?.r18mode">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td class="action-col"></td>
             </tr>
             <!-- <tr>
               <td class="title-col">2FA</td>

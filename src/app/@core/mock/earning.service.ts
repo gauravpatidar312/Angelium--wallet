@@ -11,16 +11,20 @@ export class EarningService extends EarningData {
 
   private pieChartData = [
     {
-      value: 50,
-      name: 'Bitcoin',
+      value: 0,
+      name: 'ANX',
     },
     {
-      value: 25,
-      name: 'Tether',
+      value: 0,
+      name: 'BITCOIN',
     },
     {
-      value: 25,
-      name: 'Ethereum',
+      value: 0,
+      name: 'TETHER',
+    },
+    {
+      value: 0,
+      name: 'ETHEREUM',
     },
   ];
 
@@ -53,65 +57,65 @@ export class EarningService extends EarningData {
       liveChart: [],
       delta: {
         up: true,
-        value: 4,
+        value: 0,
       },
-      dailyIncome: 45895,
+      dailyIncome: 0,
     },
     HEAVEN: {
       liveChart: [],
       delta: {
         up: false,
-        value: 9,
+        value: 0,
       },
-      dailyIncome: 5862,
+      dailyIncome: 0,
     },
     ANL: {
       liveChart: [],
       delta: {
         up: false,
-        value: 21,
+        value: 0,
       },
-      dailyIncome: 584,
+      dailyIncome: 0,
     },
     XP: {
       liveChart: [],
       delta: {
         up: false,
-        value: 21,
+        value: 0,
       },
-      dailyIncome: 584,
+      dailyIncome: 0,
     },
     BTC: {
       liveChart: [],
       delta: {
         up: false,
-        value: 21,
+        value: 0,
       },
-      dailyIncome: 584,
+      dailyIncome: 0,
     },
     ETH: {
       liveChart: [],
       delta: {
         up: false,
-        value: 21,
+        value: 0,
       },
-      dailyIncome: 584,
+      dailyIncome: 0,
     },
     USDT: {
       liveChart: [],
       delta: {
         up: false,
-        value: 21,
+        value: 0,
       },
-      dailyIncome: 584,
+      dailyIncome: 0,
     },
     ANLP: {
       liveChart: [],
       delta: {
         up: false,
-        value: 21,
+        value: 0,
       },
-      dailyIncome: 584,
+      dailyIncome: 0,
     },
   };
 

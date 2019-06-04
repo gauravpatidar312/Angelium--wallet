@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.formSubmitting = true;
     this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);
-      this.router.navigate(['pages/setting']);
+      this.getUserSettingInfo();
     }, err => {
       this.formSubmitting = false;
       if (err.status === 400) {
@@ -59,6 +59,14 @@ export class LoginComponent implements OnInit {
         }
       }
       console.log(err);
+    });
+  }
+
+  getUserSettingInfo(){
+    this.httpService.get('profile/').subscribe(data=>{
+      // this.sessionStorageService.saveToSession('userSettingInfo', data);
+      this.sessionStorageService.updateFromSession('userInfo', data);
+      this.router.navigate(['pages/setting']);
     });
   }
 }

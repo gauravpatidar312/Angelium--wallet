@@ -6,6 +6,7 @@ import { ImageCroppedEvent } from './image-cropper/interfaces/image-cropped-even
 import { ToastrService } from "../../services/toastr.service";
 import { HttpService } from "../../services/http.service";
 import { ShareDataService } from "../../services/share-data.service";
+import { SessionStorageService } from "../../services/session-storage.service";
 
 @Component({
   selector: 'ngx-setting',
@@ -14,7 +15,7 @@ import { ShareDataService } from "../../services/share-data.service";
 })
 export class SettingComponent implements OnInit {
   evaIcons = [];
-  userData: any = { 'username': '', 'link': '', 'user_id': '', 'country': '' };
+  userData: any;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   croppedImageSize: any = '';
@@ -24,37 +25,32 @@ export class SettingComponent implements OnInit {
     private toastrService: ToastrService,
     private dialogService: NbDialogService,
     private httpService: HttpService,
-    private shareDataService: ShareDataService) {
+    private shareDataService: ShareDataService,
+    private sessionStorage: SessionStorageService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
   }
 
   ngOnInit() {
     this.toastrService.success('Welcome on setting', 'Settings');
-    this.httpService.get('username/').subscribe(data=>{
-      this.userData.username = data.username;
-    });
 
-    this.httpService.get('referral-link/').subscribe(data=>{
-      this.userData.link = data.link;
-    });
+    let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    this.userData = userSettingInfo;
+  }
 
-    this.httpService.get('user_id/').subscribe(data=>{
-      this.userData.user_id = data.user_id;
-    });
-
-    this.httpService.get('country/').subscribe(data=>{
-      this.userData.country = data.country;
-    });
-
-    this.httpService.get('user-avatar/').subscribe(data=>{
-      this.userImage = data.url;
+  r18mode(event){
+    let data = { "r18mode": event.target.checked };
+    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+      if (res.status) {
+        this.sessionStorage.updateFromSession('userInfo', data);
+        this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode');
+      }
     });
   }
 
   openDialog(type: any, value:any) {
     this.newData(value);
     this.dialogService.open(DialogNamePromptComponent)
-      .onClose.subscribe(data => {
+      .onClose.subscribe(data => { 
         if (type == 'password' && data!=undefined && data!='') {
           let endpoint = 'password/';
           let apiData = { 'password' : data };
@@ -75,6 +71,7 @@ export class SettingComponent implements OnInit {
         this.toastrService.success('Password update successfully', 'Password');
       }else if (res.status =='country updated') {
         this.userData.country = apiData.country;
+        this.sessionStorage.updateFromSession('userInfo', apiData);
         this.toastrService.success('Country update successfully', 'Country');
       }
     }, err=>{
@@ -84,7 +81,7 @@ export class SettingComponent implements OnInit {
 
 
   newData(name: any) {
-    this.shareDataService.changeData(name)
+    this.shareDataService.changeData(name);
   }
 
   fileChangeEvent(event: any): void {
@@ -119,7 +116,9 @@ export class SettingComponent implements OnInit {
       this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
         if (res.status) {
           ref.close();
-          this.userImage = this.userImageBase64;
+          this.shareDataService.changeData(res);
+          this.userData.avatar = res.avatar;
+          this.sessionStorage.updateFromSession('userInfo', res);
           this.toastrService.success('User image change successfully', 'Picture updated');
         }
       });
