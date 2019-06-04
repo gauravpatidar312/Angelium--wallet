@@ -1,8 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { interval , Subscription } from 'rxjs';
-import { switchMap, takeWhile } from 'rxjs/operators';
-import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {NbThemeService} from '@nebular/theme';
+import {interval, Subscription} from 'rxjs';
+import {switchMap, takeWhile} from 'rxjs/operators';
+import {LiveUpdateChart, EarningData} from '../../../../@core/data/earning';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -17,6 +17,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   intervalSubscription: Subscription;
   currencies: string[] = ['ANX', 'HEAVEN'];
   currentTheme: string;
+  tokenName: string;
   earningLiveUpdateCardData: LiveUpdateChart;
   liveUpdateChartData: { value: [string, number] }[];
 
@@ -30,6 +31,18 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    switch (this.selectedCurrency) {
+      case 'ANX':
+      case 'HEAVEN':
+        this.tokenName = 'ANX';
+        break;
+      case 'ANLP':
+        this.tokenName = 'ANL';
+        break;
+      default :
+        this.tokenName = this.selectedCurrency;
+        break;
+    }
     this.getEarningCardData(this.selectedCurrency);
   }
 

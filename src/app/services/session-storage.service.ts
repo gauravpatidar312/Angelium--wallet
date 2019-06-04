@@ -29,4 +29,13 @@ export class SessionStorageService {
   resetSession = function() {
     sessionStorage.clear();
   };
+
+  updateFromSession = function(key, value) {
+    if (sessionStorage[key]) {
+      let data = Object.assign(JSON.parse(sessionStorage[key]), value);
+      sessionStorage[key] = JSON.stringify(data);
+    } else {
+      return "false";
+    }
+  };
 }

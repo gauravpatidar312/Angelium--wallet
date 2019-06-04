@@ -59,6 +59,13 @@ export class HttpService {
     );
   }
 
+  putWithToken(data, endpoint) {
+    return this.httpClient.put<any>(
+      `${environment.apiUrl}/${endpoint}`,
+      data, { headers: globle_header_token() }
+    );
+  }
+
   uploadImage(data, endpoint) {
     return this.httpClient.post<any>(
       `${environment.apiUrl}/${endpoint}`,
