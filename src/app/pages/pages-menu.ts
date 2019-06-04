@@ -4,6 +4,14 @@ import { environment } from '../../environments/environment';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     hidden: environment.production,
+    data: ['user'],
+    title: 'Home',
+    icon: 'nb-star',
+    link: '/pages/dashboard',
+  },
+  {
+    hidden: environment.production,
+    data: ['admin', 'company'],
     title: 'Home',
     icon: 'nb-star',
     children: [
@@ -26,24 +34,32 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Heaven',
     icon: 'nb-star',
     link: '/pages/heaven',
-    // children: [
-    // ],
   },
   {
     hidden: environment.production,
+    data: ['user'],
+    title: 'Reward',
+    icon: 'nb-star',
+    link: '',
+  },
+  {
+    hidden: environment.production,
+    data: ['admin', 'company'],
     title: 'Reward',
     icon: 'nb-star',
     children: [
       {
-        title: 'Angel',
-        link: '/pages/angel',
+        title: 'Investor',
+        link: '/pages/dashboard',
       },
       {
+        data: ['company'],
         title: 'Company',
         link: '',
       },
       {
-        title: 'HQ',
+        data: ['admin'],
+        title: 'Admin',
         link: '/pages/hq',
       },
     ],
@@ -55,23 +71,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/transfer',
   },
   {
+    hidden: environment.production,
     title: 'Settings',
     icon: 'nb-star',
     link: '/pages/setting',
   },
   {
     hidden: environment.production,
-    title: 'Admin',
+    data: ['admin'],
+    title: 'HQ',
     icon: 'nb-star',
-    children: [
-      {
-        title: 'Company',
-        link: '',
-      },
-      {
-        title: 'HQ',
-        link: '/pages/hq',
-      },
-    ],
+    link: '/pages/gq',
   },
 ];

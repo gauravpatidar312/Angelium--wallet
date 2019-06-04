@@ -10,7 +10,8 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { SettingComponent } from './setting/setting.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { KYCComponent } from './kyc/kyc.component';
- import {HeavenComponent} from './heaven/heaven.component';
+import {HeavenComponent} from './heaven/heaven.component';
+import { MergeComponent } from './merge/merge.component';
 
 
 const routes: Routes = [{
@@ -80,7 +81,11 @@ const routes: Routes = [{
     path: 'hq',
     component: HQComponent,
   },
-   {
+  {
+    path: 'merge',
+    component: MergeComponent,
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   }],

@@ -10,7 +10,7 @@
       <nb-card-body>
         <nb-auth-block>
           <div>
-            <img src="../../assets/images/angelium_logo.png" class="logo-image"/>
+            <img src="../../assets/images/angelium_logo.png" class="logo-image" />
             <h1 id="title" class="title">Register</h1>
             <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when
               enabled.</p>
@@ -18,13 +18,8 @@
               <div class="form-group row">
                 <div class="col-md-9 col-12">
                   <label>Phone number:</label>
-                  <international-phone-number
-                    [(ngModel)]="model.phone"
-                    placeholder="Enter phone number"
-                    [maxlength]="20" [required]="true"
-                    #phone="ngModel"
-                    name="phone"
-                    [defaultCountry]="'jp'">
+                  <international-phone-number [(ngModel)]="model.phone" placeholder="Enter phone number"
+                    [maxlength]="20" [required]="true" #phone="ngModel" name="phone" [defaultCountry]="'jp'">
                   </international-phone-number>
 
                   <div
@@ -36,7 +31,7 @@
                 </div>
                 <div class="col-md-3 col-12 sent_btn">
                   <button type="submit" [disabled]="otpSubmitting || otpSubmitted"
-                          class="btn btn-demo btn-success margint btnregister" size="large">
+                    class="btn btn-demo btn-success margint btnregister" size="large">
                     <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' : 'Send SMS'}}</span>
                     <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
                   </button>
@@ -46,9 +41,7 @@
             <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()">
               <div class="form-group">
                 <label>Verification code:</label>
-                <input type="text" class="form-control"
-                       formControlName="otp_code"
-                       placeholder="Verification code">
+                <input type="text" class="form-control" formControlName="otp_code" placeholder="Verification code">
                 <div *ngIf="submitted && f.otp_code.errors" class="invalid-feedback">
                   <div *ngIf="f.otp_code.errors.required">Verification code is required</div>
                 </div>
@@ -87,17 +80,15 @@
               </div>
               <div class="form-group">
                 <label>Password:</label>
-                <input type="password" class="form-control" placeholder="Password"
-                       formControlName="password">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                   <div *ngIf="f.password.errors.required">Password is required</div>
                 </div>
               </div>
               <div class="form-group">
                 <label>Repeat password:</label>
-                <input type="password" class="form-control"
-                       placeholder="Repeat password"
-                       formControlName="confirm_password">
+                <input type="password" class="form-control" placeholder="Repeat password"
+                  formControlName="confirm_password">
                 <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
                   <div *ngIf="f.confirm_password.errors.required">Repeat password is required</div>
                   <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
@@ -111,7 +102,7 @@
                 <nb-checkbox>Agree to Terms & Conditions</nb-checkbox>
               </div>
               <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer" size="large"
-                      style="width:100%">
+                style="width:100%">
                 <span *ngIf="!formSubmitting">Register</span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
               </button>

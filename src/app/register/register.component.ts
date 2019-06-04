@@ -110,11 +110,18 @@ export class RegisterComponent implements OnInit {
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);
-      this.router.navigate(['pages/setting']);
+      this.getUserSettingInfo();
     }, err => {
       this.formSubmitting = false;
       this.toastrService.danger('Something went wrong. We request you to register again after sometime.', 'Register Failed');
       console.log(err);
+    });
+  }
+
+  getUserSettingInfo(){
+    this.httpService.get('profile/').subscribe(data=>{
+      this.sessionStorageService.saveToSession('userInfo', data);
+      this.router.navigate(['pages/setting']);
     });
   }
 }
