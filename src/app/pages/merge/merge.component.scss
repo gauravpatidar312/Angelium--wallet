@@ -1,0 +1,93 @@
+@import "../../@theme/styles/themes";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+:host {
+  $auth-layout-padding: 2.5rem;
+
+  nb-card {
+    margin: 0;
+    height: calc(100vh - 2 * #{$auth-layout-padding});
+  }
+
+  nb-card-body {
+    display: flex;
+    width: 100%;
+  }
+
+  .mergeBlock {
+    margin: auto;
+  }
+
+  /deep/ .tabset {
+    justify-content: center !important;
+  }
+
+  /deep/ li.active > a {
+    color: #26df8b !important;
+  }
+  
+
+  @include media-breakpoint-down(sm) {
+    nb-card {
+      height: 100vh;
+    }
+  }
+
+  /deep/ {
+    nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding: $auth-layout-padding;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+      }
+    }
+  }
+
+  .navigation {
+    .link {
+      text-decoration: none;
+
+      .icon {
+        font-size: 2rem;
+      }
+    }
+
+    .sub-title {
+      font-size: 13px;
+      color: #d1d1ff;
+      margin: 1rem 0 0;
+    }
+  }
+
+  .logo-image {
+    width: 40%;
+    height: auto;
+    margin: 0 30% 0.5rem;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .forgot-password {
+    float: right;
+    margin-top: 7px;
+  }
+
+  .width-full {
+    width: 100%;
+  }
+
+  .another-action {
+    text-align: center;
+    margin: 1.8em;
+  }
+
+  .invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: nb-theme(color-danger);
+  }
+}

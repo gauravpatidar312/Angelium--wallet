@@ -16,6 +16,7 @@ import { KYCComponent } from './kyc/kyc.component';
 import { HeavenComponent } from './heaven/heaven.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt.component';
+import { MergeComponent } from './merge/merge.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -42,6 +43,7 @@ const PAGES_COMPONENTS = [
     KYCComponent,
     HeavenComponent,
     DialogNamePromptComponent,
+    MergeComponent,
   ],
   entryComponents: [
     DialogNamePromptComponent,
