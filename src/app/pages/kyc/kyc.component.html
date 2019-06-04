@@ -1,15 +1,21 @@
 <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-  <nb-card-header class="text-center">KYC</nb-card-header>
+  <nb-card-header class="text-center">
+    <nav class='navigation'>
+      <a href="#" class='link' aria-label='Back'>
+        <i class='icon nb-arrow-thin-left'></i></a>
+    </nav>
+    KYC
+  </nb-card-header>
   <nb-card-body>
     <nb-stepper orientation="horizontal">
       <nb-step [label]="labelOne">
-        <ng-template #labelOne>First step</ng-template>
+        <ng-template #labelOne>input</ng-template>
       </nb-step>
       <nb-step [label]="labelTwo">
-        <ng-template #labelTwo>Second step</ng-template>
+        <ng-template #labelTwo>Audit</ng-template>
       </nb-step>
       <nb-step [label]="labelFour">
-        <ng-template #labelFour>Fourth step</ng-template>
+        <ng-template #labelFour>Approved</ng-template>
       </nb-step>
 
     </nb-stepper>
@@ -38,45 +44,47 @@
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
-            <div class="col-sm-4 input-group">
-              <select class="form-control">
-                <option>Day</option>
-                <option>Gomel</option>
-                <option>Brest</option>
-                <option>Grodno</option>
-                <option>Mogilev</option>
-              </select>
+            <div class="col-sm-4">
+              <nb-card-body>
+                <nb-select placeholder="Day" status="primary">
+                  <nb-option value="1">Option 1</nb-option>
+                  <nb-option value="2">Option 2</nb-option>
+                  <nb-option value="3">Option 3</nb-option>
+                  <nb-option value="4">Option 4</nb-option>
+                </nb-select>
+              </nb-card-body>
             </div>
-            <div class="col-sm-4 input-group">
-              <select class="form-control">
-                <option>Month</option>
-                <option>Gomel</option>
-                <option>Brest</option>
-                <option>Grodno</option>
-                <option>Mogilev</option>
-              </select>
+            <div class="col-sm-4">
+              <nb-card-body>
+                <nb-select placeholder="Month" status="primary">
+                  <nb-option value="1">Option 1</nb-option>
+                  <nb-option value="2">Option 2</nb-option>
+                  <nb-option value="3">Option 3</nb-option>
+                  <nb-option value="4">Option 4</nb-option>
+                </nb-select>
+              </nb-card-body>
             </div>
-            <div class="col-sm-4 input-group">
-              <select class="form-control">
-                <option>year</option>
-                <option>Gomel</option>
-                <option>Brest</option>
-                <option>Grodno</option>
-                <option>Mogilev</option>
-              </select>
+            <div class="col-sm-4">
+              <nb-card-body>
+                <nb-select placeholder="Year" status="primary">
+                  <nb-option value="1">Option 1</nb-option>
+                  <nb-option value="2">Option 2</nb-option>
+                  <nb-option value="3">Option 3</nb-option>
+                  <nb-option value="4">Option 4</nb-option>
+                </nb-select>
+              </nb-card-body>
             </div>
           </div>
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
-            <div class="col-sm-5 input-group">
-              <select class="form-control">
-                <option>Country</option>
-                <option>Gomel</option>
-                <option>Brest</option>
-                <option>Grodno</option>
-                <option>Mogilev</option>
-              </select>
+            <div class="col-sm-5 ">
+              <nb-select placeholder="Country" status="primary">
+                <nb-option value="1">Option 1</nb-option>
+                <nb-option value="2">Option 2</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+                <nb-option value="4">Option 4</nb-option>
+              </nb-select>
             </div>
             <div class="col-sm-7 input-group">
               <input type="text" placeholder="Mobile Number" class="form-control" />
@@ -93,49 +101,46 @@
       <nb-card-body>
         <div class="form-group">
           <div class="row full-name-inputs">
-            <div class="col-sm-10 input-group">
+            <div class="col-sm-9">
               <input type="text" placeholder="ID(front)" class="form-control" />
             </div>
-            <div class="dropdown" ngbDropdown>
-              <button class="btn btn-primary" type="button" ngbDropdownToggle>
-                upload
-              </button>
-              <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item">Icon Button</li>
-                <li class="dropdown-item">Hero Button</li>
-              </ul>
+            <div class="col-sm-3">
+              <nb-select placeholder="Placeholder" status="primary">
+                <nb-option value="1">Option 1</nb-option>
+                <nb-option value="2">Option 2</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+                <nb-option value="4">Option 4</nb-option>
+              </nb-select>
             </div>
           </div>
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
-            <div class="col-sm-10 input-group">
+            <div class="col-sm-9">
               <input type="text" placeholder="ID(back)" class="form-control" />
             </div>
-            <div class="dropdown" ngbDropdown>
-              <button class="btn btn-primary" type="button" ngbDropdownToggle>
-                upload
-              </button>
-              <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item">Icon Button</li>
-                <li class="dropdown-item">Hero Button</li>
-              </ul>
+            <div class="col-sm-3">
+              <nb-select placeholder="Placeholder" status="primary">
+                <nb-option value="1">Option 1</nb-option>
+                <nb-option value="2">Option 2</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+                <nb-option value="4">Option 4</nb-option>
+              </nb-select>
             </div>
           </div>
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
-            <div class="col-sm-10 input-group">
+            <div class="col-sm-9">
               <input type="text" placeholder="Proof of address" class="form-control" />
             </div>
-            <div class="dropdown" ngbDropdown>
-              <button class="btn btn-primary" type="button" ngbDropdownToggle>
-                upload
-              </button>
-              <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item">Icon Button</li>
-                <li class="dropdown-item">Hero Button</li>
-              </ul>
+            <div class="col-sm-3">
+              <nb-select placeholder="Placeholder" status="primary">
+                <nb-option value="1">Option 1</nb-option>
+                <nb-option value="2">Option 2</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+                <nb-option value="4">Option 4</nb-option>
+              </nb-select>
             </div>
           </div>
         </div>
