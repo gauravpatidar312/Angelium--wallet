@@ -38,12 +38,12 @@
             <tr>
               <td class="title-col">E-MAIL</td>
               <td class="value-col">{{userData?.email}}</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+              <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">PHONE</td>
               <td class="value-col">{{userData?.phone_number}}</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
+              <td class="action-col"></td>
             </tr>
             <tr>
               <td class="title-col">COUNTRY</td>
@@ -81,7 +81,7 @@
               <td class="title-col">R-18 MODE</td>
               <td class="value-col">
                 <label class="switch">
-                  <input type="checkbox">
+                  <input type="checkbox" name="r18mode" (change)="r18mode($event)" [checked]="userData?.r18mode">
                   <span class="slider round"></span>
                 </label>
               </td>
@@ -111,7 +111,7 @@
               <td class="title-col">MERGE</td>
               <td>Merge your old data</td>
               <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
+            </tr> -->
             </tbody>
           </table>
         </div>

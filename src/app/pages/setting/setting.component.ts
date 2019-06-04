@@ -43,6 +43,16 @@ export class SettingComponent implements OnInit {
     }
   }
 
+  r18mode(event){
+    let data = { "r18mode": event.target.checked };
+    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+      if (res.status) {
+        this.sessionStorage.updateFromSession('userSettingInfo', data);
+        this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode');
+      }
+    });
+  }
+
   openDialog(type: any, value:any) {
     this.newData(value);
     this.dialogService.open(DialogNamePromptComponent)
