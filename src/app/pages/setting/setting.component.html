@@ -7,10 +7,10 @@
           <div class="col-md-12">
             <nb-card-body>
               <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
-              <nb-user 
-                [picture]="userData?.avatar" 
-                [name]="userData?.fullname" 
-                title="{{userData?.level}}"
+              <nb-user
+                [picture]="userData?.avatar"
+                [name]="userData?.fullname"
+                title="{{'Lv. ' + userData?.level}}"
                 size="large">
               </nb-user>
             </nb-card-body>
@@ -29,7 +29,6 @@
               <td class="value-col">{{userData?.user_id}}</td>
               <td class="action-col"></td>
             </tr>
-            
             <tr>
               <td class="title-col">REFFERAL LINK</td>
               <td class="value-col">{{userData?.referral_link}}</td>
@@ -248,4 +247,3 @@
     </nb-card-footer>
   </nb-card>
 </ng-template>
-    

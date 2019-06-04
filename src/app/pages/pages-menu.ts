@@ -20,12 +20,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/dashboard',
       },
       {
+        data: ['company'],
         title: 'Company',
         link: '',
       },
       {
-        title: 'HQ',
-        link: '/pages/hq',
+        data: ['admin'],
+        title: 'Admin',
+        link: '',
       },
     ],
   },
@@ -60,7 +62,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: ['admin'],
         title: 'Admin',
-        link: '/pages/hq',
+        link: '',
       },
     ],
   },
@@ -81,6 +83,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     data: ['admin'],
     title: 'HQ',
     icon: 'nb-star',
-    link: '/pages/gq',
+    link: '/pages/hq',
   },
 ];
