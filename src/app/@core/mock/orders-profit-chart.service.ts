@@ -10,19 +10,19 @@ export class OrdersProfitChartService extends OrdersProfitChartData {
   private summary = [
     {
       title: 'Total',
-      value: 3654,
+      value: 0,
     },
     {
       title: 'Last Month',
-      value: 946,
+      value: 0,
     },
     {
       title: 'Last Week',
-      value: 654,
+      value: 0,
     },
     {
       title: 'Today',
-      value: 230,
+      value: 0,
     },
   ];
 

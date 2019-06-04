@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
       <div class="summory" *ngFor="let item of summary">
         <div class="title">{{ item.title }}</div>
         <div class="value"><span class="text-success">$</span>{{ item.value }}</div>
-        <div class="delta up">4%</div>
+        <div class="delta up">0%</div>
       </div>
     </div>
   `,
