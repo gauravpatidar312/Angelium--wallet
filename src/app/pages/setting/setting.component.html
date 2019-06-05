@@ -26,7 +26,7 @@
             </tr>
             <tr class="spacer">
               <td class="title-col">USER ID</td>
-              <td class="value-col">{{userData?.user_id}}</td>
+              <td class="value-col">{{userData?.id}}</td>
               <td class="action-col"></td>
             </tr>
             <tr>
@@ -41,7 +41,7 @@
             </tr>
             <tr>
               <td class="title-col">PHONE</td>
-              <td class="value-col">{{userData?.phone_number}}</td>
+              <td class="value-col">{{userData?.phone}}</td>
               <td class="action-col"></td>
             </tr>
             <tr>
@@ -79,10 +79,21 @@
             <tr>
               <td class="title-col">R-18 MODE</td>
               <td class="value-col">
-                <label class="switch">
+                <!-- <label class="switch">
                   <input type="checkbox" name="r18mode" (change)="r18mode($event)" [checked]="userData?.r18mode">
                   <span class="slider round"></span>
-                </label>
+                </label> -->
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
+                    (click)="r18mode(true)">
+                    <input type="radio" name="options"> 
+                    OFF
+                  </label>
+                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
+                    (click)="r18mode(false)">
+                    <input type="radio" name="options"> ON
+                  </label>
+                </div>
               </td>
               <td class="action-col"></td>
             </tr>
@@ -239,8 +250,9 @@
           (loadImageFailed)="loadImageFailed()"
         ></image-cropper>
       </div>
-      <br>
-      <img [src]="croppedImage" />
+      <div class="img-cpr">
+        <img [src]="croppedImage" />
+      </div>
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Upload</button>

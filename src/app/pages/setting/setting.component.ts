@@ -34,11 +34,12 @@ export class SettingComponent implements OnInit {
     this.toastrService.success('Welcome on setting', 'Settings');
 
     let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    console.log(userSettingInfo);
     this.userData = userSettingInfo;
   }
 
   r18mode(event){
-    let data = { "r18mode": event.target.checked };
+    let data = { "r18mode": event };
     this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
       if (res.status) {
         this.sessionStorage.updateFromSession('userInfo', data);
