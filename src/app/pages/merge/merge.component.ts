@@ -49,9 +49,9 @@ export class MergeComponent implements OnInit {
   }
 
   onXtravelSubmit() {
-    this.submitted = true;
+    this.xtravelsubmitted = true;
     // stop here if form is invalid
-    if (this.anlForm.invalid) {
+    if (this.xtravelForm.invalid) {
       return;
     }
   }
