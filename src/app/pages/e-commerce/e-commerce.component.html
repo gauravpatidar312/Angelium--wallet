@@ -1,8 +1,6 @@
 <div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
-    <ngx-status-card [title]="statusCard.title"
-                     [type]="statusCard.type"
-                     [value]="statusCard.value">
+    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
       <i [ngClass]="statusCard.iconClass"></i>
     </ngx-status-card>
   </div>
@@ -116,9 +114,7 @@
       <nb-card-header>
         <span class="article-title">Article Title</span>
         <div class="col-md-4 col-6 btn-small pull-right">
-          <div class="dropdown"
-               [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-               ngbDropdown>
+          <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
             <button type="button" ngbDropdownToggle class="btn btn-primary">
               DropDown
             </button>
@@ -133,11 +129,14 @@
       </nb-card-header>
       <nb-card-body>
         <div class="row">
-          <div class="col-8"><h4>So what's About the grammar?</h4></div>
+          <div class="col-8">
+            <h4>So what's About the grammar?</h4>
+          </div>
           <div class="col-4 text-right"><span class="article-date">May 1, 2019</span></div>
         </div>
         <p class="article-text text-indent pt-1">
-          Far far away, behind the word mountains, far from the countries <strong>Vokalia</strong> and <strong>Consonantia</strong>,
+          Far far away, behind the word mountains, far from the countries <strong>Vokalia</strong> and
+          <strong>Consonantia</strong>,
           there live the blind texts.
           They live in <strong>Bookmarksgrove</strong>.
         </p>
@@ -150,8 +149,8 @@
           line of blind text by the name of
           <a href="http://google.com" target="_blank">Lorem Ipsum</a> decided to leave for
           the far <strong>World of Grammar</strong>.
-          <br/>
-          <br/>
+          <br />
+          <br />
         </p>
       </nb-card-body>
     </nb-card>
@@ -164,13 +163,13 @@
     <nb-card>
       <nb-card-body>
         <div class="form-group">
-          <input type="text" placeholder="Project" class="form-control"/>
+          <input type="text" placeholder="Project" class="form-control" />
           <small class="form-text ml-2 mt-1">A block of help text that breaks into a new line and may extend beyond one
             line.
           </small>
         </div>
         <div class="input-group mb-4">
-          <input type="text" placeholder="Disabled input" class="form-control" disabled/>
+          <input type="text" placeholder="Disabled input" class="form-control" disabled />
         </div>
         <div class="input-group mb-4">
           <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
