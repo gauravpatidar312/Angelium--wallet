@@ -99,10 +99,10 @@
     }
   }
 
-  /deep/ ng2-smart-table table tr td{
-    font-size:0.9em;
-    word-break: break-all;
-    }
+  // /deep/ ng2-smart-table table tr td{
+  //   font-size:0.9em;
+  //   word-break: break-all;
+  //   }
 }
 
 .hiddenRow {
@@ -115,9 +115,14 @@
 }
 table.table-bordered > thead > tr > th {
   border: 1px solid #2e296a;
+  font-family: roboto;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #ffffff;
 }
 table.table-bordered {
-  font-family: Exo;
+  font-family: roboto;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -165,7 +170,7 @@ table.table-bordered > tbody > tr > td {
 
 }
 #main-navigation li> a{
-  padding: 1%;
+  padding: 10px;
   text-decoration: none;
   font-family: Exo;
   font-size: 1rem;
@@ -186,7 +191,7 @@ table.table-bordered > tbody > tr > td {
 
 }
 #downline-navigation li> a{
-  padding: 1%;
+  padding: 10px;
   text-decoration: none;
   font-family: Exo;
   font-size: 1rem;
@@ -195,10 +200,23 @@ table.table-bordered > tbody > tr > td {
   color: #ffffff;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 300px) and (max-width: 480px) {
+
+  .rewardColumn, .downlineColumn {
+    margin-top: 10px;
+  }
+  .tab-content {
+    padding: 0px;
+  }
   
+  #main-navigation, #downline-navigation {
+    padding-left: 0px;
+  }
   .navbar-pill {
-    justify-content: center;
-     }
+    justify-content: left;
+   }
+   #main-navigation li> a, #downline-navigation li> a{
+     padding:5px;
+   }
   
 }

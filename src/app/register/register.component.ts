@@ -7,6 +7,8 @@ import {MustMatch} from '../_helpers/must-match.validator';
 import {HttpService} from '../services/http.service';
 import {ToastrService} from '../services/toastr.service';
 import {SessionStorageService} from '../services/session-storage.service';
+import { NbDialogService } from '@nebular/theme';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'ngx-register',
@@ -30,7 +32,8 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
-              private sessionStorageService: SessionStorageService) {
+              private sessionStorageService: SessionStorageService,
+              private dialogService: NbDialogService) {
 
   }
 
@@ -122,6 +125,12 @@ export class RegisterComponent implements OnInit {
     this.httpService.get('profile/').subscribe(data=>{
       this.sessionStorageService.saveToSession('userInfo', data);
       this.router.navigate(['pages/setting']);
+    });
+  }
+
+  openTermsConditions() {
+    this.dialogService.open(TermsConditionsComponent,  {
+      closeOnBackdropClick: false,
     });
   }
 }

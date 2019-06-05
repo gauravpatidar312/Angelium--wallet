@@ -1,5 +1,5 @@
-@import '../@theme/styles/themes';
-@import '~@nebular/theme/styles/global/breakpoints';
+@import "../@theme/styles/themes";
+@import "~@nebular/theme/styles/global/breakpoints";
 
 :host {
   $auth-layout-padding: 2.5rem;
@@ -79,5 +79,11 @@
     margin-top: 0.25rem;
     font-size: 80%;
     color: nb-theme(color-danger);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .terms {
+    display: inline-grid;
   }
 }

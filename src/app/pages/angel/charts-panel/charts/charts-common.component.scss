@@ -5,9 +5,17 @@
   height: 100%;
   width: 100%;
 
-  .echart {
+  .echart, .heavenchart {
     display: block;
     height: 100%;
     width: 100%;
+  }
+  @media (min-width: 300px) and (max-width: 480px) {
+    .echart{
+      height: 250px !important;
+    }
+    .heavenchart{
+      height: 250px !important;
+    }
   }
 }

@@ -471,7 +471,7 @@ export class BubbleMapComponent implements OnDestroy {
 
         this.options = {
           title: {
-            text: 'World Population (2011)',
+            text: '',
             left: 'center',
             top: 'top',
             textStyle: {
