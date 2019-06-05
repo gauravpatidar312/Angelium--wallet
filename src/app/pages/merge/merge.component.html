@@ -1,9 +1,9 @@
-<nb-layout>
-  <nb-layout-column>
+<!-- <nb-layout> -->
+  <!-- <nb-layout-column> -->
     <nb-card>
       <nb-card-header>
         <nav class='navigation'>
-          <a routerLink="#" class='link' aria-label='Login'>
+          <a href="javascript:void(0)" class='link' aria-label='Login'>
             <i class='fa fa-arrow-left'></i></a>
         </nav>
       </nb-card-header>
@@ -49,7 +49,7 @@
                     <label class="label" for="input-email">XTRAVEL Username</label>
                     <input class="form-control" fullWidth="text" placeholder="XTRAVEL Username" autofocus
                       formControlName="xtravelusername">
-                    <div *ngIf="submitted && fxtravel.xtravelusername.errors" class="invalid-feedback">
+                    <div *ngIf="xtravelsubmitted && fxtravel.xtravelusername.errors" class="invalid-feedback">
                       <div *ngIf="fxtravel.xtravelusername.errors.required">XTRAVEL username is required</div>
                     </div>
                   </div>
@@ -57,16 +57,16 @@
                     <label class="label" for="input-password">XTRAVEL Password</label>
                     <input class="form-control" fullWidth name="password" type="password"
                       formControlName="xtravelpassword" placeholder="XTRAVEL Password">
-                    <div *ngIf="submitted && fxtravel.xtravelpassword.errors" class="invalid-feedback">
+                    <div *ngIf="xtravelsubmitted && fxtravel.xtravelpassword.errors" class="invalid-feedback">
                       <div *ngIf="fxtravel.xtravelpassword.errors.required">XTRAVEL Password is required</div>
                     </div>
                   </div>
                   <p class="sub-title title">Your old XTRAVEL account will be merged to new account.</p>
                   <div class="form-group">
-                    <button nbButton [disabled]="formSubmitting" class="form-control pointer" fullWidth
+                    <button nbButton [disabled]="xtravelformSubmitting" class="form-control pointer" fullWidth
                       status="success">
-                      <span *ngIf="!formSubmitting">Submit</span>
-                      <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
+                      <span *ngIf="!xtravelformSubmitting">Submit</span>
+                      <i class="fa fa-spinner fa-spin text-white" *ngIf="xtravelformSubmitting"></i>
                     </button>
                   </div>
                 </form>
@@ -76,5 +76,5 @@
         </div>
       </nb-card-body>
     </nb-card>
-  </nb-layout-column>
-</nb-layout>
+  <!-- </nb-layout-column> -->
+<!-- </nb-layout> -->
