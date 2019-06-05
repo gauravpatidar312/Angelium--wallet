@@ -31,21 +31,28 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toastrService.success('Welcome on setting', 'Settings');
-
     let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
     console.log(userSettingInfo);
+    this.r18modeSwitchText = userSettingInfo.r18mode;
     this.userData = userSettingInfo;
   }
 
+  r18modeSwitchText:boolean;
   r18mode(event){
     let data = { "r18mode": event };
-    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
-      if (res.status) {
-        this.sessionStorage.updateFromSession('userInfo', data);
-        this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode');
-      }
-    });
+    if (this.r18modeSwitchText != event) {
+      this.r18modeSwitchText = event;
+      this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+        if (res.status) {
+          this.sessionStorage.updateFromSession('userInfo', data);
+          if (event) {
+            this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode ON'); 
+          }else{
+            this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode OFF');
+          }
+        }
+      });
+    }
   }
 
   openDialog(type: any, value:any) {

@@ -84,13 +84,13 @@
                   <span class="slider round"></span>
                 </label> -->
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
-                    (click)="r18mode(true)">
+                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
+                    (click)="r18mode(false)">
                     <input type="radio" name="options"> 
                     OFF
                   </label>
-                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
-                    (click)="r18mode(false)">
+                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
+                    (click)="r18mode(true)">
                     <input type="radio" name="options"> ON
                   </label>
                 </div>
