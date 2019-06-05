@@ -22,13 +22,13 @@ export class ECommerceComponent implements OnDestroy {
   currentTheme: string;
   assetCard: CardSettings = {
     title: 'Total Assets',
-    value: '572,900',
+    value: '0',
     iconClass: 'fa fa-university',
     type: 'primary',
   };
   gainCard: CardSettings = {
     title: 'Total Gain',
-    value: '572,900',
+    value: '0',
     iconClass: 'fa fa-chart-line',
     type: 'primary',
   };

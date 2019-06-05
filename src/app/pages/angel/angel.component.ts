@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
-
-import { DataSource } from '@angular/cdk/collections';
-import { Observable, of } from 'rxjs';
-// import { animate, state, style, transition, trigger } from '@angular/animations';
+declare let $ : any
 interface CardSettings {
   title: string;
   value: string;
@@ -28,7 +25,7 @@ export interface downlineElement {
   templateUrl: './angel.component.html',
   styleUrls: ['./angel.component.scss']
 })
-export class AngelComponent implements OnInit {
+export class AngelComponent implements OnInit, AfterViewInit {
 
   private alive = true;
   currentTheme: string;
@@ -53,11 +50,13 @@ export class AngelComponent implements OnInit {
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
+        width: '20%',
       },
       lastName: {
         title: 'Reward Rate',
         type: 'html',
         filter: false,
+        width: '15%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -66,6 +65,7 @@ export class AngelComponent implements OnInit {
         title: 'Downline Rate',
         type: 'html',
         filter: false,
+        width: '20%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -74,6 +74,7 @@ export class AngelComponent implements OnInit {
         title: 'Heaven',
         type: 'html',
         filter: false,
+        width: '25%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -82,6 +83,7 @@ export class AngelComponent implements OnInit {
         title: 'Downline',
         type: 'html',
         filter: false,
+        width: '10%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -206,7 +208,21 @@ export class AngelComponent implements OnInit {
       });
   }
 
+  getArray(number) {
+    return new Array(number).fill('');
+  }
+
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    $('ul.rewardLine li a').click(function (e) {
+      $('ul.rewardLine li.active').removeClass('active');
+      $(this).parent('li').addClass('active');
+    });
+    $('ul.downLine li a').click(function (e) {
+      $('ul.downLine li.active').removeClass('active');
+      $(this).parent('li').addClass('active');
+    });
+  }
 }

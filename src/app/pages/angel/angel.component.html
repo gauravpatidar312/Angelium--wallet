@@ -9,16 +9,16 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-md-3" id="curr1">
-        <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
-      </div>
-      <div class="col-md-3" id="curr2">
+      <div class="col-md-6 col-lg-3 col-sm-12" id="curr1">
         <ngx-earning-card></ngx-earning-card>
       </div>
-      <div class="col-md-3" id="curr3">
+      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr2">
         <ngx-earning-card></ngx-earning-card>
       </div>
-      <div class="col-md-3" id="curr4">
+      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr3">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
         <ngx-earning-card></ngx-earning-card>
       </div>
     </div>
@@ -45,113 +45,136 @@
     <ngx-ecommerce-charts></ngx-ecommerce-charts>
   </div>
 </div>
-<!-- <nb-card>
-  <nb-card-header>
-    Your Reward <span class="right-align">Today Week Month Total</span>
-  </nb-card-header>
-  <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" >
-    </ng2-smart-table>
-</nb-card-body>
-</nb-card> -->
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>
-        Your Reward
-        <nb-tabset>
-          <nb-tab tabTitle="Today">
-            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
-          </nb-tab>
-          <nb-tab tabTitle="Week" [lazyLoad]="true">
-            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
-          </nb-tab>
-          <nb-tab tabTitle="Month" [lazyLoad]="true">
-            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
-          </nb-tab>
-          <nb-tab tabTitle="Total" [lazyLoad]="true">
-            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
-          </nb-tab>
-        </nb-tabset>
+      <nb-card-header >
+        <div class="row">
+          <div class="col-md-6">
+              <div class="navbar-header">
+                  Your Reward
+                </div>
+          </div>
+          <div class="col-md-6">
+              <ul id="main-navigation" class="nav navbar-pill rewardLine">
+                  <li class="active" style="margin-right:15px;"><a data-toggle="pill" href="#today">Today</a></li>
+                  <li style="margin-right:15px;"><a data-toggle="pill" href="#week">Week</a></li>
+                  <li style="margin-right:15px;"><a data-toggle="pill" href="#month">Month</a></li>
+                  <li style="margin-right:15px;"><a data-toggle="pill" href="#total">Total</a></li>
+                </ul>
+          </div>
+        </div>
       </nb-card-header>
+      <nb-card-body class="tab-content">
+        <div id="today" class="tab-pane active">
+          <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+        </div>
+        <div id="week" class="tab-pane fade">
+          <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+        </div>
+        <div id="month" class="tab-pane fade">
+          <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+        </div>
+        <div id="total" class="tab-pane fade">
+          <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+        </div>
+      </nb-card-body>
     </nb-card>
   </div>
 </div>
-<!-- <nb-card>
-  <nb-card-header>
-    DownLine Tree
-    <span class="right-align">Today Week Month Total</span>
-  </nb-card-header>
-
-  <nb-card-body>
-    <ng2-smart-table [settings]="settingsnew" [source]="source">
-    </ng2-smart-table>
-  </nb-card-body>
-</nb-card> -->
 
 <nb-card>
   <nb-card-header>
-    DownLine Tree
-    <nb-tabset>
-      <nb-tab tabTitle="Today">
-        <!-- <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table> -->
-
-        <table class="table table-hover table-bordered">
-          <thead style="background-color: #494299;">
-            <tr>
-              <th>Level</th>
-              <th>Username</th>
-              <th>Rank</th>
-              <th>Heaven</th>
-              <th>Your Reward</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let downline of downlineData;let i= index">
-              <tr data-toggle="collapse" [attr.data-target]="'#demo' + i" class="accordion-toggle">
-                <td> 
-                  {{ downline.level }} 
-                  <span class="expand"><span class="fa fa-caret-down"></span></span>
-                </td>
-                <td>
-                  {{ downline.username }}
-                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
-                </td>
-                <td>
-                  {{ downline.rank }}
-                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
-                </td>
-                <td>
-                  {{ downline.heaven }}
-                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
-                </td>
-                <td>
-                  {{ downline.yourreward }}
-                  <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="hiddenRow " colspan="6">
-                  <div class="expanddiv accordian-body collapse" [attr.id]="'demo' + i">
-                    Level: {{ downline.level }} &nbsp;
-                    Username: {{ downline.username }} &nbsp;
-                  </div>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-      </nb-tab>
-      <nb-tab tabTitle="Week" [lazyLoad]="true">
-        <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
-      </nb-tab>
-      <nb-tab tabTitle="Month" [lazyLoad]="true">
-        <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
-      </nb-tab>
-      <nb-tab tabTitle="Total" [lazyLoad]="true">
-        <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
-      </nb-tab>
-    </nb-tabset>
+    <nb-card-header >
+        <div class="row">
+          <div class="col-md-6">
+              <div class="navbar-header">
+                  DownLine Tree
+                </div>
+          </div>
+          <div class="col-md-6">
+              <ul id="downline-navigation" class="nav navbar-pill downLine">
+                  <li class="active" style="margin-right:15px;"><a data-toggle="pill" href="#downlinetoday">Today</a></li>
+                  <li style="margin-right:15px;"><a data-toggle="pill" href="#downlineweek">Week</a></li>
+                  <li style="margin-right:15px;"><a data-toggle="pill" href="#downlinemonth">Month</a></li>
+                  <li style="margin-right:15px;"><a data-toggle="pill" href="#downlinetotal">Total</a></li>
+                </ul>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body class="tab-content">
+          <div id="downlinetoday" class="tab-pane active">
+              <table class="table table-hover table-bordered">
+                  <thead style="background-color: #494299;">
+                    <tr>
+                      <th>Level</th>
+                      <th>Username</th>
+                      <th>Rank</th>
+                      <th>Heaven</th>
+                      <th>Your Reward</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let downline of downlineData;let i= index">
+                      <tr data-toggle="collapse" [attr.data-target]="'.downline' + i" class="accordion-toggle">
+                        <td>
+                          {{ downline.level }}
+                          <span class="expand"><span class="fa fa-caret-down"></span></span>
+                        </td>
+                        <td>
+                          {{ downline.username }}
+                          <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                        </td>
+                        <td>
+                          {{ downline.rank }}
+                          <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                        </td>
+                        <td>
+                          {{ downline.heaven }}
+                          <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                        </td>
+                        <td>
+                          {{ downline.yourreward }}
+                          <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                        </td>
+                      </tr>
+                      <tr [class]="'hiddenRow expanddiv accordian-body collapse downline' + i"
+                      *ngFor="let rowCount of getArray(downline.level); let ib = index"
+                      style="background-image: linear-gradient(to right, #494299 , #7659ff);">
+                          <td>
+                            Level
+                          </td>
+                          <td>
+                            Username
+                            <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                          </td>
+                          <td>
+                            Rank
+                            <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                          </td>
+                          <td>
+                            Heaven
+                            <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                          </td>
+                          <td>
+                            Your Reward
+                            <span class="caret"><span class="fa fa-caret-up"></span>4%</span>
+                          </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+          </div>
+          <div id="downlineweek" class="tab-pane fade">
+              <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
+          </div>
+          <div id="downlinemonth" class="tab-pane fade">
+              <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
+          </div>
+          <div id="downlinetotal" class="tab-pane fade">
+              <ng2-smart-table [settings]="settingsnew" [source]="source"></ng2-smart-table>
+          </div>
+        </nb-card-body>
   </nb-card-header>
 </nb-card>
 <ngx-bubble-map></ngx-bubble-map>

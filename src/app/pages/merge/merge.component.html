@@ -1,0 +1,80 @@
+<nb-layout>
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-header>
+        <nav class='navigation'>
+          <a routerLink="#" class='link' aria-label='Login'>
+            <i class='fa fa-arrow-left'></i></a>
+        </nav>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="mergeBlock">
+          <h1 id="title" class="title">MERGE</h1>
+          <nb-tabset style="justify-content: center;">
+            <nb-tab tabTitle="ANL">
+              <div class="adjustment" style="margin-top: 2rem;">
+                <form [formGroup]="anlForm" (ngSubmit)="onANLSubmit()" class="width-full" aria-labelledby="title">
+                  <div class="form-group">
+                    <label class="label" for="input-email">ANL Username</label>
+                    <input class="form-control" fullWidth="text" placeholder="ANL Username" autofocus
+                      formControlName="anlusername">
+                    <div *ngIf="submitted && f.anlusername.errors" class="invalid-feedback">
+                      <div *ngIf="f.anlusername.errors.required">ANL username is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="label" for="input-password">ANL Password</label>
+                    <input class="form-control" fullWidth name="password" type="password" formControlName="anlpassword"
+                      placeholder="ANL Password">
+                    <div *ngIf="submitted && f.anlpassword.errors" class="invalid-feedback">
+                      <div *ngIf="f.anlpassword.errors.required">ANL Password is required</div>
+                    </div>
+                  </div>
+                  <p class="sub-title title">Your old XTRAVEL account will be merged to new account.</p>
+                  <div class="form-group">
+                    <button nbButton [disabled]="formSubmitting" class="form-control pointer" fullWidth
+                      status="success">
+                      <span *ngIf="!formSubmitting">Submit</span>
+                      <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </nb-tab>
+            <nb-tab tabTitle="XTRAVEL">
+              <div class="adjustment" style="margin-top: 2rem;">
+                <form [formGroup]="xtravelForm" (ngSubmit)="onXtravelSubmit()" class="width-full"
+                  aria-labelledby="title">
+                  <div class="form-group">
+                    <label class="label" for="input-email">XTRAVEL Username</label>
+                    <input class="form-control" fullWidth="text" placeholder="XTRAVEL Username" autofocus
+                      formControlName="xtravelusername">
+                    <div *ngIf="submitted && fxtravel.xtravelusername.errors" class="invalid-feedback">
+                      <div *ngIf="fxtravel.xtravelusername.errors.required">XTRAVEL username is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="label" for="input-password">XTRAVEL Password</label>
+                    <input class="form-control" fullWidth name="password" type="password"
+                      formControlName="xtravelpassword" placeholder="XTRAVEL Password">
+                    <div *ngIf="submitted && fxtravel.xtravelpassword.errors" class="invalid-feedback">
+                      <div *ngIf="fxtravel.xtravelpassword.errors.required">XTRAVEL Password is required</div>
+                    </div>
+                  </div>
+                  <p class="sub-title title">Your old XTRAVEL account will be merged to new account.</p>
+                  <div class="form-group">
+                    <button nbButton [disabled]="formSubmitting" class="form-control pointer" fullWidth
+                      status="success">
+                      <span *ngIf="!formSubmitting">Submit</span>
+                      <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </nb-tab>
+          </nb-tabset>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

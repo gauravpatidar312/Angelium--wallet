@@ -25,3 +25,9 @@
     }
   }
 }
+
+@media (max-width: 340px) {
+  nb-tabset .tabset .tab a {
+    padding: 1.25rem 1rem;
+  }
+}
