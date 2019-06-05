@@ -10,13 +10,13 @@
   <div class="chart-info">
     <div class="row">
       <div class="col-6">
-        <div class="title"><span class="text-success">$</span>300</div>
+        <div class="title"><span class="text-success">$</span>0</div>
       </div>
       <div class="col-6">
         <div class="text-daily text-right text-default">{{ earningLiveUpdateCardData.dailyIncome | ngxNumberWithCommas }}</div>
       </div>
     </div>
-    <div class="value">{{selectedCurrency}} = $ 9534</div>
+    <div class="value">{{tokenName}} = $ 0</div>
     <div class="delta"
          [class.up]="earningLiveUpdateCardData.delta.up"
          [class.down]="!earningLiveUpdateCardData.delta.up">

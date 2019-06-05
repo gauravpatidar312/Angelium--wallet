@@ -37,10 +37,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       invitation_code: [''],
-      username: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       phone: ['', Validators.required],
       otp_code: ['', Validators.required],
-      full_name: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
     }, {
@@ -108,11 +110,18 @@ export class RegisterComponent implements OnInit {
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);
-      this.router.navigate(['pages/setting']);
+      this.getUserSettingInfo();
     }, err => {
       this.formSubmitting = false;
       this.toastrService.danger('Something went wrong. We request you to register again after sometime.', 'Register Failed');
       console.log(err);
+    });
+  }
+
+  getUserSettingInfo(){
+    this.httpService.get('profile/').subscribe(data=>{
+      this.sessionStorageService.saveToSession('userInfo', data);
+      this.router.navigate(['pages/setting']);
     });
   }
 }
