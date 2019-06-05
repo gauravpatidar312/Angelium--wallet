@@ -19,6 +19,10 @@ $shadow-green: #00977e;
     .icon-container {
       height: 100%;
       padding: 0.625rem;
+
+      i {
+        font-size: 30px;
+      }
     }
 
     .full-width {

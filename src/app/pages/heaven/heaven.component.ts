@@ -44,7 +44,7 @@ export class HeavenComponent  {
     actions: false,
     columns: {
       id: {
-        title: 'ID',
+        title: 'HID',
         type: 'number',
       },
       firstName: {
@@ -66,7 +66,7 @@ export class HeavenComponent  {
       age: {
         title: 'Release date',
         type: 'number',
-      },
+      }
     },
   };
 
@@ -74,7 +74,71 @@ export class HeavenComponent  {
 
   constructor(private service: SmartTableData, private themeService: NbThemeService,
     private breakpointService: NbMediaBreakpointsService) {
-    const data = this.service.getData();
+    // const data = this.service.getData();
+    const data = [{
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },
+    {
+      id: 12842,
+      firstName: '$193,393',
+      lastName: 'Heaven 30',
+      username: '122,31ANX',
+      email: '2019.02.19',
+      age: '2019.0419',
+    },];
     this.source.load(data);
     this.themeService.getJsTheme()
     .pipe(takeWhile(() => this.alive))

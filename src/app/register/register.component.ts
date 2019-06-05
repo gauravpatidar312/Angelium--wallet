@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 // import custom validator to validate that password and confirm password fields match
 import {MustMatch} from '../_helpers/must-match.validator';
 // import services
+import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
 import {ToastrService} from '../services/toastr.service';
 import {SessionStorageService} from '../services/session-storage.service';
@@ -48,6 +49,7 @@ export class RegisterComponent implements OnInit {
       last_name: ['', Validators.required],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
+      isAgree: [false],
     }, {
       validator: MustMatch('password', 'confirm_password'),
     });
@@ -88,10 +90,7 @@ export class RegisterComponent implements OnInit {
     }, err => {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
-      if (err.status === 400) {
-        const msg = (err.error && err.error.phone && err.error.phone[0]) || 'We are not able to send you OTP now. Please try after sometime!';
-        this.toastrService.danger(msg, 'Send SMS');
-      }
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send SMS');
     });
   }
 
@@ -110,21 +109,26 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    if (!this.registerForm.value.isAgree) {
+      this.toastrService.danger('Please check agree to the terms and condition box.', 'Register');
+      return;
+    }
+
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);
       this.getUserSettingInfo();
     }, err => {
-      this.formSubmitting = false;
-      this.toastrService.danger('Something went wrong. We request you to register again after sometime.', 'Register Failed');
       console.log(err);
+      this.formSubmitting = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Register Failed');
     });
   }
 
-  getUserSettingInfo(){
-    this.httpService.get('profile/').subscribe(data=>{
-      this.sessionStorageService.saveToSession('userInfo', data);
-      this.router.navigate(['pages/setting']);
+  getUserSettingInfo() {
+    this.httpService.get('profile/').subscribe(data => {
+      this.sessionStorageService.updateFromSession('userInfo', data);
+      this.router.navigate(['pages/dashboard']);
     });
   }
 

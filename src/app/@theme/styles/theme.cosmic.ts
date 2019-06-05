@@ -173,12 +173,44 @@ export const COSMIC_THEME = {
       secondShadowLineDarkBg: '#2c5a85',
 
       // third line
-      thirdLineGradFrom: '#8069ff',
-      thirdLineGradTo: '#8357ff',
+      thirdLineGradFrom: 'rgb(110, 0, 239)',
+      thirdLineGradTo: 'rgb(156, 72, 255)',
 
-      thirdAreaGradFrom: 'rgba(118, 73, 208, 0.7)',
-      thirdAreaGradTo: 'rgba(188, 92, 255, 0.4)',
-      thirdShadowLineDarkBg: '#a695ff',
+      thirdAreaGradFrom: 'rgba(38, 139, 145, 0.8)',
+      thirdAreaGradTo: 'rgba(38, 139, 145, 0.5)',
+      thirdShadowLineDarkBg: '#2c5a85',
+
+      // fourth line
+      fourthLineGradFrom: 'rgba(38, 139, 145, 0.8)',
+      fourthLineGradTo: 'rgba(38, 139, 145, 0.8)',
+
+      fourthAreaGradFrom: 'rgb(139, 195, 74)',
+      fourthAreaGradTo: 'rgb(139, 195, 74)',
+      fourthShadowLineDarkBg: '#2c5a85',
+
+      // fifth line
+      fifthLineGradFrom: 'rgba(38, 139, 145, 0.8)',
+      fifthLineGradTo: 'rgba(38, 139, 145, 0.8)',
+
+      fifthAreaGradFrom: 'rgba(38, 139, 145, 0.8)',
+      fifthAreaGradTo: 'rgba(38, 139, 145, 0.5)',
+      fifthShadowLineDarkBg: '#2c5a85',
+
+      // six line
+      sixLineGradFrom: 'rgb(3, 160, 42)',
+      sixLineGradTo: 'rgb(0, 255, 64)',
+
+      // sixAreaGradFrom: 'rgba(38, 139, 145, 0.8)',
+      // sixAreaGradTo: 'rgba(38, 139, 145, 0.5)',
+      sixShadowLineDarkBg: '#018dff',
+
+      // seventh line
+      seventhLineGradFrom: 'rgb(1, 113, 103)',
+      seventhLineGradTo: 'rgb(0, 150, 136)',
+
+      seventhAreaGradFrom: 'rgba(38, 139, 145, 0.8)',
+      seventhAreaGradTo: 'rgba(38, 139, 145, 0.5)',
+      seventhShadowLineDarkBg: '#018dff',
     },
 
     profit: {

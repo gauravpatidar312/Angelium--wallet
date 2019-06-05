@@ -37,16 +37,6 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     element2[0].innerHTML = 'Average ANX';
     let element3 = document.getElementById('curr3').getElementsByClassName('curre');
     element3[0].innerHTML = 'Average Heaven';
-    let element4 = document.getElementById('curr4').getElementsByClassName('curre');
-    element4[0].innerHTML = 'Heaven growth';
-    let element5 = document.getElementById('curr5').getElementsByClassName('curre');
-    element5[0].innerHTML = 'Total user';
-    let element6 = document.getElementById('curr6').getElementsByClassName('curre');
-    element6[0].innerHTML = 'New user';
-    let element7 = document.getElementById('curr7').getElementsByClassName('curre');
-    element7[0].innerHTML = 'Leaving user';
-    let element8 = document.getElementById('curr8').getElementsByClassName('curre');
-    element8[0].innerHTML = 'User growth';
   }
   // changeCurrency(currency) {
   //   if (this.selectedCurrency !== currency) {

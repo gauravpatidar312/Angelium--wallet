@@ -1,4 +1,4 @@
-<nb-card size="medium" [ngClass]="{'r18': true}">
+<nb-card size="medium" [ngClass]="{'r18': r18mode}">
   <!-- <nb-card-header>
     <div class="cameras-card-header">
       <span class="cameras-card-title">Security Cameras</span>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="cameras" *ngIf="!isSingleView">
-      <div class="camera col-lg-4" *ngFor="let camera of camerasData" 
+      <div class="camera col-lg-4" *ngFor="let camera of cameras"
         [style.background-image]="'url(' + camera.source + ')'"
         [hidden]="!camera.display">
         <span>{{ camera.title }}</span>

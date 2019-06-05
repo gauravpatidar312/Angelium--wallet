@@ -14,6 +14,14 @@ import { AgmCoreModule } from '@agm/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earning-live-update-chart.component';
 import { EchartsAreaStackComponent } from './echarts/echarts-area-stack.component';
+import { TrafficComponent } from './traffic/traffic.component';
+import { TrafficChartComponent } from './traffic/traffic-chart.component';
+import { ECommerceChartsPanelComponent } from './charts-panel/charts-panel.component';
+import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/chart-panel-summary.component';
+import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/chart-panel-header.component';
+import { OrdersChartComponent } from './charts-panel/charts/orders-chart.component';
+import { ProfitChartComponent } from './charts-panel/charts/profit-chart.component';
+import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
 
 
 @NgModule({
@@ -24,8 +32,16 @@ import { EchartsAreaStackComponent } from './echarts/echarts-area-stack.componen
     EarningPieChartComponent,
     HQComponent,
     EarningLiveUpdateChartComponent,
-    EchartsAreaStackComponent
-    ],
+    EchartsAreaStackComponent,
+    TrafficComponent,
+    TrafficChartComponent,
+    ECommerceChartsPanelComponent,
+    ChartPanelHeaderComponent,
+    ChartPanelSummaryComponent,
+    OrdersChartComponent,
+    ProfitChartComponent,
+    ECommerceLegendChartComponent
+  ],
   imports: [
     CommonModule,
     ThemeModule,

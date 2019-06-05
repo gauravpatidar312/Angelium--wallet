@@ -13,6 +13,8 @@ $legend-canceled-color: #3f4fda;
 
     ul {
       border-bottom: none;
+       position: relative;
+      z-index: 9;
     }
   }
 
@@ -20,7 +22,6 @@ $legend-canceled-color: #3f4fda;
     flex: 1;
     padding-bottom: 1.25rem;
   }
-
   .chart-container {
     flex: 1;
     height: 100%;

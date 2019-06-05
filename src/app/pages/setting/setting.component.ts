@@ -31,26 +31,34 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toastrService.success('Welcome on setting', 'Settings');
-
     let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    console.log(userSettingInfo);
+    this.r18modeSwitchText = userSettingInfo.r18mode;
     this.userData = userSettingInfo;
   }
 
+  r18modeSwitchText:boolean;
   r18mode(event){
-    let data = { "r18mode": event.target.checked };
-    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
-      if (res.status) {
-        this.sessionStorage.updateFromSession('userInfo', data);
-        this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode');
-      }
-    });
+    let data = { "r18mode": event };
+    if (this.r18modeSwitchText != event) {
+      this.r18modeSwitchText = event;
+      this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+        if (res.status) {
+          this.sessionStorage.updateFromSession('userInfo', data);
+          if (event) {
+            this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode ON'); 
+          }else{
+            this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode OFF');
+          }
+        }
+      });
+    }
   }
 
   openDialog(type: any, value:any) {
     this.newData(value);
     this.dialogService.open(DialogNamePromptComponent)
-      .onClose.subscribe(data => { 
+      .onClose.subscribe(data => {
         if (type == 'password' && data!=undefined && data!='') {
           let endpoint = 'password/';
           let apiData = { 'password' : data };
@@ -87,7 +95,7 @@ export class SettingComponent implements OnInit {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
-  
+
   imageCropped(event: ImageCroppedEvent) {
     this.userImageBase64 = event.base64;
     this.croppedImage = event.base64;

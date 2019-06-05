@@ -32,6 +32,18 @@
         padding: 0;
       }
     }
+
+    nb-checkbox {
+      float: left;
+
+      .customised-control {
+        padding-right: 0 !important;
+      }
+    }
+  }
+
+  .form-group.terms {
+    display: block;
   }
 
   .navigation {
@@ -58,6 +70,16 @@
   .another-action {
     text-align: center;
     margin: 1.8em;
+  }
+
+  a.term-link {
+    color: #00f9a6 !important;
+    cursor: pointer;
+    text-decoration: underline !important;
+    margin-left: 5px;
+    display: block;
+    float: left;
+    margin-top: 6px;
   }
 
   .btnregister {

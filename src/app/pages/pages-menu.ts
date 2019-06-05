@@ -3,14 +3,12 @@ import { environment } from '../../environments/environment';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    hidden: environment.production,
     data: ['user'],
     title: 'Home',
     icon: 'nb-star',
     link: '/pages/dashboard',
   },
   {
-    hidden: environment.production,
     data: ['admin', 'company'],
     title: 'Home',
     icon: 'nb-star',
@@ -20,7 +18,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/dashboard',
       },
       {
+        hidden: environment.production,
+        data: ['company'],
         title: 'Company',
+        link: '',
+      },
+      {
+        hidden: environment.production,
+        data: ['admin'],
+        title: 'Admin',
         link: '',
       },
     ],
@@ -76,6 +82,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     data: ['admin'],
     title: 'HQ',
     icon: 'nb-star',
-    link: '/pages/gq',
+    link: '/pages/hq',
   },
 ];

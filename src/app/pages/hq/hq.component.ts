@@ -9,6 +9,7 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./hq.component.scss']
 })
 export class HQComponent implements OnInit {
+
   source: LocalDataSource = new LocalDataSource();
   settings = {
     add: {
@@ -57,6 +58,14 @@ export class HQComponent implements OnInit {
     this.source.load(data);
   }
   ngOnInit() {
+  }
+
+  onDeleteConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
 
 }
