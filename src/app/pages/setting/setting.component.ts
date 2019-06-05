@@ -50,7 +50,7 @@ export class SettingComponent implements OnInit {
   openDialog(type: any, value:any) {
     this.newData(value);
     this.dialogService.open(DialogNamePromptComponent)
-      .onClose.subscribe(data => { 
+      .onClose.subscribe(data => {
         if (type == 'password' && data!=undefined && data!='') {
           let endpoint = 'password/';
           let apiData = { 'password' : data };
@@ -87,7 +87,7 @@ export class SettingComponent implements OnInit {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
-  
+
   imageCropped(event: ImageCroppedEvent) {
     this.userImageBase64 = event.base64;
     this.croppedImage = event.base64;

@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
 import {SessionStorageService} from '../services/session-storage.service';
 import {ToastrService} from '../services/toastr.service';
@@ -52,21 +53,16 @@ export class LoginComponent implements OnInit {
       this.sessionStorageService.saveToSession('userInfo', res);
       this.getUserSettingInfo();
     }, err => {
-      this.formSubmitting = false;
-      if (err.status === 400) {
-        if (err.error.non_field_errors[0] === 'Unable to log in with provided credentials.') {
-          this.toastrService.danger(err.error.non_field_errors[0], 'Login Failed');
-        }
-      }
       console.log(err);
+      this.formSubmitting = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Login Failed');
     });
   }
 
-  getUserSettingInfo(){
-    this.httpService.get('profile/').subscribe(data=>{
-      // this.sessionStorageService.saveToSession('userSettingInfo', data);
+  getUserSettingInfo() {
+    this.httpService.get('profile/').subscribe(data => {
       this.sessionStorageService.updateFromSession('userInfo', data);
-      this.router.navigate(['pages/setting']);
+      this.router.navigate(['pages/dashboard']);
     });
   }
 }
