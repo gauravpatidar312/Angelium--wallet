@@ -17,8 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegisterComponent } from './register/register.component';
 // services
 import { SessionStorageService } from "./services/session-storage.service";
@@ -28,7 +27,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ShareDataService } from "./services/share-data.service";
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent, ResetPasswordComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
