@@ -25,10 +25,6 @@
     margin: 0 0 10px 0;
     color: #00bb66;
   }
-  .col{
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 }
 .trans-receive {
     justify-content: flex-end;
@@ -92,3 +88,27 @@ text-align: center;
   @media (max-width:1100px){
     .nb-card-wrap {width: 100%;max-width: 100%;}
   }
+
+@media (min-width:901px){
+  .nb-card-wrap .col{padding-left: 10px;padding-right: 10px;}
+}
+
+@media (min-width:768px) and (max-width:900px){
+    .nb-card-wrap .col{padding-left: 5px !important;padding-right: 5px !important;}
+}
+
+  @media (max-width:900px){
+    .nb-card-wrap{padding:0;}
+    .nb-theme-cosmic .transfer-form .form-control {padding: 10px 10px;font-size: 14px;}
+    .total-amount span{font-size: 14px !important;right: 10px !important;}
+  }
+
+@media (max-width:767px){
+  .transfer-form {
+    margin-bottom: 30px;
+    overflow-x: hidden;
+    .row {
+      display: block;
+    }
+  }
+}
