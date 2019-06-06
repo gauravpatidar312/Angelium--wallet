@@ -21,10 +21,8 @@
     }
   }
 
-  .paddfix{
-    padding: 0px 1.5rem;
-    line-height: 26px;
-  }
+  .iconpaddfix{ padding:0px 0.75rem; }
+  .paddfix{ padding: 0px 1.5rem; line-height: 24px; }
   .grid-h {
     margin-top: 1.5rem;
 
@@ -224,14 +222,8 @@
   }
 }
 
-.nb-icon-left{
-  float: right;
-}
+.nb-icon-left{ float: right; cursor: pointer; }
+.nb-icon-left:hover{ color: #00d977; cursor: pointer; }
 .upload-btn{ float: right }
-
 .img-cpr{ text-align: center; }
-
-.image-scoll-card-body {
-  max-height: calc(100vh - 190px);
-  overflow-y: auto;
-}
+.image-scoll-card-body { max-height: calc(100vh - 190px); overflow-y: auto; }

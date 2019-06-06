@@ -7,6 +7,7 @@ import { ToastrService } from "../../services/toastr.service";
 import { HttpService } from "../../services/http.service";
 import { ShareDataService } from "../../services/share-data.service";
 import { SessionStorageService } from "../../services/session-storage.service";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'ngx-setting',
@@ -15,6 +16,7 @@ import { SessionStorageService } from "../../services/session-storage.service";
 })
 export class SettingComponent implements OnInit {
   evaIcons = [];
+  production:boolean;
   userData: any;
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -28,6 +30,7 @@ export class SettingComponent implements OnInit {
     private shareDataService: ShareDataService,
     private sessionStorage: SessionStorageService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
+    this.production = environment.production;
   }
 
   ngOnInit() {
@@ -118,7 +121,7 @@ export class SettingComponent implements OnInit {
     if (this.imageChangedEvent!='') {
       let file = this.imageChangedEvent.target.files[0];
       this.croppedImageSize;
-      let newfile = new File([this.croppedImageSize], file.name);
+      let newfile = new File([this.croppedImageSize], file.name, {type: file.type});
       formData.append('avatar', newfile , newfile.name);
       this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
         if (res.status) {
