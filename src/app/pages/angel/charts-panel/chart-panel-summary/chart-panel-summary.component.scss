@@ -1,7 +1,7 @@
-@import '../../../../@theme/styles/themes';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/breakpoints';
-@import '~@nebular/theme/styles/global/typography/typography';
+@import "../../../../@theme/styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "~@nebular/theme/styles/global/typography/typography";
 
 @include nb-install-component() {
   .summary-container {
@@ -12,12 +12,17 @@
     justify-content: space-between;
     padding: 1.5rem 4rem 1rem;
     margin-bottom: 1rem;
-    border:
-      nb-theme(chart-panel-summary-border-width)
-      solid
+    border: nb-theme(chart-panel-summary-border-width) solid
       nb-theme(chart-panel-summary-border-color);
     border-left: none;
     border-right: none;
+  }
+  .summary {
+    width: 25%;
+    text-align: center;
+  }
+  .ernpercentage {
+    float: right;
   }
 
   .delta {
@@ -33,7 +38,7 @@
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       right: 100%;
       border-left: 6px solid transparent;
       border-right: 6px solid transparent;
@@ -58,9 +63,14 @@
     font-size: 2rem;
     color: nb-theme(color-fg-heading);
   }
-
+  .caret {
+    color: #25d786;
+    padding-right: 0.4rem;
+    font-size: 20px;
+  }
   @include media-breakpoint-down(sm) {
-    .value, .title {
+    .value,
+    .title {
       font-weight: nb-theme(font-weight-bold);
     }
 
@@ -81,6 +91,15 @@
 
     .value {
       margin-top: 0.5rem;
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    .value {
+      font-size: 1rem;
+    }
+    .caret {
+      float: left;
     }
   }
 }

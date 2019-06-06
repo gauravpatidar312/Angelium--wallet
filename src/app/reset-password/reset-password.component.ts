@@ -4,22 +4,20 @@ import {Router, ActivatedRoute} from '@angular/router';
 // import custom validator to validate that password and confirm password fields match
 import {MustMatch} from '../_helpers/must-match.validator';
 // import services
-import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
 import {ToastrService} from '../services/toastr.service';
 import {SessionStorageService} from '../services/session-storage.service';
-import { NbDialogService } from '@nebular/theme';
-import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import {ShareDataService} from '../services/share-data.service';
 
 @Component({
-  selector: 'ngx-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'ngx-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss'],
 })
 
-export class RegisterComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
   model: any = {};
-  registerForm: FormGroup;
+  resetPasswordForm: FormGroup;
   submitted: boolean = false;
   formSubmitting: boolean = false;
   otpSubmitted: boolean = false;
@@ -33,34 +31,28 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
-              private sessionStorageService: SessionStorageService,
-              private dialogService: NbDialogService) {
+              private sessionStorageService: SessionStorageService) {
 
   }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
+    this.resetPasswordForm = this.formBuilder.group({
       invitation_code: [''],
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required],
       phone: ['', Validators.required],
-      otp_code: ['', Validators.required],
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
+      code: ['', Validators.required],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
-      isAgree: [false],
     }, {
       validator: MustMatch('password', 'confirm_password'),
     });
 
     this.activatedRoute.params.subscribe(params => {
-      this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+      this.resetPasswordForm.controls.invitation_code.setValue(params.invitation_code);
     });
   }
 
   get f() {
-    return this.registerForm.controls;
+    return this.resetPasswordForm.controls;
   }
 
   get otp_form() {
@@ -75,7 +67,7 @@ export class RegisterComponent implements OnInit {
 
     this.otpSubmitted = true;
     this.otpSubmitting = true;
-    this.httpService.post(this.model, 'send-otp/').subscribe((res) => {
+    this.httpService.post(this.model, 'forgot-password/').subscribe((res) => {
       this.isResubmit = true;
       this.otpSubmitting = false;
 
@@ -94,13 +86,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  onSubmitRegistration() {
-    this.registerForm.controls.phone.setValue(this.model.phone);
-    console.log(this.registerForm.value);
+  onSubmitResetPassword() {
+    this.resetPasswordForm.controls.phone.setValue(this.model.phone);
+    console.log(this.resetPasswordForm.value);
 
     this.submitted = true;
     // stop here if form is invalid
-    if (this.registerForm.invalid || this.otpForm.invalid) {
+    if (this.resetPasswordForm.invalid || this.otpForm.invalid) {
       return;
     }
 
@@ -109,19 +101,19 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    if (!this.registerForm.value.isAgree) {
-      this.toastrService.danger('Please check agree to the terms and condition box.', 'Register');
-      return;
-    }
-
     this.formSubmitting = true;
-    this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
-      this.sessionStorageService.saveToSession('userInfo', res);
-      this.getUserSettingInfo();
+    this.httpService.post(this.resetPasswordForm.value, 'verify-forgotpassword-otp/').subscribe(res => {
+      if (res.status) {
+        this.sessionStorageService.saveToSession('userInfo', res.data);
+        this.getUserSettingInfo();
+      } else {
+        this.formSubmitting = false;
+        this.toastrService.danger(res.message || 'Please check OTP code and try again!', 'Reset Password');
+      }
     }, err => {
-      console.log(err);
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Register Failed');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reset Password');
+      console.log(err);
     });
   }
 
@@ -129,12 +121,6 @@ export class RegisterComponent implements OnInit {
     this.httpService.get('profile/').subscribe(data => {
       this.sessionStorageService.updateFromSession('userInfo', data);
       this.router.navigate(['pages/dashboard']);
-    });
-  }
-
-  openTermsConditions() {
-    this.dialogService.open(TermsConditionsComponent,  {
-      closeOnBackdropClick: false,
     });
   }
 }

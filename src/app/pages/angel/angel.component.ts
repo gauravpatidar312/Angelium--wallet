@@ -50,13 +50,13 @@ export class AngelComponent implements OnInit, AfterViewInit {
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
-        width: '20%',
+        // width: '20%',
       },
       lastName: {
         title: 'Reward Rate',
         type: 'html',
         filter: false,
-        width: '15%',
+        // width: '15%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -65,7 +65,7 @@ export class AngelComponent implements OnInit, AfterViewInit {
         title: 'Downline Rate',
         type: 'html',
         filter: false,
-        width: '20%',
+        // width: '20%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -74,7 +74,7 @@ export class AngelComponent implements OnInit, AfterViewInit {
         title: 'Heaven',
         type: 'html',
         filter: false,
-        width: '25%',
+        // width: '25%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
@@ -83,7 +83,7 @@ export class AngelComponent implements OnInit, AfterViewInit {
         title: 'Downline',
         type: 'html',
         filter: false,
-        width: '10%',
+        // width: '10%',
         valuePrepareFunction: (cell, row) => {
           return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },

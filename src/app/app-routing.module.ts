@@ -1,8 +1,7 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -10,10 +9,6 @@ const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 
-  {
-    path: 'change-password',
-    component: ChangePasswordComponent,
-  },
   {
     path: 'register',
     redirectTo: 'register/',
@@ -23,8 +18,8 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'forgot-password',
-    component: ForgetPasswordComponent,
+    path: 'reset-password',
+    component: ResetPasswordComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },

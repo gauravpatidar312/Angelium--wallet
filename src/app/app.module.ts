@@ -19,7 +19,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegisterComponent } from './register/register.component';
+import { TermsConditionsComponent } from './register/terms-conditions/terms-conditions.component';
 // services
 import { SessionStorageService } from "./services/session-storage.service";
 import { ToastrService } from "./services/toastr.service";
@@ -28,7 +30,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ShareDataService } from "./services/share-data.service";
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -45,6 +47,7 @@ import { ShareDataService } from "./services/share-data.service";
     ShareDataService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
+  entryComponents: [TermsConditionsComponent]
 })
 export class AppModule {
 }

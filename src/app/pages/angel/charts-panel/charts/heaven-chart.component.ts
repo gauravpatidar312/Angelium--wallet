@@ -9,7 +9,7 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
   selector: 'ngx-heaven-chart',
   styleUrls: ['./charts-common.component.scss'],
   template: `
-    <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
+    <div echarts [options]="options" class="heavenchart" (chartInit)="onChartInit($event)"></div>
   `,
 })
 export class HeavenChartComponent implements AfterViewInit, OnDestroy, OnChanges {
