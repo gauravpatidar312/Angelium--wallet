@@ -44,10 +44,10 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr1">
-        <ngx-earning-card [selectedCurrency]="'ANX'"></ngx-earning-card>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12" *ngFor="let currency of cryptoBalance;">
+        <ngx-earning-card [selectedCurrency]="currency.type" [amount]="currency.amount" [quantity]="currency.quantity"></ngx-earning-card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr2">
+      <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr2">
         <ngx-earning-card [selectedCurrency]="'HEAVEN'"></ngx-earning-card>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr3">
@@ -56,10 +56,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr4">
         <ngx-earning-card [selectedCurrency]="'XP'"></ngx-earning-card>
       </div>
-    </div>
-  </div>
-  <div class="col-xxl-12">
-    <div class="row">
+ 
       <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr5">
         <ngx-earning-card [selectedCurrency]="'BTC'"></ngx-earning-card>
       </div>
@@ -71,9 +68,10 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr8">
         <ngx-earning-card [selectedCurrency]="'ANLP'"></ngx-earning-card>
-      </div>
+      </div> -->
     </div>
   </div>
+   
 </div>
 <div class="row">
   <div class="col-lg-6">

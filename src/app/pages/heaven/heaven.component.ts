@@ -23,6 +23,8 @@ export class HeavenComponent  {
   breakpoints: any;
   currentTheme: string;
 
+  selectedHevenPlan = '';
+
   settings = {
     // add: {
     //   addButtonContent: '<i class="nb-plus"></i>',

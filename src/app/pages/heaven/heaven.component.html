@@ -84,7 +84,7 @@
 					<td>$192</td>
 				</tr>
 			</table>
-			<button class="table_bg">Choose</button>
+			<button class="table_bg" [ngClass]="{'selectedHeaven':selectedHevenPlan=='heaven30'}" (click)="selectedHevenPlan = 'heaven30'">Choose</button>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -106,7 +106,7 @@
 					<td>$192</td>
 				</tr>
 			</table>
-			<button class="table_btn table_bg">Choose</button>
+			<button class="table_btn table_bg" [ngClass]="{'selectedHeaven':selectedHevenPlan=='heaven60'}" (click)="selectedHevenPlan = 'heaven60'">Choose</button>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -128,7 +128,7 @@
 					<td>$192</td>
 				</tr>
 			</table>
-			<button class="table_btn table_bg">Choose</button>
+			<button class="table_btn table_bg" [ngClass]="{'selectedHeaven':selectedHevenPlan=='heaven90'}" (click)="selectedHevenPlan = 'heaven90'">Choose</button>
 		</div>
 	</div>
 </div>

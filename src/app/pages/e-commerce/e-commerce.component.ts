@@ -2,6 +2,7 @@ import { Component,OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { SolarData } from '../../@core/data/solar';
+import { HttpService } from '../../services/http.service';
 interface CardSettings {
   title: string;
   value: string;
@@ -18,6 +19,7 @@ export class ECommerceComponent implements OnDestroy {
 
   private alive = true;
 
+  cryptoBalance = [];
   solarValue: number;
   currentTheme: string;
   assetCard: CardSettings = {
@@ -60,7 +62,8 @@ export class ECommerceComponent implements OnDestroy {
   };
 
   constructor(private themeService: NbThemeService,
-              private solarService: SolarData) {
+              private solarService: SolarData,
+              private httpService: HttpService,) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -73,6 +76,15 @@ export class ECommerceComponent implements OnDestroy {
       .subscribe((data) => {
         this.solarValue = data;
       });
+
+    this.getAllCryptoBalance();
+  }
+
+  getAllCryptoBalance() {
+    this.httpService.get('all-crypto-balance/').subscribe(data => {
+      // console.log('card data', data);
+      this.cryptoBalance = data;
+    });
   }
 
   ngOnDestroy() {

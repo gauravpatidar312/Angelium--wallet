@@ -48,6 +48,10 @@ h6.card_heading {
   cursor: pointer;
 }
 
+.selectedHeaven {
+  background-image: linear-gradient(to right, #00d8b2, #03d87c);
+}
+
 .table_bg:hover {
   background-image: linear-gradient(to right, #00d8b2, #03d87c);
   border: 2px solid #03d87c;

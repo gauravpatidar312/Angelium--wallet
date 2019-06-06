@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
+  anxValue;
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserData,
@@ -58,6 +60,13 @@ export class HeaderComponent implements OnInit {
       if (data.avatar) {
         this.userData.avatar = data.avatar;
       }
+    });
+    this.getANXValue();
+  }
+
+  getANXValue() {
+    this.httpService.get('anx-price/').subscribe(data => {
+      this.anxValue = data.anx_price;
     });
   }
 
