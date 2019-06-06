@@ -3,6 +3,7 @@ import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
+import {SessionStorageService} from '../../services/session-storage.service';
 interface CardSettings {
   title: string;
   value: string;
@@ -16,10 +17,10 @@ interface CardSettings {
   templateUrl: './e-commerce.component.html',
 })
 export class ECommerceComponent implements OnDestroy {
-
   private alive = true;
 
   cryptoBalance = [];
+  user: any;
   solarValue: number;
   currentTheme: string;
   assetCard: CardSettings = {
@@ -63,13 +64,16 @@ export class ECommerceComponent implements OnDestroy {
 
   constructor(private themeService: NbThemeService,
               private solarService: SolarData,
-              private httpService: HttpService,) {
+              private httpService: HttpService,
+              private sessionStorage: SessionStorageService) {
+    this.user = this.sessionStorage.getFromSession('userInfo');
+
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
         this.statusCards1 = this.statusCardsByThemes[theme.name];
-    });
+      });
 
     this.solarService.getSolarData()
       .pipe(takeWhile(() => this.alive))

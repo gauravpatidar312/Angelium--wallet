@@ -8,19 +8,12 @@
 				<label>Heaven</label>
 				<label class="bigger-text"><span>$</span> 572,900</label>
 			</div>
-			<div class="actions">
-				<div class="select-box">
-					<div class="dropdown" ngbDropdown>
-						<button class="btn btn-primary" type="button" ngbDropdownToggle>
-							Week
-						</button>
-						<ul class="dropdown-menu" ngbDropdownMenu>
-							<li class="dropdown-item"> Week </li>
-							<li class="dropdown-item"> Month </li>
-							<li class="dropdown-item"> Year </li>
-						</ul>
-					</div>
-				</div>
+			<div class="actions flex-end text-right">
+				<nb-select class="slct" placeholder="Select" [(selected)]="commonSelectedItem">
+					<nb-option value="1">Week</nb-option>
+					<nb-option value="2">Month</nb-option>
+					<nb-option value="3">Year</nb-option>
+				</nb-select>
 				<div class="progress-data ">
 					<div class="delta value up"> 4% </div>
 					<div class="progress-container">
@@ -39,20 +32,13 @@
 				<label>Heaven drop</label>
 				<label class="bigger-text"><span>$</span> 572,900</label>
 			</div>
-			<div class="actions">
-				<div class="select-box">
-					<span class="progress-data-value"><span class="color-green">45895</span> ANX</span>
-					<div class="dropdown" ngbDropdown>
-						<button class="btn btn-primary" type="button" ngbDropdownToggle>
-							Week
-						</button>
-						<ul class="dropdown-menu" ngbDropdownMenu>
-							<li class="dropdown-item"> Week </li>
-							<li class="dropdown-item"> Month </li>
-							<li class="dropdown-item"> Year </li>
-						</ul>
-					</div>
-				</div>
+			<div class="actions flex-end text-right">
+				<span class="progress-data-value"><span class="color-green">45895</span> ANX</span>
+				<nb-select class="slct" placeholder="Select" [(selected)]="commonSelectedItem">
+					<nb-option value="1">Week</nb-option>
+					<nb-option value="2">Month</nb-option>
+					<nb-option value="3">Year</nb-option>
+				</nb-select>
 				<div class="progress-data">
 					<div class="delta value up"> 4% </div>
 					<div class="progress-container">
@@ -184,15 +170,15 @@
 						</div>
 					</div>
 					<div class="dropdown" ngbDropdown>
-							<button class="btn btn-primary" type="button" ngbDropdownToggle>
-								Year
-							</button>
-							<ul class="dropdown-menu" ngbDropdownMenu>
-								<li class="dropdown-item"> Week </li>
-								<li class="dropdown-item"> Month </li>
-								<li class="dropdown-item"> Year </li>
-							</ul>
-						</div>
+						<button class="btn btn-primary" type="button" ngbDropdownToggle>
+							Year
+						</button>
+						<ul class="dropdown-menu" ngbDropdownMenu>
+							<li class="dropdown-item"> Week </li>
+							<li class="dropdown-item"> Month </li>
+							<li class="dropdown-item"> Year </li>
+						</ul>
+					</div>
 				</div>
 				<ngx-ecommerce-charts></ngx-ecommerce-charts>
 			</nb-card-body>

@@ -1,4 +1,6 @@
 @import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
   ngx-d3-bar,
@@ -38,6 +40,13 @@
       }
     }
   }
+    @include media-breakpoint-down(sm) {
+      nb-tabset /deep/ a{
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    
+  }
 }
 .headerhq{
     margin: nb-theme(layout-padding);
@@ -53,6 +62,7 @@
       right: 0;
       text-align: center;
   }
+ 
   .main-coverboth {
     display: flex;
     align-items: center;
@@ -88,6 +98,10 @@ label.bigger-text span {
 }
 .details label:last-child{
   font-size: 40px;
+}
+.fa-university,.nb-bar-chart{font-size: 2.5rem;}
+.image_div p span {
+  color: #0ace77;
 }
 .actions a.btn-large.btn-hero {
   margin-bottom: 6px;
@@ -465,6 +479,10 @@ nb-card {
     justify-content: center;
     padding: 1.5rem 1rem 1rem
   }
+   .tabset .tab a {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   .summory {
     width: 33.3333%;
     text-align: center;
@@ -557,6 +575,7 @@ nb-card {
   .icon {
       display: none;
   }
+
 }
 @media (max-width:767.98px) {
   nb-card.large-card {

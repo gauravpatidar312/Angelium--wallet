@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile', link: '/pages/setting' }, { title: 'Log out' }];
 
   anxValue;
 

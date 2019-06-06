@@ -26,7 +26,7 @@ export class SecurityCamerasComponent implements OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe((cameras: Camera[]) => {
         cameras.map((cam) => {
-          cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) >= 0);
+          cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
         });
         this.cameras = cameras;
         this.selectedCamera = cameras[0];

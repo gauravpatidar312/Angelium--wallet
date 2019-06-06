@@ -19,8 +19,10 @@
       /deep/ nb-card {
         width: 100%;
       }
+      
     }
   }
+  
   .pull-right {
     float :right;
   }
@@ -34,6 +36,7 @@
     font-size: 16px;
     text-align: justify;
   }
+  .fa-university,.fa-chart-line{font-size: 2.5rem;}
   .size-container {
     .btn-demo {
       width: 120px;
@@ -56,11 +59,14 @@
     .nebular-calendar {
       margin-bottom: 1.5rem;
     }
+  
   }
 
   @include media-breakpoint-down(is) {
     /deep/ nb-card.large-card {
       height: nb-theme(card-height-medium);
     }
+    
   }
+  
 }

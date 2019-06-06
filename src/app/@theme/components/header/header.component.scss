@@ -192,6 +192,10 @@
     nb-user /deep/ .user-name {
       display: none;
     }
+    nb-select /deep/ button{
+         padding: 7px 0px 7px 5px;
+    font-size: 14px;
+    }
   }
 
   @include media-breakpoint-down(is) {

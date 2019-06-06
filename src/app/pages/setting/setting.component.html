@@ -9,7 +9,7 @@
               <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
               <nb-user
                 [picture]="userData?.avatar"
-                [name]="userData?.fullname"
+                [name]="userData?.fullname | titlecase"
                 title="{{'Lv. ' + userData?.level}}"
                 size="large">
               </nb-user>
@@ -19,41 +19,46 @@
             <thead>
             </thead>
             <tbody>
-            <tr class="spacer">
-              <td class="title-col">USER NAME</td>
-              <td class="value-col">{{userData?.username}}</td>
-              <td class="action-col"></td>
-            </tr>
-            <tr class="spacer">
-              <td class="title-col">USER ID</td>
-              <td class="value-col">{{userData?.id}}</td>
-              <td class="action-col"></td>
-            </tr>
-            <tr>
-              <td class="title-col">REFFERAL LINK</td>
-              <td class="value-col">{{userData?.referral_link}}</td>
-              <td class="action-col"></td>
-            </tr>
-            <tr>
-              <td class="title-col">E-MAIL</td>
-              <td class="value-col">{{userData?.email}}</td>
-              <td class="action-col"></td>
-            </tr>
-            <tr>
-              <td class="title-col">PHONE</td>
-              <td class="value-col">{{userData?.phone}}</td>
-              <td class="action-col"></td>
-            </tr>
-            <tr>
-              <td class="title-col">COUNTRY</td>
-              <td class="value-col">{{userData?.country}}</td>
-              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
-            </tr>
-            <tr>
-              <td class="title-col">LEVEL</td>
-              <td class="value-col">{{userData?.level}}</td>
-              <td class="action-col"></td>
-            </tr>
+              <tr class="spacer">
+                <td class="title-col">USERNAME</td>
+                <td class="value-col">{{userData?.username | titlecase}}</td>
+                <td class="action-col"></td>
+              </tr>
+              <tr class="spacer">
+                <td class="title-col">FULL NAME</td>
+                <td class="value-col">{{userData?.fullname | titlecase}}</td>
+                <td class="action-col"></td>
+              </tr>
+              <tr>
+                <td class="title-col">E-MAIL</td>
+                <td class="value-col">{{userData?.email}}</td>
+                <td class="action-col"></td>
+              </tr>
+              <tr>
+                <td class="title-col">COUNTRY</td>
+                <td class="value-col">{{userData?.country | titlecase}}</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
+              </tr>
+              <tr>
+                <td class="title-col">PHONE</td>
+                <td class="value-col">{{userData?.phone}}</td>
+                <td class="action-col"></td>
+              </tr>
+              <tr>
+                <td class="title-col">REFFERAL LINK</td>
+                <td class="value-col">{{userData?.referral_link}}</td>
+                <td class="action-col"></td>
+              </tr>
+              <tr>
+                <td class="title-col">LEVEL</td>
+                <td class="value-col">{{'Lv. ' + userData?.level}}</td>
+                <td class="action-col"></td>
+              </tr>
+              <tr class="spacer">
+                <td class="title-col">USER ID</td>
+                <td class="value-col">{{userData?.id}}</td>
+                <td class="action-col"></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -69,59 +74,60 @@
             <thead>
             </thead>
             <tbody>
-            <tr>
-              <td class="title-col">PASSWORD</td>
-              <td class="value-col">
-                **********
-              </td>
-              <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('password', '')"></i></td>
-            </tr>
-            <tr>
-              <td class="title-col">R-18 MODE</td>
-              <td class="value-col">
-                <!-- <label class="switch">
-                  <input type="checkbox" name="r18mode" (change)="r18mode($event)" [checked]="userData?.r18mode">
-                  <span class="slider round"></span>
-                </label> -->
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
-                    (click)="r18mode(false)">
-                    <input type="radio" name="options"> 
-                    OFF
-                  </label>
-                  <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
-                    (click)="r18mode(true)">
-                    <input type="radio" name="options"> ON
-                  </label>
-                </div>
-              </td>
-              <td class="action-col"></td>
-            </tr>
-            <!-- <tr>
-              <td class="title-col">2FA</td>
-              <td class="value-col">texttext</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
-            <tr>
-              <td class="title-col">SECRET KEY</td>
-              <td class="value-col">texttext</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
-            <tr>
-              <td class="title-col">CURRENCY</td>
-              <td class="value-col">texttext</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
-            <tr>
-              <td class="title-col">LANGUAGE</td>
-              <td>texttext</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr>
-            <tr>
-              <td class="title-col">MERGE</td>
-              <td>Merge your old data</td>
-              <td class="action-col"><i class="nb-edit fa-2x"></i></td>
-            </tr> -->
+              <tr>
+                <td class="title-col">PASSWORD</td>
+                <td class="value-col">
+                  **********
+                </td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('password', '')"></i></td>
+              </tr>
+              <tr *ngIf="!production">
+                <td class="title-col">2FA</td>
+                <td class="value-col">**********</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+              </tr>
+              <tr *ngIf="!production">
+                <td class="title-col">SECRET KEY</td>
+                <td class="value-col">**********</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+              </tr>
+              <tr *ngIf="!production">
+                <td class="title-col">KYC</td>
+                <td class="value-col">Complete</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
+              </tr>
+              <tr *ngIf="!production">
+                <td class="title-col">CURRENCY</td>
+                <td class="value-col">US$</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+              </tr>
+              <tr *ngIf="!production">
+                <td class="title-col">LANGUAGE</td>
+                <td>English</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+              </tr>
+              <tr>
+                <td class="title-col">R-18 MODE</td>
+                <td class="value-col iconpaddfix">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
+                      (click)="r18mode(false)">
+                      <input type="radio" name="options"> 
+                      OFF
+                    </label>
+                    <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
+                      (click)="r18mode(true)">
+                      <input type="radio" name="options"> ON
+                    </label>
+                  </div>
+                </td>
+                <td class="action-col"></td>
+              </tr>
+              <tr *ngIf="!production">
+                <td class="title-col">MERGE</td>
+                <td>Merge your old data</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge"></i></td>
+              </tr> 
             </tbody>
           </table>
         </div>
@@ -235,17 +241,19 @@
       Upload image
       <i class="nb-close nb-icon-left fa-2x" (click)="ref.close()"></i>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body class="image-scoll-card-body">
       <input type="file" nbInput (change)="fileChangeEvent($event)" />
       <br> <br>
       <div>
         <image-cropper
           [imageChangedEvent]="imageChangedEvent"
           [maintainAspectRatio]="true"
-          [aspectRatio]="16 / 9 "
-          [resizeToWidth]="200"
-          [cropperMinWidth]="200"
+          [aspectRatio]="1 / 1"
+          [resizeToWidth]="150"
+          [cropperMinWidth]="300"
+          [cropperMinHeight]="300"
           format="png"
+          [alignImage]="center"
           (imageCropped)="imageCropped($event)"
           (loadImageFailed)="loadImageFailed()"
         ></image-cropper>
