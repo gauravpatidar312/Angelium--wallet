@@ -113,19 +113,6 @@
     <nb-card size="small" style="height: 100%;">
       <nb-card-header>
         <span class="article-title">Article Title</span>
-        <div class="col-md-4 col-6 btn-small pull-right">
-          <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-            <button type="button" ngbDropdownToggle class="btn btn-primary">
-              DropDown
-            </button>
-            <ul class="dropdown-menu" ngbDropdownMenu>
-              <li class="dropdown-item">Option 1</li>
-              <li class="dropdown-item">Option 2</li>
-              <li class="dropdown-item">Option 3</li>
-              <li class="dropdown-item">Option 4</li>
-            </ul>
-          </div>
-        </div>
       </nb-card-header>
       <nb-card-body>
         <div class="row">
@@ -156,7 +143,7 @@
     </nb-card>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="user?.is_admin">
   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
   </div>
   <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
