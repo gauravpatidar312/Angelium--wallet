@@ -9,7 +9,7 @@
               <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
               <nb-user
                 [picture]="userData?.avatar"
-                [name]="userData?.fullname"
+                [name]="userData?.fullname | titlecase"
                 title="{{'Lv. ' + userData?.level}}"
                 size="large">
               </nb-user>
@@ -21,7 +21,12 @@
             <tbody>
             <tr class="spacer">
               <td class="title-col">USER NAME</td>
-              <td class="value-col">{{userData?.username}}</td>
+              <td class="value-col">{{userData?.username | titlecase}}</td>
+              <td class="action-col"></td>
+            </tr>
+            <tr class="spacer">
+              <td class="title-col">FULL NAME</td>
+              <td class="value-col">{{userData?.fullname | titlecase}}</td>
               <td class="action-col"></td>
             </tr>
             <tr class="spacer">
@@ -46,12 +51,12 @@
             </tr>
             <tr>
               <td class="title-col">COUNTRY</td>
-              <td class="value-col">{{userData?.country}}</td>
+              <td class="value-col">{{userData?.country | titlecase}}</td>
               <td class="action-col"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
             </tr>
             <tr>
               <td class="title-col">LEVEL</td>
-              <td class="value-col">{{userData?.level}}</td>
+              <td class="value-col">{{'Lv. ' + userData?.level}}</td>
               <td class="action-col"></td>
             </tr>
             </tbody>
