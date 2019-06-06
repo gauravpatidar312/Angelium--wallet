@@ -83,7 +83,7 @@ h6.card_heading {
 .heaven_div {
   float: left;
 }
-
+.fa-university,.nb-bar-chart{font-size: 2.5rem;}
 .image_div p span {
   color: #0ace77;
 }
@@ -583,6 +583,14 @@ span.progress-data-value {
 .color-green {
   color: #00d977;
 }
+.actions.flex-end {
+  display: inline-block;
+
+    span.progress-data-value, .slct{
+      display: inline-block;
+      width: 47%;
+    }
+}
 
 @media (min-width:1480px) and (max-width:1590px) { 
   .details label:last-child {
@@ -722,6 +730,7 @@ span.progress-data-value {
   ngx-chart-panel-header, ngx-profit-chart, ngx-orders-chart {
     padding: 0rem;
   }
+  span.progress-data-value, .slct{width: auto !important;}
 }
 @media (min-width: 576px) and (max-width: 767.98px ){
   .actions {

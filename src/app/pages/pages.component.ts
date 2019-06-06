@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {SessionStorageService} from '../services/session-storage.service';
+import { Component, OnInit } from '@angular/core';
+import { SessionStorageService } from '../services/session-storage.service';
 
-import {MENU_ITEMS} from './pages-menu';
+import { MENU_ITEMS } from './pages-menu';
 
 @Component({
   selector: 'ngx-pages',
