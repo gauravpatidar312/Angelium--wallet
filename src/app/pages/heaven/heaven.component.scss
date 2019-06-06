@@ -542,6 +542,7 @@ background-color: #9a905d;
   top: -10px;
   left: 0px;
 }
+
 .delta::before {
   content: '';
   right: 100%;
@@ -568,7 +569,9 @@ nb-card.top-content {
   -webkit-box-shadow: 0 4px 10px 0 rgba(33,7,77,.5);
   box-shadow: 0 4px 10px 0 rgba(33,7,77,.5);
 }
-
+.fa-arrow-right{
+  color: #00bb66;
+}
 nb-card {
   transform: translate3d(0, 0, 0);
 }
