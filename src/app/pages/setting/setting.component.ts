@@ -1,13 +1,18 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { HostListener, Component, OnInit, TemplateRef } from '@angular/core';
 import { icons } from 'eva-icons';
 import { NbDialogService } from '@nebular/theme';
+import { NavigationStart, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DialogNamePromptComponent } from './dialog-prompt/dialog-prompt.component';
 import { ImageCroppedEvent } from './image-cropper/interfaces/image-cropped-event.interface';
+
 import { ToastrService } from "../../services/toastr.service";
 import { HttpService } from "../../services/http.service";
 import { ShareDataService } from "../../services/share-data.service";
 import { SessionStorageService } from "../../services/session-storage.service";
 import { environment } from "../../../environments/environment";
+
+export let browserRefresh = false;
 
 @Component({
   selector: 'ngx-setting',
@@ -23,19 +28,34 @@ export class SettingComponent implements OnInit {
   croppedImageSize: any = '';
   userImage: any;
   userImageBase64: any;
+  subscription: Subscription;
   constructor(
     private toastrService: ToastrService,
     private dialogService: NbDialogService,
     private httpService: HttpService,
     private shareDataService: ShareDataService,
-    private sessionStorage: SessionStorageService) {
+    private sessionStorage: SessionStorageService,
+    private router: Router) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
     this.production = environment.production;
+    
+    window.onload = (ev) => {
+      browserRefresh = true;
+      this.getProfileData();
+    };
+  }
+
+  getProfileData(){
+    if (browserRefresh) {
+      this.httpService.get('profile/').subscribe(data => {
+        this.r18modeSwitchText = data.r18mode;
+        this.userData = data;
+      });
+    }
   }
 
   ngOnInit() {
     let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
-    console.log(userSettingInfo);
     this.r18modeSwitchText = userSettingInfo.r18mode;
     this.userData = userSettingInfo;
   }
