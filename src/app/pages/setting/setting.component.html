@@ -235,17 +235,19 @@
       Upload image
       <i class="nb-close nb-icon-left fa-2x" (click)="ref.close()"></i>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body class="image-scoll-card-body">
       <input type="file" nbInput (change)="fileChangeEvent($event)" />
       <br> <br>
       <div>
         <image-cropper
           [imageChangedEvent]="imageChangedEvent"
           [maintainAspectRatio]="true"
-          [aspectRatio]="16 / 9 "
-          [resizeToWidth]="200"
-          [cropperMinWidth]="200"
+          [aspectRatio]="1 / 1"
+          [resizeToWidth]="150"
+          [cropperMinWidth]="300"
+          [cropperMinHeight]="300"
           format="png"
+          [alignImage]="center"
           (imageCropped)="imageCropped($event)"
           (loadImageFailed)="loadImageFailed()"
         ></image-cropper>

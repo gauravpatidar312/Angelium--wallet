@@ -120,7 +120,6 @@ export class SettingComponent implements OnInit {
       this.croppedImageSize;
       let newfile = new File([this.croppedImageSize], file.name);
       formData.append('avatar', newfile , newfile.name);
-
       this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
         if (res.status) {
           ref.close();

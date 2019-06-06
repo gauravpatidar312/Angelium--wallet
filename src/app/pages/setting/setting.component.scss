@@ -20,6 +20,7 @@
       }
     }
   }
+
   .paddfix{
     padding: 0px 1.5rem;
     line-height: 26px;
@@ -229,3 +230,8 @@
 .upload-btn{ float: right }
 
 .img-cpr{ text-align: center; }
+
+.image-scoll-card-body {
+  max-height: calc(100vh - 190px);
+  overflow-y: auto;
+}
