@@ -1,16 +1,15 @@
-.nb-card {
-  transform: translate3d(0, 0, 0);
-}
-
-.right-align {
-  float: right;
-}
-
 @import "../../@theme/styles/themes";
 @import "~bootstrap/scss/mixins/breakpoints";
 @import "~@nebular/theme/styles/global/breakpoints";
 
 @include nb-install-component() {
+  .nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .right-align {
+    float: right;
+  }
   .solar-card nb-card-header {
     border: none;
     padding-bottom: 0;
@@ -70,6 +69,7 @@
     display: inline-block;
     color: nb-theme(color-fg-heading);
     padding-left: 0.2rem;
+    margin-right: 8px;
     font-size: 1rem;
     // top: 20px;
     right: 0px;
@@ -98,11 +98,6 @@
       }
     }
   }
-
-  // /deep/ ng2-smart-table table tr td{
-  //   font-size:0.9em;
-  //   word-break: break-all;
-  //   }
 }
 
 .hiddenRow {
@@ -132,22 +127,38 @@ table.table-bordered > tbody > tr > td {
   border: 1px solid #2e296a;
 }
 
-.caret {
+/deep/ .rewardtblcss {
+  padding-right: 40px;
+}
+/deep/ .rewardtblcss span {
+  word-break: break-all;
+}
+.downlinetblcss,
+.downlineuser {
+  position: relative;
+  padding-right: 40px;
+}
+.downlinetblcss,
+.downlineuser span {
+  word-break: break-all;
+}
+
+/deep/ .caret {
   float: right;
-  color: #ffffff;
+  color: #726666;
   right: 0px;
 }
-.caret span {
+/deep/ .caret span {
   padding-right: 0.2rem;
   font-size: 20px;
   color: #26df8b;
 }
-.expand {
+/deep/ .expand {
   float: right;
   color: #ffffff;
   right: 0px;
 }
-.expand span {
+/deep/ .expand span {
   font-size: 20px;
   color: #fff;
 }
@@ -157,8 +168,8 @@ table.table-bordered > tbody > tr > td {
 .navbar-pill {
   justify-content: flex-end;
 }
-#main-navigation li.active > a{
-  text-decoration:underline 2px;
+#main-navigation li.active > a {
+  text-decoration: underline 2px;
   border-radius: 2px;
   border-bottom: 5px solid #26df8b;
   text-decoration-color: #26df8b;
@@ -167,9 +178,8 @@ table.table-bordered > tbody > tr > td {
   font-weight: 400;
   line-height: 1.25;
   color: #ffffff;
-
 }
-#main-navigation li> a{
+#main-navigation li > a {
   padding: 10px;
   text-decoration: none;
   font-family: Exo;
@@ -178,8 +188,8 @@ table.table-bordered > tbody > tr > td {
   line-height: 1.25;
   color: #ffffff;
 }
-#downline-navigation li.active > a{
-  text-decoration:underline 2px;
+#downline-navigation li.active > a {
+  text-decoration: underline 2px;
   border-radius: 2px;
   border-bottom: 5px solid #26df8b;
   text-decoration-color: #26df8b;
@@ -188,9 +198,8 @@ table.table-bordered > tbody > tr > td {
   font-weight: 400;
   line-height: 1.25;
   color: #ffffff;
-
 }
-#downline-navigation li> a{
+#downline-navigation li > a {
   padding: 10px;
   text-decoration: none;
   font-family: Exo;
@@ -201,22 +210,58 @@ table.table-bordered > tbody > tr > td {
 }
 
 @media (min-width: 300px) and (max-width: 480px) {
-
-  .rewardColumn, .downlineColumn {
+  .rewardColumn,
+  .downlineColumn {
     margin-top: 10px;
   }
   .tab-content {
     padding: 0px;
   }
-  
-  #main-navigation, #downline-navigation {
+
+  #main-navigation,
+  #downline-navigation {
     padding-left: 0px;
   }
   .navbar-pill {
     justify-content: left;
-   }
-   #main-navigation li> a, #downline-navigation li> a{
-     padding:5px;
-   }
-  
+  }
+  #main-navigation li > a,
+  #downline-navigation li > a {
+    padding: 5px;
+  }
+
+  /deep/ ng2-smart-table table tr td {
+    font-size: 0.9em;
+    word-break: break-all;
+  }
+
+  /deep/ .rewardtblcss {
+    width: 120px;
+  }
+
+  /deep/ .downlinetblcss {
+    width: 100px;
+  }
+
+  /deep/ .downlineuser {
+    width: 150px;
+  }
+
+  /deep/ .downlineTree table tr td {
+    font-size: 0.9em;
+    word-break: break-all;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  /deep/ .rewardtblcss {
+    width: 150px;
+  }
+
+  /deep/ .downlinetblcss {
+    width: 150px;
+  }
+
+  /deep/ .downlineuser {
+    width: 150px;
+  }
 }

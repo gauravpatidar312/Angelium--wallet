@@ -27,14 +27,14 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)',
         },
-        legend: {
+        /*legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['ANX', 'HEAVEN', 'ANL', 'XP', 'BTC'],
+          data: ['ANX', 'HEAVEN', 'ANL', 'XP', 'BTC', 'ETH', 'USDT', 'ANLP'],
           textStyle: {
             color: echarts.textColor,
           },
-        },
+        },*/
         series: [
           {
             name: 'Portfolio',
@@ -47,6 +47,9 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
               { value: 234, name: 'ANL' },
               { value: 135, name: 'XP' },
               { value: 1548, name: 'BTC' },
+              { value: 105, name: 'ETH' },
+              { value: 300, name: 'USDT' },
+              { value: 350, name: 'ANLP' },
             ],
             itemStyle: {
               emphasis: {

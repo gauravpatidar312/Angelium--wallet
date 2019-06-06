@@ -11,13 +11,22 @@ interface CardSettings {
   type: string;
 }
 
+export interface yourrewardElement {
+  level: number;
+  yourreward: number;
+  rewardrate: string;
+  downlinereward: number;
+  heaven: number;
+  downline: number;
+}
+
 export interface downlineElement {
   username: string;
   level: number;
-  rank: number;
+  rank: string;
   heaven: number;
+  reward: number;
   yourreward: number;
-  symbol: string;
 }
 
 @Component({
@@ -30,6 +39,16 @@ export class AngelComponent implements OnInit, AfterViewInit {
   private alive = true;
   currentTheme: string;
   source: LocalDataSource = new LocalDataSource();
+
+   rewardData: yourrewardElement[] = [
+      { level: 1, yourreward: 131131, rewardrate: '100%', downlinereward: 131,  heaven: 131, downline: 14 },
+      { level: 2, yourreward: 131131, rewardrate: '10%', downlinereward: 131,  heaven: 131, downline: 14 },
+      { level: 3, yourreward: 131131, rewardrate: '10%', downlinereward: 131,  heaven: 131, downline: 14 },
+      { level: 4, yourreward: 131131, rewardrate: '10%', downlinereward: 131,  heaven: 131, downline: 14 },
+      { level: 5, yourreward: 131131, rewardrate: '10%', downlinereward: 131,  heaven: 131, downline: 14 },
+      { level: 6, yourreward: 131131, rewardrate: '10%', downlinereward: 131,  heaven: 131, downline: 14 },
+    ];
+
   settings = {
     hideSubHeader: true,
     actions: false,
@@ -37,55 +56,50 @@ export class AngelComponent implements OnInit, AfterViewInit {
       display: false,
     },
     columns: {
-      id: {
+      level: {
         title: 'Level',
         type: 'number',
         filter: false
       },
-      firstName: {
+      yourreward: {
         type: 'html',
         title: 'Your Reward',
         class: 'table-col',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
+          return `<div class="rewardtblcss"> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
-        // width: '20%',
       },
-      lastName: {
+      rewardrate: {
         title: 'Reward Rate',
         type: 'html',
         filter: false,
-        // width: '15%',
         valuePrepareFunction: (cell, row) => {
-          return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
+          return `<div class="rewardtblcss"> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
       },
-      username: {
+      downlinereward: {
         title: 'Downline Rate',
         type: 'html',
         filter: false,
-        // width: '20%',
         valuePrepareFunction: (cell, row) => {
-          return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
+          return `<div class="rewardtblcss"> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
       },
-      email: {
+      heaven: {
         title: 'Heaven',
         type: 'html',
         filter: false,
-        // width: '25%',
         valuePrepareFunction: (cell, row) => {
-          return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
+          return `<div class="rewardtblcss"> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
       },
-      age: {
+      downline: {
         title: 'Downline',
         type: 'html',
         filter: false,
-        // width: '10%',
         valuePrepareFunction: (cell, row) => {
-          return `<div> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
+          return `<div class="rewardtblcss"> <span class="">${cell} </span><span class="delta up">4%</span></div>`;
         },
       },
     },
@@ -185,11 +199,12 @@ export class AngelComponent implements OnInit, AfterViewInit {
     };
 
     downlineData: downlineElement[] = [
-      { level: 1, username: 'Rio', rank: 131, heaven: 131, yourreward: 131, symbol: 'Rio' },
-      { level: 2, username: 'Py', rank: 132, heaven: 131, yourreward: 131,symbol: 'He' },
-      { level: 3, username: 'Shrikant', rank: 131, heaven: 131, yourreward: 131, symbol: 'Li' },
-      { level: 1, username: 'Fluorine', rank: 131, heaven: 131, yourreward: 131, symbol: 'F' },
-      { level: 1, username: 'Neon', rank: 131, heaven: 131, yourreward: 131, symbol: 'Ne' }
+      { level: 1, username: 'Rio', rank: '100%', heaven: 131, reward: 131, yourreward: 14 },
+      { level: 2, username: 'Py', rank: '10%', heaven: 131, reward: 131, yourreward: 14 },
+      { level: 3, username: 'Shrikant', rank: '10%', heaven: 131, reward: 131, yourreward: 131 },
+      { level: 1, username: 'John', rank: '10%', heaven: 131, reward: 131, yourreward: 131 },
+      { level: 1, username: 'Tom', rank: '10%', heaven: 131, reward: 131, yourreward: 131 },
+      { level: 1, username: 'Neon', rank: '10%', heaven: 131, reward: 131, yourreward: 131 }
     ];
 
   constructor(private service: SmartTableData,
