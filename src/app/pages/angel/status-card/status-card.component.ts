@@ -11,4 +11,5 @@ export class StatusCardComponent {
   @Input() type: any;
   @Input() value: string;
   @Input() on = true;
+  selectedType = '1';
 }

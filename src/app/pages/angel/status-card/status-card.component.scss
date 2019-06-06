@@ -16,11 +16,11 @@ $shadow-green: #00977e;
     $shadow: nb-theme(btn-hero-shadow);
     box-shadow: $bevel, $shadow;
 
-    .icon-container {
+    /deep/ .icon-container {
       height: 100%;
       padding: 0.625rem;
 
-      i {
+      .icon > i {
         font-size: 30px;
       }
     }
@@ -286,6 +286,12 @@ $shadow-green: #00977e;
       &::after {
         top: 45% !important;
       }
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    /deep/ .icon-container {
+      display: none;
     }
   }
 }
