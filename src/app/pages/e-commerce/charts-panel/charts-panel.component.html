@@ -1,4 +1,4 @@
-<nb-card size="large">
+<nb-card >
   <nb-tabset fullWidth (changeTab)="changeTab($event)">
     <nb-tab tabTitle="Assets">
       <div class="chart-container">
@@ -8,7 +8,7 @@
         <ngx-orders-chart #ordersChart [ordersChartData]="ordersChartData"></ngx-orders-chart>
       </div>
     </nb-tab>
-    <nb-tab tabTitle="Profit" [lazyLoad]="true">
+    <nb-tab tabTitle="Profit">
       <div class="chart-container">
         <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
         <ngx-chart-panel-header [type]="period" (periodChange)="setPeriodAndGetChartData($event)">

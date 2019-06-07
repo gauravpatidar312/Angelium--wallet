@@ -1,4 +1,4 @@
-@import '../../../@theme/styles/themes';
+@import "../../../@theme/styles/themes";
 
 @include nb-install-component() {
   ngx-echarts-pie,
@@ -16,5 +16,17 @@
   /deep/ .echart {
     height: 100%;
     width: 100%;
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    /deep/ .echart {
+      height: 200px !important;
+    }
+  }
+
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    /deep/ .echart {
+      height: 350px !important;
+    }
   }
 }
