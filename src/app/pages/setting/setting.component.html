@@ -15,52 +15,54 @@
               </nb-user>
             </nb-card-body>
           </div>
-          <table class="table borderless">
-            <thead>
-            </thead>
-            <tbody>
-              <tr class="spacer">
-                <td class="title-col">USERNAME</td>
-                <td class="value-col">{{userData?.username | titlecase}}</td>
-                <td class="action-col"></td>
-              </tr>
-              <tr class="spacer">
-                <td class="title-col">FULL NAME</td>
-                <td class="value-col">{{userData?.fullname | titlecase}}</td>
-                <td class="action-col"></td>
-              </tr>
-              <tr>
-                <td class="title-col">E-MAIL</td>
-                <td class="value-col">{{userData?.email}}</td>
-                <td class="action-col"></td>
-              </tr>
-              <tr>
-                <td class="title-col">COUNTRY</td>
-                <td class="value-col">{{userData?.country | titlecase}}</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
-              </tr>
-              <tr>
-                <td class="title-col">PHONE</td>
-                <td class="value-col">{{userData?.phone}}</td>
-                <td class="action-col"></td>
-              </tr>
-              <tr>
-                <td class="title-col">REFFERAL LINK</td>
-                <td class="value-col">{{userData?.referral_link}}</td>
-                <td class="action-col"></td>
-              </tr>
-              <tr>
-                <td class="title-col">LEVEL</td>
-                <td class="value-col">{{'Lv. ' + userData?.level}}</td>
-                <td class="action-col"></td>
-              </tr>
-              <tr class="spacer">
-                <td class="title-col">USER ID</td>
-                <td class="value-col">{{userData?.id}}</td>
-                <td class="action-col"></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-md-12">
+            <table class="table borderless tablemarginfix">
+              <thead>
+              </thead>
+              <tbody>
+                <tr class="spacer">
+                  <td class="title-col">USERNAME</td>
+                  <td class="value-col">{{userData?.username | titlecase}}</td>
+                  <td class="action-col"></td>
+                </tr>
+                <tr class="spacer">
+                  <td class="title-col">FULL NAME</td>
+                  <td class="value-col">{{userData?.fullname | titlecase}}</td>
+                  <td class="action-col"></td>
+                </tr>
+                <tr>
+                  <td class="title-col">E-MAIL</td>
+                  <td class="value-col">{{userData?.email}}</td>
+                  <td class="action-col"></td>
+                </tr>
+                <tr>
+                  <td class="title-col">COUNTRY</td>
+                  <td class="value-col">{{userData?.country | titlecase}}</td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
+                </tr>
+                <tr>
+                  <td class="title-col">PHONE</td>
+                  <td class="value-col">{{userData?.phone}}</td>
+                  <td class="action-col"></td>
+                </tr>
+                <tr>
+                  <td class="title-col">REFFERAL LINK</td>
+                  <td class="value-col">{{userData?.referral_link}}</td>
+                  <td class="action-col"></td>
+                </tr>
+                <tr>
+                  <td class="title-col">LEVEL</td>
+                  <td class="value-col">{{'Lv. ' + userData?.level}}</td>
+                  <td class="action-col"></td>
+                </tr>
+                <tr class="spacer">
+                  <td class="title-col">USER ID</td>
+                  <td class="value-col">{{userData?.id}}</td>
+                  <td class="action-col"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </nb-card-body>
     </nb-card>
@@ -69,8 +71,8 @@
     <nb-card>
       <nb-card-header>SETTING</nb-card-header>
       <nb-card-body>
-        <div class="row">
-          <table class="table borderless">
+        <div class="col-md-12 nopadd">
+          <table class="table borderless tablemarginfix">
             <thead>
             </thead>
             <tbody>
