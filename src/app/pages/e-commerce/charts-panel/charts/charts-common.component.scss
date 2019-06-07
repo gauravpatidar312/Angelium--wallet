@@ -10,4 +10,15 @@
     height: 100%;
     width: 100%;
   }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    .echart{
+      height: 250px !important;
+    }
+  }
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    /deep/ .echart {
+      height: 250px !important;
+    }
+  }
 }

@@ -68,5 +68,11 @@
     }
     
   }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    /deep/ .icon-container {
+      display: none;
+    }
+  }
   
 }
