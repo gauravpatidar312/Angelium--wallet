@@ -25,10 +25,7 @@
   @include ngx-pace-theme();
 };
 
-.pointer {
-  cursor: pointer !important;
-}
-
-.nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{
-  word-break: break-all;
-}
+.pointer { cursor: pointer !important;}
+.nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{ word-break: break-all;}
+.nb-theme-cosmic .tablemarginfix{ margin:0px!important; }
+.nopadd{ padding: 0px!important; }

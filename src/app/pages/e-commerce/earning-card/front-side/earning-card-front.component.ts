@@ -15,6 +15,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   @Input() selectedCurrency: string = 'ANX';
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
+  @Input() livePrice: number = 0;
 
   intervalSubscription: Subscription;
   currencies: string[] = ['ANX', 'HEAVEN'];

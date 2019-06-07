@@ -79,14 +79,14 @@ export class SettingComponent implements OnInit {
   }
 
   openDialog(type: any, value:any) {
-    this.newData(value);
+    this.newData({ 'type': type, 'value': value});
     this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(data => {
-        if (type == 'password' && data!=undefined && data!='') {
+        if (type == 'Change Password' && data!=undefined && data!='') {
           let endpoint = 'password/';
           let apiData = { 'password' : data };
           this.updateSettingPageData(apiData, endpoint);
-        }else if (type == 'country' && data!=undefined && data!='') {
+        }else if (type == 'County' && data!=undefined && data!='') {
           let endpoint = 'country/';
           let apiData = { 'country' : data };
           this.updateSettingPageData(apiData, endpoint);

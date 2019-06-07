@@ -6,6 +6,7 @@ import { NbThemeService } from '@nebular/theme';
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
+  styleUrls: ['./echarts.component.scss'],
 })
 export class EchartsPieComponent implements AfterViewInit, OnDestroy {
   options: any = {};
