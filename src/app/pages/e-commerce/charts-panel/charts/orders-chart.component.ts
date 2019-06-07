@@ -132,6 +132,12 @@ export class OrdersChartComponent implements AfterViewInit, OnDestroy, OnChanges
       series: [
         this.getFirstLine(eTheme),
         this.getSecondLine(eTheme),
+        this.getThirdLine(eTheme),
+        this.getFourLine(eTheme),
+        this.getFiveLine(eTheme),
+        this.getSixLine(eTheme),
+        this.getSevenLine(eTheme),
+        this.getEightLine(eTheme),
       ],
     };
   }
@@ -251,6 +257,226 @@ export class OrdersChartComponent implements AfterViewInit, OnDestroy, OnChanges
           }, {
             offset: 1,
             color: eTheme.thirdAreaGradTo,
+          }]),
+        },
+      },
+      data: [],
+    };
+  }
+
+  getFourLine(eTheme) {
+    return {
+      type: 'line',
+      smooth: true,
+      symbolSize: 20,
+      itemStyle: {
+        normal: {
+          opacity: 0,
+        },
+        emphasis: {
+          color: '#ffffff',
+          borderColor: eTheme.itemBorderColor,
+          borderWidth: 2,
+          opacity: 1,
+        },
+      },
+      lineStyle: {
+        normal: {
+          width: eTheme.lineWidth,
+          type: eTheme.lineStyle,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.fourLineGradTo,
+          }, {
+            offset: 1,
+            color: eTheme.fourLineGradTo,
+          }]),
+        },
+      },
+      areaStyle: {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.fourAreaGradTo,
+          }, {
+            offset: 1,
+            color: eTheme.fourAreaGradTo,
+          }]),
+        },
+      },
+      data: [],
+    };
+  }
+
+  getFiveLine(eTheme) {
+    return {
+      type: 'line',
+      smooth: true,
+      symbolSize: 20,
+      itemStyle: {
+        normal: {
+          opacity: 0,
+        },
+        emphasis: {
+          color: '#ffffff',
+          borderColor: eTheme.itemBorderColor,
+          borderWidth: 2,
+          opacity: 1,
+        },
+      },
+      lineStyle: {
+        normal: {
+          width: eTheme.lineWidth,
+          type: eTheme.lineStyle,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.fiveLineGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.fiveLineGradTo,
+          }]),
+        },
+      },
+      areaStyle: {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.fiveAreaGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.fiveAreaGradTo,
+          }]),
+        },
+      },
+      data: [],
+    };
+  }
+
+  getSixLine(eTheme) {
+    return {
+      type: 'line',
+      smooth: true,
+      symbolSize: 20,
+      itemStyle: {
+        normal: {
+          opacity: 0,
+        },
+        emphasis: {
+          color: '#ffffff',
+          borderColor: eTheme.itemBorderColor,
+          borderWidth: 2,
+          opacity: 1,
+        },
+      },
+      lineStyle: {
+        normal: {
+          width: eTheme.lineWidth,
+          type: eTheme.lineStyle,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.sixLineGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.sixLineGradTo,
+          }]),
+        },
+      },
+      areaStyle: {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.sixAreaGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.sixAreaGradFrom,
+          }]),
+        },
+      },
+      data: [],
+    };
+  }
+
+  getSevenLine(eTheme) {
+    return {
+      type: 'line',
+      smooth: true,
+      symbolSize: 20,
+      itemStyle: {
+        normal: {
+          opacity: 0,
+        },
+        emphasis: {
+          color: '#ffffff',
+          borderColor: eTheme.itemBorderColor,
+          borderWidth: 2,
+          opacity: 1,
+        },
+      },
+      lineStyle: {
+        normal: {
+          width: eTheme.lineWidth,
+          type: eTheme.lineStyle,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.sevenLineGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.sevenLineGradTo,
+          }]),
+        },
+      },
+      areaStyle: {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.sevenAreaGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.sevenAreaGradTo,
+          }]),
+        },
+      },
+      data: [],
+    };
+  }
+
+  getEightLine(eTheme) {
+    return {
+      type: 'line',
+      smooth: true,
+      symbolSize: 20,
+      itemStyle: {
+        normal: {
+          opacity: 0,
+        },
+        emphasis: {
+          color: '#ffffff',
+          borderColor: eTheme.itemBorderColor,
+          borderWidth: 2,
+          opacity: 1,
+        },
+      },
+      lineStyle: {
+        normal: {
+          width: eTheme.lineWidth,
+          type: eTheme.lineStyle,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.eightLineGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.eightLineGradTo,
+          }]),
+        },
+      },
+      areaStyle: {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: eTheme.eightAreaGradFrom,
+          }, {
+            offset: 1,
+            color: eTheme.eightAreaGradTo,
           }]),
         },
       },

@@ -11,9 +11,14 @@ import { takeWhile } from 'rxjs/operators';
 export class ChartPanelHeaderComponent implements OnDestroy {
 
   private alive = true;
-
+  private value = '';
   @Output() periodChange = new EventEmitter<string>();
 
+  @Input('typeData')
+  set typeData(value: string) {
+    this.value = value;
+    this.setLegendItems(this.orderProfitLegend);
+  }
   @Input() type: string = 'today';
 
   types: string[] = ['today', 'week', 'month', 'total'];
@@ -21,16 +26,17 @@ export class ChartPanelHeaderComponent implements OnDestroy {
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
   currentTheme: string;
+  orderProfitLegend: any;
 
   constructor(private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
-        const orderProfitLegend = theme.variables.orderProfitLegend;
+         this.orderProfitLegend = theme.variables.orderProfitLegend;
 
         this.currentTheme = theme.name;
-        this.setLegendItems(orderProfitLegend);
+        this.setLegendItems(this.orderProfitLegend);
       });
 
       this.breakpoints = this.breakpointService.getBreakpointsMap();
@@ -42,16 +48,49 @@ export class ChartPanelHeaderComponent implements OnDestroy {
   }
 
   setLegendItems(orderProfitLegend) {
-    this.chartLegend = [
-      {
-        iconColor: orderProfitLegend.firstItem,
-        title: 'ANX',
-      },
-      {
-        iconColor: orderProfitLegend.secondItem,
-        title: 'HEAVEN',
-      },
-    ];
+    if (this.value === 'assets') {
+      this.chartLegend = [
+        {
+          iconColor: orderProfitLegend.firstItem,
+          title: 'ANX',
+        },
+        {
+          iconColor: orderProfitLegend.secondItem,
+          title: 'HEAVEN',
+        },
+        {
+          iconColor: orderProfitLegend.thirdItem,
+          title: 'ANL',
+        },
+        {
+          iconColor: orderProfitLegend.fourItem,
+          title: 'XP',
+        },
+        {
+          iconColor: orderProfitLegend.fiveItem,
+          title: 'BTC',
+        },
+        {
+          iconColor: orderProfitLegend.sixItem,
+          title: 'ETH',
+        },
+        {
+          iconColor: orderProfitLegend.sevenItem,
+          title: 'USDT',
+        },
+        {
+          iconColor: orderProfitLegend.eightItem,
+          title: 'ANLP',
+        },
+      ];
+    } else {
+      this.chartLegend = [
+        {
+          iconColor: orderProfitLegend.firstItem,
+          title: 'ANX',
+        },
+      ];
+    }
   }
 
   changePeriod(period: string): void {

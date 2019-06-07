@@ -144,7 +144,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
           },
           data: this.profitChartData.data[0],
         },
-        {
+       /* {
           name: 'Heaven',
           type: 'line',
           itemStyle: {
@@ -183,7 +183,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
             },
           },
           data: this.profitChartData.data[1],
-        },
+        },*/
       ],
     };
   }

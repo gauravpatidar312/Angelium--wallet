@@ -180,6 +180,46 @@ export const DEFAULT_THEME = {
       thirdAreaGradFrom: 'rgba(31 ,106, 124, 0.2)',
       thirdAreaGradTo: 'rgba(4, 126, 230, 0)',
       thirdShadowLineDarkBg: 'rgba(0, 0, 0, 0)',
+
+      // four line
+      fourLineGradFrom: 'rgba(169, 145, 229, 0.8)',
+      fourLineGradTo: 'rgba(169, 145, 229, 0.8)',
+
+      fourAreaGradFrom: 'rgba(161, 161, 229, 0.2)',
+      fourAreaGradTo: 'rgba(161, 161, 229, 0.2)',
+      fourShadowLineDarkBg: 'rgba(0, 0, 0, 0)',
+
+      // five line
+      fiveLineGradFrom: 'rgba(29, 94, 133, 0.8)',
+      fiveLineGradTo: 'rgba(29, 94, 133, 0.8)',
+
+      fiveAreaGradFrom: 'rgba(44, 90, 133, 0.2)',
+      fiveAreaGradTo: 'rgba(44, 90, 133, 0.2)',
+      fiveShadowLineDarkBg: 'rgba(0, 0, 0, 0)',
+
+      // six line
+      sixLineGradFrom: 'rgba(7, 206, 195, 0.8)',
+      sixLineGradTo: 'rgba(7, 206, 195, 0.8)',
+
+      sixAreaGradFrom: 'rgba(9,190,206, 0.2)',
+      sixAreaGradTo: 'rgba(9,190,206, 0.2)',
+      sixShadowLineDarkBg: 'rgba(0, 0, 0, 0)',
+
+      // seven line
+      sevenLineGradFrom: 'rgba(255, 117, 85, 0.8)',
+      sevenLineGradTo: 'rgba(255, 117, 85, 0.8)',
+
+      sevenAreaGradFrom: 'rgba(255, 137, 74, 0.2)',
+      sevenAreaGradTo: 'rgba(255, 137, 74, 0.2)',
+      sevenShadowLineDarkBg: 'rgba(0, 0, 0, 0)',
+
+      // eight line
+      eightLineGradFrom: 'rgba(255, 223, 94, 0.8)',
+      eightLineGradTo: 'rgba(255, 223, 94, 0.8)',
+
+      eightAreaGradFrom: 'rgba(255, 204, 16, 0.2)',
+      eightAreaGradTo: 'rgba(255, 204, 16, 0.2)',
+      eightShadowLineDarkBg: 'rgba(0, 0, 0, 0)',
     },
 
     // TODO: need design for default theme
@@ -213,6 +253,11 @@ export const DEFAULT_THEME = {
       firstItem: 'linear-gradient(90deg, #3edd81 0%, #3bddad 100%)',
       secondItem: 'linear-gradient(90deg, #8d7fff 0%, #b17fff 100%)',
       thirdItem: 'rgba(236, 242, 245, 0.8)',
+      fourItem: '#a1a1e5',
+      fiveItem: '#2c5a85',
+      sixItem: '#00bece',
+      sevenItem: '#ff894a',
+      eightItem: '#ffcc10',
     },
 
     visitors: {

@@ -210,6 +210,11 @@ export const CORPORATE_THEME = {
       firstItem: '#719efc',
       secondItem: '#5dcfe3',
       thirdItem: '#e3ecfe',
+      fourItem: '#a1a1e5',
+      fiveItem: '#2c5a85',
+      sixItem: '#00bece',
+      sevenItem: '#ff894a',
+      eightItem: '#ffcc10',
     },
 
     visitors: {
