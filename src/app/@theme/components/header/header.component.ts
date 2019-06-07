@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   userMenu = [{ title: 'Profile', link: '/pages/setting' }, { title: 'Log out' }];
 
   anxValue;
-
+  myEarning;
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserData,
@@ -62,11 +62,18 @@ export class HeaderComponent implements OnInit {
       }
     });
     this.getANXValue();
+    this.getMyEarning();
   }
 
   getANXValue() {
     this.httpService.get('anx-price/').subscribe(data => {
       this.anxValue = data.anx_price;
+    });
+  }
+
+  getMyEarning(){
+    this.httpService.get('my-earning/').subscribe(data => {
+      this.myEarning = data.total;
     });
   }
 
