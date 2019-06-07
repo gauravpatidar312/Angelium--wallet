@@ -38,7 +38,7 @@
                 <tr>
                   <td class="title-col">COUNTRY</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
-                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('country', userData?.country)"></i></td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('County', userData?.country)"></i></td>
                 </tr>
                 <tr>
                   <td class="title-col">PHONE</td>
@@ -81,7 +81,7 @@
                 <td class="value-col">
                   **********
                 </td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('password', '')"></i></td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
               </tr>
               <tr *ngIf="!production">
                 <td class="title-col">2FA</td>
@@ -95,7 +95,7 @@
               </tr>
               <tr *ngIf="!production">
                 <td class="title-col">KYC</td>
-                <td class="value-col">Complete</td>
+                <td class="value-col">Completed</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
               </tr>
               <tr *ngIf="!production">
@@ -266,6 +266,22 @@
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Upload</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #dialogAgeConfrm let-data let-refage="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      Age Confirmation
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <p>Are you really over 18?</p>
+      <nb-radio value="true">YES</nb-radio>
+      <nb-radio value="false">NO</nb-radio>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Confirm</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
