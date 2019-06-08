@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AngelComponent } from './angel.component';
+import { RewardComponent } from './reward.component';
 import { EarningCardComponent } from './earning-card/earning-card.component';
 import { EarningCardBackComponent } from './earning-card/back-side/earning-card-back.component';
 import { EarningCardFrontComponent } from './earning-card/front-side/earning-card-front.component';
@@ -26,7 +26,8 @@ import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/c
 import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
 
 @NgModule({
-  declarations: [AngelComponent,
+  declarations: [
+    RewardComponent,
     EarningCardComponent,
     EarningCardBackComponent,
     EarningCardFrontComponent,
@@ -57,4 +58,4 @@ import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.compo
     LeafletModule.forRoot(),
   ]
 })
-export class AngelModule { }
+export class RewardModule { }

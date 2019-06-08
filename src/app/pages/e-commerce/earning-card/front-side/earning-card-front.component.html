@@ -23,7 +23,7 @@
         <div class="text-daily text-right text-default">{{ quantity }}</div>
       </div>
     </div>
-    <div class="value">{{tokenName}} = $ 0</div>
+    <div class="value">{{tokenName}} = $ {{livePrice | number : '1.2-2' }}</div>
     <div class="delta"
          [class.up]="earningLiveUpdateCardData.delta.up"
          [class.down]="!earningLiveUpdateCardData.delta.up">

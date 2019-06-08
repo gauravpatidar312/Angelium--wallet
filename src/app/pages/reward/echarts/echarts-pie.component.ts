@@ -3,6 +3,7 @@ import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-echarts-pie',
+  styleUrls: ['./echarts-comman.component.scss'],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
@@ -27,6 +28,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)',
         },
+        responsive: true,
         legend: {
           orient: 'vertical',
           left: 'left',

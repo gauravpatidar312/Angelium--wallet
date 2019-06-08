@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserData } from '../../../@core/data/users';
@@ -8,13 +8,15 @@ import { HttpService } from "../../../services/http.service";
 import { ShareDataService } from "../../../services/share-data.service";
 import { AuthService } from '../../../_guards/auth.service';
 import { SessionStorageService } from "../../../services/session-storage.service";
+import { Router } from '@angular/router';
+declare let $: any;
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   userData: any;
   @Input() position = 'normal';
 
@@ -23,7 +25,7 @@ export class HeaderComponent implements OnInit {
   userMenu = [{ title: 'Profile', link: '/pages/setting' }, { title: 'Log out' }];
 
   anxValue;
-
+  myEarning;
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserData,
@@ -33,7 +35,8 @@ export class HeaderComponent implements OnInit {
               private authService: AuthService,
               private httpService: HttpService,
               private shareDataService: ShareDataService,
-              private sessionStorage: SessionStorageService) {
+              private sessionStorage: SessionStorageService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -62,11 +65,37 @@ export class HeaderComponent implements OnInit {
       }
     });
     this.getANXValue();
+    this.getMyEarning();
+    this.getTotalAssetsValue();
+  }
+
+  ngAfterViewInit() {
+    $('.notificationCalender').click(() => {
+      let el = $('#notifyCalender');
+      if (el.length > 0) {
+        el[0].scrollIntoView();
+      } else {
+        this.shareDataService.showNotification = true;
+        this.router.navigate(['pages/dashboard']);
+      }
+    });
   }
 
   getANXValue() {
     this.httpService.get('anx-price/').subscribe(data => {
       this.anxValue = data.anx_price;
+    });
+  }
+
+  getMyEarning(){
+    this.httpService.get('my-earning/').subscribe(data => {
+      this.myEarning = data.total;
+    });
+  }
+
+  getTotalAssetsValue() {
+    this.httpService.get('anx-live-price/').subscribe(data => {
+      console.log('Data ', data);
     });
   }
 

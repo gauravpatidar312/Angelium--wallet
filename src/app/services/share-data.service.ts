@@ -7,6 +7,7 @@ export class ShareDataService {
   private messageSource = new BehaviorSubject<any>('');
   currentData = this.messageSource.asObservable();
 
+  showNotification = false;
   constructor() { }
 
   changeData(data: any) {

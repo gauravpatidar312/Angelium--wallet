@@ -30,11 +30,11 @@ export interface downlineElement {
 }
 
 @Component({
-  selector: 'ngx-angel',
-  templateUrl: './angel.component.html',
-  styleUrls: ['./angel.component.scss']
+  selector: 'ngx-reward',
+  templateUrl: './reward.component.html',
+  styleUrls: ['./reward.component.scss']
 })
-export class AngelComponent implements OnInit, AfterViewInit {
+export class RewardComponent implements OnInit, AfterViewInit {
 
   private alive = true;
   currentTheme: string;

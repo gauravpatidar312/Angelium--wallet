@@ -18,7 +18,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     data: ['user'],
     title: 'Reward',
     icon: 'nb-lightbulb',
-    link: '',
+    link: '/pages/reward',
   },
   {
     hidden: environment.production,
