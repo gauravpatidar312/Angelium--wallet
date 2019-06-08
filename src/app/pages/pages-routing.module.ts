@@ -1,4 +1,4 @@
-import { AngelComponent } from './angel/angel.component';
+import { RewardComponent } from './reward/reward.component';
 import { HQComponent } from './hq/hq.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -73,9 +73,10 @@ const routes: Routes = [{
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-  },{
-    path: 'angel',
-    component: AngelComponent,
+  },
+  {
+    path: 'reward',
+    component: RewardComponent,
   },
   {
     path: 'hq',

@@ -59,6 +59,16 @@
     color: nb-theme(color-fg-heading);
   }
 
+  .ernpercentage {
+    float: right;
+  }
+
+  .caretSummary {
+    color: #25d786;
+    padding-right: 0.4rem;
+    font-size: 20px;
+  }
+
   @include media-breakpoint-down(sm) {
     .value, .title {
       font-weight: nb-theme(font-weight-bold);
@@ -81,6 +91,15 @@
 
     .value {
       margin-top: 0.5rem;
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    .value {
+      font-size: 1rem;
+    }
+    .caretSummary {
+      float: left;
     }
   }
 }
