@@ -3,8 +3,8 @@
     <ngx-legend-chart [legendItems]="chartLegend"></ngx-legend-chart>
   </div>
 
-  <div class="dropdown col-lg-3 col-xl-3 col-md-3 col-sm-12"
-       [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+  <div class=" col-lg-3 col-xl-3 col-md-3 col-sm-12">
+     <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
        ngbDropdown>
     <button type="button" ngbDropdownToggle class="btn"
             [ngClass]="{
@@ -19,4 +19,5 @@
       </li>
     </ul>
   </div>
+</div>
 </div>
