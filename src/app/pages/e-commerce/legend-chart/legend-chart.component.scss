@@ -35,6 +35,7 @@
   .legend-title {
     padding: 0 0.75rem;
     white-space: nowrap;
+    width: 90px;
   }
 
   @include media-breakpoint-down(md) {

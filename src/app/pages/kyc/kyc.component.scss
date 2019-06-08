@@ -1,4 +1,5 @@
 @import '/../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
   /deep/ nb-stepper .step-content {
@@ -19,3 +20,10 @@
   font-size: 25px;
 }
 .nb-theme-cosmic [nbButton]{    padding: 1.0rem 1.5rem;}
+
+@include media-breakpoint-down(sm) {
+  .kyc-margin {
+    margin-top: 10px;
+  }
+}
+

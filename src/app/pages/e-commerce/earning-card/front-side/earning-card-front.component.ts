@@ -3,6 +3,7 @@ import { NbThemeService } from '@nebular/theme';
 import { interval, Subscription } from 'rxjs';
 import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -17,14 +18,28 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   @Input() quantity: number = 0;
 
   intervalSubscription: Subscription;
-  currencies: string[] = ['ANX', 'HEAVEN'];
+  currencyType: any = {
+    'ANX': ['OTC'],
+    'HEAVEN': ['HEAVEN'],
+    'BTC': ['SEND'],
+    'ETH': ['SEND'],
+    'USDT': ['SEND'],
+  };
+  currencies: any = {
+    'ANX': ['OTC'],
+    'HEAVEN': ['HEAVEN'],
+    'BTC': ['SEND', 'RECEIVE', 'HEAVEN'],
+    'ETH': ['SEND', 'RECEIVE', 'HEAVEN'],
+    'USDT': ['SEND', 'RECEIVE', 'HEAVEN'],
+  };
   currentTheme: string;
   tokenName: string;
   earningLiveUpdateCardData: LiveUpdateChart;
   liveUpdateChartData: { value: [string, number] }[];
 
   constructor(private themeService: NbThemeService,
-    private earningService: EarningData) {
+    private earningService: EarningData,
+    private router: Router) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -48,13 +63,14 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     this.getEarningCardData(this.selectedCurrency);
   }
 
-  // changeCurrency(currency) {
-  //   if (this.selectedCurrency !== currency) {
-  //     this.selectedCurrency = currency;
-
-  //     this.getEarningCardData(this.selectedCurrency);
-  //   }
-  // }
+  changeCurrency(currency) {
+    if (currency === 'SEND' || currency === 'RECEIVE') {
+      this.router.navigate(['/pages/transfer']);
+    }
+    else if (currency === 'HEAVEN') {
+      this.router.navigate(['pages/heaven']);
+    }
+  }
 
   private getEarningCardData(currency) {
     this.earningService.getEarningCardData(currency)

@@ -68,17 +68,17 @@
         <nb-tab tabTitle="Receive">
           <form class="mt-5 transfer-form receive-form">
             <div class="row m-0">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 display-sm-up"></div>
+              <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center display-sm-up p-0">
+                <div class="form-group mt-4">
+                  <div class="arrowtransfer"><i class="fas fa-arrow-right"></i></div>
+                </div>
+              </div>
               <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center p-0">
-                    <div class="form-group mt-4">
-                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                  </div>
                   <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="form-group">
-                      <label for="BTC" class="text-link">From</label>
+                      <label for="BTC" class="text-link">To</label>
                       <nb-select class="status-dd-week" placeholder="BTC">
                         <nb-option value="1">BTC</nb-option>
                         <nb-option value="2">ETH</nb-option>
@@ -91,6 +91,11 @@
                       <label for="Amount" class="text-link">Amount</label>
                       <input type="text" class="form-control" placeholder="Amount" value="0.1313">
                       <span>$1245</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 display-sm-down text-center p-0">
+                    <div class="form-group mt-4">
+                      <div class="arrowtransfer"><i class="fas fa-arrow-up"></i></div>
                     </div>
                   </div>
                 </div>
@@ -140,7 +145,8 @@
                   </div>
                   <div class="col-lg-1 col-md-1 col-sm-12 text-center p-0">
                     <div class="form-group mt-4">
-                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                      <div class="arrowtransfer display-sm-up"><i class="fas fa-arrow-right"></i></div>
+                      <div class="arrowtransfer display-sm-down"><i class="fas fa-arrow-down"></i></div>
                     </div>
                   </div>
                   <div class="col">
