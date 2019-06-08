@@ -1,6 +1,7 @@
 @import '../../styles/themes';
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
+@import '~@nebular/theme/styles/global/typography/typography';
 :host nb-layout-column {
       height: 50vw;
     }
@@ -14,6 +15,45 @@
     }
 @include nb-install-component() {
   
+  .deltacss {
+    position: relative;
+    padding-left: 10px;
+  }
+
+  /deep/ .delta {
+    position: absolute;
+    display: inline-block;
+    color: #b5b5b5;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    top: 0px;
+    left: 5px;
+    @include nb-rtl(left, 1.25rem);
+    @include nb-rtl(right, inherit);
+
+    &::before {
+      position: absolute;
+      content: '';
+      right: 100%;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    &.down {
+      &::before {
+        bottom: 4px;
+        border-top: 7px solid text-danger();
+      }
+    }
+
+    &.up {
+      &::before {
+        top: 4px;
+        border-bottom: 7px solid text-success();
+      }
+    }
+  }
+
   display: flex;
   justify-content: space-between;
   width: 100%;

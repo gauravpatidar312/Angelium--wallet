@@ -10,14 +10,19 @@
     padding: 0 0 0 2.85rem;
   }
 
-  .legend {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-left: 1rem;
+  .legends {
+    display: block !important;
 
-    &:first-child {
-      margin-left: 0;
+    .legend {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 0;
+      float: left;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 
@@ -34,7 +39,7 @@
 
   @include media-breakpoint-down(md) {
     .legend {
-      margin-left: 2rem;
+      margin-left: 0;
     }
   }
 }

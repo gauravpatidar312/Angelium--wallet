@@ -1,4 +1,4 @@
-import { AngelModule } from './angel/angel.module';
+import { RewardModule } from './reward/reward.module';
 // import { HeavenModule } from './heaven/heaven.module';
 import { HQModule } from './hq/hq.module';
 import { NgModule } from '@angular/core';
@@ -30,7 +30,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-    AngelModule,
+    RewardModule,
     Ng2SmartTableModule,
     // HeavenModule,
     ImageCropperModule,

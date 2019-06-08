@@ -45,7 +45,7 @@
   <div class="col-xxl-12">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6 col-12" *ngFor="let currency of cryptoBalance;">
-        <ngx-earning-card [selectedCurrency]="currency.type" [amount]="currency.amount" [quantity]="currency.quantity"></ngx-earning-card>
+        <ngx-earning-card [selectedCurrency]="currency.type" [amount]="currency.amount" [quantity]="currency.quantity" [livePrice]="currency.livePrice ? currency.livePrice : 0"></ngx-earning-card>
       </div>
       <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr2">
         <ngx-earning-card [selectedCurrency]="'HEAVEN'"></ngx-earning-card>
@@ -104,7 +104,7 @@
 </div>
 
 <div class="row mb-4">
-  <div class="nebular-calendar col-xl-4 col-lg-4 col-md-12 col-sm-12">
+  <div class="nebular-calendar col-xl-4 col-lg-4 col-md-12 col-sm-12" id="notifyCalender">
     <nb-calendar [boundingMonth]="true"></nb-calendar>
   </div>
   <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
@@ -119,13 +119,13 @@
           </div>
           <div class="col-4 text-right"><span class="article-date">May 1, 2019</span></div>
         </div>
-        <p class="article-text text-indent pt-1">
+        <p class="article-text pt-1">
           Far far away, behind the word mountains, far from the countries <strong>Vokalia</strong> and
           <strong>Consonantia</strong>,
           there live the blind texts.
           They live in <strong>Bookmarksgrove</strong>.
         </p>
-        <p class="article-text text-indent pt-1">
+        <p class="article-text pt-1">
           A small <strong>river named Duden</strong> flows by their place and supplies it with the
           necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly
           into your mouth.

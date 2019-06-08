@@ -243,6 +243,11 @@ export const COSMIC_THEME = {
       firstItem: 'linear-gradient(90deg, #00c7c7 0%, #00d977 100%)',
       secondItem: 'linear-gradient(90deg, #a454ff 0%, #7659ff 100%)',
       thirdItem: '#4e40a4',
+      fourItem: '#a1a1e5',
+      fiveItem: '#2c5a85',
+      sixItem: '#00bece',
+      sevenItem: '#ff894a',
+      eightItem: '#ffcc10',
     },
 
     visitors: {
