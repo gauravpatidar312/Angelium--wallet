@@ -1,9 +1,12 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
+import { ShareDataService } from '../../services/share-data.service';
+declare let $:any;
+
 interface CardSettings {
   title: string;
   value: number;
@@ -23,7 +26,7 @@ interface CryptoBalance {
   styleUrls: ['./e-dashboard.component.scss'],
   templateUrl: './e-commerce.component.html',
 })
-export class ECommerceComponent implements OnDestroy {
+export class ECommerceComponent implements AfterViewInit,OnDestroy {
   private alive = true;
 
   cryptoBalance: CryptoBalance[] = [];
@@ -72,7 +75,8 @@ export class ECommerceComponent implements OnDestroy {
   constructor(private themeService: NbThemeService,
     private solarService: SolarData,
     private httpService: HttpService,
-    private sessionStorage: SessionStorageService) {
+    private sessionStorage: SessionStorageService,
+    private shareDataService: ShareDataService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
 
     this.themeService.getJsTheme()
@@ -94,9 +98,21 @@ export class ECommerceComponent implements OnDestroy {
     this.getTotalinvestmentData();
   }
 
+  ngAfterViewInit(){
+      if (this.shareDataService.showNotification) {
+        setTimeout(() => {
+          this.shareDataService.showNotification = false;
+          let el = $('#notifyCalender');
+          if (el.length > 0) {
+            el[0].scrollIntoView();
+          }
+        }, 700);
+     }
+  }
+
   getNotification() {
     this.httpService.get('dashboard-notification/').subscribe(data => {
-      console.log('Notify ', data);
+      // console.log('Notify ', data);
     });
   }
 
@@ -117,13 +133,13 @@ export class ECommerceComponent implements OnDestroy {
           return balance;
         });
       });
-      console.log('cryptoBalance with live price', this.cryptoBalance);
+      // console.log('cryptoBalance with live price', this.cryptoBalance);
     });
   }
 
   getAssetsData() {
     this.httpService.get('my-assets/').subscribe(data => {
-      console.log('Assets ', data);
+      // console.log('Assets ', data);
     });
   }
 
@@ -131,7 +147,7 @@ export class ECommerceComponent implements OnDestroy {
     this.httpService.get('total-investment/').subscribe(data => {
       if (data.hasOwnProperty('investment')) {
         this.gainCard.value = data.investment;
-        console.log('total-investment ', data);
+        // console.log('total-investment ', data);
       }
     });
   }
