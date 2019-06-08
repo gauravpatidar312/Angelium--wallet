@@ -67,7 +67,6 @@
     text-align: center;
   }
   .arrowtransfer {
-    display: inline;
     font-size: 2.6em;
     margin-top: 0.5em;
     color: #14ffbe;
@@ -126,6 +125,14 @@
   }
 }
 
+.display-sm-up {
+  display: block;
+}
+
+.display-sm-down {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .transfer-form {
     margin-bottom: 30px;
@@ -133,5 +140,13 @@
     .row {
       display: block;
     }
+  }
+
+  .display-sm-up {
+    display: none;
+  }
+
+  .display-sm-down {
+    display: block;
   }
 }
