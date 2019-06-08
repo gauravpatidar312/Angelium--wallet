@@ -106,7 +106,7 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
           if (el.length > 0) {
             el[0].scrollIntoView();
           }
-        }, 700);
+        }, 800);
      }
   }
 
