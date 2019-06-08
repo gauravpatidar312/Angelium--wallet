@@ -10,4 +10,10 @@
     height: 100%;
     width: 100%;
   }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    .echart{
+      height: 250px !important;
+    }
+  }
 }

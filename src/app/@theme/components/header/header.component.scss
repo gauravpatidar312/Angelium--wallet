@@ -17,6 +17,7 @@
   
   .deltacss {
     position: relative;
+    padding-left: 10px;
   }
 
   /deep/ .delta {
@@ -26,7 +27,7 @@
     padding-right: 0.5rem;
     font-size: 1rem;
     top: 0px;
-    left: -5px;
+    left: 5px;
     @include nb-rtl(left, 1.25rem);
     @include nb-rtl(right, inherit);
 
