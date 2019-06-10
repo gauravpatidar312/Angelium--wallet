@@ -11,10 +11,9 @@ import { HttpService } from "../../services/http.service";
 import { ShareDataService } from "../../services/share-data.service";
 import { SessionStorageService } from "../../services/session-storage.service";
 import { environment } from "../../../environments/environment";
+import Swal from 'sweetalert2';
 
 export let browserRefresh = false;
-
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-setting',

@@ -48,7 +48,9 @@
                 <tr>
                   <td class="title-col">REFFERAL LINK</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
-                  <td class="action-col"></td>
+                  <td class="action-col">
+                    <i ngxClipboard [cbContent]="userData?.referral_link" class="ion-document fa-2x"></i>
+                  </td>
                 </tr>
                 <tr>
                   <td class="title-col">LEVEL</td>
@@ -104,7 +106,7 @@
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col" (click)="sweetAlert()" >R-18 MODE</td>
+                <td class="title-col">R-18 MODE</td>
                 <td class="value-col iconpaddfix">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
