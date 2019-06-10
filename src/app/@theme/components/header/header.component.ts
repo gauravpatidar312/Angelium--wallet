@@ -24,19 +24,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   userMenu = [{ title: 'Profile', link: '/pages/setting' }, { title: 'Log out' }];
 
+  totalAnxLiveValue = 0;
   anxValue;
   myEarning;
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private userService: UserData,
-              private analyticsService: AnalyticsService,
-              private layoutService: LayoutService,
-              private nbMenuService: NbMenuService,
-              private authService: AuthService,
-              private httpService: HttpService,
-              private shareDataService: ShareDataService,
-              private sessionStorage: SessionStorageService,
-              private router: Router) {
+    private menuService: NbMenuService,
+    private userService: UserData,
+    private analyticsService: AnalyticsService,
+    private layoutService: LayoutService,
+    private nbMenuService: NbMenuService,
+    private authService: AuthService,
+    private httpService: HttpService,
+    private shareDataService: ShareDataService,
+    private sessionStorage: SessionStorageService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -87,7 +88,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getMyEarning(){
+  getMyEarning() {
     this.httpService.get('my-earning/').subscribe(data => {
       this.myEarning = data.total;
     });
@@ -96,6 +97,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   getTotalAssetsValue() {
     this.httpService.get('anx-live-price/').subscribe(data => {
       console.log('Data ', data);
+      if (data) {
+        if (data.hasOwnProperty('EOS')) {
+          delete data.EOS;
+        }
+        if (data.hasOwnProperty('BTC')) {
+          this.totalAnxLiveValue += data.BTC;
+        }
+        if (data.hasOwnProperty('ETH')) {
+          this.totalAnxLiveValue += data.ETH;
+        }
+        if (data.hasOwnProperty('USDT')) {
+          this.totalAnxLiveValue += data.USDT;
+        }
+      }
     });
   }
 
