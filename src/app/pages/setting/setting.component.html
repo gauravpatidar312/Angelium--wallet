@@ -38,7 +38,7 @@
                 <tr>
                   <td class="title-col">COUNTRY</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
-                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('County', userData?.country)"></i></td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
                   <td class="title-col">PHONE</td>
@@ -86,38 +86,38 @@
               <tr *ngIf="!production">
                 <td class="title-col">2FA</td>
                 <td class="value-col">**********</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr *ngIf="!production">
                 <td class="title-col">SECRET KEY</td>
                 <td class="value-col">**********</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr *ngIf="!production">
                 <td class="title-col">KYC</td>
-                <td class="value-col">Completed</td>
+                <td class="value-col">Pending</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
               </tr>
               <tr *ngIf="!production">
                 <td class="title-col">CURRENCY</td>
                 <td class="value-col">US$</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr *ngIf="!production">
                 <td class="title-col">LANGUAGE</td>
                 <td>English</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">R-18 MODE</td>
+                <td class="title-col" (click)="sweetAlert()" >R-18 MODE</td>
                 <td class="value-col iconpaddfix">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
+                    <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
                       (click)="r18mode(false)">
                       <input type="radio" name="options"> 
                       OFF
                     </label>
-                    <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
+                    <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? 'active': ''}}"
                       (click)="r18mode(true)">
                       <input type="radio" name="options"> ON
                     </label>
@@ -266,22 +266,6 @@
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Upload</button>
-    </nb-card-footer>
-  </nb-card>
-</ng-template>
-
-<ng-template #dialogAgeConfrm let-data let-refage="dialogRef">
-  <nb-card>
-    <nb-card-header>
-      Age Confirmation
-    </nb-card-header>
-    <nb-card-body class="image-scoll-card-body">
-      <p>Are you really over 18?</p>
-      <nb-radio value="true">YES</nb-radio>
-      <nb-radio value="false">NO</nb-radio>
-    </nb-card-body>
-    <nb-card-footer>
-      <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Confirm</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
