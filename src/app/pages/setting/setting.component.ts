@@ -80,19 +80,20 @@ export class SettingComponent implements OnInit {
         this.r18modeSwitchText = false;
         let data = { "r18mode": false };
         this.updateR18mode(data);
+      }else if (result.dismiss === Swal.DismissReason.backdrop) {
+        this.r18modeSwitchText = !this.r18modeSwitchText;
       }
     });
   }
 
   updateR18mode(data: any){
     this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
-      console.log(res);
       if (res.status) {
         this.sessionStorage.updateFromSession('userInfo', data);
         if (data.r18mode) {
-          Swal.fire( '', 'R-18 mode enabled.', 'success')
+          this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE ENABLED');
         }else{
-          Swal.fire('', 'R-18 mode disabled', 'info')
+          this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE DISABLED');
         }
       }
     });
