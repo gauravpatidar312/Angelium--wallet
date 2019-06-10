@@ -55,11 +55,6 @@
                   <td class="value-col">{{'Lv. ' + userData?.level}}</td>
                   <td class="action-col"></td>
                 </tr>
-                <tr class="spacer">
-                  <td class="title-col">USER ID</td>
-                  <td class="value-col">{{userData?.id}}</td>
-                  <td class="action-col"></td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -83,27 +78,27 @@
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">2FA</td>
                 <td class="value-col">**********</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">SECRET KEY</td>
                 <td class="value-col">**********</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">KYC</td>
                 <td class="value-col">Pending</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">CURRENCY</td>
                 <td class="value-col">US$</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">LANGUAGE</td>
                 <td>English</td>
                 <td class="action-col iconpaddfix"></td>
@@ -114,7 +109,7 @@
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
                       (click)="r18mode(false)">
-                      <input type="radio" name="options"> 
+                      <input type="radio" name="options">
                       OFF
                     </label>
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? 'active': ''}}"
@@ -125,11 +120,11 @@
                 </td>
                 <td class="action-col"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">MERGE</td>
                 <td>Merge your old data</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge"></i></td>
-              </tr> 
+              </tr>
             </tbody>
           </table>
         </div>

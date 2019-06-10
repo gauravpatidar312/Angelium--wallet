@@ -8,20 +8,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/dashboard',
   },
   {
-    hidden: environment.production,
     title: 'Heaven',
     icon: 'nb-star',
     link: '/pages/heaven',
   },
   {
-    hidden: environment.production,
     data: ['user'],
     title: 'Reward',
     icon: 'nb-lightbulb',
     link: '/pages/reward',
   },
   {
-    hidden: environment.production,
     data: ['admin', 'company'],
     title: 'Reward',
     icon: 'nb-lightbulb',
@@ -43,7 +40,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    hidden: environment.production,
     title: 'Transfer',
     icon: 'nb-shuffle',
     link: '/pages/transfer',
@@ -54,7 +50,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/setting',
   },
   {
-    hidden: environment.production,
     data: ['admin'],
     title: 'HQ',
     icon: 'nb-person',
