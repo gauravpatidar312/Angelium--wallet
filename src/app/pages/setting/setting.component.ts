@@ -85,6 +85,33 @@ export class SettingComponent implements OnInit {
     });
   }
 
+  downloadQR(){
+    let QR_Canvas = document.getElementById("QR_Canvas");
+    let imgBase64 = QR_Canvas.children[0].children[0]['src'];
+    let base64 = imgBase64.replace('data:image/png;base64,','');
+    
+    let byteCharacters = atob(base64);
+
+    let byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    let blob = new Blob([byteArray], {"type": "image/png"});
+    if(navigator.msSaveBlob){
+      let filename = 'qrcode';
+      navigator.msSaveBlob(blob, filename);
+    } else {
+      let link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('visibility','hidden');
+      link.download = 'qrcode';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
   updateR18mode(data: any){
     this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
       if (res.status) {

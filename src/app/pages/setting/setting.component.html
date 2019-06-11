@@ -48,9 +48,10 @@
                 <tr>
                   <td class="title-col">REFFERAL LINK</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
-                  <td class="action-col">
+                  <td class="action-col text-center">
                     <i ngxClipboard [cbContent]="userData?.referral_link" 
-                      class="ion-document ref-link-icon fa-2x"></i>
+                      class="fa fa-clone ref-link-icon fa-2x"></i>&nbsp;
+                    <i class="ion-archive ref-link-icon fa-2x" (click)="open(QRdialog)"></i>
                   </td>
                 </tr>
                 <tr>
@@ -264,6 +265,26 @@
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Upload</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #QRdialog let-data let-refQR="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      QR Code  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <ngx-qrcode 
+        id="QR_Canvas"
+        [qrc-element-type]="elementType" 
+        [qrc-value]="userData?.referral_link"
+        qrc-class="aclass"
+        qrc-errorCorrectionLevel="L">
+      </ngx-qrcode>
+    </nb-card-body>
+    <nb-card-footer class="text-center">
+      <button nbButton size="small" (click)="downloadQR()">Download</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
