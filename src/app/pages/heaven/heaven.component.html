@@ -30,19 +30,19 @@
 			</div>
 			<div class="details">
 				<label>Heaven drop</label>
-				<label class="bigger-text"><span>$</span> 572,900</label>
+				<label class="bigger-text"><span>$</span> {{heavenDrop?.total_amount}}</label>
 			</div>
 			<div class="actions flex-end text-right">
-				<span class="progress-data-value"><span class="color-green">45895</span> ANX</span>
+				<span class="progress-data-value"><span class="color-green">{{heavenDrop?.total_anx}}</span> ANX</span>
 				<nb-select class="slct" placeholder="Week">
 					<nb-option value="1">Week</nb-option>
 					<nb-option value="2">Month</nb-option>
 					<nb-option value="3">Year</nb-option>
 				</nb-select>
 				<div class="progress-data">
-					<div class="delta value up"> 4% </div>
+					<div class="delta value up"> {{heavenDrop?.parcentage}}% </div>
 					<div class="progress-container">
-						<div class="progress-value " style="width: 70%;"></div>
+						<div class="progress-value " [style.width.%]="heavenDrop?.parcentage"></div>
 					</div>
 				</div>
 

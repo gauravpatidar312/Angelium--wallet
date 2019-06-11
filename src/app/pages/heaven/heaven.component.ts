@@ -3,6 +3,7 @@ import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@n
 import { takeWhile } from 'rxjs/operators';
 import { LocalDataSource } from 'ng2-smart-table';
 
+import { HttpService } from "../../services/http.service";
 import { SmartTableData } from '../../@core/data/smart-table';
 
 @Component({
@@ -12,6 +13,7 @@ import { SmartTableData } from '../../@core/data/smart-table';
 })
 export class HeavenComponent {
   private alive = true;
+  heavenDrop: any;
 
   @Output() periodChange = new EventEmitter<string>();
 
@@ -75,7 +77,7 @@ export class HeavenComponent {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData, private themeService: NbThemeService,
-    private breakpointService: NbMediaBreakpointsService) {
+    private breakpointService: NbMediaBreakpointsService, private httpService: HttpService) {
     // const data = this.service.getData();
     const data = [{
       id: 12842,
@@ -157,6 +159,10 @@ export class HeavenComponent {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.httpService.get('heaven-drop/').subscribe(res => {
+      this.heavenDrop = res;
+    });
   }
 
   onDeleteConfirm(event): void {
