@@ -1,208 +1,200 @@
-<nb-card class="col-md-12 col-lg-12 col-xxxl-12 nb-card-outer">
+<nb-card class="col-md-12 col-lg-12 col-xl-12 nb-card-outer">
   <div class="col-md-8 offset-md-2 nb-card-wrap">
     <nb-card-header class="cardHeadercss">
       <div class="navigation">
         <h1 class="link" style="text-align: center">TRANSFER</h1>
       </div>
     </nb-card-header>
-    <nb-card-body class="col-md-12">
-      <nb-tabset fullWidth>
-        <nb-tab tabTitle="Send">
-          <form class="mt-5 transfer-form">
-            <div class="row d-sml-block m-0">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">From</label>
-                      <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                        <button type="button" ngbDropdownToggle class="btn"
-                                [ngClass]="{'btn-outline-success': currentTheme === 'default',
+    <nb-card-body class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <nb-tabset fullWidth>
+          <nb-tab tabTitle="Send">
+            <form class="mt-5 transfer-form">
+              <div class="row d-sml-block m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">From</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
-                          {{ sendType}}
-                        </button>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                          <li class="dropdown-item" *ngFor="let period of sendTypes"
-                              (click)="changePeriod(period, 'send')">
-                            {{ period }}
-                          </li>
-                        </ul>
+                            {{ sendType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of sendTypes"
+                                (click)="changePeriod(period, 'send')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group total-amount">
+                        <label for="Amount" class="text-link">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                        <span>$1245</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center p-0">
+                      <div class="form-group mt-4">
+                        <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center p-0">
-                    <div class="form-group mt-4">
-                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                  </div>
                 </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
               </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
-            </div>
-            <div class="row m-0">
-              <div class="col-md-12 mtb-0">
-                <div class="row justify-content-center">
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">To</label>
-                      <input type="text" class="form-control w-100" placeholder="Enter destination address"
-                             value="">
-                    </div>
-                    <div class="form-group mt-4">
-                      <button nbButton class="form-control pointer" fullWidth status="success">
-                        <span>RUN</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </nb-tab>
-        <nb-tab tabTitle="Receive" active="{{setReceiveTab}}">
-          <form class="mt-5 transfer-form receive-form">
-            <div class="row m-0">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">To</label>
-                      <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                        <button type="button" ngbDropdownToggle class="btn"
-                                [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                            'btn-primary': currentTheme !== 'default',
-                                            'btn-sm': breakpoint.width <= breakpoints.is}">
-                          {{ receiveType}}
+              <div class="row m-0">
+                <div class="col-md-12 mtb-0">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">To</label>
+                        <input type="text" class="form-control w-100" placeholder="Enter destination address"
+                               value="">
+                      </div>
+                      <div class="form-group mt-4">
+                        <button nbButton class="form-control pointer" fullWidth status="success">
+                          <span>RUN</span>
                         </button>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                          <li class="dropdown-item" *ngFor="let period of receiveTypes"
-                              (click)="changePeriod(period, 'receive')">
-                            {{ period }}
-                          </li>
-                        </ul>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
                 </div>
               </div>
-            </div>
-            <div class="row mt-5 m-0">
-              <div class="col-md-12 mtb-0">
-                <div class="row justify-content-center">
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control w-100" placeholder="Destination address" [disabled]="true">
-                      <a class="copy-icon"><i class="fa fa-clone" title="Copy address"></i></a>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 text-center">
-                    <img class="img-fluid barcode" [src]="barcode" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </nb-tab>
-        <nb-tab tabTitle="OTC" active="{{setOTCTab}}">
-          <form class="mt-5 transfer-form receive-form">
-            <div class="row m-0">
-              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="ANX" class="text-link">From</label>
-                      <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                        <button type="button" ngbDropdownToggle class="btn"
-                                [ngClass]="{'btn-outline-success': currentTheme === 'default',
+            </form>
+          </nb-tab>
+          <nb-tab tabTitle="Receive" active="{{setReceiveTab}}">
+            <form class="mt-5 transfer-form receive-form">
+              <div class="row m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">To</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
-                          {{ fromType}}
-                        </button>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                          <li class="dropdown-item" *ngFor="let period of fromTypes"
-                              (click)="changePeriod(period, 'from')">
-                            {{ period }}
-                          </li>
-                        </ul>
+                            {{ receiveType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of receiveTypes"
+                                (click)="changePeriod(period, 'receive')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
+                </div>
+              </div>
+              <div class="row mt-5 m-0">
+                <div class="col-md-12 mtb-0">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control w-100" placeholder="Destination address" [disabled]="true">
+                        <a class="copy-icon" ngxClipboard [cbContent]=""><i class="fa fa-clone" title="Copy address"></i></a>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 text-center">
+                      <img class="img-fluid barcode" [src]="barcode" alt="">
                     </div>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0">
-                    <div class="form-group mt-4">
-                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">To</label>
-                      <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                        <button type="button" ngbDropdownToggle class="btn"
-                                [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                </div>
+              </div>
+            </form>
+          </nb-tab>
+          <nb-tab tabTitle="OTC" active="{{setOTCTab}}">
+            <form class="mt-5 transfer-form receive-form">
+              <div class="row m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="ANX" class="text-link">From</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
-                          {{ toType}}
-                        </button>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                          <li class="dropdown-item" *ngFor="let period of toTypes" (click)="changePeriod(period, 'to')">
-                            {{ period }}
-                          </li>
-                        </ul>
+                            {{ fromType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of fromTypes"
+                                (click)="changePeriod(period, 'from')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group total-amount">
+                        <label for="Amount" class="text-link">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                        <span>$1245</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0">
+                      <div class="form-group mt-4">
+                        <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">To</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                            'btn-primary': currentTheme !== 'default',
+                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                            {{ toType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of toTypes" (click)="changePeriod(period, 'to')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group total-amount">
+                        <label for="Amount" class="text-link">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                        <span>$1245</span>
                       </div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
+                </div>
+              </div>
+              <div class="row m-0">
+                <div class="col-md-12 mtb-0">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group mt-4">
+                        <button nbButton class="form-control pointer" fullWidth status="success">
+                          <span>RUN</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-            </div>
-            <div class="row m-0">
-              <div class="col-md-12 mtb-0">
-                <div class="row justify-content-center">
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group mt-4">
-                      <button nbButton class="form-control pointer" fullWidth status="success">
-                        <span>RUN</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </nb-tab>
-      </nb-tabset>
+            </form>
+          </nb-tab>
+        </nb-tabset>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
     </nb-card-body>
   </div>
 </nb-card>

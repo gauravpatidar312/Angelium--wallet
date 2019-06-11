@@ -1,5 +1,5 @@
-import { NbMenuItem } from '@nebular/theme';
-import { environment } from '../../environments/environment';
+import {NbMenuItem} from '@nebular/theme';
+import {AppConstants} from '../app.constants';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -13,13 +13,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/heaven',
   },
   {
-    data: ['user'],
+    data: [AppConstants.ROLES.USER],
     title: 'Reward',
     icon: 'nb-lightbulb',
     link: '/pages/reward',
   },
   {
-    data: ['admin', 'company'],
+    data: [AppConstants.ROLES.ADMIN, AppConstants.ROLES.COMPANY],
     title: 'Reward',
     icon: 'nb-lightbulb',
     children: [
@@ -28,12 +28,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/dashboard',
       },
       {
-        data: ['company'],
+        data: [AppConstants.ROLES.COMPANY],
         title: 'Company',
         link: '',
       },
       {
-        data: ['admin'],
+        data: [AppConstants.ROLES.ADMIN],
         title: 'Admin',
         link: '',
       },
@@ -50,7 +50,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/setting',
   },
   {
-    data: ['admin'],
+    data: [AppConstants.ROLES.ADMIN],
     title: 'HQ',
     icon: 'nb-person',
     link: '/pages/hq',
