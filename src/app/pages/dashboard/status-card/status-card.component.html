@@ -11,12 +11,19 @@
         <div class="status text-white"><span class="text-success">$</span>{{ value }}</div>
       </div>
       <div class="col-7">
-        <nb-select class="status-dd-week" placeholder="TODAY">
-          <nb-option value="1">TODAY</nb-option>
-          <nb-option value="2">WEEK</nb-option>
-          <nb-option value="3">MONTH</nb-option>
-          <nb-option value="4">TOTAL</nb-option>
-        </nb-select>
+        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+          <button type="button" ngbDropdownToggle class="btn"
+                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                               'btn-primary': currentTheme !== 'default',
+                               'btn-sm': breakpoint.width <= breakpoints.is}">
+            {{ typeOfPeriod }}
+          </button>
+          <ul class="dropdown-menu" ngbDropdownMenu>
+            <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period)">
+              {{ period }}
+            </li>
+          </ul>
+        </div>
         <div class="clearfix"></div>
         <div class="delta up">0%</div>
         <nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>

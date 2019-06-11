@@ -71,6 +71,18 @@
     margin-top: 0.5em;
     color: #14ffbe;
   }
+  .dropdown-menu {
+    background-color: #3d3780 !important;
+    border: 2px solid #7659ff !important;
+  }
+  .copy-icon {
+    float: right;
+    margin-top: -31px;
+    margin-right: 12px;
+  }
+  nb-tab {
+    overflow: unset !important;
+  }
   /deep/ {
     nb-layout .layout .layout-container .content .columns nb-layout-column {
       padding: $auth-layout-padding;

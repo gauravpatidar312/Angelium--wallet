@@ -34,6 +34,11 @@ $shadow-green: #00977e;
       float: right;
     }
 
+    .dropdown-menu {
+      background-color: #3d3780;
+      border: 2px solid #7659ff;
+    }
+
     /deep/ nb-progress-bar {
       height: 0.6rem;
       margin-top: 1rem;

@@ -29,16 +29,16 @@
       <nb-card-body>
         <div class="form-group">
           <div class="input-group">
-            <input type="text" placeholder="Username" class="form-control" />
+            <input type="text" placeholder="Username" class="form-control"/>
           </div>
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
             <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
-              <input type="text" placeholder="First Name" class="form-control" />
+              <input type="text" placeholder="First Name" class="form-control"/>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
-              <input type="text" placeholder="Last Name" class="form-control" />
+              <input type="text" placeholder="Last Name" class="form-control"/>
             </div>
           </div>
         </div>
@@ -46,32 +46,55 @@
           <div class="row full-name-inputs">
             <div class="col-lg-4 col-md-4 col-sm-4">
               <nb-card-body>
-                <nb-select placeholder="Day" status="primary">
-                  <nb-option value="1">Option 1</nb-option>
-                  <nb-option value="2">Option 2</nb-option>
-                  <nb-option value="3">Option 3</nb-option>
-                  <nb-option value="4">Option 4</nb-option>
-                </nb-select>
+                <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                  <button type="button" ngbDropdownToggle class="btn"
+                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                      'btn-primary': currentTheme !== 'default',
+                                      'btn-sm': breakpoint.width <= breakpoints.is}">
+                    {{ typeOfDay|| 'Day' }}
+                  </button>
+                  <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li class="dropdown-item" *ngFor="let period of types['day']" (click)="changePeriod(period, 'day')">
+                      {{ period }}
+                    </li>
+                  </ul>
+                </div>
               </nb-card-body>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
               <nb-card-body>
-                <nb-select placeholder="Month" status="primary">
-                  <nb-option value="1">Option 1</nb-option>
-                  <nb-option value="2">Option 2</nb-option>
-                  <nb-option value="3">Option 3</nb-option>
-                  <nb-option value="4">Option 4</nb-option>
-                </nb-select>
+                <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                  <button type="button" ngbDropdownToggle class="btn"
+                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                      'btn-primary': currentTheme !== 'default',
+                                      'btn-sm': breakpoint.width <= breakpoints.is}">
+                    {{ typeOfMonth || 'Month' }}
+                  </button>
+                  <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li class="dropdown-item" *ngFor="let period of types['month']"
+                        (click)="changePeriod(period, 'month')">
+                      {{ period }}
+                    </li>
+                  </ul>
+                </div>
               </nb-card-body>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
               <nb-card-body>
-                <nb-select placeholder="Year" status="primary">
-                  <nb-option value="1">Option 1</nb-option>
-                  <nb-option value="2">Option 2</nb-option>
-                  <nb-option value="3">Option 3</nb-option>
-                  <nb-option value="4">Option 4</nb-option>
-                </nb-select>
+                <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                  <button type="button" ngbDropdownToggle class="btn"
+                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                      'btn-primary': currentTheme !== 'default',
+                                      'btn-sm': breakpoint.width <= breakpoints.is}">
+                    {{ typeOfYear || 'Year' }}
+                  </button>
+                  <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li class="dropdown-item" *ngFor="let period of types['year']"
+                        (click)="changePeriod(period, 'year')">
+                      {{ period }}
+                    </li>
+                  </ul>
+                </div>
               </nb-card-body>
             </div>
           </div>
@@ -79,15 +102,23 @@
         <div class="form-group">
           <div class="row full-name-inputs">
             <div class="col-lg-5 col-md-5 col-sm-5">
-              <nb-select placeholder="Country" status="primary">
-                <nb-option value="1">Option 1</nb-option>
-                <nb-option value="2">Option 2</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-                <nb-option value="4">Option 4</nb-option>
-              </nb-select>
+              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
+                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                    'btn-primary': currentTheme !== 'default',
+                                    'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ typeOfCountry || 'Country' }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let period of types['country']"
+                      (click)="changePeriod(period, 'country')">
+                    {{ period }}
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7 input-group kyc-margin">
-              <input type="text" placeholder="Mobile Number" class="form-control" />
+              <input type="text" placeholder="Mobile Number" class="form-control"/>
             </div>
           </div>
         </div>
@@ -102,45 +133,69 @@
         <div class="form-group">
           <div class="row full-name-inputs">
             <div class="col-lg-9 col-md-9 col-sm-9">
-              <input type="text" placeholder="ID(front)" class="form-control" />
+              <input type="text" placeholder="ID(front)" class="form-control"/>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 kyc-margin">
-              <nb-select placeholder="Select" status="primary">
-                <nb-option value="1">Option 1</nb-option>
-                <nb-option value="2">Option 2</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-                <nb-option value="4">Option 4</nb-option>
-              </nb-select>
+              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
+                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                    'btn-primary': currentTheme !== 'default',
+                                    'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ typeOfIdFrom || 'Select' }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let period of types['idFrom']"
+                      (click)="changePeriod(period, 'idFrom')">
+                    {{ period }}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
             <div class="col-lg-9 col-md-9 col-sm-9">
-              <input type="text" placeholder="ID(back)" class="form-control" />
+              <input type="text" placeholder="ID(back)" class="form-control"/>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 kyc-margin">
-              <nb-select placeholder="Select" status="primary">
-                <nb-option value="1">Option 1</nb-option>
-                <nb-option value="2">Option 2</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-                <nb-option value="4">Option 4</nb-option>
-              </nb-select>
+              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
+                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                    'btn-primary': currentTheme !== 'default',
+                                    'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ typeOfIdBack || 'Select' }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let period of types['idBack']"
+                      (click)="changePeriod(period, 'idBack')">
+                    {{ period }}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
         <div class="form-group">
           <div class="row full-name-inputs">
             <div class="col-lg-9 col-md-9 col-sm-9">
-              <input type="text" placeholder="Proof of address" class="form-control" />
+              <input type="text" placeholder="Proof of address" class="form-control"/>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 kyc-margin">
-              <nb-select placeholder="Select" status="primary">
-                <nb-option value="1">Option 1</nb-option>
-                <nb-option value="2">Option 2</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-                <nb-option value="4">Option 4</nb-option>
-              </nb-select>
+              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"  ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
+                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                    'btn-primary': currentTheme !== 'default',
+                                    'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ typeOfProofOfAddress || 'Select' }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let period of types['proofOfAddress']"
+                      (click)="changePeriod(period, 'proofOfAddress')">
+                    {{ period }}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

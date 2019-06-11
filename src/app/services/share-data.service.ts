@@ -8,6 +8,7 @@ export class ShareDataService {
   currentData = this.messageSource.asObservable();
 
   showNotification = false;
+  transferTab: string;
   constructor() { }
 
   changeData(data: any) {
