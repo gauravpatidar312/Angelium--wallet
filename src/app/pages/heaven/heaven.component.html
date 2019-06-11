@@ -1,47 +1,47 @@
 <div class="row">
-  <div class="col-12 col-lg-6">
-    <nb-card class="top-content">
-      <div class="icon-container">
-        <div class="icon primary"><i class="fa fa-university"></i></div>
-      </div>
-      <div class="details">
-        <label>Heaven</label>
-        <label class="bigger-text"><span>$</span> 572,900</label>
-      </div>
-      <div class="actions flex-end text-right">
-        <div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-          <button type="button" ngbDropdownToggle class="btn"
-                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                              'btn-primary': currentTheme !== 'default',
-                              'btn-sm': breakpoint.width <= breakpoints.is}">
-            {{ heavenType }}
-          </button>
-          <ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period, 'heaven')">
-              {{ period }}
-            </li>
-          </ul>
-        </div>
-        <div class="progress-data ">
-          <div class="delta value up"> 4%</div>
-          <div class="progress-container">
-            <div class="progress-value " style="width: 70%;"></div>
-          </div>
-        </div>
-      </div>
-    </nb-card>
-  </div>
-  <div class="col-12 col-lg-6">
-    <nb-card class="top-content">
-      <div class="icon-container">
-        <div class="icon primary"><i class="nb-bar-chart"></i></div>
-      </div>
-      <div class="details">
-        <label>Heaven drop</label>
-        <label class="bigger-text"><span>$</span> 572,900</label>
-      </div>
-      <div class="actions flex-end text-right">
-        <span class="progress-data-value"><span class="color-green">45895</span> ANX</span>
+	<div class="col-12 col-lg-6">
+		<nb-card class="top-content">
+			<div class="icon-container">
+				<div class="icon primary"> <i class="fa fa-university"></i></div>
+			</div>
+			<div class="details">
+				<label>Heaven</label>
+				<label class="bigger-text"><span>$</span> {{totalHeaven.heaven}}</label>
+			</div>
+			<div class="actions flex-end text-right">
+				<div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+					<button type="button" ngbDropdownToggle class="btn"
+							[ngClass]="{'btn-outline-success': currentTheme === 'default',
+										'btn-primary': currentTheme !== 'default',
+										'btn-sm': breakpoint.width <= breakpoints.is}">
+					{{ heavenType }}
+					</button>
+					<ul class="dropdown-menu" ngbDropdownMenu>
+						<li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period, 'heaven')">
+							{{ period }}
+						</li>
+					</ul>
+				</div>
+				<div class="progress-data ">
+					<div class="delta value up"> {{totalHeaven.percentage}}% </div>
+					<div class="progress-container">
+						<div class="progress-value " style="width: 70%;"></div>
+					</div>
+				</div>
+			</div>
+		</nb-card>
+	</div>
+	<div class="col-12 col-lg-6">
+		<nb-card class="top-content">
+			<div class="icon-container">
+				<div class="icon primary"> <i class="nb-bar-chart"></i></div>
+			</div>
+			<div class="details">
+				<label>Heaven drop</label>
+				<label class="bigger-text"><span>$</span> 572,900</label>
+			</div>
+			<div class="actions flex-end text-right">
+				<span class="progress-data-value"><span class="color-green">45895</span> ANX</span>
         <div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -56,12 +56,12 @@
             </li>
           </ul>
         </div>
-        <div class="progress-data">
-          <div class="delta value up"> 4%</div>
-          <div class="progress-container">
-            <div class="progress-value " style="width: 70%;"></div>
-          </div>
-        </div>
+				<div class="progress-data">
+					<div class="delta value up"> 4% </div>
+					<div class="progress-container">
+						<div class="progress-value " style="width: 70%;"></div>
+					</div>
+				</div>
 
       </div>
     </nb-card>

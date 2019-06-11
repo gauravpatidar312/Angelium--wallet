@@ -11,6 +11,7 @@ import { HttpService } from "../../services/http.service";
 import { ShareDataService } from "../../services/share-data.service";
 import { SessionStorageService } from "../../services/session-storage.service";
 import { environment } from "../../../environments/environment";
+import Swal from 'sweetalert2';
 
 export let browserRefresh = false;
 
@@ -28,7 +29,8 @@ export class SettingComponent implements OnInit {
   croppedImageSize: any = '';
   userImage: any;
   userImageBase64: any;
-  subscription: Subscription;
+  r18modeSwitchText:boolean;
+
   constructor(
     private toastrService: ToastrService,
     private dialogService: NbDialogService,
@@ -60,21 +62,74 @@ export class SettingComponent implements OnInit {
     this.userData = userSettingInfo;
   }
 
-  r18modeSwitchText:boolean;
+  sweetAlert(){
+    Swal.fire({
+      title: 'Age Confirmation',
+      text: 'Are you really over 18?',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.r18modeSwitchText = true; 
+        let data = { "r18mode": true };
+        this.updateR18mode(data);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.r18modeSwitchText = false;
+        let data = { "r18mode": false };
+        this.updateR18mode(data);
+      }else if (result.dismiss === Swal.DismissReason.backdrop) {
+        this.r18modeSwitchText = !this.r18modeSwitchText;
+      }
+    });
+  }
+
+  downloadQR(){
+    let QR_Canvas = document.getElementById("QR_Canvas");
+    let imgBase64 = QR_Canvas.children[0].children[0]['src'];
+    let base64 = imgBase64.replace('data:image/png;base64,','');
+    
+    let byteCharacters = atob(base64);
+
+    let byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    let blob = new Blob([byteArray], {"type": "image/png"});
+    if(navigator.msSaveBlob){
+      let filename = 'qrcode';
+      navigator.msSaveBlob(blob, filename);
+    } else {
+      let link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('visibility','hidden');
+      link.download = 'qrcode';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
+  updateR18mode(data: any){
+    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+      if (res.status) {
+        this.sessionStorage.updateFromSession('userInfo', data);
+        if (data.r18mode) {
+          this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE ENABLED');
+        }else{
+          this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE DISABLED');
+        }
+      }
+    });
+  }
+
   r18mode(event){
     let data = { "r18mode": event };
     if (this.r18modeSwitchText != event) {
       this.r18modeSwitchText = event;
-      this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
-        if (res.status) {
-          this.sessionStorage.updateFromSession('userInfo', data);
-          if (event) {
-            this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode ON'); 
-          }else{
-            this.toastrService.success('R-18 Mode update successfully', 'R-18 Mode OFF');
-          }
-        }
-      });
+      this.sweetAlert();
     }
   }
 

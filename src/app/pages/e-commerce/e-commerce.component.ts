@@ -21,6 +21,14 @@ interface CryptoBalance {
   livePrice: number;
 }
 
+interface Notification {
+  id: number;
+  title: String;
+  status: string;
+  type: string;
+  created: string;
+}
+
 @Component({
   selector: 'ngx-ecommerce',
   styleUrls: ['./e-dashboard.component.scss'],
@@ -47,6 +55,9 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
   };
 
   statusCards1: string;
+
+  userNotification: Notification[] = [];
+  systemNotification: Notification[] = [];
 
   commonStatusCardsSet: CardSettings[] = [
     this.assetCard,
@@ -112,7 +123,12 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
 
   getNotification() {
     this.httpService.get('dashboard-notification/').subscribe(data => {
-      // console.log('Notify ', data);
+      if (data.length) {
+        this.userNotification = data.filter((notify) => notify.type === 'user')
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.date).getTime());
+        this.systemNotification = data.filter((notify) => notify.type === 'system')
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.date).getTime());
+      }
     });
   }
 
@@ -139,12 +155,13 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
 
   getAssetsData() {
     this.httpService.get('my-assets/').subscribe(data => {
-      // console.log('Assets ', data);
+      console.log('Assets ', data);
     });
   }
 
   getTotalinvestmentData() {
     this.httpService.get('total-investment/').subscribe(data => {
+      console.log('total-investment', data);
       if (data.hasOwnProperty('investment')) {
         this.gainCard.value = data.investment;
         // console.log('total-investment ', data);

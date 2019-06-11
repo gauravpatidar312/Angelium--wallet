@@ -3,6 +3,8 @@ import { RewardModule } from './reward/reward.module';
 import { HQModule } from './hq/hq.module';
 import { NgModule } from '@angular/core';
 import { NbDialogModule } from '@nebular/theme';
+import { ClipboardModule } from 'ngx-clipboard';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -38,6 +40,8 @@ const PAGES_COMPONENTS = [
     HQModule,
     HeavenModule,
     NbDialogModule.forChild(),
+    ClipboardModule,
+    NgxQRCodeModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,

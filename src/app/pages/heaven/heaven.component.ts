@@ -4,6 +4,7 @@ import {takeWhile} from 'rxjs/operators';
 import {LocalDataSource} from 'ng2-smart-table';
 
 import {SmartTableData} from '../../@core/data/smart-table';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'ngx-heaven',
@@ -24,6 +25,11 @@ export class HeavenComponent implements OnDestroy {
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
   currentTheme: string;
+
+  totalHeaven = {
+    heaven: 0,
+    percentage: 0,
+  };
 
   selectedHevenPlan = '';
 
@@ -76,8 +82,10 @@ export class HeavenComponent implements OnDestroy {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData, private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService) {
+  constructor(private service: SmartTableData,
+    private themeService: NbThemeService,
+    private breakpointService: NbMediaBreakpointsService,
+    private httpService: HttpService) {
     // const data = this.service.getData();
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -172,6 +180,13 @@ export class HeavenComponent implements OnDestroy {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.getTotalHeaven();
+    this.getTotalHeavenDrop();
+    this.getHeavenGraph();
+    this.getANXHistory();
+    this.getHeavenReleaseSettings();
+    this.getHeavenHistory();
   }
 
   onDeleteConfirm(event): void {
@@ -206,7 +221,47 @@ export class HeavenComponent implements OnDestroy {
     this.periodChange.emit(period);
   }
 
+  getTotalHeaven() {
+    this.httpService.get('total-heaven?filter_type="week"').subscribe((res) => {
+      console.log('total-heaven', res);
+      // if (res.hasOwnProperty('heaven')) {
+      //   this.totalHeaven.heaven = res.heaven;
+      // }
+      // if (res.hasOwnProperty('percentage')) {
+      //   this.totalHeaven.percentage = res.percentage;
+      // }
+    });
+  }
+
   ngOnDestroy() {
     this.alive = false;
+  }
+  getTotalHeavenDrop() {
+    this.httpService.get('heaven-drop?filter_type="week"').subscribe((res) => {
+      console.log('drop', res);
+    });
+  }
+  getHeavenGraph() {
+    this.httpService.get('heaven-graph/').subscribe((res) => {
+      console.log('getHeavenGraph', res);
+    });
+  }
+
+  getANXHistory() {
+    this.httpService.get('anx-history/').subscribe((res) => {
+      console.log('anx-history', res);
+    });
+  }
+
+  getHeavenReleaseSettings() {
+    // this.httpService.get('heaven-release-settings').subscribe((res) => {
+    //   console.log('settings', res);
+    // });
+  }
+
+  getHeavenHistory() {
+    this.httpService.get('heaven-history/').subscribe((res) => {
+      console.log('heaven-history', res);
+    });
   }
 }

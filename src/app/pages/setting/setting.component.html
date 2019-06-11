@@ -38,7 +38,7 @@
                 <tr>
                   <td class="title-col">COUNTRY</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
-                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('County', userData?.country)"></i></td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
                   <td class="title-col">PHONE</td>
@@ -48,16 +48,15 @@
                 <tr>
                   <td class="title-col">REFFERAL LINK</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
-                  <td class="action-col"></td>
+                  <td class="action-col text-center">
+                    <i ngxClipboard [cbContent]="userData?.referral_link" 
+                      class="fa fa-clone ref-link-icon fa-2x"></i>&nbsp;
+                    <i class="ion-archive ref-link-icon fa-2x" (click)="open(QRdialog)"></i>
+                  </td>
                 </tr>
                 <tr>
                   <td class="title-col">LEVEL</td>
                   <td class="value-col">{{'Lv. ' + userData?.level}}</td>
-                  <td class="action-col"></td>
-                </tr>
-                <tr class="spacer">
-                  <td class="title-col">USER ID</td>
-                  <td class="value-col">{{userData?.id}}</td>
                   <td class="action-col"></td>
                 </tr>
               </tbody>
@@ -83,41 +82,41 @@
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">2FA</td>
                 <td class="value-col">**********</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">SECRET KEY</td>
                 <td class="value-col">**********</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">KYC</td>
-                <td class="value-col">Completed</td>
+                <td class="value-col">Pending</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">CURRENCY</td>
                 <td class="value-col">US$</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">LANGUAGE</td>
                 <td>English</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
                 <td class="title-col">R-18 MODE</td>
                 <td class="value-col iconpaddfix">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? '': 'active'}}"
+                    <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
                       (click)="r18mode(false)">
-                      <input type="radio" name="options"> 
+                      <input type="radio" name="options">
                       OFF
                     </label>
-                    <label class="btn btn-secondary paddfix btn-sm {{ userData?.r18mode ? 'active': ''}}"
+                    <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? 'active': ''}}"
                       (click)="r18mode(true)">
                       <input type="radio" name="options"> ON
                     </label>
@@ -125,11 +124,11 @@
                 </td>
                 <td class="action-col"></td>
               </tr>
-              <tr *ngIf="!production">
+              <tr>
                 <td class="title-col">MERGE</td>
                 <td>Merge your old data</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge"></i></td>
-              </tr> 
+              </tr>
             </tbody>
           </table>
         </div>
@@ -270,18 +269,22 @@
   </nb-card>
 </ng-template>
 
-<ng-template #dialogAgeConfrm let-data let-refage="dialogRef">
+<ng-template #QRdialog let-data let-refQR="dialogRef">
   <nb-card>
     <nb-card-header>
-      Age Confirmation
+      QR Code  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <p>Are you really over 18?</p>
-      <nb-radio value="true">YES</nb-radio>
-      <nb-radio value="false">NO</nb-radio>
+      <ngx-qrcode 
+        id="QR_Canvas"
+        [qrc-element-type]="elementType" 
+        [qrc-value]="userData?.referral_link"
+        qrc-class="aclass"
+        qrc-errorCorrectionLevel="L">
+      </ngx-qrcode>
     </nb-card-body>
-    <nb-card-footer>
-      <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Confirm</button>
+    <nb-card-footer class="text-center">
+      <button nbButton size="small" (click)="downloadQR()">Download</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

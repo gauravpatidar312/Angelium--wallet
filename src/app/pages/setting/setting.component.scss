@@ -227,3 +227,7 @@
 .upload-btn{ float: right }
 .img-cpr{ text-align: center; }
 .image-scoll-card-body { max-height: calc(100vh - 190px); overflow-y: auto; }
+/deep/ #swal2-title {
+  color: #595959!important; font-size: 1.45em!important;
+}
+.ref-link-icon{ font-size: 1.40em; }
