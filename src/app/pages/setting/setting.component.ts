@@ -40,7 +40,7 @@ export class SettingComponent implements OnInit {
     private router: Router) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
     this.production = environment.production;
-    
+
     window.onload = (ev) => {
       browserRefresh = true;
       this.getProfileData();
@@ -72,7 +72,7 @@ export class SettingComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.r18modeSwitchText = true; 
+        this.r18modeSwitchText = true;
         let data = { "r18mode": true };
         this.updateR18mode(data);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -89,7 +89,7 @@ export class SettingComponent implements OnInit {
     let QR_Canvas = document.getElementById("QR_Canvas");
     let imgBase64 = QR_Canvas.children[0].children[0]['src'];
     let base64 = imgBase64.replace('data:image/png;base64,','');
-    
+
     let byteCharacters = atob(base64);
 
     let byteNumbers = new Array(byteCharacters.length);
@@ -113,7 +113,7 @@ export class SettingComponent implements OnInit {
   }
 
   updateR18mode(data: any){
-    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+    this.httpService.put(data, 'r18mode/').subscribe(res=>{
       if (res.status) {
         this.sessionStorage.updateFromSession('userInfo', data);
         if (data.r18mode) {
@@ -151,7 +151,7 @@ export class SettingComponent implements OnInit {
 
 
   updateSettingPageData(apiData: any, endpoint: string){
-    this.httpService.postWithToken(apiData, endpoint)
+    this.httpService.post(apiData, endpoint)
     .subscribe(res=>{
       if (res.status == 'password reset') {
         this.toastrService.success('Password update successfully', 'Password');

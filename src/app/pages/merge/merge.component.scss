@@ -7,6 +7,7 @@
    nb-card {
      margin: 0;
      height: calc(100vh - 2 * #{$auth-layout-padding});
+     overflow: auto;
    }
 
   nb-card-body {
@@ -20,7 +21,8 @@
 
   .navigation .link {
     text-decoration: none;
-    margin: 1.6em;
+    margin: 1.6em 1.6em 0 1.6em;
+
     .icon {
       font-size: 2rem;
     }
