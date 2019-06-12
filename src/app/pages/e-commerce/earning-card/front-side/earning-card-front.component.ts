@@ -53,11 +53,20 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   ngOnInit() {
     switch (this.selectedCurrency) {
       case 'ANX':
+        this.tokenName = 'ANX';
+        this.livePrice = 0.01;
+        break;
       case 'HEAVEN':
         this.tokenName = 'ANX';
+        this.livePrice = 0.01;
+        break;
+      case 'ANL':
+        this.tokenName = 'ANL';
+        this.livePrice = 0.02;
         break;
       case 'ANLP':
         this.tokenName = 'ANL';
+        this.livePrice = 0.02;
         break;
       default:
         this.tokenName = this.selectedCurrency;
@@ -66,9 +75,10 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     this.getEarningCardData(this.selectedCurrency);
   }
 
-  changeCurrency(currency) {
+  changeCurrency(currency, selectedCurrency) {
     if (currency === 'SEND' || currency === 'RECEIVE' || currency === 'OTC') {
       this.shareDataService.transferTab = currency;
+      this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['/pages/transfer']);
     }
     else if (currency === 'HEAVEN') {

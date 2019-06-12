@@ -8,7 +8,7 @@
       {{currencyType[selectedCurrency]}}
     </button>
     <ul class="dropdown-menu" ngbDropdownMenu>
-      <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency)">{{ currency }}</li>
+      <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
     </ul>
   </div>
 </nb-card-header>

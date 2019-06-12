@@ -13,6 +13,7 @@ import { HttpService } from '../../services/http.service';
 })
 export class HeavenComponent implements OnDestroy {
   private alive = true;
+  heavenDrop: any;
 
   @Output() periodChange = new EventEmitter<string>();
 
@@ -181,6 +182,13 @@ export class HeavenComponent implements OnDestroy {
         this.breakpoint = newValue;
       });
 
+    this.httpService.get('heaven-drop/').subscribe(res => {
+      this.heavenDrop = res;
+    });
+
+    this.httpService.get('user-wallet-address/').subscribe(res => {
+      
+    });
     this.getTotalHeaven();
     this.getTotalHeavenDrop();
     this.getHeavenGraph();
