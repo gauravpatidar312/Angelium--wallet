@@ -163,6 +163,10 @@ export class HeavenComponent {
     this.httpService.get('heaven-drop/').subscribe(res => {
       this.heavenDrop = res;
     });
+
+    this.httpService.get('user-wallet-address/').subscribe(res => {
+      
+    });
   }
 
   onDeleteConfirm(event): void {
