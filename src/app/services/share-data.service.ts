@@ -9,6 +9,7 @@ export class ShareDataService {
 
   showNotification = false;
   transferTab: string;
+  transferTitle: string;
   constructor() { }
 
   changeData(data: any) {

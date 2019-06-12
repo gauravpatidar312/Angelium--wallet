@@ -75,9 +75,10 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     this.getEarningCardData(this.selectedCurrency);
   }
 
-  changeCurrency(currency) {
+  changeCurrency(currency, selectedCurrency) {
     if (currency === 'SEND' || currency === 'RECEIVE' || currency === 'OTC') {
       this.shareDataService.transferTab = currency;
+      this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['/pages/transfer']);
     }
     else if (currency === 'HEAVEN') {
