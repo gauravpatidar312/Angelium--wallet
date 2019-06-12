@@ -1,6 +1,6 @@
 @import "~@nebular/theme/styles/global/breakpoints";
 :host {
-  $auth-layout-padding: 2.5rem;
+  $auth-layout-padding: 7.3rem;
 
   nb-card {
     margin: 0;
@@ -70,6 +70,22 @@
     font-size: 2.6em;
     margin-top: 0.5em;
     color: #14ffbe;
+  }
+  .dropdown-menu {
+    background-color: #3d3780 !important;
+    border: 2px solid #7659ff !important;
+  }
+  .copy-icon {
+    float: right;
+    margin-top: -31px;
+    margin-right: 12px;
+  }
+  .copy-icon:hover {
+    color: #00d977;
+    cursor: pointer;
+  }
+   nb-card-body, nb-tab {
+    overflow: unset !important;
   }
   /deep/ {
     nb-layout .layout .layout-container .content .columns nb-layout-column {

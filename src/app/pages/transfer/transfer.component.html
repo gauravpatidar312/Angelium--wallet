@@ -1,197 +1,200 @@
-<nb-card class="col-md-12 col-lg-12 col-xxxl-12 nb-card-outer">
+<nb-card class="col-md-12 col-lg-12 col-xl-12 nb-card-outer">
   <div class="col-md-8 offset-md-2 nb-card-wrap">
     <nb-card-header class="cardHeadercss">
       <div class="navigation">
         <h1 class="link" style="text-align: center">TRANSFER</h1>
       </div>
     </nb-card-header>
-    <nb-card-body class="col-md-12">
-      <nb-tabset fullWidth>
-        <nb-tab tabTitle="Send">
-          <form class="mt-5 transfer-form">
-            <div class="row d-sml-block m-0">
-              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">From</label>
-                      <nb-select class="status-dd-week" placeholder="BTC">
-                        <nb-option value="1">BTC</nb-option>
-                        <nb-option value="2">ETH</nb-option>
-                        <nb-option value="3">USDT</nb-option>
-                      </nb-select>
+    <nb-card-body class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <nb-tabset fullWidth>
+          <nb-tab tabTitle="Send">
+            <form class="mt-5 transfer-form">
+              <div class="row d-sml-block m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">From</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                            'btn-primary': currentTheme !== 'default',
+                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                            {{ sendType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of sendTypes"
+                                (click)="changePeriod(period, 'send')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group total-amount">
+                        <label for="Amount" class="text-link">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                        <span>$1245</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center p-0">
+                      <div class="form-group mt-4">
+                        <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
-                    </div>
-                  </div>
-                  <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center p-0">
-                    <div class="form-group mt-4">
-                      <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                  </div>
-                  <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">To</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+              </div>
+              <div class="row m-0">
+                <div class="col-md-12 mtb-0">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">To</label>
+                        <input type="text" class="form-control w-100" placeholder="Enter destination address"
+                               value="">
+                      </div>
+                      <div class="form-group mt-4">
+                        <button nbButton class="form-control pointer" fullWidth status="success">
+                          <span>RUN</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
-            </div>
-            <div class="row m-0">
-              <div class="col-md-12 mt-5 mtb-0">
-                <div class="row justify-content-center">
-                  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control w-100" placeholder="enter your destination address"
-                        value="">
-                    </div>
-                    <div class="form-group mt-4">
-                      <button nbButton class="form-control pointer" fullWidth status="success">
-                        <span>RUN</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
-                    <img class="img-fluid barcode" [src]="barcode" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </nb-tab>
-        <nb-tab tabTitle="Receive">
-          <form class="mt-5 transfer-form receive-form">
-            <div class="row m-0">
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 display-sm-up"></div>
-              <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center display-sm-up p-0">
-                <div class="form-group mt-4">
-                  <div class="arrowtransfer"><i class="fas fa-arrow-right"></i></div>
-                </div>
-              </div>
-              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">To</label>
-                      <nb-select class="status-dd-week" placeholder="BTC">
-                        <nb-option value="1">BTC</nb-option>
-                        <nb-option value="2">ETH</nb-option>
-                        <nb-option value="3">USDT</nb-option>
-                      </nb-select>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 display-sm-down text-center p-0">
-                    <div class="form-group mt-4">
-                      <div class="arrowtransfer"><i class="fas fa-arrow-up"></i></div>
+            </form>
+          </nb-tab>
+          <nb-tab tabTitle="Receive" active="{{setReceiveTab}}">
+            <form class="mt-5 transfer-form receive-form">
+              <div class="row m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">To</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                            'btn-primary': currentTheme !== 'default',
+                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                            {{ receiveType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of receiveTypes"
+                                (click)="changePeriod(period, 'receive')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row m-0">
-              <div class="col-md-12 mt-5 mtb-0">
-                <div class="row justify-content-center">
-                  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control w-100" placeholder="enter your destination address"
-                        value="">
+              <div class="row mt-5 m-0">
+                <div class="col-md-12 mtb-0">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control w-100" placeholder="Destination address" [disabled]="true">
+                        <a class="copy-icon" ngxClipboard [cbContent]=""><i class="fa fa-clone" title="Copy address"></i></a>
+                      </div>
                     </div>
-                    <div class="form-group mt-4">
-                      <button nbButton class="form-control pointer" fullWidth status="success">
-                        <span>RUN</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
-                    <img class="img-fluid barcode" [src]="barcode" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </nb-tab>
-        <nb-tab tabTitle="OTC">
-          <form class="mt-5 transfer-form receive-form">
-            <div class="row m-0">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="ANX" class="text-link">From</label>
-                      <nb-select class="status-dd-week" placeholder="ANX">
-                        <nb-option value="1">ANX</nb-option>
-                      </nb-select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
-                    </div>
-                  </div>
-                  <div class="col-lg-1 col-md-1 col-sm-12 text-center p-0">
-                    <div class="form-group mt-4">
-                      <div class="arrowtransfer display-sm-up"><i class="fas fa-arrow-right"></i></div>
-                      <div class="arrowtransfer display-sm-down"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="BTC" class="text-link">To</label>
-                      <nb-select class="status-dd-week" placeholder="BTC">
-                        <nb-option value="1">BTC</nb-option>
-                        <nb-option value="2">ETH</nb-option>
-                        <nb-option value="3">USDT</nb-option>
-                      </nb-select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group total-amount">
-                      <label for="Amount" class="text-link">Amount</label>
-                      <input type="text" class="form-control" placeholder="Amount" value="0.1313">
-                      <span>$1245</span>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 text-center">
+                      <img class="img-fluid barcode" [src]="barcode" alt="">
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row m-0">
-              <div class="col-md-12 mt-5 mtb-0">
-                <div class="row justify-content-center">
-                  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control w-100" placeholder="enter your destination address"
-                        value="">
+            </form>
+          </nb-tab>
+          <nb-tab tabTitle="OTC" active="{{setOTCTab}}">
+            <form class="mt-5 transfer-form receive-form">
+              <div class="row m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="ANX" class="text-link">From</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                            'btn-primary': currentTheme !== 'default',
+                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                            {{ fromType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of fromTypes"
+                                (click)="changePeriod(period, 'from')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group mt-4">
-                      <button nbButton class="form-control pointer" fullWidth status="success">
-                        <span>RUN</span>
-                      </button>
+                    <div class="col">
+                      <div class="form-group total-amount">
+                        <label for="Amount" class="text-link">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                        <span>$1245</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
-                    <img class="img-fluid barcode" [src]="barcode" alt="">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0">
+                      <div class="form-group mt-4">
+                        <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="BTC" class="text-link">To</label>
+                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn"
+                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                            'btn-primary': currentTheme !== 'default',
+                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                            {{ toType}}
+                          </button>
+                          <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" *ngFor="let period of toTypes" (click)="changePeriod(period, 'to')">
+                              {{ period }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group total-amount">
+                        <label for="Amount" class="text-link">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" value="0.1313">
+                        <span>$1245</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
-        </nb-tab>
-      </nb-tabset>
+              <div class="row m-0">
+                <div class="col-md-12 mtb-0">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group mt-4">
+                        <button nbButton class="form-control pointer" fullWidth status="success">
+                          <span>RUN</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </nb-tab>
+        </nb-tabset>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
     </nb-card-body>
   </div>
 </nb-card>

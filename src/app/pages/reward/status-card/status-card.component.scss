@@ -58,6 +58,12 @@ $shadow-green: #00977e;
       }
     }
 
+    .dropdown-menu {
+      background-color: #3d3780 !important;
+      border: 2px solid #7659ff !important;
+    }
+
+
     .delta {
       position: absolute;
       display: inline-block;
@@ -66,6 +72,7 @@ $shadow-green: #00977e;
       font-size: 1rem;
       top: 20px;
       left: 28px;
+      width: 10px;
       @include nb-rtl(left, 1.25rem);
       @include nb-rtl(right, inherit);
 

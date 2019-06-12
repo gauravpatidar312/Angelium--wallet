@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 import {Router} from '@angular/router';
+import {ShareDataService} from '../../../../services/share-data.service';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -40,6 +41,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
 
   constructor(private themeService: NbThemeService,
     private earningService: EarningData,
+    private shareDataService: ShareDataService,
     private router: Router) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -51,11 +53,20 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   ngOnInit() {
     switch (this.selectedCurrency) {
       case 'ANX':
+        this.tokenName = 'ANX';
+        this.livePrice = 0.01;
+        break;
       case 'HEAVEN':
         this.tokenName = 'ANX';
+        this.livePrice = 0.01;
+        break;
+      case 'ANL':
+        this.tokenName = 'ANL';
+        this.livePrice = 0.02;
         break;
       case 'ANLP':
         this.tokenName = 'ANL';
+        this.livePrice = 0.02;
         break;
       default:
         this.tokenName = this.selectedCurrency;
@@ -65,7 +76,8 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   }
 
   changeCurrency(currency) {
-    if (currency === 'SEND' || currency === 'RECEIVE') {
+    if (currency === 'SEND' || currency === 'RECEIVE' || currency === 'OTC') {
+      this.shareDataService.transferTab = currency;
       this.router.navigate(['/pages/transfer']);
     }
     else if (currency === 'HEAVEN') {
