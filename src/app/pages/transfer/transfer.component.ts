@@ -6,6 +6,7 @@ import {HttpService} from '../../services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from '../../services/toastr.service';
 import {ActivatedRoute} from '@angular/router';
+import * as _ from 'lodash';
 
 declare const jQuery: any;
 @Component({
@@ -74,6 +75,7 @@ export class TransferComponent implements OnInit {
 
     this.sendForm = this.formBuilder.group({
       transfer_amount: ['', Validators.required],
+      destination_address: ['', Validators.required],
     });
   }
 
@@ -83,10 +85,9 @@ export class TransferComponent implements OnInit {
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = res;
-      this.sendWallet = this.myWallets.find(item => {
-        return item.wallet_type === 'BTC';
-      });
+      this.myWallets = _.sortBy(res, ['wallet_type']);
+      this.sendWallet = _.find(this.myWallets, ['wallet_type', 'BTC']);
+      this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
       if (this.sendWallet) {
         this.setAmount('BTC');
         this.receiveWallet = {...this.sendWallet};
@@ -96,14 +97,22 @@ export class TransferComponent implements OnInit {
         this.receiveType = 'SELECT';
         this.toType = 'SELECT';
       }
-    });
 
-    this.httpService.get('get-total-anx/').subscribe((data) => {
-      this.anxWallet.wallet_amount = data['total-anx'];
+      this.httpService.get('anx-price/').subscribe((price) => {
+        this.anxWallet.anx_price = Number(price['anx_price']);
+
+        this.httpService.get('get-total-anx/').subscribe((data) => {
+          this.anxWallet.wallet_amount = data['total-anx'];
+          this.fromOTCAmount = this.anxWallet.wallet_amount;
+          this.setOTCAmount();
+        });
+      });
     });
-    this.httpService.get('anx-price/').subscribe((data) => {
-      this.anxWallet.anx_price = Number(data['anx_price']);
-    });
+  }
+
+  copyAddress() {
+    if (this.receiveWallet.address)
+      this.toastrService.success('Wallet address copied successfully!', 'Copy Address');
   }
 
   setAmount(walletType) {
@@ -118,13 +127,16 @@ export class TransferComponent implements OnInit {
       this.fetchingAmount = false;
     }, (err) => {
       this.fetchingAmount = false;
+      this.sendWallet.walletDollar = 0;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
     });
   }
 
   setOTCAmount() {
     if (!this.fromOTCAmount) {
-      this.otcWallet.walletDollar = 0;
+      this.otcWallet.toAmount = 0;
+      this.otcWallet.toDollar = 0;
+      this.anxWallet.walletDollar = 0;
       return;
     }
 
@@ -137,24 +149,24 @@ export class TransferComponent implements OnInit {
 
     const obj = {
       'dollar_amount': this.anxWallet.walletDollar,
-      'crypto_currency_code': toWallet.id.toString(),
+      'crypto_currency_code': toWallet.wallet_type,
     };
 
-    // TODO: need to complete
-    this.httpService.post(obj, 'convert_to_crypto/').subscribe((data?: any) => {
-      if (data.ERROR || data.Error) {
+    this.otcWallet.toAmount = 0;
+    this.httpService.post(obj, 'convert_to_crypto/').subscribe((rate?: any) => {
+      if (rate.ERROR || rate.Error) {
         this.fetchingAmount = false;
-        this.toastrService.danger(data.ERROR || data.Error, 'Fetching Amount');
+        this.toastrService.danger(rate.ERROR || rate.Error, 'Fetching Amount');
         return;
       }
-      let convert = data;
-
       this.httpService.get('live-price/').subscribe(data => {
-        this.otcWallet.toAmount = data[this.toType];
-        this.otcWallet.toDollar = Number(this.fromOTCAmount) * data['ANX'];
+        this.otcWallet.toAmount = rate.exchanged_rate;
+        this.otcWallet.toDollar = this.otcWallet.toAmount * data[this.toType];
         this.fetchingAmount = false;
       }, (err) => {
         this.fetchingAmount = false;
+        this.otcWallet.toAmount = 0;
+        this.otcWallet.toDollar = 0;
         this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
       });
     }, (err) => {
@@ -169,7 +181,7 @@ export class TransferComponent implements OnInit {
       this.sendWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
       });
-      this.sendForm.value.transfer_amount = this.sendWallet.wallet_amount;
+      this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
       this.setAmount(walletType);
     }
     else if (typeValue === 'receive') {
@@ -179,7 +191,6 @@ export class TransferComponent implements OnInit {
       });
     } else if (typeValue === 'from') {
       this.fromType = walletType;
-      // this.setOTCAmount();
     } else if (typeValue === 'to') {
       this.toType = walletType;
       this.otcWallet = this.myWallets.find(item => {
@@ -190,8 +201,8 @@ export class TransferComponent implements OnInit {
   }
 
   onSendTransfer() {
-    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount)) {
-      this.toastrService.danger('Please enter transfer amount.', 'Send');
+    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
+      this.toastrService.danger('Please enter required field for transfer.', 'Send');
       return;
     }
 
@@ -202,7 +213,7 @@ export class TransferComponent implements OnInit {
 
     const transferObj = {
       'user_wallet': this.sendWallet.id,
-      'destination_address': this.sendWallet.address,
+      'destination_address': this.sendForm.value.destination_address,
       'transfer_amount': Number(this.sendForm.value.transfer_amount),
     };
 
@@ -229,7 +240,7 @@ export class TransferComponent implements OnInit {
       this.toastrService.danger('Please enter transfer amount.', 'OTC');
       return;
     }
-    if (Number(this.fromOTCAmount) > Number(this.otcWallet.wallet_amount)) {
+    if (Number(this.fromOTCAmount) > Number(this.anxWallet.wallet_amount)) {
       this.toastrService.danger('You don\'t have sufficient balance to send.', 'OTC');
       return;
     }
@@ -238,22 +249,23 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    /*
     const transferObj = {
       'user_wallet': this.otcWallet.id,
-      'transfer_amount': this.otcWallet.wallet_amount,
-      'anx_amount': this.otcWallet.wallet_amount,
+      'transfer_amount': this.otcWallet.toAmount,
+      'anx_amount': this.fromOTCAmount,
     };
     this.formSubmitting = true;
     this.httpService.post(transferObj, 'transfer-otc/').subscribe((res?: any) => {
       if (res.status) {
-        this.toastrService.success('Transfer successfully!', 'Send Transfer');
+        this.formSubmitting = false;
+        this.toastrService.success('Transfer successfully completed!', 'OTC');
       } else {
-        this.toastrService.danger(res.message, 'Send Transfer');
+        this.formSubmitting = false;
+        this.toastrService.danger(res.message, 'OTC');
       }
     }, err => {
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send Transfer');
+      this.formSubmitting = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'OTC');
     });
-    */
   }
 }
