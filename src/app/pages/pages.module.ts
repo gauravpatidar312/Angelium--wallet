@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { RewardModule } from './reward/reward.module';
 // import { HeavenModule } from './heaven/heaven.module';
 import { HQModule } from './hq/hq.module';
@@ -50,6 +51,9 @@ const PAGES_COMPONENTS = [
     KYCComponent,
     DialogNamePromptComponent,
     MergeComponent,
+  ],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '#' },
   ],
   entryComponents: [
     DialogNamePromptComponent,

@@ -14,7 +14,7 @@
       justify-content: flex-end;
     }
 @include nb-install-component() {
-  
+
   .deltacss {
     position: relative;
     padding-left: 10px;
@@ -256,12 +256,6 @@
 
     nb-action:not(.toggle-settings) {
       padding: 0;
-    }
-  }
-
-  @include media-breakpoint-down(xs) {
-    .right /deep/ {
-      display: none;
     }
   }
 }
