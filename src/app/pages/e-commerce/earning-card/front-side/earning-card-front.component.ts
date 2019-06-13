@@ -18,6 +18,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
   @Input() livePrice: number = 0;
+  @Input() percentage: number = 0;
 
   intervalSubscription: Subscription;
   currencyType: any = {
@@ -54,19 +55,15 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     switch (this.selectedCurrency) {
       case 'ANX':
         this.tokenName = 'ANX';
-        this.livePrice = 0.01;
         break;
       case 'HEAVEN':
         this.tokenName = 'ANX';
-        this.livePrice = 0.01;
         break;
       case 'ANL':
         this.tokenName = 'ANL';
-        this.livePrice = 0.02;
         break;
       case 'ANLP':
         this.tokenName = 'ANL';
-        this.livePrice = 0.02;
         break;
       default:
         this.tokenName = this.selectedCurrency;

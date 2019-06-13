@@ -12,6 +12,7 @@ export class EarningCardComponent {
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
   @Input() livePrice: number = 0;
+  @Input() percentage: number = 0;
 
   toggleFlipView() {
     this.flipped = !this.flipped;

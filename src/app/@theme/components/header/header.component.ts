@@ -83,20 +83,19 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   getANXValue() {
-    this.httpService.get('anx-price/').subscribe(data => {
+    this.httpService.get('anx-price/').subscribe((data?: any) => {
       this.anxValue = data.anx_price;
     });
   }
 
   getMyEarning() {
-    this.httpService.get('my-earning/').subscribe(data => {
+    this.httpService.get('my-earning/').subscribe((data?: any) => {
       this.myEarning = data.total;
     });
   }
 
   getTotalAssetsValue() {
-    this.httpService.get('anx-live-price/').subscribe(data => {
-      console.log('Data ', data);
+    this.httpService.get('anx-live-price/').subscribe((data?: any) => {
       if (data) {
         if (data.hasOwnProperty('EOS')) {
           delete data.EOS;
