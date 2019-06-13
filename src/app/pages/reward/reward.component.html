@@ -157,38 +157,77 @@
                 </div>
               </td>
             </tr>
-            <tr [class]="'hiddenRow expanddiv accordian-body collapse downline' + i"
-              *ngFor="let user of downline.referral_users; let ib = index"
+            <tr 
+              data-toggle="collapse" [attr.data-target]="'.downline1' + i"
+              [class]="'hiddenRow accordion-toggle expanddiv collapse downline' + i"
+              *ngFor="let level2 of downline.referral_users; let ib = index"
               style="background-image: linear-gradient(to right, #494299 , #7659ff);">
               <td>
-                {{user.level}}
+                <span> {{level2.level}} </span>
+                <span class="expand"><span class="fa fa-caret-down"></span></span>
               </td>
               <td>
                 <div class="downlineuser">
-                  <span> {{user.username}} </span><span class="delta up">4%</span>
+                  <span> {{level2.username}} </span><span class="delta up">4%</span>
                 </div>
               </td>
               <td>
                 <div class="downlinetblcss">
-                  <span> {{user.rank}} </span><span class="delta up">4%</span>
+                  <span> {{level2.rank}} </span><span class="delta up">4%</span>
                 </div>
               </td>
               <td>
                 <div class="downlinetblcss">
-                  <span> {{user.heaven}} </span><span class="delta up">4%</span>
+                  <span> {{level2.heaven}} </span><span class="delta up">4%</span>
                 </div>
               </td>
               <td>
                 <div class="downlinetblcss">
-                  <span> {{user.reward}} </span><span class="delta up">4%</span>
+                  <span> {{level2.reward}} </span><span class="delta up">4%</span>
                 </div>
               </td>
               <td>
                 <div class="downlinetblcss">
-                  <span> {{user.your_reward}} </span><span class="delta up">4%</span>
+                  <span> {{level2.your_reward}} </span><span class="delta up">4%</span>
                 </div>
               </td>
             </tr>
+
+            <ng-container *ngFor="let dl of downline.referral_users; let in = index">
+              <tr 
+                [class]="'hiddenRow accordion-toggle expanddiv collapse downline1' + in"
+                *ngFor="let level3 of dl.referral_users; let ibb = index"
+                style="background-image: linear-gradient(to right, #494299 , #7659ff);">
+                <td>
+                  <span> {{level3.level}} </span>
+                </td>
+                <td>
+                  <div class="downlineuser">
+                    <span> {{level3.username}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.rank}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.heaven}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.reward}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.your_reward}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
           </ng-container>
         </tbody>
       </table>
