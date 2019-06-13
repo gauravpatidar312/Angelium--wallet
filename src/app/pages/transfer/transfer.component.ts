@@ -17,10 +17,10 @@ declare const jQuery: any;
 export class TransferComponent implements OnInit {
   private alive = true;
   sendForm: FormGroup;
-  sendType: string = 'BTC';
-  receiveType: string = 'BTC';
+  sendType: string = 'SELECT';
+  receiveType: string = 'SELECT';
   fromType: string = 'ANX';
-  toType: string = 'BTC';
+  toType: string = 'SELECT';
   fromTypes: string[] = ['ANX'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -31,9 +31,9 @@ export class TransferComponent implements OnInit {
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   toggle: boolean;
-  myWallets: any;
-  sendWallet: any;
-  receiveWallet: any;
+  myWallets: any = [];
+  sendWallet: any = {};
+  receiveWallet: any = {};
   anxWallet: any = {};
   otcWallet: any = {};
   fromOTCAmount: number;
@@ -86,10 +86,14 @@ export class TransferComponent implements OnInit {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
-      this.sendWallet = _.find(this.myWallets, ['wallet_type', 'BTC']);
+      this.sendWallet = _.find(this.myWallets, ['wallet_type', 'BTC']) || {};
       this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
-      if (this.sendWallet) {
+      if (this.sendWallet && Object.keys(this.sendWallet).length) {
+        this.sendType = 'BTC';
+        this.receiveType = 'BTC';
+        this.toType = 'BTC';
         this.setAmount('BTC');
+
         this.receiveWallet = {...this.sendWallet};
         this.otcWallet = {...this.sendWallet};
       } else {
@@ -140,19 +144,23 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.fetchingAmount = true;
+    this.otcWallet.toAmount = 0;
     this.anxWallet.walletDollar = this.fromOTCAmount * this.anxWallet.anx_price;
 
     const toWallet = this.myWallets.find(item => {
       return item.wallet_type === this.toType;
     });
 
+    if (!toWallet) {
+      return;
+    }
+
     const obj = {
       'dollar_amount': this.anxWallet.walletDollar,
       'crypto_currency_code': toWallet.wallet_type,
     };
 
-    this.otcWallet.toAmount = 0;
+    this.fetchingAmount = true;
     this.httpService.post(obj, 'convert_to_crypto/').subscribe((rate?: any) => {
       if (rate.ERROR || rate.Error) {
         this.fetchingAmount = false;
@@ -183,8 +191,7 @@ export class TransferComponent implements OnInit {
       });
       this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
       this.setAmount(walletType);
-    }
-    else if (typeValue === 'receive') {
+    } else if (typeValue === 'receive') {
       this.receiveType = walletType;
       this.receiveWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
