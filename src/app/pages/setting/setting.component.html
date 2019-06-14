@@ -49,9 +49,9 @@
                   <td class="title-col">REFFERAL LINK</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
                   <td class="action-col text-center">
-                    <i ngxClipboard [cbContent]="userData?.referral_link" 
-                      class="fa fa-clone ref-link-icon fa-2x"></i>&nbsp;
-                    <i class="ion-archive fa-2x" (click)="open(QRdialog)"></i>
+                    <i ngxClipboard [cbContent]="userData?.referral_link" (click)="copyReferralLink()"
+                      class="fa fa-clone ref-link-icon fa-2x"></i>
+                    <i class="ion-archive down-qrCode-icon fa-2x" (click)="open(QRdialog)"></i>
                   </td>
                 </tr>
                 <tr>
@@ -275,9 +275,9 @@
       QR Code  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <ngx-qrcode 
+      <ngx-qrcode
         id="QR_Canvas"
-        [qrc-element-type]="elementType" 
+        [qrc-element-type]="elementType"
         [qrc-value]="userData?.referral_link"
         qrc-class="aclass"
         qrc-errorCorrectionLevel="L">

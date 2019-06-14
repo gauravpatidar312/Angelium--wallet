@@ -85,6 +85,11 @@ export class SettingComponent implements OnInit {
     });
   }
 
+  copyReferralLink() {
+    if (this.userData.referral_link)
+      this.toastrService.success('Link copied successfully!', 'Referral Link');
+  }
+
   downloadQR(){
     let QR_Canvas = document.getElementById("QR_Canvas");
     let imgBase64 = QR_Canvas.children[0].children[0]['src'];

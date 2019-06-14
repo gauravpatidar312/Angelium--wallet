@@ -1,4 +1,5 @@
 @import '../../@theme/styles/themes';
+@import "~@nebular/theme/styles/global/breakpoints";
 
 @include nb-install-component() {
   ngx-d3-bar,
@@ -38,8 +39,25 @@
     }
   }
 
-   nb-card-body {
+  .myWallets nb-card-body {
     overflow: unset !important;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .total-amount {
+    position: relative;
+    span {
+      position: absolute;
+      right: 30px;
+      bottom: 13px;
+      color: #00bb66;
+      font-weight: bold;
+      font-size: 16px;
+    }
   }
 
   .table {
@@ -599,6 +617,12 @@
       width: 47%;
     }
   }
+
+  @include media-breakpoint-down(sm) {
+    .total-amount span {
+      top: 0;
+    }
+  }
   @media (min-width: 1480px) and (max-width: 1590px) {
     .details label:last-child {
       font-size: 30px;
@@ -671,6 +695,13 @@
     }
     .dropdown {
       min-width: 100px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .total-amount span {
+      font-size: 14px !important;
+      right: 10px !important;
     }
   }
 

@@ -1,47 +1,47 @@
 <div class="row">
-	<div class="col-12 col-lg-6">
-		<nb-card class="top-content">
-			<div class="icon-container">
-				<div class="icon primary"> <i class="fa fa-university"></i></div>
-			</div>
-			<div class="details">
-				<label>Heaven</label>
-				<label class="bigger-text"><span>$</span> {{totalHeaven.heaven}}</label>
-			</div>
-			<div class="actions flex-end text-right">
-				<div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-					<button type="button" ngbDropdownToggle class="btn"
-							[ngClass]="{'btn-outline-success': currentTheme === 'default',
+  <div class="col-12 col-lg-6">
+    <nb-card class="top-content">
+      <div class="icon-container">
+        <div class="icon primary"><i class="fa fa-university"></i></div>
+      </div>
+      <div class="details">
+        <label>Heaven</label>
+        <label class="bigger-text"><span>$</span> {{totalHeaven.heaven}}</label>
+      </div>
+      <div class="actions flex-end text-right">
+        <div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+          <button type="button" ngbDropdownToggle class="btn"
+                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
 										'btn-primary': currentTheme !== 'default',
 										'btn-sm': breakpoint.width <= breakpoints.is}">
-					{{ heavenType }}
-					</button>
-					<ul class="dropdown-menu" ngbDropdownMenu>
-						<li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period, 'heaven')">
-							{{ period }}
-						</li>
-					</ul>
-				</div>
-				<div class="progress-data ">
-					<div class="delta value up"> {{totalHeaven.percentage}}% </div>
-					<div class="progress-container">
-						<div class="progress-value " style="width: 70%;"></div>
-					</div>
-				</div>
-			</div>
-		</nb-card>
-	</div>
-	<div class="col-12 col-lg-6">
-		<nb-card class="top-content">
-			<div class="icon-container">
-				<div class="icon primary"> <i class="nb-bar-chart"></i></div>
-			</div>
-			<div class="details">
-				<label>Heaven drop</label>
-				<label class="bigger-text"><span>$</span> {{heavenDrop?.total_amount}}</label>
-			</div>
-			<div class="actions flex-end text-right">
-				<span class="progress-data-value"><span class="color-green">{{heavenDrop?.total_anx}}</span> ANX</span>
+            {{ heavenType }}
+          </button>
+          <ul class="dropdown-menu" ngbDropdownMenu>
+            <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period, 'heaven')">
+              {{ period }}
+            </li>
+          </ul>
+        </div>
+        <div class="progress-data ">
+          <div class="delta value up"> {{totalHeaven.percentage}}%</div>
+          <div class="progress-container">
+            <div class="progress-value " style="width: 70%;"></div>
+          </div>
+        </div>
+      </div>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-6">
+    <nb-card class="top-content">
+      <div class="icon-container">
+        <div class="icon primary"><i class="nb-bar-chart"></i></div>
+      </div>
+      <div class="details">
+        <label>Heaven drop</label>
+        <label class="bigger-text"><span>$</span> {{heavenDrop?.total_amount}}</label>
+      </div>
+      <div class="actions flex-end text-right">
+        <span class="progress-data-value"><span class="color-green">{{heavenDrop?.total_anx}}</span> ANX</span>
 
         <div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
@@ -58,12 +58,12 @@
           </ul>
         </div>
 
-				<div class="progress-data">
-					<div class="delta value up"> {{heavenDrop?.parcentage}}% </div>
-					<div class="progress-container">
-						<div class="progress-value " [style.width.%]="heavenDrop?.parcentage"></div>
-					</div>
-				</div>
+        <div class="progress-data">
+          <div class="delta value up"> {{heavenDrop?.parcentage}}%</div>
+          <div class="progress-container">
+            <div class="progress-value " [style.width.%]="heavenDrop?.parcentage"></div>
+          </div>
+        </div>
 
       </div>
     </nb-card>
@@ -89,7 +89,9 @@
           <td>$192</td>
         </tr>
       </table>
-			<button class="table_bg" [ngClass]="{'selectedHeaven':selectedHevenPlan=='heaven30'}" (click)="selectedHevenPlan = 'heaven30'">Choose</button>
+      <button class="table_bg" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
+              (click)="selectedHeavenPlan = '30'">Choose
+      </button>
     </div>
   </div>
   <div class="col-md-4">
@@ -111,7 +113,9 @@
           <td>$192</td>
         </tr>
       </table>
-			<button class="table_btn table_bg" [ngClass]="{'selectedHeaven':selectedHevenPlan=='heaven60'}" (click)="selectedHevenPlan = 'heaven60'">Choose</button>
+      <button class="table_btn table_bg" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
+              (click)="selectedHeavenPlan = '60'">Choose
+      </button>
     </div>
   </div>
   <div class="col-md-4">
@@ -133,43 +137,54 @@
           <td>$192</td>
         </tr>
       </table>
-			<button class="table_btn table_bg" [ngClass]="{'selectedHeaven':selectedHevenPlan=='heaven90'}" (click)="selectedHevenPlan = 'heaven90'">Choose</button>
+      <button class="table_btn table_bg" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
+              (click)="selectedHeavenPlan = '90'">Choose
+      </button>
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 myWallets">
     <nb-card>
       <nb-card-body>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6 col-lg-4">
             <div class="form-group">
               <label style="color: #00ff00">From</label>
-              <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+              <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                   ngbDropdown>
                 <button type="button" ngbDropdownToggle class="btn"
                         [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                'btn-primary': currentTheme !== 'default',
                                'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ fromType }}
+                  {{ walletType }}
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let period of fromTypes" (click)="changePeriod(period, 'from')">
-                    {{ period }}
+                  <li class="dropdown-item" *ngFor="let wallet of myWallets"
+                      (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
+                    {{ wallet.wallet_type }}
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="form-group">
+          <div class="col-md-6 col-lg-4">
+            <div class="form-group total-amount">
               <label style="color: #00ff00">Amount</label>
-              <input type="text" placeholder="Nick" class="form-control"/>
+              <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
+                     class="form-control" value="{{wallet?.wallet_amount | number : '1.2-25'}}" (blur)="setAmount(wallet?.wallet_type)"/>
+              <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.2-2' }}</span>
+              <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-12 col-lg-4">
             <div class="form-group">
               <label class="d-none d-md-block">&nbsp;</label>
-              <button class="btn btn-block btn-success btn-rectangle">RUN</button>
+              <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" (click)="onCreateHeaven()"
+                      class="btn btn-block btn-success btn-rectangle">
+                <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
+                <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -179,7 +194,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-8 col-xl-9">
+  <div class="col-md-12 col-xl-12">
     <nb-card>
       <nb-card-body>
         <div class="chart-header">
@@ -212,7 +227,7 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-md-4 col-xl-3">
+  <!--<div class="col-md-4 col-xl-3">
     <nb-card size="xsmall">
       <nb-card-header>
         ANX Price
@@ -230,7 +245,7 @@
       </nb-card-body>
     </nb-card>
     <ngx-solar [chartValue]="'42'"></ngx-solar>
-  </div>
+  </div>-->
 </div>
 <div class="row">
   <div class="col-md-12">
