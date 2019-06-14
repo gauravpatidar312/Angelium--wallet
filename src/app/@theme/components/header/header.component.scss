@@ -2,18 +2,23 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
 @import '~@nebular/theme/styles/global/typography/typography';
+
 :host nb-layout-column {
-      height: 50vw;
-    }
+  height: 50vw;
+}
 
-    :host nb-layout-column:first-child {
-      background: #f4f4f7;
-    }
+:host nb-layout-column:first-child {
+  background: #f4f4f7;
+}
 
-    :host nb-layout-header /deep/ nav {
-      justify-content: flex-end;
-    }
+:host nb-layout-header /deep/ nav {
+  justify-content: flex-end;
+}
+
 @include nb-install-component() {
+  .header-logo {
+    width: 118px;
+  }
 
   .deltacss {
     position: relative;
@@ -83,6 +88,22 @@
     display: flex;
     align-items: center;
     width: auto;
+
+    /deep/ .user-picture.background {
+      order: 2;
+    }
+
+    /deep/ .info-container {
+      margin-left: 0.5rem;
+      order: 1;
+    }
+
+    /deep/ nb-user .user-name {
+      font-family: nb-theme(font-bebas);
+      margin-right: 10px;
+      font-size: 24px;
+      color: #06f9a3;
+    }
 
     .navigation {
       @include nb-ltr(padding-right, nb-theme(padding));
@@ -232,9 +253,9 @@
     nb-user /deep/ .user-name {
       display: none;
     }
-    nb-select /deep/ button{
-         padding: 7px 0px 7px 5px;
-    font-size: 14px;
+    nb-select /deep/ button {
+      padding: 7px 0px 7px 5px;
+      font-size: 14px;
     }
   }
 

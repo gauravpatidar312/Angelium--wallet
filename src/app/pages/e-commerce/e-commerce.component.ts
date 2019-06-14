@@ -5,6 +5,7 @@ import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { ShareDataService } from '../../services/share-data.service';
+import {environment} from 'environments/environment';
 declare let $:any;
 
 interface CardSettings {
@@ -34,21 +35,22 @@ interface Notification {
   styleUrls: ['./e-dashboard.component.scss'],
   templateUrl: './e-commerce.component.html',
 })
-export class ECommerceComponent implements AfterViewInit,OnDestroy {
+export class ECommerceComponent implements AfterViewInit, OnDestroy {
   private alive = true;
 
+  isProduction: any = environment.production;
   cryptoBalance: CryptoBalance[] = [];
   user: any;
   solarValue: number;
   currentTheme: string;
   assetCard: CardSettings = {
-    title: 'Total Assets',
+    title: 'Total Asset',
     value: 0,
     iconClass: 'fa fa-university',
     type: 'primary',
   };
   gainCard: CardSettings = {
-    title: 'Total Gain',
+    title: 'Profit Today',
     value: 0,
     iconClass: 'fa fa-chart-line',
     type: 'primary',

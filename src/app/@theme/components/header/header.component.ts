@@ -9,6 +9,7 @@ import { ShareDataService } from "../../../services/share-data.service";
 import { AuthService } from '../../../_guards/auth.service';
 import { SessionStorageService } from "../../../services/session-storage.service";
 import { Router } from '@angular/router';
+import {environment} from 'environments/environment';
 declare let $: any;
 
 @Component({
@@ -17,6 +18,7 @@ declare let $: any;
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
+  isProduction: any = environment.production;
   userData: any;
   @Input() position = 'normal';
 
