@@ -11,13 +11,13 @@ export class KYCComponent implements OnDestroy {
 
   private alive = true;
   @Output() periodChange = new EventEmitter<string>();
-  @Input() typeOfDay: string;
-  @Input() typeOfMonth: string;
-  @Input() typeOfYear: string;
-  @Input() typeOfCountry: string;
-  @Input() typeOfIdFrom: string;
-  @Input() typeOfIdBack: string;
-  @Input() typeOfProofOfAddress: string;
+  typeOfDay: string;
+  typeOfMonth: string;
+  typeOfYear: string;
+  typeOfCountry: string;
+  typeOfIdFrom: string;
+  typeOfIdBack: string;
+  typeOfProofOfAddress: string;
   types: any = {
     'day': ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
     'month': ['Option 1', 'Option 2', 'Option 3', 'Option 4'],

@@ -38,6 +38,10 @@
     }
   }
 
+   nb-card-body {
+    overflow: unset !important;
+  }
+
   .table {
     tr td {
       border: none;

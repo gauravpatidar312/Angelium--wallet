@@ -17,11 +17,12 @@ export class HeavenComponent implements OnDestroy {
 
   @Output() periodChange = new EventEmitter<string>();
 
-  @Input() heavenType: string = 'week';
-  @Input() heavenDropType: string = 'week';
-
+  heavenType: string = 'week';
+  heavenDropType: string = 'week';
+  fromType: string = 'BTC';
   types: string[] = ['week', 'month', 'year'];
   heavenDropTypes: string[] = ['week', 'month', 'year'];
+  fromTypes: string[] = ['BTC', 'ETH'];
   chartLegend: { iconColor: string; title: string }[];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -187,7 +188,7 @@ export class HeavenComponent implements OnDestroy {
     });
 
     this.httpService.get('user-wallet-address/').subscribe(res => {
-      
+
     });
     this.getTotalHeaven();
     this.getTotalHeavenDrop();
@@ -226,6 +227,8 @@ export class HeavenComponent implements OnDestroy {
       this.heavenType = period;
     else if (typeValue === 'heavenDrop')
       this.heavenDropType = period;
+    else if (typeValue === 'from')
+      this.fromType = period;
     this.periodChange.emit(period);
   }
 

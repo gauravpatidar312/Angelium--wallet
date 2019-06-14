@@ -42,7 +42,7 @@
 			</div>
 			<div class="actions flex-end text-right">
 				<span class="progress-data-value"><span class="color-green">{{heavenDrop?.total_anx}}</span> ANX</span>
-				
+
         <div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -57,7 +57,7 @@
             </li>
           </ul>
         </div>
-        
+
 				<div class="progress-data">
 					<div class="delta value up"> {{heavenDrop?.parcentage}}% </div>
 					<div class="progress-container">
@@ -145,10 +145,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label style="color: #00ff00">From</label>
-              <select class="form-control">
-                <option>BTC</option>
-                <option>ETH</option>
-              </select>
+              <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
+                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                               'btn-primary': currentTheme !== 'default',
+                               'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ fromType }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let period of fromTypes" (click)="changePeriod(period, 'from')">
+                    {{ period }}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
