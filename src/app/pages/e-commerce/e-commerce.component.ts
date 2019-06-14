@@ -6,6 +6,7 @@ import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { ShareDataService } from '../../services/share-data.service';
 import {environment} from 'environments/environment';
+import * as _ from 'lodash';
 declare let $:any;
 
 interface CardSettings {
@@ -40,6 +41,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
 
   isProduction: any = environment.production;
   cryptoBalance: CryptoBalance[] = [];
+  cryptoData: any;
   user: any;
   solarValue: number;
   currentTheme: string;
@@ -124,7 +126,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   }
 
   getNotification() {
-    this.httpService.get('dashboard-notification/').subscribe(data => {
+    this.httpService.get('dashboard-notification/').subscribe((data?: any) => {
       if (data.length) {
         this.userNotification = data.filter((notify) => notify.type === 'user')
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.date).getTime());
@@ -135,8 +137,14 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   }
 
   getAllCryptoBalance() {
-    this.httpService.get('all-crypto-balance/').subscribe(data => {
+    this.httpService.get('all-crypto-balance/').subscribe((data?: any) => {
       this.cryptoBalance = data;
+      this.cryptoData = _.map(this.cryptoBalance, function(obj) {
+        const item: any = {};
+        item.name = obj.type;
+        item.value = obj.amount;
+        return item;
+      });
       this.getLivePriceData();
     });
   }
