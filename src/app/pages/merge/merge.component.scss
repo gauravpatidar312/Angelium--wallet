@@ -2,12 +2,13 @@
 @import "~@nebular/theme/styles/global/breakpoints";
 
 :host {
-  // $auth-layout-padding: 1rem;
+   $auth-layout-padding: 7.3rem;
 
-  // nb-card {
-  //   margin: 0;
-  //   height: calc(100vh - 2 * #{$auth-layout-padding});
-  // }
+   nb-card {
+     margin: 0;
+     height: calc(100vh - 2 * #{$auth-layout-padding});
+     overflow: auto;
+   }
 
   nb-card-body {
     display: flex;
@@ -18,6 +19,15 @@
     margin: auto;
   }
 
+  .navigation .link {
+    text-decoration: none;
+    margin: 1.6em 1.6em 0 1.6em;
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+
   /deep/ .tabset {
     justify-content: center !important;
   }
@@ -25,7 +35,7 @@
   /deep/ li.active > a {
     color: #26df8b !important;
   }
-  
+
 
   // @include media-breakpoint-down(sm) {
   //   nb-card {

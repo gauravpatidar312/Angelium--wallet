@@ -1,10 +1,21 @@
 @import "~@nebular/theme/styles/global/breakpoints";
 :host {
-  $auth-layout-padding: 2.5rem;
+  $auth-layout-padding: 7.3rem;
+
+  /* Hide HTML5 Up and Down arrows. */
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 
   nb-card {
     margin: 0;
     height: calc(100vh - 2 * #{$auth-layout-padding});
+    overflow: auto;
   }
 
   .cardHeadercss {
@@ -13,7 +24,7 @@
 
   .navigation .link {
     text-decoration: none;
-    margin: 1.6em;
+    margin: 1.6em 1.6em 0 1.6em;
     .icon {
       font-size: 2rem;
     }
@@ -57,6 +68,9 @@
       border-radius: 0;
       height: auto;
     }
+    .total-amount span {
+      top: 0;
+    }
   }
 
   .labeldata {
@@ -80,7 +94,11 @@
     margin-top: -31px;
     margin-right: 12px;
   }
-  nb-tab {
+  .copy-icon:hover {
+    color: #00d977;
+    cursor: pointer;
+  }
+   nb-card-body, nb-tab {
     overflow: unset !important;
   }
   /deep/ {
@@ -97,8 +115,8 @@
 @media (max-width: 1430px) {
   .nb-card-wrap {
     margin: 0 auto;
-    width: 80%;
-    max-width: 80%;
+    width: 100%;
+    max-width: 100%;
   }
 }
 

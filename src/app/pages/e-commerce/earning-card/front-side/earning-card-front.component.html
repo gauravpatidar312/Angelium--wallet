@@ -8,7 +8,7 @@
       {{currencyType[selectedCurrency]}}
     </button>
     <ul class="dropdown-menu" ngbDropdownMenu>
-      <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency)">{{ currency }}</li>
+      <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
     </ul>
   </div>
 </nb-card-header>
@@ -25,9 +25,9 @@
     </div>
     <div class="value">{{tokenName}} = $ {{livePrice | number : '1.2-2' }}</div>
     <div class="delta"
-         [class.up]="earningLiveUpdateCardData.delta.up"
-         [class.down]="!earningLiveUpdateCardData.delta.up">
-      {{ earningLiveUpdateCardData.delta.value }}%
+         [class.up]="percentage >= 0"
+         [class.down]="percentage < 0">
+      {{ percentage > 0 ? percentage : (-1 * percentage) }}%
     </div>
   </div>
   <ngx-earning-live-update-chart

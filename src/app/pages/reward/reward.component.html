@@ -93,10 +93,18 @@
       </div>
       <div class="col-md-6 downlineColumn">
         <ul id="downline-navigation" class="nav navbar-pill downLine">
-          <li class="active" style="margin-right:15px;"><a data-toggle="pill" href="#downlinetoday">Today</a></li>
-          <li style="margin-right:15px;"><a data-toggle="pill" href="#downlineweek">Week</a></li>
-          <li style="margin-right:15px;"><a data-toggle="pill" href="#downlinemonth">Month</a></li>
-          <li style="margin-right:15px;"><a data-toggle="pill" href="#downlinetotal">Total</a></li>
+          <li class="active" style="margin-right:15px;">
+            <a data-toggle="pill" href="#downlinetoday" (click)="getDownlineTree('today')">Today</a>
+          </li>
+          <li style="margin-right:15px;">
+            <a data-toggle="pill" href="#downlineweek" (click)="getDownlineTree('weekly')">Week</a>
+          </li>
+          <li style="margin-right:15px;">
+            <a data-toggle="pill" href="#downlinemonth" (click)="getDownlineTree('monthly')">Month</a>
+          </li>
+          <li style="margin-right:15px;">
+            <a data-toggle="pill" href="#downlinetotal" (click)="getDownlineTree('yearly')">Year</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -118,51 +126,113 @@
           <ng-container *ngFor="let downline of downlineData;let i= index">
             <tr data-toggle="collapse" [attr.data-target]="'.downline' + i" class="accordion-toggle">
               <td>
-                <div class=""><span class=""> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
+                <div>
+                  <span> {{ downline.level }}</span>
+                  <span class="expand"><span class="fa fa-caret-down"></span></span>
+                </div>
               </td>
               <td>
-                <div class="downlineuser"><span class=""> {{ downline.username }}</span><span class="delta up">4%</span></div>
+                <div class="downlineuser">
+                  <span> {{ downline.username }}</span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"><span class=""> {{ downline.rank }}</span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{ downline.rank }}</span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"><span class=""> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{ downline.heaven }}</span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"><span class=""> {{ downline.reward }}</span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{ downline.reward }}</span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"><span class=""> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{ downline.your_reward }}</span><span class="delta up">4%</span>
+                </div>
               </td>
             </tr>
-            <tr [class]="'hiddenRow expanddiv accordian-body collapse downline' + i"
-              *ngFor="let rowCount of getArray(downline.level); let ib = index"
+            <tr 
+              data-toggle="collapse" [attr.data-target]="'.downline1' + i"
+              [class]="'hiddenRow accordion-toggle expanddiv collapse downline' + i"
+              *ngFor="let level2 of downline.referral_users; let ib = index"
               style="background-image: linear-gradient(to right, #494299 , #7659ff);">
               <td>
-                1
+                <span> {{level2.level}} </span>
+                <span class="expand"><span class="fa fa-caret-down"></span></span>
               </td>
               <td>
-                <div class="downlineuser"> <span class=""> Rio </span><span class="delta up">4%</span></div>
+                <div class="downlineuser">
+                  <span> {{level2.username}} </span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"> <span class=""> 100% </span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{level2.rank}} </span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{level2.heaven}} </span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{level2.reward}} </span><span class="delta up">4%</span>
+                </div>
               </td>
               <td>
-                <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                <div class="downlinetblcss">
+                  <span> {{level2.your_reward}} </span><span class="delta up">4%</span>
+                </div>
               </td>
             </tr>
+
+            <ng-container *ngFor="let dl of downline.referral_users; let in = index">
+              <tr 
+                [class]="'hiddenRow accordion-toggle expanddiv collapse downline1' + in"
+                *ngFor="let level3 of dl.referral_users; let ibb = index"
+                style="background-image: linear-gradient(to right, #494299 , #7659ff);">
+                <td>
+                  <span> {{level3.level}} </span>
+                </td>
+                <td>
+                  <div class="downlineuser">
+                    <span> {{level3.username}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.rank}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.heaven}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.reward}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="downlinetblcss">
+                    <span> {{level3.your_reward}} </span><span class="delta up">4%</span>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
           </ng-container>
         </tbody>
       </table>
     </div>
-    <div id="downlineweek" class="tab-pane fade">
+    <!-- <div id="downlineweek" class="tab-pane fade">
         <table class="table table-hover table-bordered downlineTree">
             <thead style="background-color: #494299;">
               <tr>
@@ -178,22 +248,22 @@
               <ng-container *ngFor="let downline of downlineData;let i= index">
                 <tr data-toggle="collapse" [attr.data-target]="'.downline' + i" class="accordion-toggle">
                   <td>
-                    <div class=""><span class=""> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
+                    <div><span> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
                   </td>
                   <td>
-                    <div class="downlineuser"><span class=""> {{ downline.username }}</span><span class="delta up">4%</span></div>
+                    <div class="downlineuser"><span> {{ downline.username }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.rank }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.rank }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.reward }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.reward }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
                   </td>
                 </tr>
                 <tr [class]="'hiddenRow expanddiv accordian-body collapse downline' + i"
@@ -203,26 +273,26 @@
                     1
                   </td>
                   <td>
-                    <div class="downlineuser"> <span class=""> Rio </span><span class="delta up">4%</span></div>
+                    <div class="downlineuser"> <span> Rio </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 100% </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 100% </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                 </tr>
               </ng-container>
             </tbody>
           </table>
-    </div>
-    <div id="downlinemonth" class="tab-pane fade">
+    </div> -->
+    <!-- <div id="downlinemonth" class="tab-pane fade">
         <table class="table table-hover table-bordered downlineTree">
             <thead style="background-color: #494299;">
               <tr>
@@ -238,22 +308,22 @@
               <ng-container *ngFor="let downline of downlineData;let i= index">
                 <tr data-toggle="collapse" [attr.data-target]="'.downline' + i" class="accordion-toggle">
                   <td>
-                    <div class=""><span class=""> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
+                    <div><span> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
                   </td>
                   <td>
-                    <div class="downlineuser"><span class=""> {{ downline.username }}</span><span class="delta up">4%</span></div>
+                    <div class="downlineuser"><span> {{ downline.username }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.rank }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.rank }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.reward }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.reward }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
                   </td>
                 </tr>
                 <tr [class]="'hiddenRow expanddiv accordian-body collapse downline' + i"
@@ -263,26 +333,26 @@
                     1
                   </td>
                   <td>
-                    <div class="downlineuser"> <span class=""> Rio </span><span class="delta up">4%</span></div>
+                    <div class="downlineuser"> <span> Rio </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 100% </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 100% </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                 </tr>
               </ng-container>
             </tbody>
           </table>
-    </div>
-    <div id="downlinetotal" class="tab-pane fade">
+    </div> -->
+    <!-- <div id="downlinetotal" class="tab-pane fade">
         <table class="table table-hover table-bordered downlineTree">
             <thead style="background-color: #494299;">
               <tr>
@@ -298,22 +368,22 @@
               <ng-container *ngFor="let downline of downlineData;let i= index">
                 <tr data-toggle="collapse" [attr.data-target]="'.downline' + i" class="accordion-toggle">
                   <td>
-                    <div class=""><span class=""> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
+                    <div><span> {{ downline.level }}</span><span class="expand"><span class="fa fa-caret-down"></span></span></div>
                   </td>
                   <td>
-                    <div class="downlineuser"><span class=""> {{ downline.username }}</span><span class="delta up">4%</span></div>
+                    <div class="downlineuser"><span> {{ downline.username }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.rank }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.rank }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.heaven }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.reward }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.reward }}</span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"><span class=""> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"><span> {{ downline.yourreward }}</span><span class="delta up">4%</span></div>
                   </td>
                 </tr>
                 <tr [class]="'hiddenRow expanddiv accordian-body collapse downline' + i"
@@ -323,25 +393,25 @@
                     1
                   </td>
                   <td>
-                    <div class="downlineuser"> <span class=""> Rio </span><span class="delta up">4%</span></div>
+                    <div class="downlineuser"> <span> Rio </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 100% </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 100% </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                   <td>
-                    <div class="downlinetblcss"> <span class=""> 131 </span><span class="delta up">4%</span></div>
+                    <div class="downlinetblcss"> <span> 131 </span><span class="delta up">4%</span></div>
                   </td>
                 </tr>
               </ng-container>
             </tbody>
           </table>
-    </div>
+    </div> -->
   </nb-card-body>
 </nb-card>
 <ngx-bubble-map></ngx-bubble-map>

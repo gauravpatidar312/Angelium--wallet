@@ -1,5 +1,6 @@
 @import '../@theme/styles/themes';
 @import '../@theme/styles/font-size';
+@import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
   /deep/ router-outlet + * {
@@ -14,6 +15,13 @@
       to {
         opacity: 1;
       }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    /deep/ .cdk-overlay-container .cdk-overlay-pane {
+      left: auto !important;
+      right: 2px !important;
     }
   }
 }

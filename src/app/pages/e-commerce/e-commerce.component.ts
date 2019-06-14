@@ -135,21 +135,24 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
   getAllCryptoBalance() {
     this.httpService.get('all-crypto-balance/').subscribe(data => {
       this.cryptoBalance = data;
-      this.getlivepriceData();
+      this.getLivePriceData();
     });
   }
 
-  getlivepriceData() {
-    this.httpService.get('live-price/').subscribe(data => {
+  getLivePriceData() {
+    this.httpService.get('live-price/').subscribe((data?: any) => {
       Object.keys(data).map(key => {
-        this.cryptoBalance = this.cryptoBalance.map((balance) => {
+        this.cryptoBalance.map((balance) => {
           if (balance.type === key) {
             balance['livePrice'] = data[key];
+          } else if (balance.type === 'HEAVEN') {
+            balance['livePrice'] = data.ANX;
+          } else if (balance.type === 'ANLP') {
+            balance['livePrice'] = data.ANL;
           }
           return balance;
         });
       });
-      // console.log('cryptoBalance with live price', this.cryptoBalance);
     });
   }
 

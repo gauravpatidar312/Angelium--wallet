@@ -50,7 +50,7 @@ export class AuthEffects {
       return this.authService.getProfile()
           .map(user => {
               user.token = data.token;
-              return this.store.dispatch(new UserInfo(user))
+              return this.store.dispatch(new UserInfo(user));
           })
           .catch((error) => {
             return of(new LogInFailure({ error }));

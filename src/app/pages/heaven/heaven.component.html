@@ -38,10 +38,11 @@
 			</div>
 			<div class="details">
 				<label>Heaven drop</label>
-				<label class="bigger-text"><span>$</span> 572,900</label>
+				<label class="bigger-text"><span>$</span> {{heavenDrop?.total_amount}}</label>
 			</div>
 			<div class="actions flex-end text-right">
-				<span class="progress-data-value"><span class="color-green">45895</span> ANX</span>
+				<span class="progress-data-value"><span class="color-green">{{heavenDrop?.total_anx}}</span> ANX</span>
+				
         <div class="slct dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -56,10 +57,11 @@
             </li>
           </ul>
         </div>
+        
 				<div class="progress-data">
-					<div class="delta value up"> 4% </div>
+					<div class="delta value up"> {{heavenDrop?.parcentage}}% </div>
 					<div class="progress-container">
-						<div class="progress-value " style="width: 70%;"></div>
+						<div class="progress-value " [style.width.%]="heavenDrop?.parcentage"></div>
 					</div>
 				</div>
 

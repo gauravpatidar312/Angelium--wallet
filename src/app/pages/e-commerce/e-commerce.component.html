@@ -12,7 +12,7 @@
         <nb-list class="text-white" *ngFor="let userNotify of userNotification.slice(0,2);">
           <nb-list-item>
             <span>{{userNotify.title}}</span> <span class="pull-right">{{userNotify.created | date: 'yyyy.MM.dd'}}</span>
-          </nb-list-item>         
+          </nb-list-item>
         </nb-list>
       </nb-card-body>
     </nb-card>
@@ -24,7 +24,7 @@
         <nb-list class="text-white" *ngFor="let systemNotify of systemNotification.slice(0,2);">
           <nb-list-item>
             <span>{{systemNotify.title}}</span> <span class="pull-right">{{systemNotify.created | date: 'yyyy.MM.dd'}}</span>
-          </nb-list-item>   
+          </nb-list-item>
         </nb-list>
       </nb-card-body>
     </nb-card>
@@ -40,33 +40,12 @@
   <div class="col-xxl-12">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6 col-12" *ngFor="let currency of cryptoBalance;">
-        <ngx-earning-card [selectedCurrency]="currency.type" [amount]="currency.amount" [quantity]="currency.quantity" [livePrice]="currency.livePrice ? currency.livePrice : 0"></ngx-earning-card>
+        <ngx-earning-card [selectedCurrency]="currency.type" [amount]="currency.amount" [quantity]="currency.quantity"
+                          [quantity]="currency.quantity"  [percentage]="currency.percentage || 0"
+                          [livePrice]="currency.livePrice || 0"></ngx-earning-card>
       </div>
-      <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr2">
-        <ngx-earning-card [selectedCurrency]="'HEAVEN'"></ngx-earning-card>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr3">
-        <ngx-earning-card [selectedCurrency]="'ANL'"></ngx-earning-card>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr4">
-        <ngx-earning-card [selectedCurrency]="'XP'"></ngx-earning-card>
-      </div>
- 
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr5">
-        <ngx-earning-card [selectedCurrency]="'BTC'"></ngx-earning-card>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr6">
-        <ngx-earning-card [selectedCurrency]="'ETH'"></ngx-earning-card>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr7">
-        <ngx-earning-card [selectedCurrency]="'USDT'"></ngx-earning-card>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12" id="curr8">
-        <ngx-earning-card [selectedCurrency]="'ANLP'"></ngx-earning-card>
-      </div> -->
     </div>
   </div>
-   
 </div>
 <div class="row">
   <div class="col-lg-6">

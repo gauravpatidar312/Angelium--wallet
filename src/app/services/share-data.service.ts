@@ -9,6 +9,7 @@ export class ShareDataService {
 
   showNotification = false;
   transferTab: string;
+  transferTitle: string;
   constructor() { }
 
   changeData(data: any) {
@@ -17,6 +18,9 @@ export class ShareDataService {
 
   static getErrorMessage(err: any) {
     let msg = 'Something went wrong. We request you to try after sometime.';
+    if (err.status === 500)
+      return msg;
+
     if (err.error)
       msg = err.error[Object.keys(err.error)[0]][0];
     else if (err[Object.keys(err)[0]].length)

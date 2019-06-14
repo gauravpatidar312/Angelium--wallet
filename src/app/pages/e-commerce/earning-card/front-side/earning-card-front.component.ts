@@ -18,6 +18,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
   @Input() livePrice: number = 0;
+  @Input() percentage: number = 0;
 
   intervalSubscription: Subscription;
   currencyType: any = {
@@ -53,8 +54,13 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   ngOnInit() {
     switch (this.selectedCurrency) {
       case 'ANX':
+        this.tokenName = 'ANX';
+        break;
       case 'HEAVEN':
         this.tokenName = 'ANX';
+        break;
+      case 'ANL':
+        this.tokenName = 'ANL';
         break;
       case 'ANLP':
         this.tokenName = 'ANL';
@@ -66,9 +72,10 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     this.getEarningCardData(this.selectedCurrency);
   }
 
-  changeCurrency(currency) {
+  changeCurrency(currency, selectedCurrency) {
     if (currency === 'SEND' || currency === 'RECEIVE' || currency === 'OTC') {
       this.shareDataService.transferTab = currency;
+      this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['/pages/transfer']);
     }
     else if (currency === 'HEAVEN') {

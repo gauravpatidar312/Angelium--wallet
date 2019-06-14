@@ -25,7 +25,7 @@
                   <div
                     *ngIf="((otpForm.submitted || otpSubmitted) && otp_form.phone.errors) || (submitted && f.phone.errors)"
                     class="invalid-feedback">
-                    <div *ngIf="otp_form.phone.errors.required || f.phone.errors.required">Phone number is required
+                    <div *ngIf="(otp_form?.phone.errors && otp_form?.phone.errors.required) || (f?.phone.errors && f?.phone.errors.required)">Phone number is required
                     </div>
                   </div>
                 </div>
