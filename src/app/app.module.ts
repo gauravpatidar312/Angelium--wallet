@@ -35,6 +35,8 @@ import { AuthEffects } from './@core/store/effects/auth.effect';
 import { StoreModule, Store } from '@ngrx/store';
 import { IndexedDBStorageService } from "./services/indexeddb-storage.service";
 import { UserInfo } from './@core/store/actions/user.action';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent],
@@ -48,7 +50,8 @@ import { UserInfo } from './@core/store/actions/user.action';
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     StoreModule.forRoot(reducers, {}),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent],
   providers: [
