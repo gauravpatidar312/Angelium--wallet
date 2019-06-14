@@ -29,6 +29,13 @@ import { AuthService } from "./_guards/auth.service";
 import { AuthGuard } from './_guards/auth.guard';
 import { ShareDataService } from "./services/share-data.service";
 
+import { reducers, AppState } from './@core/store/app.state';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './@core/store/effects/auth.effect';
+import { StoreModule, Store } from '@ngrx/store';
+import { IndexedDBStorageService } from "./services/indexeddb-storage.service";
+import { UserInfo } from './@core/store/actions/user.action';
+
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent],
   imports: [
@@ -40,14 +47,27 @@ import { ShareDataService } from "./services/share-data.service";
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    StoreModule.forRoot(reducers, {}),
+    EffectsModule.forRoot([AuthEffects])
   ],
   bootstrap: [AppComponent],
   providers: [
     SessionStorageService, ToastrService, AuthService,
     ShareDataService,
     { provide: APP_BASE_HREF, useValue: '/' },
+    IndexedDBStorageService
   ],
   entryComponents: [TermsConditionsComponent]
 })
 export class AppModule {
+
+  constructor(private store: Store<AppState>,
+    private storageService: IndexedDBStorageService) {
+    this.storageService.getSessionStorage().subscribe((data) => {
+      if (!data) {
+      } else {
+        this.store.dispatch(new UserInfo(data));
+      }
+    })
+  }
 }

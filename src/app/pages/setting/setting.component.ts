@@ -113,9 +113,11 @@ export class SettingComponent implements OnInit {
   }
 
   updateR18mode(data: any){
-    this.httpService.putWithToken(data, 'r18mode/').subscribe(res=>{
+    this.httpService.putWithToken(data, 'r18mode/').subscribe(res => {
       if (res.status) {
-        this.sessionStorage.updateFromSession('userInfo', data);
+        this.userData.r18mode = data.r18mode;
+        // this.sessionStorage.updateFromSession('userInfo', data);
+        this.sessionStorage.updateUserState(this.userData);
         if (data.r18mode) {
           this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE ENABLED');
         }else{
@@ -137,11 +139,11 @@ export class SettingComponent implements OnInit {
     this.newData({ 'type': type, 'value': value});
     this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(data => {
-        if (type == 'Change Password' && data!=undefined && data!='') {
+        if (type == 'Change Password' && (data!=undefined || data!='')) {
           let endpoint = 'password/';
           let apiData = { 'password' : data };
           this.updateSettingPageData(apiData, endpoint);
-        }else if (type == 'County' && data!=undefined && data!='') {
+        } else if (type == 'Country' && (data!=undefined || data!='')) {
           let endpoint = 'country/';
           let apiData = { 'country' : data };
           this.updateSettingPageData(apiData, endpoint);
@@ -152,12 +154,13 @@ export class SettingComponent implements OnInit {
 
   updateSettingPageData(apiData: any, endpoint: string){
     this.httpService.postWithToken(apiData, endpoint)
-    .subscribe(res=>{
+    .subscribe(res => {
       if (res.status == 'password reset') {
         this.toastrService.success('Password update successfully', 'Password');
       }else if (res.status =='country updated') {
         this.userData.country = apiData.country;
-        this.sessionStorage.updateFromSession('userInfo', apiData);
+        // this.sessionStorage.updateFromSession('userInfo', apiData);
+        this.sessionStorage.updateUserState(this.userData);
         this.toastrService.success('Country update successfully', 'Country');
       }
     }, err=>{
@@ -203,7 +206,8 @@ export class SettingComponent implements OnInit {
           ref.close();
           this.shareDataService.changeData(res);
           this.userData.avatar = res.avatar;
-          this.sessionStorage.updateFromSession('userInfo', res);
+          // this.sessionStorage.updateFromSession('userInfo', res);
+          this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success('User image change successfully', 'Picture updated');
         }
       });

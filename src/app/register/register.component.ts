@@ -116,8 +116,9 @@ export class RegisterComponent implements OnInit {
 
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
-      this.sessionStorageService.saveToSession('userInfo', res);
-      this.getUserSettingInfo();
+      // this.sessionStorageService.saveToSession('userInfo', res);
+      // this.getUserSettingInfo();
+      this.sessionStorageService.updateUserStateWithToken(res);
     }, err => {
       console.log(err);
       this.formSubmitting = false;
@@ -125,12 +126,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  getUserSettingInfo() {
-    this.httpService.get('profile/').subscribe(data => {
-      this.sessionStorageService.updateFromSession('userInfo', data);
-      this.router.navigate(['pages/dashboard']);
-    });
-  }
+  // getUserSettingInfo() {
+  //   this.httpService.get('profile/').subscribe(data => {
+  //     this.sessionStorageService.updateFromSession('userInfo', data);
+  //     this.router.navigate(['pages/dashboard']);
+  //   });
+  // }
 
   openTermsConditions() {
     this.dialogService.open(TermsConditionsComponent,  {

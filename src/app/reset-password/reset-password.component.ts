@@ -104,8 +104,9 @@ export class ResetPasswordComponent implements OnInit {
     this.formSubmitting = true;
     this.httpService.post(this.resetPasswordForm.value, 'verify-forgotpassword-otp/').subscribe(res => {
       if (res.status) {
-        this.sessionStorageService.saveToSession('userInfo', res.data);
-        this.getUserSettingInfo();
+        // this.sessionStorageService.saveToSession('userInfo', res.data);
+        // this.getUserSettingInfo();
+        this.sessionStorageService.updateUserStateWithToken(res.data);
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message || 'Please check OTP code and try again!', 'Reset Password');
@@ -117,10 +118,10 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  getUserSettingInfo() {
-    this.httpService.get('profile/').subscribe(data => {
-      this.sessionStorageService.updateFromSession('userInfo', data);
-      this.router.navigate(['pages/dashboard']);
-    });
-  }
+  // getUserSettingInfo() {
+  //   this.httpService.get('profile/').subscribe(data => {
+  //     this.sessionStorageService.updateFromSession('userInfo', data);
+  //     this.router.navigate(['pages/dashboard']);
+  //   });
+  // }
 }
