@@ -6,7 +6,8 @@ import { takeWhile } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 import {HttpService} from '../../services/http.service';
 
-declare let $ : any
+declare var $ : any
+
 interface CardSettings {
   title: string;
   value: string;
@@ -219,9 +220,9 @@ export class RewardComponent implements OnInit, AfterViewInit {
         this.currentTheme = theme.name;
         this.statusCards1 = this.statusCardsByThemes[theme.name];
       });
-
       this.getDownlineTree('today');
   }
+
 
   getDownlineTree(val){
     let value = val;
@@ -249,4 +250,10 @@ export class RewardComponent implements OnInit, AfterViewInit {
       $(this).parent('li').addClass('active');
     });
   }
+
+  dd(index){
+    $('.panel-collapse'+index+'.collapse').collapse('hide');
+    console.log('.panel-collapse'+index+'.collapse');
+  }
+
 }

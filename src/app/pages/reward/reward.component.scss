@@ -42,7 +42,23 @@
   .card-rewardAllocation {
     height: calc(100% - 1.5rem);
   }
-
+  .tablefixedlayout{
+    table-layout: fixed;
+    margin-bottom: 0px;
+    border-bottom: 0px!important;
+  }
+  .tablefixedlayout th{
+      border-bottom: 0px!important;
+    }
+.accordion-toggle  table{
+  margin-bottom: 0px;
+  table-layout: fixed;
+  border-bottom: 0px;
+  border-top: 0px;
+}
+.accordion-toggle  table td{
+  border-top: 0px!important;
+}
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -163,7 +179,7 @@ table.table-bordered > tbody > tr > td {
   color: #fff;
 }
 .expanddiv {
-  margin: 12px;
+  margin: 0px;
 }
 .navbar-pill {
   justify-content: flex-end;
