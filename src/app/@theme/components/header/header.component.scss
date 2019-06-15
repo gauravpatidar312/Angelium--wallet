@@ -93,6 +93,10 @@
       order: 2;
     }
 
+    /deep/ .user-picture.image {
+      order: 2;
+    }
+
     /deep/ .info-container {
       margin-left: 0.5rem;
       order: 1;
