@@ -53,7 +53,7 @@
     }
     .action-col {
       width: 10%;
-      text-align: right;
+      text-align: center;
       i:hover {
         color: nb-theme(color-success);
         cursor: pointer;
@@ -209,6 +209,22 @@
     border: none;
   }
 
+  /deep/ nb-user .user-name {
+    font-family: nb-theme(font-bebas);
+    letter-spacing: 1px;
+    font-size: 1.9rem;
+  }
+  /deep/ nb-user .user-title {
+    font-family: nb-theme(font-nunito);
+    font-size: 1rem;
+  }
+  .font-nunitoSans {
+    font-family: nb-theme(font-nunito);
+  }
+
+  .font-bebasNeue {
+    font-family: nb-theme(font-bebas);
+  }
   ngb-rating i {
     color: nb-theme(color-success);
     @include nb-for-theme(cosmic) {
@@ -244,12 +260,10 @@
 .ref-link-icon{
   display: inline-block;
   position: relative;
-  bottom: 2px;
   font-size: 15px;
 }
 
 .down-qrCode-icon {
   display: inline-block;
-  margin-left: 8px;
   font-size: 22px;
 }
