@@ -15,7 +15,12 @@
 
 @font-face {
   font-family: 'Montserrat', sans-serif;
-  src : url('/assets/fonts/Montserrat/Montserrat-Reqular.otf');
+  src : url('/assets/fonts/Montserrat/Montserrat-Light.ttf');
+}
+
+@font-face {
+  font-family: 'NunitoSans', sans-serif;
+  src : url('/assets/fonts/NunitoSans/NunitoSans-Light.ttf');
 }
 
 // which themes you what to enable (empty to enable all)
@@ -33,6 +38,7 @@ $nb-themes: nb-register-theme((
   font-bebas: BebasNeue,
   font-avenir: Avenir,
   font-mont: Montserrat,
+  font-nunito: NunitoSans,
 
   switcher-background: #ebeff5,
   switcher-background-percentage: 50%,
@@ -67,6 +73,7 @@ $nb-themes: nb-register-theme((
   font-bebas: BebasNeue,
   font-avenir: Avenir,
   font-mont: Montserrat,
+  font-nunito: NunitoSans,
 
   switcher-background: #4e41a5,
   switcher-background-percentage: 14%,
@@ -101,6 +108,7 @@ $nb-themes: nb-register-theme((
   font-bebas: BebasNeue,
   font-avenir: Avenir,
   font-mont: Montserrat,
+  font-nunito: NunitoSans,
 
   switcher-background: #2b2d34,
   switcher-background-percentage: 14%,

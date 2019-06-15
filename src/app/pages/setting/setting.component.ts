@@ -21,8 +21,8 @@ export let browserRefresh = false;
   styleUrls: ['./setting.component.scss'],
 })
 export class SettingComponent implements OnInit {
+  isProduction: boolean = environment.production;
   evaIcons = [];
-  production:boolean;
   userData: any;
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -39,7 +39,6 @@ export class SettingComponent implements OnInit {
     private sessionStorage: SessionStorageService,
     private router: Router) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
-    this.production = environment.production;
 
     window.onload = (ev) => {
       browserRefresh = true;
