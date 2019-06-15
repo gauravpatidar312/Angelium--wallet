@@ -8,10 +8,9 @@
     <div class="row">
       <div class="col-5 mt-2">
         <div class="title">{{ title }}</div>
-        <div class="status text-white"><span class="text-success">$</span>{{ value }}</div>
       </div>
       <div class="col-7">
-        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+        <!-- <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                               'btn-primary': currentTheme !== 'default',
@@ -23,10 +22,11 @@
               {{ period }}
             </li>
           </ul>
-        </div>
-        <div class="clearfix"></div>
-        <div class="delta up">4%</div>
-        <nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>
+        </div> -->
+        <!-- <div class="clearfix"></div> -->
+        <div class="status text-white"><span class="text-success">$</span>{{ value }}</div>
+        <div class="delta up">{{percentage}}%</div>
+        <!-- <nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar> -->
 
 
       </div>
