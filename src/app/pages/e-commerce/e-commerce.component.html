@@ -25,7 +25,7 @@
         <span class="notification-header">SYSTEM UPDATE</span>
         <nb-list class="text-white" *ngFor="let systemNotify of systemNotification.slice(0,2);">
           <nb-list-item>
-            <span>{{systemNotify.title}}</span> <span class="pull-right">{{systemNotify.created | date: 'yyyy.MM.dd'}}</span>
+            <span class="event-title">{{systemNotify.title}}</span> <span class="pull-right event-date">{{systemNotify.created | date: 'yyyy.MM.dd'}}</span>
           </nb-list-item>
         </nb-list>
       </nb-card-body>
