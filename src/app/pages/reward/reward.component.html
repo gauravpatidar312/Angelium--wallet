@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
+    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value" [percentage]="statusCard.percentage">
       <i [ngClass]="statusCard.iconClass"></i>
     </ngx-status-card>
   </div>
@@ -9,23 +9,23 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-md-6 col-lg-3 col-sm-12" id="curr1">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr1">
+        <ngx-earning-card cardName='Your Rank' [selectedCurrency]="'ANX'" [amount]="100" [quantity]="userData?.level"  [percentage]="4"></ngx-earning-card>
       </div>
-      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr2">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr2">
+        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="100" [quantity]="10"  [percentage]="4 || 0"></ngx-earning-card>
       </div>
-      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr3">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr3">
+        <ngx-earning-card cardName='Downline Angel' [selectedCurrency]="'Bitcoin'" [amount]="100" [quantity]="10"  [percentage]="4 || 0"></ngx-earning-card>
       </div>
-      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
+      <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
         <ngx-earning-card></ngx-earning-card>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!isProduction">
   <div class="col-lg-6">
     <nb-card class="card-rewardAllocation">
       <nb-card-header>Reward Allocation</nb-card-header>
@@ -45,7 +45,7 @@
     <ngx-ecommerce-charts></ngx-ecommerce-charts>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!isProduction">
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header>
@@ -442,4 +442,4 @@
     </div> -->
   </nb-card-body>
 </nb-card>
-<ngx-bubble-map></ngx-bubble-map>
+<ngx-bubble-map *ngIf="!isProduction"></ngx-bubble-map>
