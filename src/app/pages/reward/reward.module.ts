@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NbTreeGridModule } from '@nebular/theme';
 import { RewardComponent } from './reward.component';
 import { EarningCardComponent } from './earning-card/earning-card.component';
 import { EarningCardBackComponent } from './earning-card/back-side/earning-card-back.component';
@@ -51,11 +51,13 @@ import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.compo
     NgxEchartsModule,
     NgxChartsModule,
     Ng2SmartTableModule,
+    NbTreeGridModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCpVhQiwAllg1RAFaxMWSpQruuGARy0Y1k',
       libraries: ['places'],
     }),
     LeafletModule.forRoot(),
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RewardModule { }

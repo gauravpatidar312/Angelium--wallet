@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
+import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { environment } from '../../../environments/environment';
@@ -37,12 +38,32 @@ export interface downlineElement {
   referral_users: any;
 }
 
+interface TreeNode<T> {
+  data: T;
+  children?: TreeNode<T>[];
+  expanded?: boolean;
+}
+
+interface FSEntry {
+  arrow: boolean;
+  heaven: number;
+  level: number;
+  username: string;
+  rank: number;
+  reward: number;
+  your_reward: number;
+  referral_users: any;
+}
+
 @Component({
   selector: 'ngx-reward',
   templateUrl: './reward.component.html',
   styleUrls: ['./reward.component.scss']
 })
 export class RewardComponent implements OnInit, AfterViewInit {
+    allColumns = [ 'level', 'username', 'heaven', 'rank', 'reward', 'your_reward' ];
+    dataSource: TreeNode<FSEntry>[] = [];
+    
     private alive = true;
     isProduction: any = environment.production;
     currentTheme: string;
@@ -215,8 +236,11 @@ export class RewardComponent implements OnInit, AfterViewInit {
     private themeService: NbThemeService,
     private httpService: HttpService,
     private sanitizer: DomSanitizer,
-    private sessionStorage: SessionStorageService) {
+    private sessionStorage: SessionStorageService,
+    private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
+   
     this.userData = this.sessionStorage.getFromSession('userInfo');
+
     const data = this.service.getData();
     const NewOBj = [];
     for (let x = 0; x < 10; x++) {
@@ -260,9 +284,8 @@ export class RewardComponent implements OnInit, AfterViewInit {
     let value = val;
     let url = `downline_tree/?filter_type=${value}`;
     this.httpService.get(url).subscribe(res=>{
-      this.downlineData = [];
-      this.downlineData = res.data;
-      console.log(this.downlineData);
+      this.dataSource = res;
+      console.log(res);
     });
   }
 
@@ -282,10 +305,4 @@ export class RewardComponent implements OnInit, AfterViewInit {
       $(this).parent('li').addClass('active');
     });
   }
-
-  dd(index){
-    $('.panel-collapse'+index+'.collapse').collapse('hide');
-    console.log('.panel-collapse'+index+'.collapse');
-  }
-
 }
