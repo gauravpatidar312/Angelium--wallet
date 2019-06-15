@@ -47,6 +47,7 @@
     margin-bottom: 0px;
     border-bottom: 0px!important;
   }
+  .all-columns{ background: #494299!important; }
   .tablefixedlayout th{
       border-bottom: 0px!important;
     }
@@ -143,10 +144,17 @@ table.table-bordered > tbody > tr > td {
 
 /deep/ .rewardtblcss {
   padding-right: 40px;
+  position: relative;
 }
 /deep/ .rewardtblcss span {
   word-break: break-all;
 }
+.nb-theme-cosmic nb-tree-grid-row-toggle .row-toggle-button .icon, .nb-theme-cosmic nb-sort-icon .icon{
+  color: #fff!important;
+}
+
+
+
 .downlinetblcss,
 .downlineuser {
   position: relative;
