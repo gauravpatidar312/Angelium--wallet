@@ -14,6 +14,7 @@ export class StatusCardComponent implements OnDestroy {
   @Input() title: string;
   @Input() type: any;
   @Input() value: string;
+  @Input() percentage: string;
   @Input() on = true;
   @Input() typeOfPeriod: string = 'week';
   selectedType = '1';

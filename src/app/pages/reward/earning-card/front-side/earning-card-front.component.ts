@@ -1,8 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { interval , Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
+import {Router} from '@angular/router';
+import {ShareDataService} from '../../../../services/share-data.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -12,16 +15,38 @@ import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
 
-  @Input() selectedCurrency: string = 'Bitcoin';
+  @Input() cardName: string = '';
+  @Input() selectedCurrency: string = 'ANX';
+  @Input() amount: number = 0;
+  @Input() quantity: number = 0;
+  @Input() livePrice: number = 0;
+  @Input() percentage: number = 0;
 
+  isProduction: any = environment.production;
   intervalSubscription: Subscription;
-  currencies: string[] = ['Bitcoin', 'Tether', 'Ethereum'];
+  currencyType: any = {
+    'ANX': ['OTC'],
+    'HEAVEN': ['HEAVEN'],
+    'BTC': ['SEND'],
+    'ETH': ['SEND'],
+    'USDT': ['SEND'],
+  };
+  currencies: any = {
+    'ANX': ['OTC'],
+    'HEAVEN': ['HEAVEN'],
+    'BTC': ['SEND', 'RECEIVE', 'HEAVEN'],
+    'ETH': ['SEND', 'RECEIVE', 'HEAVEN'],
+    'USDT': ['SEND', 'RECEIVE', 'HEAVEN'],
+  };
   currentTheme: string;
+  tokenName: string;
   earningLiveUpdateCardData: LiveUpdateChart;
   liveUpdateChartData: { value: [string, number] }[];
 
   constructor(private themeService: NbThemeService,
-              private earningService: EarningData) {
+    private earningService: EarningData,
+    private shareDataService: ShareDataService,
+    private router: Router) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -30,23 +55,36 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    switch (this.selectedCurrency) {
+      case 'ANX':
+        this.tokenName = 'ANX';
+        break;
+      case 'HEAVEN':
+        this.tokenName = 'ANX';
+        break;
+      case 'ANL':
+        this.tokenName = 'ANL';
+        break;
+      case 'ANLP':
+        this.tokenName = 'ANL';
+        break;
+      default:
+        this.tokenName = this.selectedCurrency;
+        break;
+    }
     this.getEarningCardData(this.selectedCurrency);
-    let element1 = document.getElementById('curr1').getElementsByClassName('curre');
-    element1[0].innerHTML = 'Todays Rewards';
-    let element2 = document.getElementById('curr2').getElementsByClassName('curre');
-    element2[0].innerHTML = 'Total Rewards';
-    let element3 = document.getElementById('curr3').getElementsByClassName('curre');
-    element3[0].innerHTML = 'Group Heaven';
-    let element4 = document.getElementById('curr4').getElementsByClassName('curre');
-    element4[0].innerHTML = 'Downline';
   }
-  // changeCurrency(currency) {
-  //   if (this.selectedCurrency !== currency) {
-  //     this.selectedCurrency = currency;
 
-  //     this.getEarningCardData(this.selectedCurrency);
-  //   }
-  // }
+  changeCurrency(currency, selectedCurrency) {
+    if (currency === 'SEND' || currency === 'RECEIVE' || currency === 'OTC') {
+      this.shareDataService.transferTab = currency;
+      this.shareDataService.transferTitle = selectedCurrency;
+      this.router.navigate(['/pages/transfer']);
+    }
+    else if (currency === 'HEAVEN') {
+      this.router.navigate(['pages/heaven']);
+    }
+  }
 
   private getEarningCardData(currency) {
     this.earningService.getEarningCardData(currency)

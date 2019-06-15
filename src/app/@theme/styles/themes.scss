@@ -9,17 +9,22 @@
 }
 
 @font-face {
+  font-family: 'BebasNeueLight';
+  src : url('/assets/fonts/BebasNeue/BebasNeue-Light.ttf');
+}
+
+@font-face {
   font-family: 'Avenir';
   src : url('/assets/fonts/Avenir/Avenir-Light.ttf');
 }
 
 @font-face {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   src : url('/assets/fonts/Montserrat/Montserrat-Light.ttf');
 }
 
 @font-face {
-  font-family: 'NunitoSans', sans-serif;
+  font-family: 'NunitoSans';
   src : url('/assets/fonts/NunitoSans/NunitoSans-Light.ttf');
 }
 
@@ -36,6 +41,7 @@ $nb-themes: nb-register-theme((
   font-secondary: Exo,
 
   font-bebas: BebasNeue,
+  font-bebas-light: BebasNeueLight,
   font-avenir: Avenir,
   font-mont: Montserrat,
   font-nunito: NunitoSans,
@@ -71,6 +77,7 @@ $nb-themes: nb-register-theme((
   font-secondary: Exo,
 
   font-bebas: BebasNeue,
+  font-bebas-light: BebasNeueLight,
   font-avenir: Avenir,
   font-mont: Montserrat,
   font-nunito: NunitoSans,
@@ -106,6 +113,7 @@ $nb-themes: nb-register-theme((
   font-secondary: Exo,
 
   font-bebas: BebasNeue,
+  font-bebas-light: BebasNeueLight,
   font-avenir: Avenir,
   font-mont: Montserrat,
   font-nunito: NunitoSans,
