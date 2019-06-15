@@ -7,6 +7,7 @@ import {HttpService} from '../../services/http.service';
 import * as _ from 'lodash';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'ngx-heaven',
@@ -16,6 +17,7 @@ import {ShareDataService} from '../../services/share-data.service';
 export class HeavenComponent implements OnInit, OnDestroy {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
+  isProduction: any = environment.production;
   heavenDrop: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';

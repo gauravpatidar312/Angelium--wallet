@@ -5,7 +5,7 @@ import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { ShareDataService } from '../../services/share-data.service';
-import {environment} from 'environments/environment';
+import {environment} from '../../../environments/environment';
 import * as _ from 'lodash';
 declare let $:any;
 

@@ -6,12 +6,15 @@ import { takeWhile } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
+import { SessionStorageService } from '../../services/session-storage.service';
+import { environment } from '../../../environments/environment';
 
 declare var $ : any
 
 interface CardSettings {
   title: string;
   value: string;
+  percentage: string;
   iconClass: string;
   type: string;
 }
@@ -62,6 +65,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     dataSource: TreeNode<FSEntry>[] = [];
     
     private alive = true;
+    isProduction: any = environment.production;
     currentTheme: string;
     source: LocalDataSource = new LocalDataSource();
 
@@ -185,22 +189,24 @@ export class RewardComponent implements OnInit, AfterViewInit {
       },
     };
 
-    assetCard: CardSettings = {
-      title: 'Total Assets',
-      value: '572,900',
-      iconClass: 'fa fa-university',
+    totalRewardCard: CardSettings = {
+      title: 'Total Reward',
+      value: '0',
+      percentage: '0',
+      iconClass: 'nb-home',
       type: 'primary',
     };
-    gainCard: CardSettings = {
-      title: 'Total Gain',
-      value: '572,900',
-      iconClass: 'fa fa-chart-line',
+    todayRewadCard: CardSettings = {
+      title: 'Reward Today',
+      value: '0',
+      percentage: '0',
+      iconClass: 'nb-roller-shades',
       type: 'primary',
     };
 
     commonStatusCardsSet: CardSettings[] = [
-      this.assetCard,
-      this.gainCard,
+      this.totalRewardCard,
+      this.todayRewadCard,
     ];
     statusCards1: string;
 
@@ -213,11 +219,11 @@ export class RewardComponent implements OnInit, AfterViewInit {
         cosmic: this.commonStatusCardsSet,
         corporate: [
           {
-            ...this.assetCard,
+            ...this.totalRewardCard,
             type: 'primary',
           },
           {
-            ...this.gainCard,
+            ...this.todayRewadCard,
             type: 'primary',
           },
         ],
@@ -225,12 +231,15 @@ export class RewardComponent implements OnInit, AfterViewInit {
 
     downlineData: downlineElement[];
 
+  userData: any;
   constructor(private service: SmartTableData,
     private themeService: NbThemeService,
     private httpService: HttpService,
     private sanitizer: DomSanitizer,
+    private sessionStorage: SessionStorageService,
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
-    
+   
+    this.userData = this.sessionStorage.getFromSession('userInfo');
 
     const data = this.service.getData();
     const NewOBj = [];
@@ -245,8 +254,31 @@ export class RewardComponent implements OnInit, AfterViewInit {
         this.statusCards1 = this.statusCardsByThemes[theme.name];
       });
       this.getDownlineTree('today');
+      this.getDownlinecount();
+      this.getreward();
   }
 
+  getreward() {
+    let url = `reward/`;
+    this.httpService.get(url).subscribe(res => {
+      if (res.total) {
+        this.totalRewardCard.value = res.total.reward;
+        this.totalRewardCard.percentage = res.total.percentage;
+      }
+      if (res.daily) {
+        this.todayRewadCard.value = res.daily.reward;
+        this.todayRewadCard.percentage = res.total.percentage;
+      }
+      // console.log('reward', res);
+    });
+  }
+
+  getDownlinecount() {
+    let url = `downline_count/`;
+    this.httpService.get(url).subscribe(res=>{
+      // console.log('downline count', res);
+    });
+  }
 
   getDownlineTree(val){
     let value = val;

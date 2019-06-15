@@ -1,3 +1,4 @@
+@import '../../@theme/styles/themes';
 @import "~@nebular/theme/styles/global/breakpoints";
 :host {
   $auth-layout-padding: 7.3rem;
@@ -25,6 +26,8 @@
   .navigation .link {
     text-decoration: none;
     margin: 1.6em 1.6em 0 1.6em;
+    font-family: nb-theme(font-bebas);
+    font-size: 3.4rem;
     .icon {
       font-size: 2rem;
     }
@@ -61,6 +64,19 @@
 
   nb-auth-block {
     margin: auto;
+  }
+
+  /deep/ nb-tabset .tabset .tab, .font-nunitoSans {
+     font-family: nb-theme(font-avenir);
+  }
+
+  .btn-primary {
+    background-image: linear-gradient(to right, #ad59ff, #7659ff);
+    border: 1px;
+  }
+
+  .btn-success {
+    background-image: linear-gradient(to right, #00D9BB, #00DA79);
   }
 
   @include media-breakpoint-down(sm) {

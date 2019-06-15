@@ -6,6 +6,7 @@ import {HttpService} from '../../services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from '../../services/toastr.service';
 import {ActivatedRoute} from '@angular/router';
+import {environment} from 'environments/environment';
 import * as _ from 'lodash';
 
 declare const jQuery: any;
@@ -16,6 +17,7 @@ declare const jQuery: any;
 })
 export class TransferComponent implements OnInit {
   private alive = true;
+  isProduction: any = environment.production;
   sendForm: FormGroup;
   sendType: string = 'SELECT';
   receiveType: string = 'SELECT';
@@ -36,6 +38,7 @@ export class TransferComponent implements OnInit {
   receiveWallet: any = {};
   anxWallet: any = {};
   otcWallet: any = {};
+  otcWallets: any = {};
   fromOTCAmount: number;
 
   constructor(private httpService: HttpService,
@@ -86,6 +89,11 @@ export class TransferComponent implements OnInit {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
+      if (this.isProduction)
+        this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || {};
+      else
+        this.otcWallets = this.myWallets;
+
       this.sendWallet = _.find(this.myWallets, ['wallet_type', 'BTC']) || {};
       this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
       if (this.sendWallet && Object.keys(this.sendWallet).length) {

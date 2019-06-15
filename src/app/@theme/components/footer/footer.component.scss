@@ -21,16 +21,26 @@
       }
     }
   }
+  .font-avenir {
+    font-family: nb-theme(font-avenir);
+  }
+
+  .angelium-text {
+    font-family: nb-theme(font-bebas);
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-left: 4px;
+  }
  @include media-breakpoint-down(sm) {
       a {
       padding: 0.1rem !important;
     }
-    
+
   }
   @include media-breakpoint-down(is) {
     .socials {
       font-size: 1.5rem;
     }
   }
-   
+
 }
