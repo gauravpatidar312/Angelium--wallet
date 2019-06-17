@@ -7,7 +7,7 @@
               'btn-primary': currentTheme !== 'default'}">
       <!--{{currencyType[selectedCurrency]}}--> &nbsp;
     </button>
-    <ul class="dropdown-menu" *ngIf="!isProduction" ngbDropdownMenu>
+    <ul class="dropdown-menu" ngbDropdownMenu>
       <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
     </ul>
   </div>

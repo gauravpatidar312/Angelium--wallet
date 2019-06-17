@@ -90,6 +90,7 @@
     width: auto;
 
     /deep/ .user-picture.background {
+      cursor: pointer;
       order: 2;
     }
 
