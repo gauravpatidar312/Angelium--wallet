@@ -21,9 +21,7 @@
       <nb-user [picture]="userData?.avatar"
                [name]="userData?.username"
                title=""
-               [nbContextMenu]="userMenu"
-               [nbContextMenuAdjustment]="'noop'"
-               nbContextMenuTag="my-context-menu">
+               [nbContextMenu]="userMenu">
       </nb-user>
     </nb-action>
     <nb-action class="control-item notificationCalender" icon="nb-notifications" *ngIf="!isProduction"></nb-action>
