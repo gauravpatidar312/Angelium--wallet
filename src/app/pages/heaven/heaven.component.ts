@@ -276,7 +276,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
       }
     }, (err) => {
       this.formSubmitting = false;
-      this.toastrService.danger(err.error.message || ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
