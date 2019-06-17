@@ -19,6 +19,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
   private alive = true;
   isProduction: any = environment.production;
   heavenDrop: any;
+  totalHeaven: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = 'SELECT';
@@ -147,17 +148,11 @@ export class HeavenComponent implements OnInit, OnDestroy {
 
     this.getWallets();
     this.getTotalHeaven();
-    this.getTotalHeavenDrop();
     this.getHeavenGraph();
     this.getANXHistory();
     this.getHeavenReleaseSettings();
     this.getHeavenHistory();
   }
-  totalHeaven = {
-    heaven: 0,
-    percentage: 0,
-  };
-
   selectedHeavenPlan = '';
 
   settings = {
@@ -281,14 +276,8 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   getTotalHeaven() {
-    this.httpService.get('total-heaven?filter_type="week"').subscribe((res) => {
-      console.log('total-heaven', res);
-      // if (res.hasOwnProperty('heaven')) {
-      //   this.totalHeaven.heaven = res.heaven;
-      // }
-      // if (res.hasOwnProperty('percentage')) {
-      //   this.totalHeaven.percentage = res.percentage;
-      // }
+    this.httpService.get('total-heaven/').subscribe((res?: any) => {
+      this.totalHeaven = res;
     });
   }
 
@@ -304,13 +293,6 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.walletType = 'SELECT';
     });
   }
-
-  getTotalHeavenDrop() {
-    this.httpService.get('heaven-drop?filter_type="week"').subscribe((res) => {
-      console.log('drop', res);
-    });
-  }
-
   getHeavenGraph() {
     this.httpService.get('heaven-graph/').subscribe((res) => {
       console.log('getHeavenGraph', res);
