@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
+    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value"
+      [percentage]="statusCard.percentage">
       <i [ngClass]="statusCard.iconClass"></i>
     </ngx-status-card>
   </div>
@@ -9,23 +10,26 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-md-6 col-lg-3 col-sm-12" id="curr1">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr1">
+        <ngx-earning-card cardName='Your Rank' [selectedCurrency]="'ANX'" [amount]="100" [quantity]="userData?.level"
+          [percentage]="4"></ngx-earning-card>
       </div>
-      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr2">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr2">
+        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="100" [quantity]="10"
+          [percentage]="4 || 0"></ngx-earning-card>
       </div>
-      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr3">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr3">
+        <ngx-earning-card cardName='Downline Angel' [selectedCurrency]="'Bitcoin'" [amount]="100" [quantity]="10"
+          [percentage]="4 || 0"></ngx-earning-card>
       </div>
-      <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
+      <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
         <ngx-earning-card></ngx-earning-card>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!isProduction">
   <div class="col-lg-6">
     <nb-card class="card-rewardAllocation">
       <nb-card-header>Reward Allocation</nb-card-header>
@@ -45,7 +49,7 @@
     <ngx-ecommerce-charts></ngx-ecommerce-charts>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!isProduction">
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header>
@@ -83,6 +87,7 @@
   </div>
 </div>
 
+
 <nb-card>
   <nb-card-header>
     <div class="row">
@@ -111,125 +116,51 @@
   </nb-card-header>
   <nb-card-body class="tab-content">
     <div id="downlinetoday" class="tab-pane active">
-      <table class="table table-hover table-bordered downlineTree">
-        <thead style="background-color: #494299;">
-          <tr>
-            <th>Level</th>
-            <th>Username</th>
-            <th>Rank</th>
-            <th>Heaven</th>
-            <th>Reward</th>
-            <th>Your Reward</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let downline of downlineData;let i= index">
-            <tr data-toggle="collapse" [attr.data-target]="'.downline' + i" class="accordion-toggle">
-              <td>
-                <div>
-                  <span> {{ downline.level }}</span>
-                  <span class="expand"><span class="fa fa-caret-down"></span></span>
-                </div>
-              </td>
-              <td>
-                <div class="downlineuser">
-                  <span> {{ downline.username }}</span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{ downline.rank }}</span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{ downline.heaven }}</span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{ downline.reward }}</span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{ downline.your_reward }}</span><span class="delta up">4%</span>
-                </div>
-              </td>
-            </tr>
-            <tr 
-              data-toggle="collapse" [attr.data-target]="'.downline1' + i"
-              [class]="'hiddenRow accordion-toggle expanddiv collapse downline' + i"
-              *ngFor="let level2 of downline.referral_users; let ib = index"
-              style="background-image: linear-gradient(to right, #494299 , #7659ff);">
-              <td>
-                <span> {{level2.level}} </span>
-                <span class="expand"><span class="fa fa-caret-down"></span></span>
-              </td>
-              <td>
-                <div class="downlineuser">
-                  <span> {{level2.username}} </span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{level2.rank}} </span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{level2.heaven}} </span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{level2.reward}} </span><span class="delta up">4%</span>
-                </div>
-              </td>
-              <td>
-                <div class="downlinetblcss">
-                  <span> {{level2.your_reward}} </span><span class="delta up">4%</span>
-                </div>
-              </td>
-            </tr>
+      <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
+        <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+        <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+        <ng-container nbTreeGridColumnDef="level">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Level</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <nb-tree-grid-row-toggle style="float: right;" [expanded]="row.expanded" *ngIf="row.data.arrow === true">
+            </nb-tree-grid-row-toggle>
+            {{row.data.level}}
+          </td>
+        </ng-container>
+        <ng-container nbTreeGridColumnDef="username">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Username</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <div class="rewardtblcss">
+              <span class="">{{row.data.username}} </span>
+              <!-- <span class="delta up">4%</span> -->
+            </div>
+          </td>
+        </ng-container>
 
-            <ng-container *ngFor="let dl of downline.referral_users; let in = index">
-              <tr 
-                [class]="'hiddenRow accordion-toggle expanddiv collapse downline1' + in"
-                *ngFor="let level3 of dl.referral_users; let ibb = index"
-                style="background-image: linear-gradient(to right, #494299 , #7659ff);">
-                <td>
-                  <span> {{level3.level}} </span>
-                </td>
-                <td>
-                  <div class="downlineuser">
-                    <span> {{level3.username}} </span><span class="delta up">4%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="downlinetblcss">
-                    <span> {{level3.rank}} </span><span class="delta up">4%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="downlinetblcss">
-                    <span> {{level3.heaven}} </span><span class="delta up">4%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="downlinetblcss">
-                    <span> {{level3.reward}} </span><span class="delta up">4%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="downlinetblcss">
-                    <span> {{level3.your_reward}} </span><span class="delta up">4%</span>
-                  </div>
-                </td>
-              </tr>
-            </ng-container>
-          </ng-container>
-        </tbody>
+        <ng-container nbTreeGridColumnDef="rank">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Rank</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.rank || '-'}}</td>
+        </ng-container>
+
+        <ng-container nbTreeGridColumnDef="heaven">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.heaven || '-'}}</td>
+        </ng-container>
+
+        <ng-container nbTreeGridColumnDef="reward">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Reward</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.reward || '-'}}</td>
+        </ng-container>
+
+        <ng-container nbTreeGridColumnDef="rate">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Rate</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">100%</td>
+        </ng-container>
+
+        <ng-container nbTreeGridColumnDef="your_reward">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Your Reward</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.your_reward || '-'}}</td>
+        </ng-container>
       </table>
     </div>
     <!-- <div id="downlineweek" class="tab-pane fade">
@@ -414,4 +345,4 @@
     </div> -->
   </nb-card-body>
 </nb-card>
-<ngx-bubble-map></ngx-bubble-map>
+<ngx-bubble-map *ngIf="!isProduction"></ngx-bubble-map>

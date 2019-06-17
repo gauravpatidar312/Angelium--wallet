@@ -5,6 +5,8 @@ import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { ShareDataService } from '../../services/share-data.service';
+import {environment} from '../../../environments/environment';
+import * as _ from 'lodash';
 declare let $:any;
 
 interface CardSettings {
@@ -34,21 +36,23 @@ interface Notification {
   styleUrls: ['./e-dashboard.component.scss'],
   templateUrl: './e-commerce.component.html',
 })
-export class ECommerceComponent implements AfterViewInit,OnDestroy {
+export class ECommerceComponent implements AfterViewInit, OnDestroy {
   private alive = true;
 
+  isProduction: any = environment.production;
   cryptoBalance: CryptoBalance[] = [];
+  cryptoData: any;
   user: any;
   solarValue: number;
   currentTheme: string;
   assetCard: CardSettings = {
-    title: 'Total Assets',
+    title: 'Total Asset',
     value: 0,
     iconClass: 'fa fa-university',
     type: 'primary',
   };
   gainCard: CardSettings = {
-    title: 'Total Gain',
+    title: 'Profit Today',
     value: 0,
     iconClass: 'fa fa-chart-line',
     type: 'primary',
@@ -122,7 +126,7 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
   }
 
   getNotification() {
-    this.httpService.get('dashboard-notification/').subscribe(data => {
+    this.httpService.get('dashboard-notification/').subscribe((data?: any) => {
       if (data.length) {
         this.userNotification = data.filter((notify) => notify.type === 'user')
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.date).getTime());
@@ -133,8 +137,14 @@ export class ECommerceComponent implements AfterViewInit,OnDestroy {
   }
 
   getAllCryptoBalance() {
-    this.httpService.get('all-crypto-balance/').subscribe(data => {
+    this.httpService.get('all-crypto-balance/').subscribe((data?: any) => {
       this.cryptoBalance = data;
+      this.cryptoData = _.map(this.cryptoBalance, function(obj) {
+        const item: any = {};
+        item.name = obj.type;
+        item.value = obj.amount;
+        return item;
+      });
       this.getLivePriceData();
     });
   }

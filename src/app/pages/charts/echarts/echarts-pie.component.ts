@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { OnChanges, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
@@ -8,16 +8,16 @@ import { NbThemeService } from '@nebular/theme';
   `,
   styleUrls: ['./echarts.component.scss'],
 })
-export class EchartsPieComponent implements AfterViewInit, OnDestroy {
+export class EchartsPieComponent implements OnChanges, OnDestroy {
+  @Input() dataSource: any;
   options: any = {};
   themeSubscription: any;
 
   constructor(private theme: NbThemeService) {
   }
 
-  ngAfterViewInit() {
+  ngOnChanges() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors = config.variables;
       const echarts: any = config.variables.echarts;
 
@@ -42,16 +42,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
-            data: [
-              { value: 335, name: 'ANX' },
-              { value: 310, name: 'HEAVEN' },
-              { value: 234, name: 'ANL' },
-              { value: 135, name: 'XP' },
-              { value: 1548, name: 'BTC' },
-              { value: 105, name: 'ETH' },
-              { value: 300, name: 'USDT' },
-              { value: 350, name: 'ANLP' },
-            ],
+            data: this.dataSource,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,

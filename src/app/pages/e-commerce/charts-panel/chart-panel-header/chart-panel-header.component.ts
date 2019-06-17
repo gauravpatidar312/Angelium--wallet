@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 
@@ -8,19 +8,12 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./chart-panel-header.component.scss'],
   templateUrl: './chart-panel-header.component.html',
 })
-export class ChartPanelHeaderComponent implements OnDestroy {
+export class ChartPanelHeaderComponent implements OnChanges, OnDestroy {
 
   private alive = true;
-  private value = '';
   @Output() periodChange = new EventEmitter<string>();
-
-  @Input('typeData')
-  set typeData(value: string) {
-    this.value = value;
-    this.setLegendItems(this.orderProfitLegend);
-  }
+  @Input() typeData: any;
   @Input() type: string = 'today';
-
   types: string[] = ['today', 'week', 'month', 'total'];
   chartLegend: {iconColor: string; title: string}[];
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
@@ -47,8 +40,12 @@ export class ChartPanelHeaderComponent implements OnDestroy {
         });
   }
 
+  ngOnChanges() {
+    this.setLegendItems(this.orderProfitLegend);
+  }
+
   setLegendItems(orderProfitLegend) {
-    if (this.value === 'assets') {
+    if (this.typeData === 'assets') {
       this.chartLegend = [
         {
           iconColor: orderProfitLegend.firstItem,

@@ -42,7 +42,26 @@
   .card-rewardAllocation {
     height: calc(100% - 1.5rem);
   }
-
+  .tablefixedlayout {
+    table-layout: fixed;
+    margin-bottom: 0px;
+    border-bottom: 0px !important;
+  }
+  .all-columns {
+    background: #494299 !important;
+  }
+  .tablefixedlayout th {
+    border-bottom: 0px !important;
+  }
+  .accordion-toggle table {
+    margin-bottom: 0px;
+    table-layout: fixed;
+    border-bottom: 0px;
+    border-top: 0px;
+  }
+  .accordion-toggle table td {
+    border-top: 0px !important;
+  }
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -69,7 +88,7 @@
     display: inline-block;
     color: nb-theme(color-fg-heading);
     padding-left: 0.2rem;
-    margin-right: 8px;
+    // margin-right: 8px;
     font-size: 1rem;
     // top: 20px;
     right: 0px;
@@ -110,14 +129,12 @@
 }
 table.table-bordered > thead > tr > th {
   border: 1px solid #2e296a;
-  font-family: roboto;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
   color: #ffffff;
 }
 table.table-bordered {
-  font-family: roboto;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -129,10 +146,22 @@ table.table-bordered > tbody > tr > td {
 
 /deep/ .rewardtblcss {
   padding-right: 40px;
+  position: relative;
 }
 /deep/ .rewardtblcss span {
   word-break: break-all;
 }
+.nb-theme-cosmic nb-tree-grid-row-toggle .row-toggle-button .icon,
+.nb-theme-cosmic nb-sort-icon .icon {
+  color: #fff !important;
+}
+
+.navbar-header {
+  font-family: nb-theme(font-bebas);
+  font-weight: 500;
+  font-size: 22px;
+}
+
 .downlinetblcss,
 .downlineuser {
   position: relative;
@@ -141,6 +170,10 @@ table.table-bordered > tbody > tr > td {
 .downlinetblcss,
 .downlineuser span {
   word-break: break-all;
+}
+
+.downlineTree {
+ font-family: nb-theme(font-nunito);
 }
 
 /deep/ .caret {
@@ -163,7 +196,7 @@ table.table-bordered > tbody > tr > td {
   color: #fff;
 }
 .expanddiv {
-  margin: 12px;
+  margin: 0px;
 }
 .navbar-pill {
   justify-content: flex-end;
@@ -173,7 +206,7 @@ table.table-bordered > tbody > tr > td {
   border-radius: 2px;
   border-bottom: 5px solid #26df8b;
   text-decoration-color: #26df8b;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -182,7 +215,7 @@ table.table-bordered > tbody > tr > td {
 #main-navigation li > a {
   padding: 10px;
   text-decoration: none;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -193,7 +226,7 @@ table.table-bordered > tbody > tr > td {
   border-radius: 2px;
   border-bottom: 5px solid #26df8b;
   text-decoration-color: #26df8b;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -202,7 +235,7 @@ table.table-bordered > tbody > tr > td {
 #downline-navigation li > a {
   padding: 10px;
   text-decoration: none;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -210,6 +243,9 @@ table.table-bordered > tbody > tr > td {
 }
 
 @media (min-width: 300px) and (max-width: 480px) {
+  /deep/ .icon-container {
+    display: none;
+  }
   .rewardColumn,
   .downlineColumn {
     margin-top: 10px;

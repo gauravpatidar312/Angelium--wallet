@@ -9,9 +9,10 @@
   <div class="col-md-12 col-lg-6 col-xxxl-6">
     <nb-card class="list-card" *ngIf="userNotification.length">
       <nb-card-body>
+        <span class="notification-header">EVENT UPDATE</span>
         <nb-list class="text-white" *ngFor="let userNotify of userNotification.slice(0,2);">
           <nb-list-item>
-            <span>{{userNotify.title}}</span> <span class="pull-right">{{userNotify.created | date: 'yyyy.MM.dd'}}</span>
+            <span class="event-title">{{userNotify.title}}</span> <span class="pull-right event-date">{{userNotify.created | date: 'yyyy.MM.dd'}}</span>
           </nb-list-item>
         </nb-list>
       </nb-card-body>
@@ -21,9 +22,10 @@
   <div class="col-md-12 col-lg-6 col-xxxl-6">
     <nb-card class="list-card" *ngIf="systemNotification.length">
       <nb-card-body>
+        <span class="notification-header">SYSTEM UPDATE</span>
         <nb-list class="text-white" *ngFor="let systemNotify of systemNotification.slice(0,2);">
           <nb-list-item>
-            <span>{{systemNotify.title}}</span> <span class="pull-right">{{systemNotify.created | date: 'yyyy.MM.dd'}}</span>
+            <span class="event-title">{{systemNotify.title}}</span> <span class="pull-right event-date">{{systemNotify.created | date: 'yyyy.MM.dd'}}</span>
           </nb-list-item>
         </nb-list>
       </nb-card-body>
@@ -47,12 +49,12 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!isProduction">
   <div class="col-lg-6">
     <nb-card class="card-portfolio">
       <nb-card-header>PORTFOLIO</nb-card-header>
       <nb-card-body>
-        <ngx-echarts-pie></ngx-echarts-pie>
+        <ngx-echarts-pie [dataSource]="cryptoData"></ngx-echarts-pie>
       </nb-card-body>
     </nb-card>
   </div>
@@ -77,7 +79,7 @@
   </div>
 </div>
 
-<div class="row mb-4">
+<div class="row mb-4" *ngIf="!isProduction">
   <div class="nebular-calendar col-xl-4 col-lg-4 col-md-12 col-sm-12" id="notifyCalender">
     <nb-calendar [boundingMonth]="true"></nb-calendar>
   </div>
@@ -115,7 +117,7 @@
     </nb-card>
   </div>
 </div>
-<div class="row" *ngIf="user?.is_admin">
+<div class="row" *ngIf="user?.is_admin && !isProduction">
   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
   </div>
   <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">

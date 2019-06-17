@@ -1,4 +1,5 @@
 @import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/typography/typography';
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
 
@@ -33,6 +34,8 @@
 
   .table {
     margin: 0 1rem;
+    font-family: nb-theme(font-nunito);
+
     tbody tr:nth-child(2n) {
       background-color: #3a347a;
     }
@@ -43,13 +46,14 @@
     .title-col {
       width: 30%;
       font-size: 15px;
+      color: text-success();
     }
     .value-col {
       width: 60%;
     }
     .action-col {
       width: 10%;
-      text-align: right;
+      text-align: center;
       i:hover {
         color: nb-theme(color-success);
         cursor: pointer;
@@ -57,6 +61,10 @@
     }
   }
 
+  nb-card-header {
+    font-family: nb-theme(font-bebas);
+    font-size: 1.75rem;
+  }
   nb-card-body {
     overflow: visible;
   }
@@ -201,6 +209,22 @@
     border: none;
   }
 
+  /deep/ nb-user .user-name {
+    font-family: nb-theme(font-bebas);
+    letter-spacing: 1px;
+    font-size: 1.9rem;
+  }
+  /deep/ nb-user .user-title {
+    font-family: nb-theme(font-nunito);
+    font-size: 1rem;
+  }
+  .font-nunitoSans {
+    font-family: nb-theme(font-nunito);
+  }
+
+  .font-bebasNeue {
+    font-family: nb-theme(font-bebas);
+  }
   ngb-rating i {
     color: nb-theme(color-success);
     @include nb-for-theme(cosmic) {
@@ -211,6 +235,9 @@
   @include media-breakpoint-down(sm) {
     .table .title-col {
       font-size: 13px;
+    }
+    .down-qrCode-icon {
+      margin-left: 0;
     }
   }
 
@@ -230,4 +257,13 @@
 /deep/ #swal2-title {
   color: #595959!important; font-size: 1.45em!important;
 }
-.ref-link-icon{ font-size: 1.50em; }
+.ref-link-icon{
+  display: inline-block;
+  position: relative;
+  font-size: 15px;
+}
+
+.down-qrCode-icon {
+  display: inline-block;
+  font-size: 22px;
+}

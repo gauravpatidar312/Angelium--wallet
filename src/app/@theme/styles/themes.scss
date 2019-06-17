@@ -3,6 +3,31 @@
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
 
+@font-face {
+  font-family: 'BebasNeue';
+  src : url('/assets/fonts/BebasNeue/BebasNeue-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'BebasNeueLight';
+  src : url('/assets/fonts/BebasNeue/BebasNeue-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src : url('/assets/fonts/Avenir/Avenir-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src : url('/assets/fonts/Montserrat/Montserrat-Light.ttf');
+}
+
+@font-face {
+  font-family: 'NunitoSans';
+  src : url('/assets/fonts/NunitoSans/NunitoSans-Light.ttf');
+}
+
 // which themes you what to enable (empty to enable all)
 $nb-enabled-themes: (default, cosmic, corporate);
 
@@ -14,6 +39,12 @@ $nb-themes: nb-register-theme((
 
   font-main: Roboto,
   font-secondary: Exo,
+
+  font-bebas: BebasNeue,
+  font-bebas-light: BebasNeueLight,
+  font-avenir: Avenir,
+  font-mont: Montserrat,
+  font-nunito: NunitoSans,
 
   switcher-background: #ebeff5,
   switcher-background-percentage: 50%,
@@ -45,6 +76,12 @@ $nb-themes: nb-register-theme((
   font-main: Roboto,
   font-secondary: Exo,
 
+  font-bebas: BebasNeue,
+  font-bebas-light: BebasNeueLight,
+  font-avenir: Avenir,
+  font-mont: Montserrat,
+  font-nunito: NunitoSans,
+
   switcher-background: #4e41a5,
   switcher-background-percentage: 14%,
   drops-icon-line-gadient: -webkit-linear-gradient(#a258fe, #7958fa),
@@ -74,6 +111,12 @@ $nb-themes: nb-register-theme((
 
   font-main: Roboto,
   font-secondary: Exo,
+
+  font-bebas: BebasNeue,
+  font-bebas-light: BebasNeueLight,
+  font-avenir: Avenir,
+  font-mont: Montserrat,
+  font-nunito: NunitoSans,
 
   switcher-background: #2b2d34,
   switcher-background-percentage: 14%,

@@ -15,7 +15,7 @@ export class StatusCardComponent implements OnDestroy {
   @Input() type: string;
   @Input() value: string;
   @Input() on = true;
-  @Input() typeOfPeriod: string = 'today';
+  typeOfPeriod: string = 'today';
   types: string[] = ['today', 'week', 'month', 'total'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;

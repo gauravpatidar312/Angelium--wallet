@@ -9,54 +9,60 @@
               <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
               <nb-user
                 [picture]="userData?.avatar"
-                [name]="userData?.fullname | titlecase"
-                title="{{'Lv. ' + userData?.level}}"
+                [name]="userData?.fullname + ' / ' + userData?.username"
+                title="{{'Rank ' + userData?.level}}"
                 size="large">
               </nb-user>
             </nb-card-body>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-12 font-nunitoSans">
             <table class="table borderless tablemarginfix">
               <thead>
               </thead>
               <tbody>
                 <tr class="spacer">
-                  <td class="title-col">USERNAME</td>
+                  <td class="title-col">Username</td>
                   <td class="value-col">{{userData?.username | titlecase}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr class="spacer">
-                  <td class="title-col">FULL NAME</td>
+                  <td class="title-col">Name</td>
                   <td class="value-col">{{userData?.fullname | titlecase}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">E-MAIL</td>
+                  <td class="title-col">E-mail</td>
                   <td class="value-col">{{userData?.email}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">COUNTRY</td>
+                  <td class="title-col">Country</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
                   <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
-                  <td class="title-col">PHONE</td>
+                  <td class="title-col">Phone</td>
                   <td class="value-col">{{userData?.phone}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">REFFERAL LINK</td>
+                  <td class="title-col">Referral</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
                   <td class="action-col text-center">
-                    <i ngxClipboard [cbContent]="userData?.referral_link" 
-                      class="fa fa-clone ref-link-icon fa-2x"></i>&nbsp;
-                    <i class="ion-archive fa-2x" (click)="open(QRdialog)"></i>
+                    <i ngxClipboard [cbContent]="userData?.referral_link" (click)="copyReferralLink()"
+                      class="fa fa-clone ref-link-icon fa-2x"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">LEVEL</td>
-                  <td class="value-col">{{'Lv. ' + userData?.level}}</td>
+                  <td class="title-col">QR</td>
+                  <td class="value-col">Download QR Code of your referral link</td>
+                  <td class="action-col text-center">
+                    <i class="ion-archive down-qrCode-icon fa-2x" (click)="open(QRdialog)"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="title-col">Rank</td>
+                  <td class="value-col">{{userData?.level}}</td>
                   <td class="action-col"></td>
                 </tr>
               </tbody>
@@ -70,45 +76,45 @@
     <nb-card>
       <nb-card-header>SETTING</nb-card-header>
       <nb-card-body>
-        <div class="col-md-12 nopadd">
+        <div class="col-md-12 nopadd font-nunitoSans">
           <table class="table borderless tablemarginfix">
             <thead>
             </thead>
             <tbody>
               <tr>
-                <td class="title-col">PASSWORD</td>
+                <td class="title-col">Password</td>
                 <td class="value-col">
-                  **********
+                  **************
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
               </tr>
               <tr>
                 <td class="title-col">2FA</td>
-                <td class="value-col">**********</td>
+                <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">SECRET KEY</td>
-                <td class="value-col">**********</td>
+                <td class="title-col">Secret Key</td>
+                <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
                 <td class="title-col">KYC</td>
-                <td class="value-col">Pending</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
+                <td class="value-col">{{isProduction ? 'Coming soon' : 'Pending'}}</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc" *ngIf="!isProduction"></i></td>
               </tr>
               <tr>
-                <td class="title-col">CURRENCY</td>
-                <td class="value-col">US$</td>
+                <td class="title-col">Currency</td>
+                <td class="value-col">USD</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">LANGUAGE</td>
+                <td class="title-col">Language</td>
                 <td>English</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">R-18 MODE</td>
+                <td class="title-col">R-18 Mode</td>
                 <td class="value-col iconpaddfix">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
@@ -125,9 +131,9 @@
                 <td class="action-col"></td>
               </tr>
               <tr>
-                <td class="title-col">MERGE</td>
-                <td>Merge your old data</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge"></i></td>
+                <td class="title-col">Merge</td>
+                <td>{{isProduction ? 'Coming soon' : 'Merge your old data'}}</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="!isProduction"></i></td>
               </tr>
             </tbody>
           </table>
@@ -275,9 +281,9 @@
       QR Code  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <ngx-qrcode 
+      <ngx-qrcode
         id="QR_Canvas"
-        [qrc-element-type]="elementType" 
+        [qrc-element-type]="elementType"
         [qrc-value]="userData?.referral_link"
         qrc-class="aclass"
         qrc-errorCorrectionLevel="L">

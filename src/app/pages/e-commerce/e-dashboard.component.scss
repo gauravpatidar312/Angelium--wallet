@@ -19,10 +19,28 @@
       /deep/ nb-card {
         width: 100%;
       }
-      
     }
   }
-  
+
+  .list-card {
+    .notification-header {
+      font-family: nb-theme(font-bebas);
+      font-size: 16px;
+      display: block;
+      margin-left: 14px;
+      margin-bottom: 4px;
+      color: nb-theme(color-success);
+    }
+
+    .event-title {
+      font-family: nb-theme(font-mont);
+    }
+
+    .event-date {
+      font-family: nb-theme(font-avenir);
+    }
+  }
+
   .pull-right {
     float :right;
   }
@@ -59,14 +77,14 @@
     .nebular-calendar {
       margin-bottom: 1.5rem;
     }
-  
+
   }
 
   @include media-breakpoint-down(is) {
     /deep/ nb-card.large-card {
       height: nb-theme(card-height-medium);
     }
-    
+
   }
 
   @media (min-width: 300px) and (max-width: 480px) {
@@ -74,5 +92,5 @@
       display: none;
     }
   }
-  
+
 }

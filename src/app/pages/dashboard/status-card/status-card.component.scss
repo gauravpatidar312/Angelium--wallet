@@ -20,7 +20,7 @@ $shadow-green: #00977e;
       height: 100%;
       padding: 0.625rem;
 
-      i {
+      /deep/ i {
         font-size: 30px;
       }
     }
@@ -69,8 +69,8 @@ $shadow-green: #00977e;
       color: nb-theme(color-fg-heading);
       padding-left: 0.2rem;
       font-size: 1rem;
-      top: 20px;
-      left: 28px;
+      font-family: nb-theme(font-avenir);
+      right: 20px;
       @include nb-rtl(left, 1.25rem);
       @include nb-rtl(right, inherit);
 
@@ -206,17 +206,21 @@ $shadow-green: #00977e;
     }
 
     .title {
-      font-family: nb-theme(font-secondary);
-      font-size: 1.25rem;
+      font-family: nb-theme(font-bebas);
+      font-size: 2rem;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
 
     .status {
       font-size: 30px;
+      font-family: nb-theme(font-bebas);
       font-weight: nb-theme(font-weight-light);
       text-transform: uppercase;
       color: nb-theme(card-fg);
+      text-align: right;
+      margin-right: 5px;
+      margin-top: -9px;
     }
   }
 

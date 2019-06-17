@@ -5,6 +5,7 @@ import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 import {Router} from '@angular/router';
 import {ShareDataService} from '../../../../services/share-data.service';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -20,6 +21,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   @Input() livePrice: number = 0;
   @Input() percentage: number = 0;
 
+  isProduction: any = environment.production;
   intervalSubscription: Subscription;
   currencyType: any = {
     'ANX': ['OTC'],

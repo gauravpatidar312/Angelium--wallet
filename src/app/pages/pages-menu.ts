@@ -3,7 +3,7 @@ import {AppConstants} from '../app.constants';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Home',
+    title: 'Top',
     icon: 'nb-home',
     link: '/pages/dashboard',
   },
@@ -45,7 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/transfer',
   },
   {
-    title: 'Settings',
+    title: 'Setting',
     icon: 'nb-gear',
     link: '/pages/setting',
   },
