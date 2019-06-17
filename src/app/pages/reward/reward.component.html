@@ -96,7 +96,7 @@
           DownLine Tree
         </div>
       </div>
-      <div class="col-md-6 downlineColumn">
+      <!-- <div class="col-md-6 downlineColumn" *ngIf="noDataSource">
         <ul id="downline-navigation" class="nav navbar-pill downLine">
           <li class="active" style="margin-right:15px;">
             <a data-toggle="pill" href="#downlinetoday" (click)="getDownlineTree('today')">Today</a>
@@ -111,11 +111,15 @@
             <a data-toggle="pill" href="#downlinetotal" (click)="getDownlineTree('yearly')">Year</a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </nb-card-header>
+  
+  <ng-template #noData>
+    <nb-card-body>No Data Found</nb-card-body>  
+  </ng-template>
 
-  <nb-card-body class="tab-content">
+  <nb-card-body class="tab-content" *ngIf="noDataSource; else noData">
     <div id="downlinetoday" class="tab-pane active">
       <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
         <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
