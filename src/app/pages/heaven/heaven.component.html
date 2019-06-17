@@ -6,10 +6,10 @@
       </div>
       <div class="details full-width">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-7 mt-2">
             <div class="title">Total Heaven</div>
           </div>
-          <div class="col-md-4">
+          <div class="col-5">
             <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
               <button type="button" ngbDropdownToggle class="btn"
                       [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -25,7 +25,7 @@
             </div>
             <div class="clearfix"></div>-->
             <div class="status text-white"><span class="text-success">$</span>{{totalHeaven?.heaven}}</div>
-            <div class="delta up">{{totalHeaven.percentage}}%</div>
+            <div class="delta up">{{totalHeaven?.percentage}}%</div>
             <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
           </div>
         </div>
@@ -39,10 +39,10 @@
       </div>
       <div class="details full-width">
         <div class="row">
-          <div class="col-md-8 col-xs-8 mt-2">
+          <div class="col-7 mt-2">
             <div class="title">Heaven Drop Today</div>
           </div>
-          <div class="col-md-4 col-xs-4">
+          <div class="col-5 col-xs-4">
             <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
               <button type="button" ngbDropdownToggle class="btn"
                       [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -58,7 +58,7 @@
             </div>
             <div class="clearfix"></div>-->
             <div class="status text-white"><span class="text-success">$</span>{{heavenDrop?.total_amount}}</div>
-            <div class="delta up">{{heavenDrop?.parcentage}}%</div>
+            <div class="delta up">{{heavenDrop?.percentage}}%</div>
             <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
           </div>
         </div>
@@ -166,7 +166,7 @@
             <div class="form-group total-amount font-avenir">
               <label style="color: #00ff00">Amount</label>
               <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
-                     class="form-control font-avenir" value="{{wallet?.wallet_amount | number : '1.2-25'}}" (blur)="setAmount(wallet?.wallet_type)"/>
+                     class="form-control font-avenir" value="{{wallet?.wallet_amount | number : '1.2-8'}}" (blur)="setAmount(wallet?.wallet_type)"/>
               <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.2-2' }}</span>
               <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
             </div>

@@ -49,9 +49,14 @@ export class LoginComponent implements OnInit {
     }
 
     this.formSubmitting = true;
-    this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe(res => {
-      this.sessionStorageService.saveToSession('userInfo', res);
-      this.getUserSettingInfo();
+    this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
+      if (res.token) {
+        this.sessionStorageService.saveToSession('userInfo', res);
+        this.getUserSettingInfo();
+      } else {
+        this.formSubmitting = false;
+        this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
+      }
     }, err => {
       console.log(err);
       this.formSubmitting = false;
