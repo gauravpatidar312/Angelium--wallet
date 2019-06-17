@@ -88,7 +88,7 @@
   <nb-card-header>
     <div class="row">
       <div class="col-md-6">
-        <div class="navbar-header">
+        <div class="navbar-header downline-tree">
           DownLine Tree
         </div>
       </div>
@@ -110,6 +110,7 @@
       </div>
     </div>
   </nb-card-header>
+
   <nb-card-body class="tab-content">
     <div id="downlinetoday" class="tab-pane active">
       <table class="table table-hover table-bordered downlineTree" 
@@ -130,31 +131,43 @@
         <ng-container nbTreeGridColumnDef="username" >
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Username</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <div class="rewardtblcss">
-              <span class="">{{row.data.username}} </span>
-              <span class="delta up">4%</span>
-            </div>
+            <div class="downline-cell">{{row.data.username}}</div>
           </td>
         </ng-container>
-
-        <ng-container nbTreeGridColumnDef="heaven">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven</th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.heaven || '-'}}</td>
-        </ng-container>
-
+        
         <ng-container nbTreeGridColumnDef="rank">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Rank</th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.rank || '-'}}</td>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            {{row.data.rank}}
+          </td>
+        </ng-container>
+        
+        <ng-container nbTreeGridColumnDef="heaven">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <span class="text-success">$</span>{{row.data.heaven}}
+          </td>
         </ng-container>
 
         <ng-container nbTreeGridColumnDef="reward">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Reward</th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.reward || '-'}}</td>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <span class="text-success">$</span>{{row.data.reward}}
+          </td>
+        </ng-container>
+
+        <ng-container nbTreeGridColumnDef="rate">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Rate</th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            {{row.data.rate}}<span>%</span>
+          </td>
         </ng-container>
 
         <ng-container nbTreeGridColumnDef="your_reward">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Your Reward</th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.your_reward || '-'}}</td>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <span class="text-success">$</span>{{row.data.your_reward}}
+          </td>
         </ng-container>
       </table>
     </div>
