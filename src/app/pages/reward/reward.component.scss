@@ -49,9 +49,14 @@
     border-bottom: 0px;
     border-top: 0px;
   }
-.accordion-toggle  table td{
-  border-top: 0px!important;
-}
+  .accordion-toggle  table td{
+    border-top: 0px!important;
+  }
+  .all-columns {
+    background: #494299 !important;
+  }
+  
+  
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -141,11 +146,16 @@ table.table-bordered > tbody > tr > td {
 /deep/ .rewardtblcss span {
   word-break: break-all;
 }
-.nb-theme-cosmic nb-tree-grid-row-toggle .row-toggle-button .icon, .nb-theme-cosmic nb-sort-icon .icon{
-  color: #fff!important;
+.nb-theme-cosmic nb-tree-grid-row-toggle .row-toggle-button .icon,
+.nb-theme-cosmic nb-sort-icon .icon {
+  color: #fff !important;
 }
 
-
+.navbar-header {
+  font-family: nb-theme(font-bebas);
+  font-weight: 500;
+  font-size: 22px;
+}
 
 .downlinetblcss,
 .downlineuser {
@@ -155,6 +165,10 @@ table.table-bordered > tbody > tr > td {
 .downlinetblcss,
 .downlineuser span {
   word-break: break-all;
+}
+
+.downlineTree {
+ font-family: nb-theme(font-nunito);
 }
 
 /deep/ .caret {
@@ -187,7 +201,7 @@ table.table-bordered > tbody > tr > td {
   border-radius: 2px;
   border-bottom: 5px solid #26df8b;
   text-decoration-color: #26df8b;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -196,7 +210,7 @@ table.table-bordered > tbody > tr > td {
 #main-navigation li > a {
   padding: 10px;
   text-decoration: none;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -207,7 +221,7 @@ table.table-bordered > tbody > tr > td {
   border-radius: 2px;
   border-bottom: 5px solid #26df8b;
   text-decoration-color: #26df8b;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -216,7 +230,7 @@ table.table-bordered > tbody > tr > td {
 #downline-navigation li > a {
   padding: 10px;
   text-decoration: none;
-  font-family: Exo;
+  font-family: nb-theme(font-avenir);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
@@ -282,6 +296,7 @@ table.table-bordered > tbody > tr > td {
     width: 150px;
   }
 }
+
 /deep/ .nb-tree-grid-cell{ padding-left: 10px!important; }
 
 /deep/ .nb-arrow-right::before{

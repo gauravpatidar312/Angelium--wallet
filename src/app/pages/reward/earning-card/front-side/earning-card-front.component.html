@@ -7,7 +7,7 @@
               'btn-primary': currentTheme !== 'default'}">
       <!--{{currencyType[selectedCurrency]}}--> &nbsp;
     </button>
-    <ul class="dropdown-menu" *ngIf="!isProduction" ngbDropdownMenu>
+    <ul class="dropdown-menu" ngbDropdownMenu>
       <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
     </ul>
   </div>
@@ -19,7 +19,7 @@
       <div class="col-6">
         <div class="text-daily text-default">{{ quantity }}</div>
       </div>
-      <div class="col-6">
+      <div class="col-6" style="align-self: flex-end;">
         <div class="title text-right"><span class="text-success">{{ cardName === 'Downline Heaven'? '$': '' }}</span>{{ cardName === 'Your Rank' ? '': amount}}
       </div>
       </div>
@@ -28,7 +28,7 @@
     <div class="delta" *ngIf="cardName != 'Your Rank'"
          [class.up]="percentage >= 0"
          [class.down]="percentage < 0">
-      {{ percentage > 0 ? percentage : (-1 * percentage) }}%      
+      {{ percentage > 0 ? percentage : (-1 * percentage) }}%
     </div>
   </div>
   <ngx-earning-live-update-chart

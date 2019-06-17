@@ -61,7 +61,9 @@ interface FSEntry {
   styleUrls: ['./reward.component.scss']
 })
 export class RewardComponent implements OnInit, AfterViewInit {
+
     allColumns = [ 'level', 'username', 'rank', 'heaven', 'reward', 'rate', 'your_reward' ];
+
     dataSource: TreeNode<FSEntry>[] = [];
     
     private alive = true;
