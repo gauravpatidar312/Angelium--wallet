@@ -36,7 +36,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" formControlName="transfer_amount" (blur)="setAmount(sendWallet?.wallet_type)" value="{{sendWallet?.wallet_amount | number : '1.2-25' }}">
+                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" formControlName="transfer_amount" (blur)="setAmount(sendWallet?.wallet_type)" value="{{sendWallet?.wallet_amount | number : '1.2-8' }}">
                         <span *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.2-2' }}</span>
                         <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
@@ -180,7 +180,7 @@
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
                         <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
-                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.2-25'}}">
+                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.2-8'}}">
                         <span *ngIf="!fetchingAmount">${{ otcWallet?.toDollar | number : '1.2-2' }}</span>
                         <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
