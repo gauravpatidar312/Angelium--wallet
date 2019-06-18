@@ -89,25 +89,24 @@
     align-items: center;
     width: auto;
 
-    /deep/ .user-picture.background {
+    /deep/ .user-container {
       cursor: pointer;
-      order: 2;
-    }
 
-    /deep/ .user-picture.image {
-      order: 2;
-    }
+      .user-picture.background, .user-picture.image {
+        order: 2;
+      }
 
-    /deep/ .info-container {
-      margin-left: 0.5rem;
-      order: 1;
-    }
+      .info-container {
+        margin-left: 0.5rem;
+        order: 1;
+      }
 
-    /deep/ nb-user .user-name {
-      font-family: nb-theme(font-bebas);
-      margin-right: 10px;
-      font-size: 24px;
-      color: #06f9a3;
+      .user-name {
+        font-family: nb-theme(font-bebas);
+        margin-right: 10px;
+        font-size: 24px;
+        color: #06f9a3;
+      }
     }
 
     .navigation {

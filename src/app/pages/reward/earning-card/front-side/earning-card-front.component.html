@@ -1,16 +1,16 @@
 <nb-card-header class="nb-front-card">
   <div class="curre">{{ cardName }}</div>
-  <div class="dropdown ghost-dropdown" ngbDropdown *ngIf="currencies[selectedCurrency]">
+  <!--<div class="dropdown ghost-dropdown" ngbDropdown *ngIf="currencies[selectedCurrency]">
     <button type="button" class="btn btn-sm" ngbDropdownToggle
             [ngClass]="{
               'btn-success': currentTheme === 'default',
               'btn-primary': currentTheme !== 'default'}">
-      <!--{{currencyType[selectedCurrency]}}--> &nbsp;
+      &nbsp;
     </button>
     <ul class="dropdown-menu" ngbDropdownMenu>
       <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
     </ul>
-  </div>
+  </div>-->
 </nb-card-header>
 
 <nb-card-body>
