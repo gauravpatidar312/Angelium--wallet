@@ -82,6 +82,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         this.router.navigate(['pages/dashboard']);
       }
     });
+
+    $('.layout-container div.content').click(() => {
+      if ($(window).width() < 1200 && $('.menu-sidebar').length && $('.menu-sidebar').hasClass('expanded')) {
+          this.toggleSidebar();
+      }
+    });
   }
 
   getANXValue() {
@@ -116,10 +122,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    this.layoutService.changeLayoutSize();
-    return false;
-  }
+      this.sidebarService.toggle(true, 'menu-sidebar');
+      this.layoutService.changeLayoutSize();
+      return false;
+    }
 
   goToHome() {
     this.menuService.navigateHome();
