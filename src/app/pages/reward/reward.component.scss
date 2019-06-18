@@ -297,7 +297,7 @@ table.table-bordered > tbody > tr > td {
   }
 }
 
-/deep/ .nb-tree-grid-cell{ padding-left: 10px!important; }
+/deep/ .nb-tree-grid-cell{ padding-left: 10px!important; white-space: pre; }
 
 /deep/ .nb-arrow-right::before{
   color: #ffffff;
