@@ -35,8 +35,13 @@ export class AuthService {
   logIn(data: any): Observable<any> {
     return Observable.create((observer: any) => {
       this.httpService.post(data, 'jwt/api-token-auth/').subscribe((res) => {
-        observer.next(res);
-        observer.complete();
+        if (res.token) {
+          observer.next(res);
+          observer.complete();
+        } else {
+          observer.error(res);
+          this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
+        }
       }, err => {
         observer.error(err);
         this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Login Failed');

@@ -42,26 +42,21 @@
   .card-rewardAllocation {
     height: calc(100% - 1.5rem);
   }
-  .tablefixedlayout {
-    table-layout: fixed;
-    margin-bottom: 0px;
-    border-bottom: 0px !important;
-  }
-  .all-columns {
-    background: #494299 !important;
-  }
-  .tablefixedlayout th {
-    border-bottom: 0px !important;
-  }
-  .accordion-toggle table {
+
+  .accordion-toggle  table{
     margin-bottom: 0px;
     table-layout: fixed;
     border-bottom: 0px;
     border-top: 0px;
   }
-  .accordion-toggle table td {
-    border-top: 0px !important;
+  .accordion-toggle  table td{
+    border-top: 0px!important;
   }
+  .all-columns {
+    background: #494299 !important;
+  }
+  
+  
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -301,3 +296,32 @@ table.table-bordered > tbody > tr > td {
     width: 150px;
   }
 }
+
+/deep/ .nb-tree-grid-cell{ padding-left: 10px!important; }
+
+/deep/ .nb-arrow-right::before{
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/deep/ .nb-arrow-down::before{
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.downline-tree {
+  font-family: nb-theme(font-bebas);
+  font-size: 22px;
+  margin-top: 8px;
+}
+.downline-cell{
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-family: nb-theme(font-bebas);
+}
+
+/deep/.all-columns{ background: #494299!important; }
+/deep/ .nb-tree-grid-header-cell{ font-weight: 400!important; }
+/deep/ table.table-bordered{ table-layout: auto;}

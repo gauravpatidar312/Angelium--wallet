@@ -61,7 +61,9 @@ interface FSEntry {
   styleUrls: ['./reward.component.scss']
 })
 export class RewardComponent implements OnInit, AfterViewInit {
-    allColumns = [ 'level', 'username', 'rank','heaven', 'reward','rate', 'your_reward' ];
+
+    allColumns = [ 'level', 'username', 'rank', 'heaven', 'reward', 'rate', 'your_reward' ];
+    noDataSource:boolean = true;
     dataSource: TreeNode<FSEntry>[] = [];
     
     private alive = true;
@@ -285,7 +287,10 @@ export class RewardComponent implements OnInit, AfterViewInit {
     let url = `downline_tree/?filter_type=${value}`;
     this.httpService.get(url).subscribe(res=>{
       this.dataSource = res;
-      console.log(res);
+      if (res.length!=0) 
+        this.noDataSource = true;
+      else
+        this.noDataSource = false;
     });
   }
 

@@ -43,7 +43,12 @@ export class AuthEffects {
       switchMap(payload => {
         return this.authService.logIn(payload)
           .map((data) => {
-            return new SetUserProfile({ token: data.token });
+            if (data.token) {
+              return new SetUserProfile({ token: data.token });
+            } else {
+              // return of(new LogInFailure({}));
+              return this.store.dispatch(new LogInFailure());
+            }
           })
           .catch((error) => {
             return of(new LogInFailure({ error }));

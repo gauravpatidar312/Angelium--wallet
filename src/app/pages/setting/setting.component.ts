@@ -1,16 +1,15 @@
-import { HostListener, Component, OnInit, TemplateRef } from '@angular/core';
-import { icons } from 'eva-icons';
-import { NbDialogService } from '@nebular/theme';
-import { NavigationStart, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { DialogNamePromptComponent } from './dialog-prompt/dialog-prompt.component';
-import { ImageCroppedEvent } from './image-cropper/interfaces/image-cropped-event.interface';
-
-import { ToastrService } from "../../services/toastr.service";
-import { HttpService } from "../../services/http.service";
-import { ShareDataService } from "../../services/share-data.service";
-import { SessionStorageService } from "../../services/session-storage.service";
-import { environment } from "../../../environments/environment";
+import {HostListener, Component, OnInit, TemplateRef} from '@angular/core';
+import {icons} from 'eva-icons';
+import {NbDialogService} from '@nebular/theme';
+import {NavigationStart, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {DialogNamePromptComponent} from './dialog-prompt/dialog-prompt.component';
+import {ImageCroppedEvent} from './image-cropper/interfaces/image-cropped-event.interface';
+import {ToastrService} from '../../services/toastr.service';
+import {HttpService} from '../../services/http.service';
+import {ShareDataService} from '../../services/share-data.service';
+import {SessionStorageService} from '../../services/session-storage.service';
+import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
 export let browserRefresh = false;
@@ -27,17 +26,15 @@ export class SettingComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   croppedImageSize: any = '';
-  userImage: any;
   userImageBase64: any;
-  r18modeSwitchText:boolean;
+  r18modeSwitchText: boolean;
 
-  constructor(
-    private toastrService: ToastrService,
-    private dialogService: NbDialogService,
-    private httpService: HttpService,
-    private shareDataService: ShareDataService,
-    private sessionStorage: SessionStorageService,
-    private router: Router) {
+  constructor(private toastrService: ToastrService,
+              private dialogService: NbDialogService,
+              private httpService: HttpService,
+              private shareDataService: ShareDataService,
+              private sessionStorage: SessionStorageService,
+              private router: Router) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
     window.onload = (ev) => {
@@ -46,7 +43,7 @@ export class SettingComponent implements OnInit {
     };
   }
 
-  getProfileData(){
+  getProfileData() {
     if (browserRefresh) {
       this.httpService.get('profile/').subscribe(data => {
         this.r18modeSwitchText = data.r18mode;
@@ -56,12 +53,12 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
     this.r18modeSwitchText = userSettingInfo.r18mode;
     this.userData = userSettingInfo;
   }
 
-  sweetAlertAgeCfrm(){
+  sweetAlertAgeCfrm() {
     Swal.fire({
       title: 'Age Confirmation',
       text: 'Are you really over 18?',
@@ -71,14 +68,13 @@ export class SettingComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
+        this.userData.age_confirm = true;
+        // this.sessionStorage.updateFromSession('userInfo', {'age_confirm': true});
+        this.sessionStorage.updateUserState(this.userData);
         this.r18modeSwitchText = true;
-        let data = { 'r18mode': true, 'age_confirm': true };
+        const data = {'r18mode': true, 'age_confirm': true};
         this.updateR18mode(data);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.r18modeSwitchText = false;
-        let data = { 'r18mode': false, 'age_confirm': true };
-        this.updateR18mode(data);
-      }else if (result.dismiss === Swal.DismissReason.backdrop) {
+      } else {
         this.r18modeSwitchText = !this.r18modeSwitchText;
       }
     });
@@ -89,26 +85,26 @@ export class SettingComponent implements OnInit {
       this.toastrService.success('Link copied successfully!', 'Referral Link');
   }
 
-  downloadQR(){
-    let QR_Canvas = document.getElementById("QR_Canvas");
-    let imgBase64 = QR_Canvas.children[0].children[0]['src'];
-    let base64 = imgBase64.replace('data:image/png;base64,','');
+  downloadQR() {
+    const QR_Canvas = document.getElementById('QR_Canvas');
+    const imgBase64 = QR_Canvas.children[0].children[0]['src'];
+    const base64 = imgBase64.replace('data:image/png;base64,', '');
 
-    let byteCharacters = atob(base64);
+    const byteCharacters = atob(base64);
 
-    let byteNumbers = new Array(byteCharacters.length);
-    for (var i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
-    var byteArray = new Uint8Array(byteNumbers);
-    let blob = new Blob([byteArray], {"type": "image/png"});
-    if(navigator.msSaveBlob){
-      let filename = 'qrcode';
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], {'type': 'image/png'});
+    if (navigator.msSaveBlob) {
+      const filename = 'qrcode';
       navigator.msSaveBlob(blob, filename);
     } else {
-      let link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.setAttribute('visibility','hidden');
+      link.setAttribute('visibility', 'hidden');
       link.download = 'qrcode';
       document.body.appendChild(link);
       link.click();
@@ -116,69 +112,64 @@ export class SettingComponent implements OnInit {
     }
   }
 
-  updateR18mode(data: any){
-    this.httpService.put(data, 'r18mode/').subscribe(res=>{
+  updateR18mode(data: any) {
+    this.httpService.put(data, 'r18mode/').subscribe((res?: any) => {
       if (res.status) {
         this.userData.r18mode = data.r18mode;
         // this.sessionStorage.updateFromSession('userInfo', data);
         this.sessionStorage.updateUserState(this.userData);
         if (data.r18mode) {
           this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE ENABLED');
-        }else{
+        } else {
           this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE DISABLED');
         }
       }
     });
   }
 
-  r18mode(event){
-    if (this.r18modeSwitchText != event) {
+  r18mode(event) {
+    if (this.r18modeSwitchText !== event) {
       this.r18modeSwitchText = event;
       if (this.userData.age_confirm) {
-        let data = { 'r18mode': event, 'age_confirm': true };
+        const data = {'r18mode': event, 'age_confirm': true};
         this.updateR18mode(data);
-      }else{
-        this.userData.age_confirm = true;
-        // this.sessionStorage.updateFromSession('userInfo', { 'age_confirm': true } );
-        this.sessionStorage.updateUserState(this.userData);
+      } else {
         this.sweetAlertAgeCfrm();
       }
     }
   }
 
-  openDialog(type: any, value:any) {
-    this.newData({ 'type': type, 'value': value});
+  openDialog(type: any, value: any) {
+    this.newData({'type': type, 'value': value});
     this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(data => {
-        if (type == 'Change Password' && data!=undefined && data!='') {
-          let endpoint = 'password/';
-          let apiData = { 'password' : data };
-          this.updateSettingPageData(apiData, endpoint);
-        }else if (type == 'Country' && data!=undefined && data!='') {
-          let endpoint = 'country/';
-          let apiData = { 'country' : data };
-          this.updateSettingPageData(apiData, endpoint);
-        }
-    });
-  }
-
-
-  updateSettingPageData(apiData: any, endpoint: string){
-    this.httpService.post(apiData, endpoint)
-    .subscribe(res=>{
-      if (res.status == 'password reset') {
-        this.toastrService.success('Password update successfully', 'Password');
-      }else if (res.status =='country updated') {
-        this.userData.country = apiData.country;
-        // this.sessionStorage.updateFromSession('userInfo', apiData);
-        this.sessionStorage.updateUserState(this.userData);
-        this.toastrService.success('Country update successfully', 'Country');
+      if (type === 'Change Password' && data) {
+        const endpoint = 'password/';
+        const apiData = {'password': data};
+        this.updateSettingPageData(apiData, endpoint);
+      } else if (type === 'Country' && data) {
+        const endpoint = 'country/';
+        const apiData = {'country': data};
+        this.updateSettingPageData(apiData, endpoint);
       }
-    }, err=>{
-      console.log(err);
     });
   }
 
+  updateSettingPageData(apiData: any, endpoint: string) {
+    this.httpService.post(apiData, endpoint)
+      .subscribe(res => {
+        if (res.status === 'password reset') {
+          this.toastrService.success('Password update successfully', 'Password');
+        } else if (res.status === 'country updated') {
+          this.userData.country = apiData.country;
+          // this.sessionStorage.updateFromSession('userInfo', apiData);
+          this.sessionStorage.updateUserState(this.userData);
+          this.toastrService.success('Country update successfully', 'Country');
+        }
+      }, err => {
+        console.log(err);
+      });
+  }
 
   newData(name: any) {
     this.shareDataService.changeData(name);
@@ -199,20 +190,19 @@ export class SettingComponent implements OnInit {
   }
 
   open(dialog: TemplateRef<any>) {
-    this.dialogService.open(dialog).onClose.subscribe(data=>{
+    this.dialogService.open(dialog).onClose.subscribe(data => {
       this.imageChangedEvent = '';
       this.croppedImage = '';
     });
   }
 
-  uploadPicture(ref){
+  uploadPicture(ref) {
     const formData: FormData = new FormData();
-    if (this.imageChangedEvent!='') {
-      let file = this.imageChangedEvent.target.files[0];
-      this.croppedImageSize;
-      let newfile = new File([this.croppedImageSize], file.name, {type: file.type});
-      formData.append('avatar', newfile , newfile.name);
-      this.httpService.uploadImage(formData, 'avatar-upload/').subscribe(res=>{
+    if (this.imageChangedEvent !== '') {
+      const file = this.imageChangedEvent.target.files[0];
+      const newfile = new File([this.croppedImageSize], file.name, {type: file.type});
+      formData.append('avatar', newfile, newfile.name);
+      this.httpService.uploadImage(formData, 'avatar-upload/').subscribe((res?: any) => {
         if (res.status) {
           ref.close();
           this.shareDataService.changeData(res);

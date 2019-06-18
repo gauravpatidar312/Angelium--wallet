@@ -21,8 +21,7 @@
       <nb-user [picture]="userData?.avatar"
                [name]="userData?.username"
                title=""
-               [nbContextMenu]="userMenu"
-               [nbContextMenuAdjustment]="'noop'"
+               [nbContextMenu]="userMenu" nbContextMenuPlacement="bottom" nbContextMenuAdjustment="noop"
                nbContextMenuTag="my-context-menu">
       </nb-user>
     </nb-action>

@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ShareDataService {
@@ -21,11 +22,17 @@ export class ShareDataService {
     if (err.status === 500)
       return msg;
 
-    if (err.error)
-      msg = err.error[Object.keys(err.error)[0]][0];
-    else if (err[Object.keys(err)[0]].length)
+    if (err.error) {
+      if (err.error.message)
+        msg = err.error.message;
+      else if (_.isArray(err.error[Object.keys(err.error)[0]]))
+        msg = err.error[Object.keys(err.error)[0]][0];
+      else
+        msg = err.error[Object.keys(err.error)[0]];
+    } else if (_.isArray(err[Object.keys(err)[0]]))
       msg = err[Object.keys(err)[0]][0];
-
+    else if (err[Object.keys(err)[0]])
+      msg = err[Object.keys(err)[0]];
     return msg;
   }
 }
