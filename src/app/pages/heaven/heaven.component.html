@@ -24,7 +24,7 @@
               </ul>
             </div>
             <div class="clearfix"></div>-->
-            <div class="status text-white"><span class="text-success">$</span>{{totalHeaven?.heaven}}</div>
+            <div class="status text-white"><span class="text-success">$</span>{{totalHeaven?.heaven | number : '1.0-2' }}</div>
             <div class="delta up">{{totalHeaven?.percentage}}%</div>
             <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
           </div>
@@ -57,7 +57,7 @@
               </ul>
             </div>
             <div class="clearfix"></div>-->
-            <div class="status text-white"><span class="text-success">$</span>{{heavenDrop?.total_amount}}</div>
+            <div class="status text-white"><span class="text-success">$</span>{{heavenDrop?.total_amount | number : '1.0-2' }}</div>
             <div class="delta up">{{heavenDrop?.percentage}}%</div>
             <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
           </div>
@@ -85,7 +85,7 @@
           </div>
         </div>
       </nb-card-body>
-      <button class="table_bg font-bebasNeue font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
+      <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
               (click)="selectedHeavenPlan = '30'">Select
       </button>
     </nb-card>
@@ -108,7 +108,7 @@
           </div>
         </div>
       </nb-card-body>
-      <button class="table_bg font-bebasNeue font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
+      <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
               (click)="selectedHeavenPlan = '60'">Select
       </button>
     </nb-card>
@@ -131,7 +131,7 @@
           </div>
         </div>
       </nb-card-body>
-      <button class="table_bg font-bebasNeue font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
+      <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
               (click)="selectedHeavenPlan = '90'">Select
       </button>
     </nb-card>
