@@ -77,20 +77,11 @@
     .nebular-calendar {
       margin-bottom: 1.5rem;
     }
-
   }
 
   @include media-breakpoint-down(is) {
     /deep/ nb-card.large-card {
       height: nb-theme(card-height-medium);
     }
-
   }
-
-  @media (min-width: 300px) and (max-width: 480px) {
-    /deep/ .icon-container {
-      display: none;
-    }
-  }
-
 }

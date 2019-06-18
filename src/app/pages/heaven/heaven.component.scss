@@ -361,14 +361,8 @@
   }
 
   @media only screen and (width: 375px) {
-    .title {
-      font-size: 1.5rem !important;
-    }
-  }
-
-  @media (max-width: 480px) and (min-width: 300px){
-    .icon-container {
-      display: none;
+    .text-margin {
+      margin-top: 5px;
     }
   }
 
@@ -379,10 +373,6 @@
     }
     .m-t {
       margin-top: 27%;
-    }
-
-    .title {
-      font-size: 1.1rem !important;
     }
 
     .status {

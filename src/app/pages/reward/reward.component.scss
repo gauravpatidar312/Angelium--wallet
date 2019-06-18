@@ -55,8 +55,8 @@
   .all-columns {
     background: #494299 !important;
   }
-  
-  
+
+
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -238,9 +238,6 @@ table.table-bordered > tbody > tr > td {
 }
 
 @media (min-width: 300px) and (max-width: 480px) {
-  /deep/ .icon-container {
-    display: none;
-  }
   .rewardColumn,
   .downlineColumn {
     margin-top: 10px;
