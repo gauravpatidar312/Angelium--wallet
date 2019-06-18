@@ -47,7 +47,7 @@ export class AuthEffects {
               return new SetUserProfile({ token: data.token });
             } else {
               // return of(new LogInFailure({}));
-              return this.store.dispatch(new LogInFailure());
+              return this.store.dispatch(new LogInFailure({}));
             }
           })
           .catch((error) => {
