@@ -33,14 +33,8 @@
   }
 
   .status {
-    font-weight: nb-theme(font-weight-light);
-  }
-
-  .status {
+    font-family: nb-theme(font-bebas-bold);
     font-size: 30px;
-    font-family: nb-theme(font-bebas);
-    font-weight: nb-theme(font-weight-light);
-    text-transform: uppercase;
     color: nb-theme(card-fg);
     text-align: right;
     margin-right: 5px;
@@ -206,7 +200,7 @@
 
   .days-font {
     font-size: 7.6rem;
-    height: 100px;
+    height: 110px;
   }
 
   .month-day {
@@ -244,6 +238,7 @@
     border-radius: 4px;
     margin: 12px auto;
     cursor: pointer;
+    font-family: nb-theme(font-bebas-bold);
   }
 
   .table_bg:hover {
@@ -295,10 +290,10 @@
         padding-left: 0.25rem !important;
       }
       .title {
-        font-size: 1rem !important;
+        font-size: 1.7rem;
       }
       .status {
-        font-size: 2.3rem !important;
+        font-size: 2.1rem !important;
       }
 
       .total-amount span {
@@ -357,11 +352,23 @@
       float: left;
       width: 55px;
       text-align: right;
-      margin-top: 0;
+      margin-top: -2px;
     }
 
     .month-day-value {
       font-size: 1rem;
+    }
+  }
+
+  @media only screen and (width: 375px) {
+    .title {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  @media (max-width: 480px) and (min-width: 300px){
+    .icon-container {
+      display: none;
     }
   }
 
@@ -373,6 +380,15 @@
     .m-t {
       margin-top: 27%;
     }
+
+    .title {
+      font-size: 1.1rem !important;
+    }
+
+    .status {
+      font-size: 1.9rem !important;
+    }
+
     .month-day {
       font-size: 1.5rem;
       margin-right: 15px;

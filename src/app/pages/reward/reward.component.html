@@ -11,16 +11,16 @@
   <div class="col-xxl-12">
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr1">
-        <ngx-earning-card cardName='Your Rank' [selectedCurrency]="'ANX'" [amount]="100" [quantity]="userData?.level"
-          [percentage]="4"></ngx-earning-card>
+        <ngx-earning-card cardName='Your Rank' [selectedCurrency]="'ANX'" [amount]="0" [quantity]="userData?.level"
+          [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr2">
-        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="100" [quantity]="10"
-          [percentage]="4 || 0"></ngx-earning-card>
+        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="0" [quantity]="0"
+          [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr3">
-        <ngx-earning-card cardName='Downline Angel' [selectedCurrency]="'Bitcoin'" [amount]="100" [quantity]="10"
-          [percentage]="4 || 0"></ngx-earning-card>
+        <ngx-earning-card cardName='Downline Angel' [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="0"
+          [percentage]="0"></ngx-earning-card>
       </div>
       <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
         <ngx-earning-card></ngx-earning-card>
@@ -114,9 +114,9 @@
       </div> -->
     </div>
   </nb-card-header>
-  
+
   <ng-template #noData>
-    <nb-card-body>No record available</nb-card-body>  
+    <nb-card-body>There is no user in your down-line tree.</nb-card-body>
   </ng-template>
 
   <nb-card-body class="tab-content" *ngIf="noDataSource; else noData">
@@ -145,7 +145,7 @@
             {{row.data.rank}}
           </td>
         </ng-container>
-        
+
         <ng-container nbTreeGridColumnDef="heaven">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">

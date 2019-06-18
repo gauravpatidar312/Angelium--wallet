@@ -38,7 +38,7 @@ export class TransferComponent implements OnInit {
   receiveWallet: any = {};
   anxWallet: any = {};
   otcWallet: any = {};
-  otcWallets: any = {};
+  otcWallets: any = [];
   fromOTCAmount: number;
 
   constructor(private httpService: HttpService,
@@ -71,9 +71,6 @@ export class TransferComponent implements OnInit {
       } else if (this.shareDataService.transferTab === 'OTC') {
         this.setOTCTab = true;
       }
-      this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
-      this.shareDataService.transferTab = null;
-      this.shareDataService.transferTitle = null;
     }
 
     this.sendForm = this.formBuilder.group({
@@ -90,24 +87,18 @@ export class TransferComponent implements OnInit {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
       if (this.isProduction)
-        this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || {};
+        this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
       else
         this.otcWallets = this.myWallets;
 
-      this.sendWallet = _.find(this.myWallets, ['wallet_type', 'BTC']) || {};
-      this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
-      if (this.sendWallet && Object.keys(this.sendWallet).length) {
-        this.sendType = 'BTC';
-        this.receiveType = 'BTC';
-        this.toType = 'BTC';
-        this.setAmount('BTC');
-
-        this.receiveWallet = {...this.sendWallet};
-        this.otcWallet = {...this.sendWallet};
-      } else {
+      if (!this.myWallets) {
         this.sendType = 'SELECT';
         this.receiveType = 'SELECT';
         this.toType = 'SELECT';
+      } else if (this.shareDataService.transferTab) {
+        this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
+        this.shareDataService.transferTab = null;
+        this.shareDataService.transferTitle = null;
       }
 
       this.httpService.get('anx-price/').subscribe((price) => {
@@ -197,13 +188,27 @@ export class TransferComponent implements OnInit {
       this.sendWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
       });
-      this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
-      this.setAmount(walletType);
+      if (!this.sendWallet) {
+        this.sendType = 'BTC';
+        this.sendWallet = this.myWallets.find(item => {
+          return item.wallet_type === 'BTC';
+        });
+      }
+      if (this.sendWallet) {
+        this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
+        this.setAmount(walletType);
+      }
     } else if (typeValue === 'receive') {
       this.receiveType = walletType;
       this.receiveWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
       });
+      if (!this.receiveWallet) {
+        this.receiveType = 'BTC';
+        this.receiveWallet = this.myWallets.find(item => {
+          return item.wallet_type === 'BTC';
+        });
+      }
     } else if (typeValue === 'from') {
       this.fromType = walletType;
     } else if (typeValue === 'to') {
@@ -216,6 +221,11 @@ export class TransferComponent implements OnInit {
   }
 
   onSendTransfer() {
+    if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
+      this.toastrService.info('Feature coming soon! Stay tuned.', 'Send');
+      return;
+    }
+
     if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
       this.toastrService.danger('Please enter required field for transfer.', 'Send');
       return;
