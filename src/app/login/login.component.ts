@@ -30,10 +30,10 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private store: Store<AppState>,
               private authEffects: AuthEffects) {
-    const currentUser = this.authService.isAuthenticated();
-    if (currentUser) {
-      this.router.navigate(['/pages/setting']);
-    }
+    // const currentUser = this.authService.isAuthenticated();
+    // if (currentUser) {
+    //   this.router.navigate(['/pages/setting']);
+    // }
   }
 
   ngOnInit() {

@@ -13,17 +13,26 @@ import { AppState } from '../../../@core/store/app.state';
 import { AuthService } from '../../../_guards/auth.service';
 import { AuthActionTypes, LogIn, LogInFailure, ResetState, UserInfo, SetUserProfile, UpdateUserInfo } from '../actions/user.action';
 import { IndexedDBStorageService } from '../../../services/indexeddb-storage.service';
+import { Location } from "@angular/common";
 
 @Injectable()
 export class AuthEffects {
 
+  redirectUrl = '';
   constructor(
     private actions: Actions,
     private authService: AuthService,
     private router: Router,
     private store: Store<AppState>,
     private storageService: IndexedDBStorageService,
-  ) { }
+    location: Location,
+  ) {
+    router.events.subscribe(val => {
+      if (location.path() != "") {
+        this.redirectUrl = location.path();
+      }
+    });
+   }
 
   // effects go here
   @Effect()
@@ -64,7 +73,13 @@ export class AuthEffects {
     map((action: UserInfo) => action.payload),
     map((user) => {
       this.storageService.saveToSession(user);
-      this.router.navigate(['pages/dashboard']);
+      console.log('this.redirectUrl', this.redirectUrl);
+      if (this.redirectUrl === '/login' || this.redirectUrl.includes('register') || this.redirectUrl.includes('/reset-password')) {
+        this.router.navigate(['/pages/dashboard']);
+      } else {
+        this.router.navigate([this.redirectUrl]);
+      }
+      // return user;
     })
   );
 
@@ -74,6 +89,7 @@ export class AuthEffects {
     map((action: UserInfo) => action.payload),
     map((user) => {
       this.storageService.saveToSession(user);
+      return of(user);
     })
   );
 
@@ -92,7 +108,7 @@ export class AuthEffects {
   ResetState: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.RESET_STATE),
     map(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     })
   );
 }
