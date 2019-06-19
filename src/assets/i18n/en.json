@@ -1,0 +1,25 @@
+{
+  "setting-page": {
+    "username": "Username",
+    "name": "Name",
+    "e-mail": "E-mail",
+    "country": "Country",
+    "phone": "Phone",
+    "referral": "Referral",
+    "qr": "QR",
+    "rank": "Rank",
+    "password": "Password",
+    "2FA": "2FA",
+    "secret-key": "Secret Key",
+    "kyc": "KYC",
+    "currency": "Currency",
+    "language": "Language",
+    "r-18mode": "R-18 Mode",
+    "merge": "Merge"
+  },
+  "header": {
+    "logo-title": "logo-title",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
+}

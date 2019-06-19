@@ -1,0 +1,25 @@
+{
+  "setting-page": {
+    "username": "ユーザー名",
+    "name": "名",
+    "e-mail": "Eメール",
+    "country": "国",
+    "phone": "電話",
+    "referral": "紹介",
+    "qr": "QR",
+    "rank": "ランク",
+    "password": "パスワード",
+    "2FA": "2FA",
+    "secret-key": "秘密鍵",
+    "kyc": "KYC",
+    "currency": "通貨",
+    "language": "言語",
+    "r-18mode": "R-18 モード",
+    "merge": "マージ"
+  },
+  "header": {
+    "logo-title": "Event <br>Manager",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
+}
