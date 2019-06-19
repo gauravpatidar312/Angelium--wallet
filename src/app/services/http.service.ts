@@ -45,12 +45,4 @@ export class HttpService {
       {headers: setHeaders()},
     );
   }
-
-  uploadImage(data, endpoint) {
-    return this.httpClient.post<any>(
-      `${environment.apiUrl}/${endpoint}`,
-      data,
-      {headers: setHeaders()},
-    );
-  }
 }
