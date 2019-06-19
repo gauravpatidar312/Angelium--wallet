@@ -5,6 +5,7 @@ import {NavigationStart, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {DialogNamePromptComponent} from './dialog-prompt/dialog-prompt.component';
 import {ImageCroppedEvent} from './image-cropper/interfaces/image-cropped-event.interface';
+import { TranslateService } from "@ngx-translate/core";
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
@@ -22,6 +23,11 @@ export let browserRefresh = false;
 export class SettingComponent implements OnInit {
   isProduction: boolean = environment.production;
   evaIcons = [];
+  languages = [
+    { language: 'Japan', code: 'ja'},
+    { language: 'English', code: 'en' }
+  ];
+  selectedLang = 'English';
   userData: any;
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -34,7 +40,8 @@ export class SettingComponent implements OnInit {
               private httpService: HttpService,
               private shareDataService: ShareDataService,
               private sessionStorage: SessionStorageService,
-              private router: Router) {
+              private router: Router,
+              public translate: TranslateService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
     window.onload = (ev) => {
@@ -50,6 +57,11 @@ export class SettingComponent implements OnInit {
         this.userData = data;
       });
     }
+  }
+
+  changeLang(lan: any){
+    this.selectedLang = lan.language;
+    this.translate.use(lan.code);
   }
 
   ngOnInit() {

@@ -7,7 +7,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
@@ -28,6 +28,12 @@ import { ToastrService } from "./services/toastr.service";
 import { AuthService } from "./_guards/auth.service";
 import { AuthGuard } from './_guards/auth.guard';
 import { ShareDataService } from "./services/share-data.service";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent],
@@ -40,6 +46,13 @@ import { ShareDataService } from "./services/share-data.service";
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
   ],
   bootstrap: [AppComponent],
   providers: [

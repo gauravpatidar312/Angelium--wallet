@@ -21,32 +21,32 @@
               </thead>
               <tbody>
                 <tr class="spacer">
-                  <td class="title-col">Username</td>
+                  <td class="title-col">{{"setting-page.username" | translate}}</td>
                   <td class="value-col">{{userData?.username | titlecase}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr class="spacer">
-                  <td class="title-col">Name</td>
+                  <td class="title-col">{{"setting-page.name" | translate}}</td>
                   <td class="value-col">{{userData?.fullname | titlecase}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">E-mail</td>
+                  <td class="title-col">{{"setting-page.e-mail" | translate}}</td>
                   <td class="value-col">{{userData?.email}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">Country</td>
+                  <td class="title-col">{{"setting-page.country" | translate}}</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
                   <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
-                  <td class="title-col">Phone</td>
+                  <td class="title-col">{{"setting-page.phone" | translate}}</td>
                   <td class="value-col">{{userData?.phone}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">Referral</td>
+                  <td class="title-col">{{"setting-page.referral" | translate}}</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
                   <td class="action-col text-center">
                     <i ngxClipboard [cbContent]="userData?.referral_link" (click)="copyReferralLink()"
@@ -54,14 +54,14 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">QR</td>
+                  <td class="title-col">{{"setting-page.qr" | translate}}</td>
                   <td class="value-col">Download QR Code of your referral link</td>
                   <td class="action-col text-center">
                     <i class="ion-archive down-qrCode-icon fa-2x" (click)="open(QRdialog)"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">Rank</td>
+                  <td class="title-col">{{"setting-page.rank" | translate}}</td>
                   <td class="value-col">{{userData?.level}}</td>
                   <td class="action-col"></td>
                 </tr>
@@ -82,34 +82,34 @@
             </thead>
             <tbody>
               <tr>
-                <td class="title-col">Password</td>
+                <td class="title-col">{{"setting-page.password" | translate}}</td>
                 <td class="value-col">
                   **************
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
               </tr>
               <tr>
-                <td class="title-col">2FA</td>
+                <td class="title-col">{{"setting-page.2FA" | translate}}</td>
                 <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">Secret Key</td>
+                <td class="title-col">{{"setting-page.secret-key" | translate}}</td>
                 <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">KYC</td>
+                <td class="title-col">{{"setting-page.kyc" | translate}}</td>
                 <td class="value-col">{{isProduction ? 'Coming soon' : 'Pending'}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc" *ngIf="!isProduction"></i></td>
               </tr>
               <tr>
-                <td class="title-col">Currency</td>
+                <td class="title-col">{{"setting-page.currency" | translate}}</td>
                 <td class="value-col">USD</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">Language</td>
+                <td class="title-col">{{"setting-page.language" | translate}}</td>
                 <td>English</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
@@ -134,6 +134,23 @@
                 <td class="title-col">Merge</td>
                 <td>{{isProduction ? 'Coming soon' : 'Merge your old data'}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="!isProduction"></i></td>
+              </tr>
+              <tr>
+                <td class="title-col">Language switch</td>
+                <td>
+                  <div class="dropdown" ngbDropdown>
+                    <button class="btn btn-primary" type="button" ngbDropdownToggle>
+                      {{ selectedLang }}
+                    </button>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                      <li class="dropdown-item" *ngFor="let lang of languages" 
+                        (click)="changeLang(lang)">
+                        {{ lang.language }}
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
             </tbody>
           </table>

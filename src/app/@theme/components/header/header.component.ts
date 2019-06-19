@@ -9,7 +9,8 @@ import { ShareDataService } from "../../../services/share-data.service";
 import { AuthService } from '../../../_guards/auth.service';
 import { SessionStorageService } from "../../../services/session-storage.service";
 import { Router } from '@angular/router';
-import {environment} from 'environments/environment';
+import {environment} from '../../../../environments/environment';
+
 declare let $: any;
 
 @Component({
