@@ -199,7 +199,7 @@ export class SettingComponent implements OnInit {
       const file = this.imageChangedEvent.target.files[0];
       const newfile = new File([this.croppedImageSize], file.name, {type: file.type});
       formData.append('avatar', newfile, newfile.name);
-      this.httpService.uploadImage(formData, 'avatar-upload/').subscribe((res?: any) => {
+      this.httpService.post(formData, 'avatar-upload/').subscribe((res?: any) => {
         if (res.status) {
           ref.close();
           this.shareDataService.changeData(res);
