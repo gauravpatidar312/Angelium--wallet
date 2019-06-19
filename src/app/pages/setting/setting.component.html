@@ -88,12 +88,12 @@
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
               </tr>
-              <tr>
+              <tr *ngIf="!isProduction">
                 <td class="title-col">2FA</td>
                 <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
-              <tr>
+              <tr *ngIf="!isProduction">
                 <td class="title-col">Secret Key</td>
                 <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>

@@ -34,6 +34,11 @@
 
     .event-title {
       font-family: nb-theme(font-mont);
+      text-overflow: ellipsis;
+      width: 90%;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .event-date {

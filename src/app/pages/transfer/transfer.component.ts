@@ -195,7 +195,7 @@ export class TransferComponent implements OnInit {
         });
       }
       if (this.sendWallet) {
-        this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
+        // this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
         this.setAmount(walletType);
       }
     } else if (typeValue === 'receive') {

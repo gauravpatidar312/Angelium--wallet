@@ -194,6 +194,10 @@
     font-family: nb-theme(font-bebas);
   }
 
+  .font-bebasNeueBold {
+    font-family: nb-theme(font-bebas-bold);
+  }
+
   .font-avenir {
     font-family: nb-theme(font-avenir);
   }
@@ -214,6 +218,12 @@
 
   .month-day-value {
     font-size: 2.5rem;
+    &.ls-half {
+      letter-spacing: 0.5px;
+    }
+    &.ls-one {
+      letter-spacing: 1px;
+    }
   }
 
   .days-text {

@@ -36,8 +36,10 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" formControlName="transfer_amount" (blur)="setAmount(sendWallet?.wallet_type)" value="{{sendWallet?.wallet_amount | number : '1.2-8' }}">
-                        <span *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.2-2' }}</span>
+                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" step="0.000001"
+                               formControlName="transfer_amount" (keyup)="setAmount(sendWallet?.wallet_type)"
+                               value="{{0 | number : '1.0-6' }}">
+                        <span *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.0-2' }}</span>
                         <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
                     </div>
@@ -59,7 +61,7 @@
                         <input type="text" class="form-control font-nunitoSans w-100" formControlName="destination_address" placeholder="Enter destination address">
                       </div>
                       <div class="form-group mt-4">
-                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" class="font-bebasNeue btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
+                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
                           <span *ngIf="!(formSubmitting || fetchingAmount)" >RUN</span>
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
@@ -145,10 +147,11 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount" name="fromOTCAmount"
-                               [required]="true" [(ngModel)]="fromOTCAmount" (blur)="setOTCAmount()"
-                               value="{{anxWallet?.wallet_amount | number : '1.2-2' }}">
-                        <span *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.2-2' }}</span>
+                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
+                               name="fromOTCAmount" step="0.01"
+                               [required]="true" [(ngModel)]="fromOTCAmount" (keyup)="setOTCAmount()"
+                               value="{{0 | number : '1.0-2' }}">
+                        <span *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.0-2' }}</span>
                         <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
                     </div>
@@ -179,9 +182,9 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
-                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.2-8'}}">
-                        <span *ngIf="!fetchingAmount">${{ otcWallet?.toDollar | number : '1.2-2' }}</span>
+                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount" step="0.000001"
+                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.0-6'}}">
+                        <span *ngIf="!fetchingAmount">${{ otcWallet?.toDollar | number : '1.0-2' }}</span>
                         <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
                     </div>
@@ -193,7 +196,7 @@
                   <div class="row justify-content-center">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group mt-4">
-                        <button [disabled]="formSubmitting || fetchingAmount || !otcWallets?.length" class="font-bebasNeue btn-run btn btn-demo btn-success pointer"
+                        <button [disabled]="formSubmitting || fetchingAmount || !otcWallets?.length" class="font-bebasNeueBold btn-run btn btn-demo btn-success pointer"
                                 (click)="onOTCTransfer()" fullWidth style="width: 100%;">
                           <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>

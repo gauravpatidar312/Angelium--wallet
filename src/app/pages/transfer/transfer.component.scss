@@ -71,6 +71,10 @@
     font-family: nb-theme(font-bebas);
   }
 
+  .font-bebasNeueBold {
+    font-family: nb-theme(font-bebas-bold);
+  }
+
   /deep/ nb-tabset .tabset .tab, .font-nunitoSans {
      font-family: nb-theme(font-nunito);
   }

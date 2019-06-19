@@ -77,11 +77,11 @@
         <div class="col-7 m-t">
           <div>
             <div class="text-success month-day">Month</div>
-            <div class="month-day-value">4.50 %</div>
+            <div class="month-day-value ls-half">4.50 %</div>
           </div>
           <div>
             <span class="text-success month-day">Day</span>
-            <span class="month-day-value">0.15 %</span>
+            <span class="month-day-value ls-one">0.15 %</span>
           </div>
         </div>
       </nb-card-body>
@@ -165,9 +165,9 @@
           <div class="col-md-6 col-lg-4">
             <div class="form-group total-amount font-avenir">
               <label style="color: #00ff00">Amount</label>
-              <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
-                     class="form-control font-avenir" value="{{wallet?.wallet_amount | number : '1.2-8'}}" (blur)="setAmount(wallet?.wallet_type)"/>
-              <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.2-2' }}</span>
+              <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount" step="0.000001"
+                     class="form-control font-avenir" (blur)="setAmount(wallet?.wallet_type)"/>
+              <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
               <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
             </div>
           </div>
@@ -175,7 +175,7 @@
             <div class="form-group">
               <label class="d-none d-md-block">&nbsp;</label>
               <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" (click)="onCreateHeaven()"
-                      class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeue">
+                      class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
                 <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
               </button>

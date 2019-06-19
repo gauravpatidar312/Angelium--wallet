@@ -216,7 +216,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
     else if (typeValue === 'createHeaven') {
       this.walletType = period;
       this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-      this.heaven_amount = Number(this.wallet.wallet_amount);
+      this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
       this.setAmount(this.walletType);
     }
     this.periodChange.emit(period);
@@ -292,7 +292,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
       if (this.myWallets && Object.keys(this.myWallets).length){
         this.walletType = 'BTC';
         this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = Number(this.wallet.wallet_amount);
+        this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
         this.setAmount(this.walletType);
       } else
         this.walletType = 'SELECT';
