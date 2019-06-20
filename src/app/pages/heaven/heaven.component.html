@@ -166,9 +166,13 @@
             <div class="form-group total-amount font-avenir">
               <label style="color: #00ff00">Amount</label>
               <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount" step="0.000001"
-                     class="form-control font-avenir" (blur)="setAmount(wallet?.wallet_type)"/>
-              <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
-              <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                     class="form-control font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+              <span class="transfer-amount" *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
+              <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
+                    title="Click to use whole amount">
+                {{(wallet?.wallet_amount | number : '1.0-6') + ' ' + (wallet?.wallet_type) + ' / max' }}
+              </span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">

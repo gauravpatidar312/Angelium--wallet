@@ -178,11 +178,19 @@
     position: relative;
     span {
       position: absolute;
-      right: 30px;
-      bottom: 13px;
-      color: #00bb66;
-      font-weight: bold;
-      font-size: 16px;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 5px;
+        top: 0;
+      }
     }
   }
 
@@ -304,10 +312,6 @@
       }
       .status {
         font-size: 2.1rem !important;
-      }
-
-      .total-amount span {
-        top: 0;
       }
     }
   }

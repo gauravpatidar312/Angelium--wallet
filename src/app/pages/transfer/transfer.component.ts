@@ -135,6 +135,15 @@ export class TransferComponent implements OnInit {
     });
   }
 
+  setSendMaxValue() {
+    if (!this.sendWallet || !this.sendWallet.wallet_amount) {
+      return;
+    }
+
+    this.sendForm.controls.transfer_amount.setValue(Number(Number(this.sendWallet.wallet_amount).toFixed(6)));
+    this.setAmount(this.sendWallet.wallet_type);
+  }
+
   setOTCAmount() {
     if (!this.fromOTCAmount) {
       this.otcWallet.toAmount = 0;
@@ -180,6 +189,15 @@ export class TransferComponent implements OnInit {
       this.fetchingAmount = false;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
     });
+  }
+
+  setAnxMaxValue() {
+    if (!this.otcWallet || !this.otcWallet.wallet_amount) {
+      return;
+    }
+
+    this.fromOTCAmount = Number(Number(this.sendWallet.wallet_amount).toFixed(2));
+    this.setOTCAmount();
   }
 
   onChangeWallet(walletType: string, typeValue): void {

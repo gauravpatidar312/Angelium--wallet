@@ -239,6 +239,15 @@ export class HeavenComponent implements OnInit, OnDestroy {
     });
   }
 
+  setMaxValue() {
+    if (!this.wallet || !this.wallet.wallet_amount) {
+      return;
+    }
+
+    this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+    this.setAmount(this.wallet.wallet_type);
+  }
+
   onCreateHeaven() {
     if (this.isProduction) {
       this.toastrService.info('Feature coming soon! Stay tuned.', 'Heaven');
