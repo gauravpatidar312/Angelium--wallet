@@ -88,6 +88,10 @@
     background-image: linear-gradient(to right, #00D9BB, #00DA79);
   }
 
+  .receive-form .w-100 {
+    width: 94% !important;
+  }
+
   @include media-breakpoint-down(sm) {
     nb-card {
       border-radius: 0;
@@ -116,12 +120,19 @@
   }
   .copy-icon {
     float: right;
-    margin-top: -31px;
-    margin-right: 12px;
+    margin-top: -60px;
+    border-left: none;
+    width: 7%;
+    padding-right: 23px;
+    border-radius: 0 0.5rem 0.5rem 0;
+    i:hover {
+      color: #00d977;
+      cursor: pointer;
+    }
   }
-  .copy-icon:hover {
-    color: #00d977;
-    cursor: pointer;
+
+  .dropDown-padding {
+    padding: 14px;
   }
 
   .btn-run {

@@ -18,7 +18,7 @@
                       <div class="form-group">
                         <label for="BTC" class="text-link">From</label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
@@ -108,8 +108,8 @@
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <input type="text" class="form-control font-nunitoSans w-100" placeholder="Destination address" value="{{receiveWallet?.address}}" [disabled]="true">
-                        <a class="copy-icon" ngxClipboard [cbContent]="receiveWallet?.address" (click)="copyAddress()"><i class="fa fa-clone" title="Copy address"></i></a>
                       </div>
+                      <div class="form-group"><a class="form-control copy-icon" ngxClipboard [cbContent]="receiveWallet?.address" (click)="copyAddress()"><i class="fa fa-clone" title="Copy address"></i></a></div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 text-center" *ngIf="receiveWallet?.qrcode">
@@ -129,7 +129,7 @@
                       <div class="form-group">
                         <label for="ANX" class="text-link">From</label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
@@ -164,7 +164,7 @@
                       <div class="form-group">
                         <label for="BTC" class="text-link">To</label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
