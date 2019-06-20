@@ -53,7 +53,8 @@
               "src/assets/js/jquery-3.4.1.min.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/knockout-2.2.0.js",
-              "src/assets/js/knockout.mapping-latest.debug.js"
+              "src/assets/js/knockout.mapping-latest.debug.js",
+              "src/assets/js/slide-to-unlock.js"
             ]
           },
           "configurations": {
