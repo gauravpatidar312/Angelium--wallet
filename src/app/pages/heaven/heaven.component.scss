@@ -1,6 +1,6 @@
 @import '../../@theme/styles/themes';
 @import "~@nebular/theme/styles/global/breakpoints";
-
+@import '~@nebular/theme/styles/global/typography/typography';
 @include nb-install-component() {
   .title {
     font-family: nb-theme(font-bebas);
@@ -391,4 +391,50 @@
       font-size: 1.5rem;
     }
   }
+
+  .heavenhistory {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  .heavenhistory-cell{
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: nb-theme(font-nunito);
+  }
+  /deep/ ng2-smart-table table tr td {
+    font-family: nb-theme(font-nunito);
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) { 
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+    /deep/ .heavenhistory-cell{
+      width: 120px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+    /deep/ .heavenhistory-cell{
+      width: 100px;
+    }
+
+  }
+
+//   :host /deep/ ng2-smart-title {
+//     color: grey;
+//     font-family: nb-theme(font-nunito);
+// }
+
+/* headers grid color*/
+/deep/ ng2-smart-table-title > a { 
+  font-family: nb-theme(font-nunito);
+  font-size: 16px;
+} 
 }

@@ -1,256 +1,256 @@
 <div class="row">
-  <div class="col-12 col-lg-6">
-    <nb-card class="top-content">
-      <div class="icon-container">
-        <div class="icon primary"><i class="fa fa-university"></i></div>
-      </div>
-      <div class="details full-width">
-        <div class="row">
-          <div class="col-7 mt-2">
-            <div class="title">Total Heaven</div>
-          </div>
-          <div class="col-5">
-            <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-              <button type="button" ngbDropdownToggle class="btn"
-                      [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                   'btn-primary': currentTheme !== 'default',
-                                   'btn-sm': breakpoint.width <= breakpoints.is}">
-                {{ typeOfPeriod }}
-              </button>
-              <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period)">
-                  {{ period }}
-                </li>
-              </ul>
+    <div class="col-12 col-lg-6">
+      <nb-card class="top-content">
+        <div class="icon-container">
+          <div class="icon primary"><i class="fa fa-university"></i></div>
+        </div>
+        <div class="details full-width">
+          <div class="row">
+            <div class="col-7 mt-2">
+              <div class="title">Total Heaven</div>
             </div>
-            <div class="clearfix"></div>-->
-            <div class="status text-white"><span class="text-success">$</span>{{totalHeaven?.heaven | number : '1.0-2' }}</div>
-            <div class="delta up">{{totalHeaven?.percentage}}%</div>
-            <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
-          </div>
-        </div>
-      </div>
-    </nb-card>
-  </div>
-  <div class="col-12 col-lg-6">
-    <nb-card class="top-content">
-      <div class="icon-container">
-        <div class="icon primary"><i class="nb-bar-chart"></i></div>
-      </div>
-      <div class="details full-width">
-        <div class="row">
-          <div class="col-7 mt-2">
-            <div class="title">Heaven Drop Today</div>
-          </div>
-          <div class="col-5 col-xs-4">
-            <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-              <button type="button" ngbDropdownToggle class="btn"
-                      [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                   'btn-primary': currentTheme !== 'default',
-                                   'btn-sm': breakpoint.width <= breakpoints.is}">
-                {{ typeOfPeriod }}
-              </button>
-              <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period)">
-                  {{ period }}
-                </li>
-              </ul>
-            </div>
-            <div class="clearfix"></div>-->
-            <div class="status text-white text-margin"><span class="text-success">$</span>{{heavenDrop?.total_amount | number : '1.0-2' }}</div>
-            <div class="delta up">{{heavenDrop?.percentage}}%</div>
-            <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
-          </div>
-        </div>
-      </div>
-    </nb-card>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <nb-card>
-      <nb-card-header class="day-header-title title">Heaven 30</nb-card-header>
-      <nb-card-body class="row font-bebasNeue">
-        <div class="col-5">
-          <div class="text-success text-right days-font">30</div>
-          <div class="text-right days-text">Days</div></div>
-        <div class="col-7 m-t">
-          <div>
-            <div class="text-success month-day">Month</div>
-            <div class="month-day-value">4.50 %</div>
-          </div>
-          <div>
-            <span class="text-success month-day">Day</span>
-            <span class="month-day-value">0.15 %</span>
-          </div>
-        </div>
-      </nb-card-body>
-      <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
-              (click)="selectedHeavenPlan = '30'">Select
-      </button>
-    </nb-card>
-  </div>
-  <div class="col-md-4">
-    <nb-card>
-      <nb-card-header class="day-header-title title">Heaven 60</nb-card-header>
-      <nb-card-body class="row font-bebasNeue">
-        <div class="col-5">
-          <div class="text-success text-right days-font">60</div>
-          <div class="text-right days-text">Days</div></div>
-        <div class="col-7 m-t">
-          <div>
-            <div class="text-success month-day">Month</div>
-            <div class="month-day-value">6.00 %</div>
-          </div>
-          <div>
-            <span class="text-success month-day">Day</span>
-            <span class="month-day-value">0.20 %</span>
-          </div>
-        </div>
-      </nb-card-body>
-      <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
-              (click)="selectedHeavenPlan = '60'">Select
-      </button>
-    </nb-card>
-  </div>
-  <div class="col-md-4">
-    <nb-card>
-      <nb-card-header class="day-header-title title">Heaven 90</nb-card-header>
-      <nb-card-body class="row font-bebasNeue">
-        <div class="col-5">
-          <div class="text-success text-right days-font">90</div>
-          <div class="text-right days-text">Days</div></div>
-        <div class="col-7 m-t">
-          <div>
-            <div class="text-success month-day">Month</div>
-            <div class="month-day-value">9.00 %</div>
-          </div>
-          <div>
-            <span class="text-success month-day">Day</span>
-            <span class="month-day-value">0.30 %</span>
-          </div>
-        </div>
-      </nb-card-body>
-      <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
-              (click)="selectedHeavenPlan = '90'">Select
-      </button>
-    </nb-card>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 myWallets">
-    <nb-card>
-      <nb-card-body>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <div class="form-group font-avenir">
-              <label style="color: #00ff00">From</label>
-              <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-                   ngbDropdown>
-                <button type="button" ngbDropdownToggle class="font-avenir btn b-color-wallet"
+            <div class="col-5">
+              <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
                         [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                               'btn-primary': currentTheme !== 'default',
-                               'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ walletType }}
+                                     'btn-primary': currentTheme !== 'default',
+                                     'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ typeOfPeriod }}
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let wallet of myWallets"
-                      (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
-                    {{ wallet.wallet_type }}
+                  <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period)">
+                    {{ period }}
                   </li>
                 </ul>
               </div>
+              <div class="clearfix"></div>-->
+              <div class="status text-white"><span class="text-success">$</span>{{totalHeaven?.heaven | number : '1.0-2' }}</div>
+              <div class="delta up">{{totalHeaven?.percentage}}%</div>
+              <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
             </div>
           </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="form-group total-amount font-avenir">
-              <label style="color: #00ff00">Amount</label>
-              <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
-                     class="form-control font-avenir" value="{{wallet?.wallet_amount | number : '1.2-8'}}" (blur)="setAmount(wallet?.wallet_type)"/>
-              <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.2-2' }}</span>
-              <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+        </div>
+      </nb-card>
+    </div>
+    <div class="col-12 col-lg-6">
+      <nb-card class="top-content">
+        <div class="icon-container">
+          <div class="icon primary"><i class="nb-bar-chart"></i></div>
+        </div>
+        <div class="details full-width">
+          <div class="row">
+            <div class="col-7 mt-2">
+              <div class="title">Heaven Drop Today</div>
+            </div>
+            <div class="col-5 col-xs-4">
+              <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="btn"
+                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                     'btn-primary': currentTheme !== 'default',
+                                     'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ typeOfPeriod }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let period of types" (click)="changePeriod(period)">
+                    {{ period }}
+                  </li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>-->
+              <div class="status text-white text-margin"><span class="text-success">$</span>{{heavenDrop?.total_amount | number : '1.0-2' }}</div>
+              <div class="delta up">{{heavenDrop?.percentage}}%</div>
+              <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
             </div>
           </div>
-          <div class="col-md-12 col-lg-4">
-            <div class="form-group">
-              <label class="d-none d-md-block">&nbsp;</label>
-              <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" (click)="onCreateHeaven()"
-                      class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeue">
-                <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
-                <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
+        </div>
+      </nb-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <nb-card>
+        <nb-card-header class="day-header-title title">Heaven 30</nb-card-header>
+        <nb-card-body class="row font-bebasNeue">
+          <div class="col-5">
+            <div class="text-success text-right days-font">30</div>
+            <div class="text-right days-text">Days</div></div>
+          <div class="col-7 m-t">
+            <div>
+              <div class="text-success month-day">Month</div>
+              <div class="month-day-value">4.50 %</div>
+            </div>
+            <div>
+              <span class="text-success month-day">Day</span>
+              <span class="month-day-value">0.15 %</span>
+            </div>
+          </div>
+        </nb-card-body>
+        <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
+                (click)="selectedHeavenPlan = '30'">Select
+        </button>
+      </nb-card>
+    </div>
+    <div class="col-md-4">
+      <nb-card>
+        <nb-card-header class="day-header-title title">Heaven 60</nb-card-header>
+        <nb-card-body class="row font-bebasNeue">
+          <div class="col-5">
+            <div class="text-success text-right days-font">60</div>
+            <div class="text-right days-text">Days</div></div>
+          <div class="col-7 m-t">
+            <div>
+              <div class="text-success month-day">Month</div>
+              <div class="month-day-value">6.00 %</div>
+            </div>
+            <div>
+              <span class="text-success month-day">Day</span>
+              <span class="month-day-value">0.20 %</span>
+            </div>
+          </div>
+        </nb-card-body>
+        <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
+                (click)="selectedHeavenPlan = '60'">Select
+        </button>
+      </nb-card>
+    </div>
+    <div class="col-md-4">
+      <nb-card>
+        <nb-card-header class="day-header-title title">Heaven 90</nb-card-header>
+        <nb-card-body class="row font-bebasNeue">
+          <div class="col-5">
+            <div class="text-success text-right days-font">90</div>
+            <div class="text-right days-text">Days</div></div>
+          <div class="col-7 m-t">
+            <div>
+              <div class="text-success month-day">Month</div>
+              <div class="month-day-value">9.00 %</div>
+            </div>
+            <div>
+              <span class="text-success month-day">Day</span>
+              <span class="month-day-value">0.30 %</span>
+            </div>
+          </div>
+        </nb-card-body>
+        <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
+                (click)="selectedHeavenPlan = '90'">Select
+        </button>
+      </nb-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 myWallets">
+      <nb-card>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group font-avenir">
+                <label style="color: #00ff00">From</label>
+                <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                     ngbDropdown>
+                  <button type="button" ngbDropdownToggle class="font-avenir btn b-color-wallet"
+                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                 'btn-primary': currentTheme !== 'default',
+                                 'btn-sm': breakpoint.width <= breakpoints.is}">
+                    {{ walletType }}
+                  </button>
+                  <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li class="dropdown-item" *ngFor="let wallet of myWallets"
+                        (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
+                      {{ wallet.wallet_type }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group total-amount font-avenir">
+                <label style="color: #00ff00">Amount</label>
+                <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
+                       class="form-control font-avenir" value="{{wallet?.wallet_amount | number : '1.2-8'}}" (blur)="setAmount(wallet?.wallet_type)"/>
+                <span *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.2-2' }}</span>
+                <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+              <div class="form-group">
+                <label class="d-none d-md-block">&nbsp;</label>
+                <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" (click)="onCreateHeaven()"
+                        class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeue">
+                  <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
+                  <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+  
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isProduction">
+    <div class="col-md-12 col-xl-12">
+      <nb-card>
+        <nb-card-body>
+          <div class="chart-header">
+            <div class="legends">
+              <div class="legend">
+                <div class="legend-item-color"
+                     style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
+                </div>
+                <div class="legend-title">ANX</div>
+              </div>
+              <div class="legend">
+                <div class="legend-item-color"
+                     style="background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);">
+                </div>
+                <div class="legend-title">HEAVEN</div>
+              </div>
+            </div>
+            <div class="dropdown" ngbDropdown>
+              <button class="btn btn-primary" type="button" ngbDropdownToggle>
+                Year
               </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item"> Week</li>
+                <li class="dropdown-item"> Month</li>
+                <li class="dropdown-item"> Year</li>
+              </ul>
             </div>
           </div>
-        </div>
-
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-<div class="row" *ngIf="!isProduction">
-  <div class="col-md-12 col-xl-12">
-    <nb-card>
-      <nb-card-body>
-        <div class="chart-header">
-          <div class="legends">
-            <div class="legend">
-              <div class="legend-item-color"
-                   style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
-              </div>
-              <div class="legend-title">ANX</div>
+          <ngx-ecommerce-charts></ngx-ecommerce-charts>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <!--<div class="col-md-4 col-xl-3">
+      <nb-card size="xsmall">
+        <nb-card-header>
+          ANX Price
+        </nb-card-header>
+        <nb-card-body>
+          <div class="progress-info">
+            <div class="value">572,900</div>
+            <div class="progress-container ">
+              <div class="progress-value " style="width: 70%;"></div>
             </div>
-            <div class="legend">
-              <div class="legend-item-color"
-                   style="background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);">
-              </div>
-              <div class="legend-title">HEAVEN</div>
+            <div class="description">
+              <bdi>Better than last week (70%)</bdi>
             </div>
           </div>
-          <div class="dropdown" ngbDropdown>
-            <button class="btn btn-primary" type="button" ngbDropdownToggle>
-              Year
-            </button>
-            <ul class="dropdown-menu" ngbDropdownMenu>
-              <li class="dropdown-item"> Week</li>
-              <li class="dropdown-item"> Month</li>
-              <li class="dropdown-item"> Year</li>
-            </ul>
-          </div>
-        </div>
-        <ngx-ecommerce-charts></ngx-ecommerce-charts>
-      </nb-card-body>
-    </nb-card>
+        </nb-card-body>
+      </nb-card>
+      <ngx-solar [chartValue]="'42'"></ngx-solar>
+    </div>-->
   </div>
-  <!--<div class="col-md-4 col-xl-3">
-    <nb-card size="xsmall">
-      <nb-card-header>
-        ANX Price
-      </nb-card-header>
-      <nb-card-body>
-        <div class="progress-info">
-          <div class="value">572,900</div>
-          <div class="progress-container ">
-            <div class="progress-value " style="width: 70%;"></div>
-          </div>
-          <div class="description">
-            <bdi>Better than last week (70%)</bdi>
-          </div>
-        </div>
-      </nb-card-body>
-    </nb-card>
-    <ngx-solar [chartValue]="'42'"></ngx-solar>
-  </div>-->
-</div>
-<div class="row" *ngIf="!isProduction">
-  <div class="col-md-12">
-    <nb-card>
-      <nb-card-header>
-        Heaven History
-      </nb-card-header>
-      <nb-card-body>
-        <ng2-smart-table [settings]="settings" [source]="source">
-        </ng2-smart-table>
-      </nb-card-body>
-    </nb-card>
+  <div class="row">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-header class="heavenhistory">
+          Heaven History
+        </nb-card-header>
+        <nb-card-body>
+          <ng2-smart-table [settings]="settings" [source]="source">
+          </ng2-smart-table>
+        </nb-card-body>
+      </nb-card>
+    </div>
   </div>
-</div>
