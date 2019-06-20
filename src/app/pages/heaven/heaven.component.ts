@@ -224,7 +224,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   setAmount(walletType) {
-    if (!this.heaven_amount) {
+    if (!this.heaven_amount || !this.wallet || !this.wallet.wallet_type) {
       this.wallet.walletDollar = 0;
       return;
     }
