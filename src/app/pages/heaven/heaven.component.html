@@ -147,7 +147,7 @@
               <label style="color: #00ff00">From</label>
               <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
                    ngbDropdown>
-                <button type="button" ngbDropdownToggle class="font-avenir btn b-color-wallet"
+                <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn b-color-wallet"
                         [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                'btn-primary': currentTheme !== 'default',
                                'btn-sm': breakpoint.width <= breakpoints.is}">
@@ -166,7 +166,7 @@
             <div class="form-group total-amount font-avenir">
               <label style="color: #00ff00">Amount</label>
               <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount" step="0.000001"
-                     class="form-control font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
+                     class="form-control input-padding font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
               <span class="transfer-amount" *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
