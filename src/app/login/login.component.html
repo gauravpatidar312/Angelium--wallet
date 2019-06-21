@@ -15,49 +15,45 @@
             <p class="sub-title title">Hello! Log in with your email.</p>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="width-full" aria-labelledby="title">
               <div class="form-group">
-                <label class="label" for="input-email">{{"comman.email-address" | translate}}:</label>
+                <label class="label" for="input-email">{{"common.emailAddress" | translate}}:</label>
                 <input class="form-control" fullWidth name="email" 
-                  placeholder="{{ 'comman.email-address' | translate }}" autofocus
+                  placeholder="{{ 'common.emailAddress' | translate }}" autofocus
                   formControlName="email">
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                   <div *ngIf="f.email.errors.required">
-                    {{"errorMessage.email" | translate}}
-                    {{"errorMessage.is" | translate}}
-                    {{"errorMessage.required" | translate}}
+                    {{"messages.required" | translate: {'field': "common.email" | translate } }}
                   </div>
                   <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="label" for="input-password">Password:</label>
+                <label class="label" for="input-password">{{"common.password" | translate}}:</label>
                 <input class="form-control" fullWidth name="password" 
                   type="password" formControlName="password"
-                  placeholder="{{'comman.password' | translate}}">
+                  placeholder="{{'common.password' | translate}}">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                   <div *ngIf="f.password.errors.required">
-                    {{"errorMessage.password" | translate}}
-                    {{"errorMessage.is" | translate}}
-                    {{"errorMessage.required" | translate}}
+                    {{"messages.required" | translate: {'field': "common.password" | translate } }}
                   </div>
                 </div>
               </div>
               <div class="form-group accept-group">
                 <nb-checkbox name="rememberMe">
-                  {{"pages.loginPage.remember-me" | translate}}
+                  {{"pages.login.rememberMe" | translate}}
                 </nb-checkbox>
                 <a class="forgot-password" routerLink="/reset-password">
-                  {{"pages.loginPage.forgot-password" | translate}}?
+                  {{"pages.login.forgotPassword" | translate}}?
                 </a>
               </div>
               <div class="form-group">
                 <button nbButton [disabled]="formSubmitting" class="form-control pointer" fullWidth status="success">
-                  <span *ngIf="!formSubmitting">{{"buttonsText.login" | translate}}</span>
+                  <span *ngIf="!formSubmitting">{{"common.login" | translate}}</span>
                   <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
                 </button>
               </div>
               <div class="form-group">
                 <section class="another-action" aria-label="Sign in">
-                  Don't have an account? <a class="" routerLink="/register/">{{"buttonsText.register" | translate}}</a>
+                  Don't have an account? <a class="" routerLink="/register/">{{"common.register" | translate}}</a>
                 </section>
               </div>
             </form>

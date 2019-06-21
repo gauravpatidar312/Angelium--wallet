@@ -1,10 +1,14 @@
 {
-  "comman":{
+  "common":{
     "email-address": "Email address",
     "password": "電話",
     "phone": "Phone",
     "verification-code": "Verification code",
-    "username": "ユーザー名"
+    "username": "ユーザー名",
+    "email": "Eメール"
+  },
+  "messages":{
+    "required": "{{field}} is required"
   },
   "pages":{
     "settingPage": {

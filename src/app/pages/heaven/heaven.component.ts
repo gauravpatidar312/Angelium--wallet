@@ -7,6 +7,7 @@ import {HttpService} from '../../services/http.service';
 import * as _ from 'lodash';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
+import { TranslateService } from "@ngx-translate/core";
 import {environment} from 'environments/environment';
 
 @Component({
@@ -34,12 +35,13 @@ export class HeavenComponent implements OnInit, OnDestroy {
   wallet: any;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
-
+  days:any;
   constructor(private service: SmartTableData,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
               private httpService: HttpService,
-              private toastrService: ToastrService ) {
+              private toastrService: ToastrService,
+              public translate: TranslateService) {
     // const data = this.service.getData();
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -53,6 +55,11 @@ export class HeavenComponent implements OnInit, OnDestroy {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.translate.get("days").subscribe((res: any) => {
+      this.days = res;
+      console.log(res);
+    });
   }
 
   ngOnInit() {

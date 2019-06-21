@@ -58,7 +58,7 @@ export class SettingComponent implements OnInit {
       });
     }
   }
-
+  
   changeLang(lan: any){
     this.selectedLang = lan.language;
     this.translate.use(lan.code);

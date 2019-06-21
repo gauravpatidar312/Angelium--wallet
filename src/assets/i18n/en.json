@@ -1,59 +1,102 @@
 {
-  "comman":{
-    "email-address": "Email address",
+  "common":{
+    "downline": "Downline",
+    "emailAddress": "Email address",
+    "heaven": "Heaven",
+    "login": "Log In",
+    "month": "Month",
     "password": "Password",
+    "email": "Email",
     "phone": "Phone",
-    "verification-code": "Verification code",
-    "username": "Username"
+    "reward": "Reward",
+    "run": "Run",
+    "register": "Register",
+    "select": "Select",
+    "transfer": "TRANSFER",
+    "username": "Username",
+    "verificationCode": "Verification code",
+    "week": "Week",
+    "year": "Year"
+  }, 
+  "messages":{
+    "required": "{{field}} is required"
+  },
+  "header": {
+    "logoTitle": "ANGELIUM",
+    "logout": "Logout"
   },
   "pages":{
-    "settingPage": {
+    "dashboard":{
+      "articleTitle": "Article Title",
+      "eventUpdate": "Event Update",
+      "profitToday" : "Profit Today",
+      "portfolio": "PORTFOLIO",
+      "systemUpdate": "System Update",
+      "totalAsset" : "Total Asset"
+    },
+    "heaven":{
+      "amount" : "Amount",
+      "from": "From",
+      "history": "History",
+      "heavenDropToday": "Heaven Drop Today",
+      "totalHeaven": "Total Heaven"
+    },
+    "login":{
+      "forgotPassword": "Forgot Password",
+      "login": "Login",
+      "rememberMe": "Remember me"
+    },
+    "reward":{
+      "downlineAngel": "Downline Angel",
+      "downlineTree": {
+        "heaven": "heaven", 
+        "level": "level", 
+        "rank": "rank", 
+        "reward": "reward", 
+        "rate": "rate", 
+        "username": "username",
+        "your_reward": "your reward"
+      },
+      "map": "map",
+      "rewardAllocation": "Reward Allocation",
+      "rewardToday": "Reward Today",
+      "tree": "Tree",
+      "totalReward": "Total Reward",
+      "yourRank": "Your Rank",
+      "yourReward": "Your Reward"
+    },
+    "register":{
+      "alreadyHaveAnAccount": "Already have an account",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "number": "number",
+      "repeatPassword": "Repeat password",
+      "repeatPassword": "Repeat password"
+    },
+    "setting": {
       "country": "Country",
       "currency": "Currency",
       "name": "Name",
-      "e-mail": "E-mail",
+      "eMail": "E-mail",
       "language": "Language",
       "merge": "Merge",
       "kyc": "KYC",
       "qr": "QR",
-      "r-18mode": "R-18 Mode",
+      "r18mode": "R-18 Mode",
       "referral": "Referral",
       "rank": "Rank",
-      "secret-key": "Secret Key",
+      "secretKey": "Secret Key",
       "2FA": "2FA"
     },
-
-    "loginPage":{
-      "forgot-password": "Forgot Password",
-      "login": "Login",
-      "remember-me": "Remember me"
-    },
-    
-    "registerPage":{
-      "already-have-an-account": "Already have an account",
-      "first-name": "First Name",
-      "last-name": "Last Name",
-      "repeat-password": "Repeat password",
-      "number": "number",
-      "repeat-password": "Repeat password"
+    "transfer":{
+      "receive": "Receive",
+      "send": "Send",
+      "to": "To"
     }
   },
-
-  "header": {
-    "logo-title": "logo-title",
-    "logout": "Logout",
-    "settings": "Settings"
-  },
-  "buttonsText":{
-    "login": "Log In",
-    "register":"Register"
-  },
-
-  "errorMessage":{
-    "email": "Email",
-    "is": "is",
-    "password": "Password",
-    "required": "required"
+  "sidebar": {
+    "profile":"Profile",
+    "setting": "Setting",
+    "top": "Top"
   }
-
 }
