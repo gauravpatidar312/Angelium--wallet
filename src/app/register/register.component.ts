@@ -54,8 +54,13 @@ export class RegisterComponent implements OnInit {
       isAgree: [false],
     });
 
-    this.activatedRoute.params.subscribe(params => {
-      this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+    this.activatedRoute.params.subscribe((params?: any) => {
+      if (params.invitation_code) {
+        this.sessionStorageService.saveToSession('invitationCode', params.invitation_code);
+        this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+      } else if (this.sessionStorageService.getFromSession('invitationCode')) {
+        this.registerForm.controls.invitation_code.setValue(this.sessionStorageService.getFromSession('invitationCode'));
+      }
     });
   }
 
@@ -126,6 +131,7 @@ export class RegisterComponent implements OnInit {
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);
+      this.sessionStorageService.deleteFromSession('invitationCode');
       this.getUserSettingInfo();
     }, err => {
       console.log(err);

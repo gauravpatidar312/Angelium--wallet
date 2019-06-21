@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {NbDialogService, NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
 import {ShareDataService} from '../../services/share-data.service';
+import {SessionStorageService} from '../../services/session-storage.service';
 import {HttpService} from '../../services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from '../../services/toastr.service';
@@ -33,6 +34,7 @@ export class TransferComponent implements OnInit {
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   toggle: boolean;
+  waitFlag: boolean = false;
   myWallets: any = [];
   sendWallet: any = {};
   receiveWallet: any = {};
@@ -49,6 +51,7 @@ export class TransferComponent implements OnInit {
               private breakpointService: NbMediaBreakpointsService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
+              private sessionStorageService: SessionStorageService,
               private activatedRoute: ActivatedRoute) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -72,6 +75,20 @@ export class TransferComponent implements OnInit {
         this.setReceiveTab = true;
       } else if (this.shareDataService.transferTab === 'OTC') {
         this.setOTCTab = true;
+      }
+    }
+
+    if (this.sessionStorageService.getFromSession('waitTime')) {
+      const waitTime = new Date(this.sessionStorageService.getFromSession('waitTime'));
+      const seconds = (waitTime.getTime() - new Date().getTime());
+      if (seconds > 0) {
+        this.waitFlag = true;
+        setTimeout(() => {
+          this.waitFlag = false;
+          this.sessionStorageService.deleteFromSession('waitTime');
+        }, seconds);
+      } else {
+        this.sessionStorageService.deleteFromSession('waitTime');
       }
     }
 
@@ -287,31 +304,54 @@ export class TransferComponent implements OnInit {
       return;
     }
 
+    // Disabled this check for now
+    // if (this.sendWallet.wallet_type === 'BTC' && this.sendWallet.walletDollar < 100) {
+    //   this.toastrService.danger('Minimum amount for BTC transfer is $100 for beta version.', 'OTC');
+    //   return;
+    // }
+
     const transferObj = {
       'user_wallet': this.sendWallet.id,
       'destination_address': this.sendForm.value.destination_address,
       'transfer_amount': Number(this.sendForm.value.transfer_amount),
     };
 
+    this.waitFlag = true;
     this.formSubmitting = true;
     this.httpService.post(transferObj, 'transfer/').subscribe((res?: any) => {
       if (res.status) {
+        // 15 seconds wait time for next transaction.
+        let currentTime = new Date();
+        currentTime.setSeconds(currentTime.getSeconds() + 15);
+        this.sessionStorageService.saveToSession('waitTime', currentTime);
+        setTimeout(() => {
+          this.waitFlag = false;
+          this.sessionStorageService.deleteFromSession('waitTime');
+        }, 15000);
+
         this.formSubmitting = false;
         this.toastrService.success('Transfer successfully completed!', 'Send');
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           this.myWallets = data;
         });
       } else {
+        this.waitFlag = false;
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'Send');
       }
     }, (err) => {
+      this.waitFlag = false;
       this.formSubmitting = false;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send');
     });
   }
 
   onOTCTransfer() {
+    if (this.isProduction) {
+      this.toastrService.info('Feature coming soon! Stay tuned.', 'OTC');
+      return;
+    }
+
     if (!this.fromOTCAmount || !Number(this.fromOTCAmount)) {
       this.toastrService.danger('Please enter transfer amount.', 'OTC');
       return;
@@ -324,6 +364,12 @@ export class TransferComponent implements OnInit {
       this.toastrService.danger('Please check receive amount.', 'OTC');
       return;
     }
+
+    // Disabled this check for now
+    // if (this.otcWallet.wallet_type === 'BTC' && this.anxWallet.walletDollar < 100) {
+    //   this.toastrService.danger('Minimum amount for BTC transfer is $100 for beta version.', 'OTC');
+    //   return;
+    // }
 
     const transferObj = {
       'user_wallet': this.otcWallet.id,

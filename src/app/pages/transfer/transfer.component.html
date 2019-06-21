@@ -22,13 +22,16 @@
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
-                            {{ sendType}}
+                            {{ sendType }}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item" *ngFor="let wallet of myWallets"
-                                (click)="onChangeWallet(wallet.wallet_type, 'send')">
-                              {{ wallet.wallet_type }}
-                            </li>
+                            <ng-container *ngFor="let wallet of myWallets">
+                              <li class="dropdown-item"
+                                  *ngIf="sendType != wallet.wallet_type"
+                                  (click)="onChangeWallet(wallet.wallet_type, 'send')">
+                                {{ wallet.wallet_type }}
+                              </li>
+                            </ng-container>
                           </ul>
                         </div>
                       </div>
@@ -65,11 +68,12 @@
                         <input type="text" class="form-control font-nunitoSans w-100" formControlName="destination_address" placeholder="Enter destination address">
                       </div>
                       <div class="form-group mt-4">
-                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" (click)="open(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
+                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || waitFlag" (click)="open(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
                           <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
+                      <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
                     </div>
                   </div>
                 </div>
@@ -191,7 +195,7 @@
                         <label for="Amount" class="text-link">Amount</label>
                         <input type="number" class="font-nunitoSans form-control" placeholder="Amount" step="0.000001"
                                [disabled]="true" value="{{otcWallet?.toAmount | number : '1.0-6'}}">
-                        <span class="transfer-amount" *ngIf="!fetchingAmount">${{ otcWallet?.toDollar | number : '1.0-2' }}</span>
+                        <span class="transfer-amount" *ngIf="!fetchingAmount && false">${{ otcWallet?.toDollar | number : '1.0-2' }}</span>
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
                     </div>
@@ -209,6 +213,7 @@
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
+                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
                     </div>
                   </div>
                 </div>

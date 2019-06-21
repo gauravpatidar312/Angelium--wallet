@@ -165,7 +165,8 @@
           <div class="col-md-6 col-lg-4">
             <div class="form-group total-amount font-avenir">
               <label style="color: #00ff00">Amount</label>
-              <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount" step="0.000001"
+              <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
+                     step="0.000001" [disabled]="!wallet?.wallet_type"
                      class="form-control input-padding font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
               <span class="transfer-amount" *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
@@ -178,7 +179,8 @@
           <div class="col-md-12 col-lg-4">
             <div class="form-group">
               <label class="d-none d-md-block">&nbsp;</label>
-              <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" (click)="onCreateHeaven()"
+              <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || !wallet?.wallet_type"
+                      (click)="onCreateHeaven()"
                       class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
                 <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
