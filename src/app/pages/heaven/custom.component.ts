@@ -3,8 +3,8 @@ import { ViewCell } from 'ng2-smart-table';
 
 @Component({
   template: `
-  <div class="dropdown ghost-dropdown" ngbDropdown >
-  <button type="button" class="btn btn-sm" ngbDropdownToggle
+  <div class="dropdown ghost-dropdown" ngbDropdown>
+  <button type="button" class="btn btn-sm" ngbDropdownToggle style="background-color: transparent;"
           [ngClass]="{ 'btn-success': currentTheme === 'default', 'btn-primary': currentTheme !== 'default'}">
     {{value}}
   </button>
