@@ -22,13 +22,16 @@
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
-                            {{ sendType}}
+                            {{ sendType }}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item" *ngFor="let wallet of myWallets"
-                                (click)="onChangeWallet(wallet.wallet_type, 'send')">
-                              {{ wallet.wallet_type }}
-                            </li>
+                            <ng-container *ngFor="let wallet of myWallets">
+                              <li class="dropdown-item"
+                                  *ngIf="sendType != wallet.wallet_type"
+                                  (click)="onChangeWallet(wallet.wallet_type, 'send')">
+                                {{ wallet.wallet_type }}
+                              </li>
+                            </ng-container>
                           </ul>
                         </div>
                       </div>
