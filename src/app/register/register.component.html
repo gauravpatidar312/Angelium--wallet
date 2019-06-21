@@ -79,19 +79,33 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Password:</label>
-                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <label>Login Password:</label>
+                <input type="password" class="form-control" placeholder="Login Password" formControlName="password">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Password is required</div>
+                  <div *ngIf="f.password.errors.required">Login password is required</div>
                 </div>
               </div>
               <div class="form-group">
-                <label>Repeat password:</label>
-                <input type="password" class="form-control" placeholder="Repeat password"
+                <label>Repeat Login password:</label>
+                <input type="password" class="form-control" placeholder="Repeat Login password"
                   formControlName="confirm_password">
                 <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.confirm_password.errors.required">Repeat password is required</div>
-                  <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
+                  <div *ngIf="f.confirm_password.errors.required">Repeat login password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Trade Password:</label>
+                <input type="password" class="form-control" placeholder="Trade Password" formControlName="trade_password">
+                <div *ngIf="submitted && f.trade_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.trade_password.errors.required">Trade password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Repeat Trade password:</label>
+                <input type="password" class="form-control" placeholder="Repeat Trade password"
+                       formControlName="confirm_trade_password">
+                <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirm_trade_password.errors.required">Repeat trade password is required</div>
                 </div>
               </div>
               <!-- <div class="form-group">

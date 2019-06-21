@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {NbDialogService, NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
 import {ShareDataService} from '../../services/share-data.service';
 import {HttpService} from '../../services/http.service';
@@ -40,9 +40,11 @@ export class TransferComponent implements OnInit {
   otcWallet: any = {};
   otcWallets: any = [];
   fromOTCAmount: number;
+  trade_password: any = '';
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
+              private dialogService: NbDialogService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
               private shareDataService: ShareDataService,
@@ -116,6 +118,37 @@ export class TransferComponent implements OnInit {
   copyAddress() {
     if (this.receiveWallet.address)
       this.toastrService.success('Wallet address copied successfully!', 'Copy Address');
+  }
+
+  open(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog).onClose.subscribe(data => {
+    });
+  }
+
+  passwordDialog(ref: any) {
+    if (!this.trade_password) {
+      this.toastrService.danger('Please enter your trade password.', 'Trade Password');
+      return;
+    }
+    const endpoint = 'verify-trade-password/';
+    const apiData = {'trade_password': this.trade_password};
+    this.httpService.post(apiData, endpoint)
+      .subscribe((res?: any) => {
+        if (res.status) {
+          ref.close();
+          this.trade_password = null;
+          this.onSendTransfer();
+        } else {
+          this.toastrService.danger(res.message, 'Trade Password');
+        }
+      }, err => {
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Trade Password');
+      });
+  }
+
+  cancelDialog(ref) {
+    this.trade_password = null;
+    ref.close();
   }
 
   setAmount(walletType) {

@@ -49,9 +49,9 @@ export class RegisterComponent implements OnInit {
       last_name: ['', Validators.required],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
+      trade_password: ['', Validators.required],
+      confirm_trade_password: ['', Validators.required],
       isAgree: [false],
-    }, {
-      validator: MustMatch('password', 'confirm_password'),
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -108,12 +108,21 @@ export class RegisterComponent implements OnInit {
       this.toastrService.danger('Please submit OTP first.', 'Register');
       return;
     }
+    if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
+      this.toastrService.danger('Confirm login password do not match', 'Register');
+      return;
+    }
+    if (this.registerForm.controls.trade_password.value !== this.registerForm.controls.confirm_trade_password.value) {
+      this.toastrService.danger('Confirm trade password do not match', 'Register');
+      return;
+    }
 
     if (!this.registerForm.value.isAgree) {
       this.toastrService.danger('Please check agree to the terms and condition box.', 'Register');
       return;
     }
 
+    delete this.registerForm.value.confirm_trade_password;
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.sessionStorageService.saveToSession('userInfo', res);

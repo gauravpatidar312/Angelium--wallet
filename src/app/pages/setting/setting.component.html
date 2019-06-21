@@ -82,11 +82,18 @@
             </thead>
             <tbody>
               <tr>
-                <td class="title-col">Password</td>
+                <td class="title-col">Login Password</td>
                 <td class="value-col">
                   **************
                 </td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Change Password', '')"></i></td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="open(changeLoginPassword)"></i></td>
+              </tr>
+              <tr>
+                <td class="title-col">Trade Password</td>
+                <td class="value-col">
+                  **************
+                </td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="open(changeTradePassword)"></i></td>
               </tr>
               <tr *ngIf="!isProduction">
                 <td class="title-col">2FA</td>
@@ -241,6 +248,42 @@
     </nb-card>
   </div>
 </div> -->
+
+<ng-template #changeLoginPassword let-data let-ref="dialogRef">
+  <nb-card  class="changePassword">
+    <nb-card-header>
+      Change Login Password
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelLoginPasswordDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <input type="password" [(ngModel)]="oldLoginPassword" placeholder="Old password" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="newLoginPassword" placeholder="New password" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="confirmLoginPassword" placeholder="Confirm password" nbInput/>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="changeLoginPasswordDialog(ref)">Submit</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelLoginPasswordDialog(ref)">Cancel</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #changeTradePassword let-data let-ref="dialogRef">
+  <nb-card  class="changePassword">
+    <nb-card-header>
+      Change Trade Password
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradePasswordDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <input type="password" [(ngModel)]="oldTradePassword" placeholder="Old password" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="newTradePassword" placeholder="New password" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="confirmTradePassword" placeholder="Confirm password" nbInput/>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">Submit</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelTradePasswordDialog(ref)">Cancel</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
 
 <ng-template #dialog let-data let-ref="dialogRef">
   <nb-card>

@@ -227,3 +227,24 @@
     display: block;
   }
 }
+
+.nb-icon-left {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.nb-icon-left:hover {
+  color: #00d977;
+  cursor: pointer;
+}
+
+.image-scoll-card-body {
+  max-height: calc(100vh - 190px);
+  overflow-y: auto;
+}
+
+.submit-btn {
+  float: right;
+  background-color: #00d977 !important;
+}

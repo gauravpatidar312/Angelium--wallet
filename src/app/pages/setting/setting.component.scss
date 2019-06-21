@@ -263,13 +263,58 @@
   }
 }
 
-.nb-icon-left{ float: right; cursor: pointer; }
-.nb-icon-left:hover{ color: #00d977; cursor: pointer; }
-.upload-btn{ float: right }
-.img-cpr{ text-align: center; }
-.image-scoll-card-body { max-height: calc(100vh - 190px); overflow-y: auto; }
+@media (max-width: 375px) {
+  .changePassword {
+    width: 250px !important;
+  }
+
+  .input-rectangle {
+    width: 223px !important;
+  }
+}
+
+.nb-icon-left {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.nb-icon-left:hover {
+  color: #00d977;
+  cursor: pointer;
+}
+
+ .changePassword {
+   width: 325px;
+ }
+
+  .changePassword .input-rectangle {
+    width: 100%;
+  }
+
+  .submit-btn {
+  float: right;
+  background-color: #00d977 !important;
+}
+
+.cancel-btn {
+  float: left;
+  background-color: #db305b !important;
+  margin-right: 5px;
+}
+
+.img-cpr {
+  text-align: center;
+}
+
+.image-scoll-card-body {
+  max-height: calc(100vh - 190px);
+  overflow-y: auto;
+}
+
 /deep/ #swal2-title {
-  color: #595959!important; font-size: 1.45em!important;
+  color: #595959 !important;
+  font-size: 1.45em !important;
 }
 .ref-link-icon{
   display: inline-block;

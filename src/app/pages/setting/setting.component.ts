@@ -28,6 +28,13 @@ export class SettingComponent implements OnInit {
   croppedImageSize: any = '';
   userImageBase64: any;
   r18modeSwitchText: boolean;
+  newLoginPassword: any = '';
+  confirmLoginPassword: any = '';
+  oldLoginPassword: any = '';
+  newTradePassword: any = '';
+  confirmTradePassword: any = '';
+  oldTradePassword: any = '';
+
 
   constructor(private toastrService: ToastrService,
               private dialogService: NbDialogService,
@@ -112,6 +119,74 @@ export class SettingComponent implements OnInit {
     }
   }
 
+  changeLoginPasswordDialog(ref: any) {
+    if (!(this.oldLoginPassword && this.newLoginPassword && this.confirmLoginPassword)) {
+      this.toastrService.danger('Please enter value in all fields.', 'Change Login Password');
+      return;
+    }
+    if (this.newLoginPassword !== this.confirmLoginPassword) {
+      this.toastrService.danger('Passwords do not match.', 'Change Login Password');
+      return;
+    }
+    const endpoint = 'change-password/';
+    const apiData = {'old_password': this.oldLoginPassword, 'password': this.newLoginPassword};
+    this.httpService.put(apiData, endpoint)
+      .subscribe((res?: any) => {
+        if (res.status) {
+          ref.close();
+          this.newLoginPassword = null;
+          this.oldLoginPassword = null;
+          this.confirmLoginPassword = null;
+          this.toastrService.success('Login password updated successfully', 'Change Login Password');
+        } else {
+          this.toastrService.danger(res.message, 'Change Login Password');
+        }
+      }, err => {
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Login Password');
+      });
+  }
+
+  changeTradePasswordDialog(ref: any) {
+    if (!(this.oldTradePassword && this.newTradePassword && this.confirmTradePassword)) {
+      this.toastrService.danger('Please enter value in all fields.', 'Change Trade Password');
+      return;
+    }
+    if (this.newTradePassword !== this.confirmTradePassword) {
+      this.toastrService.danger('Passwords do not match.', 'Change Trade Password');
+      return;
+    }
+    const endpoint = 'change-trade-password/';
+    const apiData = {'old_trade_password': this.oldTradePassword, 'trade_password': this.newTradePassword};
+    this.httpService.put(apiData, endpoint)
+      .subscribe((res?: any) => {
+        if (res.status) {
+          ref.close();
+          this.newTradePassword = null;
+          this.oldTradePassword = null;
+          this.confirmTradePassword = null;
+          this.toastrService.success('Trade password updated successfully', 'Change Trade Password');
+        } else {
+          this.toastrService.danger(res.message, 'Change Trade Password');
+        }
+      }, err => {
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Trade Password');
+      });
+  }
+
+  cancelLoginPasswordDialog(ref) {
+    ref.close();
+    this.newLoginPassword = null;
+    this.oldLoginPassword = null;
+    this.confirmLoginPassword = null;
+  }
+
+  cancelTradePasswordDialog(ref) {
+    ref.close();
+    this.newTradePassword = null;
+    this.oldTradePassword = null;
+    this.confirmTradePassword = null;
+  }
+
   updateR18mode(data: any) {
     this.httpService.put(data, 'r18mode/').subscribe((res?: any) => {
       if (res.status) {
@@ -141,11 +216,7 @@ export class SettingComponent implements OnInit {
     this.newData({'type': type, 'value': value});
     this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(data => {
-      if (type === 'Change Password' && data) {
-        const endpoint = 'password/';
-        const apiData = {'password': data};
-        this.updateSettingPageData(apiData, endpoint);
-      } else if (type === 'Country' && data) {
+      if (type === 'Country' && data) {
         const endpoint = 'country/';
         const apiData = {'country': data};
         this.updateSettingPageData(apiData, endpoint);
@@ -156,9 +227,7 @@ export class SettingComponent implements OnInit {
   updateSettingPageData(apiData: any, endpoint: string) {
     this.httpService.post(apiData, endpoint)
       .subscribe(res => {
-        if (res.status === 'password reset') {
-          this.toastrService.success('Password update successfully', 'Password');
-        } else if (res.status === 'country updated') {
+        if (res.status === 'country updated') {
           this.userData.country = apiData.country;
           this.sessionStorage.updateFromSession('userInfo', apiData);
           this.toastrService.success('Country update successfully', 'Country');
