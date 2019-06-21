@@ -47,6 +47,7 @@
       font-size: 13px;
       color: #d1d1ff;
       margin: 1rem 0 0;
+      font-family: NunitoSans !important;      
     }
   }
 
@@ -58,8 +59,12 @@
 
   .title {
     text-align: center;
+    font-family: NunitoSansRegular;
   }
 
+  .sub-title {
+    font-family: NunitoSans !important;      
+  }
   .forgot-password {
     float: right;
     margin-top: 7px;
@@ -81,4 +86,103 @@
     font-size: 80%;
     color: nb-theme(color-danger);
   }
+
+  .loginForm {
+    font-family: NunitoSans;
+  }
+  .loginForm > .form-group > .form-control {
+    font-family: NunitoSans;
+  }
+
+  .customised-control-description {
+    font-family: NunitoSans;
+  }
+  .loginBtnCss {
+    font-family: BebasNeueBold !important;
+    font-size: 18px;
+  }
+
+
+  /deep/ .locked {
+    color: #692003;
+    font-size: 18px;
+    font-family: 'Microsoft Yahei', serif;      
+    // background-color: #eff3ea;   
+    border: 3px solid #7659ff;
+}
+
+/deep/ .green.unlock {
+  background: rgba(8, 122, 252, 0.5);
+}
+ 
+
+/deep/ .unlocked {
+  background-image: linear-gradient(to right, #ad59ff, #7659ff);
+}
+
+/deep/ .slideToUnlock {   
+  position:relative;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 25px;  
+}
+
+/deep/ .progressBar {
+  position: absolute;
+  left:0;
+  top:0;
+  width: 0;
+  height: 100%; 
+  border-radius: 25px;
+ } 
+ /deep/ .text {
+  position: absolute;
+  font-family: NunitoSans;
+  color :#fff;
+  font-size: 14px;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%; 
+  font-weight: 500;
+  border-radius: 25px;
+  text-transform: uppercase;
+  background-color:transparent;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome and Opera */
+ } 
+
+ /deep/ .drag {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  left:0%;
+  display: inline-block;
+  line-height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: 0px solid #7659ff;
+  background: #fff;
+  color: #692003;
+  text-align: center;
+}
+
+/deep/ .drag:before {
+  content: "\f061";
+  display: block;
+  /* padding-right: 3px; */
+  /* vertical-align: middle; */
+  font-weight: 900;
+  cursor: pointer;
+  font-family: 'Font Awesome 5 Free';
+  margin: -6px;
+  color:#7659ff;
+  /* font-weight: 900; */
+} 
 }

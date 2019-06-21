@@ -10,6 +10,8 @@ import {ToastrService} from '../services/toastr.service';
 import {SessionStorageService} from '../services/session-storage.service';
 import { NbDialogService } from '@nebular/theme';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+declare let $: any;
+declare let jQuery: any;
 
 @Component({
   selector: 'ngx-register',
@@ -28,6 +30,8 @@ export class RegisterComponent implements OnInit {
   resubmitTime: number = 60 * 1000;
   @ViewChild('otpForm') otpForm: NgForm;
 
+  isVerifiedCaptcha = false;
+
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -39,6 +43,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(document).ready(() => {
+      $("#registerSlider").slideToUnlock({ useData: true});
+      $( document ).on("veryfiedCaptcha", (event, arg) => {
+        if (arg === 'verified') {
+          this.isVerifiedCaptcha = true;
+        }
+    });
+   })
     this.registerForm = this.formBuilder.group({
       invitation_code: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -100,6 +112,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitRegistration() {
+    if (!this.isVerifiedCaptcha) {
+      this.toastrService.danger('', 'Please verify captcha');
+      return;
+    }
     this.registerForm.controls.phone.setValue(this.model.phone);
     console.log(this.registerForm.value);
 

@@ -15,6 +15,7 @@ import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.compo
 import { ProfitChartComponent } from './charts-panel/charts/profit-chart.component';
 import { ChartModule } from 'angular2-chartjs';
 import { SolarComponent } from './solar/solar.component';
+import { CustomRendererComponent } from './custom.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SolarComponent } from './solar/solar.component';
     OrdersChartComponent,
     ProfitChartComponent,
     ECommerceLegendChartComponent,
-    SolarComponent
+    SolarComponent,
+    CustomRendererComponent
   ],
   imports: [
     CommonModule,
@@ -40,8 +42,8 @@ import { SolarComponent } from './solar/solar.component';
       libraries: ['places'],
     }),
     LeafletModule.forRoot(),
-
-  ]
+  ],
+  entryComponents: [CustomRendererComponent]
 })
 
 export class HeavenModule { }
