@@ -14,7 +14,7 @@
             <h1 id="title" class="title">Register</h1>
             <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when
               enabled.</p>
-            <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()">
+            <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()"  class="registerForm">
               <div class="form-group row">
                 <div class="col-md-9 col-12">
                   <label>Phone number:</label>
@@ -25,7 +25,9 @@
                   <div
                     *ngIf="((otpForm.submitted || otpSubmitted) && otp_form.phone.errors) || (submitted && f.phone.errors)"
                     class="invalid-feedback">
-                    <div *ngIf="(otp_form?.phone.errors && otp_form?.phone.errors.required) || (f?.phone.errors && f?.phone.errors.required)">Phone number is required
+                    <div
+                      *ngIf="(otp_form?.phone.errors && otp_form?.phone.errors.required) || (f?.phone.errors && f?.phone.errors.required)">
+                      Phone number is required
                     </div>
                   </div>
                 </div>
@@ -38,7 +40,7 @@
                 </div>
               </div>
             </form>
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()"  class="registerForm">
               <div class="form-group">
                 <label>Verification code:</label>
                 <input type="text" class="form-control" formControlName="otp_code" placeholder="Verification code">
@@ -103,8 +105,11 @@
                 <a class="term-link" (click)="openTermsConditions()">Terms & Conditions</a>
                 <div class="clearfix"></div>
               </div>
-              <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer" size="large"
-                style="width:100%">
+              <div class="form-group">
+                <div id="registerSlider" data-lock-text="Please verify captcha" data-unlock-text="verified"> </div>
+              </div> 
+              <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer registerBtnCss"
+                size="large" style="width:100%">
                 <span *ngIf="!formSubmitting">Register</span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
               </button>
