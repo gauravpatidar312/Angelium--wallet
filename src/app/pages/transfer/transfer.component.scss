@@ -137,6 +137,11 @@
     }
   }
 
+  .transfer-message {
+    display: block;
+    text-align: right;
+  }
+
   .dropDown-padding {
     padding: 14px;
   }
@@ -226,5 +231,9 @@
 
   .display-sm-down {
     display: block;
+  }
+
+  .transfer-message {
+    font-size: 12px;
   }
 }
