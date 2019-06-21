@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           this.isVerifiedCaptcha = true;
         }
     });
-   })
+   });
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

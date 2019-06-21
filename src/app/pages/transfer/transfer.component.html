@@ -162,7 +162,7 @@
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                         <span class="transfer-amount" *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.0-2' }}</span>
                         <span class="available-amount" (click)="setAnxMaxValue()" title="Click to use whole amount">
-                          {{(anxWallet?.wallet_amount | number : '1.0-2') + ' ANX / max' }}
+                          {{((anxWallet?.wallet_amount || 0) | number : '1.0-2') + ' ANX / max' }}
                         </span>
                       </div>
                     </div>

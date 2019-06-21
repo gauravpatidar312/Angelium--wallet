@@ -138,6 +138,21 @@ export class TransferComponent implements OnInit {
   }
 
   open(dialog: TemplateRef<any>) {
+    if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
+      this.toastrService.info('Feature coming soon! Stay tuned.', 'Send');
+      return;
+    }
+
+    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
+      this.toastrService.danger('Please enter required field for transfer.', 'Send');
+      return;
+    }
+
+    if (Number(this.sendForm.value.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
+      this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
+      return;
+    }
+
     this.dialogService.open(dialog).onClose.subscribe(data => {
     });
   }
