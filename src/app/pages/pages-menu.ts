@@ -25,17 +25,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Investor',
-        link: '/pages/dashboard',
+        link: '/pages/reward',
       },
       {
         data: [AppConstants.ROLES.COMPANY],
         title: 'Company',
-        link: '',
+        link: '/pages/reward',
       },
       {
         data: [AppConstants.ROLES.ADMIN],
         title: 'Admin',
-        link: '',
+        link: '/pages/reward',
       },
     ],
   },

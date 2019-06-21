@@ -14,6 +14,10 @@
     margin: 0;
   }
 
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+
   .details {
     display: flex;
     flex-direction: column;
@@ -178,11 +182,19 @@
     position: relative;
     span {
       position: absolute;
-      right: 30px;
-      bottom: 13px;
-      color: #00bb66;
-      font-weight: bold;
-      font-size: 16px;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
     }
   }
 
@@ -192,6 +204,10 @@
 
   .font-bebasNeue {
     font-family: nb-theme(font-bebas);
+  }
+
+  .font-bebasNeueBold {
+    font-family: nb-theme(font-bebas-bold);
   }
 
   .font-avenir {
@@ -214,6 +230,12 @@
 
   .month-day-value {
     font-size: 2.5rem;
+    &.ls-half {
+      letter-spacing: 0.5px;
+    }
+    &.ls-one {
+      letter-spacing: 1px;
+    }
   }
 
   .days-text {
@@ -274,6 +296,14 @@
     font-size: 1.5rem;
   }
 
+  .dropDown-padding {
+    padding: 14px !important;
+  }
+
+  .input-padding {
+    padding: 0.70rem 1.125rem !important;
+  }
+
   nb-card .icon-container i {
     font-size: 30px;
   }
@@ -294,10 +324,6 @@
       }
       .status {
         font-size: 2.1rem !important;
-      }
-
-      .total-amount span {
-        top: 0;
       }
     }
   }

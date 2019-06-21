@@ -37,10 +37,11 @@ export class HeavenComponent implements OnInit, OnDestroy {
   fetchingAmount: boolean = false;
 
   constructor(private service: SmartTableData,
-    private themeService: NbThemeService,
-    private breakpointService: NbMediaBreakpointsService,
-    private httpService: HttpService,
-    private toastrService: ToastrService) {
+              private shareDataService: ShareDataService,
+              private themeService: NbThemeService,
+              private breakpointService: NbMediaBreakpointsService,
+              private httpService: HttpService,
+              private toastrService: ToastrService ) {
     // const data = this.service.getData();
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -199,14 +200,14 @@ export class HeavenComponent implements OnInit, OnDestroy {
     else if (typeValue === 'createHeaven') {
       this.walletType = period;
       this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-      this.heaven_amount = Number(this.wallet.wallet_amount);
+      this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
       this.setAmount(this.walletType);
     }
     this.periodChange.emit(period);
   }
 
   setAmount(walletType) {
-    if (!this.heaven_amount) {
+    if (!this.heaven_amount || !this.wallet || !this.wallet.wallet_type) {
       this.wallet.walletDollar = 0;
       return;
     }
@@ -220,6 +221,15 @@ export class HeavenComponent implements OnInit, OnDestroy {
       this.wallet.walletDollar = 0;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
     });
+  }
+
+  setMaxValue() {
+    if (!this.wallet || !this.wallet.wallet_amount) {
+      return;
+    }
+
+    this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+    this.setAmount(this.wallet.wallet_type);
   }
 
   onCreateHeaven() {
@@ -272,13 +282,15 @@ export class HeavenComponent implements OnInit, OnDestroy {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
-      if (this.myWallets && Object.keys(this.myWallets).length) {
-        this.walletType = 'BTC';
-        this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = Number(this.wallet.wallet_amount);
-        this.setAmount(this.walletType);
-      } else
+      if (!this.myWallets) {
         this.walletType = 'SELECT';
+      } else if (this.shareDataService.transferTitle) {
+        this.walletType = this.shareDataService.transferTitle;
+        this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
+        this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+        this.setAmount(this.walletType);
+        this.shareDataService.transferTitle = null;
+      }
     });
   }
   getHeavenGraph() {
