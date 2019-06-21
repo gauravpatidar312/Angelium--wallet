@@ -1,25 +1,59 @@
 {
-  "setting-page": {
-    "username": "Username",
-    "name": "Name",
-    "e-mail": "E-mail",
-    "country": "Country",
-    "phone": "Phone",
-    "referral": "Referral",
-    "qr": "QR",
-    "rank": "Rank",
+  "comman":{
+    "email-address": "Email address",
     "password": "Password",
-    "2FA": "2FA",
-    "secret-key": "Secret Key",
-    "kyc": "KYC",
-    "currency": "Currency",
-    "language": "Language",
-    "r-18mode": "R-18 Mode",
-    "merge": "Merge"
+    "phone": "Phone",
+    "verification-code": "Verification code",
+    "username": "Username"
   },
+  "pages":{
+    "settingPage": {
+      "country": "Country",
+      "currency": "Currency",
+      "name": "Name",
+      "e-mail": "E-mail",
+      "language": "Language",
+      "merge": "Merge",
+      "kyc": "KYC",
+      "qr": "QR",
+      "r-18mode": "R-18 Mode",
+      "referral": "Referral",
+      "rank": "Rank",
+      "secret-key": "Secret Key",
+      "2FA": "2FA"
+    },
+
+    "loginPage":{
+      "forgot-password": "Forgot Password",
+      "login": "Login",
+      "remember-me": "Remember me"
+    },
+    
+    "registerPage":{
+      "already-have-an-account": "Already have an account",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "repeat-password": "Repeat password",
+      "number": "number",
+      "repeat-password": "Repeat password"
+    }
+  },
+
   "header": {
     "logo-title": "logo-title",
-    "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "settings": "Settings"
+  },
+  "buttonsText":{
+    "login": "Log In",
+    "register":"Register"
+  },
+
+  "errorMessage":{
+    "email": "Email",
+    "is": "is",
+    "password": "Password",
+    "required": "required"
   }
+
 }

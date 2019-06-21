@@ -1,25 +1,57 @@
 {
-  "setting-page": {
-    "username": "ユーザー名",
-    "name": "名",
-    "e-mail": "Eメール",
-    "country": "国",
-    "phone": "電話",
-    "referral": "紹介",
-    "qr": "QR",
-    "rank": "ランク",
-    "password": "パスワード",
-    "2FA": "2FA",
-    "secret-key": "秘密鍵",
-    "kyc": "KYC",
-    "currency": "通貨",
-    "language": "言語",
-    "r-18mode": "R-18 モード",
-    "merge": "マージ"
+  "comman":{
+    "email-address": "Email address",
+    "password": "電話",
+    "phone": "Phone",
+    "verification-code": "Verification code",
+    "username": "ユーザー名"
   },
+  "pages":{
+    "settingPage": {
+      "name": "名",
+      "e-mail": "Eメール",
+      "country": "国",
+      "referral": "紹介",
+      "qr": "QR",
+      "rank": "ランク",
+      "2FA": "2FA",
+      "secret-key": "秘密鍵",
+      "kyc": "KYC",
+      "currency": "通貨",
+      "language": "言語",
+      "r-18mode": "R-18 モード",
+      "merge": "マージ"
+    },
+
+    "loginPage":{
+      "forgot-password": "Forgot Password",
+      "login": "Login",
+      "remember-me": "Remember me"
+    },
+    
+    "registerPage":{
+      "already-have-an-account": "Already have an account",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "number": "number",
+      "repeat-password": "Repeat password"
+    }
+  },
+
   "header": {
-    "logo-title": "Event <br>Manager",
-    "settings": "Settings",
-    "logout": "Logout"
+    "logo-title": "logo-title",
+    "logout": "Logout",
+    "settings": "Settings"
+  },
+  "buttonsText":{
+    "login": "Log In",
+    "register":"Register"
+  },
+
+  "errorMessage":{
+    "email": "Email",
+    "is": "is",
+    "password": "Password",
+    "required": "required"
   }
 }
