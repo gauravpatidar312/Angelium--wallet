@@ -29,10 +29,8 @@ class slideToUnlock {
         this.settings = {
             // unlockText    : "Slide To Unlock",
             useData: false,
-            unlockfn: function () {
-                console.log('unlock');
+            unlockfn: function () {               
                 $(document).trigger("veryfiedCaptcha", ['verified']);
-
             },
             lockfn: function () { },
             allowToLock: true,

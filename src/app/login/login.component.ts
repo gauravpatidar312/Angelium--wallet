@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin() {
     if (!this.isVerifiedCaptcha) {
-      this.toastrService.danger('', 'Please verify captcha');
+      this.toastrService.danger('Please verify captcha', 'Login');
       return;
     }
     this.submitted = true;

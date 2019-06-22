@@ -112,8 +112,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitRegistration() {
-    if (!this.isVerifiedCaptcha) {
-      this.toastrService.danger('', 'Please verify captcha');
+    if (!this.isVerifiedCaptcha) {      
+      this.toastrService.danger('Please verify captcha', 'Register');
       return;
     }
     this.registerForm.controls.phone.setValue(this.model.phone);

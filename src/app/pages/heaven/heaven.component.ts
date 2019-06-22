@@ -185,7 +185,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         type: 'custom',
         renderComponent: CustomRendererComponent,
         filter: false,
-        class: 'heavenhistory-cell',
+        class: 'heavenhistory-cell text-center',
       },
     },
   };
