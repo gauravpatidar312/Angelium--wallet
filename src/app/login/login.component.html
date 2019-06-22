@@ -35,9 +35,9 @@
                 <nb-checkbox name="rememberMe">Remember me</nb-checkbox>
                 <a class="forgot-password" routerLink="/reset-password">Forgot Password?</a>
               </div>
-              <div class="form-group">
-                  <div id="loginSlider" data-lock-text="Please verify captcha" data-unlock-text="verified"> </div>
-                </div>
+              <div class="form-group sliderCss">
+                  <div id="loginSlider" data-lock-text="Slide right to verify" data-unlock-text="Verified"> </div>
+              </div>
               <div class="form-group">
                 <button nbButton [disabled]="formSubmitting" class="form-control pointer loginBtnCss" fullWidth status="success">
                   <span *ngIf="!formSubmitting">Log In</span>

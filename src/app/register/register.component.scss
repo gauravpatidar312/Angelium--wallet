@@ -130,11 +130,10 @@
 }
 
 /deep/ .locked {
-  color: #692003;
   font-size: 18px;
-  font-family: 'Microsoft Yahei', serif;      
+  border: 2px solid #7659ff; 
   // background-color: #eff3ea;   
-  border: 3px solid #7659ff;
+  // border: 3px solid #7659ff;
 }
 
 /deep/ .green.unlock {
@@ -149,8 +148,8 @@ background-image: linear-gradient(to right, #ad59ff, #7659ff);
 /deep/ .slideToUnlock {   
 position:relative;
 text-align: center;
-height: 44px;
-line-height: 44px;
+height: 42px;
+line-height: 38px;
 border-radius: 25px;  
 }
 
@@ -173,7 +172,7 @@ width: 100%;
 height: 100%; 
 font-weight: 500;
 border-radius: 25px;
-text-transform: uppercase;
+// text-transform: uppercase;
 background-color:transparent;
 -webkit-touch-callout: none; /* iOS Safari */
 -webkit-user-select: none; /* Safari */
@@ -210,4 +209,7 @@ font-family: 'Font Awesome 5 Free';
 margin: -6px;
 color:#7659ff;
 /* font-weight: 900; */
+} 
+/deep/ .sliderCss {
+margin-bottom: 1.5rem;
 }
