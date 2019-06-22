@@ -1,10 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
+import { NbThemeService } from '@nebular/theme';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   template: `
   <div class="dropdown ghost-dropdown" ngbDropdown>
-  <button type="button" class="btn btn-sm" ngbDropdownToggle style="background-color: transparent;">
+  <button type="button" class="btn btn-sm" ngbDropdownToggle style="background-color: transparent;"  
+  [ngClass]="{
+    'btn-success': currentTheme === 'default',
+    'btn-primary': currentTheme !== 'default'}">
     {{value}}
   </button>
   <ul class="dropdown-menu" ngbDropdownMenu>
@@ -17,10 +22,17 @@ import { ViewCell } from 'ng2-smart-table';
   `
 })
 export class CustomRendererComponent implements ViewCell {
+  private alive = true;
   @Input() value: any;    // This hold the cell value
   @Input() rowData: any;  // This holds the entire row object
 
-  constructor() {
+  currentTheme: string;
+  constructor(private themeService: NbThemeService) {
+    this.themeService.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(theme => {
+        this.currentTheme = theme.name;
+      });
   }
 
   releaseSettingChange(data) {
