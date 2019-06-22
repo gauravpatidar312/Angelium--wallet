@@ -137,7 +137,7 @@ export class TransferComponent implements OnInit {
       this.toastrService.success('Wallet address copied successfully!', 'Copy Address');
   }
 
-  open(dialog: TemplateRef<any>) {
+  openTradeDialog(dialog: TemplateRef<any>) {
     if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
       this.toastrService.info('Feature coming soon! Stay tuned.', 'Send');
       return;
@@ -153,11 +153,13 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.dialogService.open(dialog).onClose.subscribe(data => {
+    this.dialogService.open(dialog,  {
+      closeOnBackdropClick: false,
+      autoFocus: false,
     });
   }
 
-  passwordDialog(ref: any) {
+  tradPasswordDialog(ref: any) {
     if (!this.trade_password) {
       this.toastrService.danger('Please enter your trade password.', 'Trade Password');
       return;
@@ -178,7 +180,7 @@ export class TransferComponent implements OnInit {
       });
   }
 
-  cancelDialog(ref) {
+  cancelTradeDialog(ref) {
     this.trade_password = null;
     ref.close();
   }
@@ -279,6 +281,7 @@ export class TransferComponent implements OnInit {
       }
       if (this.sendWallet) {
         // this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
+        this.sendWallet.wallet_amount = 0;
         this.setAmount(walletType);
       }
     } else if (typeValue === 'receive') {

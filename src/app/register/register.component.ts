@@ -50,15 +50,15 @@ export class RegisterComponent implements OnInit {
           this.isVerifiedCaptcha = true;
         }
     });
-   })
+   });
     this.registerForm = this.formBuilder.group({
       invitation_code: [''],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};'~`:"\\|,.<>\/?]*$/)]],
       phone: ['', Validators.required],
       otp_code: ['', Validators.required],
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
+      first_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};'~`:"\\|,.<>\/?]*$/)]],
+      last_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};'~`:"\\|,.<>\/?]*$/)]],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
       trade_password: ['', Validators.required],
@@ -160,6 +160,10 @@ export class RegisterComponent implements OnInit {
     this.httpService.get('profile/').subscribe(data => {
       this.sessionStorageService.updateFromSession('userInfo', data);
       this.router.navigate(['pages/dashboard']);
+    }, err => {
+      console.log(err);
+      this.formSubmitting = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Profile');
     });
   }
 

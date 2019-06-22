@@ -54,6 +54,7 @@
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                   <div *ngIf="f.username.errors.required">Username is required</div>
                   <div *ngIf="f.username.errors.email">Username us required</div>
+                  <div *ngIf="f.username.errors.pattern">Please enter value in English language only.</div>
                 </div>
               </div>
               <div class="row">
@@ -62,6 +63,7 @@
                   <input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
                   <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                     <div *ngIf="f.first_name.errors.required">First name is required</div>
+                    <div *ngIf="f.first_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -69,6 +71,7 @@
                   <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name">
                   <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                     <div *ngIf="f.last_name.errors.required">Last name is required</div>
+                    <div *ngIf="f.last_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
               </div>
@@ -121,7 +124,7 @@
               </div>
               <div class="form-group">
                 <div id="registerSlider" data-lock-text="Please verify captcha" data-unlock-text="verified"> </div>
-              </div> 
+              </div>
               <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer registerBtnCss"
                 size="large" style="width:100%">
                 <span *ngIf="!formSubmitting">Register</span>

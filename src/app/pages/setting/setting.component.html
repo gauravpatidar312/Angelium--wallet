@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-12">
             <nb-card-body>
-              <i class="nb-edit nb-icon-left fa-2x" (click)="open(dialog)"></i>
+              <i class="nb-edit nb-icon-left fa-2x" (click)="openDialog(dialog)"></i>
               <nb-user
                 [picture]="userData?.avatar"
                 [name]="userData?.username"
@@ -38,7 +38,7 @@
                 <tr>
                   <td class="title-col">Country</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
-                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog('Country', userData?.country)"></i></td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openCountryDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
                   <td class="title-col">Phone</td>
@@ -57,7 +57,7 @@
                   <td class="title-col">QR</td>
                   <td class="value-col">Download QR Code of your referral link</td>
                   <td class="action-col text-center">
-                    <i class="ion-archive down-qrCode-icon fa-2x" (click)="open(QRdialog)"></i>
+                    <i class="ion-archive down-qrCode-icon fa-2x" (click)="openDialog(QRdialog)"></i>
                   </td>
                 </tr>
                 <tr>
@@ -84,16 +84,16 @@
               <tr>
                 <td class="title-col">Login Password</td>
                 <td class="value-col">
-                  **************
+                  *************
                 </td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="open(changeLoginPassword)"></i></td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeLoginPassword)"></i></td>
               </tr>
               <tr>
                 <td class="title-col">Trade Password</td>
                 <td class="value-col">
-                  **************
+                  *************
                 </td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="open(changeTradePassword)"></i></td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeTradePassword)"></i></td>
               </tr>
               <tr *ngIf="!isProduction">
                 <td class="title-col">2FA</td>
@@ -122,20 +122,19 @@
               </tr>
               <tr>
                 <td class="title-col">R-18 Mode</td>
-                <td class="value-col iconpaddfix">
+                <td class="value-col iconpaddfix" colspan="2">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
                       (click)="r18mode(false)">
                       <input type="radio" name="options">
                       OFF
                     </label>
-                    <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? 'active': ''}}"
+                    <label  class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? 'active': ''}}"
                       (click)="r18mode(true)">
                       <input type="radio" name="options"> ON
                     </label>
                   </div>
                 </td>
-                <td class="action-col"></td>
               </tr>
               <tr>
                 <td class="title-col">Merge</td>
@@ -289,13 +288,13 @@
   <nb-card>
     <nb-card-header>
       Upload image
-      <i class="nb-close nb-icon-left fa-2x" (click)="ref.close()"></i>
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelUploadDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <input type="file" nbInput (change)="fileChangeEvent($event)" />
       <br> <br>
       <div>
-        <image-cropper
+        <image-cropper class="image-cropper-width"
           [imageChangedEvent]="imageChangedEvent"
           [maintainAspectRatio]="true"
           [aspectRatio]="1 / 1"

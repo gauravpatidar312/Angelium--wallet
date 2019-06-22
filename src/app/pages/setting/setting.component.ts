@@ -212,7 +212,7 @@ export class SettingComponent implements OnInit {
     }
   }
 
-  openDialog(type: any, value: any) {
+  openCountryDialog(type: any, value: any) {
     this.newData({'type': type, 'value': value});
     this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(data => {
@@ -255,11 +255,17 @@ export class SettingComponent implements OnInit {
     // show message
   }
 
-  open(dialog: TemplateRef<any>) {
-    this.dialogService.open(dialog).onClose.subscribe(data => {
-      this.imageChangedEvent = '';
-      this.croppedImage = '';
+  openDialog(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog,  {
+      closeOnBackdropClick: false,
+      autoFocus: false,
     });
+  }
+
+  cancelUploadDialog(ref) {
+    ref.close();
+    this.imageChangedEvent = '';
+    this.croppedImage = '';
   }
 
   uploadPicture(ref) {

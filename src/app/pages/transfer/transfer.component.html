@@ -68,7 +68,7 @@
                         <input type="text" class="form-control font-nunitoSans w-100" formControlName="destination_address" placeholder="Enter destination address">
                       </div>
                       <div class="form-group mt-4">
-                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || waitFlag" (click)="open(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
+                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || waitFlag" (click)="openTradeDialog(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
                           <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
@@ -231,13 +231,13 @@
   <nb-card>
     <nb-card-header>
       Trade Password
-      <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradeDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <input type="password" [(ngModel)]="trade_password" placeholder="Trade password" nbInput/><br/><br/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="passwordDialog(ref)">Submit</button>
+      <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">Submit</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

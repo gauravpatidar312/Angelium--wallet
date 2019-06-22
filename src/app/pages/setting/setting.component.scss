@@ -248,10 +248,22 @@
 
   @include media-breakpoint-down(sm) {
     .table .title-col {
-      font-size: 13px;
+      font-size: 12.5px;
+      padding: 15px 6px 15px 6px !important;
     }
     .down-qrCode-icon {
       margin-left: 0;
+    }
+    .table {
+      .title-col {
+        width: 47%;
+      }
+      .value-col {
+        width: 52%;
+      }
+      .action-col {
+        width: 1%;
+      }
     }
   }
 
@@ -270,6 +282,35 @@
 
   .input-rectangle {
     width: 223px !important;
+  }
+
+  .table {
+    .title-col {
+      width: 49%;
+    }
+    .value-col {
+      width: 50%;
+    }
+    .action-col {
+      width: 1%;
+    }
+    .btn-group {
+      width: 100%;
+      display: table-cell;
+    }
+  }
+  .paddfix {
+    width: 54px;
+  }
+}
+
+@media (width: 320px) {
+  .table .title-col {
+    font-size: 11.2px !important;
+  }
+
+  nb-card {
+    font-size: 12px !important;
   }
 }
 
@@ -292,6 +333,10 @@
     width: 100%;
   }
 
+  .upload-btn {
+    float: right;
+  }
+
   .submit-btn {
   float: right;
   background-color: #00d977 !important;
@@ -304,6 +349,7 @@
 }
 
 .img-cpr {
+  margin-top: 15px;
   text-align: center;
 }
 
@@ -311,7 +357,10 @@
   max-height: calc(100vh - 190px);
   overflow-y: auto;
 }
-
+.image-cropper-width {
+  max-width: 290px !important;
+  max-height: 290px !important;
+}
 /deep/ #swal2-title {
   color: #595959 !important;
   font-size: 1.45em !important;
