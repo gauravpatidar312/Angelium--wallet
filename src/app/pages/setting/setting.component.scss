@@ -26,7 +26,7 @@
     padding: 0px 0.75rem;
   }
   .paddfix {
-    padding: 0px 1.5rem;
+    padding: 0 1.5rem;
     line-height: 24px;
   }
   .grid-h {
@@ -300,6 +300,7 @@
     }
   }
   .paddfix {
+    padding: 0 0.5rem !important;
     width: 54px;
   }
 }

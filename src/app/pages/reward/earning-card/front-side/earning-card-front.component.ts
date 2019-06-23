@@ -14,6 +14,7 @@ import {environment} from '../../../../../environments/environment';
 })
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
+  labelText: string = '';
 
   @Input() cardName: string = '';
   @Input() selectedCurrency: string = 'ANX';
@@ -72,6 +73,13 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
         this.tokenName = this.selectedCurrency;
         break;
     }
+
+    if(this.cardName === 'Your Rank') {
+      this.labelText = '~LV.';
+    } else if(this.cardName === 'Downline Heaven') {
+      this.labelText = '$';
+    }
+
     this.getEarningCardData(this.selectedCurrency);
   }
 
