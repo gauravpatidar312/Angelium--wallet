@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
+import {takeWhile} from 'rxjs/operators';
+import { TranslateService } from "@ngx-translate/core";
 // import custom validator to validate that password and confirm password fields match
 import {MustMatch} from '../_helpers/must-match.validator';
 // import services
@@ -18,6 +21,7 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
 })
 
 export class RegisterComponent implements OnInit {
+  private alive = true;
   model: any = {};
   registerForm: FormGroup;
   submitted: boolean = false;
@@ -26,6 +30,17 @@ export class RegisterComponent implements OnInit {
   otpSubmitting: boolean = false;
   isResubmit: boolean = false;
   resubmitTime: number = 60 * 1000;
+  currentTheme: string;
+  breakpoints: any;
+  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
+  languageType: string = 'SELECT';
+  languageData = [
+    {'language': 'English', 'code': 'en'},
+    {'language': 'Chinese', 'code': 'zh'},
+    {'language': 'Japanese', 'code': 'ja'},
+    {'language': 'Korean', 'code': 'ko'}
+  ]
+
   @ViewChild('otpForm') otpForm: NgForm;
 
   constructor(private httpService: HttpService,
@@ -34,8 +49,19 @@ export class RegisterComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
-              private dialogService: NbDialogService) {
-
+              private dialogService: NbDialogService,
+              private breakpointService: NbMediaBreakpointsService,
+              private themeService: NbThemeService,
+              public translate: TranslateService) {
+    var browserDetectLang = navigator.languages[2];
+    var currectLang = this.languageData.find((data:any)=> {
+      return data.code === browserDetectLang;
+    });
+    if (currectLang) {
+      this.languageType = currectLang.language;
+    }else{
+      this.languageType = 'English';
+    }
   }
 
   ngOnInit() {
@@ -57,6 +83,23 @@ export class RegisterComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.registerForm.controls.invitation_code.setValue(params.invitation_code);
     });
+
+    this.themeService.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(theme => {
+        this.currentTheme = theme.name;
+      });
+
+    this.breakpoints = this.breakpointService.getBreakpointsMap();
+    this.themeService.onMediaQueryChange()
+    .pipe(takeWhile(() => this.alive))
+    .subscribe(([oldValue, newValue]) => {
+      this.breakpoint = newValue;
+    });
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   get f() {
@@ -136,5 +179,10 @@ export class RegisterComponent implements OnInit {
     this.dialogService.open(TermsConditionsComponent,  {
       closeOnBackdropClick: false,
     });
+  }
+
+  changeLanguage(lan: any){
+    this.languageType = lan.language;
+    this.translate.use(lan.code);
   }
 }

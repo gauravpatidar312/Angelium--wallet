@@ -5,13 +5,31 @@
         <nav class='navigation'>
           <a routerLink="/login" class='link' aria-label='Back'>
             <i class='icon nb-arrow-thin-left'></i></a>
+          
+            <div class="status-dd-week dropdown" 
+              [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                 ngbDropdown>
+              <button type="button" ngbDropdownToggle
+                class="btn b-language-size"
+                      [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                             'btn-primary': currentTheme !== 'default',
+                             'btn-sm': breakpoint.width <= breakpoints.is}">
+                {{ languageType }}
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item {{languageType === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                  (click)="changeLanguage(lan)">
+                  {{ lan.language }}
+                </li>
+              </ul>
+            </div>
         </nav>
       </nb-card-header>
       <nb-card-body>
         <nb-auth-block>
           <div>
             <img src="../../assets/images/angelium_logo.png" class="logo-image" />
-            <h1 id="title" class="title">Register</h1>
+            <h1 id="title" class="title">{{"common.register" | translate}}</h1>
             <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when
               enabled.</p>
             <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()">
@@ -23,7 +41,6 @@
                   <international-phone-number [(ngModel)]="model.phone" 
                     [maxlength]="20" [required]="true" #phone="ngModel" name="phone" [defaultCountry]="'jp'">
                   </international-phone-number>
-
                   <div
                     *ngIf="((otpForm.submitted || otpSubmitted) && otp_form.phone.errors) || (submitted && f.phone.errors)"
                     class="invalid-feedback">
@@ -100,6 +117,7 @@
                   <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                 </div>
               </div>
+              
               <div class="form-group">
                 <label>{{"common.password" | translate}}:</label>
                 <input type="password" class="form-control" 
@@ -139,7 +157,7 @@
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
               </button>
               <div class="form-group">
-                <section class="another-action" aria-label="Sign in">.
+                <section class="another-action" aria-label="Sign in">
                   {{"pages.register.alreadyHaveAnAccount" | translate}}? 
                   <a routerLink="/login">{{"common.login" | translate}}</a>
                 </section>
