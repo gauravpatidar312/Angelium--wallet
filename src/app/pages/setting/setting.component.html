@@ -38,7 +38,7 @@
                 <tr>
                   <td class="title-col">Country</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
-                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openCountryDialog('Country', userData?.country)"></i></td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" *ngIf="false" (click)="openCountryDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
                   <td class="title-col">Phone</td>

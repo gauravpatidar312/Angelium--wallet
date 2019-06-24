@@ -9,6 +9,7 @@ import { ToastrService } from '../../services/toastr.service';
 import { ShareDataService } from '../../services/share-data.service';
 import { environment } from 'environments/environment';
 import { CustomRendererComponent } from './custom.component';
+import * as moment from 'moment';
 // declare let $: any;
 @Component({
   selector: 'ngx-heaven',
@@ -58,26 +59,6 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const data = [{
-      hid: 'HD1038',
-      heavenAmount: '28 BTC',
-      plan: 'Heaven 90',
-      totalReceive: '364 ANX',
-      entryDate: '2019.03.19',
-      releaseDate: '2019.03.19',
-      releaseSetting: 'Another Heaven 90',
-    },
-    {
-      hid: 'HD 1213',
-      heavenAmount: '163 ETH',
-      plan: 'Heaven 30',
-      totalReceive: '364 ANX',
-      entryDate: '2019.03.19',
-      releaseDate: '2019.03.19',
-      releaseSetting: 'Another Heaven 60',
-    },
-    ];
-    this.source.load(data);
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -140,7 +121,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
       },
-      heavenAmount: {
+      heaven_amount: {
         title: 'Amount',
         type: 'html',
         filter: false,
@@ -156,7 +137,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
       },
-      totalReceive: {
+      total_received: {
         title: 'Received',
         type: 'html',
         filter: false,
@@ -164,7 +145,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
       },
-      entryDate: {
+      entry_date: {
         title: 'Entry date',
         type: 'html',
         filter: false,
@@ -172,7 +153,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
       },
-      releaseDate: {
+      release_date: {
         title: 'Release date',
         type: 'html',
         filter: false,
@@ -180,7 +161,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
       },
-      releaseSetting: {
+      release_settings: {
         title: 'Release Setting',
         type: 'custom',
         renderComponent: CustomRendererComponent,
@@ -310,12 +291,19 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   getHeavenHistory() {
-    this.httpService.get('heaven-history/').subscribe((res) => {
-      console.log('heaven-history', res);
+    this.httpService.get('heaven-history/').subscribe((res?: any) => {
+      const data = res.results;
+      const heaven_history_data = _.map(data, function(obj) {
+        obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.total_received = obj.total_received + ' ANX';
+        return obj;
+      });
+      this.source.load(heaven_history_data);
     });
   }
 
   ngOnDestroy() {
     this.alive = false;
-  }
+}
 }

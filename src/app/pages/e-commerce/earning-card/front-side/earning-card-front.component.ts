@@ -59,7 +59,8 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
         this.tokenName = 'ANX';
         break;
       case 'HEAVEN':
-        this.tokenName = 'ANX';
+        this.quantity = null;
+        this.tokenName = null;
         break;
       case 'ANL':
         this.tokenName = 'ANL';
