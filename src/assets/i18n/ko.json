@@ -1,0 +1,101 @@
+{
+  "common":{
+    "downline": "다운라인",
+    "emailAddress": "이메일",
+    "heaven": "헤븐",
+    "login": "로그인",
+    "month": "월",
+    "password": "비밀번호",
+    "email": "이메일",
+    "phone": "휴대전화",
+    "reward": "리워드",
+    "run": "실행",
+    "register": "등록",
+    "select": "선택",
+    "transfer": "이체하기",
+    "username": "사용자명",
+    "verificationCode": "인증번호",
+    "week": "주",
+    "year": "년"
+  }, 
+  "messages":{
+    "required": "{{field}} 이(가) 필요합니다"
+  },
+  "header": {
+    "logoTitle": "ANGELIUM",
+    "logout": "로그아웃"
+  },
+  "pages":{
+    "dashboard":{
+      "articleTitle": "기사 제목",
+      "eventUpdate": "이벤트 업데이트",
+      "profitToday": "오늘의 이익",
+      "portfolio": "포트폴리오",
+      "systemUpdate": "시스템 업데이트",
+      "totalAsset": "총자산"
+    },
+    "heaven":{
+      "amount": "수량",
+      "from": "From",
+      "history": "내역",
+      "heavenDropToday": "오늘의 헤븐 드롭",
+      "totalHeaven": "총 헤븐"
+    },
+    "login":{
+      "forgotPassword": "비밀번호 찾기",
+      "login": "로그인",
+      "rememberMe": "로그인 정보 기억하기"
+    },
+    "reward":{
+      "downlineAngel": "소개한 엔젤",
+      "downlineTree": {
+        "heaven": "헤븐",
+        "level": "레벨",
+        "rank": "랭킹",
+        "reward": "리워드",
+        "rate": "이율",
+        "username": "사용자명",
+        "your_reward": "당신의 리워드"
+      },
+      "map": "지도",
+      "rewardAllocation": "리워드 내역",
+      "rewardToday": "오늘의 리워드",
+      "tree": "다운라인 트리",
+      "totalReward": "총 리워드",
+      "yourRank": "당신의 랭킹",
+      "yourReward": "당신의 리워드"
+    },
+    "register":{
+      "alreadyHaveAnAccount": "이미 가입하셨나요?",
+      "firstName": "명",
+      "lastName": "성",
+      "number": "number",
+      "repeatPassword": "비밀번호 재입력"
+    },
+    "setting": {
+      "country": "국가",
+      "currency": "통화",
+      "name": "이름",
+      "eMail": "이메일",
+      "language": "언어",
+      "merge": "통합",
+      "kyc": "KYC",
+      "qr": "QR",
+      "r18mode": "R-18 모드",
+      "referral": "추천코드",
+      "rank": "랭킹",
+      "secretKey": "Secret Key",
+      "2FA": "2FA"
+    },
+    "transfer":{
+      "receive": "입금",
+      "send": "출금",
+      "to": "To"
+    }
+  },
+  "sidebar": {
+    "profile":"프로필",
+    "setting": "설정",
+    "top": "홈"
+  }
+}
