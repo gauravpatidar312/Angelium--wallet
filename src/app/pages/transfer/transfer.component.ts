@@ -125,7 +125,7 @@ export class TransferComponent implements OnInit {
 
         this.httpService.get('get-total-anx/').subscribe((data) => {
           this.anxWallet.wallet_amount = data['total-anx'];
-          this.fromOTCAmount = this.anxWallet.wallet_amount;
+          this.fromOTCAmount = Number(Number(this.anxWallet.wallet_amount).toFixed(2));
           this.setOTCAmount();
         });
       });
@@ -259,11 +259,7 @@ export class TransferComponent implements OnInit {
   }
 
   setAnxMaxValue() {
-    if (!this.otcWallet || !this.otcWallet.wallet_amount) {
-      return;
-    }
-
-    this.fromOTCAmount = Number(Number(this.sendWallet.wallet_amount).toFixed(2));
+    this.fromOTCAmount = Number(Number(this.anxWallet.wallet_amount).toFixed(2));
     this.setOTCAmount();
   }
 
@@ -401,7 +397,7 @@ export class TransferComponent implements OnInit {
 
           this.httpService.get('get-total-anx/').subscribe((data) => {
             this.anxWallet.wallet_amount = data['total-anx'];
-            this.fromOTCAmount = this.anxWallet.wallet_amount;
+            this.fromOTCAmount = Number(Number(this.anxWallet.wallet_amount).toFixed(2));
             this.setOTCAmount();
           });
         });
