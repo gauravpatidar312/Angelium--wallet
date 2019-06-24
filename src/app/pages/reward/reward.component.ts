@@ -3,6 +3,7 @@ import { SmartTableData } from '../../@core/data/smart-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
+import { TranslateService } from "@ngx-translate/core";
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
@@ -192,14 +193,14 @@ export class RewardComponent implements OnInit, AfterViewInit {
     };
 
     totalRewardCard: CardSettings = {
-      title: 'Total Reward',
+      title: this.translate.instant('pages.reward.totalReward'),
       value: '0',
       percentage: '0',
       iconClass: 'nb-home',
       type: 'primary',
     };
     todayRewadCard: CardSettings = {
-      title: 'Reward Today',
+      title: this.translate.instant('pages.reward.rewardToday'),
       value: '0',
       percentage: '0',
       iconClass: 'nb-roller-shades',
@@ -239,8 +240,10 @@ export class RewardComponent implements OnInit, AfterViewInit {
     private httpService: HttpService,
     private sanitizer: DomSanitizer,
     private sessionStorage: SessionStorageService,
-    private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
-   
+    private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
+    public translate: TranslateService) {
+    var dd = this.translate.instant('pages.reward.rewardToday');
+    
     this.userData = this.sessionStorage.getFromSession('userInfo');
 
     const data = this.service.getData();
@@ -254,6 +257,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       .subscribe(theme => {
         this.currentTheme = theme.name;
         this.statusCards1 = this.statusCardsByThemes[theme.name];
+        console.log(this.statusCards1)
       });
       this.getDownlineTree('today');
       this.getDownlinecount();

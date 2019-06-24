@@ -59,8 +59,10 @@ export class RegisterComponent implements OnInit {
     });
     if (currectLang) {
       this.languageType = currectLang.language;
+      this.translate.use(currectLang.code);
     }else{
       this.languageType = 'English';
+      this.translate.use('en');
     }
   }
 

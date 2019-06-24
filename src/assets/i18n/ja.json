@@ -45,10 +45,10 @@
       "forgotPassword": "パスワードを忘れた",
       "login": "ログイン",
       "rememberMe": "ログイン情報を記憶"
-      },
-      "reward":{
-        "downlineAngel": "紹介したエンジェル",
-        "downlineTree": {
+    },
+    "reward":{
+      "downlineAngel": "紹介したエンジェル",
+      "downlineTree": {
         "heaven": "ヘブン",
         "level": "レベル",
         "rank": "ランク",
@@ -56,15 +56,15 @@
         "rate": "利率",
         "username": "ユーザーネーム",
         "your_reward": "あなたのリワード"
-        },
-        "map": "マップ",
-        "rewardAllocation": "リワードの内訳",
-        "rewardToday": "今日のリワード",
-        "tree": "ダウンラインツリー",
-        "totalReward": "Total Reward",
-        "yourRank": "あなたのランク",
-        "yourReward": "あなたのリワード"
-        },
+      },
+      "map": "マップ",
+      "rewardAllocation": "リワードの内訳",
+      "rewardToday": "今日のリワード",
+      "tree": "ダウンラインツリー",
+      "totalReward": "Total Reward",
+      "yourRank": "あなたのランク",
+      "yourReward": "あなたのリワード"
+    },
     "register":{
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
       "firstName": "名",
@@ -91,7 +91,7 @@
       "receive": "受信",
       "send": "送信",
       "to": "To"
-      }
+    }
   },
   "sidebar": {
     "profile":"プロフィール",
