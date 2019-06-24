@@ -1,61 +1,101 @@
 {
   "common":{
-    "email-address": "Email address",
-    "password": "電話",
-    "phone": "Phone",
-    "verification-code": "Verification code",
-    "username": "ユーザー名",
-    "email": "Eメール"
-  },
+    "downline": "ダウンライン",
+    "emailAddress": "Eメール",
+    "heaven": "ヘブン",
+    "login": "ログイン",
+    "month": "月",
+    "password": "パスワード",
+    "email": "Eメール",
+    "phone": "電話番号",
+    "reward": "リワード",
+    "run": "実行",
+    "register": "登録",
+    "select": "選択",
+    "transfer": "TRANSFER",
+    "username": "ユーザーネーム",
+    "verificationCode": "認証コード",
+    "week": "週",
+    "year": "年"
+  }, 
   "messages":{
-    "required": "{{field}} is required"
+    "required": "{{field}} が必要です"
+  },
+  "header": {
+    "logoTitle": "ANGELIUM",
+    "logout": "ログアウト"
   },
   "pages":{
-    "settingPage": {
-      "name": "名",
-      "e-mail": "Eメール",
-      "country": "国",
-      "referral": "紹介",
-      "qr": "QR",
-      "rank": "ランク",
-      "2FA": "2FA",
-      "secret-key": "秘密鍵",
-      "kyc": "KYC",
-      "currency": "通貨",
-      "language": "言語",
-      "r-18mode": "R-18 モード",
-      "merge": "マージ"
+    "dashboard":{
+      "articleTitle": "投稿記事名",
+      "eventUpdate": "イベント更新",
+      "profitToday" : "今日の利益",
+      "portfolio": "ポートフォリオ",
+      "systemUpdate": "システム更新",
+      "totalAsset" : "アセット合計"
     },
-
-    "loginPage":{
-      "forgot-password": "Forgot Password",
-      "login": "Login",
-      "remember-me": "Remember me"
+    "heaven":{
+      "amount" : "数量",
+      "from": "From",
+      "history": "履歴",
+      "heavenDropToday": "今日のヘブンドロップ",
+      "totalHeaven": "ヘブン合計"
     },
-    
-    "registerPage":{
-      "already-have-an-account": "Already have an account",
-      "first-name": "First Name",
-      "last-name": "Last Name",
+    "login":{
+      "forgotPassword": "パスワードを忘れた",
+      "login": "ログイン",
+      "rememberMe": "ログイン情報を記憶"
+      },
+      "reward":{
+        "downlineAngel": "紹介したエンジェル",
+        "downlineTree": {
+        "heaven": "ヘブン",
+        "level": "レベル",
+        "rank": "ランク",
+        "reward": "リワード",
+        "rate": "利率",
+        "username": "ユーザーネーム",
+        "your_reward": "あなたのリワード"
+        },
+        "map": "マップ",
+        "rewardAllocation": "リワードの内訳",
+        "rewardToday": "今日のリワード",
+        "tree": "ダウンラインツリー",
+        "totalReward": "Total Reward",
+        "yourRank": "あなたのランク",
+        "yourReward": "あなたのリワード"
+        },
+    "register":{
+      "alreadyHaveAnAccount": "すでにアカウントを持っている",
+      "firstName": "名",
+      "lastName": "姓",
       "number": "number",
-      "repeat-password": "Repeat password"
-    }
+      "repeatPassword": "パスワードを再入力"
+    },
+    "setting": {
+      "country": "国",
+      "currency": "表示通貨",
+      "name": "名前",
+      "eMail": "Eメール",
+      "language": "言語",
+      "merge": "統合",
+      "kyc": "KYC",
+      "qr": "QR",
+      "r18mode": "R-18モード",
+      "referral": "リフェラル",
+      "rank": "ランク",
+      "secretKey": "Secret Key",
+      "2FA": "2FA"
+    },
+    "transfer":{
+      "receive": "受信",
+      "send": "送信",
+      "to": "To"
+      }
   },
-
-  "header": {
-    "logo-title": "logo-title",
-    "logout": "Logout",
-    "settings": "Settings"
-  },
-  "buttonsText":{
-    "login": "Log In",
-    "register":"Register"
-  },
-
-  "errorMessage":{
-    "email": "Email",
-    "is": "is",
-    "password": "Password",
-    "required": "required"
+  "sidebar": {
+    "profile":"プロフィール",
+    "setting": "設定",
+    "top": "トップ"
   }
 }
