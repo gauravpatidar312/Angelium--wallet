@@ -35,7 +35,7 @@ export class ShareDataService {
     else if (err[Object.keys(err)[0]])
       msg = err[Object.keys(err)[0]];
 
-    if (msg === 'true' || Object.keys(msg).length)
+    if (msg === 'true' || typeof msg !== 'string')
       msg = 'Something went wrong. We request you to try after sometime.';
 
     return msg;

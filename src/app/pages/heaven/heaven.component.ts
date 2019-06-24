@@ -135,7 +135,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
       hid: {
         title: 'Heaven ID',
         type: 'html',
-        filter: false,        
+        filter: false,
         valuePrepareFunction: (cell, row) => {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
@@ -233,11 +233,6 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   onCreateHeaven() {
-    if (this.isProduction) {
-      this.toastrService.info('Feature coming soon! Stay tuned.', 'Heaven');
-      return;
-    }
-
     if (!this.heaven_amount) {
       this.toastrService.danger('Please enter amount.', 'Heaven');
       return;

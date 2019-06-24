@@ -281,7 +281,7 @@ export class TransferComponent implements OnInit {
       }
       if (this.sendWallet) {
         // this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
-        this.sendWallet.wallet_amount = 0;
+        this.sendForm.controls.transfer_amount.setValue(0);
         this.setAmount(walletType);
       }
     } else if (typeValue === 'receive') {
@@ -365,11 +365,6 @@ export class TransferComponent implements OnInit {
   }
 
   onOTCTransfer() {
-    if (this.isProduction) {
-      this.toastrService.info('Feature coming soon! Stay tuned.', 'OTC');
-      return;
-    }
-
     if (!this.fromOTCAmount || !Number(this.fromOTCAmount)) {
       this.toastrService.danger('Please enter transfer amount.', 'OTC');
       return;
