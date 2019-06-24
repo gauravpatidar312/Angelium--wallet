@@ -53,7 +53,8 @@ export class RegisterComponent implements OnInit {
               private breakpointService: NbMediaBreakpointsService,
               private themeService: NbThemeService,
               public translate: TranslateService) {
-    var browserDetectLang = navigator.languages[2];
+    var browserDetectLang = navigator.language.split("-")[0];
+    debugger
     var currectLang = this.languageData.find((data:any)=> {
       return data.code === browserDetectLang;
     });
