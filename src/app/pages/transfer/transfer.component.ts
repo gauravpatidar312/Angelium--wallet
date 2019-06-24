@@ -352,6 +352,8 @@ export class TransferComponent implements OnInit {
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           this.myWallets = data;
         });
+        this.onChangeWallet(this.sendWallet.wallet_type, 'send');
+        this.sendForm.controls.destination_address.setValue(null);
       } else {
         this.waitFlag = false;
         this.formSubmitting = false;
@@ -394,6 +396,15 @@ export class TransferComponent implements OnInit {
       if (res.status) {
         this.formSubmitting = false;
         this.toastrService.success('Transfer successfully completed!', 'OTC');
+        this.httpService.get('anx-price/').subscribe((price) => {
+          this.anxWallet.anx_price = Number(price['anx_price']);
+
+          this.httpService.get('get-total-anx/').subscribe((data) => {
+            this.anxWallet.wallet_amount = data['total-anx'];
+            this.fromOTCAmount = this.anxWallet.wallet_amount;
+            this.setOTCAmount();
+          });
+        });
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'OTC');

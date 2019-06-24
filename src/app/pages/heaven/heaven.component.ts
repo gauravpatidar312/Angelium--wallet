@@ -258,6 +258,9 @@ export class HeavenComponent implements OnInit, OnDestroy {
       if (res.status) {
         this.formSubmitting = false;
         this.toastrService.success('Transaction successfully completed!', 'Heaven');
+        this.getWallets();
+        this.heaven_amount = null;
+        this.setAmount(this.wallet.wallet_type);
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'Heaven');
