@@ -1,45 +1,44 @@
 {
   "common":{
     "amount" : "数量",
+    "assets": "Assets",
     "downline": "ダウンライン",
+    "days": "Days",
+    "day": "Day",
+    "email": "Eメール",
     "emailAddress": "Eメール",
+    "enter": "Enter",
     "from": "From",
     "heaven": "ヘブン",
     "login": "ログイン",
+    "last": "Last",
     "month": "月",
     "password": "パスワード",
-    "email": "Eメール",
     "phone": "電話番号",
+    "profit": "Profit",
     "reward": "リワード",
     "run": "実行",
     "register": "登録",
+    "Repeat": "Repeat",
     "select": "選択",
+    "slideRightToVerify": "Slide right to verify",
+    "sendSMS": "Send SMS",
     "transfer": "TRANSFER",
+    "Trade": "Trade",
+    "total": "Total",
+    "today": "Today",
     "username": "ユーザーネーム",
+    "verified": "Verified",
     "verificationCode": "認証コード",
     "week": "週",
-    "year": "年",
-
-
-    "slideRightToVerify": "Slide right to verify",
-    "verified": "Verified",
-    "Repeat": "Repeat",
-    "Trade": "Trade",
-    "sendSMS": "Send SMS",
-    "assets": "Assets",
-    "profit": "Profit",
-    "total": "Total",
-    "last": "Last",
-    "today": "Today",
-    "days": "Days",
-    "day": "Day",
-    "enter": "Enter"
+    "year": "年"
+    
   }, 
   "messages":{
     "required": "{{field}} が必要です"
   },
   "footer":{
-    "allRightsReservedBy": "All rights reserved by",
+    "allRightsReservedBy": "All rights reserved by"
   },
   "header": {
     "logoTitle": "ANGELIUM",
@@ -75,7 +74,7 @@
 
 
       "DontHaveAnAccount": "Don't have an account",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email"
     },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
@@ -109,7 +108,7 @@
 
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
       "agreeTo": "Agree to",
-      "terms&Conditions" : "Terms & Conditions",
+      "terms&Conditions" : "Terms & Conditions"
     },
     "setting": {
       "country": "国",

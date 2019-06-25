@@ -1,22 +1,36 @@
 {
   "common":{
+    "assets": "Assets",
     "downline": "邀请好友",
+    "days": "Days",
+    "day": "Day",
+    "email": "电子邮箱",
     "emailAddress": "邮箱地址",
+    "enter": "Enter",
     "heaven": "天堂",
     "login": "登录",
+    "last": "Last",
     "month": "月",
     "password": "密码",
-    "email": "电子邮箱",
     "phone": "手机号吗",
+    "profit": "Profit",
     "reward": "奖励",
     "run": "运行",
     "register": "注册",
+    "Repeat": "Repeat",
     "select": "选择",
+    "slideRightToVerify": "Slide right to verify",
+    "sendSMS": "Send SMS",
     "transfer": "转账",
+    "Trade": "Trade",
+    "total": "Total",
+    "today": "Today",
     "username": "用户名",
+    "verified": "Verified",
     "verificationCode": "认证码",
     "week": "周",
     "year": "年"
+    
   }, 
   "messages":{
     "required": "{{field}} 必填"
