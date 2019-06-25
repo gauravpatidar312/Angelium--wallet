@@ -7,7 +7,7 @@
         <div class="details full-width">
           <div class="row">
             <div class="col-7 mt-2">
-              <div class="title">Total Heaven</div>
+              <div class="title">{{"pages.heaven.totalHeaven" | translate}}</div>
             </div>
             <div class="col-5">
               <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
@@ -40,7 +40,7 @@
         <div class="details full-width">
           <div class="row">
             <div class="col-7 mt-2">
-              <div class="title">Heaven Drop Today</div>
+              <div class="title heaven-drop">{{"pages.heaven.heavenDropToday" | translate}}</div>
             </div>
             <div class="col-5 col-xs-4">
               <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
@@ -69,7 +69,7 @@
   <div class="row">
     <div class="col-md-4">
       <nb-card>
-        <nb-card-header class="day-header-title title">Heaven 30</nb-card-header>
+        <nb-card-header class="day-header-title title">{{"common.heaven" | translate}} 30</nb-card-header>
         <nb-card-body class="row font-bebasNeue">
           <div class="col-5">
             <div class="text-success text-right days-font">30</div>
@@ -86,13 +86,13 @@
           </div>
         </nb-card-body>
         <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
-                (click)="selectedHeavenPlan = '30'">Select
+                (click)="selectedHeavenPlan = '30'">{{"common.select" | translate}}
         </button>
       </nb-card>
     </div>
     <div class="col-md-4">
       <nb-card>
-        <nb-card-header class="day-header-title title">Heaven 60</nb-card-header>
+        <nb-card-header class="day-header-title title">{{"common.heaven" | translate}} 60</nb-card-header>
         <nb-card-body class="row font-bebasNeue">
           <div class="col-5">
             <div class="text-success text-right days-font">60</div>
@@ -109,13 +109,13 @@
           </div>
         </nb-card-body>
         <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
-                (click)="selectedHeavenPlan = '60'">Select
+                (click)="selectedHeavenPlan = '60'">{{"common.select" | translate}}
         </button>
       </nb-card>
     </div>
     <div class="col-md-4">
       <nb-card>
-        <nb-card-header class="day-header-title title">Heaven 90</nb-card-header>
+        <nb-card-header class="day-header-title title">{{"common.heaven" | translate}} 90</nb-card-header>
         <nb-card-body class="row font-bebasNeue">
           <div class="col-5">
             <div class="text-success text-right days-font">90</div>
@@ -132,7 +132,7 @@
           </div>
         </nb-card-body>
         <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
-                (click)="selectedHeavenPlan = '90'">Select
+                (click)="selectedHeavenPlan = '90'">{{"common.select" | translate}}
         </button>
       </nb-card>
     </div>
@@ -144,7 +144,9 @@
           <div class="row">
             <div class="col-md-6 col-lg-4">
               <div class="form-group font-avenir">
-                <label style="color: #00ff00">From</label>
+                <label style="color: #00ff00">
+                  {{"pages.heaven.from" | translate}}
+                </label>
                 <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
                      ngbDropdown>
                 <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn b-color-wallet"
@@ -164,7 +166,9 @@
             </div>
             <div class="col-md-6 col-lg-4">
               <div class="form-group total-amount font-avenir">
-                <label style="color: #00ff00">Amount</label>
+                <label style="color: #00ff00">
+                  {{"pages.heaven.amount" | translate}}
+                </label>
                 <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
                      step="0.000001" [disabled]="!wallet?.wallet_type"
                      class="form-control input-padding font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
@@ -179,10 +183,12 @@
             <div class="col-md-12 col-lg-4">
               <div class="form-group">
                 <label class="d-none d-md-block">&nbsp;</label>
-              <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || !wallet?.wallet_type"
+                <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || !wallet?.wallet_type"
                       (click)="onCreateHeaven()"
                       class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
-                  <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
+                  <span *ngIf="!(formSubmitting || fetchingAmount)">
+                    {{"common.run" | translate}}
+                  </span>
                   <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                 </button>
               </div>
@@ -251,7 +257,7 @@
     <div class="col-md-12">
       <nb-card>
         <nb-card-header class="heavenhistory">
-          Heaven History
+          {{"common.heaven" | translate}} {{"pages.heaven.history" | translate}}
         </nb-card-header>
         <nb-card-body>
           <ng2-smart-table [settings]="settings" [source]="source">

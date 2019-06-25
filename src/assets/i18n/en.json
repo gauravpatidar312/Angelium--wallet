@@ -50,13 +50,13 @@
     "reward":{
       "downlineAngel": "Downline Angel",
       "downlineTree": {
-        "heaven": "heaven", 
-        "level": "level", 
-        "rank": "rank", 
-        "reward": "reward", 
-        "rate": "rate", 
-        "username": "username",
-        "your_reward": "your reward"
+        "heaven": "Heaven", 
+        "level": "Level", 
+        "rank": "Rank", 
+        "reward": "Reward", 
+        "rate": "Rate", 
+        "username": "Username",
+        "your_reward": "Your Reward"
       },
       "map": "map",
       "rewardAllocation": "Reward Allocation",
