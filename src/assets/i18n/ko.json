@@ -16,6 +16,7 @@
     "password": "비밀번호",
     "phone": "휴대전화",
     "profit": "수익",
+    "profile":"프로필",
     "reward": "리워드",
     "run": "실행",
     "register": "등록",
@@ -23,6 +24,7 @@
     "select": "선택",
     "slideRightToVerify": "밀어서 인증하기",
     "sendSMS": "인증번호 전송",
+    "setting": "설정",
     "transfer": "이체하기",
     "trade": "거래",
     "total": "총",
@@ -38,8 +40,7 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "로그아웃",
-    "profile":"프로필"
+    "logout": "로그아웃"
   },
   "footer":{
     "allRightsReservedBy": "All rights reserved by"
@@ -122,7 +123,6 @@
     }
   },
   "sidebar": {
-    "setting": "설정",
     "top": "홈"
   }
 }
