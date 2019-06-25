@@ -10,7 +10,7 @@
               <nb-user
                 [picture]="userData?.avatar"
                 [name]="userData?.username"
-                title="{{'Rank ' + userData?.level}}"
+                title="{{'Rank ' + userData?.rank}}"
                 size="large">
               </nb-user>
             </nb-card-body>
@@ -61,7 +61,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">Rank</td>
+                  <td class="title-col">Level</td>
                   <td class="value-col">{{userData?.level}}</td>
                   <td class="action-col"></td>
                 </tr>

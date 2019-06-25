@@ -77,7 +77,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     if(this.cardName === 'Your Rank') {
       this.labelText = '~LV.';
     } else if(this.cardName === 'Downline Heaven') {
-      this.labelText = '';
+      this.labelText = '$';
     }
 
     this.getEarningCardData(this.selectedCurrency);

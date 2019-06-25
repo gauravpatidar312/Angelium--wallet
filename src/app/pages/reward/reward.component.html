@@ -15,7 +15,7 @@
           [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr2">
-        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="0" [quantity]="downline_heaven"
+        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="downline_heaven" [quantity]="total_users"
           [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr3">
@@ -155,9 +155,9 @@
         </ng-container>
 
         <ng-container nbTreeGridColumnDef="reward">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Reward</th>
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven Drop</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.reward.toFixed(2)}}
+          <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(2)}} <span class="text-success">ANX</span></div>
           </td>
         </ng-container>
 
@@ -171,7 +171,7 @@
         <ng-container nbTreeGridColumnDef="your_reward">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Your Reward</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.your_reward.toFixed(2)}}
+            {{row.data.your_reward.toFixed(2)}} <span class="text-success">ANX</span>
           </td>
         </ng-container>
       </table>

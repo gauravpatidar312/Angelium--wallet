@@ -61,7 +61,7 @@
                 </ul>
               </div>
               <div class="clearfix"></div>-->
-              <div class="status text-white text-margin"><span class="text-success">$</span>{{heavenDrop?.total_amount | number : '1.0-2' }}</div>
+              <div class="status text-white text-margin">{{heavenDrop?.total_amount | number : '1.0-2' }} <span class="text-success">ANX</span></div>
               <div class="delta" [class.up]="heavenDrop?.percentage >= 0" [class.down]="heavenDrop?.percentage < 0">
                 {{heavenDrop?.percentage > 0 ? heavenDrop?.percentage : (-1 * heavenDrop?.percentage)}}%
               </div>

@@ -130,7 +130,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       currency_type: {
-        title: 'Assets',
+        title: 'Asset',
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {

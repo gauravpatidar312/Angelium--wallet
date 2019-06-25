@@ -240,6 +240,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
   userData: any;
   angel_count: any;
   downline_heaven: any;
+  total_users: any;
   constructor(private service: SmartTableData,
               private themeService: NbThemeService,
               private httpService: HttpService,
@@ -299,7 +300,8 @@ export class RewardComponent implements OnInit, AfterViewInit {
 
   getDownlineHeaven() {
     this.httpService.get(`downline-heaven/`).subscribe((res?: any) => {
-      this.downline_heaven = res.downline_heaven.toFixed(6);
+      this.downline_heaven = res.downline_heaven.toFixed(2);
+      this.total_users = res.total_users;
     }, (err) => {
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
     });
