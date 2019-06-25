@@ -129,6 +129,14 @@ export class HeavenComponent implements OnInit, OnDestroy {
           return `<div class="heavenhistory-cell">${cell}</div>`;
         },
       },
+      currency_type: {
+        title: 'Assets',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
       plan: {
         title: 'Plan',
         type: 'html',
@@ -242,6 +250,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.getWallets();
         this.heaven_amount = null;
         this.setAmount(this.wallet.wallet_type);
+        this.getHeavenHistory();
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'Heaven');
@@ -312,7 +321,8 @@ export class HeavenComponent implements OnInit, OnDestroy {
       const heaven_history_data = _.map(data, function(obj) {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.total_received = obj.total_received + ' ANX';
+        obj.total_received = (obj.total_received.toFixed(2)) + ' ANX';
+        obj.heaven_amount = obj.heaven_amount.toFixed(6);
         return obj;
       });
       this.source.load(heaven_history_data);
