@@ -12,7 +12,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "preserveSymlinks": true,
-            "outputPath": "dist",
+            "outputPath": "publish",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -50,10 +50,8 @@
               "node_modules/echarts/dist/echarts.min.js",
               "node_modules/echarts/dist/extension/bmap.min.js",
               "node_modules/chart.js/dist/Chart.min.js",
-              "src/assets/js/jquery-3.4.1.min.js",
-              "src/assets/js/bootstrap.min.js",
-              "src/assets/js/knockout-2.2.0.js",
-              "src/assets/js/knockout.mapping-latest.debug.js"
+              "src/assets/js/jquery-3.4.1.min.js",            
+              "src/assets/js/slide-to-unlock.js"
             ]
           },
           "configurations": {

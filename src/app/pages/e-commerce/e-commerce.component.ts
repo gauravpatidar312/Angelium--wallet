@@ -1,13 +1,14 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
+import { TranslateService } from "@ngx-translate/core";
 import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { ShareDataService } from '../../services/share-data.service';
 import {environment} from '../../../environments/environment';
 import * as _ from 'lodash';
-declare let $:any;
+declare let $: any;
 
 interface CardSettings {
   title: string;
@@ -17,7 +18,7 @@ interface CardSettings {
 }
 
 interface CryptoBalance {
-  type: string;
+  name: string;
   amount: number;
   quantity: number;
   livePrice: number;
@@ -46,13 +47,13 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   solarValue: number;
   currentTheme: string;
   assetCard: CardSettings = {
-    title: 'Total Asset',
+    title: this.translate.instant('pages.dashboard.totalAsset'),
     value: 0,
     iconClass: 'fa fa-university',
     type: 'primary',
   };
   gainCard: CardSettings = {
-    title: 'Profit Today',
+    title: this.translate.instant('pages.dashboard.profitToday'),
     value: 0,
     iconClass: 'fa fa-chart-line',
     type: 'primary',
@@ -91,7 +92,8 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     private solarService: SolarData,
     private httpService: HttpService,
     private sessionStorage: SessionStorageService,
-    private shareDataService: ShareDataService) {
+    private shareDataService: ShareDataService,
+    public translate: TranslateService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
 
     this.themeService.getJsTheme()
@@ -109,7 +111,6 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
 
     this.getNotification();
     this.getAllCryptoBalance();
-    this.getAssetsData();
     this.getTotalinvestmentData();
   }
 
@@ -137,11 +138,33 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   }
 
   getAllCryptoBalance() {
-    this.httpService.get('all-crypto-balance/').subscribe((data?: any) => {
-      this.cryptoBalance = data;
+    this.httpService.get('asset/').subscribe((data?: any) => {
+      this.assetCard.value = data.total_asset;
+      this.gainCard.value = data.total_profit;
+      this.cryptoBalance = _.sortBy(_.filter(data.cryptos, (item) => {
+        if (item.name === 'ANX')
+            item.order = 1;
+        else if (item.name === 'HEAVEN')
+          item.order = 2;
+        else if (item.name === 'BTC')
+          item.order = 3;
+        else if (item.name === 'ETH')
+          item.order = 4;
+        else if (item.name === 'ANL')
+          item.order = 5;
+        else if (item.name === 'XP')
+          item.order = 6;
+        else if (item.name === 'USDT')
+          item.order = 7;
+        else if (item.name === 'ANLP')
+          item.order = 8;
+
+        return !this.isProduction || ['XP', 'USDT', 'ANLP'].indexOf(item.name) === -1;
+      }), 'order');
+
       this.cryptoData = _.map(this.cryptoBalance, function(obj) {
         const item: any = {};
-        item.name = obj.type;
+        item.name = obj.name;
         item.value = obj.amount;
         return item;
       });
@@ -152,23 +175,17 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   getLivePriceData() {
     this.httpService.get('live-price/').subscribe((data?: any) => {
       Object.keys(data).map(key => {
-        this.cryptoBalance.map((balance) => {
-          if (balance.type === key) {
+        this.cryptoBalance.map((balance?: any) => {
+          if (balance.name === key) {
             balance['livePrice'] = data[key];
-          } else if (balance.type === 'HEAVEN') {
+          } else if (balance.name === 'HEAVEN') {
             balance['livePrice'] = data.ANX;
-          } else if (balance.type === 'ANLP') {
+          } else if (balance.name === 'ANLP') {
             balance['livePrice'] = data.ANL;
           }
           return balance;
         });
       });
-    });
-  }
-
-  getAssetsData() {
-    this.httpService.get('my-assets/').subscribe(data => {
-      console.log('Assets ', data);
     });
   }
 

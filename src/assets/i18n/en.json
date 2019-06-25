@@ -23,7 +23,8 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "Logout"
+    "logout": "Logout",
+    "profile":"Profile"
   },
   "pages":{
     "dashboard":{
@@ -70,7 +71,8 @@
       "firstName": "First Name",
       "lastName": "Last Name",
       "number": "number",
-      "repeatPassword": "Repeat password"
+      "repeatPassword": "Repeat password",
+      "slideRightToVerify": "Slide right to verify"
     },
     "setting": {
       "country": "Country",
@@ -94,7 +96,6 @@
     }
   },
   "sidebar": {
-    "profile":"Profile",
     "setting": "Setting",
     "top": "Top"
   }

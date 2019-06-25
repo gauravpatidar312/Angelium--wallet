@@ -17,13 +17,13 @@
   <div class="chart-info">
     <div class="row">
       <div class="col-6">
-        <div class="text-daily text-default">{{ quantity }}</div>
+        <div class="text-daily text-default">{{ quantity | number: '1.0-6' }}</div>
       </div>
       <div class="col-6" style="align-self: flex-end;">
         <div class="title text-right"><span class="text-success">$</span>{{amount | number: '1.0-2'}}</div>
       </div>
     </div>
-    <div class="value">{{tokenName}} = $ {{livePrice | number : '1.0-2' }}</div>
+    <div class="value" *ngIf="tokenName">{{tokenName}} = $ {{livePrice | number : '1.0-2' }}</div>
     <div class="delta"
          [class.up]="percentage >= 0"
          [class.down]="percentage < 0">

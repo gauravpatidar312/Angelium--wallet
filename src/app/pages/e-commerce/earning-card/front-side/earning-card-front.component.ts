@@ -59,7 +59,8 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
         this.tokenName = 'ANX';
         break;
       case 'HEAVEN':
-        this.tokenName = 'ANX';
+        this.quantity = null;
+        this.tokenName = null;
         break;
       case 'ANL':
         this.tokenName = 'ANL';
@@ -79,8 +80,9 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
       this.shareDataService.transferTab = currency;
       this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['/pages/transfer']);
-    }
-    else if (currency === 'HEAVEN') {
+    } else if (currency === 'HEAVEN') {
+      if (selectedCurrency !== 'HEAVEN')
+        this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['pages/heaven']);
     }
   }

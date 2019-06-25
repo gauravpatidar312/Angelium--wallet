@@ -23,7 +23,8 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "profile":"プロフィール"
   },
   "pages":{
     "dashboard":{
@@ -70,7 +71,8 @@
       "firstName": "名",
       "lastName": "姓",
       "number": "number",
-      "repeatPassword": "パスワードを再入力"
+      "repeatPassword": "パスワードを再入力",
+      "slideRightToVerify": "右にスライドして確認"
     },
     "setting": {
       "country": "国",
@@ -94,7 +96,6 @@
     }
   },
   "sidebar": {
-    "profile":"プロフィール",
     "setting": "設定",
     "top": "トップ"
   }

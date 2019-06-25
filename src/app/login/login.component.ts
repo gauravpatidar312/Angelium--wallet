@@ -6,7 +6,8 @@ import {HttpService} from '../services/http.service';
 import {SessionStorageService} from '../services/session-storage.service';
 import {ToastrService} from '../services/toastr.service';
 import {AuthService} from '../_guards/auth.service';
-
+declare let $: any;
+declare let jQuery: any;
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean = false;
   formSubmitting: boolean = false;
+  isVerifiedCaptcha = false;
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
@@ -31,6 +33,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(document).ready(() => {
+      $("#loginSlider").slideToUnlock({ useData: true});
+      $( document ).on("veryfiedCaptcha", (event, arg) => {
+        if (arg === 'verified') {
+          this.isVerifiedCaptcha = true;
+        }
+    });
+   });
+
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -42,6 +53,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
+    if (!this.isVerifiedCaptcha) {
+      this.toastrService.danger('Please verify captcha', 'Login');
+      return;
+    }
     this.submitted = true;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -52,6 +67,9 @@ export class LoginComponent implements OnInit {
     this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
       if (res.token) {
         this.sessionStorageService.saveToSession('userInfo', res);
+        if (this.sessionStorageService.getFromSession('invitationCode')) {
+          this.sessionStorageService.deleteFromSession('invitationCode');
+        }
         this.getUserSettingInfo();
       } else {
         this.formSubmitting = false;

@@ -1,6 +1,6 @@
 @import '../../@theme/styles/themes';
 @import "~@nebular/theme/styles/global/breakpoints";
-
+@import '~@nebular/theme/styles/global/typography/typography';
 @include nb-install-component() {
   .title {
     font-family: nb-theme(font-bebas);
@@ -12,6 +12,10 @@
   input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield;
   }
 
   .details {
@@ -160,6 +164,10 @@
     border-radius: .5rem 0 0 .5rem;
   }
 
+  /deep/ .ng2-smart-title {
+    width: 135px !important;
+  }
+
   nb-card.top-content {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -178,11 +186,19 @@
     position: relative;
     span {
       position: absolute;
-      right: 30px;
-      bottom: 13px;
-      color: #00bb66;
-      font-weight: bold;
-      font-size: 16px;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
     }
   }
 
@@ -192,6 +208,10 @@
 
   .font-bebasNeue {
     font-family: nb-theme(font-bebas);
+  }
+
+  .font-bebasNeueBold {
+    font-family: nb-theme(font-bebas-bold);
   }
 
   .font-avenir {
@@ -214,6 +234,12 @@
 
   .month-day-value {
     font-size: 2.5rem;
+    &.ls-half {
+      letter-spacing: 0.5px;
+    }
+    &.ls-one {
+      letter-spacing: 1px;
+    }
   }
 
   .days-text {
@@ -274,6 +300,14 @@
     font-size: 1.5rem;
   }
 
+  .dropDown-padding {
+    padding: 14px !important;
+  }
+
+  .input-padding {
+    padding: 0.70rem 1.125rem !important;
+  }
+
   nb-card .icon-container i {
     font-size: 30px;
   }
@@ -294,10 +328,6 @@
       }
       .status {
         font-size: 2.1rem !important;
-      }
-
-      .total-amount span {
-        top: 0;
       }
     }
   }
@@ -350,7 +380,7 @@
       font-size: 1.1rem;
       margin-right: 1px;
       float: left;
-      width: 55px;
+      width: 50px;
       text-align: right;
       margin-top: -2px;
     }
@@ -391,4 +421,51 @@
       font-size: 1.5rem;
     }
   }
+
+  .heavenhistory {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  .heavenhistory-cell{
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: nb-theme(font-nunito);
+  }
+  /deep/ ng2-smart-table table tr td {
+    font-family: nb-theme(font-nunito);
+    padding: 0.50rem 1.25rem;
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+    /deep/ .heavenhistory-cell{
+      width: 120px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+    /deep/ .heavenhistory-cell{
+      width: 100px;
+    }
+
+  }
+
+//   :host /deep/ ng2-smart-title {
+//     color: grey;
+//     font-family: nb-theme(font-nunito);
+// }
+
+/* headers grid color*/
+/deep/ ng2-smart-table-title > a {
+  font-family: nb-theme(font-nunito);
+  font-size: 16px;
+}
 }

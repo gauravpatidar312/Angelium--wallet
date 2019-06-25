@@ -23,7 +23,8 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "登出"
+    "logout": "登出",
+    "profile":"个人资料"
   },
   "pages":{
     "dashboard":{
@@ -70,7 +71,8 @@
       "firstName": "名",
       "lastName": "姓",
       "number": "号码",
-      "repeatPassword": "再次输入密码"
+      "repeatPassword": "再次输入密码",
+      "slideRightToVerify": "Slide right to verify"
     },
     "setting": {
       "country": "国家",
@@ -94,7 +96,6 @@
     }
   },
   "sidebar": {
-    "profile":"个人资料",
     "setting": "设置",
     "top": "顶部"
   }

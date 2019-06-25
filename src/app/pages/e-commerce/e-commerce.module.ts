@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TranslateModule } from "@ngx-translate/core";
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { ECommerceComponent } from './e-commerce.component';
@@ -58,6 +59,7 @@ import { StatusCardComponent } from '../dashboard/status-card/status-card.compon
     NgxEchartsModule,
     NgxChartsModule,
     LeafletModule,
+    TranslateModule
   ],
   declarations: [
     StatusCardComponent,

@@ -5,7 +5,6 @@
         <nav class='navigation'>
           <a routerLink="/login" class='link' aria-label='Back'>
             <i class='icon nb-arrow-thin-left'></i></a>
-          
             <div class="status-dd-week dropdown" 
               [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
                  ngbDropdown>
@@ -32,7 +31,7 @@
             <h1 id="title" class="title">{{"common.register" | translate}}</h1>
             <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when
               enabled.</p>
-            <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()">
+            <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()"  class="registerForm">
               <div class="form-group row">
                 <div class="col-md-9 col-12">
                   <label>
@@ -58,7 +57,7 @@
                 </div>
               </div>
             </form>
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()"  class="registerForm">
               <div class="form-group">
                 <label>{{"common.verificationCode" | translate}}:</label>
                 <input type="text" class="form-control" formControlName="otp_code"  
@@ -79,6 +78,7 @@
                       {{"messages.required" | translate: {'field': "common.username" | translate } }}
                   </div>
                   <div *ngIf="f.username.errors.email">Username us required</div>
+                  <div *ngIf="f.username.errors.pattern">Please enter value in English language only.</div>
                 </div>
               </div>
               <div class="row">
@@ -91,6 +91,7 @@
                     <div *ngIf="f.first_name.errors.required">
                       {{"messages.required" | translate: {'field': "pages.register.firstName" | translate } }}
                     </div>
+                    <div *ngIf="f.first_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -102,8 +103,10 @@
                     <div *ngIf="f.last_name.errors.required">
                       {{"messages.required" | translate: {'field': "pages.register.lastName" | translate } }}
                     </div>
+                    <div *ngIf="f.last_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
+                <span class="form-group col-md-12 msg-font-size">Real name is required for KYC process. it cannot be changed after registration.</span>
               </div>
               <div class="form-group">
                 <label>{{"common.emailAddress" | translate}}:</label>
@@ -119,25 +122,33 @@
               </div>
               
               <div class="form-group">
-                <label>{{"common.password" | translate}}:</label>
-                <input type="password" class="form-control" 
-                  placeholder="{{'common.password' | translate}}" formControlName="password">
+                <label>Login Password:</label>
+                <input type="password" class="form-control" placeholder="Login Password" formControlName="password">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">
-                    {{"messages.required" | translate: {'field': "common.password" | translate } }}
-                  </div>
+                  <div *ngIf="f.password.errors.required">Login password is required</div>
                 </div>
               </div>
               <div class="form-group">
-                <label>{{"pages.register.repeatPassword" | translate}}:</label>
-                <input type="password" class="form-control" 
-                  placeholder="{{'pages.register.repeatPassword' | translate}}"
+                <label>Repeat Login password:</label>
+                <input type="password" class="form-control" placeholder="Repeat Login password"
                   formControlName="confirm_password">
                 <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.confirm_password.errors.required">
-                    {{"messages.required" | translate: {'field': "pages.register.repeatPassword" | translate } }}
-                  </div>
-                  <div *ngIf="f.confirm_password.errors.mustMatch">Passwords must match</div>
+                  <div *ngIf="f.confirm_password.errors.required">Repeat login password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Trade Password:</label>
+                <input type="password" class="form-control" placeholder="Trade Password" formControlName="trade_password">
+                <div *ngIf="submitted && f.trade_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.trade_password.errors.required">Trade password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Repeat Trade password:</label>
+                <input type="password" class="form-control" placeholder="Repeat Trade password"
+                       formControlName="confirm_trade_password">
+                <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirm_trade_password.errors.required">Repeat trade password is required</div>
                 </div>
               </div>
               <!-- <div class="form-group">
@@ -149,8 +160,13 @@
                 <a class="term-link" (click)="openTermsConditions()">Terms & Conditions</a>
                 <div class="clearfix"></div>
               </div>
-              <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer" size="large"
-                style="width:100%">
+
+              <div class="form-group sliderCss">
+                <div id="registerSlider" data-lock-text="Slide right to verify" data-unlock-text="Verified"> </div>
+              </div>
+
+              <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer registerBtnCss"
+                size="large" style="width:100%">
                 <span *ngIf="!formSubmitting">
                   {{"common.register" | translate}}
                 </span>

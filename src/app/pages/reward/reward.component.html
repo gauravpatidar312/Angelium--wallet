@@ -10,19 +10,16 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr1">
-        <ngx-earning-card cardName='{{"pages.reward.yourRank" | translate}}' 
-          [selectedCurrency]="'ANX'" [amount]="0" 
-          [quantity]="userData?.level"
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr1">
+        <ngx-earning-card cardName='{{"pages.reward.yourRank" | translate}}' [selectedCurrency]="'ANX'" [amount]="userData?.level" [quantity]="userData?.level"
           [percentage]="0"></ngx-earning-card>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr2">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr2">
         <ngx-earning-card cardName='{{"common.downline" | translate}} {{"common.heaven" | translate}}' [selectedCurrency]="'HEAVEN'" [amount]="0" [quantity]="0"
           [percentage]="0"></ngx-earning-card>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr3">
-        <ngx-earning-card cardName='{{"pages.reward.downlineAngel" | translate}}' 
-          [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="0"
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr3">
+        <ngx-earning-card cardName='{{"pages.reward.downlineAngel" | translate}}' [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="0"
           [percentage]="0"></ngx-earning-card>
       </div>
       <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
@@ -35,7 +32,7 @@
 <div class="row" *ngIf="!isProduction">
   <div class="col-lg-6">
     <nb-card class="card-rewardAllocation">
-      <nb-card-header>Reward Allocation</nb-card-header>
+      <nb-card-header>{{"pages.reward.rewardAllocation" | translate}}</nb-card-header>
       <nb-card-body>
         <ngx-echarts-pie></ngx-echarts-pie>
       </nb-card-body>
@@ -59,7 +56,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="navbar-header">
-              Your Reward
+              {{"pages.reward.yourReward" | translate}}
             </div>
           </div>
           <div class="col-md-6 rewardColumn">
@@ -96,7 +93,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="navbar-header downline-tree">
-          DownLine Tree
+          {{"common.downline" | translate}} {{"pages.reward.tree" | translate}}
         </div>
       </div>
       <!-- <div class="col-md-6 downlineColumn" *ngIf="noDataSource">

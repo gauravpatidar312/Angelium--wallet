@@ -34,6 +34,11 @@
 
     .event-title {
       font-family: nb-theme(font-mont);
+      text-overflow: ellipsis;
+      width: 81%;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .event-date {
@@ -71,6 +76,9 @@
     .article-title {
       font-size: 22px;
     }
+    .event-title {
+      width: 78% !important;
+    }
   }
 
   @include media-breakpoint-down(md) {
@@ -82,6 +90,9 @@
   @include media-breakpoint-down(is) {
     /deep/ nb-card.large-card {
       height: nb-theme(card-height-medium);
+    }
+    .event-title {
+      width: 70% !important;
     }
   }
 }

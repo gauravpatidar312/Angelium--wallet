@@ -66,7 +66,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     allColumns = [ 'level', 'username', 'rank', 'heaven', 'reward', 'rate', 'your_reward' ];
     noDataSource:boolean = true;
     dataSource: TreeNode<FSEntry>[] = [];
-    
+
     private alive = true;
     isProduction: any = environment.production;
     currentTheme: string;
@@ -242,10 +242,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     private sessionStorage: SessionStorageService,
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     public translate: TranslateService) {
-    var dd = this.translate.instant('pages.reward.rewardToday');
-    
     this.userData = this.sessionStorage.getFromSession('userInfo');
-
     const data = this.service.getData();
     const NewOBj = [];
     for (let x = 0; x < 10; x++) {
@@ -259,7 +256,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         this.statusCards1 = this.statusCardsByThemes[theme.name];
         console.log(this.statusCards1)
       });
-      this.getDownlineTree('today');
+      this.getDownlineTree('total');
       this.getDownlinecount();
       this.getreward();
   }
@@ -291,7 +288,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     let url = `downline_tree/?filter_type=${value}`;
     this.httpService.get(url).subscribe(res=>{
       this.dataSource = res;
-      if (res.length!=0) 
+      if (res.length!=0)
         this.noDataSource = true;
       else
         this.noDataSource = false;

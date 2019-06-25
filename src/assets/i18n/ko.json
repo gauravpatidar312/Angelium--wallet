@@ -23,7 +23,8 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "로그아웃"
+    "logout": "로그아웃",
+    "profile":"프로필"
   },
   "pages":{
     "dashboard":{
@@ -70,7 +71,8 @@
       "firstName": "명",
       "lastName": "성",
       "number": "number",
-      "repeatPassword": "비밀번호 재입력"
+      "repeatPassword": "비밀번호 재입력",
+      "slideRightToVerify": "Slide right to verify"
     },
     "setting": {
       "country": "국가",
@@ -94,7 +96,6 @@
     }
   },
   "sidebar": {
-    "profile":"프로필",
     "setting": "설정",
     "top": "홈"
   }
