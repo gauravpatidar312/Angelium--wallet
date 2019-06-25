@@ -123,7 +123,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
     mode: 'inline',
     columns: {
       hid: {
-        title: 'Heaven ID',
+        title: this.translate.instant('common.heaven') +' '+ this.translate.instant('pages.heaven.ID'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -131,7 +131,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       heaven_amount: {
-        title: 'Amount',
+        title: this.translate.instant('common.amount'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -139,7 +139,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       plan: {
-        title: 'Plan',
+        title: this.translate.instant('pages.heaven.plan'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -147,7 +147,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       total_received: {
-        title: 'Received',
+        title: this.translate.instant('pages.heaven.received'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -155,7 +155,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       entry_date: {
-        title: 'Entry date',
+        title: this.translate.instant('pages.heaven.entryDate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -163,7 +163,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       release_date: {
-        title: 'Release date',
+        title: this.translate.instant('pages.heaven.releaseDate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -171,7 +171,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         },
       },
       release_settings: {
-        title: 'Release Setting',
+        title: this.translate.instant('pages.heaven.releaseSetting'),
         type: 'custom',
         renderComponent: CustomRendererComponent,
         filter: false,
