@@ -1,5 +1,6 @@
 {
   "common":{
+    "amount": "수량",
     "assets": "자산",
     "downline": "다운라인",
     "days": "일",
@@ -7,6 +8,7 @@
     "email": "이메일",
     "emailAddress": "이메일",
     "enter": "입력",
+    "from": "From",
     "heaven": "헤븐",
     "login": "로그인",
     "last": "지난",
@@ -30,7 +32,6 @@
     "verified": "인증됨",
     "week": "주",
     "year": "년"
-    
   }, 
   "messages":{
     "required": "{{field}} 이(가) 필요합니다"
@@ -49,15 +50,24 @@
       "systemUpdate": "시스템 업데이트",
       "totalAsset": "총자산"
     },
+    "footer":{
+      "allRightsReservedBy": "All rights reserved by"
+    },
     "heaven":{
-      "amount": "수량",
-      "from": "From",
+      "entryDate": "참여일",
       "history": "내역",
       "heavenDropToday": "오늘의 헤븐 드롭",
+      "ID": "ID",
+      "plan": "계획",
+      "received": "Received",
+      "releaseDate": "완료일",
+      "releaseSetting": "완료 설정",
       "totalHeaven": "총 헤븐"
     },
     "login":{
+      "DontHaveAnAccount": "계정이 없으신가요?",
       "forgotPassword": "비밀번호 찾기",
+      "HelloLoginWithYourEmail" : "반갑습니다! 이메일로 로그인해주세요",
       "login": "로그인",
       "rememberMe": "로그인 정보 기억하기"
     },
@@ -66,6 +76,7 @@
       "downlineTree": {
         "heaven": "헤븐",
         "level": "레벨",
+        "noUserDownlineTree": "다운라인 트리에 사용자가 없습니다",
         "rank": "랭킹",
         "reward": "리워드",
         "rate": "이율",
@@ -81,12 +92,14 @@
       "yourReward": "당신의 리워드"
     },
     "register":{
+      "agreeTo": "동의하기",
       "alreadyHaveAnAccount": "이미 가입하셨나요?",
       "firstName": "명",
       "lastName": "성",
       "number": "number",
       "repeatPassword": "비밀번호 재입력",
-      "slideRightToVerify": "Slide right to verify"
+      "RealNameIsRequiredForKYC": "KYC 인증을 위한 실명이 필요합니다. 등록한 후 변경할 수 없습니다",
+      "terms&Conditions" : "이용약관"
     },
     "setting": {
       "country": "국가",

@@ -14,8 +14,8 @@
     "last": "Last",
     "month": "月",
     "password": "パスワード",
-    "phone": "電話番号",
     "profit": "Profit",
+    "phone": "電話番号",
     "reward": "リワード",
     "run": "実行",
     "register": "登録",
@@ -32,13 +32,12 @@
     "verificationCode": "認証コード",
     "week": "週",
     "year": "年"
-    
   }, 
   "messages":{
     "required": "{{field}} が必要です"
   },
   "footer":{
-    "allRightsReservedBy": "All rights reserved by"
+    "allRightsReservedBy": "All rights reserved by",
   },
   "header": {
     "logoTitle": "ANGELIUM",
@@ -54,41 +53,35 @@
       "systemUpdate": "システム更新",
       "totalAsset" : "アセット合計"
     },
-    "heaven":{      
+    "heaven":{  
+      "entryDate": "Entry date",    
       "history": "履歴",
-      "heavenDropToday": "今日のヘブンドロップ",
-      "totalHeaven": "ヘブン合計",
-
-
       "ID": "ID",
+      "heavenDropToday": "今日のヘブンドロップ",
       "plan": "Plan",
       "received": "Received",
-      "entryDate": "Entry date",
       "releaseDate": "Release date",
-      "releaseSetting": "Release Setting"
+      "releaseSetting": "Release Setting",
+      "totalHeaven": "ヘブン合計" 
     },
-    "login":{      
+    "login":{  
+      "DontHaveAnAccount": "Don't have an account",    
       "forgotPassword": "パスワードを忘れた",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "ログイン",
-      "rememberMe": "ログイン情報を記憶",
-
-
-      "DontHaveAnAccount": "Don't have an account",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email"
+      "rememberMe": "ログイン情報を記憶"
     },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
       "downlineTree": {
         "heaven": "ヘブン",
         "level": "レベル",
+        "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "ランク",
         "reward": "リワード",
         "rate": "利率",
         "username": "ユーザーネーム",
-        "your_reward": "あなたのリワード",
-
-
-        "noUserDownlineTree": "There is no user in your down-line tree"
+        "your_reward": "あなたのリワード"
       },
       "map": "マップ",
       "rewardAllocation": "リワードの内訳",
@@ -99,15 +92,13 @@
       "yourReward": "あなたのリワード"
     },
     "register":{
+      "agreeTo": "Agree to",
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
       "firstName": "名",
       "lastName": "姓",
       "number": "number",
       "repeatPassword": "パスワードを再入力",
-
-
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
-      "agreeTo": "Agree to",
       "terms&Conditions" : "Terms & Conditions"
     },
     "setting": {
