@@ -32,7 +32,6 @@
     "verificationCode": "认证码",
     "week": "周",
     "year": "年"
-    
   }, 
   "messages":{
     "required": "{{field}} 必填"
@@ -51,25 +50,36 @@
       "systemUpdate": "系统更新",
       "totalAsset" : "资产总额"
     },
+    "footer":{
+      "allRightsReservedBy": "All rights reserved by"
+    },
     "heaven":{
+      "entryDate": "Entry date",
       "history": "历史",
       "heavenDropToday": "今日天堂之滴",
-      "totalHeaven": "天堂总计"
+      "ID": "ID",
+      "plan": "Plan",
+      "received": "Received",
+      "releaseDate": "Release date",
+      "releaseSetting": "Release Setting",
+      "totalHeaven": "天堂总计" 
     },
     "login":{
+      "DontHaveAnAccount": "Don't have an account",
       "forgotPassword": "忘记密码",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "登录",
-      "rememberMe": "记住我"
+      "rememberMe": "记住我" 
     },
     "reward":{
       "downlineAngel": "经我邀请的天使",
       "downlineTree": {
         "heaven": "天堂",
         "level": "等级",
+        "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "排行",
         "reward": "奖励",
         "rate": "利率",
-        "username": "用户名",
         "your_reward": "你的奖励"
       },
       "map": "地图",
@@ -81,12 +91,14 @@
       "yourReward": "你的奖励"
     },
     "register":{
+      "agreeTo": "Agree to",
       "alreadyHaveAnAccount": "已有账户",
       "firstName": "名",
       "lastName": "姓",
       "number": "号码",
       "repeatPassword": "再次输入密码",
-      "slideRightToVerify": "Slide right to verify"
+      "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
+      "terms&Conditions" : "Terms & Conditions"
     },
     "setting": {
       "country": "国家",

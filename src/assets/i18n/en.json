@@ -79,8 +79,7 @@
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank", 
         "reward": "Reward", 
-        "rate": "Rate", 
-        "username": "Username",
+        "rate": "Rate",
         "your_reward": "Your Reward"
       },
       "map": "map",
