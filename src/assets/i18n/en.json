@@ -16,6 +16,7 @@
     "password": "Password",
     "phone": "Phone",
     "profit": "Profit",
+    "profile":"Profile",
     "reward": "Reward",
     "run": "Run",
     "register": "Register",
@@ -23,6 +24,7 @@
     "slideRightToVerify": "Slide right to verify",
     "select": "Select",
     "sendSMS": "Send SMS",
+    "setting": "Setting",
     "transfer": "TRANSFER",
     "trade": "Trade",
     "total": "Total",
@@ -38,8 +40,7 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "Log out",
-    "profile":"Profile"
+    "logout": "Log out"
   },
   "footer":{
     "allRightsReservedBy": "All rights reserved by"
@@ -122,7 +123,6 @@
     }
   },
   "sidebar": {
-    "setting": "Setting",
     "top": "Top"
   }
 }

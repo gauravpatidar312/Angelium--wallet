@@ -16,6 +16,7 @@
     "password": "パスワード",
     "phone": "電話番号",
     "profit": "Profit",
+    "profile":"プロフィール",
     "reward": "リワード",
     "run": "実行",
     "register": "登録",
@@ -23,6 +24,7 @@
     "slideRightToVerify": "Slide right to verify",
     "select": "選択",
     "sendSMS": "Send SMS",
+    "setting": "設定",
     "transfer": "TRANSFER",
     "trade": "Trade",
     "total": "Total",
@@ -38,8 +40,7 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "ログアウト",
-    "profile":"プロフィール"
+    "logout": "ログアウト"
   },
   "footer":{
     "allRightsReservedBy": "All rights reserved by"
@@ -122,7 +123,6 @@
     }
   },
   "sidebar": {
-    "setting": "設定",
     "top": "トップ"
   }
 }
