@@ -41,6 +41,9 @@
     "logout": "Log out",
     "profile":"Profile"
   },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
+  },
   "pages":{
     "dashboard":{
       "articleTitle": "Article Title",
@@ -49,9 +52,6 @@
       "portfolio": "PORTFOLIO",
       "systemUpdate": "System Update",
       "totalAsset" : "Total Asset"
-    },
-    "footer":{
-      "allRightsReservedBy": "All rights reserved by"
     },
     "heaven":{
       "entryDate": "Entry date",

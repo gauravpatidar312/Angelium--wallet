@@ -41,6 +41,9 @@
     "logout": "로그아웃",
     "profile":"프로필"
   },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
+  },
   "pages":{
     "dashboard":{
       "articleTitle": "기사 제목",
@@ -49,9 +52,6 @@
       "portfolio": "포트폴리오",
       "systemUpdate": "시스템 업데이트",
       "totalAsset": "총자산"
-    },
-    "footer":{
-      "allRightsReservedBy": "All rights reserved by"
     },
     "heaven":{
       "entryDate": "참여일",

@@ -41,6 +41,9 @@
     "logout": "登出",
     "profile":"个人资料"
   },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
+  },
   "pages":{
     "dashboard":{
       "articleTitle": "文章标题",
@@ -49,9 +52,6 @@
       "portfolio": "组合",
       "systemUpdate": "系统更新",
       "totalAsset" : "资产总额"
-    },
-    "footer":{
-      "allRightsReservedBy": "All rights reserved by"
     },
     "heaven":{
       "entryDate": "Entry date",
