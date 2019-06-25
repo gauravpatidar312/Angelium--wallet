@@ -1,7 +1,9 @@
 {
   "common":{
+    "amount": "수량",
     "downline": "다운라인",
     "emailAddress": "이메일",
+    "from": "From",
     "heaven": "헤븐",
     "login": "로그인",
     "month": "월",
@@ -36,8 +38,6 @@
       "totalAsset": "총자산"
     },
     "heaven":{
-      "amount": "수량",
-      "from": "From",
       "history": "내역",
       "heavenDropToday": "오늘의 헤븐 드롭",
       "totalHeaven": "총 헤븐"

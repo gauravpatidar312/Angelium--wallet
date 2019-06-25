@@ -19,12 +19,12 @@
     "reward": "Reward",
     "run": "Run",
     "register": "Register",
-    "Repeat": "Repeat",
+    "repeat": "Repeat",
     "slideRightToVerify": "Slide right to verify",
     "select": "Select",
     "sendSMS": "Send SMS",
     "transfer": "TRANSFER",
-    "Trade": "Trade",
+    "trade": "Trade",
     "total": "Total",
     "today": "Today",
     "username": "Username",
@@ -51,7 +51,7 @@
       "totalAsset" : "Total Asset"
     },
     "footer":{
-      "allRightsReservedBy": "All rights reserved by",
+      "allRightsReservedBy": "All rights reserved by"
     },
     "heaven":{
       "entryDate": "Entry date",
@@ -81,7 +81,7 @@
         "reward": "Reward", 
         "rate": "Rate", 
         "username": "Username",
-        "your_reward": "Your Reward",
+        "your_reward": "Your Reward"
       },
       "map": "map",
       "rewardAllocation": "Reward Allocation",
@@ -99,7 +99,7 @@
       "number": "number",
       "repeatPassword": "Repeat password",
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
-      "terms&Conditions" : "Terms & Conditions",
+      "terms&Conditions" : "Terms & Conditions"
     },
     "setting": {
       "country": "Country",
@@ -114,7 +114,7 @@
       "referral": "Referral",
       "rank": "Rank",
       "secretKey": "Secret Key",
-      "2FA": "2FA",
+      "2FA": "2FA"
     },
     "transfer":{
       "receive": "Receive",

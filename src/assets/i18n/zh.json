@@ -1,7 +1,9 @@
 {
   "common":{
+    "amount" : "数量",
     "downline": "邀请好友",
     "emailAddress": "邮箱地址",
+    "from": "From",
     "heaven": "天堂",
     "login": "登录",
     "month": "月",
@@ -36,8 +38,6 @@
       "totalAsset" : "资产总额"
     },
     "heaven":{
-      "amount" : "数量",
-      "from": "From",
       "history": "历史",
       "heavenDropToday": "今日天堂之滴",
       "totalHeaven": "天堂总计"

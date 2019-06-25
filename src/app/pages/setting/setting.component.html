@@ -144,14 +144,20 @@
               <tr>
                 <td class="title-col">Language switch</td>
                 <td>
-                  <div class="dropdown" ngbDropdown>
-                    <button class="btn btn-primary" type="button" ngbDropdownToggle>
+                  <div class="status-dd-week dropdown" 
+                    [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                       ngbDropdown placement="top">
+                    <button type="button" ngbDropdownToggle
+                      class="btn b-language-size"
+                            [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                   'btn-primary': currentTheme !== 'default',
+                                   'btn-sm': breakpoint.width <= breakpoints.is}">
                       {{ selectedLang }}
                     </button>
                     <ul class="dropdown-menu" ngbDropdownMenu>
-                      <li class="dropdown-item" *ngFor="let lang of languages" 
-                        (click)="changeLang(lang)">
-                        {{ lang.language }}
+                      <li class="dropdown-item {{selectedLang === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                        (click)="changeLang(lan)">
+                        {{ lan.language }}
                       </li>
                     </ul>
                   </div>

@@ -145,7 +145,7 @@
             <div class="col-md-6 col-lg-4">
               <div class="form-group font-avenir">
                 <label style="color: #00ff00">
-                  {{"pages.heaven.from" | translate}}
+                  {{"common.from" | translate}}
                 </label>
                 <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
                      ngbDropdown>
@@ -167,7 +167,7 @@
             <div class="col-md-6 col-lg-4">
               <div class="form-group total-amount font-avenir">
                 <label style="color: #00ff00">
-                  {{"pages.heaven.amount" | translate}}
+                  {{"common.amount" | translate}}
                 </label>
                 <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
                      step="0.000001" [disabled]="!wallet?.wallet_type"

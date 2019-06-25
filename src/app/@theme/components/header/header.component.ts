@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 import { UserData } from '../../../@core/data/users';
 import { AnalyticsService } from '../../../@core/utils';
 import { LayoutService } from '../../../@core/utils';
@@ -25,7 +26,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile', link: '/pages/setting' }, { title: 'Log out' }];
+  userMenu = [
+    {  title: this.translate.instant('header.profile'), link: '/pages/setting' }, 
+    { title: this.translate.instant('header.logout') }
+  ];
 
   totalAnxLiveValue = 0;
   anxValue;
@@ -40,7 +44,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private httpService: HttpService,
     private shareDataService: ShareDataService,
     private sessionStorage: SessionStorageService,
-    private router: Router) {
+    private router: Router,
+    public translate: TranslateService,) {
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.userMenu = [
+        { title: this.translate.instant('header.profile'), link: '/pages/setting' }, 
+        { title: this.translate.instant('header.logout') }
+      ];
+    });
   }
 
   ngOnInit() {
@@ -55,8 +66,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         map(({ item: { title } }) => title),
       )
       .subscribe(title => {
-        if (title === 'Log out') {
+        if (title === this.translate.instant('header.logout')) {
           this.authService.logout();
+          this.translate.use('en');
         }
       });
 

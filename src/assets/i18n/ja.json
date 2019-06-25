@@ -18,28 +18,13 @@
     "username": "ユーザーネーム",
     "verificationCode": "認証コード",
     "week": "週",
-    "year": "年",
-
-
-    "slideRightToVerify": "Slide right to verify",
-    "verified": "Verified",
-    "Repeat": "Repeat",
-    "Trade": "Trade",
-    "sendSMS": "Send SMS",
-    "assets": "Assets",
-    "profit": "Profit",
-    "total": "Total",
-    "last": "Last",
-    "today": "Today",
-    "days": "Days",
-    "day": "Day",
-    "enter": "Enter"
+    "year": "年"
   }, 
   "messages":{
     "required": "{{field}} が必要です"
   },
   "footer":{
-    "allRightsReservedBy": "All rights reserved by",
+    "allRightsReservedBy": "All rights reserved by"
   },
   "header": {
     "logoTitle": "ANGELIUM",
@@ -58,24 +43,12 @@
     "heaven":{      
       "history": "履歴",
       "heavenDropToday": "今日のヘブンドロップ",
-      "totalHeaven": "ヘブン合計",
-
-
-      "ID": "ID",
-      "plan": "Plan",
-      "received": "Received",
-      "entryDate": "Entry date",
-      "releaseDate": "Release date",
-      "releaseSetting": "Release Setting"
+      "totalHeaven": "ヘブン合計"
     },
     "login":{      
       "forgotPassword": "パスワードを忘れた",
       "login": "ログイン",
-      "rememberMe": "ログイン情報を記憶",
-
-
-      "DontHaveAnAccount": "Don't have an account",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "rememberMe": "ログイン情報を記憶"
     },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
@@ -86,10 +59,7 @@
         "reward": "リワード",
         "rate": "利率",
         "username": "ユーザーネーム",
-        "your_reward": "あなたのリワード",
-
-
-        "noUserDownlineTree": "There is no user in your down-line tree"
+        "your_reward": "あなたのリワード"
       },
       "map": "マップ",
       "rewardAllocation": "リワードの内訳",
@@ -104,12 +74,7 @@
       "firstName": "名",
       "lastName": "姓",
       "number": "number",
-      "repeatPassword": "パスワードを再入力",
-
-
-      "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
-      "agreeTo": "Agree to",
-      "terms&Conditions" : "Terms & Conditions",
+      "repeatPassword": "パスワードを再入力"
     },
     "setting": {
       "country": "国",
