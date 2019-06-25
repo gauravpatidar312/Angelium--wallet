@@ -9,7 +9,8 @@
             <div class="col-7 mt-2">
               <div class="title">Total Heaven</div>
             </div>
-            <div class="col-5">
+            <div class="col-5" *ngIf="fetchingTotalHeaven"><div class="status text-white mt-0"><i class="fa fa-spinner spinner-color fa-spin"></i></div></div>
+            <div class="col-5" *ngIf="!fetchingTotalHeaven">
               <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
                 <button type="button" ngbDropdownToggle class="btn"
                         [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -42,7 +43,8 @@
             <div class="col-7 mt-2">
               <div class="title">Heaven Drop Today</div>
             </div>
-            <div class="col-5 col-xs-4">
+            <div class="col-5 col-xs-4" *ngIf="fetchingHeavenDrop"><div class="status text-white mt-0"><i class="fa fa-spinner spinner-color fa-spin"></i></div></div>
+            <div class="col-5 col-xs-4" *ngIf="!fetchingHeavenDrop">
               <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
                 <button type="button" ngbDropdownToggle class="btn"
                         [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -254,7 +256,8 @@
           Heaven History
         </nb-card-header>
         <nb-card-body>
-          <ng2-smart-table [settings]="settings" [source]="source">
+         <div *ngIf="fetchHeavenHistory"><span class="heaven-history-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+          <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
           </ng2-smart-table>
         </nb-card-body>
       </nb-card>

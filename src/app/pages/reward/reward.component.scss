@@ -56,6 +56,13 @@
     background: #494299 !important;
   }
 
+  .downline-tree-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    text-align: center;
+  }
+
 
   @include media-breakpoint-down(sm) {
     ngx-traffic {

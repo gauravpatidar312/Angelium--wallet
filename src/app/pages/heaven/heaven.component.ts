@@ -36,6 +36,9 @@ export class HeavenComponent implements OnInit, OnDestroy {
   wallet: any;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
+  fetchingTotalHeaven: boolean = false;
+  fetchingHeavenDrop: boolean = false;
+  fetchHeavenHistory: boolean = false;
 
   constructor(private service: SmartTableData,
               private shareDataService: ShareDataService,
@@ -72,12 +75,9 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.breakpoint = newValue;
       });
 
-    this.httpService.get('heaven-drop/').subscribe(res => {
-      this.heavenDrop = res;
-    });
-
     this.getWallets();
     this.getTotalHeaven();
+    this.getHeavenDrop();
     this.getHeavenGraph();
     this.getANXHistory();
     this.getHeavenReleaseSettings();
@@ -252,9 +252,24 @@ export class HeavenComponent implements OnInit, OnDestroy {
     });
   }
 
+  getHeavenDrop() {
+    this.fetchingHeavenDrop = true;
+    this.httpService.get('heaven-drop/').subscribe(res => {
+      this.heavenDrop = res;
+      this.fetchingHeavenDrop = false;
+    }, (err) => {
+      this.fetchingHeavenDrop = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+    });
+  }
   getTotalHeaven() {
+    this.fetchingTotalHeaven = true;
     this.httpService.get('total-heaven/').subscribe((res?: any) => {
       this.totalHeaven = res;
+      this.fetchingTotalHeaven = false;
+    }, (err) => {
+      this.fetchingTotalHeaven = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
@@ -291,6 +306,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   getHeavenHistory() {
+    this.fetchHeavenHistory = true;
     this.httpService.get('heaven-history/').subscribe((res?: any) => {
       const data = res.results;
       const heaven_history_data = _.map(data, function(obj) {
@@ -300,6 +316,10 @@ export class HeavenComponent implements OnInit, OnDestroy {
         return obj;
       });
       this.source.load(heaven_history_data);
+      this.fetchHeavenHistory = false;
+    }, (err) => {
+      this.fetchHeavenHistory = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
