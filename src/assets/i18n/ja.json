@@ -1,7 +1,9 @@
 {
   "common":{
+    "amount" : "数量",
     "downline": "ダウンライン",
     "emailAddress": "Eメール",
+    "from": "From",
     "heaven": "ヘブン",
     "login": "ログイン",
     "month": "月",
@@ -16,10 +18,28 @@
     "username": "ユーザーネーム",
     "verificationCode": "認証コード",
     "week": "週",
-    "year": "年"
+    "year": "年",
+
+
+    "slideRightToVerify": "Slide right to verify",
+    "verified": "Verified",
+    "Repeat": "Repeat",
+    "Trade": "Trade",
+    "sendSMS": "Send SMS",
+    "assets": "Assets",
+    "profit": "Profit",
+    "total": "Total",
+    "last": "Last",
+    "today": "Today",
+    "days": "Days",
+    "day": "Day",
+    "enter": "Enter"
   }, 
   "messages":{
     "required": "{{field}} が必要です"
+  },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by",
   },
   "header": {
     "logoTitle": "ANGELIUM",
@@ -35,17 +55,27 @@
       "systemUpdate": "システム更新",
       "totalAsset" : "アセット合計"
     },
-    "heaven":{
-      "amount" : "数量",
-      "from": "From",
+    "heaven":{      
       "history": "履歴",
       "heavenDropToday": "今日のヘブンドロップ",
-      "totalHeaven": "ヘブン合計"
+      "totalHeaven": "ヘブン合計",
+
+
+      "ID": "ID",
+      "plan": "Plan",
+      "received": "Received",
+      "entryDate": "Entry date",
+      "releaseDate": "Release date",
+      "releaseSetting": "Release Setting"
     },
-    "login":{
+    "login":{      
       "forgotPassword": "パスワードを忘れた",
       "login": "ログイン",
-      "rememberMe": "ログイン情報を記憶"
+      "rememberMe": "ログイン情報を記憶",
+
+
+      "DontHaveAnAccount": "Don't have an account",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
     },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
@@ -56,7 +86,10 @@
         "reward": "リワード",
         "rate": "利率",
         "username": "ユーザーネーム",
-        "your_reward": "あなたのリワード"
+        "your_reward": "あなたのリワード",
+
+
+        "noUserDownlineTree": "There is no user in your down-line tree"
       },
       "map": "マップ",
       "rewardAllocation": "リワードの内訳",
@@ -72,7 +105,11 @@
       "lastName": "姓",
       "number": "number",
       "repeatPassword": "パスワードを再入力",
-      "slideRightToVerify": "右にスライドして確認"
+
+
+      "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
+      "agreeTo": "Agree to",
+      "terms&Conditions" : "Terms & Conditions",
     },
     "setting": {
       "country": "国",

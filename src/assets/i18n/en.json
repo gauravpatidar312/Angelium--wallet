@@ -1,20 +1,35 @@
 {
   "common":{
+    "assets": "Assets",
+    "amount" : "Amount",
     "downline": "Downline",
+    "days": "Days",
+    "day": "Day",
     "emailAddress": "Email address",
+    "email": "Email",
+    "enter": "Enter",
+    "from": "From",
     "heaven": "Heaven",
     "login": "Log In",
+    "last": "Last",
     "month": "Month",
     "password": "Password",
-    "email": "Email",
     "phone": "Phone",
+    "profit": "Profit",
     "reward": "Reward",
     "run": "Run",
     "register": "Register",
+    "Repeat": "Repeat",
+    "slideRightToVerify": "Slide right to verify",
     "select": "Select",
+    "sendSMS": "Send SMS",
     "transfer": "TRANSFER",
+    "Trade": "Trade",
+    "total": "Total",
+    "today": "Today",
     "username": "Username",
     "verificationCode": "Verification code",
+    "verified": "Verified",
     "week": "Week",
     "year": "Year"
   }, 
@@ -23,7 +38,7 @@
   },
   "header": {
     "logoTitle": "ANGELIUM",
-    "logout": "Logout",
+    "logout": "Log out",
     "profile":"Profile"
   },
   "pages":{
@@ -35,15 +50,24 @@
       "systemUpdate": "System Update",
       "totalAsset" : "Total Asset"
     },
+    "footer":{
+      "allRightsReservedBy": "All rights reserved by",
+    },
     "heaven":{
-      "amount" : "Amount",
-      "from": "From",
+      "entryDate": "Entry date",
       "history": "History",
+      "ID": "ID",
       "heavenDropToday": "Heaven Drop Today",
+      "plan": "Plan",
+      "received": "Received",
+      "releaseDate": "Release date",
+      "releaseSetting": "Release Setting",
       "totalHeaven": "Total Heaven"
     },
     "login":{
+      "DontHaveAnAccount": "Don't have an account",
       "forgotPassword": "Forgot Password",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "Login",
       "rememberMe": "Remember me"
     },
@@ -52,11 +76,12 @@
       "downlineTree": {
         "heaven": "Heaven", 
         "level": "Level", 
+        "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank", 
         "reward": "Reward", 
         "rate": "Rate", 
         "username": "Username",
-        "your_reward": "Your Reward"
+        "your_reward": "Your Reward",
       },
       "map": "map",
       "rewardAllocation": "Reward Allocation",
@@ -68,11 +93,13 @@
     },
     "register":{
       "alreadyHaveAnAccount": "Already have an account",
+      "agreeTo": "Agree to",
       "firstName": "First Name",
       "lastName": "Last Name",
       "number": "number",
       "repeatPassword": "Repeat password",
-      "slideRightToVerify": "Slide right to verify"
+      "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
+      "terms&Conditions" : "Terms & Conditions",
     },
     "setting": {
       "country": "Country",
@@ -87,7 +114,7 @@
       "referral": "Referral",
       "rank": "Rank",
       "secretKey": "Secret Key",
-      "2FA": "2FA"
+      "2FA": "2FA",
     },
     "transfer":{
       "receive": "Receive",
