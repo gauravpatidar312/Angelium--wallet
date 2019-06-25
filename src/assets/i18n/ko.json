@@ -1,14 +1,14 @@
 {
   "common":{
-    "amount": "수량",
     "assets": "자산",
+    "amount": "수량",
     "downline": "다운라인",
     "days": "일",
     "day": "일",
-    "email": "이메일",
     "emailAddress": "이메일",
-    "from": "From",
+    "email": "이메일",
     "enter": "입력",
+    "from": "From",
     "heaven": "헤븐",
     "login": "로그인",
     "last": "지난",
@@ -20,8 +20,8 @@
     "run": "실행",
     "register": "등록",
     "repeat": "재입력",
-    "select": "선택",
     "slideRightToVerify": "밀어서 인증하기",
+    "select": "선택",
     "sendSMS": "인증번호 전송",
     "transfer": "이체하기",
     "trade": "거래",
@@ -56,8 +56,8 @@
     "heaven":{
       "entryDate": "참여일",
       "history": "내역",
-      "heavenDropToday": "오늘의 헤븐 드롭",
       "ID": "ID",
+      "heavenDropToday": "오늘의 헤븐 드롭",
       "plan": "계획",
       "received": "Received",
       "releaseDate": "완료일",
@@ -91,8 +91,8 @@
       "yourReward": "당신의 리워드"
     },
     "register":{
-      "agreeTo": "동의하기",
       "alreadyHaveAnAccount": "이미 가입하셨나요?",
+      "agreeTo": "동의하기",
       "firstName": "명",
       "lastName": "성",
       "number": "number",

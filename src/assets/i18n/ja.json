@@ -1,12 +1,12 @@
 {
   "common":{
-    "amount" : "数量",
     "assets": "Assets",
+    "amount" : "数量",
     "downline": "ダウンライン",
     "days": "Days",
     "day": "Day",
-    "email": "Eメール",
     "emailAddress": "Eメール",
+    "email": "Eメール",
     "enter": "Enter",
     "from": "From",
     "heaven": "ヘブン",
@@ -14,35 +14,35 @@
     "last": "Last",
     "month": "月",
     "password": "パスワード",
-    "profit": "Profit",
     "phone": "電話番号",
+    "profit": "Profit",
     "reward": "リワード",
     "run": "実行",
     "register": "登録",
     "repeat": "Repeat",
-    "select": "選択",
     "slideRightToVerify": "Slide right to verify",
+    "select": "選択",
     "sendSMS": "Send SMS",
     "transfer": "TRANSFER",
     "trade": "Trade",
     "total": "Total",
     "today": "Today",
     "username": "ユーザーネーム",
-    "verified": "Verified",
     "verificationCode": "認証コード",
+    "verified": "Verified",
     "week": "週",
     "year": "年"
   }, 
   "messages":{
     "required": "{{field}} が必要です"
   },
-  "footer":{
-    "allRightsReservedBy": "All rights reserved by"
-  },
   "header": {
     "logoTitle": "ANGELIUM",
     "logout": "ログアウト",
     "profile":"プロフィール"
+  },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
   },
   "pages":{
     "dashboard":{
@@ -91,8 +91,8 @@
       "yourReward": "あなたのリワード"
     },
     "register":{
-      "agreeTo": "Agree to",
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
+      "agreeTo": "Agree to",
       "firstName": "名",
       "lastName": "姓",
       "number": "number",
