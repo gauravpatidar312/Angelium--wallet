@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from '../../services/toastr.service';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from 'environments/environment';
+import {TranslateService} from '@ngx-translate/core';
 import * as _ from 'lodash';
 
 declare const jQuery: any;
@@ -20,10 +21,10 @@ export class TransferComponent implements OnInit {
   private alive = true;
   isProduction: any = environment.production;
   sendForm: FormGroup;
-  sendType: string = 'SELECT';
-  receiveType: string = 'SELECT';
+  sendType: string = this.translate.instant('common.select');
+  receiveType: string =  this.translate.instant('common.select');
   fromType: string = 'ANX';
-  toType: string = 'SELECT';
+  toType: string =  this.translate.instant('common.select');
   fromTypes: string[] = ['ANX'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -52,7 +53,8 @@ export class TransferComponent implements OnInit {
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private translate:TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -111,9 +113,9 @@ export class TransferComponent implements OnInit {
         this.otcWallets = this.myWallets;
 
       if (!this.myWallets) {
-        this.sendType = 'SELECT';
-        this.receiveType = 'SELECT';
-        this.toType = 'SELECT';
+        this.sendType = this.translate.instant('common.select');
+        this.receiveType = this.translate.instant('common.select');
+        this.toType =  this.translate.instant('common.select');
       } else if (this.shareDataService.transferTab) {
         this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
         this.shareDataService.transferTab = null;
