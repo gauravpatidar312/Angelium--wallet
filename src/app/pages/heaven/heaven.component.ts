@@ -122,6 +122,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
     },
     editable: true,
     mode: 'inline',
+    noDataMessage: "No data found",
     columns: {
       hid: {
         title: this.translate.instant('common.heaven') +' '+ this.translate.instant('pages.heaven.ID'),
