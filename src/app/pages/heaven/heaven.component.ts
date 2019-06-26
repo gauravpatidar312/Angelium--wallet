@@ -27,7 +27,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
   totalHeaven: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';
-  walletType: string = 'SELECT';
+  walletType: string = this.translate.instant('common.select');
   types: string[] = ['week', 'month', 'year'];
   heavenDropTypes: string[] = ['week', 'month', 'year'];
   myWallets: string[];

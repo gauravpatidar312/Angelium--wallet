@@ -175,7 +175,7 @@
                 <label style="color: #00ff00">
                   {{"common.amount" | translate}}
                 </label>
-                <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
+                <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="{{'common.enter'|translate}} {{'common.amount'|translate}}"
                      step="0.000001" [disabled]="!wallet?.wallet_type"
                      class="form-control input-padding font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
@@ -226,12 +226,12 @@
             </div>
             <div class="dropdown" ngbDropdown>
               <button class="btn btn-primary" type="button" ngbDropdownToggle>
-                Year
+                {{'common.year'|translate}}
               </button>
               <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item"> Week</li>
-                <li class="dropdown-item"> Month</li>
-                <li class="dropdown-item"> Year</li>
+                <li class="dropdown-item"> {{'common.week'|translate}}</li>
+                <li class="dropdown-item"> {{'common.month'|translate}}</li>
+                <li class="dropdown-item"> {{'common.year'|translate}}</li>
               </ul>
             </div>
           </div>
