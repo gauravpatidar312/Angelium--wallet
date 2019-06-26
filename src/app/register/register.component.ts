@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
   resubmitTime: number = 60 * 1000;
   currentTheme: string;
   breakpoints: any;
+  languageCode: any;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   languageType: string = 'SELECT';
   languageData = [
@@ -64,9 +65,11 @@ export class RegisterComponent implements OnInit {
     });
     if (currectLang) {
       this.languageType = currectLang.language;
+      this.languageCode = currectLang.code; 
       this.translate.use(currectLang.code);
     }else{
       this.languageType = 'English';
+      this.languageCode = 'en';
       this.translate.use('en');
     }
   }
@@ -92,6 +95,8 @@ export class RegisterComponent implements OnInit {
       confirm_password: ['', Validators.required],
       trade_password: ['', Validators.required],
       confirm_trade_password: ['', Validators.required],
+      language: [this.languageType],
+      language_code: [this.languageCode],
       isAgree: [false],
     });
 
@@ -222,5 +227,7 @@ export class RegisterComponent implements OnInit {
   changeLanguage(lan: any){
     this.languageType = lan.language;
     this.translate.use(lan.code);
+    this.registerForm.controls.language.setValue(lan.language);
+    this.registerForm.controls.language_code.setValue(lan.code);
   }
 }
