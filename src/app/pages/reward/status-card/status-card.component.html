@@ -9,7 +9,10 @@
       <div class="col-6 mt-2 pr-0">
         <div class="title">{{ title }}</div>
       </div>
-      <div class="col-6">
+      <div class="col-6" *ngIf="fetchingRewardValue">
+        <div class="status text-white mt-0"><i class="fa fa-spinner spinner-color fa-spin"></i></div>
+      </div>
+      <div class="col-6" *ngIf="!fetchingRewardValue">
         <!-- <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -24,8 +27,10 @@
           </ul>
         </div> -->
         <!-- <div class="clearfix"></div> -->
-        <div class="status text-white"><span class="text-success">$</span>{{ value | number : '1.0-2'}}</div>
-        <div class="delta up">{{percentage}}%</div>
+        <div class="status text-white"><span class="text-success" *ngIf="title !== 'Reward Today'">$</span>{{ value | number : '1.0-2'}} <span class="text-success" *ngIf="title === 'Reward Today'">ANX</span></div>
+        <div class="delta" [class.up]="percentage >= 0" [class.down]="percentage < 0">
+          {{percentage > 0 ? percentage : (-1 * percentage)}}%
+        </div>
         <!-- <nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar> -->
 
 

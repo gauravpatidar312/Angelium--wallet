@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { TranslateService } from "@ngx-translate/core";
@@ -8,6 +8,7 @@ import { SessionStorageService } from '../../services/session-storage.service';
 import { ShareDataService } from '../../services/share-data.service';
 import {environment} from '../../../environments/environment';
 import * as _ from 'lodash';
+import {ToastrService} from '../../services/toastr.service';
 declare let $: any;
 
 interface CardSettings {
@@ -46,6 +47,8 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   user: any;
   solarValue: number;
   currentTheme: string;
+  fetchingAssetValue: boolean = false;
+  @Input() fetchingCryptos: boolean = false;
   assetCard: CardSettings = {
     title: this.translate.instant('pages.dashboard.totalAsset'),
     value: 0,
@@ -93,7 +96,8 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     private httpService: HttpService,
     private sessionStorage: SessionStorageService,
     private shareDataService: ShareDataService,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    private toastrService: ToastrService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
 
     this.themeService.getJsTheme()
@@ -138,12 +142,15 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   }
 
   getAllCryptoBalance() {
+    this.fetchingAssetValue = true;
+    this.fetchingCryptos = true;
     this.httpService.get('asset/').subscribe((data?: any) => {
       this.assetCard.value = data.total_asset;
       this.gainCard.value = data.total_profit;
+      this.fetchingAssetValue = false;
       this.cryptoBalance = _.sortBy(_.filter(data.cryptos, (item) => {
         if (item.name === 'ANX')
-            item.order = 1;
+          item.order = 1;
         else if (item.name === 'HEAVEN')
           item.order = 2;
         else if (item.name === 'BTC')
@@ -162,13 +169,18 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
         return !this.isProduction || ['XP', 'USDT', 'ANLP'].indexOf(item.name) === -1;
       }), 'order');
 
-      this.cryptoData = _.map(this.cryptoBalance, function(obj) {
+      this.fetchingCryptos = false;
+      this.cryptoData = _.map(this.cryptoBalance, function (obj) {
         const item: any = {};
         item.name = obj.name;
         item.value = obj.amount;
         return item;
       });
       this.getLivePriceData();
+    }, (err) => {
+      this.fetchingAssetValue = false;
+      this.fetchingCryptos = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
     });
   }
 

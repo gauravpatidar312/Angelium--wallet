@@ -39,6 +39,11 @@ $shadow-green: #00977e;
       border: 2px solid #7659ff;
     }
 
+    .spinner-color{
+      color: #a1a1e5;
+      font-size: 25px;
+    }
+
     /deep/ nb-progress-bar {
       height: 0.6rem;
       margin-top: 1rem;

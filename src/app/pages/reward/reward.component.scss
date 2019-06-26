@@ -56,6 +56,13 @@
     background: #494299 !important;
   }
 
+  .downline-tree-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    text-align: center;
+  }
+
 
   @include media-breakpoint-down(sm) {
     ngx-traffic {
@@ -312,6 +319,9 @@ table.table-bordered > tbody > tr > td {
   font-family: nb-theme(font-bebas);
   font-size: 22px;
   margin-top: 8px;
+}
+.downline-heavenDrop-cell {
+  width: 100px !important;
 }
 .downline-cell{
   color: #ffffff;

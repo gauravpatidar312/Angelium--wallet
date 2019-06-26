@@ -313,6 +313,18 @@
     font-size: 30px;
   }
 
+  .heaven-history-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    text-align: center;
+  }
+
+  .spinner-color{
+    color: #a1a1e5;
+    font-size: 25px;
+  }
+
   @include media-breakpoint-down(sm) {
     nb-card {
       .icon-container {

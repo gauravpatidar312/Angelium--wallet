@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value"
+    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value" [fetchingRewardValue]="fetchingRewardValue"
       [percentage]="statusCard.percentage">
       <i [ngClass]="statusCard.iconClass"></i>
     </ngx-status-card>
@@ -11,15 +11,15 @@
   <div class="col-xxl-12">
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr1">
-        <ngx-earning-card cardName='{{"pages.reward.yourRank" | translate}}' [selectedCurrency]="'ANX'" [amount]="userData?.level" [quantity]="userData?.level"
+        <ngx-earning-card cardName='{{"pages.reward.yourRank" | translate}}' [selectedCurrency]="'ANX'" [amount]="userData?.level" [quantity]="userData?.rank"
           [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr2">
-        <ngx-earning-card cardName='{{"common.downline" | translate}} {{"common.heaven" | translate}}' [selectedCurrency]="'HEAVEN'" [amount]="0" [quantity]="0"
+        <ngx-earning-card cardName='{{"common.downline" | translate}} {{"common.heaven" | translate}}' [selectedCurrency]="'HEAVEN'" [amount]="downline_heaven" [quantity]="total_users"
           [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr3">
-        <ngx-earning-card cardName='{{"pages.reward.downlineAngel" | translate}}' [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="0"
+        <ngx-earning-card cardName='{{"pages.reward.downlineAngel" | translate}}' [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="angel_count"
           [percentage]="0"></ngx-earning-card>
       </div>
       <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
@@ -120,7 +120,8 @@
   </ng-template>
 
   <nb-card-body class="tab-content" *ngIf="noDataSource; else noData">
-    <div id="downlinetoday" class="tab-pane active">
+    <div *ngIf="fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+    <div id="downlinetoday" class="tab-pane active" *ngIf="!fetchingDownlineTree">
       <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
         <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
         <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
@@ -157,16 +158,14 @@
             {{"pages.reward.downlineTree.heaven" | translate}}
           </th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.heaven}}
+            <span class="text-success">$</span>{{row.data.heaven.toFixed(2)}}
           </td>
         </ng-container>
 
         <ng-container nbTreeGridColumnDef="reward">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"pages.reward.downlineTree.reward" | translate}}
-          </th>
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven Drop</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.reward}}
+          <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(2)}} <span class="text-success">ANX</span></div>
           </td>
         </ng-container>
 
@@ -184,7 +183,7 @@
             {{"pages.reward.downlineTree.your_reward" | translate}}
           </th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.your_reward}}
+            {{row.data.your_reward.toFixed(2)}} <span class="text-success">ANX</span>
           </td>
         </ng-container>
       </table>

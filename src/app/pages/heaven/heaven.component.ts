@@ -40,6 +40,10 @@ export class HeavenComponent implements OnInit, OnDestroy {
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   days:any;
+  fetchingTotalHeaven: boolean = false;
+  fetchingHeavenDrop: boolean = false;
+  fetchHeavenHistory: boolean = false;
+
   constructor(private service: SmartTableData,
               private shareDataService: ShareDataService,
               private themeService: NbThemeService,
@@ -81,12 +85,9 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.breakpoint = newValue;
       });
 
-    this.httpService.get('heaven-drop/').subscribe(res => {
-      this.heavenDrop = res;
-    });
-
     this.getWallets();
     this.getTotalHeaven();
+    this.getHeavenDrop();
     this.getHeavenGraph();
     this.getANXHistory();
     this.getHeavenReleaseSettings();
@@ -132,6 +133,14 @@ export class HeavenComponent implements OnInit, OnDestroy {
       },
       heaven_amount: {
         title: this.translate.instant('common.amount'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      currency_type: {
+        title: 'Asset',
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -251,6 +260,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.getWallets();
         this.heaven_amount = null;
         this.setAmount(this.wallet.wallet_type);
+        this.getHeavenHistory();
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'Heaven');
@@ -261,9 +271,24 @@ export class HeavenComponent implements OnInit, OnDestroy {
     });
   }
 
+  getHeavenDrop() {
+    this.fetchingHeavenDrop = true;
+    this.httpService.get('heaven-drop/').subscribe(res => {
+      this.heavenDrop = res;
+      this.fetchingHeavenDrop = false;
+    }, (err) => {
+      this.fetchingHeavenDrop = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+    });
+  }
   getTotalHeaven() {
+    this.fetchingTotalHeaven = true;
     this.httpService.get('total-heaven/').subscribe((res?: any) => {
       this.totalHeaven = res;
+      this.fetchingTotalHeaven = false;
+    }, (err) => {
+      this.fetchingTotalHeaven = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
@@ -300,15 +325,21 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   getHeavenHistory() {
+    this.fetchHeavenHistory = true;
     this.httpService.get('heaven-history/').subscribe((res?: any) => {
       const data = res.results;
       const heaven_history_data = _.map(data, function(obj) {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.total_received = obj.total_received + ' ANX';
+        obj.total_received = (obj.total_received.toFixed(2)) + ' ANX';
+        obj.heaven_amount = obj.heaven_amount.toFixed(6);
         return obj;
       });
       this.source.load(heaven_history_data);
+      this.fetchHeavenHistory = false;
+    }, (err) => {
+      this.fetchHeavenHistory = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 

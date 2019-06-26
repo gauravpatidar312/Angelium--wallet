@@ -69,6 +69,18 @@
     height: calc(100% - 1.5rem);
   }
 
+  .fetchingCryptos {
+    height: 216px;
+    background: #3d3780;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .fetchingCryptos-margin {
+    margin-top: 86px;
+  }
+
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
