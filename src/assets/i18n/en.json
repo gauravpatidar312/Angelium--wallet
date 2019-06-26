@@ -12,6 +12,7 @@
     "heaven": "Heaven",
     "login": "Log In",
     "last": "Last",
+    "level": "Level",
     "month": "Month",
     "password": "Password",
     "phone": "Phone",
@@ -75,8 +76,6 @@
     "reward":{
       "downlineAngel": "Downline Angel",
       "downlineTree": {
-        "heaven": "Heaven", 
-        "level": "Level", 
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank", 
         "reward": "Reward", 
@@ -98,7 +97,7 @@
       "lastName": "Last Name",
       "number": "number",
       "repeatPassword": "Repeat password",
-      "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
+      "RealNameIsRequiredForKYC": "Must be real name for KYC process. it cannot be changed",
       "terms&Conditions" : "Terms & Conditions"
     },
     "setting": {

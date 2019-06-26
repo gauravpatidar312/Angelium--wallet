@@ -12,6 +12,7 @@
     "heaven": "헤븐",
     "login": "로그인",
     "last": "지난",
+    "level": "레벨",
     "month": "월",
     "password": "비밀번호",
     "phone": "휴대전화",
@@ -75,8 +76,6 @@
     "reward":{
       "downlineAngel": "소개한 엔젤",
       "downlineTree": {
-        "heaven": "헤븐",
-        "level": "레벨",
         "noUserDownlineTree": "다운라인 트리에 사용자가 없습니다",
         "rank": "랭킹",
         "reward": "리워드",

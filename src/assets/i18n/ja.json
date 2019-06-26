@@ -12,6 +12,7 @@
     "heaven": "ヘブン",
     "login": "ログイン",
     "last": "Last",
+    "level": "レベル",
     "month": "月",
     "password": "パスワード",
     "phone": "電話番号",
@@ -75,8 +76,6 @@
     "reward":{
       "downlineAngel": "紹介したエンジェル",
       "downlineTree": {
-        "heaven": "ヘブン",
-        "level": "レベル",
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "ランク",
         "reward": "リワード",

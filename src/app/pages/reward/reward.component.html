@@ -127,7 +127,7 @@
         <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
         <ng-container nbTreeGridColumnDef="level">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"pages.reward.downlineTree.level" | translate}}
+            {{"common.level" | translate}}
           </th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
             <nb-tree-grid-row-toggle style="float: right;" [expanded]="row.expanded" *ngIf="row.data.arrow === true">
@@ -155,7 +155,7 @@
 
         <ng-container nbTreeGridColumnDef="heaven">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"pages.reward.downlineTree.heaven" | translate}}
+            {{"common.heaven" | translate}}
           </th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
             <span class="text-success">$</span>{{row.data.heaven.toFixed(2)}}

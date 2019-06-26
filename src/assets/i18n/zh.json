@@ -12,6 +12,7 @@
     "heaven": "天堂",
     "login": "登录",
     "last": "Last",
+    "level": "等级",
     "month": "月",
     "password": "密码",
     "phone": "手机号吗",
@@ -75,8 +76,6 @@
     "reward":{
       "downlineAngel": "经我邀请的天使",
       "downlineTree": {
-        "heaven": "天堂",
-        "level": "等级",
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "排行",
         "reward": "奖励",
