@@ -121,7 +121,7 @@
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">R-18 Mode</td>
+                <td class="title-col">R-18 {{"pages.setting.r18mode" | translate}}</td>
                 <td class="value-col iconpaddfix" colspan="2">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
@@ -137,7 +137,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="title-col">Merge</td>
+                <td class="title-col">{{"pages.setting.merge" | translate}}</td>
                 <td>{{isProduction ? 'Coming soon' : 'Merge your old data'}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="!isProduction"></i></td>
               </tr>
