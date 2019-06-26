@@ -94,13 +94,13 @@ export class RewardComponent implements OnInit, AfterViewInit {
     },
     columns: {
       level: {
-        title: 'Level',
+        title: this.translate.instant('common.level'),
         type: 'number',
         filter: false
       },
       yourreward: {
         type: 'html',
-        title: 'Your Reward',
+        title: this.translate.instant('pages.reward.downlineTree.your_reward'),
         class: 'table-col',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -108,7 +108,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       rewardrate: {
-        title: 'Reward Rate',
+        title: this.translate.instant('pages.reward.downlineTree.reward')+" "+ this.translate.instant('pages.reward.downlineTree.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -116,7 +116,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downlinereward: {
-        title: 'Downline Rate',
+        title: this.translate.instant('common.downline')+" "+ this.translate.instant('pages.reward.downlineTree.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -124,7 +124,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       heaven: {
-        title: 'Heaven',
+        title: this.translate.instant('common.heaven'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -132,7 +132,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downline: {
-        title: 'Downline',
+        title: this.translate.instant('common.downline'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
