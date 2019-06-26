@@ -256,11 +256,25 @@
   <div class="row">
     <div class="col-md-12">
       <nb-card>
-        <nb-card-header class="heavenhistory">
-          Heaven History
+        <nb-card-header class="row heavenhistory">
+          <div class="col-md-6">
+            <div class="navbar-header heavenHistory-tree">
+              Heaven History
+            </div>
+          </div>
+          <div class="col-md-6 heavenHistoryColumn">
+            <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
+              <li class="pointer li-margin">
+                <a data-toggle="pill" (click)="getHeavenHistory('today')">Today</a>
+              </li>
+              <li class="active pointer li-margin">
+                <a data-toggle="pill" (click)="getHeavenHistory('total')">Total</a>
+              </li>
+            </ul>
+          </div>
         </nb-card-header>
-        <nb-card-body>
-         <div *ngIf="fetchHeavenHistory"><span class="heaven-history-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+        <nb-card-body id="heaven-history">
+          <div [hidden]="!fetchHeavenHistory"><span class="heaven-history-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
           <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
           </ng2-smart-table>
         </nb-card-body>

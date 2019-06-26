@@ -73,6 +73,8 @@ export class RewardComponent implements OnInit, AfterViewInit {
   currentTheme: string;
   fetchingRewardValue: boolean = false;
   fetchingDownlineTree: boolean = false;
+  fetchingDownlineHeaven: boolean = false;
+  fetchingDownlineAngel: boolean = false;
   source: LocalDataSource = new LocalDataSource();
 
   rewardData: yourrewardElement[] = [
@@ -291,18 +293,24 @@ export class RewardComponent implements OnInit, AfterViewInit {
   }
 
   getDownlineAngel() {
+    this.fetchingDownlineAngel = true;
     this.httpService.get(`downline-angel/`).subscribe((res?: any) => {
         this.angel_count = res.angel_count;
+      this.fetchingDownlineAngel = false;
     }, (err) => {
+      this.fetchingDownlineAngel = false;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
     });
   }
 
   getDownlineHeaven() {
+    this.fetchingDownlineHeaven = true;
     this.httpService.get(`downline-heaven/`).subscribe((res?: any) => {
       this.downline_heaven = res.downline_heaven.toFixed(2);
       this.total_users = res.total_users;
+      this.fetchingDownlineHeaven = false;
     }, (err) => {
+      this.fetchingDownlineHeaven = false;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
     });
   }
@@ -315,6 +323,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
   }
 
   getDownlineTree(val) {
+    $('.downline-tree-spinner').height($('#downline-tree').height());
     this.fetchingDownlineTree = true;
     const value = val;
     const url = `downline_tree/?filter_type=${value}`;
