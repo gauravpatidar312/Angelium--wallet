@@ -1,19 +1,86 @@
-@import '/../../@theme/styles/themes';
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/typography/typography';
+@import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
+
+  .card-info,
+  .card-upload {
+    height: calc(100% - 1.5rem);
+    box-shadow: none;
+  }
+  .kycstepcard {
+    box-shadow: none;
+  }
+  .navigationKYC .linkKYC {
+    margin: 25px;
+    text-align: center;
+    text-decoration: none;
+    // margin: 1.6em 1.6em 0 1.6em;
+    font-weight: nb-theme(font-weight-bold) !important;
+    font-family: nb-theme(font-bebas);
+    font-size: 3.4rem;
+    .icon {
+      font-size: 2rem;
+    }
+  }
+  .cardHeadercss {
+    padding: 0px;
+  }
+  
   /deep/ nb-stepper .step-content {
     text-align: center;
+    padding: 0px;
 
     button {
       cursor: pointer;
       margin: 0.5rem;
     }
   }
-}
  nb-card-body {
    overflow: unset !important;
 }
+
+/deep/ .borderless td, .borderless th {
+  border: none;
+}
+
+.uploadcss {
+  font-size: 15px;
+}
+
+.btn-kyc {
+  letter-spacing: 2px;
+  padding: 0.5rem;
+  font-size: 20px;
+}
+
+.uploadinfomargin {
+  margin:5px;
+}
+.card-header {
+  font-family: nb-theme(font-bebas);
+  font-weight: 500;
+  font-size: 22px;
+}
+
+/deep/ nb-stepper .header .label {
+  font-family: nb-theme(font-nunito);
+ }
+
+ .font-nunitoSans {
+  font-family: nb-theme(font-nunito);
+}
+
+.font-bebasNeue {
+  font-family: nb-theme(font-bebas);
+}
+
+.font-bebasNeueBold {
+  font-family: nb-theme(font-bebas-bold);
+}
+
  .dropdown-menu {
    background-color: #3d3780 !important;
    border: 2px solid #7659ff !important;
@@ -34,6 +101,47 @@
 .navigation a i{
   font-size: 25px;
 }
+
+.kyc-margin .input-rectangle  {
+  max-width: 100%;
+}
+
+.table {
+  margin: 0 1rem;
+  font-family: nb-theme(font-nunito);
+
+  tbody tr:nth-child(2n) {
+    background-color: #3a347a;
+  }
+  tr td, .table tr th {
+    border: 1px solid #342e73;
+    vertical-align: middle;
+  }
+  .title-col {
+    width: 30%;
+    font-size: 15px;
+    color: text-success();
+  }
+  .value-col {
+    width: 60%;
+  }
+  .action-col {
+    width: 10%;
+    text-align: center;
+    i:hover {
+      color: nb-theme(color-success);
+      cursor: pointer;
+    }
+  }
+}
+
+nb-card-header {
+  font-family: nb-theme(font-bebas);
+  font-size: 1.75rem;
+}
+nb-card-body {
+  overflow: visible;
+}
 .nb-theme-cosmic [nbButton]{    padding: 1.0rem 1.5rem;}
 
 @include media-breakpoint-down(sm) {
@@ -41,4 +149,67 @@
     margin-top: 10px;
   }
 }
+}
+
+
+@include media-breakpoint-down(sm) {
+  .table .title-col {
+    font-size: 12.5px;
+    padding: 15px 6px 15px 6px !important;
+  }
+  .down-qrCode-icon {
+    margin-left: 0;
+  }
+  .table {
+    .title-col {
+      width: 47%;
+    }
+    .value-col {
+      width: 52%;
+    }
+    .action-col {
+      width: 1%;
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  button:not(.btn-icon) {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+
+@media (max-width: 375px) {
+  .table td {
+    padding: 0px;
+  }
+  .table {
+    .title-col {
+      width: 49%;
+    }
+    .value-col {
+      width: 50%;
+    }
+    .action-col {
+      width: 1%;
+    }
+
+  }
+}
+
+@media (width: 320px) {
+  .table td {
+    padding: 0px;
+  }
+  .table .title-col {
+    font-size: 11.2px !important;
+  }
+
+  nb-card {
+    font-size: 12px !important;
+  }
+}
+
 
