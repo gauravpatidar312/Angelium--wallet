@@ -27,8 +27,7 @@ export class AppComponent implements OnInit {
 
   setLanguage() {
     const userInfo = this.sessionStorageService.getFromSession("userInfo");
-    let selectedLanguage =
-      userInfo == false ? userInfo.language : 'en';
+    let selectedLanguage = userInfo == false ? userInfo.language : 'en';
     this.translate.use(selectedLanguage);
   }
 }

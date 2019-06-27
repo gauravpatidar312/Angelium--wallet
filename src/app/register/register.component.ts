@@ -80,6 +80,7 @@ export class RegisterComponent implements OnInit {
       $( document ).on("veryfiedCaptcha", (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
+          this.getCapchaTranslation();
         }
     });
    });
@@ -229,5 +230,20 @@ export class RegisterComponent implements OnInit {
     this.translate.use(lan.code);
     this.registerForm.controls.language.setValue(lan.language);
     this.registerForm.controls.language_code.setValue(lan.code);
+    this.getCapchaTranslation();
+  }
+
+  getCapchaTranslation(){
+    this.translate.get('common').subscribe((res)=>{
+      if (this.isVerifiedCaptcha) {
+        setTimeout(function(){
+          $("#registerSlider").children(".text").text(res.verified);
+        },0);
+      }else{
+        setTimeout(function(){
+          $("#registerSlider").children(".text").text(res.slideRightToVerify);
+        },0);
+      }
+    });
   }
 }
