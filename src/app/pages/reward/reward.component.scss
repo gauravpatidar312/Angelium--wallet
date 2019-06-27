@@ -55,8 +55,28 @@
   .all-columns {
     background: #494299 !important;
   }
-  
-  
+
+  .downline-tree-spinner {
+    display: block;
+    font-size: 25px;
+    height: 100px;
+    color: #a1a1e5;
+    text-align: center;
+  }
+
+  .fetchingDownLine {
+    height: 216px;
+    background: #3d3780;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 0.5rem;
+  }
+
+  .fetchingDownline-margin {
+    margin-top: 86px;
+  }
+
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -238,9 +258,6 @@ table.table-bordered > tbody > tr > td {
 }
 
 @media (min-width: 300px) and (max-width: 480px) {
-  /deep/ .icon-container {
-    display: none;
-  }
   .rewardColumn,
   .downlineColumn {
     margin-top: 10px;
@@ -259,6 +276,10 @@ table.table-bordered > tbody > tr > td {
   #main-navigation li > a,
   #downline-navigation li > a {
     padding: 5px;
+  }
+
+  .fetchingDownLine {
+    margin-bottom: 21px;
   }
 
   /deep/ ng2-smart-table table tr td {
@@ -297,7 +318,7 @@ table.table-bordered > tbody > tr > td {
   }
 }
 
-/deep/ .nb-tree-grid-cell{ padding-left: 10px!important; }
+/deep/ .nb-tree-grid-cell{ padding-left: 10px!important; white-space: pre; }
 
 /deep/ .nb-arrow-right::before{
   color: #ffffff;
@@ -316,12 +337,18 @@ table.table-bordered > tbody > tr > td {
   font-size: 22px;
   margin-top: 8px;
 }
+.downline-heavenDrop-cell {
+  width: 100px !important;
+}
 .downline-cell{
   color: #ffffff;
   font-size: 1.2rem;
   font-family: nb-theme(font-bebas);
 }
-
+.li-margin {
+  margin-right: 15px;
+}
 /deep/.all-columns{ background: #494299!important; }
 /deep/ .nb-tree-grid-header-cell{ font-weight: 400!important; }
 /deep/ table.table-bordered{ table-layout: auto;}
+/deep/ .cdk-column-your_reward{ white-space: pre; }

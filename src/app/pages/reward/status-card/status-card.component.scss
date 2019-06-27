@@ -63,6 +63,11 @@ $shadow-green: #00977e;
       }
     }
 
+    .spinner-color{
+      color: #a1a1e5;
+      font-size: 25px;
+    }
+
     .delta {
       position: absolute;
       display: inline-block;
@@ -214,8 +219,7 @@ $shadow-green: #00977e;
 
     .status {
       font-size: 30px;
-      font-family: nb-theme(font-bebas);
-      font-weight: nb-theme(font-weight-light);
+      font-family: nb-theme(font-bebas-bold);
       text-transform: uppercase;
       color: nb-theme(card-fg);
       text-align: right;
@@ -278,10 +282,10 @@ $shadow-green: #00977e;
         padding-left: 0.25rem !important;
       }
       .title {
-        font-size: 1rem !important;
+        font-size: 1.7rem;
       }
       .status {
-        font-size: 1.7rem !important;
+        font-size: 2.1rem !important;
       }
       .status-dd-week {
         width: 67% !important;
@@ -297,6 +301,22 @@ $shadow-green: #00977e;
       }
     }
   }
+
+  @media only screen and (width: 1024px) {
+    .title {
+      font-size: 1.7rem !important;
+    }
+  }
+  @media only screen and (width: 320px) {
+    .title {
+      font-size: 1.3rem !important;
+    }
+
+    .status {
+      font-size: 1.9rem !important;
+    }
+  }
+
 
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
     .status-dd-week {

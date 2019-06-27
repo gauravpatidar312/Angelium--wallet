@@ -6,10 +6,13 @@
   </div>
   <div class="details full-width">
     <div class="row">
-      <div class="col-5 mt-2">
+      <div class="col-6 mt-2">
         <div class="title">{{ title }}</div>
       </div>
-      <div class="col-7">
+      <div class="col-6" *ngIf="fetchingAssetValue">
+        <div class="status text-white mt-0"><span><i class="fa fa-spinner spinner-color fa-spin"></i></span></div>
+      </div>
+      <div class="col-6" *ngIf="!fetchingAssetValue">
         <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -24,7 +27,7 @@
           </ul>
         </div>
         <div class="clearfix"></div>-->
-        <div class="status text-white"><span class="text-success">$</span>{{ value }}</div>
+        <div class="status text-white" *ngIf="!fetchingAssetValue"><span class="text-success">$</span>{{ value |  number : '1.0-2' }}</div>
         <div class="delta up">0%</div>
         <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
       </div>

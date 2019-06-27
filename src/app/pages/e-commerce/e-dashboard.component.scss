@@ -34,6 +34,11 @@
 
     .event-title {
       font-family: nb-theme(font-mont);
+      text-overflow: ellipsis;
+      width: 81%;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .event-date {
@@ -64,6 +69,18 @@
     height: calc(100% - 1.5rem);
   }
 
+  .fetchingCryptos {
+    height: 216px;
+    background: #3d3780;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .fetchingCryptos-margin {
+    margin-top: 86px;
+  }
+
   @include media-breakpoint-down(sm) {
     ngx-traffic {
       display: none;
@@ -71,26 +88,23 @@
     .article-title {
       font-size: 22px;
     }
+    .event-title {
+      width: 78% !important;
+    }
   }
 
   @include media-breakpoint-down(md) {
     .nebular-calendar {
       margin-bottom: 1.5rem;
     }
-
   }
 
   @include media-breakpoint-down(is) {
     /deep/ nb-card.large-card {
       height: nb-theme(card-height-medium);
     }
-
-  }
-
-  @media (min-width: 300px) and (max-width: 480px) {
-    /deep/ .icon-container {
-      display: none;
+    .event-title {
+      width: 70% !important;
     }
   }
-
 }

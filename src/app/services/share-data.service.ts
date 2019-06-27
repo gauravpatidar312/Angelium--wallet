@@ -23,6 +23,7 @@ export class ShareDataService {
       return msg;
 
     if (err.error) {
+      delete err.error.status;
       if (err.error.message)
         msg = err.error.message;
       else if (_.isArray(err.error[Object.keys(err.error)[0]]))
@@ -33,6 +34,10 @@ export class ShareDataService {
       msg = err[Object.keys(err)[0]][0];
     else if (err[Object.keys(err)[0]])
       msg = err[Object.keys(err)[0]];
+
+    if (msg === 'true' || typeof msg !== 'string')
+      msg = 'Something went wrong. We request you to try after sometime.';
+
     return msg;
   }
 }

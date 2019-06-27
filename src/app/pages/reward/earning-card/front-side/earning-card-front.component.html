@@ -20,12 +20,12 @@
         <div class="text-daily text-default">{{ quantity }}</div>
       </div>
       <div class="col-6" style="align-self: flex-end;">
-        <div class="title text-right"><span class="text-success">{{ cardName === 'Downline Heaven'? '$': '' }}</span>{{ cardName === 'Your Rank' ? '': amount}}
+        <div class="title text-right"><span class="text-success">{{ labelText }}</span>{{ cardName === 'Downline Angel' ? '' : amount}}
       </div>
       </div>
     </div>
     <!-- <div class="value">{{tokenName}} = $ {{livePrice | number : '1.2-2' }}</div> -->
-    <div class="delta" *ngIf="cardName != 'Your Rank'"
+    <div class="delta" *ngIf="false"
          [class.up]="percentage >= 0"
          [class.down]="percentage < 0">
       {{ percentage > 0 ? percentage : (-1 * percentage) }}%

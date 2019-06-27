@@ -43,6 +43,11 @@
   src : url('/assets/fonts/NunitoSans/NunitoSans-Light.ttf');
 }
 
+@font-face {
+  font-family: 'NunitoSansRegular';
+  src : url('/assets/fonts/NunitoSans/NunitoSans-Regular.ttf');
+}
+
 // which themes you what to enable (empty to enable all)
 $nb-enabled-themes: (default, cosmic, corporate);
 
@@ -53,13 +58,16 @@ $nb-themes: nb-register-theme((
   layout-content-width: 1400px,
 
   font-main: Roboto,
-  font-secondary: Exo,
+  font-secondary: Avenir,
 
   font-bebas: BebasNeue,
   font-bebas-light: BebasNeueLight,
+  font-bebas-book: BebasNeueBook,
+  font-bebas-bold: BebasNeueBold,
   font-avenir: Avenir,
   font-mont: Montserrat,
   font-nunito: NunitoSans,
+  font-nunito-regular: NunitoSansRegular,
 
   switcher-background: #ebeff5,
   switcher-background-percentage: 50%,
@@ -89,13 +97,16 @@ $nb-themes: nb-register-theme((
   layout-content-width: 1400px,
 
   font-main: Roboto,
-  font-secondary: Exo,
+  font-secondary: Avenir,
 
   font-bebas: BebasNeue,
   font-bebas-light: BebasNeueLight,
+  font-bebas-book: BebasNeueBook,
+  font-bebas-bold: BebasNeueBold,
   font-avenir: Avenir,
   font-mont: Montserrat,
   font-nunito: NunitoSans,
+  font-nunito-regular: NunitoSansRegular,
 
   switcher-background: #4e41a5,
   switcher-background-percentage: 14%,
@@ -125,13 +136,16 @@ $nb-themes: nb-register-theme((
   layout-content-width: 1400px,
 
   font-main: Roboto,
-  font-secondary: Exo,
+  font-secondary: Avenir,
 
   font-bebas: BebasNeue,
   font-bebas-light: BebasNeueLight,
+  font-bebas-book: BebasNeueBook,
+  font-bebas-bold: BebasNeueBold,
   font-avenir: Avenir,
   font-mont: Montserrat,
   font-nunito: NunitoSans,
+  font-nunito-regular: NunitoSansRegular,
 
   switcher-background: #2b2d34,
   switcher-background-percentage: 14%,

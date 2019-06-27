@@ -1,20 +1,22 @@
-import {Component, EventEmitter, OnInit, OnDestroy, Output} from '@angular/core';
-import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
-import {takeWhile} from 'rxjs/operators';
-import {LocalDataSource} from 'ng2-smart-table';
-import {SmartTableData} from '../../@core/data/smart-table';
-import {HttpService} from '../../services/http.service';
+import { Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output } from '@angular/core';
+import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
+import { takeWhile } from 'rxjs/operators';
+import { LocalDataSource } from 'ng2-smart-table';
+import { SmartTableData } from '../../@core/data/smart-table';
+import { HttpService } from '../../services/http.service';
 import * as _ from 'lodash';
-import {ToastrService} from '../../services/toastr.service';
-import {ShareDataService} from '../../services/share-data.service';
-import {environment} from 'environments/environment';
-
+import { ToastrService } from '../../services/toastr.service';
+import { ShareDataService } from '../../services/share-data.service';
+import { environment } from 'environments/environment';
+import { CustomRendererComponent } from './custom.component';
+import * as moment from 'moment';
+declare let $: any;
 @Component({
   selector: 'ngx-heaven',
   templateUrl: './heaven.component.html',
   styleUrls: ['./heaven.component.scss'],
 })
-export class HeavenComponent implements OnInit, OnDestroy {
+export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
   isProduction: any = environment.production;
@@ -27,15 +29,19 @@ export class HeavenComponent implements OnInit, OnDestroy {
   heavenDropTypes: string[] = ['week', 'month', 'year'];
   myWallets: string[];
   chartLegend: { iconColor: string; title: string }[];
-  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
+  breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
   currentTheme: string;
   heaven_amount: any;
   wallet: any;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
+  fetchingTotalHeaven: boolean = false;
+  fetchingHeavenDrop: boolean = false;
+  fetchHeavenHistory: boolean = false;
 
   constructor(private service: SmartTableData,
+              private shareDataService: ShareDataService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
               private httpService: HttpService,
@@ -56,79 +62,6 @@ export class HeavenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const data = [{
-      hid: 12842,
-      heavenAmount: '$193,393',
-      plan: 'Heaven 30',
-      totalReceive: '122,31ANX',
-      entryDate: '2019.02.19',
-      releaseDate: '2019.04.19',
-      releaseSetting: '<i class="fas fa-arrow-left text-warning"></i> Another Heaven',
-    },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '<i class="fas fa-arrow-right text-muted"></i> Release',
-      },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '<i class="fas fa-arrow-right text-muted"></i> Release',
-      },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '<i class="fas fa-arrow-right text-muted"></i> Release',
-      },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '<i class="fas fa-arrow-right text-success"></i> Release',
-      },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '<i class="fas fa-arrow-right text-muted"></i> Release',
-      },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '<i class="fas fa-arrow-right text-muted"></i> Release',
-      },
-      {
-        hid: 12842,
-        heavenAmount: '$193,393',
-        plan: 'Heaven 30',
-        totalReceive: '122,31ANX',
-        entryDate: '2019.02.19',
-        releaseDate: '2019.04.19',
-        releaseSetting: '2019.0419',
-      }];
-    this.source.load(data);
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -142,66 +75,106 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.breakpoint = newValue;
       });
 
-    this.httpService.get('heaven-drop/').subscribe(res => {
-      this.heavenDrop = res;
-    });
-
     this.getWallets();
     this.getTotalHeaven();
+    this.getHeavenDrop();
     this.getHeavenGraph();
     this.getANXHistory();
     this.getHeavenReleaseSettings();
-    this.getHeavenHistory();
+    this.getHeavenHistory('total');
   }
   selectedHeavenPlan = '';
 
+
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
+    // add: {
+    //   addButtonContent: '<i class="nb-plus"></i>',
+    //   createButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    // },
+    // edit: {
+    //   editButtonContent: '<i class="nb-edit"></i>',
+    //   saveButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    // },
+    // delete: {
+    //   deleteButtonContent: '<i class="nb-trash"></i>',
+    //   confirmDelete: true,
+    // },
     // add: '',
     // edit: '',
     // delete: '',
+
+    hideSubHeader: true,
     actions: false,
+    pager: {
+      display: false,
+    },
+    editable: true,
+    mode: 'inline',
     columns: {
       hid: {
-        title: 'HID',
-        type: 'number',
+        title: 'Heaven ID',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
       },
-      heavenAmount: {
-        title: 'Heaven Amount',
-        type: 'string',
+      heaven_amount: {
+        title: 'Amount',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      currency_type: {
+        title: 'Asset',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
       },
       plan: {
         title: 'Plan',
-        type: 'string',
-      },
-      totalReceive: {
-        title: 'Total Receive',
-        type: 'string',
-      },
-      entryDate: {
-        title: 'Entry date',
-        type: 'string',
-      },
-      releaseDate: {
-        title: 'Release date',
-        type: 'string',
-      },
-      releaseSetting: {
-        title: 'Release Setting',
         type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      total_received: {
+        title: 'Received',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      entry_date: {
+        title: 'Entry date',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      release_date: {
+        title: 'Release date',
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      release_settings: {
+        title: 'Release Setting',
+        type: 'custom',
+        renderComponent: CustomRendererComponent,
+        filter: false,
+        class: 'heavenhistory-cell text-center',
       },
     },
   };
@@ -216,14 +189,14 @@ export class HeavenComponent implements OnInit, OnDestroy {
     else if (typeValue === 'createHeaven') {
       this.walletType = period;
       this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-      this.heaven_amount = Number(this.wallet.wallet_amount);
+      this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
       this.setAmount(this.walletType);
     }
     this.periodChange.emit(period);
   }
 
   setAmount(walletType) {
-    if (!this.heaven_amount) {
+    if (!this.heaven_amount || !this.wallet || !this.wallet.wallet_type) {
       this.wallet.walletDollar = 0;
       return;
     }
@@ -239,12 +212,16 @@ export class HeavenComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCreateHeaven() {
-    if (this.isProduction) {
-      this.toastrService.info('Feature coming soon! Stay tuned.', 'Heaven');
+  setMaxValue() {
+    if (!this.wallet || !this.wallet.wallet_amount) {
       return;
     }
 
+    this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+    this.setAmount(this.wallet.wallet_type);
+  }
+
+  onCreateHeaven() {
     if (!this.heaven_amount) {
       this.toastrService.danger('Please enter amount.', 'Heaven');
       return;
@@ -270,6 +247,10 @@ export class HeavenComponent implements OnInit, OnDestroy {
       if (res.status) {
         this.formSubmitting = false;
         this.toastrService.success('Transaction successfully completed!', 'Heaven');
+        this.getWallets();
+        this.heaven_amount = null;
+        this.setAmount(this.wallet.wallet_type);
+        this.getHeavenHistory('total');
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'Heaven');
@@ -280,22 +261,39 @@ export class HeavenComponent implements OnInit, OnDestroy {
     });
   }
 
+  getHeavenDrop() {
+    this.fetchingHeavenDrop = true;
+    this.httpService.get('heaven-drop/').subscribe(res => {
+      this.heavenDrop = res;
+      this.fetchingHeavenDrop = false;
+    }, (err) => {
+      this.fetchingHeavenDrop = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+    });
+  }
   getTotalHeaven() {
+    this.fetchingTotalHeaven = true;
     this.httpService.get('total-heaven/').subscribe((res?: any) => {
       this.totalHeaven = res;
+      this.fetchingTotalHeaven = false;
+    }, (err) => {
+      this.fetchingTotalHeaven = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
-      if (this.myWallets && Object.keys(this.myWallets).length){
-        this.walletType = 'BTC';
-        this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = Number(this.wallet.wallet_amount);
-        this.setAmount(this.walletType);
-      } else
+      if (!this.myWallets) {
         this.walletType = 'SELECT';
+      } else if (this.shareDataService.transferTitle) {
+        this.walletType = this.shareDataService.transferTitle;
+        this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
+        this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+        this.setAmount(this.walletType);
+        this.shareDataService.transferTitle = null;
+      }
     });
   }
   getHeavenGraph() {
@@ -316,13 +314,34 @@ export class HeavenComponent implements OnInit, OnDestroy {
     // });
   }
 
-  getHeavenHistory() {
-    this.httpService.get('heaven-history/').subscribe((res) => {
-      console.log('heaven-history', res);
+  getHeavenHistory(value) {
+    $('.heaven-history-spinner').height($('#heaven-history').height());
+    this.fetchHeavenHistory = true;
+    this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
+      const data = res.results;
+      const heaven_history_data = _.map(data, function(obj) {
+        obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.total_received = (obj.total_received.toFixed(2)) + ' ANX';
+        obj.heaven_amount = obj.heaven_amount.toFixed(6);
+        return obj;
+      });
+      this.source.load(heaven_history_data);
+      this.fetchHeavenHistory = false;
+    }, (err) => {
+      this.fetchHeavenHistory = false;
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+    });
+  }
+
+  ngAfterViewInit() {
+    $('ul.downLine li a').click(function (e) {
+      $('ul.downLine li.active').removeClass('active');
+      $(this).parent('li').addClass('active');
     });
   }
 
   ngOnDestroy() {
     this.alive = false;
-  }
+}
 }

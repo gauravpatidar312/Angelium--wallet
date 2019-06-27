@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value"
+    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value" [fetchingRewardValue]="fetchingRewardValue"
       [percentage]="statusCard.percentage">
       <i [ngClass]="statusCard.iconClass"></i>
     </ngx-status-card>
@@ -10,17 +10,19 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr1">
-        <ngx-earning-card cardName='Your Rank' [selectedCurrency]="'ANX'" [amount]="100" [quantity]="userData?.level"
-          [percentage]="4"></ngx-earning-card>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr1">
+        <ngx-earning-card cardName='Your Rank' [selectedCurrency]="'ANX'" [amount]="userData?.level" [quantity]="userData?.rank"
+          [percentage]="0"></ngx-earning-card>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr2">
-        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="100" [quantity]="10"
-          [percentage]="4 || 0"></ngx-earning-card>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr2">
+        <div *ngIf="fetchingDownlineHeaven"><span class="fetchingDownLine"><i class="fa fa-spinner fetchingDownline-margin spinner-color fa-spin"></i></span></div>
+        <ngx-earning-card cardName='Downline Heaven' [selectedCurrency]="'HEAVEN'" [amount]="downline_heaven" [quantity]="total_users"
+          [percentage]="0" *ngIf="!fetchingDownlineHeaven"></ngx-earning-card>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="curr3">
-        <ngx-earning-card cardName='Downline Angel' [selectedCurrency]="'Bitcoin'" [amount]="100" [quantity]="10"
-          [percentage]="4 || 0"></ngx-earning-card>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr3">
+        <div *ngIf="fetchingDownlineAngel"><span class="fetchingDownLine"><i class="fa fa-spinner fetchingDownline-margin spinner-color fa-spin"></i></span></div>
+        <ngx-earning-card cardName='Downline Angel' [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="angel_count"
+          [percentage]="0" *ngIf="!fetchingDownlineAngel"></ngx-earning-card>
       </div>
       <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
         <ngx-earning-card></ngx-earning-card>
@@ -96,31 +98,26 @@
           DownLine Tree
         </div>
       </div>
-      <!-- <div class="col-md-6 downlineColumn" *ngIf="noDataSource">
+       <div class="col-md-6 downlineColumn">
         <ul id="downline-navigation" class="nav navbar-pill downLine">
-          <li class="active" style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlinetoday" (click)="getDownlineTree('today')">Today</a>
+          <li class="pointer li-margin">
+            <a data-toggle="pill" (click)="getDownlineTree('today')">Today</a>
           </li>
-          <li style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlineweek" (click)="getDownlineTree('weekly')">Week</a>
-          </li>
-          <li style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlinemonth" (click)="getDownlineTree('monthly')">Month</a>
-          </li>
-          <li style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlinetotal" (click)="getDownlineTree('yearly')">Year</a>
+          <li class="active pointer li-margin">
+            <a data-toggle="pill" (click)="getDownlineTree('total')">Total</a>
           </li>
         </ul>
-      </div> -->
+      </div>
     </div>
   </nb-card-header>
-  
+
   <ng-template #noData>
-    <nb-card-body>No Data Found</nb-card-body>  
+    <nb-card-body>There is no user in your down-line tree.</nb-card-body>
   </ng-template>
 
-  <nb-card-body class="tab-content" *ngIf="noDataSource; else noData">
-    <div id="downlinetoday" class="tab-pane active">
+  <nb-card-body id="downline-tree" class="tab-content" *ngIf="noDataSource; else noData">
+    <div [hidden]="!fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+    <div class="tab-pane active" *ngIf="!fetchingDownlineTree">
       <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
         <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
         <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
@@ -145,18 +142,18 @@
             {{row.data.rank}}
           </td>
         </ng-container>
-        
+
         <ng-container nbTreeGridColumnDef="heaven">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.heaven}}
+            <span class="text-success">$</span>{{row.data.heaven.toFixed(2)}}
           </td>
         </ng-container>
 
         <ng-container nbTreeGridColumnDef="reward">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Reward</th>
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven Drop</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.reward}}
+          <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(2)}} <span class="text-success">ANX</span></div>
           </td>
         </ng-container>
 
@@ -170,7 +167,7 @@
         <ng-container nbTreeGridColumnDef="your_reward">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Your Reward</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.your_reward}}
+            {{row.data.your_reward.toFixed(2)}} <span class="text-success">ANX</span>
           </td>
         </ng-container>
       </table>

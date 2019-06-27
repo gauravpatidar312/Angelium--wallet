@@ -39,6 +39,11 @@ $shadow-green: #00977e;
       border: 2px solid #7659ff;
     }
 
+    .spinner-color{
+      color: #a1a1e5;
+      font-size: 25px;
+    }
+
     /deep/ nb-progress-bar {
       height: 0.6rem;
       margin-top: 1rem;
@@ -207,15 +212,15 @@ $shadow-green: #00977e;
 
     .title {
       font-family: nb-theme(font-bebas);
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
 
     .status {
       font-size: 30px;
-      font-family: nb-theme(font-bebas);
-      font-weight: nb-theme(font-weight-light);
+      font-family: nb-theme(font-bebas-bold);
+      font-weight: nb-theme(font-weight-bold) !important;
       text-transform: uppercase;
       color: nb-theme(card-fg);
       text-align: right;
@@ -278,10 +283,10 @@ $shadow-green: #00977e;
         padding-left: 0.25rem !important;
       }
       .title {
-        font-size: 1rem !important;
+        font-size: 1.7rem;
       }
       .status {
-        font-size: 1.7rem !important;
+        font-size: 2.1rem !important;
       }
       .status-dd-week {
         width: 67% !important;
@@ -295,6 +300,16 @@ $shadow-green: #00977e;
       &::after {
         top: 45% !important;
       }
+    }
+  }
+
+  @media only screen and (width: 320px) {
+    .title {
+      font-size: 1.5rem !important;
+    }
+
+    .status {
+      font-size: 1.9rem !important;
     }
   }
 

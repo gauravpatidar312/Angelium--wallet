@@ -18,6 +18,8 @@
 @include nb-install-component() {
   .header-logo {
     width: 118px;
+    /*float: left;
+    margin-top: 7px;*/
   }
 
   .deltacss {
@@ -102,7 +104,7 @@
       }
 
       .user-name {
-        font-family: nb-theme(font-bebas);
+        font-family: nb-theme(font-bebas-bold);
         margin-right: 10px;
         font-size: 24px;
         color: #06f9a3;
@@ -110,7 +112,6 @@
     }
 
     .navigation {
-      @include nb-ltr(padding-right, nb-theme(padding));
       @include nb-rtl(padding-left, nb-theme(padding));
       font-size: 2.5rem;
       text-decoration: none;
@@ -118,19 +119,20 @@
       i {
         display: block;
       }
-
     }
 
     .logo {
-      padding: 0 nb-theme(padding);
+      padding: 0 nb-theme(padding) 0 0.25rem;
       font-size: 1.75rem;
       font-weight: nb-theme(font-weight-bolder);
-      @include nb-ltr(border-left, 1px solid nb-theme(separator));
-      @include nb-rtl(border-right, 1px solid nb-theme(separator));
       white-space: nowrap;
+      cursor: pointer;
 
-      span {
-        font-weight: nb-theme(font-weight-normal);
+      .logo-text {
+        font-family: nb-theme(font-bebas-bold);
+        font-size: 28px;
+        margin-left: 4px;
+        display: inline-block;
       }
     }
   }

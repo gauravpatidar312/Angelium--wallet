@@ -17,6 +17,7 @@ export class StatusCardComponent implements OnDestroy {
   @Input() percentage: string;
   @Input() on = true;
   @Input() typeOfPeriod: string = 'week';
+  @Input() fetchingRewardValue: boolean;
   selectedType = '1';
   types: string[] = ['week', 'month', 'year'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};

@@ -8,8 +8,11 @@ import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
 import {ToastrService} from '../services/toastr.service';
 import {SessionStorageService} from '../services/session-storage.service';
+import { IndexedDBStorageService } from '../services/indexeddb-storage.service';
 import { NbDialogService } from '@nebular/theme';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+declare let $: any;
+declare let jQuery: any;
 
 @Component({
   selector: 'ngx-register',
@@ -28,34 +31,53 @@ export class RegisterComponent implements OnInit {
   resubmitTime: number = 60 * 1000;
   @ViewChild('otpForm') otpForm: NgForm;
 
+  isVerifiedCaptcha = false;
+
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
+              private storageService: IndexedDBStorageService,
               private dialogService: NbDialogService) {
 
   }
 
   ngOnInit() {
+    $(document).ready(() => {
+      $("#registerSlider").slideToUnlock({ useData: true});
+      $( document ).on("veryfiedCaptcha", (event, arg) => {
+        if (arg === 'verified') {
+          this.isVerifiedCaptcha = true;
+        }
+    });
+   });
     this.registerForm = this.formBuilder.group({
       invitation_code: [''],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};'~`:"\\|,.<>\/?]*$/)]],
       phone: ['', Validators.required],
       otp_code: ['', Validators.required],
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
+      first_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};'~`:"\\|,.<>\/?]*$/)]],
+      last_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};'~`:"\\|,.<>\/?]*$/)]],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
+      trade_password: ['', Validators.required],
+      confirm_trade_password: ['', Validators.required],
       isAgree: [false],
-    }, {
-      validator: MustMatch('password', 'confirm_password'),
     });
 
-    this.activatedRoute.params.subscribe(params => {
-      this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+    this.activatedRoute.params.subscribe( async(params?: any) => {
+      let info: any = await this.storageService.getAngeliumStorage();
+      if (params.invitation_code) {
+        this.storageService.saveToAngeliumSession({'invitationCode': params.invitation_code});
+        this.registerForm.controls.invitation_code.setValue(params.invitation_code);
+      } else if (info) {
+        if (info.invitationCode) {
+          this.registerForm.controls.invitation_code.setValue(info.invitationCode);
+        }
+      }
     });
   }
 
@@ -95,6 +117,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitRegistration() {
+    if (!this.isVerifiedCaptcha) {      
+      this.toastrService.danger('Please verify captcha', 'Register');
+      return;
+    }
     this.registerForm.controls.phone.setValue(this.model.phone);
     console.log(this.registerForm.value);
 
@@ -108,17 +134,28 @@ export class RegisterComponent implements OnInit {
       this.toastrService.danger('Please submit OTP first.', 'Register');
       return;
     }
+    if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
+      this.toastrService.danger('Confirm login password do not match', 'Register');
+      return;
+    }
+    if (this.registerForm.controls.trade_password.value !== this.registerForm.controls.confirm_trade_password.value) {
+      this.toastrService.danger('Confirm trade password do not match', 'Register');
+      return;
+    }
 
     if (!this.registerForm.value.isAgree) {
       this.toastrService.danger('Please check agree to the terms and condition box.', 'Register');
       return;
     }
 
+    delete this.registerForm.value.confirm_trade_password;
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
-      // this.sessionStorageService.saveToSession('userInfo', res);
-      // this.getUserSettingInfo();
+      this.storageService.saveToAngeliumSession({'invitationCode': null });
       this.sessionStorageService.updateUserStateWithToken(res);
+      // this.sessionStorageService.saveToSession('userInfo', res);
+      // this.sessionStorageService.deleteFromSession('invitationCode');
+      // this.getUserSettingInfo();
     }, err => {
       console.log(err);
       this.formSubmitting = false;
@@ -130,6 +167,10 @@ export class RegisterComponent implements OnInit {
   //   this.httpService.get('profile/').subscribe(data => {
   //     this.sessionStorageService.updateFromSession('userInfo', data);
   //     this.router.navigate(['pages/dashboard']);
+  //   }, err => {
+  //     console.log(err);
+  //     this.formSubmitting = false;
+  //     this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Profile');
   //   });
   // }
 

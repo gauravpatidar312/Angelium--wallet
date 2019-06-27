@@ -128,7 +128,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }
 
   goToHome() {
-    this.menuService.navigateHome();
+    this.router.navigate(['pages/dashboard']);
   }
 
   startSearch() {

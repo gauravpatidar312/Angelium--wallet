@@ -10,7 +10,7 @@
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
         <nb-tabset fullWidth>
           <nb-tab tabTitle="SEND">
-            <form [formGroup]="sendForm" (ngSubmit)="onSendTransfer()" class="mt-5 transfer-form">
+            <form [formGroup]="sendForm" class="mt-5 transfer-form">
               <div class="form-group row d-sml-block m-0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="row font-nunitoSans">
@@ -18,17 +18,20 @@
                       <div class="form-group">
                         <label for="BTC" class="text-link">From</label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
-                            {{ sendType}}
+                            {{ sendType }}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item" *ngFor="let wallet of myWallets"
-                                (click)="onChangeWallet(wallet.wallet_type, 'send')">
-                              {{ wallet.wallet_type }}
-                            </li>
+                            <ng-container *ngFor="let wallet of myWallets">
+                              <li class="dropdown-item"
+                                  *ngIf="sendType != wallet.wallet_type"
+                                  (click)="onChangeWallet(wallet.wallet_type, 'send')">
+                                {{ wallet.wallet_type }}
+                              </li>
+                            </ng-container>
                           </ul>
                         </div>
                       </div>
@@ -36,9 +39,15 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" formControlName="transfer_amount" (blur)="setAmount(sendWallet?.wallet_type)" value="{{sendWallet?.wallet_amount | number : '1.2-8' }}">
-                        <span *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.2-2' }}</span>
-                        <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" step="0.000001"
+                               formControlName="transfer_amount" (keyup)="setAmount(sendWallet?.wallet_type)"
+                               value="{{0 | number : '1.0-6' }}">
+                        <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                        <span class="transfer-amount" *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.0-2' }}</span>
+                        <span class="available-amount" (click)="setSendMaxValue()" *ngIf="sendWallet?.wallet_type"
+                              title="Click to use whole amount">
+                          {{(sendWallet?.wallet_amount | number : '1.0-6') + ' ' + (sendWallet?.wallet_type) + ' / max' }}
+                        </span>
                       </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center p-0">
@@ -59,11 +68,12 @@
                         <input type="text" class="form-control font-nunitoSans w-100" formControlName="destination_address" placeholder="Enter destination address">
                       </div>
                       <div class="form-group mt-4">
-                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length" class="btn btn-demo btn-success pointer" fullWidth style="width: 100%;">
-                          <span *ngIf="!(formSubmitting || fetchingAmount)" >RUN</span>
+                        <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || waitFlag" (click)="openTradeDialog(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
+                          <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
+                      <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
                     </div>
                   </div>
                 </div>
@@ -106,8 +116,8 @@
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <input type="text" class="form-control font-nunitoSans w-100" placeholder="Destination address" value="{{receiveWallet?.address}}" [disabled]="true">
-                        <a class="copy-icon" ngxClipboard [cbContent]="receiveWallet?.address" (click)="copyAddress()"><i class="fa fa-clone" title="Copy address"></i></a>
                       </div>
+                      <div class="form-group"><a class="form-control copy-icon" ngxClipboard [cbContent]="receiveWallet?.address" (click)="copyAddress()"><i class="fa fa-clone" title="Copy address"></i></a></div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 text-center" *ngIf="receiveWallet?.qrcode">
@@ -127,7 +137,7 @@
                       <div class="form-group">
                         <label for="ANX" class="text-link">From</label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
@@ -145,11 +155,15 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount" name="fromOTCAmount"
-                               [required]="true" [(ngModel)]="fromOTCAmount" (blur)="setOTCAmount()"
-                               value="{{anxWallet?.wallet_amount | number : '1.2-2' }}">
-                        <span *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.2-2' }}</span>
-                        <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
+                               name="fromOTCAmount" step="0.01"
+                               [required]="true" [(ngModel)]="fromOTCAmount" (keyup)="setOTCAmount()"
+                               value="{{0 | number : '1.0-2' }}">
+                        <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                        <span class="transfer-amount" *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.0-2' }}</span>
+                        <span class="available-amount" (click)="setAnxMaxValue()" title="Click to use whole amount">
+                          {{((anxWallet?.wallet_amount || 0) | number : '1.0-2') + ' ANX / max' }}
+                        </span>
                       </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0">
@@ -161,7 +175,7 @@
                       <div class="form-group">
                         <label for="BTC" class="text-link">To</label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
@@ -179,10 +193,10 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">Amount</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
-                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.2-8'}}">
-                        <span *ngIf="!fetchingAmount">${{ otcWallet?.toDollar | number : '1.2-2' }}</span>
-                        <span><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount" step="0.000001"
+                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.0-6'}}">
+                        <span class="transfer-amount" *ngIf="!fetchingAmount && false">${{ otcWallet?.toDollar | number : '1.0-2' }}</span>
+                        <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>
                     </div>
                   </div>
@@ -193,12 +207,14 @@
                   <div class="row justify-content-center">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group mt-4">
-                        <button [disabled]="formSubmitting || fetchingAmount || !otcWallets?.length" class="btn btn-demo btn-success pointer"
+                        <button [disabled]="formSubmitting || fetchingAmount || !otcWallets?.length" class="font-bebasNeueBold btn-run btn btn-demo btn-success pointer"
                                 (click)="onOTCTransfer()" fullWidth style="width: 100%;">
                           <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
+                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
+                      <span class="transfer-message font-nunitoSans">3% handling charge is applicable on each transaction.*</span>
                     </div>
                   </div>
                 </div>
@@ -211,3 +227,18 @@
     </nb-card-body>
   </div>
 </nb-card>
+
+<ng-template #tradePassword let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      Trade Password
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradeDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <input type="password" [(ngModel)]="trade_password" placeholder="Trade password" nbInput/><br/><br/>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">Submit</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

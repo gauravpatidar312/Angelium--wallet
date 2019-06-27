@@ -1,6 +1,6 @@
 @import '../../@theme/styles/themes';
 @import "~@nebular/theme/styles/global/breakpoints";
-
+@import '~@nebular/theme/styles/global/typography/typography';
 @include nb-install-component() {
   .title {
     font-family: nb-theme(font-bebas);
@@ -12,6 +12,10 @@
   input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield;
   }
 
   .details {
@@ -33,14 +37,8 @@
   }
 
   .status {
-    font-weight: nb-theme(font-weight-light);
-  }
-
-  .status {
+    font-family: nb-theme(font-bebas-bold);
     font-size: 30px;
-    font-family: nb-theme(font-bebas);
-    font-weight: nb-theme(font-weight-light);
-    text-transform: uppercase;
     color: nb-theme(card-fg);
     text-align: right;
     margin-right: 5px;
@@ -134,6 +132,43 @@
     padding: 0;
   }
 
+  .navbar-header {
+    font-family: nb-theme(font-bebas);
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .heavenHistory-tree {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  .navbar-pill {
+    justify-content: flex-end;
+  }
+
+  #heavenHistory-navigation li.active > a {
+    text-decoration: underline 2px;
+    border-radius: 2px;
+    border-bottom: 5px solid #26df8b;
+    text-decoration-color: #26df8b;
+    font-family: nb-theme(font-avenir);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #ffffff;
+  }
+  #heavenHistory-navigation li > a {
+    padding: 10px;
+    text-decoration: none;
+    font-family: nb-theme(font-avenir);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #ffffff;
+  }
+
   .icon.primary {
     background-image: -webkit-gradient(linear, left top, right top, from(#ad59ff), to(#7659ff));
     background-image: linear-gradient(to right, #ad59ff, #7659ff);
@@ -166,6 +201,10 @@
     border-radius: .5rem 0 0 .5rem;
   }
 
+  /deep/ .ng2-smart-title {
+    width: 135px !important;
+  }
+
   nb-card.top-content {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -184,11 +223,19 @@
     position: relative;
     span {
       position: absolute;
-      right: 30px;
-      bottom: 13px;
-      color: #00bb66;
-      font-weight: bold;
-      font-size: 16px;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
     }
   }
 
@@ -200,13 +247,17 @@
     font-family: nb-theme(font-bebas);
   }
 
+  .font-bebasNeueBold {
+    font-family: nb-theme(font-bebas-bold);
+  }
+
   .font-avenir {
     font-family: nb-theme(font-avenir);
   }
 
   .days-font {
     font-size: 7.6rem;
-    height: 100px;
+    height: 110px;
   }
 
   .month-day {
@@ -220,6 +271,12 @@
 
   .month-day-value {
     font-size: 2.5rem;
+    &.ls-half {
+      letter-spacing: 0.5px;
+    }
+    &.ls-one {
+      letter-spacing: 1px;
+    }
   }
 
   .days-text {
@@ -244,6 +301,7 @@
     border-radius: 4px;
     margin: 12px auto;
     cursor: pointer;
+    font-family: nb-theme(font-bebas-bold);
   }
 
   .table_bg:hover {
@@ -279,8 +337,32 @@
     font-size: 1.5rem;
   }
 
+  .dropDown-padding {
+    padding: 14px !important;
+  }
+
+  .input-padding {
+    padding: 0.70rem 1.125rem !important;
+  }
+
   nb-card .icon-container i {
     font-size: 30px;
+  }
+
+  .heaven-history-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    height: 100px;
+    text-align: center;
+  }
+
+  .li-margin {
+    margin-right: 15px;
+  }
+  .spinner-color{
+    color: #a1a1e5;
+    font-size: 25px;
   }
 
   @include media-breakpoint-down(sm) {
@@ -295,14 +377,10 @@
         padding-left: 0.25rem !important;
       }
       .title {
-        font-size: 1rem !important;
+        font-size: 1.7rem;
       }
       .status {
-        font-size: 2.3rem !important;
-      }
-
-      .total-amount span {
-        top: 0;
+        font-size: 2.1rem !important;
       }
     }
   }
@@ -355,13 +433,19 @@
       font-size: 1.1rem;
       margin-right: 1px;
       float: left;
-      width: 55px;
+      width: 50px;
       text-align: right;
-      margin-top: 0;
+      margin-top: -2px;
     }
 
     .month-day-value {
       font-size: 1rem;
+    }
+  }
+
+  @media only screen and (width: 375px) {
+    .text-margin {
+      margin-top: 5px;
     }
   }
 
@@ -373,6 +457,11 @@
     .m-t {
       margin-top: 27%;
     }
+
+    .status {
+      font-size: 1.9rem !important;
+    }
+
     .month-day {
       font-size: 1.5rem;
       margin-right: 15px;
@@ -385,4 +474,67 @@
       font-size: 1.5rem;
     }
   }
+
+  .heavenhistory {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    padding: 1.25rem !important;
+  }
+
+  .heavenhistory-cell{
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: nb-theme(font-nunito);
+  }
+  /deep/ ng2-smart-table table tr td {
+    font-family: nb-theme(font-nunito);
+    padding: 0.50rem 1.25rem;
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    .heavenHistoryColumn {
+      margin-top: 10px;
+    }
+
+    #heavenHistory-navigation {
+      padding-left: 0px;
+    }
+    .navbar-pill {
+      justify-content: left;
+    }
+    #heavenHistory-navigation li > a {
+      padding: 5px;
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+    /deep/ .heavenhistory-cell{
+      width: 120px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+    /deep/ .heavenhistory-cell{
+      width: 100px;
+    }
+
+  }
+
+//   :host /deep/ ng2-smart-title {
+//     color: grey;
+//     font-family: nb-theme(font-nunito);
+// }
+
+/* headers grid color*/
+/deep/ ng2-smart-table-title > a {
+  font-family: nb-theme(font-nunito);
+  font-size: 16px;
+}
 }
