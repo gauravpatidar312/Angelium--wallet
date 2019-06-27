@@ -133,6 +133,43 @@
     padding: 0;
   }
 
+  .navbar-header {
+    font-family: nb-theme(font-bebas);
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .heavenHistory-tree {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  .navbar-pill {
+    justify-content: flex-end;
+  }
+
+  #heavenHistory-navigation li.active > a {
+    text-decoration: underline 2px;
+    border-radius: 2px;
+    border-bottom: 5px solid #26df8b;
+    text-decoration-color: #26df8b;
+    font-family: nb-theme(font-avenir);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #ffffff;
+  }
+  #heavenHistory-navigation li > a {
+    padding: 10px;
+    text-decoration: none;
+    font-family: nb-theme(font-avenir);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #ffffff;
+  }
+
   .icon.primary {
     background-image: -webkit-gradient(linear, left top, right top, from(#ad59ff), to(#7659ff));
     background-image: linear-gradient(to right, #ad59ff, #7659ff);
@@ -317,9 +354,13 @@
     display: block;
     font-size: 25px;
     color: #a1a1e5;
+    height: 100px;
     text-align: center;
   }
 
+  .li-margin {
+    margin-right: 15px;
+  }
   .spinner-color{
     color: #a1a1e5;
     font-size: 25px;
@@ -438,7 +479,7 @@
   .heavenhistory {
     font-family: nb-theme(font-bebas);
     font-size: 22px;
-    margin-top: 8px;
+    padding: 1.25rem !important;
   }
 
   .heavenhistory-cell{
@@ -449,6 +490,22 @@
   /deep/ ng2-smart-table table tr td {
     font-family: nb-theme(font-nunito);
     padding: 0.50rem 1.25rem;
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    .heavenHistoryColumn {
+      margin-top: 10px;
+    }
+
+    #heavenHistory-navigation {
+      padding-left: 0px;
+    }
+    .navbar-pill {
+      justify-content: left;
+    }
+    #heavenHistory-navigation li > a {
+      padding: 5px;
+    }
   }
 
   @media (min-width: 300px) and (max-width: 480px) {

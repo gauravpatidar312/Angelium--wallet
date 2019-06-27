@@ -59,10 +59,23 @@
   .downline-tree-spinner {
     display: block;
     font-size: 25px;
+    height: 100px;
     color: #a1a1e5;
     text-align: center;
   }
 
+  .fetchingDownLine {
+    height: 216px;
+    background: #3d3780;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 0.5rem;
+  }
+
+  .fetchingDownline-margin {
+    margin-top: 86px;
+  }
 
   @include media-breakpoint-down(sm) {
     ngx-traffic {
@@ -265,6 +278,10 @@ table.table-bordered > tbody > tr > td {
     padding: 5px;
   }
 
+  .fetchingDownLine {
+    margin-bottom: 21px;
+  }
+
   /deep/ ng2-smart-table table tr td {
     font-size: 0.9em;
     word-break: break-all;
@@ -328,7 +345,9 @@ table.table-bordered > tbody > tr > td {
   font-size: 1.2rem;
   font-family: nb-theme(font-bebas);
 }
-
+.li-margin {
+  margin-right: 15px;
+}
 /deep/.all-columns{ background: #494299!important; }
 /deep/ .nb-tree-grid-header-cell{ font-weight: 400!important; }
 /deep/ table.table-bordered{ table-layout: auto;}
