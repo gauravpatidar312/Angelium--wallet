@@ -222,10 +222,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCreateHeaven() {
-    if (this.isProduction) {
+    /*if (this.isProduction) {
       this.toastrService.danger('Feature coming soon! Stay tuned.', 'Heaven');
       return;
-    }
+    }*/
 
     if (!this.heaven_amount) {
       this.toastrService.danger('Please enter amount.', 'Heaven');
