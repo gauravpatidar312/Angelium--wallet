@@ -30,6 +30,7 @@
     "trade": "거래",
     "total": "총",
     "today": "오늘",
+    "top": "홈",
     "username": "사용자명",
     "verificationCode": "인증번호",
     "verified": "인증됨",
@@ -120,8 +121,5 @@
       "send": "출금",
       "to": "To"
     }
-  },
-  "sidebar": {
-    "top": "홈"
   }
 }

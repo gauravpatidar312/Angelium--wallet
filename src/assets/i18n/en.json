@@ -30,6 +30,7 @@
     "trade": "Trade",
     "total": "Total",
     "today": "today",
+    "top": "Top",
     "username": "Username",
     "verificationCode": "Verification code",
     "verified": "Verified",
@@ -120,8 +121,5 @@
       "send": "Send",
       "to": "To"
     }
-  },
-  "sidebar": {
-    "top": "Top"
   }
 }

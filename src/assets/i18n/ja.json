@@ -30,6 +30,7 @@
     "trade": "Trade",
     "total": "Total",
     "today": "Today",
+    "top": "トップ",
     "username": "ユーザーネーム",
     "verificationCode": "認証コード",
     "verified": "Verified",
@@ -120,8 +121,5 @@
       "send": "送信",
       "to": "To"
     }
-  },
-  "sidebar": {
-    "top": "トップ"
   }
 }

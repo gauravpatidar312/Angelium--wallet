@@ -30,6 +30,7 @@
     "trade": "Trade",
     "total": "Total",
     "today": "Today",
+    "top": "顶部",
     "username": "用户名",
     "verificationCode": "认证码",
     "verified": "Verified",
@@ -120,8 +121,5 @@
       "send": "发送",
       "to": "To"
     }
-  },
-  "sidebar": {
-    "top": "顶部"
   }
 }
