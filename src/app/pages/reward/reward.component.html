@@ -15,12 +15,14 @@
           [percentage]="0"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr2">
+        <div *ngIf="fetchingDownlineHeaven"><span class="fetchingDownLine"><i class="fa fa-spinner fetchingDownline-margin spinner-color fa-spin"></i></span></div>
         <ngx-earning-card cardName='{{"common.downline" | translate}} {{"common.heaven" | translate}}' [selectedCurrency]="'HEAVEN'" [amount]="downline_heaven" [quantity]="total_users"
-          [percentage]="0"></ngx-earning-card>
+          [percentage]="0" *ngIf="!fetchingDownlineHeaven"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr3">
+        <div *ngIf="fetchingDownlineAngel"><span class="fetchingDownLine"><i class="fa fa-spinner fetchingDownline-margin spinner-color fa-spin"></i></span></div>
         <ngx-earning-card cardName='{{"pages.reward.downlineAngel" | translate}}' [selectedCurrency]="'Bitcoin'" [amount]="0" [quantity]="angel_count"
-          [percentage]="0"></ngx-earning-card>
+          [percentage]="0" *ngIf="!fetchingDownlineAngel"></ngx-earning-card>
       </div>
       <!-- <div class="col-md-6 col-lg-3 col-sm-12 col-xl-3" id="curr4">
         <ngx-earning-card></ngx-earning-card>
@@ -61,7 +63,7 @@
           </div>
           <div class="col-md-6 rewardColumn">
             <ul id="main-navigation" class="nav navbar-pill rewardLine">
-              <li class="active" style="margin-right:15px;"><a data-toggle="pill" href="#today">{{'common.today' | translate}}</a></li>
+              <li class="active" style="margin-right:15px;"><a data-toggle="pill" href="#today">{{'common.today' | translate | titlecase}}</a></li>
               <li style="margin-right:15px;"><a data-toggle="pill" href="#week">{{'common.week' | translate}}</a></li>
               <li style="margin-right:15px;"><a data-toggle="pill" href="#month">{{'common.month' | translate}}</a></li>
               <li style="margin-right:15px;"><a data-toggle="pill" href="#total">{{'common.total' | translate}}</a></li>
@@ -96,22 +98,16 @@
           {{"common.downline" | translate}} {{"pages.reward.tree" | translate}}
         </div>
       </div>
-      <!-- <div class="col-md-6 downlineColumn" *ngIf="noDataSource">
+       <div class="col-md-6 downlineColumn">
         <ul id="downline-navigation" class="nav navbar-pill downLine">
-          <li class="active" style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlinetoday" (click)="getDownlineTree('today')">Today</a>
+          <li class="pointer li-margin">
+            <a data-toggle="pill" (click)="getDownlineTree('today')">Today</a>
           </li>
-          <li style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlineweek" (click)="getDownlineTree('weekly')">Week</a>
-          </li>
-          <li style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlinemonth" (click)="getDownlineTree('monthly')">Month</a>
-          </li>
-          <li style="margin-right:15px;">
-            <a data-toggle="pill" href="#downlinetotal" (click)="getDownlineTree('yearly')">Year</a>
+          <li class="active pointer li-margin">
+            <a data-toggle="pill" (click)="getDownlineTree('total')">Total</a>
           </li>
         </ul>
-      </div> -->
+      </div>
     </div>
   </nb-card-header>
 
@@ -119,9 +115,9 @@
     <nb-card-body>There is no user in your down-line tree.</nb-card-body>
   </ng-template>
 
-  <nb-card-body class="tab-content" *ngIf="noDataSource; else noData">
-    <div *ngIf="fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
-    <div id="downlinetoday" class="tab-pane active" *ngIf="!fetchingDownlineTree">
+  <nb-card-body id="downline-tree" class="tab-content" *ngIf="noDataSource; else noData">
+    <div [hidden]="!fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+    <div class="tab-pane active" *ngIf="!fetchingDownlineTree">
       <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
         <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
         <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>

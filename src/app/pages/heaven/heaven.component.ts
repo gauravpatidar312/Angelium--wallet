@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output } from '@angular/core';
 import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -12,14 +12,15 @@ import { ShareDataService } from '../../services/share-data.service';
 import { environment } from 'environments/environment';
 import { CustomRendererComponent } from './custom.component';
 import * as moment from 'moment';
-// declare let $: any;
+
+declare let $: any;
 
 @Component({
   selector: 'ngx-heaven',
   templateUrl: './heaven.component.html',
   styleUrls: ['./heaven.component.scss'],
 })
-export class HeavenComponent implements OnInit, OnDestroy {
+export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
   isProduction: any = environment.production;
@@ -91,7 +92,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
     this.getHeavenGraph();
     this.getANXHistory();
     this.getHeavenReleaseSettings();
-    this.getHeavenHistory();
+    this.getHeavenHistory('total');
   }
   selectedHeavenPlan = '';
 
@@ -122,6 +123,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
     },
     editable: true,
     mode: 'inline',
+    noDataMessage: "No data found",
     columns: {
       hid: {
         title: this.translate.instant('common.heaven') +' '+ this.translate.instant('pages.heaven.ID'),
@@ -260,7 +262,7 @@ export class HeavenComponent implements OnInit, OnDestroy {
         this.getWallets();
         this.heaven_amount = null;
         this.setAmount(this.wallet.wallet_type);
-        this.getHeavenHistory();
+        this.getHeavenHistory('total');
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, 'Heaven');
@@ -324,9 +326,10 @@ export class HeavenComponent implements OnInit, OnDestroy {
     // });
   }
 
-  getHeavenHistory() {
+  getHeavenHistory(value) {
+    $('.heaven-history-spinner').height($('#heaven-history').height());
     this.fetchHeavenHistory = true;
-    this.httpService.get('heaven-history/').subscribe((res?: any) => {
+    this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
       const data = res.results;
       const heaven_history_data = _.map(data, function(obj) {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
@@ -340,6 +343,13 @@ export class HeavenComponent implements OnInit, OnDestroy {
     }, (err) => {
       this.fetchHeavenHistory = false;
       this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+    });
+  }
+
+  ngAfterViewInit() {
+    $('ul.downLine li a').click(function (e) {
+      $('ul.downLine li.active').removeClass('active');
+      $(this).parent('li').addClass('active');
     });
   }
 
