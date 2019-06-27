@@ -18,10 +18,10 @@ export class AuthService {
 
   isAuthenticated(): Boolean {
     let userInfo = this.sessionStorage.getFromSession("userInfo");
-    if (userInfo === "false") {
-      return false;
-    } else {
+    if (userInfo) {
       return true;
+    } else {
+      return false;
     }
   }
 }
