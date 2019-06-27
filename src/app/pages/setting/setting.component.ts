@@ -26,10 +26,10 @@ export class SettingComponent implements OnInit {
   evaIcons = [];
   selectedLang: string = 'English';
   languageData = [
-    {'language': 'English', 'code': 'en'},
-    {'language': 'Chinese', 'code': 'zh'},
-    {'language': 'Japanese', 'code': 'ja'},
-    {'language': 'Korean', 'code': 'ko'}
+    // {'language': 'English', 'code': 'en'},
+    // {'language': 'Chinese', 'code': 'zh'},
+    // {'language': 'Japanese', 'code': 'ja'},
+    // {'language': 'Korean', 'code': 'ko'}
   ]
   private alive = true;
   userData: any;
@@ -75,10 +75,18 @@ export class SettingComponent implements OnInit {
     .subscribe(([oldValue, newValue]) => {
       this.breakpoint = newValue;
     });
+    this.getLanguageData();
   }
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  getLanguageData(){
+    this.httpService.getLanguage('languages/').subscribe(res=>{
+      this.languageData = res;
+      this.selectedLang = 'English';
+    });
   }
 
   getProfileData() {
@@ -92,7 +100,7 @@ export class SettingComponent implements OnInit {
   
   changeLang(lan: any){
     this.selectedLang = lan.language;
-    this.translate.use(lan.code);
+    this.translate.use(lan.language_code);
   }
 
   ngOnInit() {

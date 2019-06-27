@@ -34,14 +34,13 @@ export class RegisterComponent implements OnInit {
   resubmitTime: number = 60 * 1000;
   currentTheme: string;
   breakpoints: any;
-  languageCode: any;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   languageType: string = 'SELECT';
   languageData = [
-    {'language': 'English', 'code': 'en'},
-    {'language': 'Chinese', 'code': 'zh'},
-    {'language': 'Japanese', 'code': 'ja'},
-    {'language': 'Korean', 'code': 'ko'}
+    // {'language': 'English', 'code': 'en'},
+    // {'language': 'Chinese', 'code': 'zh'},
+    // {'language': 'Japanese', 'code': 'ja'},
+    // {'language': 'Korean', 'code': 'ko'}
   ]
 
   @ViewChild('otpForm') otpForm: NgForm;
@@ -58,20 +57,27 @@ export class RegisterComponent implements OnInit {
               private breakpointService: NbMediaBreakpointsService,
               private themeService: NbThemeService,
               public translate: TranslateService) {
-    var browserDetectLang = navigator.language.split("-")[0];
-    
-    var currectLang = this.languageData.find((data:any)=> {
-      return data.code === browserDetectLang;
+    this.getLanguageData();
+  }
+  
+
+  getLanguageData(){
+    this.httpService.getLanguage('languages/').subscribe(res=>{
+      this.languageData = res;
+      var browserDetectLang = navigator.language.split("-")[0];
+      var currectLang = this.languageData.find((data:any)=> {
+        return data.language_code === browserDetectLang;
+      });
+      if (currectLang) {
+        this.languageType = currectLang.language;
+        this.registerForm.controls.user_language.setValue(currectLang.id);
+        this.translate.use(currectLang.language_code);
+      }else{
+        this.languageType = 'English';
+        this.registerForm.controls.user_language.setValue(1);
+        this.translate.use('en');
+      }
     });
-    if (currectLang) {
-      this.languageType = currectLang.language;
-      this.languageCode = currectLang.code; 
-      this.translate.use(currectLang.code);
-    }else{
-      this.languageType = 'English';
-      this.languageCode = 'en';
-      this.translate.use('en');
-    }
   }
 
   ngOnInit() {
@@ -96,8 +102,7 @@ export class RegisterComponent implements OnInit {
       confirm_password: ['', Validators.required],
       trade_password: ['', Validators.required],
       confirm_trade_password: ['', Validators.required],
-      language: [this.languageType],
-      language_code: [this.languageCode],
+      user_language: [''],
       isAgree: [false],
     });
 
@@ -227,9 +232,8 @@ export class RegisterComponent implements OnInit {
 
   changeLanguage(lan: any){
     this.languageType = lan.language;
-    this.translate.use(lan.code);
-    this.registerForm.controls.language.setValue(lan.language);
-    this.registerForm.controls.language_code.setValue(lan.code);
+    this.translate.use(lan.language_code);
+    this.registerForm.controls.user_language.setValue(lan.id);
     this.getCapchaTranslation();
   }
 

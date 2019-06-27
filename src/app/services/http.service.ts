@@ -23,6 +23,10 @@ export class HttpService {
     return this.httpClient.get<any>(`${environment.apiUrl}/${endpoint}`, { headers: setHeaders() });
   }
 
+  getLanguage(endpoint) {
+    return this.httpClient.get<any>(`${environment.testUrl}/${endpoint}`);
+  }
+
   post(data, endpoint) {
     return this.httpClient.post<any>(
       `${environment.apiUrl}/${endpoint}`,
