@@ -24,7 +24,7 @@ export let browserRefresh = false;
 export class SettingComponent implements OnInit {
   isProduction: boolean = environment.production;
   evaIcons = [];
-  selectedLang: string = 'English';
+  selectedLang: string = 'SELECT';
   languageData = [
     // {'language': 'English', 'code': 'en'},
     // {'language': 'Chinese', 'code': 'zh'},
@@ -86,6 +86,15 @@ export class SettingComponent implements OnInit {
     this.httpService.getLanguage('languages/').subscribe(res=>{
       this.languageData = res;
       this.selectedLang = 'English';
+      var browserDetectLang = navigator.language.split("-")[0];
+      var currectLang = this.languageData.find((data:any)=> {
+        return data.language_code === browserDetectLang;
+      });
+      if (currectLang) {
+        this.selectedLang = currectLang.language;
+      }else{
+        this.selectedLang = 'English';
+      }
     });
   }
 
