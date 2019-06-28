@@ -83,7 +83,7 @@ export class SettingComponent implements OnInit {
   }
 
   getLanguageData(){
-    this.httpService.getLanguage('languages/').subscribe(res=>{
+    this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
       const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
       this.selectedLang = userSettingInfo.user_language.language;

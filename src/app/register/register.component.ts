@@ -64,9 +64,9 @@ export class RegisterComponent implements OnInit {
   
 
   getLanguageData(){
-    this.httpService.getLanguage('languages/').subscribe(res=>{
+    this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
-      var browserDetectLang = navigator.language.split("-")[0];
+      var browserDetectLang = navigator.language.split('-')[0];
       var currectLang = this.languageData.find((data:any)=> {
         return data.language_code === browserDetectLang;
       });

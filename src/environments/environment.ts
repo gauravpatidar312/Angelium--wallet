@@ -10,6 +10,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://testwallet.angelium.net/api',
-  testUrl: 'http://testwallet.angelium.net/api'
+  apiUrl: 'http://testwallet.angelium.net/api'
 };
