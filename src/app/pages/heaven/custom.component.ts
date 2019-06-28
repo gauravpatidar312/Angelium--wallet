@@ -5,7 +5,7 @@ import {takeWhile} from 'rxjs/operators';
 import {ShareDataService} from '../../services/share-data.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
-import {DatePipe} from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   template: `
@@ -15,14 +15,14 @@ import {DatePipe} from '@angular/common';
               [ngClass]="{
     'btn-success': currentTheme === 'default',
     'btn-primary': currentTheme !== 'default'}">
-        {{currentDate > releaseDate && value === 'Release' ? 'Stop' : value}}
+        {{value}}
       </button>
       <ul class="dropdown-menu" ngbDropdownMenu>
         <li class="dropdown-item" (click)="releaseSettingChange(rowData, '30', rowData.plan === 'Heaven 30' ? 'Heaven 30' : 'Another Heaven 30')">{{rowData.plan === 'Heaven 30' ? '' : 'Another'}} Heaven 30</li>
         <li class="dropdown-item" (click)="releaseSettingChange(rowData, '60', rowData.plan === 'Heaven 30' ? 'Heaven 60' : 'Another Heaven 60')">{{ rowData.plan === 'Heaven 30' ? '' : 'Another'}} Heaven 60</li>
         <li class="dropdown-item" (click)="releaseSettingChange(rowData, '90', rowData.plan === 'Heaven 30' ? 'Heaven 90' : 'Another Heaven 90')">{{rowData.plan === 'Heaven 30' ? '' : 'Another'}} Heaven 90</li>
-        <li class="dropdown-item" *ngIf="currentDate <= releaseDate" (click)="releaseSettingChange(rowData, 'release', 'Release')">Release</li>
-        <li class="dropdown-item" *ngIf="currentDate > releaseDate" (click)="releaseSettingChange(rowData, 'release', 'Stop')">Stop</li>
+        <li class="dropdown-item" *ngIf="currentDate < releaseDate" (click)="releaseSettingChange(rowData, 'release', 'Stop')">Stop</li>
+        <li class="dropdown-item" *ngIf="currentDate >= releaseDate" (click)="releaseSettingChange(rowData, 'release', 'Release')">Release</li>
       </ul>
     </div>`
 })
@@ -36,7 +36,6 @@ export class CustomRendererComponent implements ViewCell, OnInit{
 
   constructor(private themeService: NbThemeService,
               private httpService: HttpService,
-              private datePipe: DatePipe,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService) {
     this.themeService.getJsTheme()
@@ -47,8 +46,9 @@ export class CustomRendererComponent implements ViewCell, OnInit{
   }
 
   ngOnInit() {
-    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-    this.releaseDate = this.datePipe.transform(this.rowData.release_date, 'dd/MM/yyyy');
+    this.currentDate = moment();
+    this.releaseDate = moment(this.rowData.release_date, 'YYYY.MM.DD');
+    this.value = (this.currentDate < this.releaseDate && this.value === 'Release') ? 'Stop' : this.value;
   }
 
   releaseSettingChange(data, planType, valueType) {

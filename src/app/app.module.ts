@@ -28,6 +28,7 @@ import { ToastrService } from "./services/toastr.service";
 import { AuthService } from "./_guards/auth.service";
 import { AuthGuard } from './_guards/auth.guard';
 import { ShareDataService } from "./services/share-data.service";
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 import { reducers, AppState } from './@core/store/app.state';
 import { EffectsModule } from '@ngrx/effects';
@@ -39,7 +40,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -67,6 +67,11 @@ export class TransferComponent implements OnInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.sendForm = this.formBuilder.group({
+      transfer_amount: ['', Validators.required],
+      destination_address: ['', Validators.required],
+    });
   }
 
   async ngOnInit() {
@@ -109,11 +114,6 @@ export class TransferComponent implements OnInit {
     //     this.sessionStorageService.deleteFromSession('waitTime');
     //   }
     // }
-
-    this.sendForm = this.formBuilder.group({
-      transfer_amount: ['', Validators.required],
-      destination_address: ['', Validators.required],
-    });
   }
 
   get f() {
