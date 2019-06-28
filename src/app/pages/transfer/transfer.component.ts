@@ -9,6 +9,7 @@ import {ToastrService} from '../../services/toastr.service';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from 'environments/environment';
 import * as _ from 'lodash';
+import { IndexedDBStorageService } from '../../services/indexeddb-storage.service';
 
 declare const jQuery: any;
 @Component({
@@ -52,6 +53,7 @@ export class TransferComponent implements OnInit {
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
+              private storageService: IndexedDBStorageService,
               private activatedRoute: ActivatedRoute) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -65,9 +67,14 @@ export class TransferComponent implements OnInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.sendForm = this.formBuilder.group({
+      transfer_amount: ['', Validators.required],
+      destination_address: ['', Validators.required],
+    });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.toggle = null;
     this.getWallets();
     if (this.shareDataService.transferTab) {
@@ -78,24 +85,35 @@ export class TransferComponent implements OnInit {
       }
     }
 
-    if (this.sessionStorageService.getFromSession('waitTime')) {
-      const waitTime = new Date(this.sessionStorageService.getFromSession('waitTime'));
-      const seconds = (waitTime.getTime() - new Date().getTime());
-      if (seconds > 0) {
-        this.waitFlag = true;
-        setTimeout(() => {
-          this.waitFlag = false;
-          this.sessionStorageService.deleteFromSession('waitTime');
-        }, seconds);
-      } else {
-        this.sessionStorageService.deleteFromSession('waitTime');
+    let angeliumnInfo: any = await this.storageService.getAngeliumStorage();
+    if (angeliumnInfo) {
+      if (angeliumnInfo.waitTime) {
+        const waitTime = new Date(angeliumnInfo.waitTime);
+        const seconds = (waitTime.getTime() - new Date().getTime());
+        if (seconds > 0) {
+          this.waitFlag = true;
+          setTimeout(() => {
+            this.waitFlag = false;
+            this.storageService.saveToAngeliumSession({'waitTime': null});
+          }, seconds);
+        } else {
+          this.storageService.saveToAngeliumSession({'waitTime': null});
+        }
       }
     }
-
-    this.sendForm = this.formBuilder.group({
-      transfer_amount: ['', Validators.required],
-      destination_address: ['', Validators.required],
-    });
+    // if (this.sessionStorageService.getFromSession('waitTime')) {
+    //   const waitTime = new Date(this.sessionStorageService.getFromSession('waitTime'));
+    //   const seconds = (waitTime.getTime() - new Date().getTime());
+    //   if (seconds > 0) {
+    //     this.waitFlag = true;
+    //     setTimeout(() => {
+    //       this.waitFlag = false;
+    //       this.sessionStorageService.deleteFromSession('waitTime');
+    //     }, seconds);
+    //   } else {
+    //     this.sessionStorageService.deleteFromSession('waitTime');
+    //   }
+    // }
   }
 
   get f() {
@@ -341,10 +359,12 @@ export class TransferComponent implements OnInit {
         // 15 seconds wait time for next transaction.
         let currentTime = new Date();
         currentTime.setSeconds(currentTime.getSeconds() + 15);
-        this.sessionStorageService.saveToSession('waitTime', currentTime);
+        // this.sessionStorageService.saveToSession('waitTime', currentTime);
+        this.storageService.saveToAngeliumSession({'waitTime': currentTime });
         setTimeout(() => {
           this.waitFlag = false;
-          this.sessionStorageService.deleteFromSession('waitTime');
+          // this.sessionStorageService.deleteFromSession('waitTime');
+          this.storageService.saveToAngeliumSession({'waitTime': null });
         }, 15000);
 
         this.formSubmitting = false;

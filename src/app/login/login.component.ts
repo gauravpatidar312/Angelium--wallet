@@ -6,6 +6,11 @@ import {HttpService} from '../services/http.service';
 import {SessionStorageService} from '../services/session-storage.service';
 import {ToastrService} from '../services/toastr.service';
 import {AuthService} from '../_guards/auth.service';
+import {Store} from '@ngrx/store';
+import {LogIn} from '../@core/store/actions/user.action';
+import {AppState, selectAuthState} from '../@core/store/app.state';
+import { AuthEffects } from '../@core/store/effects/auth.effect';
+
 declare let $: any;
 declare let jQuery: any;
 @Component({
@@ -25,11 +30,13 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private sessionStorageService: SessionStorageService,
               private toastrService: ToastrService,
-              private authService: AuthService) {
-    const currentUser = this.authService.isAuthenticated();
-    if (currentUser) {
-      this.router.navigate(['/pages/setting']);
-    }
+              private authService: AuthService,
+              private store: Store<AppState>,
+              private authEffects: AuthEffects) {
+    // const currentUser = this.authService.isAuthenticated();
+    // if (currentUser) {
+    //   this.router.navigate(['/pages/setting']);
+    // }
   }
 
   ngOnInit() {
@@ -64,28 +71,43 @@ export class LoginComponent implements OnInit {
     }
 
     this.formSubmitting = true;
-    this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
-      if (res.token) {
-        this.sessionStorageService.saveToSession('userInfo', res);
-        if (this.sessionStorageService.getFromSession('invitationCode')) {
-          this.sessionStorageService.deleteFromSession('invitationCode');
+    this.store.dispatch(new LogIn(this.loginForm.value));
+    this.authEffects.LogInFailure.subscribe(res => {
+      if (res.hasOwnProperty('payload')) {
+        if (res.payload.hasOwnProperty('error')) {
+          this.formSubmitting = false;
         }
-        this.getUserSettingInfo();
-      } else {
-        this.formSubmitting = false;
-        this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
       }
-    }, err => {
-      console.log(err);
-      this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Login Failed');
     });
+    // this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
+    //   if (res.token) {
+    //     this.sessionStorageService.saveToSession('userInfo', res);
+    //     if (this.sessionStorageService.getFromSession('invitationCode')) {
+    //       this.sessionStorageService.deleteFromSession('invitationCode');
+    //     }
+    //     this.getUserSettingInfo();
+    //   } else {
+    //     this.formSubmitting = false;
+    //     this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
+    //   }
+    // });
+    // this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
+    //   if (res.token) {
+    //     this.sessionStorageService.saveToSession('userInfo', res);
+    //     if (this.sessionStorageService.getFromSession('invitationCode')) {
+    //       this.sessionStorageService.deleteFromSession('invitationCode');
+    //     }
+    //     this.getUserSettingInfo();
+    //   } else {
+    //     this.formSubmitting = false;
+    //     this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
+    //   }
+    // });
   }
 
-  getUserSettingInfo() {
-    this.httpService.get('profile/').subscribe(data => {
-      this.sessionStorageService.updateFromSession('userInfo', data);
-      this.router.navigate(['pages/dashboard']);
-    });
-  }
+  // getUserSettingInfo() {
+  //   this.httpService.get('profile/').subscribe(data => {
+  //     this.router.navigate(['pages/dashboard']);
+  //   });
+  // }
 }

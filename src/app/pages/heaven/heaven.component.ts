@@ -34,6 +34,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   currentTheme: string;
   heaven_amount: any;
   wallet: any;
+  maxAmount: number;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   fetchingTotalHeaven: boolean = false;
@@ -189,7 +190,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     else if (typeValue === 'createHeaven') {
       this.walletType = period;
       this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-      this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+      this.maxAmount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
+      this.heaven_amount = this.maxAmount;
       this.setAmount(this.walletType);
     }
     this.periodChange.emit(period);
@@ -217,7 +219,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+    this.heaven_amount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
     this.setAmount(this.wallet.wallet_type);
   }
 
@@ -232,7 +234,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    if (Number(this.heaven_amount) > Number(this.wallet.wallet_amount)) {
+    if (Number(this.heaven_amount) > ShareDataService.toFixedDown(this.wallet.wallet_amount, 6)) {
       this.toastrService.danger('You don\'t have sufficient balance.', 'Heaven');
       return;
     }
@@ -292,7 +294,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (this.shareDataService.transferTitle) {
         this.walletType = this.shareDataService.transferTitle;
         this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = Number(Number(this.wallet.wallet_amount).toFixed(6));
+        this.heaven_amount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
         this.setAmount(this.walletType);
         this.shareDataService.transferTitle = null;
       }
@@ -324,8 +326,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       const heaven_history_data = _.map(data, function(obj) {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.total_received = (obj.total_received.toFixed(2)) + ' ANX';
-        obj.heaven_amount = obj.heaven_amount.toFixed(6);
+        obj.total_received = (ShareDataService.toFixedDown(obj.total_received, 2)) + ' ANX';
+        obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
         return obj;
       });
       this.source.load(heaven_history_data);
