@@ -28,6 +28,7 @@ import { ToastrService } from "./services/toastr.service";
 import { AuthService } from "./_guards/auth.service";
 import { AuthGuard } from './_guards/auth.guard';
 import { ShareDataService } from "./services/share-data.service";
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
@@ -35,8 +36,10 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
+
+
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
