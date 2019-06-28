@@ -103,6 +103,10 @@ export class SettingComponent implements OnInit {
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.userData.user_language = lan;
+    this.httpService.put({'user_language': lan.id }, 'update_userlang/')
+      .subscribe(res=>{
+        this.toastrService.success('Language update successfully!', 'Language');
+      });
     this.sessionStorage.updateUserState(this.userData);
   }
 
