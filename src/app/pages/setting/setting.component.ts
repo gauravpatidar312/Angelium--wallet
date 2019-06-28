@@ -85,16 +85,8 @@ export class SettingComponent implements OnInit {
   getLanguageData(){
     this.httpService.getLanguage('languages/').subscribe(res=>{
       this.languageData = res;
-      this.selectedLang = 'English';
-      var browserDetectLang = navigator.language.split("-")[0];
-      var currectLang = this.languageData.find((data:any)=> {
-        return data.language_code === browserDetectLang;
-      });
-      if (currectLang) {
-        this.selectedLang = currectLang.language;
-      }else{
-        this.selectedLang = 'English';
-      }
+      const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+      this.selectedLang = userSettingInfo.user_language.language;
     });
   }
 
@@ -129,8 +121,8 @@ export class SettingComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.userData.age_confirm = true;
-        this.sessionStorage.updateFromSession('userInfo', {'age_confirm': true});
-
+        // this.sessionStorage.updateFromSession('userInfo', {'age_confirm': true});
+        this.sessionStorage.updateUserState(this.userData);
         this.r18modeSwitchText = true;
         const data = {'r18mode': true, 'age_confirm': true};
         this.updateR18mode(data);
@@ -243,7 +235,9 @@ export class SettingComponent implements OnInit {
   updateR18mode(data: any) {
     this.httpService.put(data, 'r18mode/').subscribe((res?: any) => {
       if (res.status) {
-        this.sessionStorage.updateFromSession('userInfo', data);
+        this.userData.r18mode = data.r18mode;
+        // this.sessionStorage.updateFromSession('userInfo', data);
+        this.sessionStorage.updateUserState(this.userData);
         if (data.r18mode) {
           this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE ENABLED');
         } else {
@@ -282,7 +276,8 @@ export class SettingComponent implements OnInit {
       .subscribe(res => {
         if (res.status === 'country updated') {
           this.userData.country = apiData.country;
-          this.sessionStorage.updateFromSession('userInfo', apiData);
+          // this.sessionStorage.updateFromSession('userInfo', apiData);
+          this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success('Country update successfully', 'Country');
         }
       }, err => {
@@ -332,7 +327,8 @@ export class SettingComponent implements OnInit {
           ref.close();
           this.shareDataService.changeData(res);
           this.userData.avatar = res.avatar;
-          this.sessionStorage.updateFromSession('userInfo', res);
+          // this.sessionStorage.updateFromSession('userInfo', res);
+          this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success('User image change successfully', 'Picture updated');
         }
       });

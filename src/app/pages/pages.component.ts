@@ -22,7 +22,6 @@ export class PagesComponent implements OnInit {
   constructor(private sessionStorage: SessionStorageService,
     public translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      console.log(MENU_ITEMS);
       this.setMenuTranslation();
     });
   }
