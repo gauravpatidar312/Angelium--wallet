@@ -1,18 +1,26 @@
 import {Component, AfterViewInit, Output, EventEmitter, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
-import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbStepperComponent, NbDialogService} from '@nebular/theme';
+import {
+  NbMediaBreakpoint,
+  NbMediaBreakpointsService,
+  NbThemeService,
+  NbStepperComponent,
+  NbDialogService
+} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
-import { SessionStorageService } from '../../services/session-storage.service';
-import { ToastrService } from '../../services/toastr.service';
-import { HttpService } from '../../services/http.service';
-import { DatePipe } from '@angular/common'
-import { NbStepComponent } from '@nebular/theme/components/stepper/step.component';
-declare let $:any;
+import {SessionStorageService} from '../../services/session-storage.service';
+import {ToastrService} from '../../services/toastr.service';
+import {HttpService} from '../../services/http.service';
+import {DatePipe} from '@angular/common'
+import {NbStepComponent} from '@nebular/theme/components/stepper/step.component';
+
+declare let $: any;
+
 @Component({
   selector: 'ngx-kyc',
   templateUrl: './kyc.component.html',
   styleUrls: ['./kyc.component.scss'],
 })
-export class KYCComponent implements AfterViewInit,OnDestroy {
+export class KYCComponent implements AfterViewInit, OnDestroy {
 
   private alive = true;
   @Output() periodChange = new EventEmitter<string>();
@@ -45,8 +53,6 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
 
   selectedImage = '';
 
-  userDateOfBirth = '';
-
   userData: any;
 
   kycFormDisable = false;
@@ -73,56 +79,50 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
-      this.userData = this.sessionStorage.getFromSession('userInfo');
-      // console.log('profile data', this.userData);
-      if (this.userData.kyc_info) {        
-        if (this.userData.kyc_info.status_description === 'pending') {
-          this.kycFormDisable = true;
-          this.updateStateKYC();
-          // this.kycStep = 'pending';
-        }
-      } else {
-        if (!this.userData.kyc_info.hasOwnProperty('datefield')) {
-          this.userData.kyc_info.datefield = '';
-        }
-      }
+    this.userData = this.sessionStorage.getFromSession('userInfo');
+    this.userData.kyc_info = this.userData.kyc_info || {};
+    if (this.userData.kyc_info.status_description === 'pending') {
+      this.kycFormDisable = true;
+      this.updateStateKYC();
+      // this.kycStep = 'pending';
+    }
+    if (!this.userData.kyc_info.datefield) {
+      this.userData.kyc_info.datefield = '';
+    }
   }
 
   ngAfterViewInit() {
-    if (this.userData.kyc_info) {        
-      if (this.userData.kyc_info.status_description === 'pending') {
-        this.statusPending();
-      }
+    if (this.userData.kyc_info && this.userData.kyc_info.status_description === 'pending') {
+      this.statusPending();
     }
 
-    $("[data-fancybox]").fancybox({
-      thumbs          : false,
-      hash            : false,
-      loop            : true,
-      keyboard        : true,
-      toolbar         : false,
-      animationEffect : true,
-      arrows          : true,
-      clickContent    : true
+    $('[data-fancybox]').fancybox({
+      thumbs: false,
+      hash: false,
+      loop: true,
+      keyboard: true,
+      toolbar: false,
+      animationEffect: true,
+      arrows: true,
+      clickContent: true
     });
   }
 
   statusPending() {
     setTimeout(() => {
       this.stepper.selectedIndex = 1;
-    }, 7)
+    }, 7);
   }
 
   updateStateKYC() {
-    if (this.userData.kyc_info) {        
-      if (this.userData.kyc_info.status_description === 'pending') {
-        this.idFrontLabel = 'ID Proof (front side)';
-        // this.idFrontLabel = this.userData.kyc_info.doc_photo;
-        // this.idBackLabel = this.userData.kyc_info.doc_photo_back;
-        // this.selfieLabel = this.userData.kyc_info.selfie;
-      }
+    if (this.userData.kyc_info && this.userData.kyc_info.status_description === 'pending') {
+      this.idFrontLabel = 'ID Proof (front side)';
+      // this.idFrontLabel = this.userData.kyc_info.doc_photo;
+      // this.idBackLabel = this.userData.kyc_info.doc_photo_back;
+      // this.selfieLabel = this.userData.kyc_info.selfie;
     }
   }
+
   changePeriod(period: string, typeValue): void {
     if (typeValue === 'day')
       this.typeOfDay = period;
@@ -159,9 +159,9 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
   uploadKYC() {
     if (!this.kycFormDisable) {
       const formData: FormData = new FormData();
-      if (this.userDateOfBirth != '') {
-        let formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
-        formData.append('datefield', formatedData); 
+      if (this.userData.kyc_info && this.userData.kyc_info.datefield) {
+        const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
+        formData.append('datefield', formatedData);
       } else {
         this.toastrService.danger('Please select date of birth.', 'KYC');
         return;
@@ -175,7 +175,7 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
         return;
       }
       if (this.idBackChangedEvent !== '') {
-        const file = this.idFrontChangedEvent.target.files[0];
+        const file = this.idBackChangedEvent.target.files[0];
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('doc_photo_back', newfile, newfile.name);
       } else {
@@ -183,14 +183,14 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
         return;
       }
       if (this.selfieChangedEvent !== '') {
-        const file = this.idFrontChangedEvent.target.files[0];
+        const file = this.selfieChangedEvent.target.files[0];
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('selfie', newfile, newfile.name);
       } else {
         this.toastrService.danger('Please upload selfie.', 'KYC');
         return;
       }
-  
+
       this.httpService.post(formData, 'kyc/').subscribe((res?: any) => {
         if (res.status_description === 'pending') {
           this.userData.kyc_info = {};
@@ -198,7 +198,8 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
           if (this.userData.kyc_info.status_description === 'pending') {
             this.statusPending();
             this.updateStateKYC();
-          }4
+          }
+
           this.sessionService.updateUserState(this.userData);
           this.kycFormDisable = true;
           this.toastrService.success('User kyc upload successfully', 'KYC');
@@ -209,7 +210,7 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
 
   openDialog(dialog: TemplateRef<any>, selectImage) {
     this.selectedImage = selectImage;
-    this.dialogService.open(dialog,  {
+    this.dialogService.open(dialog, {
       closeOnBackdropClick: false,
       autoFocus: false,
     });
