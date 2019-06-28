@@ -17,6 +17,11 @@ export class ShareDataService {
     this.messageSource.next(data);
   }
 
+  static toFixedDown(number: number, digits: number = 0) {
+    const re = new RegExp('(\\d+\\.\\d{' + digits + '})(\\d)'), m = number.toString().match(re);
+    return m ? parseFloat(m[1]) : number.valueOf();
+  }
+
   static getErrorMessage(err: any) {
     let msg = 'Something went wrong. We request you to try after sometime.';
     if (err.status === 500)
