@@ -110,7 +110,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       rewardrate: {
-        title: this.translate.instant('pages.reward.downlineTree.reward')+" "+ this.translate.instant('pages.reward.downlineTree.rate'),
+        title: this.translate.instant('pages.reward.downlineTree.reward')+' '+ this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -118,7 +118,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downlinereward: {
-        title: this.translate.instant('common.downline')+" "+ this.translate.instant('pages.reward.downlineTree.rate'),
+        title: this.translate.instant('common.downline')+" "+ this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {

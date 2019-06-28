@@ -22,6 +22,7 @@
     "run": "运行",
     "register": "注册",
     "repeat": "Repeat",
+    "rate": "利率",
     "slideRightToVerify": "Slide right to verify",
     "select": "选择",
     "sendSMS": "Send SMS",
@@ -80,7 +81,6 @@
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "排行",
         "reward": "奖励",
-        "rate": "利率",
         "your_reward": "你的奖励"
       },
       "map": "地图",
