@@ -14,7 +14,7 @@ export class SessionStorageService {
     if (sessionStorage[key]) {
       return JSON.parse(sessionStorage[key]);
     } else {
-      return "false";
+      return false;
     }
   };
 
@@ -35,7 +35,7 @@ export class SessionStorageService {
       let data = Object.assign(JSON.parse(sessionStorage[key]), value);
       sessionStorage[key] = JSON.stringify(data);
     } else {
-      return "false";
+      return false;
     }
   };
 }
