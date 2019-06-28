@@ -21,7 +21,6 @@ declare const jQuery: any;
 export class TransferComponent implements OnInit {
   private alive = true;
   isProduction: any = environment.production;
-  sendForm: FormGroup;
   sendType: string = this.translate.instant('common.select');
   receiveType: string =  this.translate.instant('common.select');
   fromType: string = 'ANX';
@@ -44,10 +43,11 @@ export class TransferComponent implements OnInit {
   otcWallet: any = {};
   otcWallets: any = [];
   fromOTCAmount: number;
+  transfer_amount: number;
+  destination_address: number;
   trade_password: any = '';
 
   constructor(private httpService: HttpService,
-              private formBuilder: FormBuilder,
               private dialogService: NbDialogService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -68,11 +68,6 @@ export class TransferComponent implements OnInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
-
-    this.sendForm = this.formBuilder.group({
-      transfer_amount: ['', Validators.required],
-      destination_address: ['', Validators.required],
-    });
   }
 
   async ngOnInit() {
@@ -117,10 +112,6 @@ export class TransferComponent implements OnInit {
     // }
   }
 
-  get f() {
-    return this.sendForm.controls;
-  }
-
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
@@ -162,12 +153,12 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
+    if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger('Please enter required field for transfer.', 'Send');
       return;
     }
 
-    if (Number(this.sendForm.value.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
+    if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
       this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
       return;
     }
@@ -205,14 +196,14 @@ export class TransferComponent implements OnInit {
   }
 
   setAmount(walletType) {
-    if (!this.sendForm.value.transfer_amount) {
+    if (!this.transfer_amount) {
       this.sendWallet.walletDollar = 0;
       return;
     }
 
     this.fetchingAmount = true;
     this.httpService.get('live-price/').subscribe(data => {
-      this.sendWallet.walletDollar = Number(this.sendForm.value.transfer_amount) * data[walletType];
+      this.sendWallet.walletDollar = Number(this.transfer_amount) * data[walletType];
       this.fetchingAmount = false;
     }, (err) => {
       this.fetchingAmount = false;
@@ -226,7 +217,7 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.sendForm.controls.transfer_amount.setValue(Number(Number(this.sendWallet.wallet_amount).toFixed(6)));
+    this.transfer_amount = Number(Number(this.sendWallet.wallet_amount).toFixed(6));
     this.setAmount(this.sendWallet.wallet_type);
   }
 
@@ -300,7 +291,7 @@ export class TransferComponent implements OnInit {
       }
       if (this.sendWallet) {
         // this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
-        this.sendForm.controls.transfer_amount.setValue(0);
+        this.transfer_amount = 0;
         this.setAmount(walletType);
       }
     } else if (typeValue === 'receive') {
@@ -331,12 +322,12 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
+    if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger('Please enter required field for transfer.', 'Send');
       return;
     }
 
-    if (Number(this.sendForm.value.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
+    if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
       this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
       return;
     }
@@ -349,8 +340,8 @@ export class TransferComponent implements OnInit {
 
     const transferObj = {
       'user_wallet': this.sendWallet.id,
-      'destination_address': this.sendForm.value.destination_address,
-      'transfer_amount': Number(this.sendForm.value.transfer_amount),
+      'destination_address': this.destination_address,
+      'transfer_amount': Number(this.transfer_amount),
     };
 
     this.waitFlag = true;
@@ -374,7 +365,7 @@ export class TransferComponent implements OnInit {
           this.myWallets = data;
         });
         this.onChangeWallet('SELECT', 'send');
-        this.sendForm.controls.destination_address.setValue(null);
+        this.destination_address = null;
       } else {
         this.waitFlag = false;
         this.formSubmitting = false;
