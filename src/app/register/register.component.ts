@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   currentTheme: string;
   breakpoints: any;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
-  languageType: string = 'SELECT';
+  selectedLang: string = 'SELECT';
   languageData = [
     // {'language': 'English', 'code': 'en'},
     // {'language': 'Chinese', 'code': 'zh'},
@@ -71,13 +71,11 @@ export class RegisterComponent implements OnInit {
         return data.language_code === browserDetectLang;
       });
       if (currectLang) {
-        this.languageType = currectLang.language;
+        this.selectedLang = currectLang.language;
         this.registerForm.controls.user_language.setValue(currectLang.id);
-        this.translate.use(currectLang.language_code);
       }else{
-        this.languageType = 'English';
+        this.selectedLang = 'English';
         this.registerForm.controls.user_language.setValue(1);
-        this.translate.use('en');
       }
     });
   }
@@ -238,7 +236,7 @@ export class RegisterComponent implements OnInit {
   }
 
   changeLanguage(lan: any){
-    this.languageType = lan.language;
+    this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.registerForm.controls.user_language.setValue(lan.id);
     this.getCapchaTranslation();

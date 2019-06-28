@@ -102,6 +102,8 @@ export class SettingComponent implements OnInit {
   changeLang(lan: any){
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
+    this.userData.user_language = lan;
+    this.sessionStorage.updateUserState(this.userData);
   }
 
   ngOnInit() {
