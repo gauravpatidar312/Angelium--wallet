@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
 import { SmartTableData } from '../../@core/data/smart-table';
 import { LocalDataSource } from 'ng2-smart-table';
 
@@ -32,19 +33,19 @@ export class HQComponent implements OnInit {
         type: 'number'
       },
       firstName: {
-        title: 'First Name',
+        title: this.translate.instant('pages.register.firstName'),
         type: 'string',
       },
       lastName: {
-        title: 'Last Name',
+        title: this.translate.instant('pages.register.lastName'),
         type: 'string',
       },
       username: {
-        title: 'Username',
+        title: this.translate.instant('common.username'),
         type: 'string',
       },
       email: {
-        title: 'E-mail',
+        title: this.translate.instant('pages.setting.eMail'),
         type: 'string',
       },
       age: {
@@ -53,7 +54,8 @@ export class HQComponent implements OnInit {
       },
     },
   };
-  constructor(private service: SmartTableData) {
+  constructor(private service: SmartTableData,
+    public translate: TranslateService) {
     const data = this.service.getData();
     this.source.load(data);
   }
