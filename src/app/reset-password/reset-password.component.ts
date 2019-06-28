@@ -8,6 +8,7 @@ import {HttpService} from '../services/http.service';
 import {ToastrService} from '../services/toastr.service';
 import {SessionStorageService} from '../services/session-storage.service';
 import {ShareDataService} from '../services/share-data.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-reset-password',
@@ -31,7 +32,8 @@ export class ResetPasswordComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
-              private sessionStorageService: SessionStorageService) {
+              private sessionStorageService: SessionStorageService,
+              private translate:TranslateService) {
 
   }
 
