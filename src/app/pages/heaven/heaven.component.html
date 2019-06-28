@@ -7,7 +7,7 @@
         <div class="details full-width">
           <div class="row">
             <div class="col-7 mt-2">
-              <div class="title">Total Heaven</div>
+              <div class="title">{{"pages.heaven.totalHeaven" | translate}}</div>
             </div>
             <div class="col-5" *ngIf="fetchingTotalHeaven"><div class="status text-white mt-0"><i class="fa fa-spinner spinner-color fa-spin"></i></div></div>
             <div class="col-5" *ngIf="!fetchingTotalHeaven">
@@ -43,7 +43,7 @@
         <div class="details full-width">
           <div class="row">
             <div class="col-7 mt-2">
-              <div class="title">Heaven Drop Today</div>
+              <div class="title heaven-drop">{{"pages.heaven.heavenDropToday" | translate}}</div>
             </div>
             <div class="col-5 col-xs-4" *ngIf="fetchingHeavenDrop"><div class="status text-white mt-0"><i class="fa fa-spinner spinner-color fa-spin"></i></div></div>
             <div class="col-5 col-xs-4" *ngIf="!fetchingHeavenDrop">
@@ -75,70 +75,70 @@
   <div class="row">
     <div class="col-md-4">
       <nb-card>
-        <nb-card-header class="day-header-title title">Heaven 30</nb-card-header>
+        <nb-card-header class="day-header-title title">{{"common.heaven" | translate}} 30</nb-card-header>
         <nb-card-body class="row font-bebasNeue">
           <div class="col-5">
             <div class="text-success text-right days-font">30</div>
-            <div class="text-right days-text">Days</div></div>
+            <div class="text-right days-text">{{"common.days"| translate}}</div></div>
           <div class="col-7 m-t">
             <div>
-              <div class="text-success month-day">Month</div>
+              <div class="text-success month-day">{{"common.month"| translate}}</div>
             <div class="month-day-value ls-half">4.50 %</div>
             </div>
             <div>
-              <span class="text-success month-day">Day</span>
+              <span class="text-success month-day">{{"common.day"| translate}}</span>
             <span class="month-day-value ls-one">0.15 %</span>
             </div>
           </div>
         </nb-card-body>
         <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
-                (click)="selectedHeavenPlan = '30'">Select
+                (click)="selectedHeavenPlan = '30'">{{"common.select" | translate}}
         </button>
       </nb-card>
     </div>
     <div class="col-md-4">
       <nb-card>
-        <nb-card-header class="day-header-title title">Heaven 60</nb-card-header>
+        <nb-card-header class="day-header-title title">{{"common.heaven" | translate}} 60</nb-card-header>
         <nb-card-body class="row font-bebasNeue">
           <div class="col-5">
             <div class="text-success text-right days-font">60</div>
-            <div class="text-right days-text">Days</div></div>
+            <div class="text-right days-text">{{"common.days"| translate}}</div></div>
           <div class="col-7 m-t">
             <div>
-              <div class="text-success month-day">Month</div>
+              <div class="text-success month-day">{{"common.month"| translate}}</div>
               <div class="month-day-value">6.00 %</div>
             </div>
             <div>
-              <span class="text-success month-day">Day</span>
+              <span class="text-success month-day">{{"common.day"| translate}}</span>
               <span class="month-day-value">0.20 %</span>
             </div>
           </div>
         </nb-card-body>
         <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
-                (click)="selectedHeavenPlan = '60'">Select
+                (click)="selectedHeavenPlan = '60'">{{"common.select" | translate}}
         </button>
       </nb-card>
     </div>
     <div class="col-md-4">
       <nb-card>
-        <nb-card-header class="day-header-title title">Heaven 90</nb-card-header>
+        <nb-card-header class="day-header-title title">{{"common.heaven" | translate}} 90</nb-card-header>
         <nb-card-body class="row font-bebasNeue">
           <div class="col-5">
             <div class="text-success text-right days-font">90</div>
-            <div class="text-right days-text">Days</div></div>
+            <div class="text-right days-text">{{"common.days"| translate}}</div></div>
           <div class="col-7 m-t">
             <div>
-              <div class="text-success month-day">Month</div>
+              <div class="text-success month-day">{{"common.month"| translate}}</div>
               <div class="month-day-value">9.00 %</div>
             </div>
             <div>
-              <span class="text-success month-day">Day</span>
+              <span class="text-success month-day">{{"common.day"| translate}}</span>
               <span class="month-day-value">0.30 %</span>
             </div>
           </div>
         </nb-card-body>
         <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
-                (click)="selectedHeavenPlan = '90'">Select
+                (click)="selectedHeavenPlan = '90'">{{"common.select" | translate}}
         </button>
       </nb-card>
     </div>
@@ -150,7 +150,9 @@
           <div class="row">
             <div class="col-md-6 col-lg-4">
               <div class="form-group font-avenir">
-                <label style="color: #00ff00">From</label>
+                <label style="color: #00ff00">
+                  {{"common.from" | translate}}
+                </label>
                 <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
                      ngbDropdown>
                 <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn b-color-wallet"
@@ -170,8 +172,10 @@
             </div>
             <div class="col-md-6 col-lg-4">
               <div class="form-group total-amount font-avenir">
-                <label style="color: #00ff00">Amount</label>
-                <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="Enter amount"
+                <label style="color: #00ff00">
+                  {{"common.amount" | translate}}
+                </label>
+                <input type="number" [required]="true" [(ngModel)]="heaven_amount" placeholder="{{'common.enter'|translate}} {{'common.amount'|translate}}"
                      step="0.000001" [disabled]="!wallet?.wallet_type"
                      class="form-control input-padding font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
@@ -185,10 +189,12 @@
             <div class="col-md-12 col-lg-4">
               <div class="form-group">
                 <label class="d-none d-md-block">&nbsp;</label>
-              <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || !wallet?.wallet_type"
+                <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || !wallet?.wallet_type"
                       (click)="onCreateHeaven()"
                       class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
-                  <span *ngIf="!(formSubmitting || fetchingAmount)">RUN</span>
+                  <span *ngIf="!(formSubmitting || fetchingAmount)">
+                    {{"common.run" | translate}}
+                  </span>
                   <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                 </button>
               </div>
@@ -220,12 +226,12 @@
             </div>
             <div class="dropdown" ngbDropdown>
               <button class="btn btn-primary" type="button" ngbDropdownToggle>
-                Year
+                {{'common.year'|translate}}
               </button>
               <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item"> Week</li>
-                <li class="dropdown-item"> Month</li>
-                <li class="dropdown-item"> Year</li>
+                <li class="dropdown-item"> {{'common.week'|translate}}</li>
+                <li class="dropdown-item"> {{'common.month'|translate}}</li>
+                <li class="dropdown-item"> {{'common.year'|translate}}</li>
               </ul>
             </div>
           </div>
@@ -259,7 +265,7 @@
         <nb-card-header class="row heavenhistory">
           <div class="col-md-6">
             <div class="navbar-header heavenHistory-tree">
-              Heaven History
+              {{"common.heaven" | translate}} {{"pages.heaven.history" | translate}}
             </div>
           </div>
           <div class="col-md-6 heavenHistoryColumn">

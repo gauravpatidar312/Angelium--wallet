@@ -1,0 +1,125 @@
+{
+  "common":{
+    "assets": "자산",
+    "amount": "수량",
+    "downline": "다운라인",
+    "days": "일",
+    "day": "일",
+    "emailAddress": "이메일",
+    "email": "이메일",
+    "enter": "입력",
+    "from": "From",
+    "heaven": "헤븐",
+    "login": "로그인",
+    "last": "지난",
+    "level": "레벨",
+    "month": "월",
+    "password": "비밀번호",
+    "phone": "휴대전화",
+    "profit": "수익",
+    "profile":"프로필",
+    "reward": "리워드",
+    "run": "실행",
+    "register": "등록",
+    "repeat": "재입력",
+    "slideRightToVerify": "밀어서 인증하기",
+    "select": "선택",
+    "sendSMS": "인증번호 전송",
+    "setting": "설정",
+    "transfer": "이체하기",
+    "trade": "거래",
+    "total": "총",
+    "today": "오늘",
+    "top": "홈",
+    "username": "사용자명",
+    "verificationCode": "인증번호",
+    "verified": "인증됨",
+    "week": "주",
+    "year": "년"
+  }, 
+  "messages":{
+    "required": "{{field}} 이(가) 필요합니다"
+  },
+  "header": {
+    "logoTitle": "ANGELIUM",
+    "logout": "로그아웃"
+  },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
+  },
+  "pages":{
+    "dashboard":{
+      "articleTitle": "기사 제목",
+      "eventUpdate": "이벤트 업데이트",
+      "profitToday": "오늘의 이익",
+      "portfolio": "포트폴리오",
+      "systemUpdate": "시스템 업데이트",
+      "totalAsset": "총자산"
+    },
+    "heaven":{
+      "entryDate": "참여일",
+      "history": "내역",
+      "ID": "ID",
+      "heavenDropToday": "오늘의 헤븐 드롭",
+      "plan": "계획",
+      "received": "Received",
+      "releaseDate": "완료일",
+      "releaseSetting": "완료 설정",
+      "totalHeaven": "총 헤븐"
+    },
+    "login":{
+      "DontHaveAnAccount": "계정이 없으신가요?",
+      "forgotPassword": "비밀번호 찾기",
+      "HelloLoginWithYourEmail" : "반갑습니다! 이메일로 로그인해주세요",
+      "login": "로그인",
+      "rememberMe": "로그인 정보 기억하기"
+    },
+    "reward":{
+      "downlineAngel": "소개한 엔젤",
+      "downlineTree": {
+        "noUserDownlineTree": "다운라인 트리에 사용자가 없습니다",
+        "rank": "랭킹",
+        "reward": "리워드",
+        "rate": "이율",
+        "your_reward": "당신의 리워드"
+      },
+      "map": "지도",
+      "rewardAllocation": "리워드 내역",
+      "rewardToday": "오늘의 리워드",
+      "tree": "다운라인 트리",
+      "totalReward": "총 리워드",
+      "yourRank": "당신의 랭킹",
+      "yourReward": "당신의 리워드"
+    },
+    "register":{
+      "alreadyHaveAnAccount": "이미 가입하셨나요?",
+      "agreeTo": "동의하기",
+      "firstName": "명",
+      "lastName": "성",
+      "number": "number",
+      "repeatPassword": "비밀번호 재입력",
+      "RealNameIsRequiredForKYC": "KYC 인증을 위한 실명이 필요합니다. 등록한 후 변경할 수 없습니다",
+      "terms&Conditions" : "이용약관"
+    },
+    "setting": {
+      "country": "국가",
+      "currency": "통화",
+      "name": "이름",
+      "eMail": "이메일",
+      "language": "언어",
+      "merge": "통합",
+      "kyc": "KYC",
+      "qr": "QR",
+      "r18mode": "R-18 모드",
+      "referral": "추천코드",
+      "rank": "랭킹",
+      "secretKey": "Secret Key",
+      "2FA": "2FA"
+    },
+    "transfer":{
+      "receive": "입금",
+      "send": "출금",
+      "to": "To"
+    }
+  }
+}

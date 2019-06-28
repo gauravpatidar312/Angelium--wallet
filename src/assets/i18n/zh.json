@@ -1,0 +1,125 @@
+{
+  "common":{
+    "assets": "Assets",
+    "amount" : "数量",
+    "downline": "邀请好友",
+    "days": "Days",
+    "day": "Day",
+    "emailAddress": "邮箱地址",
+    "email": "电子邮箱",
+    "enter": "Enter",
+    "from": "From",
+    "heaven": "天堂",
+    "login": "登录",
+    "last": "Last",
+    "level": "等级",
+    "month": "月",
+    "password": "密码",
+    "phone": "手机号吗",
+    "profit": "Profit",
+    "profile":"个人资料",
+    "reward": "奖励",
+    "run": "运行",
+    "register": "注册",
+    "repeat": "Repeat",
+    "slideRightToVerify": "Slide right to verify",
+    "select": "选择",
+    "sendSMS": "Send SMS",
+    "setting": "设置",
+    "transfer": "转账",
+    "trade": "Trade",
+    "total": "Total",
+    "today": "Today",
+    "top": "顶部",
+    "username": "用户名",
+    "verificationCode": "认证码",
+    "verified": "Verified",
+    "week": "周",
+    "year": "年"
+  }, 
+  "messages":{
+    "required": "{{field}} 必填"
+  },
+  "header": {
+    "logoTitle": "ANGELIUM",
+    "logout": "登出"
+  },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
+  },
+  "pages":{
+    "dashboard":{
+      "articleTitle": "文章标题",
+      "eventUpdate": "事件更新",
+      "profitToday" : "今日收益",
+      "portfolio": "组合",
+      "systemUpdate": "系统更新",
+      "totalAsset" : "资产总额"
+    },
+    "heaven":{
+      "entryDate": "Entry date",
+      "history": "历史",
+      "ID": "ID",
+      "heavenDropToday": "今日天堂之滴",
+      "plan": "Plan",
+      "received": "Received",
+      "releaseDate": "Release date",
+      "releaseSetting": "Release Setting",
+      "totalHeaven": "天堂总计" 
+    },
+    "login":{
+      "DontHaveAnAccount": "Don't have an account",
+      "forgotPassword": "忘记密码",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "login": "登录",
+      "rememberMe": "记住我" 
+    },
+    "reward":{
+      "downlineAngel": "经我邀请的天使",
+      "downlineTree": {
+        "noUserDownlineTree": "There is no user in your down-line tree",
+        "rank": "排行",
+        "reward": "奖励",
+        "rate": "利率",
+        "your_reward": "你的奖励"
+      },
+      "map": "地图",
+      "rewardAllocation": "奖励分配",
+      "rewardToday": "今日奖励",
+      "tree": "邀请历史及分支",
+      "totalReward": "奖励总额",
+      "yourRank": "你的排行",
+      "yourReward": "你的奖励"
+    },
+    "register":{
+      "alreadyHaveAnAccount": "已有账户",
+      "agreeTo": "Agree to",
+      "firstName": "名",
+      "lastName": "姓",
+      "number": "号码",
+      "repeatPassword": "再次输入密码",
+      "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
+      "terms&Conditions" : "Terms & Conditions"
+    },
+    "setting": {
+      "country": "国家",
+      "currency": "通货",
+      "name": "名称",
+      "eMail": "E-mail",
+      "language": "语言",
+      "merge": "合并",
+      "kyc": "KYC",
+      "qr": "二维",
+      "r18mode": "R-18禁模式",
+      "referral": "转送",
+      "rank": "排行",
+      "secretKey": "密钥",
+      "2FA": "2FA"
+    },
+    "transfer":{
+      "receive": "接收",
+      "send": "发送",
+      "to": "To"
+    }
+  }
+}

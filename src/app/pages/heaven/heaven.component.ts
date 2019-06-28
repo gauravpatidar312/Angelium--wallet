@@ -5,12 +5,16 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { HttpService } from '../../services/http.service';
 import * as _ from 'lodash';
+
+import { TranslateService } from "@ngx-translate/core";
 import { ToastrService } from '../../services/toastr.service';
 import { ShareDataService } from '../../services/share-data.service';
 import { environment } from 'environments/environment';
 import { CustomRendererComponent } from './custom.component';
 import * as moment from 'moment';
+
 declare let $: any;
+
 @Component({
   selector: 'ngx-heaven',
   templateUrl: './heaven.component.html',
@@ -24,7 +28,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   totalHeaven: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';
-  walletType: string = 'SELECT';
+  walletType: string = this.translate.instant('common.select');
   types: string[] = ['week', 'month', 'year'];
   heavenDropTypes: string[] = ['week', 'month', 'year'];
   myWallets: string[];
@@ -37,6 +41,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxAmount: number;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
+  days:any;
   fetchingTotalHeaven: boolean = false;
   fetchingHeavenDrop: boolean = false;
   fetchHeavenHistory: boolean = false;
@@ -46,7 +51,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
               private httpService: HttpService,
-              private toastrService: ToastrService ) {
+              private toastrService: ToastrService,
+              public translate: TranslateService) {
     // const data = this.service.getData();
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -60,6 +66,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.translate.get("days").subscribe((res: any) => {
+      this.days = res;
+      console.log(res);
+    });
   }
 
   ngOnInit() {
@@ -113,9 +124,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     editable: true,
     mode: 'inline',
+    noDataMessage: "No data found",
     columns: {
       hid: {
-        title: 'Heaven ID',
+        title: this.translate.instant('common.heaven') +' '+ this.translate.instant('pages.heaven.ID'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -123,7 +135,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       heaven_amount: {
-        title: 'Amount',
+        title: this.translate.instant('common.amount'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -139,7 +151,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       plan: {
-        title: 'Plan',
+        title: this.translate.instant('pages.heaven.plan'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -147,7 +159,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       total_received: {
-        title: 'Received',
+        title: this.translate.instant('pages.heaven.received'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -155,7 +167,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       entry_date: {
-        title: 'Entry date',
+        title: this.translate.instant('pages.heaven.entryDate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -163,7 +175,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       release_date: {
-        title: 'Release date',
+        title: this.translate.instant('pages.heaven.releaseDate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -171,7 +183,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       release_settings: {
-        title: 'Release Setting',
+        title: this.translate.instant('pages.heaven.releaseSetting'),
         type: 'custom',
         renderComponent: CustomRendererComponent,
         filter: false,

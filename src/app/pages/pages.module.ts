@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { NbDialogModule } from '@nebular/theme';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-
+import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
@@ -21,7 +21,9 @@ import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt
 import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -43,6 +45,8 @@ const PAGES_COMPONENTS = [
     NbDialogModule.forChild(),
     ClipboardModule,
     NgxQRCodeModule,
+    TranslateModule,
+    InternationalPhoneNumberModule,
     NbDateFnsDateModule.forRoot({
       parseOptions: { awareOfUnicodeTokens: true },
       formatOptions: { awareOfUnicodeTokens: true },

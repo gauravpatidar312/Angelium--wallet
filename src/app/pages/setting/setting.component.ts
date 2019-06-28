@@ -1,10 +1,12 @@
 import {HostListener, Component, OnInit, TemplateRef} from '@angular/core';
 import {icons} from 'eva-icons';
-import {NbDialogService} from '@nebular/theme';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbDialogService} from '@nebular/theme';
+import {takeWhile} from 'rxjs/operators';
 import {NavigationStart, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {DialogNamePromptComponent} from './dialog-prompt/dialog-prompt.component';
 import {ImageCroppedEvent} from './image-cropper/interfaces/image-cropped-event.interface';
+import { TranslateService } from "@ngx-translate/core";
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
@@ -22,8 +24,17 @@ export let browserRefresh = false;
 export class SettingComponent implements OnInit {
   isProduction: boolean = environment.production;
   evaIcons = [];
+  selectedLang: string = 'SELECT';
+  languageData = [
+    // {'language': 'English', 'code': 'en'},
+    // {'language': 'Chinese', 'code': 'zh'},
+    // {'language': 'Japanese', 'code': 'ja'},
+    // {'language': 'Korean', 'code': 'ko'}
+  ]
+  private alive = true;
   userData: any;
   imageChangedEvent: any = '';
+  currentTheme: string;
   croppedImage: any = '';
   croppedImageSize: any = '';
   userImageBase64: any;
@@ -34,20 +45,49 @@ export class SettingComponent implements OnInit {
   newTradePassword: any = '';
   confirmTradePassword: any = '';
   oldTradePassword: any = '';
-
+  breakpoints: any;
+  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
   constructor(private toastrService: ToastrService,
               private dialogService: NbDialogService,
               private httpService: HttpService,
               private shareDataService: ShareDataService,
               private sessionStorage: SessionStorageService,
-              private router: Router) {
+              private router: Router,
+              public translate: TranslateService,
+              private themeService: NbThemeService,
+              private breakpointService: NbMediaBreakpointsService,) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
     window.onload = (ev) => {
       browserRefresh = true;
       this.getProfileData();
     };
+    this.themeService.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(theme => {
+        this.currentTheme = theme.name;
+      });
+
+    this.breakpoints = this.breakpointService.getBreakpointsMap();
+    this.themeService.onMediaQueryChange()
+    .pipe(takeWhile(() => this.alive))
+    .subscribe(([oldValue, newValue]) => {
+      this.breakpoint = newValue;
+    });
+    this.getLanguageData();
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
+  }
+
+  getLanguageData(){
+    this.httpService.get('languages/').subscribe(res=>{
+      this.languageData = res;
+      const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+      this.selectedLang = userSettingInfo.user_language.language;
+    });
   }
 
   getProfileData() {
@@ -57,6 +97,11 @@ export class SettingComponent implements OnInit {
         this.userData = data;
       });
     }
+  }
+  
+  changeLang(lan: any){
+    this.selectedLang = lan.language;
+    this.translate.use(lan.language_code);
   }
 
   ngOnInit() {

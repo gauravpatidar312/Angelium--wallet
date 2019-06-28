@@ -1,6 +1,6 @@
 <nb-card>
   <nb-tabset fullWidth (changeTab)="changeTab($event)">
-    <nb-tab tabTitle="Reward">
+    <nb-tab tabTitle='{{"common.reward" | translate}}'>
         <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
       <div class="chart-container">
         <ngx-chart-panel-header [type]="period"
@@ -9,7 +9,7 @@
         <ngx-reward-chart #rewardsChart [rewardsChartData]="rewardsChartData"></ngx-reward-chart>
       </div>
     </nb-tab>
-    <nb-tab tabTitle="Heaven" >
+    <nb-tab tabTitle='{{"common.heaven" | translate}}'>
         <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
       <div class="chart-container">
         <ngx-chart-panel-header [type]="period"

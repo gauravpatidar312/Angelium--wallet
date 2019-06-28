@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
+import {takeWhile} from 'rxjs/operators';
+import { TranslateService } from "@ngx-translate/core";
 // import custom validator to validate that password and confirm password fields match
 import {MustMatch} from '../_helpers/must-match.validator';
 // import services
@@ -21,6 +24,7 @@ declare let jQuery: any;
 })
 
 export class RegisterComponent implements OnInit {
+  private alive = true;
   model: any = {};
   registerForm: FormGroup;
   submitted: boolean = false;
@@ -29,6 +33,17 @@ export class RegisterComponent implements OnInit {
   otpSubmitting: boolean = false;
   isResubmit: boolean = false;
   resubmitTime: number = 60 * 1000;
+  currentTheme: string;
+  breakpoints: any;
+  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
+  languageType: string = 'SELECT';
+  languageData = [
+    // {'language': 'English', 'code': 'en'},
+    // {'language': 'Chinese', 'code': 'zh'},
+    // {'language': 'Japanese', 'code': 'ja'},
+    // {'language': 'Korean', 'code': 'ko'}
+  ]
+
   @ViewChild('otpForm') otpForm: NgForm;
 
   isVerifiedCaptcha = false;
@@ -39,9 +54,32 @@ export class RegisterComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
-              private storageService: IndexedDBStorageService,
-              private dialogService: NbDialogService) {
+              private dialogService: NbDialogService,
+              private breakpointService: NbMediaBreakpointsService,
+              private themeService: NbThemeService,
+              public translate: TranslateService,
+              private storageService: IndexedDBStorageService) {
+    this.getLanguageData();
+  }
+  
 
+  getLanguageData(){
+    this.httpService.get('languages/').subscribe(res=>{
+      this.languageData = res;
+      var browserDetectLang = navigator.language.split('-')[0];
+      var currectLang = this.languageData.find((data:any)=> {
+        return data.language_code === browserDetectLang;
+      });
+      if (currectLang) {
+        this.languageType = currectLang.language;
+        this.registerForm.controls.user_language.setValue(currectLang.id);
+        this.translate.use(currectLang.language_code);
+      }else{
+        this.languageType = 'English';
+        this.registerForm.controls.user_language.setValue(1);
+        this.translate.use('en');
+      }
+    });
   }
 
   ngOnInit() {
@@ -50,6 +88,7 @@ export class RegisterComponent implements OnInit {
       $( document ).on("veryfiedCaptcha", (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
+          this.getCapchaTranslation();
         }
     });
    });
@@ -65,6 +104,7 @@ export class RegisterComponent implements OnInit {
       confirm_password: ['', Validators.required],
       trade_password: ['', Validators.required],
       confirm_trade_password: ['', Validators.required],
+      user_language: [''],
       isAgree: [false],
     });
 
@@ -79,6 +119,23 @@ export class RegisterComponent implements OnInit {
         }
       }
     });
+
+    this.themeService.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(theme => {
+        this.currentTheme = theme.name;
+      });
+
+    this.breakpoints = this.breakpointService.getBreakpointsMap();
+    this.themeService.onMediaQueryChange()
+    .pipe(takeWhile(() => this.alive))
+    .subscribe(([oldValue, newValue]) => {
+      this.breakpoint = newValue;
+    });
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   get f() {
@@ -177,6 +234,27 @@ export class RegisterComponent implements OnInit {
   openTermsConditions() {
     this.dialogService.open(TermsConditionsComponent,  {
       closeOnBackdropClick: false,
+    });
+  }
+
+  changeLanguage(lan: any){
+    this.languageType = lan.language;
+    this.translate.use(lan.language_code);
+    this.registerForm.controls.user_language.setValue(lan.id);
+    this.getCapchaTranslation();
+  }
+
+  getCapchaTranslation(){
+    this.translate.get('common').subscribe((res)=>{
+      if (this.isVerifiedCaptcha) {
+        setTimeout(function(){
+          $("#registerSlider").children(".text").text(res.verified);
+        },0);
+      }else{
+        setTimeout(function(){
+          $("#registerSlider").children(".text").text(res.slideRightToVerify);
+        },0);
+      }
     });
   }
 }

@@ -10,7 +10,7 @@ import { registerMap } from 'echarts';
   styleUrls: ['./bubble-map.component.scss'],
   template: `
     <nb-card>
-    <nb-card-header>Downline map</nb-card-header>
+    <nb-card-header>{{"common.downline" | translate}} {{"pages.reward.map" | translate}}</nb-card-header>
       <nb-card-body>
         <div echarts [options]="options" class="echarts"></div>
       </nb-card-body>
