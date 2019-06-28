@@ -67,6 +67,11 @@ export class TransferComponent implements OnInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.sendForm = this.formBuilder.group({
+      transfer_amount: ['', Validators.required],
+      destination_address: ['', Validators.required],
+    });
   }
 
   async ngOnInit() {
@@ -109,11 +114,6 @@ export class TransferComponent implements OnInit {
     //     this.sessionStorageService.deleteFromSession('waitTime');
     //   }
     // }
-
-    this.sendForm = this.formBuilder.group({
-      transfer_amount: ['', Validators.required],
-      destination_address: ['', Validators.required],
-    });
   }
 
   get f() {
@@ -284,14 +284,18 @@ export class TransferComponent implements OnInit {
   onChangeWallet(walletType: string, typeValue): void {
     if (typeValue === 'send') {
       this.sendType = walletType;
-      this.sendWallet = this.myWallets.find(item => {
-        return item.wallet_type === walletType;
-      });
-      if (!this.sendWallet) {
-        this.sendType = 'BTC';
+      if (this.sendType  !== 'SELECT') {
         this.sendWallet = this.myWallets.find(item => {
-          return item.wallet_type === 'BTC';
+          return item.wallet_type === walletType;
         });
+        if (!this.sendWallet) {
+          this.sendType = 'BTC';
+          this.sendWallet = this.myWallets.find(item => {
+            return item.wallet_type === 'BTC';
+          });
+        }
+      } else if (this.sendType === 'SELECT') {
+        this.sendWallet = {};
       }
       if (this.sendWallet) {
         // this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
@@ -368,7 +372,7 @@ export class TransferComponent implements OnInit {
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           this.myWallets = data;
         });
-        this.onChangeWallet(this.sendWallet.wallet_type, 'send');
+        this.onChangeWallet('SELECT', 'send');
         this.sendForm.controls.destination_address.setValue(null);
       } else {
         this.waitFlag = false;

@@ -475,6 +475,33 @@
     }
   }
 
+  @media (min-width: 768px) and (max-width: 1286px) {
+    .month-day {
+      width: 42px;
+    }
+  }
+
+  @media (min-width: 1200px) and (max-width: 1212px) {
+    .month-day {
+      width: 38px;
+    }
+  }
+
+  @media (min-width: 836px) and (max-width: 1030px) {
+    .month-day {
+      width: 33px;
+    }
+  }
+
+  @media (min-width: 840px) and (max-width: 958px) {
+    .month-day {
+      width: 31px;
+    }
+    .month-day-value {
+      font-size: 32px;
+    }
+  }
+
   .heavenhistory {
     font-family: nb-theme(font-bebas);
     font-size: 22px;
