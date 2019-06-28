@@ -6,7 +6,7 @@ import { ToastrService } from '../../services/toastr.service';
 import { HttpService } from '../../services/http.service';
 import { DatePipe } from '@angular/common'
 import { NbStepComponent } from '@nebular/theme/components/stepper/step.component';
-
+declare let $:any;
 @Component({
   selector: 'ngx-kyc',
   templateUrl: './kyc.component.html',
@@ -94,6 +94,17 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
         this.statusPending();
       }
     }
+
+    $("[data-fancybox]").fancybox({
+      thumbs          : false,
+      hash            : false,
+      loop            : true,
+      keyboard        : true,
+      toolbar         : false,
+      animationEffect : true,
+      arrows          : true,
+      clickContent    : true
+    });
   }
 
   statusPending() {

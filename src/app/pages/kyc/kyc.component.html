@@ -100,7 +100,9 @@
                         [disabled]="kycFormDisable"> Browse </button>
                     </ng-container>
                     <ng-container *ngIf="kycFormDisable">
-                      <img [src]="this.userData.kyc_info.doc_photo" class="kycImages pointer" alt="ID Proof (front side)"/>
+                        <a data-fancybox="gallery" [href]="this.userData.kyc_info.doc_photo"  data-caption="ID Proof (front side)">
+                            <img [src]="this.userData.kyc_info.doc_photo" class="kycImages pointer" alt="ID Proof (front side)"/>
+                        </a>
                     </ng-container>
                   </div>
                 </div>
@@ -118,7 +120,9 @@
                         [disabled]="kycFormDisable"> Browse </button>
                     </ng-container>
                     <ng-container *ngIf="kycFormDisable">
-                      <img [src]="this.userData.kyc_info.doc_photo_back" class="kycImages pointer" alt="ID Proof (back side)"/>
+                      <a data-fancybox="gallery" [href]="this.userData.kyc_info.doc_photo_back"  data-caption="ID Proof (back side)">
+                          <img [src]="this.userData.kyc_info.doc_photo_back" class="kycImages pointer" alt="ID Proof (back side)"/>
+                      </a>
                     </ng-container>
                   </div>
                 </div>
@@ -136,7 +140,9 @@
                         [disabled]="kycFormDisable"> Browse </button>
                     </ng-container>
                     <ng-container *ngIf="kycFormDisable">
-                      <img [src]="this.userData.kyc_info.selfie" class="kycImages pointer" alt="Selfie"/>
+                      <a data-fancybox="gallery" [href]="this.userData.kyc_info.selfie"  data-caption="Selfie">
+                          <img [src]="this.userData.kyc_info.selfie" class="kycImages pointer" alt="Selfie"/>
+                      </a>
                     </ng-container>
                   </div>
                 </div>

@@ -21,8 +21,9 @@ import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt
 import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule } from '@ngx-translate/core';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
