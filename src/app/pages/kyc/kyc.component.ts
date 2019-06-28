@@ -1,5 +1,5 @@
-import {Component, AfterViewInit, Output, EventEmitter, OnDestroy, ViewChild} from '@angular/core';
-import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbStepperComponent} from '@nebular/theme';
+import {Component, AfterViewInit, Output, EventEmitter, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbStepperComponent, NbDialogService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { ToastrService } from '../../services/toastr.service';
@@ -36,12 +36,14 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
   breakpoints: any;
   currentTheme: string;
 
-  idFrontLabel: any = '';
+  idFrontLabel: any = 'ID Proof (front side)';
   idFrontChangedEvent: any = '';
-  idBackLabel: any = '';
+  idBackLabel: any = 'ID Proof (back side)';
   idBackChangedEvent: any = '';
-  selfieLabel: any = '';
+  selfieLabel: any = 'Selfie';
   selfieChangedEvent: any = '';
+
+  selectedImage = '';
 
   userDateOfBirth = '';
 
@@ -57,6 +59,7 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
               private sessionStorage: SessionStorageService,
               private httpService: HttpService,
               private sessionService: SessionStorageService,
+              private dialogService: NbDialogService,
               private toastrService: ToastrService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -94,12 +97,15 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
   }
 
   statusPending() {
-    this.stepper.selectedIndex = 1;
+    setTimeout(() => {
+      this.stepper.selectedIndex = 1;
+    }, 7)
   }
 
   updateStateKYC() {
     if (this.userData.kyc_info) {        
       if (this.userData.kyc_info.status_description === 'pending') {
+        this.idFrontLabel = 'ID Proof (front side)';
         // this.idFrontLabel = this.userData.kyc_info.doc_photo;
         // this.idBackLabel = this.userData.kyc_info.doc_photo_back;
         // this.selfieLabel = this.userData.kyc_info.selfie;
@@ -188,6 +194,19 @@ export class KYCComponent implements AfterViewInit,OnDestroy {
         }
       });
     }
+  }
+
+  openDialog(dialog: TemplateRef<any>, selectImage) {
+    this.selectedImage = selectImage;
+    this.dialogService.open(dialog,  {
+      closeOnBackdropClick: false,
+      autoFocus: false,
+    });
+  }
+
+  closeDialog(ref) {
+    ref.close();
+    this.selectedImage = '';
   }
 
   ngOnDestroy() {

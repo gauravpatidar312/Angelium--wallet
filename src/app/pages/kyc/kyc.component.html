@@ -29,10 +29,12 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" placeholder="Username" [(ngModel)]="userData.username"
-                        class="form-control font-nunitoSans" disabled />
-                    </div>
+                      <div class="row full-name-inputs">
+                          <div class="col-lg-12 col-md-12 col-sm-12 input-group kyc-margin ">
+                              <input type="text" placeholder="Username" [(ngModel)]="userData.username"
+                              class="form-control font-nunitoSans" disabled />
+                          </div>
+                        </div>
                   </div>
                   <div class="form-group">
                     <div class="row full-name-inputs">
@@ -40,7 +42,7 @@
                         <input type="text" placeholder="First Name" class="form-control font-nunitoSans"
                           [(ngModel)]="userData.first_name" disabled />
                       </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
+                      <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin ">
                         <input type="text" placeholder="Last Name" class="form-control font-nunitoSans"
                           [(ngModel)]="userData.last_name" disabled />
                       </div>
@@ -49,45 +51,30 @@
                   <div class="form-group">
                     <div class="row full-name-inputs">
                       <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
-                        <input type="text" placeholder="country" [(ngModel)]="userData.country"
-                          class="form-control font-nunitoSans" disabled />
-                        <!-- <international-phone-number [(ngModel)]="userData.country" [maxlength]="20" [required]="true" name="phone"></international-phone-number> -->
+                        <input type="text" placeholder="country" [(ngModel)]="userData.country" class="form-control font-nunitoSans" disabled />
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
-                        <input type="text" placeholder="Mobile Number" [(ngModel)]="userData.phone"
-                          class="form-control font-nunitoSans" disabled />
+                        <input type="text" placeholder="Mobile Number" [(ngModel)]="userData.phone" class="form-control font-nunitoSans" disabled />
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="row full-name-inputs">
                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
-                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin"> -->
                         <div class="row">
                           <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6 input-group kyc-margin" style="padding: 0px;">
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 ">
-                              <label for="inputEmail3" class=" form-control-label font-nunitoSans" style="padding: 15px">Date of Birth</label>
+                              <label for="inputEmail3" class=" form-control-label font-nunitoSans"
+                                style="padding: 15px">Date of Birth</label>
                             </div>
-                            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 ">
-                              <input nbInput placeholder="DOB" [nbDatepicker]="userDOB" class="form-control font-nunitoSans" style="border-radius: 0.5rem;" [(ngModel)]="userData.kyc_info.datefield" [disabled]="kycFormDisable">
-                              <nb-datepicker #userDOB  format="yyyy-MM-dd"></nb-datepicker>
+                            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 input-group kyc-margin">
+                              <input nbInput placeholder="DOB" [nbDatepicker]="userDOB"
+                                class="form-control font-nunitoSans" style="border-radius: 0.5rem;"
+                                [(ngModel)]="userData.kyc_info.datefield" [disabled]="kycFormDisable">
+                              <nb-datepicker #userDOB format="yyyy-MM-dd"></nb-datepicker>
                             </div>
                           </div>
-
                         </div>
-                        <!-- </div> -->
-
-                        <!-- <div class="form-horizontal">
-                          <div class="row">
-                            <label for="inputEmail3" class="col-sm-6 form-control-label align-self-center">Date of
-                              Birth</label>
-                            <div class="col-sm-6">
-                              <input nbInput placeholder="DOB" [nbDatepicker]="userDOB" style="width: 100%"
-                                [(ngModel)]="userDateOfBirth">
-                              <nb-datepicker #userDOB></nb-datepicker>
-                            </div>
-                          </div>
-                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -103,36 +90,54 @@
               <div class="form-group">
                 <div class="row full-name-inputs">
                   <div class="col-lg-9 col-md-6 col-sm-6 input-group kyc-margin">
-                    <span class="form-control">{{ idFrontLabel == ''? 'ID Proof (front side)' : idFrontLabel}}</span>
+                    <input type="text" placeholder="ID Proof (front side)" class="form-control font-nunitoSans" [(ngModel)]="idFrontLabel" disabled />
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin">
-                    <!-- <input type="file" nbInput accept="image/x-png,image/gif,image/jpeg" /> -->
-                      <input type="file" style="display: none" #idFront (change)="fileChangeEvent($event, 'front')" accept="image/x-png,image/gif,image/jpeg"/>
-                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idFront.click()" [disabled]="kycFormDisable"> Browse </button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row full-name-inputs">
-                  <div class="col-lg-9 col-md-6 col-sm-6 input-group kyc-margin">
-                    <span class="form-control">{{ idBackLabel == ''? 'ID Proof (back side)' : idBackLabel}}</span>
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin">
-                    <!-- <input type="file" nbInput (change)="fileChangeEvent($event, 'back')" accept="image/x-png,image/gif,image/jpeg" /> -->
-                      <input type="file" style="display: none" #idBack (change)="fileChangeEvent($event, 'back')" accept="image/x-png,image/gif,image/jpeg"/>
-                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idBack.click()" [disabled]="kycFormDisable"> Browse </button>
+                  <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin smkycImage">
+                    <ng-container *ngIf="!kycFormDisable">
+                      <input type="file" style="display: none" #idFront (change)="fileChangeEvent($event, 'front')"
+                        accept="image/x-png,image/gif,image/jpeg" />
+                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idFront.click()"
+                        [disabled]="kycFormDisable"> Browse </button>
+                    </ng-container>
+                    <ng-container *ngIf="kycFormDisable">
+                      <img [src]="this.userData.kyc_info.doc_photo" class="kycImages pointer" alt="ID Proof (front side)"/>
+                    </ng-container>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="row full-name-inputs">
                   <div class="col-lg-9 col-md-6 col-sm-6 input-group kyc-margin">
-                    <span class="form-control">{{ selfieLabel == ''? 'Selfie' : selfieLabel}}</span>
+                    <input type="text" placeholder="ID Proof (back side)" class="form-control font-nunitoSans" [(ngModel)]="idBackLabel" disabled />
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin">
-                    <!-- <input type="file" nbInput (change)="fileChangeEvent($event, 'selfie')" accept="image/x-png,image/gif,image/jpeg" /> -->
-                    <input type="file" style="display: none" #selfie (change)="fileChangeEvent($event, 'selfie')" accept="image/x-png,image/gif,image/jpeg"/>
-                    <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="selfie.click()" [disabled]="kycFormDisable"> Browse </button>
+                  <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin smkycImage">
+                    <ng-container *ngIf="!kycFormDisable">
+                      <input type="file" style="display: none" #idBack (change)="fileChangeEvent($event, 'back')"
+                        accept="image/x-png,image/gif,image/jpeg" />
+                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idBack.click()"
+                        [disabled]="kycFormDisable"> Browse </button>
+                    </ng-container>
+                    <ng-container *ngIf="kycFormDisable">
+                      <img [src]="this.userData.kyc_info.doc_photo_back" class="kycImages pointer" alt="ID Proof (back side)"/>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row full-name-inputs">
+                  <div class="col-lg-9 col-md-6 col-sm-6 input-group kyc-margin ">
+                    <input type="text" placeholder="Selfie" class="form-control font-nunitoSans" [(ngModel)]="selfieLabel" disabled />
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin smkycImage">
+                    <ng-container *ngIf="!kycFormDisable">
+                      <input type="file" style="display: none" #selfie (change)="fileChangeEvent($event, 'selfie')"
+                        accept="image/x-png,image/gif,image/jpeg" />
+                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="selfie.click()"
+                        [disabled]="kycFormDisable"> Browse </button>
+                    </ng-container>
+                    <ng-container *ngIf="kycFormDisable">
+                      <img [src]="this.userData.kyc_info.selfie" class="kycImages pointer" alt="Selfie"/>
+                    </ng-container>
                   </div>
                 </div>
               </div>
@@ -144,7 +149,8 @@
             <!-- <button nbButton class="form-control pointer" fullWidth status="success">
                 <span>Submit</span>
               </button> -->
-            <button class="font-bebasNeueBold btn btn-kyc btn-demo btn-success pointer" fullWidth style="width: 100%;" [disabled]="kycFormDisable" (click)="uploadKYC()">
+            <button class="font-bebasNeueBold btn btn-kyc btn-demo btn-success pointer" fullWidth style="width: 100%;"
+              [disabled]="kycFormDisable" (click)="uploadKYC()">
               Submit
             </button>
           </div>
@@ -153,216 +159,17 @@
     </nb-card-body>
   </div>
 </nb-card>
-
-<!-- <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-  <nb-card-header class="text-center">
-    <nav class='navigation'>
-      <a href="#" class='link' aria-label='Back'>
-        <i class='icon nb-arrow-thin-left'></i></a>
-    </nav>
-    KYC
-  </nb-card-header>
-  <nb-card-body>
-    <nb-stepper orientation="horizontal">
-      <nb-step [label]="labelOne">
-        <ng-template #labelOne>input</ng-template>
-      </nb-step>
-      <nb-step [label]="labelTwo">
-        <ng-template #labelTwo>Audit</ng-template>
-      </nb-step>
-      <nb-step [label]="labelFour">
-        <ng-template #labelFour>Approved</ng-template>
-      </nb-step>
-
-    </nb-stepper>
-  </nb-card-body>
-</nb-card>
-
-<div class="row">
-  <div class="col-lg-6">
+<ng-template #dialog let-data let-ref="dialogRef">
     <nb-card>
-      <nb-card-header>Information</nb-card-header>
-      <nb-card-body>
-        <div class="form-group">
-          <div class="input-group">
-            <input type="text" placeholder="Username" class="form-control"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row full-name-inputs">
-            <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
-              <input type="text" placeholder="First Name" class="form-control"/>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 input-group kyc-margin">
-              <input type="text" placeholder="Last Name" class="form-control"/>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row full-name-inputs">
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <nb-card-body>
-                <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                  <button type="button" ngbDropdownToggle class="btn"
-                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                      'btn-primary': currentTheme !== 'default',
-                                      'btn-sm': breakpoint.width <= breakpoints.is}">
-                    {{ typeOfDay|| 'Day' }}
-                  </button>
-                  <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li class="dropdown-item" *ngFor="let period of types['day']" (click)="changePeriod(period, 'day')">
-                      {{ period }}
-                    </li>
-                  </ul>
-                </div>
-              </nb-card-body>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <nb-card-body>
-                <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                  <button type="button" ngbDropdownToggle class="btn"
-                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                      'btn-primary': currentTheme !== 'default',
-                                      'btn-sm': breakpoint.width <= breakpoints.is}">
-                    {{ typeOfMonth || 'Month' }}
-                  </button>
-                  <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li class="dropdown-item" *ngFor="let period of types['month']"
-                        (click)="changePeriod(period, 'month')">
-                      {{ period }}
-                    </li>
-                  </ul>
-                </div>
-              </nb-card-body>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <nb-card-body>
-                <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                  <button type="button" ngbDropdownToggle class="btn"
-                          [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                      'btn-primary': currentTheme !== 'default',
-                                      'btn-sm': breakpoint.width <= breakpoints.is}">
-                    {{ typeOfYear || 'Year' }}
-                  </button>
-                  <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li class="dropdown-item" *ngFor="let period of types['year']"
-                        (click)="changePeriod(period, 'year')">
-                      {{ period }}
-                    </li>
-                  </ul>
-                </div>
-              </nb-card-body>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row full-name-inputs">
-            <div class="col-lg-5 col-md-5 col-sm-5">
-              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                <button type="button" ngbDropdownToggle class="btn dropDown-padding"
-                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                    'btn-primary': currentTheme !== 'default',
-                                    'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ typeOfCountry || 'Country' }}
-                </button>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let period of types['country']"
-                      (click)="changePeriod(period, 'country')">
-                    {{ period }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 input-group kyc-margin">
-              <input type="text" placeholder="Mobile Number" class="form-control"/>
-            </div>
-          </div>
-        </div>
+      <nb-card-header>
+        ID Proof Preview
+        <i class="nb-close nb-icon-left fa-2x" (click)="closeDialog(ref)"></i>
+      </nb-card-header>
+      <nb-card-body class="image-scoll-card-body">
+          <img [src]="selectedImage" />
       </nb-card-body>
+      <nb-card-footer>
+        <button nbButton class="upload-btn" size="small" (click)="closeDialog(ref)">close</button>
+      </nb-card-footer>
     </nb-card>
-  </div>
-
-  <div class="col-lg-6">
-    <nb-card>
-      <nb-card-header>Upload</nb-card-header>
-      <nb-card-body>
-        <div class="form-group">
-          <div class="row full-name-inputs">
-            <div class="col-lg-9 col-md-9 col-sm-9">
-              <input type="text" placeholder="ID(front)" class="form-control"/>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 kyc-margin">
-              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                <button type="button" ngbDropdownToggle class="btn dropDown-upload-padding"
-                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                    'btn-primary': currentTheme !== 'default',
-                                    'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ typeOfIdFrom || 'Select' }}
-                </button>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let period of types['idFrom']"
-                      (click)="changePeriod(period, 'idFrom')">
-                    {{ period }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row full-name-inputs">
-            <div class="col-lg-9 col-md-9 col-sm-9">
-              <input type="text" placeholder="ID(back)" class="form-control"/>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 kyc-margin">
-              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                <button type="button" ngbDropdownToggle class="btn dropDown-upload-padding"
-                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                    'btn-primary': currentTheme !== 'default',
-                                    'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ typeOfIdBack || 'Select' }}
-                </button>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let period of types['idBack']"
-                      (click)="changePeriod(period, 'idBack')">
-                    {{ period }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row full-name-inputs">
-            <div class="col-lg-9 col-md-9 col-sm-9">
-              <input type="text" placeholder="Proof of address" class="form-control"/>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 kyc-margin">
-              <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"  ngbDropdown>
-                <button type="button" ngbDropdownToggle class="btn dropDown-upload-padding"
-                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                    'btn-primary': currentTheme !== 'default',
-                                    'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ typeOfProofOfAddress || 'Select' }}
-                </button>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let period of types['proofOfAddress']"
-                      (click)="changePeriod(period, 'proofOfAddress')">
-                    {{ period }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-  <div class="col-lg-6 offset-md-3">
-    <div class="form-group">
-      <button nbButton class="form-control pointer" fullWidth status="success">
-        <span>Submit</span>
-      </button>
-    </div>
-  </div>
-</div> -->
+  </ng-template>
