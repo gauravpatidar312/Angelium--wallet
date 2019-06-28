@@ -21,7 +21,7 @@ import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt
 import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
-
+import { NbDateFnsDateModule } from '@nebular/date-fns';
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -42,7 +42,11 @@ const PAGES_COMPONENTS = [
     HeavenModule,
     NbDialogModule.forChild(),
     ClipboardModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    NbDateFnsDateModule.forRoot({
+      parseOptions: { awareOfUnicodeTokens: true },
+      formatOptions: { awareOfUnicodeTokens: true },
+    })
   ],
   declarations: [
     ...PAGES_COMPONENTS,
