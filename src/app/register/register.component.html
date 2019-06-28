@@ -13,10 +13,10 @@
                       [ngClass]="{'btn-outline-success': currentTheme === 'default',
                              'btn-primary': currentTheme !== 'default',
                              'btn-sm': breakpoint.width <= breakpoints.is}">
-                {{ languageType }}
+                {{ selectedLang }}
               </button>
               <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item {{languageType === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                <li class="dropdown-item {{selectedLang === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
                   (click)="changeLanguage(lan)">
                   {{ lan.language }}
                 </li>

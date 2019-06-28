@@ -22,6 +22,7 @@
     "run": "실행",
     "register": "등록",
     "repeat": "재입력",
+    "rate": "이율",
     "slideRightToVerify": "밀어서 인증하기",
     "select": "선택",
     "sendSMS": "인증번호 전송",
@@ -80,7 +81,6 @@
         "noUserDownlineTree": "다운라인 트리에 사용자가 없습니다",
         "rank": "랭킹",
         "reward": "리워드",
-        "rate": "이율",
         "your_reward": "당신의 리워드"
       },
       "map": "지도",

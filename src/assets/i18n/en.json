@@ -22,6 +22,7 @@
     "run": "Run",
     "register": "Register",
     "repeat": "Repeat",
+    "rate": "Rate",
     "slideRightToVerify": "Slide right to verify",
     "select": "Select",
     "sendSMS": "Send SMS",
@@ -80,7 +81,6 @@
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank", 
         "reward": "Reward", 
-        "rate": "Rate",
         "your_reward": "Your Reward"
       },
       "map": "map",

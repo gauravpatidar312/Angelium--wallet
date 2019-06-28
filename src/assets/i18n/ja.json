@@ -22,6 +22,7 @@
     "run": "実行",
     "register": "登録",
     "repeat": "Repeat",
+    "rate": "利率",
     "slideRightToVerify": "Slide right to verify",
     "select": "選択",
     "sendSMS": "Send SMS",
@@ -80,7 +81,6 @@
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "ランク",
         "reward": "リワード",
-        "rate": "利率",
         "your_reward": "あなたのリワード"
       },
       "map": "マップ",
