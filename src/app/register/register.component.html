@@ -35,8 +35,7 @@
               <div class="form-group row">
                 <div class="col-md-9 col-12">
                   <label>
-                    {{"common.phone" | translate}}
-                    {{"pages.register.number" | translate}}:</label>
+                    {{"pages.register.phoneNumber" | translate}}:</label>
                   <international-phone-number [(ngModel)]="model.phone" 
                     [maxlength]="20" [required]="true" #phone="ngModel" name="phone" [defaultCountry]="'jp'">
                   </international-phone-number>
@@ -44,7 +43,7 @@
                     *ngIf="((otpForm.submitted || otpSubmitted) && otp_form.phone.errors) || (submitted && f.phone.errors)"
                     class="invalid-feedback">
                     <div *ngIf="(otp_form?.phone.errors && otp_form?.phone.errors.required) || (f?.phone.errors && f?.phone.errors.required)">
-                      {{"messages.required" | translate: {'field': "common.phone" | translate } }}
+                      {{"messages.required" | translate: {'field': "pages.register.phoneNumber" | translate } }}
                     </div>
                   </div>
                 </div>
@@ -79,8 +78,12 @@
                   <div *ngIf="f.username.errors.required">
                       {{"messages.required" | translate: {'field': "common.username" | translate } }}
                   </div>
-                  <div *ngIf="f.username.errors.email">Username us required</div>
-                  <div *ngIf="f.username.errors.pattern">Please enter value in English language only.</div>
+                  <div *ngIf="f.username.errors.email">
+                    {{"pages.register.usernameUsRequired" | translate}}
+                  </div>
+                  <div *ngIf="f.username.errors.pattern">
+                    {{"pages.register.enterValueInEnglish" | translate}}.
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -121,67 +124,73 @@
                   <div *ngIf="f.email.errors.required">
                     {{"messages.required" | translate: {'field': "common.emailAddress" | translate } }}
                   </div>
-                  <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  <div *ngIf="f.email.errors.email">
+                    {{"common.emailMustBeValid" | translate}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>{{"pages.register.confirmYourEmail" | translate}}:</label>
+                <input type="email" class="form-control" 
+                  placeholder="{{'pages.register.confirmYourEmail' | translate}}" 
+                  formControlName="confirm_your_email">
+                <div *ngIf="submitted && f.confirm_your_email.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirm_your_email.errors.required">
+                    {{"messages.required" | translate: {'field': "pages.register.confirmYourEmail" | translate } }}
+                  </div>
+                  <div *ngIf="f.confirm_your_email.errors.email">
+                    {{"common.emailMustBeValid" | translate}}
+                  </div>
                 </div>
               </div>
               
               <div class="form-group">
                 <label>
-                  {{"pages.login.login" | translate}}
-                  {{"common.password" | translate}}:</label>
-                <input type="password" class="form-control" placeholder='{{ "common.login"| translate }} {{ "common.password"| translate }}' formControlName="password">
+                  {{"pages.register.loginPassword" | translate}}:</label>
+                <input type="password" class="form-control" placeholder='{{ "pages.register.loginPassword"| translate }}' formControlName="password">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                   <div *ngIf="f.password.errors.required">
-                    {{"pages.login.login" | translate}}
-                    {{
-                      "messages.required" | translate: {'field': "common.password" | translate }
-                    }}
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>{{"common.repeat" | translate}} 
-                    {{"pages.login.login" | translate}}
-                  {{"common.password" | translate}}:</label>
-                <input type="password" class="form-control" placeholder="{{'common.repeat'|translate}} {{ 'common.login'| translate }} {{ 'common.password'| translate }}"
-                  formControlName="confirm_password">
-                <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.confirm_password.errors.required">
-                    {{"common.repeat" | translate}}
-                    {{"pages.login.login" | translate}}
-                    {{
-                      "messages.required" | translate: {'field': "common.password" | translate }
-                    }}
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>{{"common.trade" | translate}} 
-                  {{"common.password" | translate}}:</label>
-                <input type="password" class="form-control" placeholder="{{'common.trade'|translate}} {{ 'common.password'| translate }}" formControlName="trade_password">
-                <div *ngIf="submitted && f.trade_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.trade_password.errors.required">
-                    {{"common.trade" | translate}} 
-                    {{
-                      "messages.required" | translate: {'field': "common.password" | translate }
+                    {{ "messages.required" | translate: {
+                      'field': "pages.register.loginPassword" | translate }
                     }}
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label>
-                  {{"common.repeat" | translate}}
-                  {{"common.trade" | translate}} 
-                  {{"common.password" | translate}}:
+                  {{"pages.register.repeatLoginPassword" | translate}}:</label>
+                <input type="password" class="form-control" placeholder="{{'pages.register.repeatLoginPassword' | translate}}"
+                  formControlName="confirm_password">
+                <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirm_password.errors.required">
+                    {{
+                      "messages.required" | translate: {'field': "pages.register.repeatLoginPassword" | translate }
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>{{"pages.register.tradePassword" | translate}}:</label>
+                <input type="password" class="form-control" placeholder="{{'pages.register.tradePassword'|translate}}" formControlName="trade_password">
+                <div *ngIf="submitted && f.trade_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.trade_password.errors.required">
+                    {{
+                      "messages.required" | translate: {'field': "pages.register.tradePassword" | translate }
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>
+                  {{"pages.register.repeatTradePassword" | translate}}:
                 </label>
-                <input type="password" class="form-control" placeholder="{{'common.repeat'|translate}} {{'common.trade'|translate}} {{ 'common.password'| translate }}"
+                <input type="password" class="form-control" placeholder="{{'pages.register.repeatTradePassword' | translate}}"
                        formControlName="confirm_trade_password">
                 <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
                   <div *ngIf="f.confirm_trade_password.errors.required">
-                    {{"common.repeat" | translate}}
-                    {{"common.trade" | translate}} 
                     {{
-                      "messages.required" | translate: {'field': "common.password" | translate }
+                      "messages.required" | translate: {'field': "pages.register.repeatTradePassword" | translate }
                     }}</div>
                 </div>
               </div>

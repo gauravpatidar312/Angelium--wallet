@@ -1,6 +1,5 @@
 {
   "common":{
-    "anx":"ANX",
     "assets": "Assets",
     "amount" : "数量",
     "cryptos":{
@@ -24,9 +23,10 @@
     "login": "登录",
     "last": "Last",
     "level": "等级",
+    "lastMonth": "Last Month",
+    "lastWeek": "Last Week",
     "month": "月",
     "password": "密码",
-    "phone": "手机号吗",
     "profit": "Profit",
     "profile":"个人资料",
     "reward": "奖励",
@@ -106,14 +106,15 @@
       "upload":"Upload" 
     },
     "login":{
-      "DontHaveAnAccount": "Don't have an account",
+      "dontHaveAnAccount": "Don't have an account",
       "forgotPassword": "忘记密码",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "登录",
       "rememberMe": "记住我" 
     },
     "reward":{
       "downlineAngel": "经我邀请的天使",
+      "downlineHeaven": "Downline Heaven",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "排行",
@@ -131,12 +132,18 @@
     "register":{
       "alreadyHaveAnAccount": "已有账户",
       "agreeTo": "Agree to",
+      "enterValueInEnglish":"Please enter value in English language only",
+      "emailMustBeValid": "Email must be a valid email address",
       "firstName": "名",
       "lastName": "姓",
-      "number": "号码",
+      "loginPassword": "Login Password",
+      "phoneNumber": "Phone number",
       "repeatPassword": "再次输入密码",
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
-      "terms&Conditions" : "Terms & Conditions"
+      "repeatLoginPassword": "Repeat Login Password",
+      "terms&Conditions" : "Terms & Conditions",
+      "tradePassword": "Trade Password",
+      "usernameUsRequired": "Username us required"
     },
     "setting": {
       "country": "国家",

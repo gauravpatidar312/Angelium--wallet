@@ -67,7 +67,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         this.breakpoint = newValue;
       });
 
-    this.translate.get("days").subscribe((res: any) => {
+    this.translate.get('days').subscribe((res: any) => {
       this.days = res;
       console.log(res);
     });

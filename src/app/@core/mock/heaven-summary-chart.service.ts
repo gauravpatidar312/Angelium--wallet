@@ -3,31 +3,33 @@ import { Injectable } from '@angular/core';
 import { RewardsChart, RewardsChartData } from '../data/rewards-chart';
 import { HeavenChartSummary, HeavenSummaryChartData } from '../data/heaven-summary-chart';
 import { HeavenChart, HeavenChartData } from '../data/heaven-chart';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class HeavenSummaryChartService extends HeavenSummaryChartData {
 
   private summary = [
     {
-      title: 'Total',
+      title: this.translate.instant('common.total'),
       value: 3654,
     },
     {
-      title: 'Last Month',
+      title: this.translate.instant('common.lastMonth'),
       value: 946,
     },
     {
-      title: 'Last Week',
+      title: this.translate.instant('common.lastWeek'),
       value: 654,
     },
     {
-      title: 'Today',
+      title: this.translate.instant('common.today'),
       value: 230,
     },
   ];
 
   constructor(private rewardChartService: RewardsChartData,
-              private heavenChartService: HeavenChartData) {
+              private heavenChartService: HeavenChartData,
+              private translate: TranslateService) {
     super();
   }
 

@@ -1,6 +1,5 @@
 {
   "common":{
-    "anx":"ANX",
     "assets": "Assets",
     "amount" : "Amount",
     "cryptos":{
@@ -19,14 +18,16 @@
     "emailAddress": "Email address",
     "email": "Email",
     "enter": "Enter",
+    "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
     "heaven": "Heaven",
     "login": "Log In",
     "last": "Last",
     "level": "Level",
-    "month": "Month",
+    "lastMonth": "Last Month",
+    "lastWeek": "Last Week",
+    "month": "month",
     "password": "Password",
-    "phone": "Phone",
     "profit": "Profit",
     "profile":"Profile",
     "reward": "Reward",
@@ -46,8 +47,8 @@
     "username": "Username",
     "verificationCode": "Verification code",
     "verified": "Verified",
-    "week": "Week",
-    "year": "Year"
+    "week": "week",
+    "year": "year"
   }, 
   "messages":{
     "required": "{{field}} is required"
@@ -106,14 +107,15 @@
       "upload":"Upload" 
     },
     "login":{
-      "DontHaveAnAccount": "Don't have an account",
+      "dontHaveAnAccount": "Don't have an account",
       "forgotPassword": "Forgot Password",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "Login",
       "rememberMe": "Remember me"
     },
     "reward":{
       "downlineAngel": "Downline Angel",
+      "downlineHeaven": "Downline Heaven",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank", 
@@ -131,12 +133,19 @@
     "register":{
       "alreadyHaveAnAccount": "Already have an account",
       "agreeTo": "Agree to",
+      "confirmYourEmail": "Confirm your E-mail",
+      "enterValueInEnglish":"Please enter value in English language only",
       "firstName": "First Name",
       "lastName": "Last Name",
-      "number": "number",
+      "loginPassword": "Login Password",
+      "phoneNumber": "Phone number",
       "repeatPassword": "Repeat password",
       "RealNameIsRequiredForKYC": "Must be real name for KYC process. it cannot be changed",
-      "terms&Conditions" : "Terms & Conditions"
+      "repeatLoginPassword": "Repeat Login Password",
+      "repeatTradePassword": "Repeat Trade Password",
+      "terms&Conditions" : "Terms & Conditions",
+      "tradePassword": "Trade Password",
+      "usernameUsRequired": "Username us required"
     },
     "setting": {
       "country": "Country",

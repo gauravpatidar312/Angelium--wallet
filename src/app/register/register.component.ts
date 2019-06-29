@@ -93,6 +93,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       invitation_code: [''],
       email: ['', [Validators.required, Validators.email]],
+      confirm_your_email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/)]],
       phone: ['', Validators.required],
       otp_code: ['', Validators.required],
@@ -189,6 +190,10 @@ export class RegisterComponent implements OnInit {
       this.toastrService.danger('Please submit OTP first.', 'Register');
       return;
     }
+    if (this.registerForm.controls.email.value !== this.registerForm.controls.confirm_your_email.value) {
+      this.toastrService.danger('Confirm e-mail do not match', 'Register');
+      return;
+    }
     if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
       this.toastrService.danger('Confirm login password do not match', 'Register');
       return;
@@ -204,6 +209,8 @@ export class RegisterComponent implements OnInit {
     }
 
     delete this.registerForm.value.confirm_trade_password;
+    delete this.registerForm.value.confirm_your_email;
+
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
       this.storageService.saveToAngeliumSession({'invitationCode': null });
