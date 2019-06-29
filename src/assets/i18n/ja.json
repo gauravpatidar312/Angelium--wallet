@@ -1,5 +1,6 @@
 {
   "common":{
+    "anx":"ANX",
     "assets": "Assets",
     "amount" : "数量",
     "downline": "ダウンライン",
@@ -58,15 +59,19 @@
       "totalAsset" : "アセット合計"
     },
     "heaven":{  
+      "enterAmount":"Enter Amount",
       "entryDate": "Entry date",    
       "history": "履歴",
-      "ID": "ID",
       "heavenDropToday": "今日のヘブンドロップ",
+      "heavenHistory":"Heaven History",
+      "heavenId":"Heaven ID",
+      "ID": "ID",
+      "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
-      "totalHeaven": "ヘブン合計"
+      "totalHeaven": "ヘブン合計" 
     },
     "login":{  
       "DontHaveAnAccount": "Don't have an account",    
