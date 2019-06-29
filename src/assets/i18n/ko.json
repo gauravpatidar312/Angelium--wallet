@@ -1,5 +1,6 @@
 {
   "common":{
+    "anx":"ANX",
     "assets": "자산",
     "amount": "수량",
     "downline": "다운라인",
@@ -66,10 +67,14 @@
       }
     },
     "heaven":{
+      "enterAmount":"Enter Amount",
       "entryDate": "참여일",
       "history": "내역",
-      "ID": "ID",
       "heavenDropToday": "오늘의 헤븐 드롭",
+      "heavenHistory":"Heaven History",
+      "heavenId":"Heaven ID",
+      "ID": "ID",
+      "noDataFound":"No data found",
       "plan": "계획",
       "received": "Received",
       "releaseDate": "완료일",

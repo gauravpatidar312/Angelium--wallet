@@ -1,5 +1,6 @@
 {
   "common":{
+    "anx":"ANX",
     "assets": "Assets",
     "amount" : "Amount",
     "downline": "Downline",
@@ -30,7 +31,7 @@
     "transfer": "Transfer",
     "trade": "Trade",
     "total": "Total",
-    "today": "today",
+    "today": "Today",
     "top": "Top",
     "username": "Username",
     "verificationCode": "Verification code",
@@ -66,10 +67,12 @@
       }
     },
     "heaven":{
+      "enterAmount":"Enter Amount",
       "entryDate": "Entry date",
       "heavenHistory": "Heaven History",
-      "ID": "ID",
       "heavenDropToday": "Heaven Drop Today",
+      "heavenId":"Heaven ID",
+      "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
       "releaseDate": "Release date",

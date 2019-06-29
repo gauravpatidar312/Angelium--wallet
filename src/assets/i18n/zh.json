@@ -1,5 +1,6 @@
 {
   "common":{
+    "anx":"ANX",
     "assets": "Assets",
     "amount" : "数量",
     "downline": "邀请好友",
@@ -66,15 +67,19 @@
       }
     },
     "heaven":{
+      "enterAmount":"Enter Amount",
       "entryDate": "Entry date",
       "history": "历史",
-      "ID": "ID",
       "heavenDropToday": "今日天堂之滴",
+      "heavenHistory":"Heaven History",
+      "heavenId":"Heaven ID",
+      "ID": "ID",
+      "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
-      "totalHeaven": "天堂总计" 
+      "totalHeaven": "天堂总计"
     },
     "login":{
       "DontHaveAnAccount": "Don't have an account",

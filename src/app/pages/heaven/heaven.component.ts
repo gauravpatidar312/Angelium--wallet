@@ -124,7 +124,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     editable: true,
     mode: 'inline',
-    noDataMessage: "No data found",
+    noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
       hid: {
         title: this.translate.instant('common.heaven') +' '+ this.translate.instant('pages.heaven.ID'),
@@ -143,7 +143,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       currency_type: {
-        title: 'Asset',
+        title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
