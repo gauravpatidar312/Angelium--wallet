@@ -29,7 +29,7 @@ export class HQComponent implements OnInit {
     },
     columns: {
       id: {
-        title: 'ID',
+        title: this.translate.instant('pages.hq.id'),
         type: 'number'
       },
       firstName: {
@@ -49,7 +49,7 @@ export class HQComponent implements OnInit {
         type: 'string',
       },
       age: {
-        title: 'Age',
+        title: this.translate.instant('pages.hq.age'),
         type: 'number',
       },
     },

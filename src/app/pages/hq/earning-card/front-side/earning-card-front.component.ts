@@ -3,6 +3,7 @@ import { NbThemeService } from '@nebular/theme';
 import { interval , Subscription } from 'rxjs';
 import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -21,7 +22,8 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   liveUpdateChartData: { value: [string, number] }[];
 
   constructor(private themeService: NbThemeService,
-              private earningService: EarningData) {
+              private earningService: EarningData,
+              private translate:TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -32,11 +34,11 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.getEarningCardData(this.selectedCurrency);
     let element1 = document.getElementById('curr1').getElementsByClassName('curre');
-    element1[0].innerHTML = 'ANX';
+    element1[0].innerHTML = this.translate.instant("common.anx");
     let element2 = document.getElementById('curr2').getElementsByClassName('curre');
-    element2[0].innerHTML = 'Average ANX';
+    element2[0].innerHTML = this.translate.instant("pages.hq.averageANX");
     let element3 = document.getElementById('curr3').getElementsByClassName('curre');
-    element3[0].innerHTML = 'Average Heaven';
+    element3[0].innerHTML = this.translate.instant("pages.hq.averageHeaven");
   }
   // changeCurrency(currency) {
   //   if (this.selectedCurrency !== currency) {
