@@ -29,6 +29,7 @@
     "password": "비밀번호",
     "profit": "수익",
     "profile":"프로필",
+    "phone": "手机号吗",
     "reward": "리워드",
     "run": "실행",
     "register": "등록",
@@ -179,6 +180,8 @@
       "2FA": "2FA"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "입금",
       "send": "출금",
       "to": "To"

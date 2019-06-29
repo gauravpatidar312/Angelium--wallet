@@ -45,7 +45,8 @@
                         <label for="Amount" class="text-link">
                           {{"common.amount" | translate}}
                         </label>
-                        <input type="number"  name="transfer_amount" class="form-control font-nunitoSans" placeholder="Amount" step="0.000001"
+                        <input type="number"  name="transfer_amount" class="form-control font-nunitoSans" 
+                            placeholder="{{ 'common.amount' | translate }}" step="0.000001"
                                [(ngModel)]="transfer_amount" [disabled]="!sendWallet?.wallet_type"  (keyup)="setAmount(sendWallet?.wallet_type)"
                                value="{{0 | number : '1.0-6' }}">
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
@@ -73,7 +74,7 @@
                         <label for="BTC" class="text-link">
                           {{"pages.transfer.to" | translate}}
                         </label>
-                        <input type="text" name="destination_address" class="form-control font-nunitoSans w-100" [(ngModel)]="destination_address" placeholder="Enter destination address">
+                        <input type="text" name="destination_address" class="form-control font-nunitoSans w-100" [(ngModel)]="destination_address" placeholder="{{'pages.transfer.enterDestinationAddress' | translate}}">
                       </div>
                       <div class="form-group mt-4">
                         <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || waitFlag" (click)="openTradeDialog(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
@@ -128,7 +129,7 @@
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                       <div class="form-group">
-                        <input type="text" class="form-control font-nunitoSans w-100" placeholder="Destination address" value="{{receiveWallet?.address}}" [disabled]="true">
+                        <input type="text" class="form-control font-nunitoSans w-100" placeholder="{{'pages.transfer.destinationAddress' | translate}}" value="{{receiveWallet?.address}}" [disabled]="true">
                       </div>
                       <div class="form-group"><a class="form-control copy-icon" ngxClipboard [cbContent]="receiveWallet?.address" (click)="copyAddress()"><i class="fa fa-clone" title="Copy address"></i></a></div>
                     </div>

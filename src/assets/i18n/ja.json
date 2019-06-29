@@ -29,6 +29,7 @@
     "password": "パスワード",
     "profit": "Profit",
     "profile":"プロフィール",
+    "phone": "電話番号",
     "reward": "リワード",
     "run": "実行",
     "register": "登録",
@@ -179,6 +180,8 @@
       "2FA": "2FA"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "受信",
       "send": "送信",
       "to": "To"

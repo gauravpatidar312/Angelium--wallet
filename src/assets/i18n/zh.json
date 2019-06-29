@@ -29,6 +29,7 @@
     "password": "密码",
     "profit": "Profit",
     "profile":"个人资料",
+    "phone": "휴대전화",
     "reward": "奖励",
     "run": "运行",
     "register": "注册",
@@ -179,6 +180,8 @@
       "2FA": "2FA"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "接收",
       "send": "发送",
       "to": "To"

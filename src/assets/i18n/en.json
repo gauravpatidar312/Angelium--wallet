@@ -30,6 +30,7 @@
     "password": "Password",
     "profit": "Profit",
     "profile":"Profile",
+    "phone": "Phone",
     "reward": "Reward",
     "run": "Run",
     "register": "Register",
@@ -181,6 +182,8 @@
       "2FA": "2FA"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "Receive",
       "send": "Send",
       "to": "To"
