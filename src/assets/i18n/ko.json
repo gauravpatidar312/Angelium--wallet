@@ -89,6 +89,24 @@
       "releaseSetting": "완료 설정",
       "totalHeaven": "총 헤븐"
     },
+    "hq":{
+      "age":"Age",
+      "commissionPaid":"Commission Paid",
+      "gainPaid":"Gain Paid",
+      "heavenRate":"Heaven Rate",
+      "id":"ID",
+      "newHeaven":"New Heaven",
+      "releasable":"Releasable",
+      "released":"Released",
+      "userDatabase":"User Database",
+      "averageANX":"Average ANX",
+      "averageHeaven":"Average Heaven",
+      "heavenGrowth":"Heaven Growth",
+      "totalUser":"Total User",
+      "newUser":"New User",
+      "leavingUser":"Leaving User",
+      "userGrowth":"User Growth"
+    },
     "kyc":{
       "audit":"Audit",
       "approved":"Approved",

@@ -2,6 +2,7 @@ import { delay, takeWhile } from 'rxjs/operators';
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../../@core/utils';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-traffic-chart',
@@ -23,13 +24,14 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
 
   @Input() points: number[];
 
-  type = 'month';
-  types = ['week', 'month', 'year'];
+  type = this.translate.instant("common.month");
+  types = [this.translate.instant("common.week"), this.translate.instant("common.month"), this.translate.instant("common.year")];
   option: any = {};
   echartsIntance: any;
 
   constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
+              private layoutService: LayoutService,
+              private translate:TranslateService) {
     this.layoutService.onChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
