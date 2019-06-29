@@ -127,7 +127,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
       hid: {
-        title: this.translate.instant('common.heaven') +' '+ this.translate.instant('pages.heaven.ID'),
+        title: this.translate.instant('pages.heaven.heavenId'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
