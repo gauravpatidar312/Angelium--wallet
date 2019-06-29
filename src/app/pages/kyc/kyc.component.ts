@@ -208,19 +208,6 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  openDialog(dialog: TemplateRef<any>, selectImage) {
-    this.selectedImage = selectImage;
-    this.dialogService.open(dialog, {
-      closeOnBackdropClick: false,
-      autoFocus: false,
-    });
-  }
-
-  closeDialog(ref) {
-    ref.close();
-    this.selectedImage = '';
-  }
-
   ngOnDestroy() {
     this.alive = false;
   }

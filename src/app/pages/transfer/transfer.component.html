@@ -12,7 +12,7 @@
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
         <nb-tabset fullWidth>
           <nb-tab tabTitle='{{"pages.transfer.send" | translate}}'>
-            <form [formGroup]="sendForm" class="mt-5 transfer-form">
+            <form class="mt-5 transfer-form">
               <div class="form-group row d-sml-block m-0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="row font-nunitoSans">
@@ -45,8 +45,8 @@
                         <label for="Amount" class="text-link">
                           {{"common.amount" | translate}}
                         </label>
-                        <input type="number" class="form-control font-nunitoSans" placeholder="Amount" step="0.000001"
-                               formControlName="transfer_amount" (keyup)="setAmount(sendWallet?.wallet_type)"
+                        <input type="number"  name="transfer_amount" class="form-control font-nunitoSans" placeholder="Amount" step="0.000001"
+                               [(ngModel)]="transfer_amount" [disabled]="!sendWallet?.wallet_type"  (keyup)="setAmount(sendWallet?.wallet_type)"
                                value="{{0 | number : '1.0-6' }}">
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                         <span class="transfer-amount" *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.0-2' }}</span>
@@ -73,7 +73,7 @@
                         <label for="BTC" class="text-link">
                           {{"pages.transfer.to" | translate}}
                         </label>
-                        <input type="text" class="form-control font-nunitoSans w-100" formControlName="destination_address" placeholder="Enter destination address">
+                        <input type="text" name="destination_address" class="form-control font-nunitoSans w-100" [(ngModel)]="destination_address" placeholder="Enter destination address">
                       </div>
                       <div class="form-group mt-4">
                         <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || waitFlag" (click)="openTradeDialog(tradePassword)" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" fullWidth style="width: 100%;">
@@ -90,7 +90,7 @@
               </div>
             </form>
           </nb-tab>
-          <nb-tab tabTitle='{{"pages.transfer.receive" | translate}}' 
+          <nb-tab tabTitle='{{"pages.transfer.receive" | translate}}'
             active="{{setReceiveTab}}">
             <form class="mt-5 font-nunitoSans transfer-form receive-form">
               <div class="row m-0">

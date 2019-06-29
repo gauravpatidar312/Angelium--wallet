@@ -42,6 +42,7 @@ export class SettingComponent implements OnInit {
   newLoginPassword: any = '';
   confirmLoginPassword: any = '';
   oldLoginPassword: any = '';
+  newUsername: any = '';
   newTradePassword: any = '';
   confirmTradePassword: any = '';
   oldTradePassword: any = '';
@@ -170,6 +171,35 @@ export class SettingComponent implements OnInit {
     }
   }
 
+  onChangeUsername(ref: any) {
+    if (!this.newUsername || !this.newUsername.trim()) {
+      this.toastrService.danger('Please enter username.', 'Change Username');
+      return;
+    }
+
+    if (!(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/.test(this.newUsername))) {
+      this.toastrService.danger('Username must be in English, without space.', 'Change Username');
+      return;
+    }
+
+    const endpoint = 'username/';
+    const apiData = {'username': this.newUsername};
+    this.httpService.put(apiData, endpoint)
+      .subscribe((res?: any) => {
+        if (res.status) {
+          ref.close();
+          this.toastrService.success('Username updated successfully', 'Change Username');
+          this.userData.username = this.newUsername;
+          this.sessionStorage.updateUserState(this.userData);
+          this.newUsername = null;
+        } else {
+          this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Change Username');
+        }
+      }, err => {
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Username');
+      });
+  }
+
   changeLoginPasswordDialog(ref: any) {
     if (!(this.oldLoginPassword && this.newLoginPassword && this.confirmLoginPassword)) {
       this.toastrService.danger('Please enter value in all fields.', 'Change Login Password');
@@ -222,6 +252,13 @@ export class SettingComponent implements OnInit {
       }, err => {
         this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Trade Password');
       });
+  }
+
+  cancelUsernameDialog(ref) {
+    ref.close();
+    this.newLoginPassword = null;
+    this.oldLoginPassword = null;
+    this.confirmLoginPassword = null;
   }
 
   cancelLoginPasswordDialog(ref) {
