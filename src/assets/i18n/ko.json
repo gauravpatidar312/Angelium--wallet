@@ -69,11 +69,9 @@
     "heaven":{
       "enterAmount":"Enter Amount",
       "entryDate": "참여일",
-      "history": "내역",
-      "heavenDropToday": "오늘의 헤븐 드롭",
       "heavenHistory":"Heaven History",
+      "heavenDropToday": "오늘의 헤븐 드롭",
       "heavenId":"Heaven ID",
-      "ID": "ID",
       "noDataFound":"No data found",
       "plan": "계획",
       "received": "Received",
@@ -82,7 +80,20 @@
       "totalHeaven": "총 헤븐"
     },
     "kyc":{
-      "mobileNumber": "Mobile Number"
+      "audit":"Audit",
+      "approved":"Approved",
+      "browse":"Browse",
+      "close":"Close",
+      "dob":"Date of Birth",
+      "idProofFront":"ID Proof (front side)",
+      "idProofBack":"ID Proof (back side)",
+      "input":"Input",
+      "information":"Information",
+      "idProofPreview":"ID Proof Preview",
+      "mobileNumber": "Mobile Number",
+      "selfie":"Selfie",
+      "submit":"Submit",
+      "upload":"Upload"
     },
     "login":{
       "DontHaveAnAccount": "계정이 없으신가요?",
