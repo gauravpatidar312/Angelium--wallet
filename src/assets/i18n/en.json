@@ -166,6 +166,11 @@
       "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required"
     },
+    "resetPassword":{
+      "changePassword":"Change Password",
+      "resetPassword":"Reset Password",
+      "enterPhoneNumber":"Enter Phone Number"
+    },
     "setting": {
       "country": "Country",
       "currency": "Currency",
