@@ -37,7 +37,17 @@
     "verificationCode": "인증번호",
     "verified": "인증됨",
     "week": "주",
-    "year": "년"
+    "year": "년",
+    "cryptos":{
+      "anx": "인증됨",
+      "heaven": "HEAVEN",
+      "btc": "BTC",
+      "eth": "ETH",
+      "anl": "ANL",
+      "xp": "XP",
+      "usdt": "USDT",
+      "anlp": "ANLP"
+    }
   }, 
   "messages":{
     "required": "{{field}} 이(가) 필요합니다"
@@ -58,7 +68,7 @@
       "systemUpdate": "시스템 업데이트",
       "totalAsset": "총자산",
       "securityCamera":{
-        "xLOVE": "총자산",
+        "xLOVE": "XLOVE",
         "xCASINO": "XCASINO",
         "xWISH": "XWISH",
         "xTRAVEL": "XTRAVEL",

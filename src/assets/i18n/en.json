@@ -37,7 +37,17 @@
     "verificationCode": "Verification code",
     "verified": "Verified",
     "week": "Week",
-    "year": "Year"
+    "year": "Year",
+    "cryptos":{
+      "anx": "ANX",
+      "heaven": "HEAVEN",
+      "btc": "BTC",
+      "eth": "ETH",
+      "anl": "ANL",
+      "xp": "XP",
+      "usdt": "USDT",
+      "anlp": "ANLP"
+    }
   }, 
   "messages":{
     "required": "{{field}} is required"

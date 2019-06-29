@@ -35,15 +35,15 @@ export class SecurityCamerasComponent implements OnDestroy {
           cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
           if (cam.title === 'XLOVE')
             cam.title = securityCameraLang.xLOVE;
-          if (cam.title === 'XCASINO')
+          else if (cam.title === 'XCASINO')
             cam.title = securityCameraLang.xCASINO;
-          if (cam.title === 'XWISH')
+          else if (cam.title === 'XWISH')
             cam.title = securityCameraLang.xWISH;
-          if (cam.title === 'XTRAVEL')
+          else if (cam.title === 'XTRAVEL')
             cam.title = securityCameraLang.xTRAVEL;
-          if (cam.title === 'XMALL')
+          else if (cam.title === 'XMALL')
             cam.title = securityCameraLang.xMALL;
-          if (cam.title === 'XSCHOOL')
+          else if (cam.title === 'XSCHOOL')
             cam.title = securityCameraLang.xSCHOOL;
         });
         this.cameras = cloneCameras;
