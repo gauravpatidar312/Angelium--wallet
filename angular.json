@@ -25,7 +25,8 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
-              }
+              },
+              "src/manifest.json"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -38,7 +39,8 @@
               "node_modules/angular-tree-component/dist/angular-tree-component.css",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/leaflet/dist/leaflet.css",
-              "src/app/@theme/styles/styles.scss"
+              "src/app/@theme/styles/styles.scss",
+              "src/assets/css/jquery.fancybox.min.css"
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
@@ -51,7 +53,8 @@
               "node_modules/echarts/dist/extension/bmap.min.js",
               "node_modules/chart.js/dist/Chart.min.js",
               "src/assets/js/jquery-3.4.1.min.js",            
-              "src/assets/js/slide-to-unlock.js"
+              "src/assets/js/slide-to-unlock.js",
+              "src/assets/js/jquery.fancybox.min.js"
             ]
           },
           "configurations": {
@@ -70,7 +73,9 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
             }
           }
         },
@@ -128,7 +133,8 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
-              }
+              },
+              "src/manifest.json"
             ]
           }
         },

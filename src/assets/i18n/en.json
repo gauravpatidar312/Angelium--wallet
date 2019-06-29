@@ -1,0 +1,125 @@
+{
+  "common":{
+    "assets": "Assets",
+    "amount" : "Amount",
+    "downline": "Downline",
+    "days": "Days",
+    "day": "Day",
+    "emailAddress": "Email address",
+    "email": "Email",
+    "enter": "Enter",
+    "from": "From",
+    "heaven": "Heaven",
+    "login": "Log In",
+    "last": "Last",
+    "level": "Level",
+    "month": "Month",
+    "password": "Password",
+    "phone": "Phone",
+    "profit": "Profit",
+    "profile":"Profile",
+    "reward": "Reward",
+    "run": "Run",
+    "register": "Register",
+    "repeat": "Repeat",
+    "rate": "Rate",
+    "slideRightToVerify": "Slide right to verify",
+    "select": "Select",
+    "sendSMS": "Send SMS",
+    "setting": "Setting",
+    "transfer": "Transfer",
+    "trade": "Trade",
+    "total": "Total",
+    "today": "today",
+    "top": "Top",
+    "username": "Username",
+    "verificationCode": "Verification code",
+    "verified": "Verified",
+    "week": "Week",
+    "year": "Year"
+  }, 
+  "messages":{
+    "required": "{{field}} is required"
+  },
+  "header": {
+    "logoTitle": "ANGELIUM",
+    "logout": "Log out"
+  },
+  "footer":{
+    "allRightsReservedBy": "All rights reserved by"
+  },
+  "pages":{
+    "dashboard":{
+      "articleTitle": "Article Title",
+      "eventUpdate": "Event Update",
+      "profitToday" : "Profit Today",
+      "portfolio": "PORTFOLIO",
+      "systemUpdate": "System Update",
+      "totalAsset" : "Total Asset"
+    },
+    "heaven":{
+      "entryDate": "Entry date",
+      "history": "History",
+      "ID": "ID",
+      "heavenDropToday": "Heaven Drop Today",
+      "plan": "Plan",
+      "received": "Received",
+      "releaseDate": "Release date",
+      "releaseSetting": "Release setting",
+      "totalHeaven": "Total Heaven"
+    },
+    "login":{
+      "DontHaveAnAccount": "Don't have an account",
+      "forgotPassword": "Forgot Password",
+      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "login": "Login",
+      "rememberMe": "Remember me"
+    },
+    "reward":{
+      "downlineAngel": "Downline Angel",
+      "downlineTree": {
+        "noUserDownlineTree": "There is no user in your down-line tree",
+        "rank": "Rank", 
+        "reward": "Reward", 
+        "your_reward": "Your Reward"
+      },
+      "map": "map",
+      "rewardAllocation": "Reward Allocation",
+      "rewardToday": "Reward Today",
+      "tree": "Tree",
+      "totalReward": "Total Reward",
+      "yourRank": "Your Rank",
+      "yourReward": "Your Reward"
+    },
+    "register":{
+      "alreadyHaveAnAccount": "Already have an account",
+      "agreeTo": "Agree to",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "number": "number",
+      "repeatPassword": "Repeat password",
+      "RealNameIsRequiredForKYC": "Must be real name for KYC process. it cannot be changed",
+      "terms&Conditions" : "Terms & Conditions"
+    },
+    "setting": {
+      "country": "Country",
+      "currency": "Currency",
+      "name": "Name",
+      "eMail": "E-mail",
+      "language": "Language",
+      "merge": "Merge",
+      "kyc": "KYC",
+      "qr": "QR",
+      "r18mode": "R-18 Mode",
+      "referral": "Referral",
+      "rank": "Rank",
+      "secretKey": "Secret Key",
+      "2FA": "2FA"
+    },
+    "transfer":{
+      "receive": "Receive",
+      "send": "Send",
+      "to": "To"
+    }
+  }
+}

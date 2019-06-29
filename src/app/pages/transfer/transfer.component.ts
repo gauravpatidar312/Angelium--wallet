@@ -8,7 +8,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from '../../services/toastr.service';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from 'environments/environment';
+import {TranslateService} from '@ngx-translate/core';
 import * as _ from 'lodash';
+import { IndexedDBStorageService } from '../../services/indexeddb-storage.service';
 
 declare const jQuery: any;
 @Component({
@@ -19,11 +21,10 @@ declare const jQuery: any;
 export class TransferComponent implements OnInit {
   private alive = true;
   isProduction: any = environment.production;
-  sendForm: FormGroup;
-  sendType: string = 'SELECT';
-  receiveType: string = 'SELECT';
+  sendType: string = this.translate.instant('common.select');
+  receiveType: string =  this.translate.instant('common.select');
   fromType: string = 'ANX';
-  toType: string = 'SELECT';
+  toType: string =  this.translate.instant('common.select');
   fromTypes: string[] = ['ANX'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -42,16 +43,18 @@ export class TransferComponent implements OnInit {
   otcWallet: any = {};
   otcWallets: any = [];
   fromOTCAmount: number;
+  transfer_amount: number;
+  destination_address: number;
   trade_password: any = '';
 
   constructor(private httpService: HttpService,
-              private formBuilder: FormBuilder,
               private dialogService: NbDialogService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private sessionStorageService: SessionStorageService,
+              private storageService: IndexedDBStorageService,
+              private translate:TranslateService,
               private activatedRoute: ActivatedRoute) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -67,7 +70,7 @@ export class TransferComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.toggle = null;
     this.getWallets();
     if (this.shareDataService.transferTab) {
@@ -78,28 +81,35 @@ export class TransferComponent implements OnInit {
       }
     }
 
-    if (this.sessionStorageService.getFromSession('waitTime')) {
-      const waitTime = new Date(this.sessionStorageService.getFromSession('waitTime'));
-      const seconds = (waitTime.getTime() - new Date().getTime());
-      if (seconds > 0) {
-        this.waitFlag = true;
-        setTimeout(() => {
-          this.waitFlag = false;
-          this.sessionStorageService.deleteFromSession('waitTime');
-        }, seconds);
-      } else {
-        this.sessionStorageService.deleteFromSession('waitTime');
+    let angeliumnInfo: any = await this.storageService.getAngeliumStorage();
+    if (angeliumnInfo) {
+      if (angeliumnInfo.waitTime) {
+        const waitTime = new Date(angeliumnInfo.waitTime);
+        const seconds = (waitTime.getTime() - new Date().getTime());
+        if (seconds > 0) {
+          this.waitFlag = true;
+          setTimeout(() => {
+            this.waitFlag = false;
+            this.storageService.saveToAngeliumSession({'waitTime': null});
+          }, seconds);
+        } else {
+          this.storageService.saveToAngeliumSession({'waitTime': null});
+        }
       }
     }
-
-    this.sendForm = this.formBuilder.group({
-      transfer_amount: ['', Validators.required],
-      destination_address: ['', Validators.required],
-    });
-  }
-
-  get f() {
-    return this.sendForm.controls;
+    // if (this.sessionStorageService.getFromSession('waitTime')) {
+    //   const waitTime = new Date(this.sessionStorageService.getFromSession('waitTime'));
+    //   const seconds = (waitTime.getTime() - new Date().getTime());
+    //   if (seconds > 0) {
+    //     this.waitFlag = true;
+    //     setTimeout(() => {
+    //       this.waitFlag = false;
+    //       this.sessionStorageService.deleteFromSession('waitTime');
+    //     }, seconds);
+    //   } else {
+    //     this.sessionStorageService.deleteFromSession('waitTime');
+    //   }
+    // }
   }
 
   getWallets() {
@@ -111,9 +121,9 @@ export class TransferComponent implements OnInit {
         this.otcWallets = this.myWallets;
 
       if (!this.myWallets) {
-        this.sendType = 'SELECT';
-        this.receiveType = 'SELECT';
-        this.toType = 'SELECT';
+        this.sendType = this.translate.instant('common.select');
+        this.receiveType = this.translate.instant('common.select');
+        this.toType =  this.translate.instant('common.select');
       } else if (this.shareDataService.transferTab) {
         this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
         this.shareDataService.transferTab = null;
@@ -143,12 +153,12 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
+    if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger('Please enter required field for transfer.', 'Send');
       return;
     }
 
-    if (Number(this.sendForm.value.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
+    if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
       this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
       return;
     }
@@ -186,14 +196,14 @@ export class TransferComponent implements OnInit {
   }
 
   setAmount(walletType) {
-    if (!this.sendForm.value.transfer_amount) {
+    if (!this.transfer_amount) {
       this.sendWallet.walletDollar = 0;
       return;
     }
 
     this.fetchingAmount = true;
     this.httpService.get('live-price/').subscribe(data => {
-      this.sendWallet.walletDollar = Number(this.sendForm.value.transfer_amount) * data[walletType];
+      this.sendWallet.walletDollar = Number(this.transfer_amount) * data[walletType];
       this.fetchingAmount = false;
     }, (err) => {
       this.fetchingAmount = false;
@@ -207,7 +217,7 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.sendForm.controls.transfer_amount.setValue(Number(Number(this.sendWallet.wallet_amount).toFixed(6)));
+    this.transfer_amount = Number(Number(this.sendWallet.wallet_amount).toFixed(6));
     this.setAmount(this.sendWallet.wallet_type);
   }
 
@@ -266,18 +276,22 @@ export class TransferComponent implements OnInit {
   onChangeWallet(walletType: string, typeValue): void {
     if (typeValue === 'send') {
       this.sendType = walletType;
-      this.sendWallet = this.myWallets.find(item => {
-        return item.wallet_type === walletType;
-      });
-      if (!this.sendWallet) {
-        this.sendType = 'BTC';
+      if (this.sendType  !== 'SELECT') {
         this.sendWallet = this.myWallets.find(item => {
-          return item.wallet_type === 'BTC';
+          return item.wallet_type === walletType;
         });
+        if (!this.sendWallet) {
+          this.sendType = 'BTC';
+          this.sendWallet = this.myWallets.find(item => {
+            return item.wallet_type === 'BTC';
+          });
+        }
+      } else if (this.sendType === 'SELECT') {
+        this.sendWallet = {};
       }
       if (this.sendWallet) {
         // this.sendForm.controls.transfer_amount.setValue(this.sendWallet.wallet_amount);
-        this.sendForm.controls.transfer_amount.setValue(0);
+        this.transfer_amount = 0;
         this.setAmount(walletType);
       }
     } else if (typeValue === 'receive') {
@@ -308,12 +322,12 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    if (!this.sendForm.value || !this.sendForm.value.transfer_amount || !Number(this.sendForm.value.transfer_amount) || !this.sendForm.value.destination_address) {
+    if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger('Please enter required field for transfer.', 'Send');
       return;
     }
 
-    if (Number(this.sendForm.value.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
+    if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
       this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
       return;
     }
@@ -326,8 +340,8 @@ export class TransferComponent implements OnInit {
 
     const transferObj = {
       'user_wallet': this.sendWallet.id,
-      'destination_address': this.sendForm.value.destination_address,
-      'transfer_amount': Number(this.sendForm.value.transfer_amount),
+      'destination_address': this.destination_address,
+      'transfer_amount': Number(this.transfer_amount),
     };
 
     this.waitFlag = true;
@@ -337,10 +351,12 @@ export class TransferComponent implements OnInit {
         // 15 seconds wait time for next transaction.
         let currentTime = new Date();
         currentTime.setSeconds(currentTime.getSeconds() + 15);
-        this.sessionStorageService.saveToSession('waitTime', currentTime);
+        // this.sessionStorageService.saveToSession('waitTime', currentTime);
+        this.storageService.saveToAngeliumSession({'waitTime': currentTime });
         setTimeout(() => {
           this.waitFlag = false;
-          this.sessionStorageService.deleteFromSession('waitTime');
+          // this.sessionStorageService.deleteFromSession('waitTime');
+          this.storageService.saveToAngeliumSession({'waitTime': null });
         }, 15000);
 
         this.formSubmitting = false;
@@ -348,8 +364,8 @@ export class TransferComponent implements OnInit {
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           this.myWallets = data;
         });
-        this.onChangeWallet(this.sendWallet.wallet_type, 'send');
-        this.sendForm.controls.destination_address.setValue(null);
+        this.onChangeWallet('SELECT', 'send');
+        this.destination_address = null;
       } else {
         this.waitFlag = false;
         this.formSubmitting = false;

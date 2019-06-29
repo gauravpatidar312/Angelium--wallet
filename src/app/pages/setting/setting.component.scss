@@ -170,12 +170,14 @@
   }
 
   .dropdown {
-    min-width: 7rem;
+    min-width: 150px;
   }
 
   .dropdown-menu {
-    width: auto;
+    background-color: #3d3780 !important;
+    border: 2px solid #7659ff !important;
   }
+
 
   .form-group label {
     padding: 0 0 0.75rem;
@@ -376,3 +378,4 @@
   display: inline-block;
   font-size: 22px;
 }
+.dropup {width: 150px;}

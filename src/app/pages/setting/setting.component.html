@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>PROFILE</nb-card-header>
+      <nb-card-header>{{"common.profile" | translate}}</nb-card-header>
       <nb-card-body>
         <div class="row">
           <div class="col-md-12">
@@ -21,32 +21,32 @@
               </thead>
               <tbody>
                 <tr class="spacer">
-                  <td class="title-col">Username</td>
+                  <td class="title-col">{{"common.username" | translate}}</td>
                   <td class="value-col">{{userData?.username | titlecase}}</td>
-                  <td class="action-col"></td>
+                  <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeUsername)"></i></td>
                 </tr>
                 <tr class="spacer">
-                  <td class="title-col">Name</td>
+                  <td class="title-col">{{"pages.setting.name" | translate}}</td>
                   <td class="value-col">{{userData?.fullname | titlecase}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">E-mail</td>
+                  <td class="title-col">{{"pages.setting.eMail" | translate}}</td>
                   <td class="value-col">{{userData?.email}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">Country</td>
+                  <td class="title-col">{{"pages.setting.country" | translate}}</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
                   <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" *ngIf="false" (click)="openCountryDialog('Country', userData?.country)"></i></td>
                 </tr>
                 <tr>
-                  <td class="title-col">Phone</td>
+                  <td class="title-col">{{"common.phone" | translate}}</td>
                   <td class="value-col">{{userData?.phone}}</td>
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">Referral</td>
+                  <td class="title-col">{{"pages.setting.referral" | translate}}</td>
                   <td class="value-col">{{userData?.referral_link}}</td>
                   <td class="action-col text-center">
                     <i ngxClipboard [cbContent]="userData?.referral_link" (click)="copyReferralLink()"
@@ -54,14 +54,14 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">QR</td>
+                  <td class="title-col">{{"pages.setting.qr" | translate}}</td>
                   <td class="value-col">Download QR Code of your referral link</td>
                   <td class="action-col text-center">
                     <i class="ion-archive down-qrCode-icon fa-2x" (click)="openDialog(QRdialog)"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">Level</td>
+                  <td class="title-col">{{"common.level" | translate}}</td>
                   <td class="value-col">{{userData?.level}}</td>
                   <td class="action-col"></td>
                 </tr>
@@ -74,7 +74,7 @@
   </div>
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>SETTING</nb-card-header>
+      <nb-card-header>{{"common.setting" | translate}}</nb-card-header>
       <nb-card-body>
         <div class="col-md-12 nopadd font-nunitoSans">
           <table class="table borderless tablemarginfix">
@@ -82,14 +82,14 @@
             </thead>
             <tbody>
               <tr>
-                <td class="title-col">Login Password</td>
+                <td class="title-col">{{"common.password" | translate}}</td>
                 <td class="value-col">
                   *************
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeLoginPassword)"></i></td>
               </tr>
               <tr>
-                <td class="title-col">Trade Password</td>
+                <td class="title-col">{{"common.trade" | translate}} {{"common.password" | translate}}</td>
                 <td class="value-col">
                   *************
                 </td>
@@ -101,27 +101,22 @@
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr *ngIf="!isProduction">
-                <td class="title-col">Secret Key</td>
+                <td class="title-col">{{"pages.setting.secretKey" | translate}}</td>
                 <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">KYC</td>
-                <td class="value-col">{{isProduction ? 'Coming soon' : 'Pending'}}</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc" *ngIf="!isProduction"></i></td>
+                <td class="title-col">{{"pages.setting.kyc" | translate}}</td>
+                <td class="value-col">{{userData?.kyc_info?.status_description || 'pending'}}</td>
+                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
               </tr>
               <tr>
-                <td class="title-col">Currency</td>
+                <td class="title-col">{{"pages.setting.currency" | translate}}</td>
                 <td class="value-col">USD</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">Language</td>
-                <td>English</td>
-                <td class="action-col iconpaddfix"></td>
-              </tr>
-              <tr>
-                <td class="title-col">R-18 Mode</td>
+                <td class="title-col">{{"pages.setting.r18mode" | translate}}</td>
                 <td class="value-col iconpaddfix" colspan="2">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
@@ -137,9 +132,32 @@
                 </td>
               </tr>
               <tr>
-                <td class="title-col">Merge</td>
+                <td class="title-col">{{"pages.setting.merge" | translate}}</td>
                 <td>{{isProduction ? 'Coming soon' : 'Merge your old data'}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="!isProduction"></i></td>
+              </tr>
+              <tr>
+                <td class="title-col">{{"pages.setting.language" | translate}}</td>
+                <td>
+                  <div class="status-dd-week dropdown" 
+                    [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                       ngbDropdown placement="top">
+                    <button type="button" ngbDropdownToggle
+                      class="btn b-language-size"
+                            [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                   'btn-primary': currentTheme !== 'default',
+                                   'btn-sm': breakpoint.width <= breakpoints.is}">
+                      {{ selectedLang }}
+                    </button>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                      <li class="dropdown-item {{selectedLang === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                        (click)="changeLang(lan)">
+                        {{ lan.language }}
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
             </tbody>
           </table>
@@ -247,6 +265,22 @@
     </nb-card>
   </div>
 </div> -->
+
+<ng-template #changeUsername let-data let-ref="dialogRef">
+  <nb-card class="changePassword">
+    <nb-card-header>
+      Change Username
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelUsernameDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <input type="text" [(ngModel)]="newUsername" placeholder="New Username (English only)" nbInput/>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="onChangeUsername(ref)">Submit</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelUsernameDialog(ref)">Cancel</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
 
 <ng-template #changeLoginPassword let-data let-ref="dialogRef">
   <nb-card  class="changePassword">

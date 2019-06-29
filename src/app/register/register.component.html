@@ -5,36 +5,55 @@
         <nav class='navigation'>
           <a routerLink="/login" class='link' aria-label='Back'>
             <i class='icon nb-arrow-thin-left'></i></a>
+            <div class="status-dd-week dropdown" 
+              [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                 ngbDropdown>
+              <button type="button" ngbDropdownToggle
+                class="btn b-language-size"
+                      [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                             'btn-primary': currentTheme !== 'default',
+                             'btn-sm': breakpoint.width <= breakpoints.is}">
+                {{ selectedLang }}
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item {{selectedLang === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                  (click)="changeLanguage(lan)">
+                  {{ lan.language }}
+                </li>
+              </ul>
+            </div>
         </nav>
       </nb-card-header>
       <nb-card-body>
         <nb-auth-block>
           <div>
             <img src="../../assets/images/angelium_logo.png" class="logo-image" />
-            <h1 id="title" class="title">Register</h1>
+            <h1 id="title" class="title">{{"common.register" | translate}}</h1>
             <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when
               enabled.</p>
             <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()"  class="registerForm">
               <div class="form-group row">
                 <div class="col-md-9 col-12">
-                  <label>Phone number:</label>
-                  <international-phone-number [(ngModel)]="model.phone" placeholder="Enter phone number"
+                  <label>
+                    {{"common.phone" | translate}}
+                    {{"pages.register.number" | translate}}:</label>
+                  <international-phone-number [(ngModel)]="model.phone" 
                     [maxlength]="20" [required]="true" #phone="ngModel" name="phone" [defaultCountry]="'jp'">
                   </international-phone-number>
-
                   <div
                     *ngIf="((otpForm.submitted || otpSubmitted) && otp_form.phone.errors) || (submitted && f.phone.errors)"
                     class="invalid-feedback">
-                    <div
-                      *ngIf="(otp_form?.phone.errors && otp_form?.phone.errors.required) || (f?.phone.errors && f?.phone.errors.required)">
-                      Phone number is required
+                    <div *ngIf="(otp_form?.phone.errors && otp_form?.phone.errors.required) || (f?.phone.errors && f?.phone.errors.required)">
+                      {{"messages.required" | translate: {'field': "common.phone" | translate } }}
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3 col-12 sent_btn">
                   <button type="submit" [disabled]="otpSubmitting || otpSubmitted"
                     class="btn btn-demo btn-success margint btnregister" size="large">
-                    <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' : 'Send SMS'}}</span>
+                    <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' : 
+                      "common.sendSMS" | translate }}
+                    </span>
                     <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
                   </button>
                 </div>
@@ -42,76 +61,128 @@
             </form>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()"  class="registerForm">
               <div class="form-group">
-                <label>Verification code:</label>
-                <input type="text" class="form-control" formControlName="otp_code" placeholder="Verification code">
+                <label>{{"common.verificationCode" | translate}}:</label>
+                <input type="text" class="form-control" formControlName="otp_code"  
+                      placeholder="{{'common.verificationCode' | translate}}">
                 <div *ngIf="submitted && f.otp_code.errors" class="invalid-feedback">
-                  <div *ngIf="f.otp_code.errors.required">Verification code is required</div>
+                  <div *ngIf="f.otp_code.errors.required">
+                      {{"messages.required" | translate: {'field': "common.verificationCode" | translate } }}
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <label>Username:</label>
-                <input type="text" class="form-control" placeholder="Username" formControlName="username">
+                <label>{{"common.username" | translate}}:</label>
+                <input type="text" class="form-control" 
+                  placeholder="{{'common.username' | translate}}" 
+                  formControlName="username">
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">Username is required</div>
+                  <div *ngIf="f.username.errors.required">
+                      {{"messages.required" | translate: {'field': "common.username" | translate } }}
+                  </div>
                   <div *ngIf="f.username.errors.email">Username us required</div>
                   <div *ngIf="f.username.errors.pattern">Please enter value in English language only.</div>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label>First Name:</label>
-                  <input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
+                  <label>{{"pages.register.firstName" | translate}}:</label>
+                  <input type="text" class="form-control" 
+                    placeholder="{{'pages.register.firstName' | translate}}" 
+                    formControlName="first_name">
                   <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-                    <div *ngIf="f.first_name.errors.required">First name is required</div>
+                    <div *ngIf="f.first_name.errors.required">
+                      {{"messages.required" | translate: {'field': "pages.register.firstName" | translate } }}
+                    </div>
                     <div *ngIf="f.first_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label>Last Name:</label>
-                  <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name">
+                  <label>{{"pages.register.lastName" | translate}}:</label>
+                  <input type="text" class="form-control" 
+                    placeholder="{{'pages.register.lastName' | translate}}" 
+                    formControlName="last_name">
                   <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-                    <div *ngIf="f.last_name.errors.required">Last name is required</div>
+                    <div *ngIf="f.last_name.errors.required">
+                      {{"messages.required" | translate: {'field': "pages.register.lastName" | translate } }}
+                    </div>
                     <div *ngIf="f.last_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
-                <span class="form-group col-md-12 msg-font-size">Must be real name for KYC process. it cannot be changed.</span>
+                <span class="form-group col-md-12 msg-font-size">
+                  {{"pages.register.RealNameIsRequiredForKYC" | translate}}.
+                </span>
               </div>
               <div class="form-group">
-                <label>Email address:</label>
-                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                <label>{{"common.emailAddress" | translate}}:</label>
+                <input type="email" class="form-control" 
+                  placeholder="{{'common.emailAddress' | translate}}" 
+                  formControlName="email">
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                  <div *ngIf="f.email.errors.required">Email is required</div>
+                  <div *ngIf="f.email.errors.required">
+                    {{"messages.required" | translate: {'field': "common.emailAddress" | translate } }}
+                  </div>
                   <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                 </div>
               </div>
+              
               <div class="form-group">
-                <label>Login Password:</label>
-                <input type="password" class="form-control" placeholder="Login Password" formControlName="password">
+                <label>
+                  {{"pages.login.login" | translate}}
+                  {{"common.password" | translate}}:</label>
+                <input type="password" class="form-control" placeholder='{{ "common.login"| translate }} {{ "common.password"| translate }}' formControlName="password">
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Login password is required</div>
+                  <div *ngIf="f.password.errors.required">
+                    {{"pages.login.login" | translate}}
+                    {{
+                      "messages.required" | translate: {'field': "common.password" | translate }
+                    }}
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <label>Repeat Login password:</label>
-                <input type="password" class="form-control" placeholder="Repeat Login password"
+                <label>{{"common.repeat" | translate}} 
+                    {{"pages.login.login" | translate}}
+                  {{"common.password" | translate}}:</label>
+                <input type="password" class="form-control" placeholder="{{'common.repeat'|translate}} {{ 'common.login'| translate }} {{ 'common.password'| translate }}"
                   formControlName="confirm_password">
                 <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.confirm_password.errors.required">Repeat login password is required</div>
+                  <div *ngIf="f.confirm_password.errors.required">
+                    {{"common.repeat" | translate}}
+                    {{"pages.login.login" | translate}}
+                    {{
+                      "messages.required" | translate: {'field': "common.password" | translate }
+                    }}
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <label>Trade Password:</label>
-                <input type="password" class="form-control" placeholder="Trade Password" formControlName="trade_password">
+                <label>{{"common.trade" | translate}} 
+                  {{"common.password" | translate}}:</label>
+                <input type="password" class="form-control" placeholder="{{'common.trade'|translate}} {{ 'common.password'| translate }}" formControlName="trade_password">
                 <div *ngIf="submitted && f.trade_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.trade_password.errors.required">Trade password is required</div>
+                  <div *ngIf="f.trade_password.errors.required">
+                    {{"common.trade" | translate}} 
+                    {{
+                      "messages.required" | translate: {'field': "common.password" | translate }
+                    }}
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <label>Repeat Trade password:</label>
-                <input type="password" class="form-control" placeholder="Repeat Trade password"
+                <label>
+                  {{"common.repeat" | translate}}
+                  {{"common.trade" | translate}} 
+                  {{"common.password" | translate}}:
+                </label>
+                <input type="password" class="form-control" placeholder="{{'common.repeat'|translate}} {{'common.trade'|translate}} {{ 'common.password'| translate }}"
                        formControlName="confirm_trade_password">
                 <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                  <div *ngIf="f.confirm_trade_password.errors.required">Repeat trade password is required</div>
+                  <div *ngIf="f.confirm_trade_password.errors.required">
+                    {{"common.repeat" | translate}}
+                    {{"common.trade" | translate}} 
+                    {{
+                      "messages.required" | translate: {'field': "common.password" | translate }
+                    }}</div>
                 </div>
               </div>
               <!-- <div class="form-group">
@@ -119,22 +190,32 @@
                   <input type="password" class="form-control"  placeholder="Slider captcha">
                 </div> -->
               <div class="form-group terms">
-                <nb-checkbox formControlName="isAgree">Agree to </nb-checkbox>
-                <a class="term-link" (click)="openTermsConditions()">Terms & Conditions</a>
+                <nb-checkbox formControlName="isAgree">
+                  {{"pages.register.agreeTo" | translate}}
+                </nb-checkbox>
+                <a class="term-link" (click)="openTermsConditions()">
+                  {{"pages.register.terms&Conditions" | translate}}
+                </a>
                 <div class="clearfix"></div>
               </div>
+
               <div class="form-group sliderCss">
-                <div id="registerSlider" data-lock-text="Slide right to verify" data-unlock-text="Verified"> </div>
+                <div id="registerSlider"
+                 [attr.data-lock-text]="'common.slideRightToVerify' | translate"
+                 [attr.data-unlock-text]="'common.verified' | translate"> </div>
               </div>
 
               <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer registerBtnCss"
                 size="large" style="width:100%">
-                <span *ngIf="!formSubmitting">Register</span>
+                <span *ngIf="!formSubmitting">
+                  {{"common.register" | translate}}
+                </span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
               </button>
               <div class="form-group">
                 <section class="another-action" aria-label="Sign in">
-                  Already have an account? <a class="" routerLink="/login">Log in</a>
+                  {{"pages.register.alreadyHaveAnAccount" | translate}}? 
+                  <a routerLink="/login">{{"common.login" | translate}}</a>
                 </section>
               </div>
             </form>

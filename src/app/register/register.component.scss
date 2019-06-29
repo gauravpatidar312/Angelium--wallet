@@ -133,6 +133,13 @@
   }
 }
 
+.dropdown-menu {
+  background-color: #3d3780 !important;
+  border: 2px solid #7659ff !important;
+}
+
+.dropdown { float: right; width: 150px; }
+
 /deep/ .locked {
   font-size: 18px;
   border: 2px solid #7659ff;

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
+import { TranslateService } from "@ngx-translate/core";
 import { SolarData } from '../../@core/data/solar';
 import { HttpService } from '../../services/http.service';
 import { SessionStorageService } from '../../services/session-storage.service';
@@ -49,13 +50,13 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   fetchingAssetValue: boolean = false;
   @Input() fetchingCryptos: boolean = false;
   assetCard: CardSettings = {
-    title: 'Total Asset',
+    title: this.translate.instant('pages.dashboard.totalAsset'),
     value: 0,
     iconClass: 'fa fa-university',
     type: 'primary',
   };
   gainCard: CardSettings = {
-    title: 'Profit Today',
+    title: this.translate.instant('pages.dashboard.profitToday'),
     value: 0,
     iconClass: 'fa fa-chart-line',
     type: 'primary',
@@ -95,6 +96,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     private httpService: HttpService,
     private sessionStorage: SessionStorageService,
     private shareDataService: ShareDataService,
+    public translate: TranslateService,
     private toastrService: ToastrService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
 

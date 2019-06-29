@@ -1,10 +1,12 @@
 import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {SmartTableData} from '../../@core/data/smart-table';
 import {LocalDataSource} from 'ng2-smart-table';
+import { TranslateService } from "@ngx-translate/core";
 import {NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
 import {DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl} from '@angular/platform-browser';
 import {NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder} from '@nebular/theme';
+
 import {HttpService} from '../../services/http.service';
 import {SessionStorageService} from '../../services/session-storage.service';
 import {environment} from '../../../environments/environment';
@@ -94,13 +96,13 @@ export class RewardComponent implements OnInit, AfterViewInit {
     },
     columns: {
       level: {
-        title: 'Level',
+        title: this.translate.instant('common.level'),
         type: 'number',
         filter: false
       },
       yourreward: {
         type: 'html',
-        title: 'Your Reward',
+        title: this.translate.instant('pages.reward.downlineTree.your_reward'),
         class: 'table-col',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -108,7 +110,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       rewardrate: {
-        title: 'Reward Rate',
+        title: this.translate.instant('pages.reward.downlineTree.reward')+' '+ this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -116,7 +118,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downlinereward: {
-        title: 'Downline Rate',
+        title: this.translate.instant('common.downline')+" "+ this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -124,7 +126,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       heaven: {
-        title: 'Heaven',
+        title: this.translate.instant('common.heaven'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -132,7 +134,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downline: {
-        title: 'Downline',
+        title: this.translate.instant('common.downline'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -198,14 +200,14 @@ export class RewardComponent implements OnInit, AfterViewInit {
   };
 
   totalRewardCard: CardSettings = {
-    title: 'Total Reward',
+    title: this.translate.instant('pages.reward.totalReward'),
     value: '0',
     percentage: '0',
     iconClass: 'nb-home',
     type: 'primary',
   };
   todayRewadCard: CardSettings = {
-    title: 'Reward Today',
+    title: this.translate.instant('pages.reward.rewardToday'),
     value: '0',
     percentage: '0',
     iconClass: 'nb-roller-shades',
@@ -250,10 +252,10 @@ export class RewardComponent implements OnInit, AfterViewInit {
               private sessionStorage: SessionStorageService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
+              private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
+              public translate: TranslateService) {
 
     this.userData = this.sessionStorage.getFromSession('userInfo');
-
     const data = this.service.getData();
     const NewOBj = [];
     for (let x = 0; x < 10; x++) {
@@ -265,6 +267,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       .subscribe(theme => {
         this.currentTheme = theme.name;
         this.statusCards1 = this.statusCardsByThemes[theme.name];
+        console.log(this.statusCards1)
       });
     this.getDownlineTree('total');
     this.getDownlinecount();

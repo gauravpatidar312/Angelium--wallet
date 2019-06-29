@@ -16,7 +16,7 @@ import { ProfitChartComponent } from './charts-panel/charts/profit-chart.compone
 import { ChartModule } from 'angular2-chartjs';
 import { SolarComponent } from './solar/solar.component';
 import { CustomRendererComponent } from './custom.component';
-
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { CustomRendererComponent } from './custom.component';
     ChartModule,
     NgxEchartsModule,
     NgxChartsModule,
+    TranslateModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCpVhQiwAllg1RAFaxMWSpQruuGARy0Y1k',
       libraries: ['places'],
