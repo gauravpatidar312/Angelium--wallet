@@ -35,7 +35,8 @@
   "dataGroups": [{
     "name": "api-performance",
     "urls": [
-      "/api/**"
+      "/api/**",
+      "https://api.angelium.net/api/**"
     ],
     "cacheConfig": {
       "strategy": "performance",
