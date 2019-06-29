@@ -34,7 +34,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.getEarningCardData(this.selectedCurrency);
     let element1 = document.getElementById('curr1').getElementsByClassName('curre');
-    element1[0].innerHTML = this.translate.instant("common.anx");
+    element1[0].innerHTML = this.translate.instant("common.cryptos.anx");
     let element2 = document.getElementById('curr2').getElementsByClassName('curre');
     element2[0].innerHTML = this.translate.instant("pages.hq.averageANX");
     let element3 = document.getElementById('curr3').getElementsByClassName('curre');
