@@ -164,6 +164,13 @@
       "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required"
     },
+    "resetPassword":{
+      "changePassword":"Change Password",
+      "enterPhoneNumber":"Enter Phone Number",
+      "repeatPassword": "Repeat password",
+      "resetPassword":"Reset Password",
+      "passwordsMustMatch": "Passwords must match"
+    },
     "setting": {
       "country": "国家",
       "currency": "通货",

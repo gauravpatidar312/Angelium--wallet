@@ -158,7 +158,6 @@
       "lastName": "Last Name",
       "loginPassword": "Login Password",
       "phoneNumber": "Phone number",
-      "repeatPassword": "Repeat password",
       "RealNameIsRequiredForKYC": "Must be real name for KYC process. it cannot be changed",
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "Repeat Trade Password",
@@ -168,8 +167,10 @@
     },
     "resetPassword":{
       "changePassword":"Change Password",
+      "enterPhoneNumber":"Enter Phone Number",
+      "repeatPassword": "Repeat password",
       "resetPassword":"Reset Password",
-      "enterPhoneNumber":"Enter Phone Number"
+      "passwordsMustMatch": "Passwords must match"
     },
     "setting": {
       "country": "Country",
