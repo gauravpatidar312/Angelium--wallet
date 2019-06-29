@@ -3,6 +3,16 @@
     "anx":"ANX",
     "assets": "Assets",
     "amount" : "数量",
+    "cryptos":{
+      "anx": "ANX",
+      "anl": "ANL",
+      "anlp": "ANLP",
+      "btc": "BTC",
+      "eth": "ETH",
+      "heaven": "HEAVEN",
+      "usdt": "USDT",
+      "xp": "XP"
+    },
     "downline": "ダウンライン",
     "days": "Days",
     "day": "Day",
@@ -37,17 +47,7 @@
     "verificationCode": "認証コード",
     "verified": "Verified",
     "week": "週",
-    "year": "年",
-    "cryptos":{
-      "anx": "ANX",
-      "heaven": "HEAVEN",
-      "btc": "BTC",
-      "eth": "ETH",
-      "anl": "ANL",
-      "xp": "XP",
-      "usdt": "USDT",
-      "anlp": "ANLP"
-    }
+    "year": "年"
   }, 
   "messages":{
     "required": "{{field}} が必要です"

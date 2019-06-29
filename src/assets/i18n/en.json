@@ -3,6 +3,16 @@
     "anx":"ANX",
     "assets": "Assets",
     "amount" : "Amount",
+    "cryptos":{
+      "anx": "ANX",
+      "anl": "ANL",
+      "anlp": "ANLP",
+      "btc": "BTC",
+      "eth": "ETH",
+      "heaven": "HEAVEN",
+      "usdt": "USDT",
+      "xp": "XP"
+    },
     "downline": "Downline",
     "days": "Days",
     "day": "Day",
@@ -37,17 +47,7 @@
     "verificationCode": "Verification code",
     "verified": "Verified",
     "week": "Week",
-    "year": "Year",
-    "cryptos":{
-      "anx": "ANX",
-      "heaven": "HEAVEN",
-      "btc": "BTC",
-      "eth": "ETH",
-      "anl": "ANL",
-      "xp": "XP",
-      "usdt": "USDT",
-      "anlp": "ANLP"
-    }
+    "year": "Year"
   }, 
   "messages":{
     "required": "{{field}} is required"
