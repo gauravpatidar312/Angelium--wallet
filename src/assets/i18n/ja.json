@@ -79,11 +79,9 @@
     "heaven":{  
       "enterAmount":"Enter Amount",
       "entryDate": "Entry date",    
-      "history": "履歴",
-      "heavenDropToday": "今日のヘブンドロップ",
       "heavenHistory":"Heaven History",
+      "heavenDropToday": "今日のヘブンドロップ",
       "heavenId":"Heaven ID",
-      "ID": "ID",
       "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
@@ -92,7 +90,20 @@
       "totalHeaven": "ヘブン合計" 
     },
     "kyc":{
-      "mobileNumber": "Mobile Number"
+      "audit":"Audit",
+      "approved":"Approved",
+      "browse":"Browse",
+      "close":"Close",
+      "dob":"Date of Birth",
+      "idProofFront":"ID Proof (front side)",
+      "idProofBack":"ID Proof (back side)",
+      "input":"Input",
+      "information":"Information",
+      "idProofPreview":"ID Proof Preview",
+      "mobileNumber": "Mobile Number",
+      "selfie":"Selfie",
+      "submit":"Submit",
+      "upload":"Upload"
     },
     "login":{  
       "DontHaveAnAccount": "Don't have an account",    
