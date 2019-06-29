@@ -55,11 +55,19 @@
       "profitToday" : "Profit Today",
       "portfolio": "PORTFOLIO",
       "systemUpdate": "System Update",
-      "totalAsset" : "Total Asset"
+      "totalAsset" : "Total Asset",
+      "securityCamera":{
+        "xLOVE": "XLOVE",
+        "xCASINO": "XCASINO",
+        "xWISH": "XWISH",
+        "xTRAVEL": "XTRAVEL",
+        "xMALL": "XMALL",
+        "xSCHOOL": "XSCHOOL"
+      }
     },
     "heaven":{
       "entryDate": "Entry date",
-      "history": "History",
+      "heavenHistory": "Heaven History",
       "ID": "ID",
       "heavenDropToday": "Heaven Drop Today",
       "plan": "Plan",
@@ -67,6 +75,9 @@
       "releaseDate": "Release date",
       "releaseSetting": "Release setting",
       "totalHeaven": "Total Heaven"
+    },
+    "kyc":{
+      "mobileNumber": "Mobile Number"
     },
     "login":{
       "DontHaveAnAccount": "Don't have an account",

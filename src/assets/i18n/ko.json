@@ -55,7 +55,15 @@
       "profitToday": "오늘의 이익",
       "portfolio": "포트폴리오",
       "systemUpdate": "시스템 업데이트",
-      "totalAsset": "총자산"
+      "totalAsset": "총자산",
+      "securityCamera":{
+        "xLOVE": "총자산",
+        "xCASINO": "XCASINO",
+        "xWISH": "XWISH",
+        "xTRAVEL": "XTRAVEL",
+        "xMALL": "XMALL",
+        "xSCHOOL": "XSCHOOL"
+      }
     },
     "heaven":{
       "entryDate": "참여일",
@@ -67,6 +75,9 @@
       "releaseDate": "완료일",
       "releaseSetting": "완료 설정",
       "totalHeaven": "총 헤븐"
+    },
+    "kyc":{
+      "mobileNumber": "Mobile Number"
     },
     "login":{
       "DontHaveAnAccount": "계정이 없으신가요?",

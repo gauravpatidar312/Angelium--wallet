@@ -55,7 +55,15 @@
       "profitToday" : "今日の利益",
       "portfolio": "ポートフォリオ",
       "systemUpdate": "システム更新",
-      "totalAsset" : "アセット合計"
+      "totalAsset" : "アセット合計",
+      "securityCamera":{
+        "xLOVE": "XLOVE",
+        "xCASINO": "XCASINO",
+        "xWISH": "XWISH",
+        "xTRAVEL": "XTRAVEL",
+        "xMALL": "XMALL",
+        "xSCHOOL": "XSCHOOL"
+      }
     },
     "heaven":{  
       "entryDate": "Entry date",    
@@ -67,6 +75,9 @@
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
       "totalHeaven": "ヘブン合計"
+    },
+    "kyc":{
+      "mobileNumber": "Mobile Number"
     },
     "login":{  
       "DontHaveAnAccount": "Don't have an account",    

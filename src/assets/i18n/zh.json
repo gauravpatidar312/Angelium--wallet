@@ -55,7 +55,15 @@
       "profitToday" : "今日收益",
       "portfolio": "组合",
       "systemUpdate": "系统更新",
-      "totalAsset" : "资产总额"
+      "totalAsset" : "资产总额",
+      "securityCamera":{
+        "xLOVE": "XLOVE",
+        "xCASINO": "XCASINO",
+        "xWISH": "XWISH",
+        "xTRAVEL": "XTRAVEL",
+        "xMALL": "XMALL",
+        "xSCHOOL": "XSCHOOL"
+      }
     },
     "heaven":{
       "entryDate": "Entry date",
