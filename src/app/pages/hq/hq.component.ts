@@ -78,6 +78,7 @@ export class HQComponent implements OnInit {
               private toastrService: ToastrService,
               private store: Store<AppState>,
               private router: Router,
+              private shareDataService: ShareDataService,
               public translate: TranslateService) {
     this.getUsersList();
   }
@@ -97,7 +98,7 @@ export class HQComponent implements OnInit {
       this.fetchingUsers = false;
     }, (err) => {
       this.fetchingUsers = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'User Database');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'User Database');
     });
   }
 
@@ -116,7 +117,7 @@ export class HQComponent implements OnInit {
           this.toastrService.danger(res.message, 'Load User Session');
         }
       }, (err) => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Load User Session');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Load User Session');
       });
     }
     event.confirm.reject();
