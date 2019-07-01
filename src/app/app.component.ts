@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     var currectLang = langArr.find((data:any)=> {
       return data === browserDetectLang;
     });
-    if (userData) {
+    if (userData && userData.user_language) {
       this.translate.use(userData.user_language.language_code);
     }else{
       if (currectLang) {
