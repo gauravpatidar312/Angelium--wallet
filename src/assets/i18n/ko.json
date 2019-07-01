@@ -93,7 +93,14 @@
       "received": "Received",
       "releaseDate": "완료일",
       "releaseSetting": "완료 설정",
-      "totalHeaven": "총 헤븐"
+      "totalHeaven": "총 헤븐",
+      "toastr":{
+        "pleaseEnterAmount":"Please enter amount",
+        "pleaseChoosePlan":"Please choose plan.",
+        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "transactionSuccessfullyCompleted":"Transaction successfully completed!",
+        "youDontHaveSufficientBalance":"You don't have sufficient balance."
+      }
     },
     "hq":{
       "age":"Age",

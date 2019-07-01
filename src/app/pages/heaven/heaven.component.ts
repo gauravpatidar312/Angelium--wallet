@@ -222,7 +222,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     }, (err) => {
       this.fetchingAmount = false;
       this.wallet.walletDollar = 0;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.dashboard.toastr.fetchingAmount'));
     });
   }
 
@@ -237,17 +237,17 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onCreateHeaven() {
     if (!this.heaven_amount) {
-      this.toastrService.danger('Please enter amount.', 'Heaven');
+      this.toastrService.danger(this.translate.instant('.pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
       return;
     }
 
     if (!this.selectedHeavenPlan) {
-      this.toastrService.danger('Please choose plan.', 'Heaven');
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.pleaseChoosePlan'), this.translate.instant('common.heaven'));
       return;
     }
 
     if (Number(this.heaven_amount) > ShareDataService.toFixedDown(this.wallet.wallet_amount, 6)) {
-      this.toastrService.danger('You don\'t have sufficient balance.', 'Heaven');
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.heaven'));
       return;
     }
 
@@ -260,7 +260,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.httpService.post(obj, 'create-heaven/').subscribe((res?: any) => {
       if (res.status) {
         this.formSubmitting = false;
-        this.toastrService.success('Transaction successfully completed!', 'Heaven');
+        this.toastrService.success(this.translate.instant('pages.heaven.toastr.transactionSuccessfullyCompleted'), this.translate.instant('common.heaven'));
         this.getWallets();
         this.heaven_amount = null;
         this.selectedHeavenPlan = null;
@@ -269,11 +269,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         this.getHeavenHistory('total');
       } else {
         this.formSubmitting = false;
-        this.toastrService.danger(res.message, 'Heaven');
+        this.toastrService.danger(res.message, this.translate.instant('common.heaven'));
       }
     }, (err) => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
 
@@ -284,7 +284,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingHeavenDrop = false;
     }, (err) => {
       this.fetchingHeavenDrop = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
   getTotalHeaven() {
@@ -294,7 +294,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingTotalHeaven = false;
     }, (err) => {
       this.fetchingTotalHeaven = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
 
@@ -346,7 +346,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchHeavenHistory = false;
     }, (err) => {
       this.fetchHeavenHistory = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
 

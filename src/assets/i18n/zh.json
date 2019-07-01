@@ -93,7 +93,14 @@
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
-      "totalHeaven": "天堂总计"
+      "totalHeaven": "天堂总计",
+      "toastr":{
+        "pleaseEnterAmount":"Please enter amount",
+        "pleaseChoosePlan":"Please choose plan.",
+        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "transactionSuccessfullyCompleted":"Transaction successfully completed!",
+        "youDontHaveSufficientBalance":"You don't have sufficient balance."
+      }
     },
     "hq":{
       "age":"Age",
