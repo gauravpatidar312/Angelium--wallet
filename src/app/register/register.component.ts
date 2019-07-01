@@ -147,7 +147,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmitOtp() {
     if (this.otpForm.invalid) {
-      this.toastrService.warning('Phone number is invalid.', 'Send SMS');
+      this.toastrService.warning(this.translate.instant("pages.register.phoneNumberIsInvalid"), this.translate.instant("common.sendSMS"));
       return;
     }
 
@@ -163,18 +163,18 @@ export class RegisterComponent implements OnInit {
           this.resubmitTime += (60 * 1000);
         }, this.resubmitTime);
 
-        this.toastrService.success('We\'ve sent an OTP code to your phone number.', 'Send SMS');
+        this.toastrService.success(this.translate.instant("pages.register.sentOTPtoMobile"), this.translate.instant("common.sendSMS"));
       }
     }, err => {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send SMS');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant("common.sendSMS"));
     });
   }
 
   onSubmitRegistration() {
     if (!this.isVerifiedCaptcha) {      
-      this.toastrService.danger('Please verify captcha', 'Register');
+      this.toastrService.danger(this.translate.instant("pages.login.pleaseVerifyCaptcha"), this.translate.instant("common.register"));
       return;
     }
     this.registerForm.controls.phone.setValue(this.model.phone);
@@ -187,24 +187,24 @@ export class RegisterComponent implements OnInit {
     }
 
     if (!this.isResubmit) {
-      this.toastrService.danger('Please submit OTP first.', 'Register');
+      this.toastrService.danger(this.translate.instant("pages.register.pleaseSubmitOTPfirst"), this.translate.instant("common.register"));
       return;
     }
     if (this.registerForm.controls.email.value !== this.registerForm.controls.confirm_your_email.value) {
-      this.toastrService.danger('Confirm e-mail do not match', 'Register');
+      this.toastrService.danger(this.translate.instant("pages.register.confirmEmaildonotMatch"), this.translate.instant("common.register"));
       return;
     }
     if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
-      this.toastrService.danger('Confirm login password do not match', 'Register');
+      this.toastrService.danger(this.translate.instant(".pages.register.confirmLoginPassworddonotMatch"), this.translate.instant("common.register"));
       return;
     }
     if (this.registerForm.controls.trade_password.value !== this.registerForm.controls.confirm_trade_password.value) {
-      this.toastrService.danger('Confirm trade password do not match', 'Register');
+      this.toastrService.danger(this.translate.instant("pages.register.confirmTradePassworddonotMatch"), this.translate.instant("common.register"));
       return;
     }
 
     if (!this.registerForm.value.isAgree) {
-      this.toastrService.danger('Please check agree to the terms and condition box.', 'Register');
+      this.toastrService.danger(this.translate.instant("pages.register.pleaseCheckAgreetoTermsandConditionBox"), this.translate.instant("common.register"));
       return;
     }
 
@@ -221,7 +221,7 @@ export class RegisterComponent implements OnInit {
     }, err => {
       console.log(err);
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Register Failed');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant("pages.register.RegisterFailed"));
     });
   }
 

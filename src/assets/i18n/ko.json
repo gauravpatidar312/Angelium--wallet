@@ -18,6 +18,7 @@
     "emailAddress": "이메일",
     "email": "이메일",
     "enter": "입력",
+    "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
     "heaven": "헤븐",
     "login": "로그인",
@@ -129,6 +130,7 @@
       "forgotPassword": "비밀번호 찾기",
       "helloLoginWithYourEmail" : "반갑습니다! 이메일로 로그인해주세요",
       "login": "로그인",
+      "pleaseVerifyCaptcha":"Please verify captcha",
       "rememberMe": "로그인 정보 기억하기"
     },
     "reward":{
@@ -151,15 +153,23 @@
     "register":{
       "alreadyHaveAnAccount": "이미 가입하셨나요?",
       "agreeTo": "동의하기",
+      "confirmYourEmail": "Confirm your E-mail",
+      "confirmEmaildonotMatch":"Confirm e-mail do not match",
+      "confirmLoginPassworddonotMatch":"Confirm login password do not match",
+      "confirmTradePassworddonotMatch":"Confirm trade password do not match",
       "enterValueInEnglish":"Please enter value in English language only",
-      "emailMustBeValid": "Email must be a valid email address",
       "firstName": "명",
       "lastName": "성",
       "loginPassword": "Login Password",
       "phoneNumber": "Phone number",
-      "repeatPassword": "비밀번호 재입력",
+      "phoneNumberIsInvalid":"Phone number is invalid",
+      "pleaseSubmitOTPfirst":"Please submit OTP first",
+      "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
       "RealNameIsRequiredForKYC": "KYC 인증을 위한 실명이 필요합니다. 등록한 후 변경할 수 없습니다",
       "repeatLoginPassword": "Repeat Login Password",
+      "repeatTradePassword": "Repeat Trade Password",
+      "RegisterFailed":"Register Failed",
+      "sentOTPtoMobile":"We've sent an OTP code to your phone number.",
       "terms&Conditions" : "이용약관",
       "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required"
@@ -167,7 +177,7 @@
     "resetPassword":{
       "changePassword":"Change Password",
       "enterPhoneNumber":"Enter Phone Number",
-      "repeatPassword": "Repeat password",
+      "repeatPassword": "비밀번호 재입력",
       "resetPassword":"Reset Password",
       "passwordsMustMatch": "Passwords must match"
     },
