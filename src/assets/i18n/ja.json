@@ -48,6 +48,7 @@
     "total": "Total",
     "today": "Today",
     "top": "トップ",
+    "tradePassword": "Trade Password",
     "username": "ユーザーネーム",
     "verificationCode": "認証コード",
     "verified": "Verified",
@@ -182,7 +183,6 @@
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "Repeat Trade Password",
       "terms&Conditions" : "Terms & Conditions",
-      "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",

@@ -176,7 +176,7 @@ export class TransferComponent implements OnInit {
   tradPasswordDialog(ref: any) {
     if (!this.trade_password) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterYourTradePassword'),
-      this.translate.instant('pages.register.tradePassword'));
+      this.translate.instant('common.tradePassword'));
       return;
     }
     const endpoint = 'verify-trade-password/';
@@ -188,11 +188,11 @@ export class TransferComponent implements OnInit {
           this.trade_password = null;
           this.onSendTransfer();
         } else {
-          this.toastrService.danger(res.message, this.translate.instant('pages.register.tradePassword'));
+          this.toastrService.danger(res.message, this.translate.instant('common.tradePassword'));
         }
       }, err => {
         this.toastrService.danger(ShareDataService.getErrorMessage(err), 
-        this.translate.instant('pages.register.tradePassword'));
+        this.translate.instant('common.tradePassword'));
       });
   }
 

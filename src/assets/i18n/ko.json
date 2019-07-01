@@ -48,6 +48,7 @@
     "total": "총",
     "today": "오늘",
     "top": "홈",
+    "tradePassword": "Trade Password",
     "username": "사용자명",
     "verificationCode": "인증번호",
     "verified": "인증됨",
@@ -182,7 +183,6 @@
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "Repeat Trade Password",
       "terms&Conditions" : "이용약관",
-      "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",

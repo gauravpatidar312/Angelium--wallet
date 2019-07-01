@@ -171,12 +171,12 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>{{"pages.register.tradePassword" | translate}}:</label>
-                <input type="password" class="form-control" placeholder="{{'pages.register.tradePassword'|translate}}" formControlName="trade_password">
+                <label>{{"common.tradePassword" | translate}}:</label>
+                <input type="password" class="form-control" placeholder="{{'common.tradePassword'|translate}}" formControlName="trade_password">
                 <div *ngIf="submitted && f.trade_password.errors" class="invalid-feedback">
                   <div *ngIf="f.trade_password.errors.required">
                     {{
-                      "messages.required" | translate: {'field': "pages.register.tradePassword" | translate }
+                      "messages.required" | translate: {'field': "common.tradePassword" | translate }
                     }}
                   </div>
                 </div>

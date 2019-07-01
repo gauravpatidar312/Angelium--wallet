@@ -49,6 +49,7 @@
     "total": "Total",
     "today": "Today",
     "top": "Top",
+    "tradePassword": "Trade Password",
     "username": "Username",
     "verificationCode": "Verification code",
     "verified": "Verified",
@@ -183,7 +184,6 @@
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "Repeat Trade Password",
       "terms&Conditions" : "Terms & Conditions",
-      "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",
