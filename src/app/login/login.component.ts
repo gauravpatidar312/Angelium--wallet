@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin() {
     if (!this.isVerifiedCaptcha) {
-      this.toastrService.danger(this.translate.instant('pages.login.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
+      this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
       return;
     }
     this.submitted = true;

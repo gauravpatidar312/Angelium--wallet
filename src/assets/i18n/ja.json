@@ -130,8 +130,10 @@
       "forgotPassword": "パスワードを忘れた",
       "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "ログイン",
-      "pleaseVerifyCaptcha":"Please verify captcha",
-      "rememberMe": "ログイン情報を記憶"
+      "rememberMe": "ログイン情報を記憶",
+      "toastr":{
+        "pleaseVerifyCaptcha":"Please verify captcha"
+      }
     },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
@@ -154,32 +156,37 @@
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
       "agreeTo": "Agree to",
       "confirmYourEmail": "Confirm your E-mail",
-      "confirmEmaildonotMatch":"Confirm e-mail do not match",
-      "confirmLoginPassworddonotMatch":"Confirm login password do not match",
-      "confirmTradePassworddonotMatch":"Confirm trade password do not match",
       "enterValueInEnglish":"Please enter value in English language only",
       "firstName": "名",
       "lastName": "姓",
       "loginPassword": "Login Password",
       "phoneNumber": "Phone number",
-      "phoneNumberIsInvalid":"Phone number is invalid",
-      "pleaseSubmitOTPfirst":"Please submit OTP first",
-      "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "Repeat Trade Password",
-      "RegisterFailed":"Register Failed",
-      "sentOTPtoMobile":"We've sent an OTP code to your phone number.",
       "terms&Conditions" : "Terms & Conditions",
       "tradePassword": "Trade Password",
-      "usernameUsRequired": "Username us required"
+      "usernameUsRequired": "Username us required",
+      "toastr":{
+        "confirmEmaildonotMatch":"Confirm e-mail do not match",
+        "confirmLoginPassworddonotMatch":"Confirm login password do not match",
+        "confirmTradePassworddonotMatch":"Confirm trade password do not match",
+        "pleaseSubmitOTPfirst":"Please submit OTP first",
+        "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
+        "phoneNumberIsInvalid":"Phone number is invalid",
+        "RegisterFailed":"Register Failed",
+        "sentOTPtoMobile":"We've sent an OTP code to your phone number."
+      }
     },
     "resetPassword":{
       "changePassword":"Change Password",
       "enterPhoneNumber":"Enter Phone Number",
       "repeatPassword": "パスワードを再入力",
       "resetPassword":"Reset Password",
-      "passwordsMustMatch": "Passwords must match"
+      "passwordsMustMatch": "Passwords must match",
+      "toastr":{
+        "pleaseCheckOTPCodeandTryAgain":"Please check OTP code and try again!"
+      }
     },
     "setting": {
       "country": "国",

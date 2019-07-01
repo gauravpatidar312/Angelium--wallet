@@ -63,7 +63,8 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmitOtp() {
     if (this.otpForm.invalid) {
-      this.toastrService.warning('Phone number is invalid.', 'Send SMS');
+      this.toastrService.warning(this.translate.instant('pages.register.toastr.phoneNumberIsInvalid'),
+      this.translate.instant('common.sendSMS'));
       return;
     }
 
@@ -79,12 +80,14 @@ export class ResetPasswordComponent implements OnInit {
           this.resubmitTime += (60 * 1000);
         }, this.resubmitTime);
 
-        this.toastrService.success('We\'ve sent an OTP code to your phone number.', 'Send SMS');
+        this.toastrService.success(this.translate.instant('pages.register.toastr.sentOTPtoMobile'),
+        this.translate.instant('common.sendSMS'));
       }
     }, err => {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send SMS');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+      this.translate.instant('common.sendSMS'));
     });
   }
 
@@ -99,7 +102,8 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     if (!this.isResubmit) {
-      this.toastrService.danger('Please submit OTP first.', 'Register');
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseSubmitOTPfirst'),  
+      this.translate.instant('common.register'));
       return;
     }
 
@@ -111,11 +115,12 @@ export class ResetPasswordComponent implements OnInit {
         this.sessionStorageService.updateUserStateWithToken(res.data);
       } else {
         this.formSubmitting = false;
-        this.toastrService.danger(res.message || 'Please check OTP code and try again!', 'Reset Password');
+        this.toastrService.danger(res.message || this.translate.instant('pages.resetPassword.toastr.pleaseCheckOTPCodeandTryAgain'),
+        this.translate.instant('pages.resetPassword.resetPassword'));
       }
     }, err => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reset Password');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.resetPassword.resetPassword'));
       console.log(err);
     });
   }
