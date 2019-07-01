@@ -9,6 +9,7 @@ import {AnalyticsService} from './@core/utils/analytics.service';
 import {NavigationStart, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
 import {SessionStorageService} from './services/session-storage.service';
+import { IndexedDBStorageService } from './services/indexeddb-storage.service';
 
 @Component({
   selector: 'ngx-app',
@@ -20,13 +21,13 @@ export class AppComponent implements OnInit {
               private httpService: HttpService,
               private router: Router,
               public translate: TranslateService,
-              private sessionStorage: SessionStorageService) {
+              private sessionStorage: SessionStorageService,
+              private storageService: IndexedDBStorageService) {
     
     
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
         const userData = this.sessionStorage.getFromSession('userInfo');
-        this.setLanguage(userData);
         if (!userData || (userData && !userData.is_admin)) {
           this.httpService.get('maintenance/').subscribe((res?: any) => {
             if (res.is_under_maintenance) {
@@ -37,26 +38,33 @@ export class AppComponent implements OnInit {
         }
       }
     });
+    this.storageService.getLangFormIndexDb().subscribe((data)=>{
+      this.setLanguage(data);
+    });
   }
 
   ngOnInit(): void {
     this.analytics.trackPageViews();
   }
 
-  setLanguage(userData) {
-    var langArr = ['en', 'ko', 'zh'];
-    var browserDetectLang = navigator.language.split('-')[0];
-    var currectLang = langArr.find((data:any)=> {
-      return data === browserDetectLang;
-    });
-    if (userData) {
-      this.translate.use(userData.user_language.language_code);
+  setLanguage(data: any) {
+    if (!data) {
+      this.httpService.get('languages/').subscribe(res=>{
+        var browserDetectLang = navigator.language.split('-')[0];
+        var currectLang = res.find((data:any)=> {
+          return data.language_code === browserDetectLang;
+        });
+        if (currectLang) {
+          this.storageService.storeLangIndexDb(currectLang);
+          this.translate.use(currectLang.language_code);
+        }else{
+          let language = {id: 1, language: 'english', language_code: 'en'};
+          this.storageService.storeLangIndexDb(language);
+          this.translate.setDefaultLang('en');
+        }
+      });
     }else{
-      if (currectLang) {
-        this.translate.use(currectLang);
-      }else{
-        this.translate.setDefaultLang('en');
-      }
+      this.translate.use(data.language_code);
     }
   }
 }

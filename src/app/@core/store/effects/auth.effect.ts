@@ -78,6 +78,7 @@ export class AuthEffects {
     map((action: UserInfo) => action.payload),
     map((user) => {
       this.storageService.saveToSession(user);
+      this.storageService.storeLangIndexDb(user.user_language);
       console.log('this.redirectUrl', this.redirectUrl);
       if (this.redirectUrl === '/login' || this.redirectUrl.includes('register') || this.redirectUrl.includes('/reset-password')) {
         this.router.navigate(['/pages/dashboard']);

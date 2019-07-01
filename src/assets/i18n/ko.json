@@ -125,7 +125,7 @@
       "upload":"Upload"
     },
     "login":{
-      "dontHaveAnAccount": "계정이 없으신가요?",
+      "dontHaveAnAccount": "계정이 없으신가요",
       "forgotPassword": "비밀번호 찾기",
       "helloLoginWithYourEmail" : "반갑습니다! 이메일로 로그인해주세요",
       "login": "로그인",

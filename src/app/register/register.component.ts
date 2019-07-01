@@ -59,28 +59,26 @@ export class RegisterComponent implements OnInit {
               private themeService: NbThemeService,
               public translate: TranslateService,
               private storageService: IndexedDBStorageService) {
-    this.getLanguageData();
+    this.getCapchaTranslation();
   }
   
-
   getLanguageData(){
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
-      var browserDetectLang = navigator.language.split('-')[0];
-      var currectLang = this.languageData.find((data:any)=> {
-        return data.language_code === browserDetectLang;
-      });
-      if (currectLang) {
-        this.selectedLang = currectLang.language;
-        this.registerForm.controls.user_language.setValue(currectLang.id);
-      }else{
+    });
+    this.storageService.getLangFormIndexDb().subscribe((data)=>{
+      if (!data) {
         this.selectedLang = 'English';
         this.registerForm.controls.user_language.setValue(1);
+      }else{
+        this.selectedLang = data.language;
+        this.registerForm.controls.user_language.setValue(data.id);
       }
     });
   }
 
   ngOnInit() {
+    this.getLanguageData();
     $(document).ready(() => {
       $("#registerSlider").slideToUnlock({ useData: true});
       $( document ).on("veryfiedCaptcha", (event, arg) => {
@@ -246,20 +244,21 @@ export class RegisterComponent implements OnInit {
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.registerForm.controls.user_language.setValue(lan.id);
+    this.storageService.storeLangIndexDb(lan);
     this.getCapchaTranslation();
   }
 
   getCapchaTranslation(){
-    this.translate.get('common').subscribe((res)=>{
-      if (this.isVerifiedCaptcha) {
-        setTimeout(function(){
-          $("#registerSlider").children(".text").text(res.verified);
-        },0);
-      }else{
-        setTimeout(function(){
-          $("#registerSlider").children(".text").text(res.slideRightToVerify);
-        },0);
-      }
-    });
+    if (this.isVerifiedCaptcha) {
+      setTimeout(()=>{
+        $("#registerSlider").children(".text").text(
+          this.translate.instant('common.verified'));
+      },0);
+    }else{
+      setTimeout(()=>{
+        $("#registerSlider").children(".text").text(
+          this.translate.instant('common.slideRightToVerify'));
+      },300);
+    }
   }
 }

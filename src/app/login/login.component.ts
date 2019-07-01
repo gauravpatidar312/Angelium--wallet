@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import { TranslateService } from "@ngx-translate/core";
 import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
 import {SessionStorageService} from '../services/session-storage.service';
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private sessionStorageService: SessionStorageService,
               private toastrService: ToastrService,
+              public translate: TranslateService,
               private authService: AuthService,
               private store: Store<AppState>,
               private authEffects: AuthEffects) {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
     // if (currentUser) {
     //   this.router.navigate(['/pages/setting']);
     // }
+    this.getCapchaTranslation();
   }
 
   ngOnInit() {
@@ -45,14 +48,30 @@ export class LoginComponent implements OnInit {
       $( document ).on("veryfiedCaptcha", (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
+          this.getCapchaTranslation();
         }
+      });
     });
-   });
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
+
+
+  getCapchaTranslation(){
+    if (this.isVerifiedCaptcha) {
+      setTimeout(()=>{
+        $("#loginSlider").children(".text").text(
+          this.translate.instant('common.verified'));
+      },0);
+    }else{
+      setTimeout(()=>{
+        $("#loginSlider").children(".text").text(
+          this.translate.instant('common.slideRightToVerify'));
+      },300);
+    }
   }
 
   get f() {

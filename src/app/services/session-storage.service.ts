@@ -18,7 +18,6 @@ export class SessionStorageService {
     });
   }
 
-
   // call this function when you set new user register and need to set profile .
   // Pass token then its call => profile api and set user profile in our store state.
   // It used in register & reset-password page.
