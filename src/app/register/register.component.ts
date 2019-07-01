@@ -55,13 +55,14 @@ export class RegisterComponent implements OnInit {
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
               private dialogService: NbDialogService,
+              private shareDataService: ShareDataService,
               private breakpointService: NbMediaBreakpointsService,
               private themeService: NbThemeService,
               public translate: TranslateService,
               private storageService: IndexedDBStorageService) {
     this.getLanguageData();
   }
-  
+
 
   getLanguageData(){
     this.httpService.get('languages/').subscribe(res=>{
@@ -167,12 +168,12 @@ export class RegisterComponent implements OnInit {
     }, err => {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send SMS');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Send SMS');
     });
   }
 
   onSubmitRegistration() {
-    if (!this.isVerifiedCaptcha) {      
+    if (!this.isVerifiedCaptcha) {
       this.toastrService.danger('Please verify captcha', 'Register');
       return;
     }
@@ -214,7 +215,7 @@ export class RegisterComponent implements OnInit {
     }, err => {
       console.log(err);
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Register Failed');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Register Failed');
     });
   }
 

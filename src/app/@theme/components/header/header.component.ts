@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   user: any;
 
   userMenu = [
-    {  title: this.translate.instant('common.profile'), link: '/pages/setting' }, 
+    {  title: this.translate.instant('common.profile'), link: '/pages/setting' },
     { title: this.translate.instant('header.logout') }
   ];
 
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     public translate: TranslateService,) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.userMenu = [
-        { title: this.translate.instant('common.profile'), link: '/pages/setting' }, 
+        { title: this.translate.instant('common.profile'), link: '/pages/setting' },
         { title: this.translate.instant('header.logout') }
       ];
     });
@@ -72,8 +72,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         }
       });
 
-    let userSettingInfo = this.sessionStorage.getFromSession('userInfo');
-    this.userData = userSettingInfo;
+    this.userData = this.sessionStorage.getFromSession('userInfo');
 
     this.shareDataService.currentData.subscribe(data => {
       if (data.avatar) {

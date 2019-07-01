@@ -186,7 +186,7 @@ export class TransferComponent implements OnInit {
           this.toastrService.danger(res.message, 'Trade Password');
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Trade Password');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Trade Password');
       });
   }
 
@@ -208,7 +208,7 @@ export class TransferComponent implements OnInit {
     }, (err) => {
       this.fetchingAmount = false;
       this.sendWallet.walletDollar = 0;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Fetching Amount');
     });
   }
 
@@ -260,11 +260,11 @@ export class TransferComponent implements OnInit {
         this.fetchingAmount = false;
         this.otcWallet.toAmount = 0;
         this.otcWallet.toDollar = 0;
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Fetching Amount');
       });
     }, (err) => {
       this.fetchingAmount = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Fetching Amount');
     });
   }
 
@@ -374,7 +374,7 @@ export class TransferComponent implements OnInit {
     }, (err) => {
       this.waitFlag = false;
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Send');
     });
   }
 
@@ -423,7 +423,7 @@ export class TransferComponent implements OnInit {
       }
     }, err => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'OTC');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'OTC');
     });
   }
 }

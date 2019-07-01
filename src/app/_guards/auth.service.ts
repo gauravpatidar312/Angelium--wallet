@@ -23,6 +23,7 @@ export class AuthService {
     private router: Router,
     private httpService: HttpService,
     private store: Store<AppState>,
+    private shareDataService: ShareDataService,
     private toastrService: ToastrService,
   ) {
     this.getState = this.store.select(selectAuthState);
@@ -34,17 +35,18 @@ export class AuthService {
 
   logIn(data: any): Observable<any> {
     return Observable.create((observer: any) => {
-      this.httpService.post(data, 'jwt/api-token-auth/').subscribe((res) => {
+      this.httpService.post(data, 'jwt/api-token-auth/').subscribe((res?: any) => {
         if (res.token) {
+          this.sessionStorage.saveToSession('loggedIn', true);
           observer.next(res);
           observer.complete();
         } else {
           observer.error(res);
-          this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), 'Login Failed');
         }
       }, err => {
         observer.error(err);
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Login Failed');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Login Failed');
       });
     });
   }
@@ -56,16 +58,10 @@ export class AuthService {
   logout() {
     this.storageService.resetStorage();
     this.store.dispatch(new ResetState({}));
-    // this.router.navigate(['']);
   }
 
   isAuthenticated(): Boolean {
     console.log('Is Authenticated?', this.isUserAuthenticated);
-    if (this.isUserAuthenticated) {
-      return true;
-    } else {
-      return false;
-    }
-
+    return this.isUserAuthenticated;
   }
 }
