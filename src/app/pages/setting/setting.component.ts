@@ -11,6 +11,7 @@ import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
 import {SessionStorageService} from '../../services/session-storage.service';
+import { IndexedDBStorageService } from '../../services/indexeddb-storage.service';
 import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
@@ -57,7 +58,8 @@ export class SettingComponent implements OnInit {
               private router: Router,
               public translate: TranslateService,
               private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService,) {
+              private breakpointService: NbMediaBreakpointsService,
+              private storageService: IndexedDBStorageService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
     window.onload = (ev) => {
@@ -86,8 +88,10 @@ export class SettingComponent implements OnInit {
   getLanguageData(){
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
-      const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
-      this.selectedLang = userSettingInfo.user_language.language;
+    });
+    this.storageService.getLangFormIndexDb().subscribe((data)=>{
+      this.selectedLang = data.language;
+      this.translate.use(data.language_code);
     });
   }
 
@@ -106,6 +110,7 @@ export class SettingComponent implements OnInit {
     this.userData.user_language = lan;
     this.httpService.put({'user_language': lan.id }, 'update_userlang/')
       .subscribe(res=>{
+        this.storageService.storeLangIndexDb(lan);
         this.toastrService.success('Language update successfully!', 'Language');
       });
     this.sessionStorage.updateUserState(this.userData);
