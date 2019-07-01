@@ -62,10 +62,10 @@ export class CustomRendererComponent implements ViewCell, OnInit{
         this.toastrService.success('Release setting saved successfully!', 'Heaven History');
       }
       else {
-        this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Heaven History');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), 'Heaven History');
       }
     }, (err) => {
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven History');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Heaven History');
     });
   }
 }

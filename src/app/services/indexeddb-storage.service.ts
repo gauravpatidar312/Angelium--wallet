@@ -109,6 +109,10 @@ export class IndexedDBStorageService {
     });
   }
 
+  deleteDatabase() {
+    this.dbAngelium.deleteDatabase();
+  }
+
   updateSessionData = function (value) {
     this.dbAngelium.getByKey('userInfo', 1).then((data) => {
       if (data) {
