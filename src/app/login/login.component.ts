@@ -1,7 +1,7 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
 import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
 import {SessionStorageService} from '../services/session-storage.service';
@@ -11,7 +11,6 @@ import {Store} from '@ngrx/store';
 import {LogIn} from '../@core/store/actions/user.action';
 import {AppState, selectAuthState} from '../@core/store/app.state';
 import { AuthEffects } from '../@core/store/effects/auth.effect';
-import { TranslateService } from '@ngx-translate/core';
 
 declare let $: any;
 declare let jQuery: any;
@@ -35,8 +34,7 @@ export class LoginComponent implements OnInit {
               public translate: TranslateService,
               private authService: AuthService,
               private store: Store<AppState>,
-              private authEffects: AuthEffects,
-              private translate: TranslateService) {
+              private authEffects: AuthEffects,) {
     // const currentUser = this.authService.isAuthenticated();
     // if (currentUser) {
     //   this.router.navigate(['/pages/setting']);

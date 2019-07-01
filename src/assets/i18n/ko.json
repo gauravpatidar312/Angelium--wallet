@@ -168,9 +168,9 @@
       "tradePassword": "Trade Password",
       "usernameUsRequired": "Username us required",
       "toastr":{
-        "confirmEmaildonotMatch":"Confirm e-mail do not match",
-        "confirmLoginPassworddonotMatch":"Confirm login password do not match",
-        "confirmTradePassworddonotMatch":"Confirm trade password do not match",
+        "confirmEmailDoNotMatch":"Confirm e-mail do not match",
+        "confirmLoginPasswordDoNotMatch":"Confirm login password do not match",
+        "confirmTradePasswordDoNotMatch":"Confirm trade password do not match",
         "pleaseSubmitOTPfirst":"Please submit OTP first",
         "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
         "phoneNumberIsInvalid":"Phone number is invalid",
