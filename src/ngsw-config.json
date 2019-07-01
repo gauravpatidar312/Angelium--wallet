@@ -35,12 +35,15 @@
   "dataGroups": [{
     "name": "api-performance",
     "urls": [
-      "/api/**"
+      "/api/**",
+      "https://api.angelium.net/**"
     ],
+    "version": 1,
     "cacheConfig": {
-      "strategy": "performance",
+      "strategy": "freshness",
       "maxSize": 100,
-      "maxAge": "3d"
+      "maxAge": "3d",
+      "timeout": "3m"
     }
   }
 ]

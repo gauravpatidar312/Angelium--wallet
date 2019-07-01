@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
   }
 
   setLanguage(userData) {
-    console.log('userData',userData)
     var langArr = ['en', 'ko', 'zh'];
     var browserDetectLang = navigator.language.split('-')[0];
     var currectLang = langArr.find((data:any)=> {
