@@ -76,6 +76,9 @@
         "xTRAVEL": "XTRAVEL",
         "xMALL": "XMALL",
         "xSCHOOL": "XSCHOOL"
+      },
+      "toastr":{
+        "fetchingAmount":"Fetching Amount"
       }
     },
     "heaven":{  
