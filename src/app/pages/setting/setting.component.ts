@@ -111,7 +111,9 @@ export class SettingComponent implements OnInit {
     this.httpService.put({'user_language': lan.id }, 'update_userlang/')
       .subscribe(res=>{
         this.storageService.storeLangIndexDb(lan);
-        this.toastrService.success('Language update successfully!', 'Language');
+        this.toastrService.success(
+          this.translate.instant('pages.setting.toastr.languageUpdateSuccessfully'), 
+          this.translate.instant('pages.setting.language'));
       });
     this.sessionStorage.updateUserState(this.userData);
   }
@@ -146,7 +148,9 @@ export class SettingComponent implements OnInit {
 
   copyReferralLink() {
     if (this.userData.referral_link)
-      this.toastrService.success('Link copied successfully!', 'Referral Link');
+      this.toastrService.success(
+        this.translate.instant('pages.setting.toastr.linkCopiedSuccessfully'), 
+        this.translate.instant('pages.setting.referralLink'));
   }
 
   downloadQR() {
@@ -178,12 +182,18 @@ export class SettingComponent implements OnInit {
 
   onChangeUsername(ref: any) {
     if (!this.newUsername || !this.newUsername.trim()) {
-      this.toastrService.danger('Please enter username.', 'Change Username');
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.pleaseEnterUsername'), 
+        this.translate.instant('pages.setting.toastr.changeUsername')
+      );
       return;
     }
 
     if (!(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/.test(this.newUsername))) {
-      this.toastrService.danger('Username must be in English, without space.', 'Change Username');
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.usernameMustEnglishWithoutSpace'), 
+        this.translate.instant('pages.setting.toastr.changeUsername')
+      );
       return;
     }
 
@@ -193,25 +203,38 @@ export class SettingComponent implements OnInit {
       .subscribe((res?: any) => {
         if (res.status) {
           ref.close();
-          this.toastrService.success('Username updated successfully', 'Change Username');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.usernameUpdatedSuccessfully'), 
+            this.translate.instant('pages.setting.toastr.changeUsername')
+          );
           this.userData.username = this.newUsername;
           this.sessionStorage.updateUserState(this.userData);
           this.newUsername = null;
         } else {
-          this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Change Username');
+          this.toastrService.danger(ShareDataService.getErrorMessage(res), 
+            this.translate.instant('pages.setting.toastr.changeUsername')
+          );
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Username');
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+          this.translate.instant('pages.setting.toastr.changeUsername')
+        );
       });
   }
 
   changeLoginPasswordDialog(ref: any) {
     if (!(this.oldLoginPassword && this.newLoginPassword && this.confirmLoginPassword)) {
-      this.toastrService.danger('Please enter value in all fields.', 'Change Login Password');
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.enterValueInAllFields'), 
+        this.translate.instant('pages.setting.toastr.changeLoginPassword')
+      );
       return;
     }
     if (this.newLoginPassword !== this.confirmLoginPassword) {
-      this.toastrService.danger('Passwords do not match.', 'Change Login Password');
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'), 
+        this.translate.instant('pages.setting.toastr.changeLoginPassword')
+      );
       return;
     }
     const endpoint = 'change-password/';
@@ -223,22 +246,31 @@ export class SettingComponent implements OnInit {
           this.newLoginPassword = null;
           this.oldLoginPassword = null;
           this.confirmLoginPassword = null;
-          this.toastrService.success('Login password updated successfully', 'Change Login Password');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.loginPasswordUpdated'), 
+            this.translate.instant('pages.setting.toastr.changeLoginPassword')
+          );
         } else {
-          this.toastrService.danger(res.message, 'Change Login Password');
+          this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeLoginPassword'));
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Login Password');
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.setting.toastr.changeLoginPassword'));
       });
   }
 
   changeTradePasswordDialog(ref: any) {
     if (!(this.oldTradePassword && this.newTradePassword && this.confirmTradePassword)) {
-      this.toastrService.danger('Please enter value in all fields.', 'Change Trade Password');
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.enterValueInAllFields'), 
+        this.translate.instant('pages.setting.toastr.changeTradePassword')
+      );
       return;
     }
     if (this.newTradePassword !== this.confirmTradePassword) {
-      this.toastrService.danger('Passwords do not match.', 'Change Trade Password');
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'), 
+        this.translate.instant('pages.setting.toastr.changeTradePassword')
+      );
       return;
     }
     const endpoint = 'change-trade-password/';
@@ -250,12 +282,17 @@ export class SettingComponent implements OnInit {
           this.newTradePassword = null;
           this.oldTradePassword = null;
           this.confirmTradePassword = null;
-          this.toastrService.success('Trade password updated successfully', 'Change Trade Password');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.tradePasswordUpdated'), 
+            this.translate.instant('pages.setting.toastr.changeTradePassword')
+          );
         } else {
-          this.toastrService.danger(res.message, 'Change Trade Password');
+          this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeTradePassword'));
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Trade Password');
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+          this.translate.instant('pages.setting.toastr.changeTradePassword')
+        );
       });
   }
 
@@ -287,9 +324,15 @@ export class SettingComponent implements OnInit {
         // this.sessionStorage.updateFromSession('userInfo', data);
         this.sessionStorage.updateUserState(this.userData);
         if (data.r18mode) {
-          this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE ENABLED');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.r18ModeUpdated'), 
+            this.translate.instant('pages.setting.toastr.r18ModeEnable')
+          );
         } else {
-          this.toastrService.success('R-18 Mode updated successfully', 'R-18 MODE DISABLED');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.r18ModeUpdated'), 
+            this.translate.instant('pages.setting.toastr.r18ModeDisabled')
+          );
         }
       }
     });
@@ -326,7 +369,10 @@ export class SettingComponent implements OnInit {
           this.userData.country = apiData.country;
           // this.sessionStorage.updateFromSession('userInfo', apiData);
           this.sessionStorage.updateUserState(this.userData);
-          this.toastrService.success('Country update successfully', 'Country');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.countryUpdate'), 
+            this.translate.instant('common.country')
+          );
         }
       }, err => {
         console.log(err);
@@ -377,7 +423,10 @@ export class SettingComponent implements OnInit {
           this.userData.avatar = res.avatar;
           // this.sessionStorage.updateFromSession('userInfo', res);
           this.sessionStorage.updateUserState(this.userData);
-          this.toastrService.success('User image change successfully', 'Picture updated');
+          this.toastrService.success(
+            this.translate.instant('pages.setting.toastr.userImageChanged'),
+            this.translate.instant('common.pictureUpdated')
+          );
         }
       });
     }
