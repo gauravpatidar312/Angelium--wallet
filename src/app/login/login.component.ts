@@ -11,6 +11,7 @@ import {Store} from '@ngrx/store';
 import {LogIn} from '../@core/store/actions/user.action';
 import {AppState, selectAuthState} from '../@core/store/app.state';
 import { AuthEffects } from '../@core/store/effects/auth.effect';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let $: any;
 declare let jQuery: any;
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
               public translate: TranslateService,
               private authService: AuthService,
               private store: Store<AppState>,
-              private authEffects: AuthEffects) {
+              private authEffects: AuthEffects,
+              private translate: TranslateService) {
     // const currentUser = this.authService.isAuthenticated();
     // if (currentUser) {
     //   this.router.navigate(['/pages/setting']);
@@ -80,7 +82,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin() {
     if (!this.isVerifiedCaptcha) {
-      this.toastrService.danger('Please verify captcha', 'Login');
+      this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
       return;
     }
     this.submitted = true;
@@ -88,7 +90,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
+    
     this.formSubmitting = true;
     this.store.dispatch(new LogIn(this.loginForm.value));
     this.authEffects.LogInFailure.subscribe(res => {

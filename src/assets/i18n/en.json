@@ -130,7 +130,10 @@
       "forgotPassword": "Forgot Password",
       "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "Login",
-      "rememberMe": "Remember me"
+      "rememberMe": "Remember me",
+      "toastr":{
+        "pleaseVerifyCaptcha":"Please verify captcha"
+      }
     },
     "reward":{
       "downlineAngel": "Downline Angel",
@@ -163,14 +166,27 @@
       "repeatTradePassword": "Repeat Trade Password",
       "terms&Conditions" : "Terms & Conditions",
       "tradePassword": "Trade Password",
-      "usernameUsRequired": "Username us required"
+      "usernameUsRequired": "Username us required",
+      "toastr":{
+        "confirmEmaildonotMatch":"Confirm e-mail do not match",
+        "confirmLoginPassworddonotMatch":"Confirm login password do not match",
+        "confirmTradePassworddonotMatch":"Confirm trade password do not match",
+        "pleaseSubmitOTPfirst":"Please submit OTP first",
+        "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
+        "phoneNumberIsInvalid":"Phone number is invalid",
+        "RegisterFailed":"Register Failed",
+        "sentOTPtoMobile":"We've sent an OTP code to your phone number."
+      }
     },
     "resetPassword":{
       "changePassword":"Change Password",
       "enterPhoneNumber":"Enter Phone Number",
       "repeatPassword": "Repeat password",
       "resetPassword":"Reset Password",
-      "passwordsMustMatch": "Passwords must match"
+      "passwordsMustMatch": "Passwords must match",
+      "toastr":{
+        "pleaseCheckOTPCodeandTryAgain":"Please check OTP code and try again!"
+      }
     },
     "setting": {
       "country": "Country",
