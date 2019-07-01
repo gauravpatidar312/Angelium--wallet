@@ -22,6 +22,7 @@
     "enter": "Enter",
     "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
+    "fetchingAmount":"Fetching Amount",
     "heaven": "Heaven",
     "kyc": "KYC",
     "login": "Log In",
@@ -79,9 +80,6 @@
         "xTRAVEL": "XTRAVEL",
         "xMALL": "XMALL",
         "xSCHOOL": "XSCHOOL"
-      },
-      "toastr":{
-        "fetchingAmount":"Fetching Amount"
       }
     },
     "heaven":{
@@ -251,7 +249,19 @@
       "destinationAddress" : "Destination Address",
       "receive": "Receive",
       "send": "Send",
-      "to": "To"
+      "to": "To",
+      "toastr":{
+        "copyAddress":"Copy Address",
+        "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",
+        "otc":"OTC",
+        "pleaseEnterRequiredFieldForTransfer":"Please enter required field for transfer",
+        "pleaseEnterYourTradePassword":"Please enter your trade password",
+        "pleaseEnterTransferAmount":"Please enter transfer amount",
+        "pleaseCheckReceiveAmount":"Please check receive amount.",
+        "transferSuccessfullyCompleted":"Transfer successfully completed!",
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
+      }
     }
   }
 }
