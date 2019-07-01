@@ -30,7 +30,6 @@ export class SecurityCamerasComponent implements OnDestroy {
       .subscribe((cameras: Camera[]) => {
         let securityCameraLang = this.translate.instant('pages.dashboard.securityCamera');
         let cloneCameras = _.cloneDeep(cameras);
-        console.log(cloneCameras);
         cloneCameras.map((cam) => {
           cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
           if (cam.title === 'XLOVE')
@@ -47,7 +46,6 @@ export class SecurityCamerasComponent implements OnDestroy {
             cam.title = securityCameraLang.xSCHOOL;
         });
         this.cameras = cloneCameras;
-        console.log(cameras);
         this.selectedCamera = cloneCameras[0];
       });
   }
