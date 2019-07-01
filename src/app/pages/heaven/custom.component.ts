@@ -6,6 +6,7 @@ import {ShareDataService} from '../../services/share-data.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -37,7 +38,8 @@ export class CustomRendererComponent implements ViewCell, OnInit{
   constructor(private themeService: NbThemeService,
               private httpService: HttpService,
               private shareDataService: ShareDataService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private translate:TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -59,13 +61,14 @@ export class CustomRendererComponent implements ViewCell, OnInit{
     };
     this.httpService.put(apiData, 'heaven-release-settings/').subscribe((res?: any) => {
       if (res.status) {
-        this.toastrService.success('Release setting saved successfully!', 'Heaven History');
+        this.toastrService.success(this.translate.instant('pages.heaven.toastr.releaseSettingSavedSuccessfully'),
+        this.translate.instant('pages.heaven.heavenHistory'));
       }
       else {
-        this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Heaven History');
+        this.toastrService.danger(ShareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.heavenHistory'));
       }
     }, (err) => {
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven History');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.heaven.heavenHistory'));
     });
   }
 }
