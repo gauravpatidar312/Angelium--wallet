@@ -193,10 +193,10 @@ export class SettingComponent implements OnInit {
           this.sessionStorage.updateUserState(this.userData);
           this.newUsername = null;
         } else {
-          this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Change Username');
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), 'Change Username');
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Username');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Change Username');
       });
   }
 
@@ -223,7 +223,7 @@ export class SettingComponent implements OnInit {
           this.toastrService.danger(res.message, 'Change Login Password');
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Login Password');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Change Login Password');
       });
   }
 
@@ -250,7 +250,7 @@ export class SettingComponent implements OnInit {
           this.toastrService.danger(res.message, 'Change Trade Password');
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Change Trade Password');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Change Trade Password');
       });
   }
 

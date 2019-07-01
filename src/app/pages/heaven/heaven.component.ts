@@ -222,7 +222,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     }, (err) => {
       this.fetchingAmount = false;
       this.wallet.walletDollar = 0;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Fetching Amount');
     });
   }
 
@@ -278,7 +278,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }, (err) => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
@@ -289,7 +289,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingHeavenDrop = false;
     }, (err) => {
       this.fetchingHeavenDrop = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Heaven');
     });
   }
   getTotalHeaven() {
@@ -299,7 +299,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingTotalHeaven = false;
     }, (err) => {
       this.fetchingTotalHeaven = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
@@ -351,7 +351,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchHeavenHistory = false;
     }, (err) => {
       this.fetchHeavenHistory = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Heaven');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Heaven');
     });
   }
 
