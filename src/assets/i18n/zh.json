@@ -2,6 +2,7 @@
   "common":{
     "assets": "Assets",
     "amount" : "数量",
+    "country": "国家",
     "cryptos":{
       "anx": "ANX",
       "anl": "ANL",
@@ -192,7 +193,6 @@
       }
     },
     "setting": {
-      "country": "国家",
       "currency": "通货",
       "name": "名称",
       "eMail": "E-mail",
@@ -204,7 +204,28 @@
       "referral": "转送",
       "rank": "排行",
       "secretKey": "密钥",
-      "2FA": "2FA"
+      "2FA": "2FA",
+      "referralLink": "Referral Link",
+      "toastr":{
+        "changeUsername": "Change Username",
+        "changeLoginPassword": "Change Login Password",
+        "changeTradePassword": "Change Trade Password",
+        "countryUpdate": "Country update successfully",
+        "enterValueInAllFields": "Please enter value in all fields.",
+        "languageUpdateSuccessfully": "Language update successfully!",
+        "linkCopiedSuccessfully": "Link copied successfully!",
+        "loginPasswordUpdated": "Login password updated successfully",
+        "pleaseEnterUsername": "Please enter username",
+        "passwordsDoNotMatch": "Passwords do not match",
+        "pictureUpdated": "Picture updated",
+        "r18ModeUpdated": "R-18 Mode updated successfully",
+        "r18ModeEnable": "R-18 MODE ENABLED",
+        "r18ModeDisabled": "R-18 MODE DISABLED",
+        "tradePasswordUpdated": "Trade password updated successfully",
+        "userImageChanged": "User image change successfully",
+        "usernameUpdatedSuccessfully": "Username updated successfully",
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+      }
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",
