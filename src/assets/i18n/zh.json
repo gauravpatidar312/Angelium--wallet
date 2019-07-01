@@ -3,6 +3,7 @@
     "assets": "Assets",
     "amount" : "数量",
     "country": "国家",
+    "cancel": "Cancel",
     "cryptos":{
       "anx": "ANX",
       "anl": "ANL",
@@ -134,7 +135,14 @@
       "mobileNumber": "Mobile Number",
       "selfie":"Selfie",
       "submit":"Submit",
-      "upload":"Upload" 
+      "upload":"Upload",
+      "toastr":{
+        "pleaseSelectDOB": "Please select date of birth",
+        "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
+        "uploadBackSideIDProof": "Please upload ID Proof (back side).",
+        "uploadSelfie": "Please upload selfie.",
+        "userKycUploadSuccessfully": "User kyc upload successfully"
+      }
     },
     "login":{
       "dontHaveAnAccount": "Don't have an account",
@@ -201,10 +209,13 @@
     },
     "setting": {
       "currency": "通货",
+      "confirmPassword": "Confirm password",
       "name": "名称",
       "eMail": "E-mail",
       "language": "语言",
       "merge": "合并",
+      "newPassword": "New Password",
+      "oldPassword":"Old password",
       "kyc": "KYC",
       "qr": "二维",
       "r18mode": "R-18禁模式",
@@ -232,7 +243,8 @@
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
-      }
+      },
+      "usernameOnlyEnglish": "New Username (English only)"
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",

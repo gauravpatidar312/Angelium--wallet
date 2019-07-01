@@ -3,6 +3,7 @@
     "assets": "자산",
     "amount": "수량",
     "country": "국가",
+    "cancel": "Cancel",
     "cryptos":{
       "anx": "ANX",
       "anl": "ANL",
@@ -134,7 +135,14 @@
       "mobileNumber": "Mobile Number",
       "selfie":"Selfie",
       "submit":"Submit",
-      "upload":"Upload"
+      "upload":"Upload",
+      "toastr":{
+        "pleaseSelectDOB": "Please select date of birth",
+        "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
+        "uploadBackSideIDProof": "Please upload ID Proof (back side).",
+        "uploadSelfie": "Please upload selfie.",
+        "userKycUploadSuccessfully": "User kyc upload successfully"
+      }
     },
     "login":{
       "dontHaveAnAccount": "계정이 없으신가요",
@@ -201,10 +209,13 @@
     },
     "setting": {
       "currency": "통화",
+      "confirmPassword": "Confirm password",
       "name": "이름",
       "eMail": "이메일",
       "language": "언어",
       "merge": "통합",
+      "newPassword": "New Password",
+      "oldPassword":"Old password",
       "kyc": "KYC",
       "qr": "QR",
       "r18mode": "R-18 모드",
@@ -216,7 +227,7 @@
       "toastr":{
         "changeUsername": "Change Username",
         "changeLoginPassword": "Change Login Password",
-        "changeTradePassword": "Change Trade Password",
+        "changeTradePassword": "Change Trade Password ",
         "countryUpdate": "Country update successfully",
         "enterValueInAllFields": "Please enter value in all fields.",
         "languageUpdateSuccessfully": "Language update successfully!",
@@ -232,7 +243,8 @@
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
-      }
+      },
+      "usernameOnlyEnglish": "New Username (English only)"
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",

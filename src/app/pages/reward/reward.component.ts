@@ -291,7 +291,8 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.fetchingRewardValue = false;
     }, (err) => {
       this.fetchingRewardValue = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.translate.instant('common.reward'));
     });
   }
 
@@ -302,7 +303,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.fetchingDownlineAngel = false;
     }, (err) => {
       this.fetchingDownlineAngel = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.reward'));
     });
   }
 
@@ -314,7 +315,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.fetchingDownlineHeaven = false;
     }, (err) => {
       this.fetchingDownlineHeaven = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.reward'));
     });
   }
 
@@ -339,7 +340,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.fetchingDownlineTree = false;
     }, (err) => {
       this.fetchingDownlineTree = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Reward');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.reward'));
     });
   }
 

@@ -3,6 +3,7 @@
     "assets": "Assets",
     "amount" : "Amount",
     "country": "Country",
+    "cancel": "Cancel",
     "cryptos":{
       "anx": "ANX",
       "anl": "ANL",
@@ -22,6 +23,7 @@
     "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
     "heaven": "Heaven",
+    "kyc": "KYC",
     "login": "Log In",
     "last": "Last",
     "level": "Level",
@@ -134,7 +136,14 @@
       "mobileNumber": "Mobile Number",
       "selfie":"Selfie",
       "submit":"Submit",
-      "upload":"Upload" 
+      "upload":"Upload",
+      "toastr":{
+        "pleaseSelectDOB": "Please select date of birth",
+        "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
+        "uploadBackSideIDProof": "Please upload ID Proof (back side).",
+        "uploadSelfie": "Please upload selfie.",
+        "userKycUploadSuccessfully": "User kyc upload successfully"
+      }
     },
     "login":{
       "dontHaveAnAccount": "Don't have an account",
@@ -201,11 +210,13 @@
     },
     "setting": {
       "currency": "Currency",
+      "confirmPassword": "Confirm password",
       "name": "Name",
       "eMail": "E-mail",
       "language": "Language",
       "merge": "Merge",
-      "kyc": "KYC",
+      "newPassword": "New Password",
+      "oldPassword":"Old password",
       "qr": "QR",
       "r18mode": "R-18 Mode",
       "referral": "Referral",
@@ -232,7 +243,8 @@
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
-      }
+      },
+      "usernameOnlyEnglish": "New Username (English only)"
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",
