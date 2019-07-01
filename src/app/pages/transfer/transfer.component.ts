@@ -144,22 +144,26 @@ export class TransferComponent implements OnInit {
 
   copyAddress() {
     if (this.receiveWallet.address)
-      this.toastrService.success('Wallet address copied successfully!', 'Copy Address');
+      this.toastrService.success(this.translate.instant('pages.transfer.toastr.walletAddressCopiedSuccessfully'), 
+      this.translate.instant('pages.transfer.toastr.copyAddress'));
   }
 
   openTradeDialog(dialog: TemplateRef<any>) {
     if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
-      this.toastrService.info('Feature coming soon! Stay tuned.', 'Send');
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'), 
+      this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
-      this.toastrService.danger('Please enter required field for transfer.', 'Send');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'), 
+      this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
-      this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'), 
+      this.translate.instant('pages.transfer.send'));
       return;
     }
 
@@ -171,7 +175,8 @@ export class TransferComponent implements OnInit {
 
   tradPasswordDialog(ref: any) {
     if (!this.trade_password) {
-      this.toastrService.danger('Please enter your trade password.', 'Trade Password');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterYourTradePassword'),
+      this.translate.instant('pages.register.tradePassword'));
       return;
     }
     const endpoint = 'verify-trade-password/';
@@ -183,10 +188,11 @@ export class TransferComponent implements OnInit {
           this.trade_password = null;
           this.onSendTransfer();
         } else {
-          this.toastrService.danger(res.message, 'Trade Password');
+          this.toastrService.danger(res.message, this.translate.instant('pages.register.tradePassword'));
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Trade Password');
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.translate.instant('pages.register.tradePassword'));
       });
   }
 
@@ -208,7 +214,7 @@ export class TransferComponent implements OnInit {
     }, (err) => {
       this.fetchingAmount = false;
       this.sendWallet.walletDollar = 0;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
     });
   }
 
@@ -249,7 +255,7 @@ export class TransferComponent implements OnInit {
     this.httpService.post(obj, 'convert_to_crypto/').subscribe((rate?: any) => {
       if (rate.ERROR || rate.Error) {
         this.fetchingAmount = false;
-        this.toastrService.danger(rate.ERROR || rate.Error, 'Fetching Amount');
+        this.toastrService.danger(rate.ERROR || rate.Error, this.translate.instant('common.fetchingAmount'));
         return;
       }
       this.httpService.get('live-price/').subscribe(data => {
@@ -260,11 +266,13 @@ export class TransferComponent implements OnInit {
         this.fetchingAmount = false;
         this.otcWallet.toAmount = 0;
         this.otcWallet.toDollar = 0;
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.translate.instant('common.fetchingAmount'));
       });
     }, (err) => {
       this.fetchingAmount = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+      this.translate.instant('common.fetchingAmount'));
     });
   }
 
@@ -318,17 +326,20 @@ export class TransferComponent implements OnInit {
 
   onSendTransfer() {
     if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
-      this.toastrService.info('Feature coming soon! Stay tuned.', 'Send');
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'), 
+      this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
-      this.toastrService.danger('Please enter required field for transfer.', 'Send');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'), 
+      this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
-      this.toastrService.danger('You don\'t have sufficient balance to send.', 'Send');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'), 
+      this.translate.instant('pages.transfer.send'));
       return;
     }
 
@@ -360,7 +371,8 @@ export class TransferComponent implements OnInit {
         }, 15000);
 
         this.formSubmitting = false;
-        this.toastrService.success('Transfer successfully completed!', 'Send');
+        this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'), 
+        this.translate.instant('pages.transfer.send'));
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           this.myWallets = data;
         });
@@ -369,26 +381,29 @@ export class TransferComponent implements OnInit {
       } else {
         this.waitFlag = false;
         this.formSubmitting = false;
-        this.toastrService.danger(res.message, 'Send');
+        this.toastrService.danger(res.message, this.translate.instant('pages.transfer.send'));
       }
     }, (err) => {
       this.waitFlag = false;
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Send');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.send'));
     });
   }
 
   onOTCTransfer() {
     if (!this.fromOTCAmount || !Number(this.fromOTCAmount)) {
-      this.toastrService.danger('Please enter transfer amount.', 'OTC');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterTransferAmount'), 
+      this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
     if (Number(this.fromOTCAmount) > Number(this.anxWallet.wallet_amount)) {
-      this.toastrService.danger('You don\'t have sufficient balance to send.', 'OTC');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
+      this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
     if (!this.otcWallet || !this.otcWallet.toAmount) {
-      this.toastrService.danger('Please check receive amount.', 'OTC');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseCheckReceiveAmount'),
+       this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
 
@@ -407,7 +422,8 @@ export class TransferComponent implements OnInit {
     this.httpService.post(transferObj, 'transfer-otc/').subscribe((res?: any) => {
       if (res.status) {
         this.formSubmitting = false;
-        this.toastrService.success('Transfer successfully completed!', 'OTC');
+        this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
+        this.translate.instant('pages.transfer.toastr.otc'));
         this.httpService.get('anx-price/').subscribe((price) => {
           this.anxWallet.anx_price = Number(price['anx_price']);
 
@@ -419,11 +435,11 @@ export class TransferComponent implements OnInit {
         });
       } else {
         this.formSubmitting = false;
-        this.toastrService.danger(res.message, 'OTC');
+        this.toastrService.danger(res.message, this.translate.instant('pages.transfer.toastr.otc'));
       }
     }, err => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 'OTC');
+      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.toastr.otc'));
     });
   }
 }
