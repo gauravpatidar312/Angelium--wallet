@@ -37,7 +37,7 @@
     "verified": "Verified",
     "week": "Week",
     "year": "Year"
-  }, 
+  },
   "messages":{
     "required": "{{field}} is required"
   },
@@ -79,8 +79,8 @@
       "downlineAngel": "Downline Angel",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
-        "rank": "Rank", 
-        "reward": "Reward", 
+        "rank": "Rank",
+        "reward": "Reward",
         "your_reward": "Your Reward"
       },
       "map": "map",
@@ -114,7 +114,11 @@
       "referral": "Referral",
       "rank": "Rank",
       "secretKey": "Secret Key",
-      "2FA": "2FA"
+      "2FA": "2FA",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "receive": "Receive",

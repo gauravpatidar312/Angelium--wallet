@@ -37,7 +37,7 @@
     "verified": "Verified",
     "week": "週",
     "year": "年"
-  }, 
+  },
   "messages":{
     "required": "{{field}} が必要です"
   },
@@ -57,8 +57,8 @@
       "systemUpdate": "システム更新",
       "totalAsset" : "アセット合計"
     },
-    "heaven":{  
-      "entryDate": "Entry date",    
+    "heaven":{
+      "entryDate": "Entry date",
       "history": "履歴",
       "ID": "ID",
       "heavenDropToday": "今日のヘブンドロップ",
@@ -68,8 +68,8 @@
       "releaseSetting": "Release Setting",
       "totalHeaven": "ヘブン合計"
     },
-    "login":{  
-      "DontHaveAnAccount": "Don't have an account",    
+    "login":{
+      "DontHaveAnAccount": "Don't have an account",
       "forgotPassword": "パスワードを忘れた",
       "HelloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "ログイン",
@@ -114,7 +114,11 @@
       "referral": "リフェラル",
       "rank": "ランク",
       "secretKey": "Secret Key",
-      "2FA": "2FA"
+      "2FA": "2FA",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "receive": "受信",
