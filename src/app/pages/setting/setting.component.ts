@@ -211,12 +211,12 @@ export class SettingComponent implements OnInit {
           this.sessionStorage.updateUserState(this.userData);
           this.newUsername = null;
         } else {
-          this.toastrService.danger(ShareDataService.getErrorMessage(res), 
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), 
             this.translate.instant('pages.setting.toastr.changeUsername')
           );
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
           this.translate.instant('pages.setting.toastr.changeUsername')
         );
       });
@@ -254,7 +254,7 @@ export class SettingComponent implements OnInit {
           this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeLoginPassword'));
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.setting.toastr.changeLoginPassword'));
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.toastr.changeLoginPassword'));
       });
   }
 
@@ -290,7 +290,7 @@ export class SettingComponent implements OnInit {
           this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeTradePassword'));
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
           this.translate.instant('pages.setting.toastr.changeTradePassword')
         );
       });

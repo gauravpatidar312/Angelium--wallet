@@ -222,7 +222,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     }, (err) => {
       this.fetchingAmount = false;
       this.wallet.walletDollar = 0;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+
     });
   }
 
@@ -273,7 +274,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }, (err) => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
 
@@ -284,7 +285,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingHeavenDrop = false;
     }, (err) => {
       this.fetchingHeavenDrop = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
   getTotalHeaven() {
@@ -294,7 +295,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingTotalHeaven = false;
     }, (err) => {
       this.fetchingTotalHeaven = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
 
@@ -346,7 +347,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchHeavenHistory = false;
     }, (err) => {
       this.fetchHeavenHistory = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
 

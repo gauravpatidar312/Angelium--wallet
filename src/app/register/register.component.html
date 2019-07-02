@@ -88,25 +88,25 @@
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label>{{"pages.register.firstName" | translate}}:</label>
+                  <label>{{"common.firstName" | translate}}:</label>
                   <input type="text" class="form-control" 
-                    placeholder="{{'pages.register.firstName' | translate}}" 
+                    placeholder="{{'common.firstName' | translate}}" 
                     formControlName="first_name">
                   <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                     <div *ngIf="f.first_name.errors.required">
-                      {{"messages.required" | translate: {'field': "pages.register.firstName" | translate } }}
+                      {{"messages.required" | translate: {'field': "common.firstName" | translate } }}
                     </div>
                     <div *ngIf="f.first_name.errors.pattern">Please enter value in English language only.</div>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label>{{"pages.register.lastName" | translate}}:</label>
+                  <label>{{"common.lastName" | translate}}:</label>
                   <input type="text" class="form-control" 
-                    placeholder="{{'pages.register.lastName' | translate}}" 
+                    placeholder="{{'common.lastName' | translate}}" 
                     formControlName="last_name">
                   <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                     <div *ngIf="f.last_name.errors.required">
-                      {{"messages.required" | translate: {'field': "pages.register.lastName" | translate } }}
+                      {{"messages.required" | translate: {'field': "common.lastName" | translate } }}
                     </div>
                     <div *ngIf="f.last_name.errors.pattern">Please enter value in English language only.</div>
                   </div>

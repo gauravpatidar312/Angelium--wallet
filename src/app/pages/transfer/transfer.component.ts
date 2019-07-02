@@ -191,7 +191,7 @@ export class TransferComponent implements OnInit {
           this.toastrService.danger(res.message, this.translate.instant('common.tradePassword'));
         }
       }, err => {
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
         this.translate.instant('common.tradePassword'));
       });
   }
@@ -214,7 +214,7 @@ export class TransferComponent implements OnInit {
     }, (err) => {
       this.fetchingAmount = false;
       this.sendWallet.walletDollar = 0;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
     });
   }
 
@@ -266,12 +266,12 @@ export class TransferComponent implements OnInit {
         this.fetchingAmount = false;
         this.otcWallet.toAmount = 0;
         this.otcWallet.toDollar = 0;
-        this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
         this.translate.instant('common.fetchingAmount'));
       });
     }, (err) => {
       this.fetchingAmount = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
       this.translate.instant('common.fetchingAmount'));
     });
   }
@@ -386,7 +386,7 @@ export class TransferComponent implements OnInit {
     }, (err) => {
       this.waitFlag = false;
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.send'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.send'));
     });
   }
 
@@ -439,7 +439,7 @@ export class TransferComponent implements OnInit {
       }
     }, err => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.toastr.otc'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.toastr.otc'));
     });
   }
 }

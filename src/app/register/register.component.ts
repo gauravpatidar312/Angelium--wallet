@@ -55,13 +55,14 @@ export class RegisterComponent implements OnInit {
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
               private dialogService: NbDialogService,
+              private shareDataService: ShareDataService,
               private breakpointService: NbMediaBreakpointsService,
               private themeService: NbThemeService,
               public translate: TranslateService,
               private storageService: IndexedDBStorageService) {
     this.getCapchaTranslation();
   }
-  
+
   getLanguageData(){
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
@@ -168,14 +169,17 @@ export class RegisterComponent implements OnInit {
     }, err => {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('common.sendSMS'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.sendSMS'));
+
     });
   }
 
   onSubmitRegistration() {
-    if (!this.isVerifiedCaptcha) {      
-      this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), 
-      this.translate.instant('common.register'));
+    if (!this.isVerifiedCaptcha) {
+      this.toastrService.danger(
+        this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), 
+        this.translate.instant('common.register')
+      );
       return;
     }
     this.registerForm.controls.phone.setValue(this.model.phone);
@@ -226,8 +230,9 @@ export class RegisterComponent implements OnInit {
     }, err => {
       console.log(err);
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 
-      this.translate.instant('pages.register.toastr.RegisterFailed'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+        this.translate.instant('pages.register.toastr.RegisterFailed'));
+
     });
   }
 

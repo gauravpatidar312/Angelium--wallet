@@ -32,18 +32,20 @@ export class SessionStorageService {
     this.store.dispatch(new UpdateUserInfo(data));
   }
 
-  // getFromSession = function(key): any {
-  //   if (sessionStorage[key]) {
-  //     return JSON.parse(sessionStorage[key]);
-  //   } else {
-  //     return "false";
-  //   }
-  // };
-
-
   // call this function for get user profile detail from our store state.
   getFromSession =  function(key): any {
     return this.userInfo;
   };
 
+  saveToSession = function(key, value) {
+    sessionStorage[key] = JSON.stringify(value);
+  };
+
+  getSessionStorage = function(key): any {
+    if (sessionStorage[key]) {
+      return JSON.parse(sessionStorage[key]);
+    } else {
+      return false;
+    }
+  };
 }

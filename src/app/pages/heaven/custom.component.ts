@@ -65,10 +65,10 @@ export class CustomRendererComponent implements ViewCell, OnInit{
         this.translate.instant('pages.heaven.heavenHistory'));
       }
       else {
-        this.toastrService.danger(ShareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.heavenHistory'));
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.heavenHistory'));
       }
     }, (err) => {
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.heaven.heavenHistory'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.heaven.heavenHistory'));
     });
   }
 }

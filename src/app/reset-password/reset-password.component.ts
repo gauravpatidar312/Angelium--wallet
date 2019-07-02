@@ -32,6 +32,7 @@ export class ResetPasswordComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
+              private shareDataService: ShareDataService,
               private sessionStorageService: SessionStorageService,
               private translate:TranslateService) {
 
@@ -86,8 +87,7 @@ export class ResetPasswordComponent implements OnInit {
     }, err => {
       this.otpSubmitting = false;
       this.otpSubmitted = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), 
-      this.translate.instant('common.sendSMS'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.sendSMS'));
     });
   }
 
@@ -120,7 +120,8 @@ export class ResetPasswordComponent implements OnInit {
       }
     }, err => {
       this.formSubmitting = false;
-      this.toastrService.danger(ShareDataService.getErrorMessage(err), this.translate.instant('pages.resetPassword.resetPassword'));
+
+      this.toastrService.danger(this.translate.instant('common.sendSMS'), this.translate.instant('pages.resetPassword.resetPassword'));
       console.log(err);
     });
   }

@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import * as _ from 'lodash';
+import {IndexedDBStorageService} from './indexeddb-storage.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class ShareDataService {
@@ -11,7 +13,8 @@ export class ShareDataService {
   showNotification = false;
   transferTab: string;
   transferTitle: string;
-  constructor() { }
+  constructor( private storageService: IndexedDBStorageService,
+               private router: Router) {}
 
   changeData(data: any) {
     this.messageSource.next(data);
@@ -22,8 +25,16 @@ export class ShareDataService {
     return m ? parseFloat(m[1]) : number.valueOf();
   }
 
-  static getErrorMessage(err: any) {
+  getErrorMessage(err: any) {
     let msg = 'Something went wrong. We request you to try after sometime.';
+
+    if (err.status === 401) {
+      this.storageService.deleteDatabase();
+      this.router.navigate(['']);
+      msg = 'Session expired. Please log in again.';
+      return msg;
+    }
+
     if (err.status === 500)
       return msg;
 

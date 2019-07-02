@@ -411,8 +411,9 @@
        {{"pages.hq.userDatabase"|translate}}
       </nb-card-header>
 
-      <nb-card-body>
-        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+      <nb-card-body id="card-user-database">
+        <div [hidden]="!fetchingUsers"><span class="user-database-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+        <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchingUsers" (deleteConfirm)="onLoadConfirm($event)">
         </ng2-smart-table>
       </nb-card-body>
     </nb-card>
