@@ -37,7 +37,7 @@
     "verified": "인증됨",
     "week": "주",
     "year": "년"
-  }, 
+  },
   "messages":{
     "required": "{{field}} 이(가) 필요합니다"
   },
@@ -114,7 +114,11 @@
       "referral": "추천코드",
       "rank": "랭킹",
       "secretKey": "Secret Key",
-      "2FA": "2FA"
+      "2FA": "2FA",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "receive": "입금",
