@@ -76,12 +76,12 @@
       "systemUpdate": "システム更新",
       "totalAsset" : "アセット合計",
       "securityCamera":{
-        "xLOVE": "XLOVE",
-        "xCASINO": "XCASINO",
-        "xWISH": "XWISH",
-        "xTRAVEL": "XTRAVEL",
-        "xMALL": "XMALL",
-        "xSCHOOL": "XSCHOOL"
+        "xlove": "XLOVE",
+        "xcasino": "XCASINO",
+        "xwish": "XWISH",
+        "xtravel": "XTRAVEL",
+        "xmall": "XMALL",
+        "xschool": "XSCHOOL"
       }
     },
     "heaven":{  

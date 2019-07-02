@@ -3,7 +3,7 @@
     "assets": "자산",
     "amount": "수량",
     "country": "국가",
-    "cancel": "Cancel",
+    "cancel": "취소",
     "cryptos":{
       "anx": "ANX",
       "anl": "ANL",
@@ -76,12 +76,12 @@
       "systemUpdate": "시스템 업데이트",
       "totalAsset": "총자산",
       "securityCamera":{
-        "xLOVE": "XLOVE",
-        "xCASINO": "XCASINO",
-        "xWISH": "XWISH",
-        "xTRAVEL": "XTRAVEL",
-        "xMALL": "XMALL",
-        "xSCHOOL": "XSCHOOL"
+        "xlove": "XLOVE",
+        "xcasino": "XCASINO",
+        "xwish": "XWISH",
+        "xtravel": "XTRAVEL",
+        "xmall": "XMALL",
+        "xschool": "XSCHOOL"
       }
     },
     "heaven":{
