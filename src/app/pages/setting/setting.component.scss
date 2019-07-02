@@ -169,15 +169,15 @@
     }
   }
 
-  .dropdown {
-    min-width: 150px;
+  .dropup {
+    width: 150px;
+    display: table-cell;
   }
 
   .dropdown-menu {
     background-color: #3d3780 !important;
     border: 2px solid #7659ff !important;
   }
-
 
   .form-group label {
     padding: 0 0 0.75rem;
@@ -222,6 +222,27 @@
 
   .borderless td, .borderless th {
     border: none;
+  }
+
+  .text-color {
+    color: #d1d1ff;
+  }
+
+  .text-color:hover {
+    color: #26df8b !important;
+  }
+
+  .chatHover:hover {
+    color: #26df8b !important;
+    text-decoration: underline;
+  }
+
+  .btn-padding {
+    padding: 0.30rem 1.5rem;
+  }
+
+  .td-padding {
+    padding: 0 0.75rem;
   }
 
   /deep/ nb-user .user-name {
@@ -378,4 +399,3 @@
   display: inline-block;
   font-size: 22px;
 }
-.dropup {width: 150px;}

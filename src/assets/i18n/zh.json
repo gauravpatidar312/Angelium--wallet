@@ -37,7 +37,7 @@
     "verified": "Verified",
     "week": "周",
     "year": "年"
-  }, 
+  },
   "messages":{
     "required": "{{field}} 必填"
   },
@@ -66,14 +66,14 @@
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
-      "totalHeaven": "天堂总计" 
+      "totalHeaven": "天堂总计"
     },
     "login":{
       "DontHaveAnAccount": "Don't have an account",
       "forgotPassword": "忘记密码",
       "HelloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "登录",
-      "rememberMe": "记住我" 
+      "rememberMe": "记住我"
     },
     "reward":{
       "downlineAngel": "经我邀请的天使",
@@ -114,7 +114,11 @@
       "referral": "转送",
       "rank": "排行",
       "secretKey": "密钥",
-      "2FA": "2FA"
+      "2FA": "2FA",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "receive": "接收",
