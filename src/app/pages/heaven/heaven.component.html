@@ -282,8 +282,10 @@
         </nb-card-header>
         <nb-card-body id="heaven-history">
           <div [hidden]="!fetchHeavenHistory"><span class="heaven-history-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
-          <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
-          </ng2-smart-table>
+          <div style="overflow: auto;">
+            <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
+            </ng2-smart-table>
+          </div>
         </nb-card-body>
       </nb-card>
     </div>

@@ -25,6 +25,7 @@
     "fetchingAmount":"Fetching Amount",
     "firstName": "名",
     "heaven": "天堂",
+    "kyc": "KYC",
     "login": "登录",
     "last": "Last",
     "level": "等级",
@@ -32,7 +33,6 @@
     "lastWeek": "Last Week",
     "lastName": "姓",
     "month": "月",
-    "kyc": "KYC",
     "password": "密码",
     "profit": "Profit",
     "profile":"个人资料",
@@ -57,7 +57,7 @@
     "verified": "Verified",
     "week": "周",
     "year": "年"
-  }, 
+  },
   "messages":{
     "required": "{{field}} 必填"
   },
@@ -242,7 +242,11 @@
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
       },
-      "usernameOnlyEnglish": "New Username (English only)"
+      "usernameOnlyEnglish": "New Username (English only)",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",

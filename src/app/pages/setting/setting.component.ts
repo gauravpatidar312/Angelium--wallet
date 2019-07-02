@@ -15,6 +15,7 @@ import { IndexedDBStorageService } from '../../services/indexeddb-storage.servic
 import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
+declare let $: any;
 export let browserRefresh = false;
 
 @Component({
@@ -103,7 +104,7 @@ export class SettingComponent implements OnInit {
       });
     }
   }
-  
+
   changeLang(lan: any){
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
@@ -402,6 +403,12 @@ export class SettingComponent implements OnInit {
       closeOnBackdropClick: false,
       autoFocus: false,
     });
+  }
+
+  openChatDialog() {
+    (<any>window).$crisp.push(['do', 'chat:show']);
+    (<any>window).$crisp.push(['do', 'chat:open']);
+    $('.crisp-client .crisp-1rjpbb7 .crisp-1rf4xdh .crisp-kquevr').attr('style', 'display: none !important;');​
   }
 
   cancelUploadDialog(ref) {

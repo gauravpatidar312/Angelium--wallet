@@ -55,9 +55,9 @@
     "username": "Username",
     "verificationCode": "Verification code",
     "verified": "Verified",
-    "week": "week",
-    "year": "year"
-  }, 
+    "week": "Week",
+    "year": "Year"
+  },
   "messages":{
     "required": "{{field}} is required"
   },
@@ -161,8 +161,8 @@
       "downlineHeaven": "Downline Heaven",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
-        "rank": "Rank", 
-        "reward": "Reward", 
+        "rank": "Rank",
+        "reward": "Reward",
         "your_reward": "Your Reward"
       },
       "map": "map",
@@ -242,7 +242,11 @@
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
       },
-      "usernameOnlyEnglish": "New Username (English only)"
+      "usernameOnlyEnglish": "New Username (English only)",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",

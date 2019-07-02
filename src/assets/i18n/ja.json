@@ -56,7 +56,7 @@
     "verified": "Verified",
     "week": "週",
     "year": "年"
-  }, 
+  },
   "messages":{
     "required": "{{field}} が必要です"
   },
@@ -84,9 +84,9 @@
         "xschool": "XSCHOOL"
       }
     },
-    "heaven":{  
+    "heaven":{
       "enterAmount":"Enter Amount",
-      "entryDate": "Entry date",    
+      "entryDate": "Entry date",
       "heavenHistory":"Heaven History",
       "heavenDropToday": "今日のヘブンドロップ",
       "heavenId":"Heaven ID",
@@ -242,7 +242,11 @@
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
       },
-      "usernameOnlyEnglish": "New Username (English only)"
+      "usernameOnlyEnglish": "New Username (English only)",
+      "support": "Support",
+      "chatNow": "Chat now",
+      "reportBug": "Report bug",
+      "clickToReport": "Click to report"
     },
     "transfer":{
       "enterDestinationAddress" : "Enter destination address",
