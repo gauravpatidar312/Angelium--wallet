@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
         var currectLang = res.find((data:any)=> {
           return data.language_code === browserDetectLang;
         });
+        console.log(currectLang);
         if (currectLang) {
           this.storageService.storeLangIndexDb(currectLang);
           this.translate.use(currectLang.language_code);
@@ -70,6 +71,8 @@ export class AppComponent implements OnInit {
           this.translate.setDefaultLang('en');
         }
       });
+    }else{
+      this.translate.use(data.language_code);
     }
   }
 

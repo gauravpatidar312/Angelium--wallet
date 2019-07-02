@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
       setTimeout(()=>{
         $("#loginSlider").children(".text").text(
           this.translate.instant('common.slideRightToVerify'));
-      },300);
+      },500);
     }
   }
 

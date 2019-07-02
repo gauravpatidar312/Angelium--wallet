@@ -173,7 +173,7 @@
       "yourReward": "당신의 리워드"
     },
     "register":{
-      "alreadyHaveAnAccount": "이미 가입하셨나요?",
+      "alreadyHaveAnAccount": "이미 가입하셨나요",
       "agreeTo": "동의하기",
       "confirmYourEmail": "Confirm your E-mail",
       "enterValueInEnglish":"Please enter value in English language only",
