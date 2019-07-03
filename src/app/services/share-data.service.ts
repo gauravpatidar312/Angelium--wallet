@@ -29,6 +29,7 @@ export class ShareDataService {
     let msg = 'Something went wrong. We request you to try after sometime.';
 
     if (err.status === 401) {
+      console.warn('DB cleared after 401 error');
       this.storageService.deleteDatabase();
       this.router.navigate(['']);
       msg = 'Session expired. Please log in again.';

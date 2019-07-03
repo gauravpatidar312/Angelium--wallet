@@ -111,7 +111,7 @@ export class HQComponent implements OnInit {
           this.router.navigateByUrl('/pages/setting').then(() => {
             setTimeout(() => {
               window.location.reload();
-            }, 100);
+            }, 250);
           });
         } else if (res.message) {
           this.toastrService.danger(res.message, 'Load User Session');

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs';
@@ -16,9 +16,8 @@ import { IndexedDBStorageService } from '../../../services/indexeddb-storage.ser
 import { Location } from "@angular/common";
 
 @Injectable()
-export class AuthEffects {
+export class AuthEffects{
 
-  redirectUrl = '';
   constructor(
     private actions: Actions,
     private authService: AuthService,
@@ -27,12 +26,8 @@ export class AuthEffects {
     private storageService: IndexedDBStorageService,
     location: Location,
   ) {
-    router.events.subscribe(val => {
-      if (location.path() != "") {
-        this.redirectUrl = location.path();
-      }
-    });
-   }
+    this.router = router;
+  }
 
   // effects go here
   @Effect()
@@ -62,30 +57,27 @@ export class AuthEffects {
     map((action: SetUserProfile) => action.payload),
     switchMap((data: any) => {
       return this.authService.getProfile()
-          .map(user => {
-              user.token = data.token;
-              return this.store.dispatch(new UserInfo(user));
-          })
-          .catch((error) => {
-            return of(new LogInFailure({ error }));
-          });
-      })
+        .map(user => {
+          user.token = data.token;
+          return this.store.dispatch(new UserInfo(user));
+        })
+        .catch((error) => {
+          return of(new LogInFailure({ error }));
+        });
+    })
   );
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   UserInfo: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.USER_INFO),
     map((action: UserInfo) => action.payload),
     map((user) => {
       this.storageService.saveToSession(user);
       this.storageService.storeLangIndexDb(user.user_language);
-      console.log('this.redirectUrl', this.redirectUrl);
-      if (this.redirectUrl === '/login' || this.redirectUrl.includes('register') || this.redirectUrl.includes('/reset-password')) {
+      console.log('this.redirectUrl', this.router.url);
+      if (this.router.url !== '' && (this.router.url === '/login' || this.router.url.includes('register') || this.router.url.includes('/reset-password'))) {
         this.router.navigate(['/pages/dashboard']);
-      } else {
-        this.router.navigate([this.redirectUrl]);
       }
-      // return user;
     })
   );
 
