@@ -99,6 +99,7 @@ export class AppModule {
             this.store.dispatch(new UserInfo(data));
           } else {
             // This means user has closed the tab and opened again so logged user out.
+            console.warn('DB cleared for logout on tab close');
             this.storageService.deleteDatabase();
           }
         } else {
