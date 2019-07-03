@@ -7,6 +7,7 @@ import {
   NbDialogService
 } from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
+import { TranslateService } from "@ngx-translate/core";
 import {SessionStorageService} from '../../services/session-storage.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
@@ -66,7 +67,8 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
               private httpService: HttpService,
               private sessionService: SessionStorageService,
               private dialogService: NbDialogService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              public translate: TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -163,7 +165,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
         const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
         formData.append('datefield', formatedData);
       } else {
-        this.toastrService.danger('Please select date of birth.', 'KYC');
+        this.toastrService.danger(
+          this.translate.instant('pages.kyc.toastr.pleaseSelectDOB'),
+          this.translate.instant('common.kyc')
+        );
         return;
       }
       if (this.idFrontChangedEvent !== '') {
@@ -171,7 +176,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('doc_photo', newfile, newfile.name);
       } else {
-        this.toastrService.danger('Please upload ID Proof (front side).', 'KYC');
+        this.toastrService.danger(
+          this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProof'),
+          this.translate.instant('common.kyc')
+        );
         return;
       }
       if (this.idBackChangedEvent !== '') {
@@ -179,7 +187,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('doc_photo_back', newfile, newfile.name);
       } else {
-        this.toastrService.danger('Please upload ID Proof (back side).', 'KYC');
+        this.toastrService.danger(
+          this.translate.instant('pages.kyc.toastr.uploadBackSideIDProof'),
+          this.translate.instant('common.kyc')
+        );
         return;
       }
       if (this.selfieChangedEvent !== '') {
@@ -187,7 +198,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('selfie', newfile, newfile.name);
       } else {
-        this.toastrService.danger('Please upload selfie.', 'KYC');
+        this.toastrService.danger(
+          this.translate.instant('pages.kyc.toastr.uploadSelfie'),
+          this.translate.instant('common.kyc')
+        );
         return;
       }
 
@@ -202,7 +216,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
 
           this.sessionService.updateUserState(this.userData);
           this.kycFormDisable = true;
-          this.toastrService.success('User kyc upload successfully', 'KYC');
+          this.toastrService.success(
+            this.translate.instant('pages.kyc.toastr.userKycUploadSuccessfully'),
+            this.translate.instant('common.kyc')
+          );
         }
       });
     }

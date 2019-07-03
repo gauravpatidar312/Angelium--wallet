@@ -2,22 +2,41 @@
   "common":{
     "assets": "Assets",
     "amount" : "数量",
+    "country": "国家",
+    "cancel": "Cancel",
+    "cryptos":{
+      "anx": "ANX",
+      "anl": "ANL",
+      "anlp": "ANLP",
+      "btc": "BTC",
+      "eth": "ETH",
+      "heaven": "HEAVEN",
+      "usdt": "USDT",
+      "xp": "XP"
+    },
     "downline": "邀请好友",
     "days": "Days",
     "day": "Day",
     "emailAddress": "邮箱地址",
     "email": "电子邮箱",
     "enter": "Enter",
+    "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
+    "fetchingAmount":"Fetching Amount",
+    "firstName": "名",
     "heaven": "天堂",
+    "kyc": "KYC",
     "login": "登录",
     "last": "Last",
     "level": "等级",
+    "lastMonth": "Last Month",
+    "lastWeek": "Last Week",
+    "lastName": "姓",
     "month": "月",
     "password": "密码",
-    "phone": "手机号吗",
     "profit": "Profit",
     "profile":"个人资料",
+    "phone": "휴대전화",
     "reward": "奖励",
     "run": "运行",
     "register": "注册",
@@ -32,6 +51,7 @@
     "total": "Total",
     "today": "Today",
     "top": "顶部",
+    "tradePassword": "Trade Password",
     "username": "用户名",
     "verificationCode": "认证码",
     "verified": "Verified",
@@ -55,28 +75,90 @@
       "profitToday" : "今日收益",
       "portfolio": "组合",
       "systemUpdate": "系统更新",
-      "totalAsset" : "资产总额"
+      "totalAsset" : "资产总额",
+      "securityCamera":{
+        "xlove": "XLOVE",
+        "xcasino": "XCASINO",
+        "xwish": "XWISH",
+        "xtravel": "XTRAVEL",
+        "xmall": "XMALL",
+        "xschool": "XSCHOOL"
+      }
     },
     "heaven":{
+      "enterAmount":"Enter Amount",
       "entryDate": "Entry date",
-      "history": "历史",
-      "ID": "ID",
+      "heavenHistory":"Heaven History",
       "heavenDropToday": "今日天堂之滴",
+      "heavenId":"Heaven ID",
+      "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
-      "totalHeaven": "天堂总计"
+      "totalHeaven": "天堂总计",
+      "toastr":{
+        "pleaseEnterAmount":"Please enter amount",
+        "pleaseChoosePlan":"Please choose plan.",
+        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "transactionSuccessfullyCompleted":"Transaction successfully completed!",
+        "youDontHaveSufficientBalance":"You don't have sufficient balance."
+      }
+    },
+    "hq":{
+      "age":"Age",
+      "commissionPaid":"Commission Paid",
+      "gainPaid":"Gain Paid",
+      "heavenRate":"Heaven Rate",
+      "id":"ID",
+      "newHeaven":"New Heaven",
+      "releasable":"Releasable",
+      "released":"Released",
+      "userDatabase":"User Database",
+      "averageANX":"Average ANX",
+      "averageHeaven":"Average Heaven",
+      "heavenGrowth":"Heaven Growth",
+      "totalUser":"Total User",
+      "newUser":"New User",
+      "leavingUser":"Leaving User",
+      "userGrowth":"User Growth"
+    },
+    "kyc":{
+      "audit":"Audit",
+      "approved":"Approved",
+      "browse":"Browse",
+      "close":"Close",
+      "dob":"Date of Birth",
+      "idProofFront":"ID Proof (front side)",
+      "idProofBack":"ID Proof (back side)",
+      "input":"Input",
+      "information":"Information",
+      "idProofPreview":"ID Proof Preview",
+      "mobileNumber": "Mobile Number",
+      "selfie":"Selfie",
+      "submit":"Submit",
+      "upload":"Upload",
+      "toastr":{
+        "pleaseSelectDOB": "Please select date of birth",
+        "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
+        "uploadBackSideIDProof": "Please upload ID Proof (back side).",
+        "uploadSelfie": "Please upload selfie.",
+        "userKycUploadSuccessfully": "User kyc upload successfully"
+      }
     },
     "login":{
-      "DontHaveAnAccount": "Don't have an account",
+      "dontHaveAnAccount": "Don't have an account",
       "forgotPassword": "忘记密码",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "登录",
-      "rememberMe": "记住我"
+      "rememberMe": "记住我" ,
+      "toastr":{
+        "pleaseVerifyCaptcha":"Please verify captcha"
+      }
     },
     "reward":{
       "downlineAngel": "经我邀请的天使",
+      "downlineHeaven": "Downline Heaven",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "排行",
@@ -94,36 +176,96 @@
     "register":{
       "alreadyHaveAnAccount": "已有账户",
       "agreeTo": "Agree to",
-      "firstName": "名",
-      "lastName": "姓",
-      "number": "号码",
-      "repeatPassword": "再次输入密码",
+      "confirmYourEmail": "Confirm your E-mail",
+      "enterValueInEnglish":"Please enter value in English language only",
+      "loginPassword": "Login Password",
+      "phoneNumber": "Phone number",
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
-      "terms&Conditions" : "Terms & Conditions"
+      "repeatLoginPassword": "Repeat Login Password",
+      "repeatTradePassword": "Repeat Trade Password",
+      "terms&Conditions" : "Terms & Conditions",
+      "usernameUsRequired": "Username us required",
+      "toastr":{
+        "confirmEmailDoNotMatch":"Confirm e-mail do not match",
+        "confirmLoginPasswordDoNotMatch":"Confirm login password do not match",
+        "confirmTradePasswordDoNotMatch":"Confirm trade password do not match",
+        "pleaseSubmitOTPfirst":"Please submit OTP first",
+        "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
+        "phoneNumberIsInvalid":"Phone number is invalid",
+        "RegisterFailed":"Register Failed",
+        "sentOTPtoMobile":"We've sent an OTP code to your phone number."
+      }      
+    },
+    "resetPassword":{
+      "changePassword":"Change Password",
+      "enterPhoneNumber":"Enter Phone Number",
+      "repeatPassword": "再次输入密码",
+      "resetPassword":"Reset Password",
+      "passwordsMustMatch": "Passwords must match",
+      "toastr":{
+        "pleaseCheckOTPCodeandTryAgain":"Please check OTP code and try again!"
+      }
     },
     "setting": {
-      "country": "国家",
       "currency": "通货",
+      "confirmPassword": "Confirm password",
       "name": "名称",
       "eMail": "E-mail",
       "language": "语言",
       "merge": "合并",
-      "kyc": "KYC",
+      "newPassword": "New Password",
+      "oldPassword":"Old password",
       "qr": "二维",
       "r18mode": "R-18禁模式",
       "referral": "转送",
       "rank": "排行",
       "secretKey": "密钥",
       "2FA": "2FA",
+      "referralLink": "Referral Link",
+      "toastr":{
+        "changeUsername": "Change Username",
+        "changeLoginPassword": "Change Login Password",
+        "changeTradePassword": "Change Trade Password",
+        "countryUpdate": "Country update successfully",
+        "enterValueInAllFields": "Please enter value in all fields.",
+        "languageUpdateSuccessfully": "Language update successfully!",
+        "linkCopiedSuccessfully": "Link copied successfully!",
+        "loginPasswordUpdated": "Login password updated successfully",
+        "pleaseEnterUsername": "Please enter username",
+        "passwordsDoNotMatch": "Passwords do not match",
+        "pictureUpdated": "Picture updated",
+        "r18ModeUpdated": "R-18 Mode updated successfully",
+        "r18ModeEnable": "R-18 MODE ENABLED",
+        "r18ModeDisabled": "R-18 MODE DISABLED",
+        "tradePasswordUpdated": "Trade password updated successfully",
+        "userImageChanged": "User image change successfully",
+        "usernameUpdatedSuccessfully": "Username updated successfully",
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+      },
+      "usernameOnlyEnglish": "New Username (English only)",
       "support": "Support",
       "chatNow": "Chat now",
       "reportBug": "Report bug",
       "clickToReport": "Click to report"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "接收",
       "send": "发送",
-      "to": "To"
+      "to": "To",
+      "toastr":{
+        "copyAddress":"Copy Address",
+        "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",
+        "otc":"OTC",
+        "pleaseEnterRequiredFieldForTransfer":"Please enter required field for transfer",
+        "pleaseEnterYourTradePassword":"Please enter your trade password",
+        "pleaseEnterTransferAmount":"Please enter transfer amount",
+        "pleaseCheckReceiveAmount":"Please check receive amount.",
+        "transferSuccessfullyCompleted":"Transfer successfully completed!",
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
+      }
     }
   }
 }

@@ -68,12 +68,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       .subscribe(title => {
         if (title === this.translate.instant('header.logout')) {
           this.authService.logout();
-          this.translate.use('en');
         }
       });
 
     this.userData = this.sessionStorage.getFromSession('userInfo');
-
     this.shareDataService.currentData.subscribe(data => {
       if (data.avatar) {
         this.userData.avatar = data.avatar;

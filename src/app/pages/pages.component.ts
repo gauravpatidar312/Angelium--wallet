@@ -27,20 +27,8 @@ export class PagesComponent implements OnInit {
   }
 
   setMenuTranslation(){
-    let menus = _.cloneDeep(MENU_ITEMS);
-    let common = this.translate.instant('common');
+    let menus = MENU_ITEMS;
     menus.forEach((item) => {
-      if (item.title === 'Top') {
-        item.title = common.top;
-      }else if (item.title === 'Heaven') {
-        item.title = common.heaven;
-      }else if (item.title === 'Reward') {
-        item.title = common.reward;
-      }else if (item.title === 'Transfer') {
-        item.title = common.transfer;
-      }else if (item.title === 'Setting') {
-        item.title = common.setting;
-      }
       this.setVisibility(item);
     });
     this.menu = menus;
@@ -55,6 +43,7 @@ export class PagesComponent implements OnInit {
         this.setVisibility(child);
       });
     }
+    item.title = this.translate.instant('common.'+item.languageKey);
   }
 
   ngOnInit() {

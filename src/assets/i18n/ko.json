@@ -2,22 +2,40 @@
   "common":{
     "assets": "자산",
     "amount": "수량",
+    "country": "국가",
+    "cancel": "취소",
+    "cryptos":{
+      "anx": "ANX",
+      "anl": "ANL",
+      "anlp": "ANLP",
+      "btc": "BTC",
+      "eth": "ETH",
+      "heaven": "헤븐",
+      "usdt": "USDT",
+      "xp": "XP"
+    },
     "downline": "다운라인",
     "days": "일",
     "day": "일",
     "emailAddress": "이메일",
     "email": "이메일",
     "enter": "입력",
+    "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
+    "fetchingAmount":"Fetching Amount",
+    "firstName": "명",
     "heaven": "헤븐",
     "login": "로그인",
     "last": "지난",
     "level": "레벨",
+    "lastMonth": "지난 달",
+    "lastWeek": "지난 주",
+    "lastName": "성",
     "month": "월",
     "password": "비밀번호",
-    "phone": "휴대전화",
     "profit": "수익",
     "profile":"프로필",
+    "phone": "手机号吗",
     "reward": "리워드",
     "run": "실행",
     "register": "등록",
@@ -32,6 +50,7 @@
     "total": "총",
     "today": "오늘",
     "top": "홈",
+    "tradePassword": "거래 비밀번호",
     "username": "사용자명",
     "verificationCode": "인증번호",
     "verified": "인증됨",
@@ -55,28 +74,90 @@
       "profitToday": "오늘의 이익",
       "portfolio": "포트폴리오",
       "systemUpdate": "시스템 업데이트",
-      "totalAsset": "총자산"
+      "totalAsset": "총자산",
+      "securityCamera":{
+        "xlove": "XLOVE",
+        "xcasino": "XCASINO",
+        "xwish": "XWISH",
+        "xtravel": "XTRAVEL",
+        "xmall": "XMALL",
+        "xschool": "XSCHOOL"
+      }
     },
     "heaven":{
+      "enterAmount":"Enter Amount",
       "entryDate": "참여일",
-      "history": "내역",
-      "ID": "ID",
+      "heavenHistory":"Heaven History",
       "heavenDropToday": "오늘의 헤븐 드롭",
+      "heavenId":"Heaven ID",
+      "noDataFound":"No data found",
       "plan": "계획",
       "received": "Received",
       "releaseDate": "완료일",
       "releaseSetting": "완료 설정",
-      "totalHeaven": "총 헤븐"
+      "totalHeaven": "총 헤븐",
+      "toastr":{
+        "pleaseEnterAmount":"Please enter amount",
+        "pleaseChoosePlan":"Please choose plan.",
+        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "transactionSuccessfullyCompleted":"Transaction successfully completed!",
+        "youDontHaveSufficientBalance":"You don't have sufficient balance."
+      }
+    },
+    "hq":{
+      "age":"Age",
+      "commissionPaid":"Commission Paid",
+      "gainPaid":"Gain Paid",
+      "heavenRate":"Heaven Rate",
+      "id":"ID",
+      "newHeaven":"New Heaven",
+      "releasable":"Releasable",
+      "released":"Released",
+      "userDatabase":"User Database",
+      "averageANX":"Average ANX",
+      "averageHeaven":"Average Heaven",
+      "heavenGrowth":"Heaven Growth",
+      "totalUser":"Total User",
+      "newUser":"New User",
+      "leavingUser":"Leaving User",
+      "userGrowth":"User Growth"
+    },
+    "kyc":{
+      "audit":"Audit",
+      "approved":"승인 됨",
+      "browse":"Browse",
+      "close":"Close",
+      "dob":"생년월일",
+      "idProofFront":"ID Proof (front side)",
+      "idProofBack":"ID Proof (back side)",
+      "input":"Input",
+      "information":"정보",
+      "idProofPreview":"ID Proof Preview",
+      "mobileNumber": "휴대전화",
+      "selfie":"Selfie",
+      "submit":"제출",
+      "upload":"업로드",
+      "toastr":{
+        "pleaseSelectDOB": "Please select date of birth",
+        "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
+        "uploadBackSideIDProof": "Please upload ID Proof (back side).",
+        "uploadSelfie": "Please upload selfie.",
+        "userKycUploadSuccessfully": "User kyc upload successfully"
+      }
     },
     "login":{
-      "DontHaveAnAccount": "계정이 없으신가요?",
+      "dontHaveAnAccount": "계정이 없으신가요",
       "forgotPassword": "비밀번호 찾기",
-      "HelloLoginWithYourEmail" : "반갑습니다! 이메일로 로그인해주세요",
+      "helloLoginWithYourEmail" : "반갑습니다! 이메일로 로그인해주세요",
       "login": "로그인",
-      "rememberMe": "로그인 정보 기억하기"
+      "rememberMe": "로그인 정보 기억하기",
+      "toastr":{
+        "pleaseVerifyCaptcha":"Please verify captcha"
+      }
     },
     "reward":{
       "downlineAngel": "소개한 엔젤",
+      "downlineHeaven": "다운라인 헤븐",
       "downlineTree": {
         "noUserDownlineTree": "다운라인 트리에 사용자가 없습니다",
         "rank": "랭킹",
@@ -92,22 +173,47 @@
       "yourReward": "당신의 리워드"
     },
     "register":{
-      "alreadyHaveAnAccount": "이미 가입하셨나요?",
+      "alreadyHaveAnAccount": "이미 가입하셨나요",
       "agreeTo": "동의하기",
-      "firstName": "명",
-      "lastName": "성",
-      "number": "number",
-      "repeatPassword": "비밀번호 재입력",
+      "confirmYourEmail": "Confirm your E-mail",
+      "enterValueInEnglish":"Please enter value in English language only",
+      "loginPassword": "로그인 비밀번호",
+      "phoneNumber": "Phone number",
       "RealNameIsRequiredForKYC": "KYC 인증을 위한 실명이 필요합니다. 등록한 후 변경할 수 없습니다",
-      "terms&Conditions" : "이용약관"
+      "repeatLoginPassword": "Repeat Login Password",
+      "repeatTradePassword": "거래 비밀번호 재입력",
+      "terms&Conditions" : "이용약관",
+      "usernameUsRequired": "Username us required",
+      "toastr":{
+        "confirmEmailDoNotMatch":"Confirm e-mail do not match",
+        "confirmLoginPasswordDoNotMatch":"Confirm login password do not match",
+        "confirmTradePasswordDoNotMatch":"Confirm trade password do not match",
+        "pleaseSubmitOTPfirst":"Please submit OTP first",
+        "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
+        "phoneNumberIsInvalid":"Phone number is invalid",
+        "RegisterFailed":"Register Failed",
+        "sentOTPtoMobile":"We've sent an OTP code to your phone number."
+      }
+    },
+    "resetPassword":{
+      "changePassword":"Change Password",
+      "enterPhoneNumber":"Enter Phone Number",
+      "repeatPassword": "비밀번호 재입력",
+      "resetPassword":"Reset Password",
+      "passwordsMustMatch": "Passwords must match",
+      "toastr":{
+        "pleaseCheckOTPCodeandTryAgain":"Please check OTP code and try again!"
+      }
     },
     "setting": {
-      "country": "국가",
       "currency": "통화",
+      "confirmPassword": "비밀번호 확인",
       "name": "이름",
       "eMail": "이메일",
       "language": "언어",
       "merge": "통합",
+      "newPassword": "새로운 비밀번호",
+      "oldPassword":"기존 비밀번호",
       "kyc": "KYC",
       "qr": "QR",
       "r18mode": "R-18 모드",
@@ -115,15 +221,51 @@
       "rank": "랭킹",
       "secretKey": "Secret Key",
       "2FA": "2FA",
+      "referralLink": "Referral Link",
+      "toastr":{
+        "changeUsername": "사용자명 변경",
+        "changeLoginPassword": "로그인 비밀번호 변경",
+        "changeTradePassword": "거래 비밀번호 변경",
+        "countryUpdate": "Country update successfully",
+        "enterValueInAllFields": "Please enter value in all fields.",
+        "languageUpdateSuccessfully": "Language update successfully!",
+        "linkCopiedSuccessfully": "Link copied successfully!",
+        "loginPasswordUpdated": "Login password updated successfully",
+        "pleaseEnterUsername": "사용자명을 입력해주세요",
+        "passwordsDoNotMatch": "비밀번호가 일치하지 않습니다",
+        "pictureUpdated": "Picture updated",
+        "r18ModeUpdated": "R-18 Mode updated successfully",
+        "r18ModeEnable": "R-18 MODE ENABLED",
+        "r18ModeDisabled": "R-18 MODE DISABLED",
+        "tradePasswordUpdated": "Trade password updated successfully",
+        "userImageChanged": "User image change successfully",
+        "usernameUpdatedSuccessfully": "Username updated successfully",
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+      },
+      "usernameOnlyEnglish": "New Username (English only)",
       "support": "Support",
       "chatNow": "Chat now",
       "reportBug": "Report bug",
       "clickToReport": "Click to report"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "입금",
       "send": "출금",
-      "to": "To"
+      "to": "To",
+      "toastr":{
+        "copyAddress":"주소 복사",
+        "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",
+        "otc":"OTC",
+        "pleaseEnterRequiredFieldForTransfer":"Please enter required field for transfer",
+        "pleaseEnterYourTradePassword":"Please enter your trade password",
+        "pleaseEnterTransferAmount":"Please enter transfer amount",
+        "pleaseCheckReceiveAmount":"Please check receive amount.",
+        "transferSuccessfullyCompleted":"Transfer successfully completed!",
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
+      }
     }
   }
 }

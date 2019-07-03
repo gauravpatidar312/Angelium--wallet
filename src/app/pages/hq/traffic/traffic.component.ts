@@ -2,6 +2,7 @@ import { Component, OnDestroy, Input } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { TrafficChartData } from '../../../@core/data/traffic-chart';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-traffic',
@@ -31,12 +32,13 @@ export class TrafficComponent implements OnDestroy {
   @Input() trafficHeading: string;
   private alive = true;
   trafficChartPoints: number[];
-  type = 'month';
-  types = ['week', 'month', 'year'];
+  type = this.translate.instant("common.month");
+  types = [this.translate.instant("common.week"), this.translate.instant("common.month"), this.translate.instant("common.year")];
   currentTheme: string;
 
   constructor(private themeService: NbThemeService,
-              private trafficChartService: TrafficChartData) {
+              private trafficChartService: TrafficChartData,
+              private translate:TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {

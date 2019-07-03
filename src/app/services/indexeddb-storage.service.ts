@@ -17,6 +17,7 @@ export class IndexedDBStorageService {
     return Observable.create((observer: any) => {
       this.dbAngelium.openDatabase(1, evt => {
         const objectStore = evt.currentTarget.result.createObjectStore('userInfo', { keyPath: 'uid' });
+        const objectStoreLang = evt.currentTarget.result.createObjectStore('languageInfo', { keyPath: 'uid' });
         const angeliumInfo = evt.currentTarget.result.createObjectStore('angeliumInfo', { keyPath: 'uid' });
         angeliumInfo.createIndex('invitationCode', 'invitationCode');
         angeliumInfo.createIndex('waitTime', 'waitTime');
@@ -81,6 +82,43 @@ export class IndexedDBStorageService {
       }
     }, (error) => {
       console.error(error);
+    });
+  }
+
+  storeLangIndexDb(value){
+    this.dbAngelium.getByKey('languageInfo', 2).then((data) => {
+      if (!data) {
+        value.uid = 2;
+        this.dbAngelium.add('languageInfo', value).then((dbData) => {
+        },
+          (err) => {
+            console.error(err);
+          });
+      } else {
+        value.uid = data.uid;
+        this.dbAngelium.update('languageInfo', value).then(() => {
+        },
+          (error) => {
+            console.error(error);
+            return 'false';
+          });
+      }
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+  getLangFormIndexDb(): Observable<any>{
+    return Observable.create((observer: any) => {
+      this.dbAngelium.openDatabase(1).then(() => {
+        this.dbAngelium.getByKey('languageInfo', 2).then((data) => {
+          observer.next(data);
+          observer.complete();
+        }, (error) => {
+          console.error(error);
+          return 'false';
+        });
+      });
     });
   }
 

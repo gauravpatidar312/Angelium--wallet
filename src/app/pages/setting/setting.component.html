@@ -36,7 +36,7 @@
                   <td class="action-col"></td>
                 </tr>
                 <tr>
-                  <td class="title-col">{{"pages.setting.country" | translate}}</td>
+                  <td class="title-col">{{"common.country" | translate}}</td>
                   <td class="value-col">{{userData?.country | titlecase}}</td>
                   <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" *ngIf="false" (click)="openCountryDialog('Country', userData?.country)"></i></td>
                 </tr>
@@ -89,7 +89,7 @@
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeLoginPassword)"></i></td>
               </tr>
               <tr>
-                <td class="title-col">{{"common.trade" | translate}} {{"common.password" | translate}}</td>
+                <td class="title-col">{{"common.tradePassword" | translate}}</td>
                 <td class="value-col">
                   *************
                 </td>
@@ -106,7 +106,7 @@
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
-                <td class="title-col">{{"pages.setting.kyc" | translate}}</td>
+                <td class="title-col">{{"common.kyc" | translate}}</td>
                 <td class="value-col">{{isProduction ? 'Coming soon' : (userData?.kyc_info?.status_description || 'pending')}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc" *ngIf="!isProduction"></i></td>
               </tr>
@@ -278,15 +278,16 @@
 <ng-template #changeUsername let-data let-ref="dialogRef">
   <nb-card class="changePassword">
     <nb-card-header>
-      Change Username
+      {{"pages.setting.toastr.changeUsername" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelUsernameDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <input type="text" [(ngModel)]="newUsername" placeholder="New Username (English only)" nbInput/>
+      <input type="text" [(ngModel)]="newUsername" 
+        placeholder="{{'pages.setting.usernameOnlyEnglish' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="onChangeUsername(ref)">Submit</button>
-      <button nbButton class="cancel-btn" size="small" (click)="cancelUsernameDialog(ref)">Cancel</button>
+      <button nbButton class="submit-btn" size="small" (click)="onChangeUsername(ref)">{{"pages.kyc.submit" | translate}}</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelUsernameDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
@@ -294,17 +295,18 @@
 <ng-template #changeLoginPassword let-data let-ref="dialogRef">
   <nb-card  class="changePassword">
     <nb-card-header>
-      Change Login Password
+      {{"pages.setting.toastr.changeLoginPassword" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelLoginPasswordDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <input type="password" [(ngModel)]="oldLoginPassword" placeholder="Old password" nbInput/><br/><br/>
-      <input type="password" [(ngModel)]="newLoginPassword" placeholder="New password" nbInput/><br/><br/>
-      <input type="password" [(ngModel)]="confirmLoginPassword" placeholder="Confirm password" nbInput/>
+      <input type="password" [(ngModel)]="oldLoginPassword" placeholder="{{'pages.setting.oldPassword' | translate}}" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="newLoginPassword" placeholder="{{'pages.setting.newPassword' | translate}}" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="confirmLoginPassword" 
+      placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="changeLoginPasswordDialog(ref)">Submit</button>
-      <button nbButton class="cancel-btn" size="small" (click)="cancelLoginPasswordDialog(ref)">Cancel</button>
+      <button nbButton class="submit-btn" size="small" (click)="changeLoginPasswordDialog(ref)">{{"pages.kyc.submit" | translate}}</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelLoginPasswordDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
@@ -312,17 +314,17 @@
 <ng-template #changeTradePassword let-data let-ref="dialogRef">
   <nb-card  class="changePassword">
     <nb-card-header>
-      Change Trade Password
+      {{"pages.setting.toastr.changeTradePassword" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradePasswordDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <input type="password" [(ngModel)]="oldTradePassword" placeholder="Old password" nbInput/><br/><br/>
-      <input type="password" [(ngModel)]="newTradePassword" placeholder="New password" nbInput/><br/><br/>
-      <input type="password" [(ngModel)]="confirmTradePassword" placeholder="Confirm password" nbInput/>
+      <input type="password" [(ngModel)]="oldTradePassword" placeholder="{{'pages.setting.oldPassword' | translate}}" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="newTradePassword" placeholder="{{'pages.setting.newPassword' | translate}}" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="confirmTradePassword" placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">Submit</button>
-      <button nbButton class="cancel-btn" size="small" (click)="cancelTradePasswordDialog(ref)">Cancel</button>
+      <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">{{"pages.kyc.submit" | translate}}</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelTradePasswordDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

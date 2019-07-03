@@ -1,7 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
 import {Camera, SecurityCamerasData} from '../../../@core/data/security-cameras';
 import {takeWhile, map} from 'rxjs/operators';
 import {SessionStorageService} from '../../../services/session-storage.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ngx-security-cameras',
@@ -18,18 +20,21 @@ export class SecurityCamerasComponent implements OnDestroy {
   r18mode: boolean;
 
   constructor(private securityCamerasService: SecurityCamerasData,
-              private sessionStorage: SessionStorageService) {
+              private sessionStorage: SessionStorageService,
+              public translate: TranslateService,) {
     const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
     this.r18mode = userSettingInfo.r18mode;
 
     this.securityCamerasService.getCamerasData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((cameras: Camera[]) => {
-        cameras.map((cam) => {
+        let cloneCameras = _.cloneDeep(cameras);
+        cloneCameras.map((cam) => {
           cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
+          cam.title = this.translate.instant('pages.dashboard.securityCamera.'+cam.title.toLowerCase());
         });
-        this.cameras = cameras;
-        this.selectedCamera = cameras[0];
+        this.cameras = cloneCameras;
+        this.selectedCamera = cloneCameras[0];
       });
   }
 

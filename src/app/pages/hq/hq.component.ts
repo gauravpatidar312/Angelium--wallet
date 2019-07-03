@@ -47,15 +47,15 @@ export class HQComponent implements OnInit {
     },
     columns: {
       id: {
-        title: this.translate.instant('pages.heaven.ID'),
+        title: this.translate.instant('pages.hq.id'),
         type: 'string',
       },
       first_name: {
-        title: this.translate.instant('pages.register.firstName'),
+        title: this.translate.instant('common.firstName'),
         type: 'string',
       },
       last_name: {
-        title: this.translate.instant('pages.register.lastName'),
+        title: this.translate.instant('common.lastName'),
         type: 'string',
       },
       username: {

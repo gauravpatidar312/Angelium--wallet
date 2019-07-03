@@ -13,7 +13,7 @@
             <img src="../../assets/images/angelium_logo.png" class="logo-image" />
             <h1 id="title" class="title">
               {{"pages.login.login" | translate}}</h1>
-            <p class="sub-title title">Hello! Log in with your email.</p>
+            <p class="sub-title title">{{"pages.login.helloLoginWithYourEmail" | translate}}.</p>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="width-full loginForm" aria-labelledby="title">
               <div class="form-group">
                 <label class="label" for="input-email">{{"common.emailAddress" | translate}}:</label>
@@ -24,7 +24,9 @@
                   <div *ngIf="f.email.errors.required">
                     {{"messages.required" | translate: {'field': "common.email" | translate } }}
                   </div>
-                  <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  <div *ngIf="f.email.errors.email">
+                    {{"common.emailMustBeValid" | translate}}
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -59,7 +61,7 @@
               </div>
               <div class="form-group">
                 <section class="another-action" aria-label="Sign in">
-                  Don't have an account? <a class="" routerLink="/register/">{{"common.register" | translate}}</a>
+                  {{ "pages.login.dontHaveAnAccount" | translate }}? <a class="" routerLink="/register/">{{"common.register" | translate}}</a>
                 </section>
               </div>
             </form>

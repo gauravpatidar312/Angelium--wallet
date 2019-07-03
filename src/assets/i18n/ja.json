@@ -2,22 +2,40 @@
   "common":{
     "assets": "Assets",
     "amount" : "数量",
+    "country": "国",
+    "cancel": "Cancel",
+    "cryptos":{
+      "anx": "ANX",
+      "anl": "ANL",
+      "anlp": "ANLP",
+      "btc": "BTC",
+      "eth": "ETH",
+      "heaven": "HEAVEN",
+      "usdt": "USDT",
+      "xp": "XP"
+    },
     "downline": "ダウンライン",
     "days": "Days",
     "day": "Day",
     "emailAddress": "Eメール",
     "email": "Eメール",
     "enter": "Enter",
+    "emailMustBeValid": "Email must be a valid email address",
     "from": "From",
+    "fetchingAmount":"Fetching Amount",
+    "firstName": "名",
     "heaven": "ヘブン",
     "login": "ログイン",
     "last": "Last",
     "level": "レベル",
+    "lastMonth": "Last Month",
+    "lastWeek": "Last Week",
+    "lastName": "姓",
     "month": "月",
     "password": "パスワード",
-    "phone": "電話番号",
     "profit": "Profit",
     "profile":"プロフィール",
+    "phone": "電話番号",
     "reward": "リワード",
     "run": "実行",
     "register": "登録",
@@ -32,6 +50,7 @@
     "total": "Total",
     "today": "Today",
     "top": "トップ",
+    "tradePassword": "Trade Password",
     "username": "ユーザーネーム",
     "verificationCode": "認証コード",
     "verified": "Verified",
@@ -55,28 +74,90 @@
       "profitToday" : "今日の利益",
       "portfolio": "ポートフォリオ",
       "systemUpdate": "システム更新",
-      "totalAsset" : "アセット合計"
+      "totalAsset" : "アセット合計",
+      "securityCamera":{
+        "xlove": "XLOVE",
+        "xcasino": "XCASINO",
+        "xwish": "XWISH",
+        "xtravel": "XTRAVEL",
+        "xmall": "XMALL",
+        "xschool": "XSCHOOL"
+      }
     },
     "heaven":{
+      "enterAmount":"Enter Amount",
       "entryDate": "Entry date",
-      "history": "履歴",
-      "ID": "ID",
+      "heavenHistory":"Heaven History",
       "heavenDropToday": "今日のヘブンドロップ",
+      "heavenId":"Heaven ID",
+      "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
-      "totalHeaven": "ヘブン合計"
+      "totalHeaven": "ヘブン合計",
+      "toastr":{
+        "pleaseEnterAmount":"Please enter amount",
+        "pleaseChoosePlan":"Please choose plan.",
+        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "transactionSuccessfullyCompleted":"Transaction successfully completed!",
+        "youDontHaveSufficientBalance":"You don't have sufficient balance."
+      } 
     },
-    "login":{
-      "DontHaveAnAccount": "Don't have an account",
+    "hq":{
+      "age":"Age",
+      "commissionPaid":"Commission Paid",
+      "gainPaid":"Gain Paid",
+      "heavenRate":"Heaven Rate",
+      "id":"ID",
+      "newHeaven":"New Heaven",
+      "releasable":"Releasable",
+      "released":"Released",
+      "userDatabase":"User Database",
+      "averageANX":"Average ANX",
+      "averageHeaven":"Average Heaven",
+      "heavenGrowth":"Heaven Growth",
+      "totalUser":"Total User",
+      "newUser":"New User",
+      "leavingUser":"Leaving User",
+      "userGrowth":"User Growth"
+    },
+    "kyc":{
+      "audit":"Audit",
+      "approved":"Approved",
+      "browse":"Browse",
+      "close":"Close",
+      "dob":"Date of Birth",
+      "idProofFront":"ID Proof (front side)",
+      "idProofBack":"ID Proof (back side)",
+      "input":"Input",
+      "information":"Information",
+      "idProofPreview":"ID Proof Preview",
+      "mobileNumber": "Mobile Number",
+      "selfie":"Selfie",
+      "submit":"Submit",
+      "upload":"Upload",
+      "toastr":{
+        "pleaseSelectDOB": "Please select date of birth",
+        "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
+        "uploadBackSideIDProof": "Please upload ID Proof (back side).",
+        "uploadSelfie": "Please upload selfie.",
+        "userKycUploadSuccessfully": "User kyc upload successfully"
+      }
+    },
+    "login":{  
+      "dontHaveAnAccount": "Don't have an account",    
       "forgotPassword": "パスワードを忘れた",
-      "HelloLoginWithYourEmail" : "Hello! Log in with your email",
+      "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "ログイン",
-      "rememberMe": "ログイン情報を記憶"
+      "rememberMe": "ログイン情報を記憶",
+      "toastr":{
+        "pleaseVerifyCaptcha":"Please verify captcha"
+      }
     },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
+      "downlineHeaven": "Downline Heaven",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "ランク",
@@ -94,36 +175,97 @@
     "register":{
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
       "agreeTo": "Agree to",
-      "firstName": "名",
-      "lastName": "姓",
-      "number": "number",
-      "repeatPassword": "パスワードを再入力",
+      "confirmYourEmail": "Confirm your E-mail",
+      "enterValueInEnglish":"Please enter value in English language only",
+      "loginPassword": "Login Password",
+      "phoneNumber": "Phone number",
       "RealNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
-      "terms&Conditions" : "Terms & Conditions"
+      "repeatLoginPassword": "Repeat Login Password",
+      "repeatTradePassword": "Repeat Trade Password",
+      "terms&Conditions" : "Terms & Conditions",
+      "usernameUsRequired": "Username us required",
+      "toastr":{
+        "confirmEmailDoNotMatch":"Confirm e-mail do not match",
+        "confirmLoginPasswordDoNotMatch":"Confirm login password do not match",
+        "confirmTradePasswordDoNotMatch":"Confirm trade password do not match",
+        "pleaseSubmitOTPfirst":"Please submit OTP first",
+        "pleaseCheckAgreetoTermsandConditionBox":"Please check agree to the terms and condition box.",
+        "phoneNumberIsInvalid":"Phone number is invalid",
+        "RegisterFailed":"Register Failed",
+        "sentOTPtoMobile":"We've sent an OTP code to your phone number."
+      }
+    },
+    "resetPassword":{
+      "changePassword":"Change Password",
+      "enterPhoneNumber":"Enter Phone Number",
+      "repeatPassword": "パスワードを再入力",
+      "resetPassword":"Reset Password",
+      "passwordsMustMatch": "Passwords must match",
+      "toastr":{
+        "pleaseCheckOTPCodeandTryAgain":"Please check OTP code and try again!"
+      }
     },
     "setting": {
-      "country": "国",
       "currency": "表示通貨",
+      "confirmPassword": "Confirm password",
       "name": "名前",
       "eMail": "Eメール",
       "language": "言語",
       "merge": "統合",
+      "newPassword": "New Password",
+      "oldPassword":"Old password",
       "kyc": "KYC",
       "qr": "QR",
       "r18mode": "R-18モード",
       "referral": "リフェラル",
       "rank": "ランク",
+      "referralLink": "Referral Link",
       "secretKey": "Secret Key",
       "2FA": "2FA",
+      "toastr":{
+        "changeUsername": "Change Username",
+        "changeLoginPassword": "Change Login Password",
+        "changeTradePassword": "Change Trade Password",
+        "countryUpdate": "Country update successfully",
+        "enterValueInAllFields": "Please enter value in all fields.",
+        "languageUpdateSuccessfully": "Language update successfully!",
+        "linkCopiedSuccessfully": "Link copied successfully!",
+        "loginPasswordUpdated": "Login password updated successfully",
+        "pleaseEnterUsername": "Please enter username",
+        "passwordsDoNotMatch": "Passwords do not match",
+        "pictureUpdated": "Picture updated",
+        "r18ModeUpdated": "R-18 Mode updated successfully",
+        "r18ModeEnable": "R-18 MODE ENABLED",
+        "r18ModeDisabled": "R-18 MODE DISABLED",
+        "tradePasswordUpdated": "Trade password updated successfully",
+        "userImageChanged": "User image change successfully",
+        "usernameUpdatedSuccessfully": "Username updated successfully",
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+      },
+      "usernameOnlyEnglish": "New Username (English only)",
       "support": "Support",
       "chatNow": "Chat now",
       "reportBug": "Report bug",
       "clickToReport": "Click to report"
     },
     "transfer":{
+      "enterDestinationAddress" : "Enter destination address",
+      "destinationAddress" : "Destination Address",
       "receive": "受信",
       "send": "送信",
-      "to": "To"
+      "to": "To",
+      "toastr":{
+        "copyAddress":"Copy Address",
+        "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",
+        "otc":"OTC",
+        "pleaseEnterRequiredFieldForTransfer":"Please enter required field for transfer",
+        "pleaseEnterYourTradePassword":"Please enter your trade password",
+        "pleaseEnterTransferAmount":"Please enter transfer amount",
+        "pleaseCheckReceiveAmount":"Please check receive amount.",
+        "transferSuccessfullyCompleted":"Transfer successfully completed!",
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
+      }
     }
   }
 }

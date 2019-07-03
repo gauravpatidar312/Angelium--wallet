@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class ChartPanelHeaderComponent implements OnChanges, OnDestroy {
   @Input() typeData: any;
   @Input() type: string = 'today';
   types: string[] = ['today', 'week', 'month', 'total'];
+  
   chartLegend: {iconColor: string; title: string}[];
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
@@ -22,7 +24,8 @@ export class ChartPanelHeaderComponent implements OnChanges, OnDestroy {
   orderProfitLegend: any;
 
   constructor(private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private translate:TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {

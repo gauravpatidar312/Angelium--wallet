@@ -1,6 +1,6 @@
 <nb-card >
   <nb-tabset fullWidth (changeTab)="changeTab($event)">
-    <nb-tab tabTitle="Assets">
+    <nb-tab tabTitle="{{'common.assets' | translate}}">
       <div class="chart-container">
         <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
         <ngx-chart-panel-header [typeData]="'assets'" [type]="period" (periodChange)="setPeriodAndGetChartData($event)">
@@ -8,7 +8,7 @@
         <ngx-orders-chart #ordersChart [ordersChartData]="ordersChartData"></ngx-orders-chart>
       </div>
     </nb-tab>
-    <nb-tab tabTitle="Profit">
+    <nb-tab tabTitle="{{'common.profit' | translate}}">
       <div class="chart-container">
         <ngx-chart-panel-summary [summary]="chartPanelSummary"></ngx-chart-panel-summary>
         <ngx-chart-panel-header [typeData]="'profit'" [type]="period" (periodChange)="setPeriodAndGetChartData($event)">

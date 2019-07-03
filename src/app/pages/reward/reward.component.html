@@ -16,7 +16,8 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr2">
         <div *ngIf="fetchingDownlineHeaven"><span class="fetchingDownLine"><i class="fa fa-spinner fetchingDownline-margin spinner-color fa-spin"></i></span></div>
-        <ngx-earning-card cardName='{{"common.downline" | translate}} {{"common.heaven" | translate}}' [selectedCurrency]="'HEAVEN'" [amount]="downline_heaven" [quantity]="total_users"
+        <ngx-earning-card cardName='{{"pages.reward.downlineHeaven" | translate}}'
+          [selectedCurrency]="'HEAVEN'" [amount]="downline_heaven" [quantity]="total_users"
           [percentage]="0" *ngIf="!fetchingDownlineHeaven"></ngx-earning-card>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr3">

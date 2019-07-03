@@ -180,7 +180,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     }, (err) => {
       this.fetchingAssetValue = false;
       this.fetchingCryptos = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Fetching Amount');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
     });
   }
 
