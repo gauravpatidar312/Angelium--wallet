@@ -101,6 +101,7 @@ export class SettingComponent implements OnInit {
       this.httpService.get('profile/').subscribe(data => {
         this.r18modeSwitchText = data.r18mode;
         this.userData = data;
+        this.shareDataService.changeData(data);
       });
     }
   }
@@ -432,7 +433,7 @@ export class SettingComponent implements OnInit {
           this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.userImageChanged'),
-            this.translate.instant('common.pictureUpdated')
+            this.translate.instant('pages.setting.toastr.pictureUpdated')
           );
         }
       });

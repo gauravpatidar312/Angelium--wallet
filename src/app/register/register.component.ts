@@ -271,7 +271,7 @@ export class RegisterComponent implements OnInit {
       setTimeout(()=>{
         $("#registerSlider").children(".text").text(
           this.translate.instant('common.slideRightToVerify'));
-      },500);
+      },1000);
     }
   }
 }

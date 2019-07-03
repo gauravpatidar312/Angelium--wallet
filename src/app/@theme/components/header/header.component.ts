@@ -72,7 +72,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       });
 
     this.userData = this.sessionStorage.getFromSession('userInfo');
-
     this.shareDataService.currentData.subscribe(data => {
       if (data.avatar) {
         this.userData.avatar = data.avatar;

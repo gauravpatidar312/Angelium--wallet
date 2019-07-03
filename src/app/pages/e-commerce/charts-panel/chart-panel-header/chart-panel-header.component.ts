@@ -15,7 +15,8 @@ export class ChartPanelHeaderComponent implements OnChanges, OnDestroy {
   @Output() periodChange = new EventEmitter<string>();
   @Input() typeData: any;
   @Input() type: string = 'today';
-  types: string[] = [this.translate.instant('common.today'), this.translate.instant('common.week'), this.translate.instant('common.month'), this.translate.instant('common.total')];
+  types: string[] = ['today', 'week', 'month', 'total'];
+  
   chartLegend: {iconColor: string; title: string}[];
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
