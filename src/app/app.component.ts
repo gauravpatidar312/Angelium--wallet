@@ -47,6 +47,8 @@ export class AppComponent implements OnInit {
     this.storageService.getLangFormIndexDb().subscribe((data)=>{
       this.setLanguage(data);
     });
+    var lang = this.sessionStorage.getSessionStorage('language');
+    this.translate.use(lang.language_code);
   }
 
   ngOnInit(): void {
@@ -69,9 +71,13 @@ export class AppComponent implements OnInit {
           this.storageService.storeLangIndexDb(language);
           this.translate.setDefaultLang('en');
         }
+      }, err=>{
+          let language = {id: 1, language: 'english', language_code: 'en'};
+          this.storageService.storeLangIndexDb(language);
+          this.translate.setDefaultLang('en');
       });
     }else{
-      this.translate.use(data.language_code);
+      // this.translate.use(data.language_code);
     }
   }
 
