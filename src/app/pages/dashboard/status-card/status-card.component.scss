@@ -225,7 +225,7 @@ $shadow-green: #00977e;
       color: nb-theme(card-fg);
       text-align: right;
       margin-right: 5px;
-      margin-top: -9px;
+      margin-top: 3px;
     }
   }
 
@@ -310,6 +310,7 @@ $shadow-green: #00977e;
 
     .status {
       font-size: 1.9rem !important;
+      margin-top: 10px !important;
     }
   }
 

@@ -28,7 +28,7 @@
         </div>
         <div class="clearfix"></div>-->
         <div class="status text-white" *ngIf="!fetchingAssetValue"><span class="text-success">$</span>{{ value |  number : '1.0-2' }}</div>
-        <div class="delta up">0%</div>
+        <div class="delta up" *ngIf="false">0%</div>
         <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
       </div>
     </div>
