@@ -121,15 +121,14 @@ export class IndexedDBStorageService {
     });
   }
 
-  getSessionStorage(): Observable<any> {
-    return Observable.create((observer: any) => {
+  async getSessionStorage() {
+    return new Promise((resolve, reject) => {
       this.dbAngelium.openDatabase(1).then(() => {
         this.dbAngelium.getByKey('userInfo', 1).then((data) => {
-          observer.next(data);
-          observer.complete();
+          resolve(data);
         }, (error) => {
           console.warn(error);
-          return 'false';
+          reject(false);
         });
       });
     });
