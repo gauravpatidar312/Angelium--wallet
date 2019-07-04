@@ -243,7 +243,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     }*/
 
     if (!this.heaven_amount) {
-      this.toastrService.danger(this.translate.instant('.pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
       return;
     }
 
