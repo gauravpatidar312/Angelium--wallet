@@ -1,5 +1,6 @@
 {
   "common":{
+    "admin":"Admin",
     "assets": "资产",
     "amount" : "数量",
     "country": "国家",
@@ -14,6 +15,7 @@
       "usdt": "USDT",
       "xp": "XP"
     },
+    "company":"Company",
     "downline": "邀请好友",
     "days": "天",
     "day": "天",
@@ -25,6 +27,8 @@
     "fetchingAmount":"获取金额",
     "firstName": "名",
     "heaven": "天堂",
+    "hq":"hq",
+    "investor": "Investor",
     "kyc": "KYC",
     "login": "登录",
     "last": "最后",
@@ -110,6 +114,7 @@
       "commissionPaid":"佣金支付",
       "gainPaid":"获得报酬",
       "heavenRate":"天堂利率",
+      "hq":"hq",
       "id":"ID",
       "newHeaven":"新天堂",
       "releasable":"可释放",
