@@ -130,10 +130,10 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
      }
   }
 
-  ngAfterContentChecked(){
-    this.assetCard.title = this.translate.instant('pages.dashboard.totalAsset');
-    this.gainCard.title = this.translate.instant('pages.dashboard.profitToday');
-  }
+  // ngAfterContentChecked(){
+  //   this.assetCard.title = this.translate.instant('pages.dashboard.totalAsset');
+  //   this.gainCard.title = this.translate.instant('pages.dashboard.profitToday');
+  // }
 
   getNotification() {
     this.httpService.get('dashboard-notification/').subscribe((data?: any) => {
