@@ -3,7 +3,7 @@ import { NgxIndexedDB } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class IndexedDBStorageService {
 
@@ -54,13 +54,12 @@ export class IndexedDBStorageService {
         this.dbAngelium.getByKey('angeliumInfo', 1).then((data) => {
           resolve(data);
         }, (error) => {
-          console.error(error);
+          console.warn(error);
           reject(false);
         });
-      })
+      });
     });
   }
-
 
   saveToSession(value) {
     this.dbAngelium.getByKey('userInfo', 1).then((data) => {
@@ -115,7 +114,7 @@ export class IndexedDBStorageService {
           observer.next(data);
           observer.complete();
         }, (error) => {
-          console.error(error);
+          console.warn(error);
           return 'false';
         });
       });
@@ -129,7 +128,7 @@ export class IndexedDBStorageService {
           observer.next(data);
           observer.complete();
         }, (error) => {
-          console.error(error);
+          console.warn(error);
           return 'false';
         });
       });
@@ -142,7 +141,7 @@ export class IndexedDBStorageService {
         () => {
           this.createStore().toPromise();
         }, error => {
-          console.log(error);
+          console.warn(error);
         });
     });
   }
