@@ -44,11 +44,9 @@ export class AppComponent implements OnInit {
         }
       }
     });
-    this.storageService.getLangFormIndexDb().subscribe((data)=>{
-      this.setLanguage(data);
-    });
-    var lang = this.sessionStorage.getSessionStorage('language');
-    this.translate.use(lang.language_code);
+    
+    var lang = this.sessionStorage.getFronLocalStorage('languageData');
+    this.setLanguage(lang);
   }
 
   ngOnInit(): void {
@@ -57,27 +55,28 @@ export class AppComponent implements OnInit {
 
   
   setLanguage(data: any) {
+    console.log(data);
     if (!data) {
-      this.httpService.get('languages/').subscribe(res=>{
-        var browserDetectLang = navigator.language.split('-')[0];
-        var currectLang = res.find((data:any)=> {
-          return data.language_code === browserDetectLang;
-        });
-        if (currectLang) {
-          this.storageService.storeLangIndexDb(currectLang);
-          this.translate.use(currectLang.language_code);
-        }else{
-          let language = {id: 1, language: 'english', language_code: 'en'};
-          this.storageService.storeLangIndexDb(language);
-          this.translate.setDefaultLang('en');
-        }
-      }, err=>{
-          let language = {id: 1, language: 'english', language_code: 'en'};
-          this.storageService.storeLangIndexDb(language);
-          this.translate.setDefaultLang('en');
+      let languages = [
+        { 'id': 1, 'language': 'english', 'language_code': 'en' },
+        { 'id': 2, 'language': 'Chinese', 'language_code': 'zh' },
+        { 'id': 3, 'language': 'Korean', 'language_code': 'ko' }
+      ]
+      var browserDetectLang = navigator.language.split('-')[0];
+      var currectLang = languages.find((data:any)=> {
+        return data.language_code === browserDetectLang;
       });
-    }else{
-      // this.translate.use(data.language_code);
+      if (currectLang) {
+        this.translate.use(currectLang.language_code);
+        this.sessionStorage.saveToLocalStorage('languageData', currectLang);
+      }else{
+        let language = {id: 1, language: 'english', language_code: 'en'};
+        this.sessionStorage.saveToLocalStorage('languageData', currectLang);
+        this.translate.setDefaultLang('en');
+      }
+    }
+    else{
+      this.translate.use(data.language_code);
     }
   }
 

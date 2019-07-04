@@ -90,10 +90,9 @@ export class SettingComponent implements OnInit {
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
     });
-    this.storageService.getLangFormIndexDb().subscribe((data)=>{
-      this.selectedLang = data.language;
-      this.translate.use(data.language_code);
-    });
+    var lang = this.sessionStorage.getFronLocalStorage('languageData');
+    this.selectedLang = lang.language;
+    this.translate.use(lang.language_code);
   }
 
   getProfileData() {
@@ -112,7 +111,7 @@ export class SettingComponent implements OnInit {
     this.userData.user_language = lan;
     this.httpService.put({'user_language': lan.id }, 'update_userlang/')
       .subscribe(res=>{
-        this.storageService.storeLangIndexDb(lan);
+        this.sessionStorage.saveToLocalStorage('languageData', lan);
         this.toastrService.success(
           this.translate.instant('pages.setting.toastr.languageUpdateSuccessfully'), 
           this.translate.instant('pages.setting.language'));

@@ -67,15 +67,6 @@ export class RegisterComponent implements OnInit {
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
     });
-    this.storageService.getLangFormIndexDb().subscribe((data)=>{
-      if (!data) {
-        this.selectedLang = 'English';
-        this.registerForm.controls.user_language.setValue(1);
-      }else{
-        this.selectedLang = data.language;
-        this.registerForm.controls.user_language.setValue(data.id);
-      }
-    });
   }
 
   ngOnInit() {
@@ -130,6 +121,15 @@ export class RegisterComponent implements OnInit {
     .subscribe(([oldValue, newValue]) => {
       this.breakpoint = newValue;
     });
+
+    var lang = this.sessionStorageService.getFronLocalStorage('languageData');
+    if (!lang) {
+      this.selectedLang = 'English';
+      this.registerForm.controls.user_language.setValue(1);
+    }else{
+      this.selectedLang = lang.language;
+      this.registerForm.controls.user_language.setValue(lang.id);
+    }
   }
 
   ngOnDestroy() {
@@ -257,7 +257,7 @@ export class RegisterComponent implements OnInit {
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.registerForm.controls.user_language.setValue(lan.id);
-    this.storageService.storeLangIndexDb(lan);
+    this.sessionStorageService.saveToLocalStorage('languageData', lan);
     this.getCapchaTranslation();
   }
 

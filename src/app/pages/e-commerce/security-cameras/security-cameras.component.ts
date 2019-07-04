@@ -33,24 +33,11 @@ export class SecurityCamerasComponent implements OnDestroy {
         let cloneCameras = _.cloneDeep(cameras);
         cloneCameras.map((cam) => {
           cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
-          // cam.title = this.translate.instant('pages.dashboard.securityCamera.' + cam.title.toLowerCase());
+          cam.title = this.translate.instant('pages.dashboard.securityCamera.' + cam.title.toLowerCase());
         });
         this.cameras = cloneCameras;
         this.selectedCamera = cloneCameras[0];
       });
-      storageService.getLangFormIndexDb().subscribe(data=>{
-        var dd = this.translate.instant('pages.dashboard.securityCamera');
-        this.cloneCameras.map((cam) => {
-          cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
-          cam.title = this.translate.instant('pages.dashboard.securityCamera.' + cam.title.toLowerCase());
-        });
-        this.cameras = this.cloneCameras;
-        this.selectedCamera = this.cloneCameras[0];
-      });
-  }
-
-  getSecurityCam(){
-    
   }
 
   selectCamera(camera: any) {
