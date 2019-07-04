@@ -37,7 +37,6 @@ export class PagesComponent implements OnInit {
   setVisibility(item) {
     if (!item.hidden && item.data && item.data.length)
       item.hidden = item.data.indexOf(this.userInfo.user_type) < 0;
-
     if (item.children && item.children.length) {
       item.children.forEach((child) => {
         this.setVisibility(child);

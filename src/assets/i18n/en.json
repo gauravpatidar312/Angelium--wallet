@@ -1,5 +1,6 @@
 {
   "common":{
+    "admin":"Admin",
     "assets": "Assets",
     "amount" : "Amount",
     "country": "Country",
@@ -14,6 +15,7 @@
       "usdt": "USDT",
       "xp": "XP"
     },
+    "company":"Company",
     "downline": "Downline",
     "days": "Days",
     "day": "Day",
@@ -25,6 +27,8 @@
     "fetchingAmount":"Fetching Amount",
     "firstName": "First Name",
     "heaven": "Heaven",
+    "hq":"hq",
+    "investor": "Investor",
     "kyc": "KYC",
     "login": "Log In",
     "last": "Last",
@@ -111,6 +115,7 @@
       "gainPaid":"Gain Paid",
       "heavenRate":"Heaven Rate",
       "id":"ID",
+      "hq":"hq",
       "newHeaven":"New Heaven",
       "releasable":"Releasable",
       "released":"Released",

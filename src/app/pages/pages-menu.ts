@@ -30,16 +30,19 @@ export const MENU_ITEMS = [
       {
         title: 'Investor',
         link: '/pages/reward',
+        languageKey: 'investor',
       },
       {
         data: [AppConstants.ROLES.COMPANY],
         title: 'Company',
         link: '/pages/reward',
+        languageKey: 'company',
       },
       {
         data: [AppConstants.ROLES.ADMIN],
         title: 'Admin',
         link: '/pages/reward',
+        languageKey: 'admin',
       },
     ],
   },

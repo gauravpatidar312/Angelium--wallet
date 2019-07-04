@@ -1,5 +1,6 @@
 {
   "common":{
+    "admin":"Admin",
     "assets": "Assets",
     "amount" : "数量",
     "country": "国",
@@ -14,6 +15,7 @@
       "usdt": "USDT",
       "xp": "XP"
     },
+    "company":"Company",
     "downline": "ダウンライン",
     "days": "Days",
     "day": "Day",
@@ -25,6 +27,9 @@
     "fetchingAmount":"Fetching Amount",
     "firstName": "名",
     "heaven": "ヘブン",
+    "hq":"hq",
+    "investor": "Investor",
+    "kyc": "KYC",
     "login": "ログイン",
     "last": "Last",
     "level": "レベル",
@@ -109,6 +114,7 @@
       "commissionPaid":"Commission Paid",
       "gainPaid":"Gain Paid",
       "heavenRate":"Heaven Rate",
+      "hq":"hq",
       "id":"ID",
       "newHeaven":"New Heaven",
       "releasable":"Releasable",
@@ -214,7 +220,6 @@
       "merge": "統合",
       "newPassword": "New Password",
       "oldPassword":"Old password",
-      "kyc": "KYC",
       "qr": "QR",
       "r18mode": "R-18モード",
       "referral": "リフェラル",
