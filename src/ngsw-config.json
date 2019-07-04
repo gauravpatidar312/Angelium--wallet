@@ -1,6 +1,8 @@
 {
   "index": "/index.html",
-  "version": 2,
+  "appData": {
+    "version": "2019.07.04.1"
+  },
   "assetGroups": [
     {
       "name": "app-files",
