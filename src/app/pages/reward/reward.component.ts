@@ -256,10 +256,18 @@ export class RewardComponent implements OnInit, AfterViewInit {
               public translate: TranslateService) {
 
     this.userData = this.sessionStorage.getFromSession('userInfo');
+    if (this.userData.infinity_mark === 1)
+      this.userData.infinity_name = 'SILVER ANGEL';
+    else if (this.userData.infinity_mark === 2)
+      this.userData.infinity_name = 'GOLD ANGEL';
+    else if (this.userData.infinity_mark === 3)
+      this.userData.infinity_name = 'PINK ANGEL';
+    else
+      this.userData.infinity_name = 'BLUE ANGEL';
     const data = this.service.getData();
     const NewOBj = [];
     for (let x = 0; x < 10; x++) {
-      NewOBj.push(data[x])
+      NewOBj.push(data[x]);
     }
     this.source.load(NewOBj);
     this.themeService.getJsTheme()
@@ -291,7 +299,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.fetchingRewardValue = false;
     }, (err) => {
       this.fetchingRewardValue = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),
         this.translate.instant('common.reward'));
     });
   }

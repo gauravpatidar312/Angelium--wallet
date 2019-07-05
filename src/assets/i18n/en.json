@@ -40,6 +40,7 @@
     "password": "Password",
     "profit": "Profit",
     "profile":"Profile",
+    "option":"Option",
     "phone": "Phone",
     "reward": "Reward",
     "run": "Run",
@@ -267,7 +268,7 @@
         "pleaseEnterTransferAmount":"Please enter transfer amount",
         "pleaseCheckReceiveAmount":"Please check receive amount.",
         "transferSuccessfullyCompleted":"Transfer successfully completed!",
-        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!",
         "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
       }
     }

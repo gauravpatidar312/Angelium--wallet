@@ -24,6 +24,7 @@
       </div>
       </div>
     </div>
+    <div *ngIf="cardName === 'Your Rank'">{{infinity_name}}</div>
     <!-- <div class="value">{{tokenName}} = $ {{livePrice | number : '1.2-2' }}</div> -->
     <div class="delta" *ngIf="false"
          [class.up]="percentage >= 0"
