@@ -84,43 +84,6 @@ export class IndexedDBStorageService {
     });
   }
 
-  storeLangIndexDb(value){
-    this.dbAngelium.getByKey('languageInfo', 2).then((data) => {
-      if (!data) {
-        value.uid = 2;
-        this.dbAngelium.add('languageInfo', value).then((dbData) => {
-        },
-          (err) => {
-            console.error(err);
-          });
-      } else {
-        value.uid = data.uid;
-        this.dbAngelium.update('languageInfo', value).then(() => {
-        },
-          (error) => {
-            console.error(error);
-            return 'false';
-          });
-      }
-    }, (error) => {
-      console.error(error);
-    });
-  }
-
-  getLangFormIndexDb(): Observable<any>{
-    return Observable.create((observer: any) => {
-      this.dbAngelium.openDatabase(1).then(() => {
-        this.dbAngelium.getByKey('languageInfo', 2).then((data) => {
-          observer.next(data);
-          observer.complete();
-        }, (error) => {
-          console.warn(error);
-          return 'false';
-        });
-      });
-    });
-  }
-
   async getSessionStorage() {
     return new Promise((resolve, reject) => {
       this.dbAngelium.openDatabase(1).then(() => {

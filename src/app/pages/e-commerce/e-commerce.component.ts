@@ -99,7 +99,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     public translate: TranslateService,
     private toastrService: ToastrService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
-
+    
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -117,7 +117,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     this.getAllCryptoBalance();
     this.getTotalinvestmentData();
   }
-
+  
   ngAfterViewInit(){
       if (this.shareDataService.showNotification) {
         setTimeout(() => {
@@ -129,6 +129,11 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
         }, 800);
      }
   }
+
+  // ngAfterContentChecked(){
+  //   this.assetCard.title = this.translate.instant('pages.dashboard.totalAsset');
+  //   this.gainCard.title = this.translate.instant('pages.dashboard.profitToday');
+  // }
 
   getNotification() {
     this.httpService.get('dashboard-notification/').subscribe((data?: any) => {

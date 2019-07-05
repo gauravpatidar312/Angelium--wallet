@@ -41,9 +41,21 @@ export class SessionStorageService {
     sessionStorage[key] = JSON.stringify(value);
   };
 
+  saveToLocalStorage = function(key, value) {
+    localStorage[key] = JSON.stringify(value);
+  };
+
   getSessionStorage = function(key): any {
     if (sessionStorage[key]) {
       return JSON.parse(sessionStorage[key]);
+    } else {
+      return false;
+    }
+  };
+
+  getFromLocalStorage = function(key): any {
+    if (localStorage[key]) {
+      return JSON.parse(localStorage[key]);
     } else {
       return false;
     }

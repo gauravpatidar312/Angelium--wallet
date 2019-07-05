@@ -43,9 +43,9 @@ export class AppComponent implements OnInit {
         }
       }
     });
-    this.storageService.getLangFormIndexDb().subscribe((data) => {
-      this.setLanguage(data);
-    });
+    
+    var lang = this.sessionStorage.getFromLocalStorage('languageData');
+    this.setLanguage(lang);
   }
 
   ngOnInit(): void {
@@ -53,22 +53,27 @@ export class AppComponent implements OnInit {
   }
 
   setLanguage(data: any) {
+    console.log(data);
     if (!data) {
-      this.httpService.get('languages/').subscribe(res => {
-        const browserDetectLang = navigator.language.split('-')[0];
-        const currectLang = res.find((data: any) => {
-          return data.language_code === browserDetectLang;
-        });
-        if (currectLang) {
-          this.storageService.storeLangIndexDb(currectLang);
-          this.translate.use(currectLang.language_code);
-        } else {
-          const language = {id: 1, language: 'english', language_code: 'en'};
-          this.storageService.storeLangIndexDb(language);
-          this.translate.setDefaultLang('en');
-        }
+      let languages = [
+        { 'id': 1, 'language': 'english', 'language_code': 'en' },
+        { 'id': 2, 'language': 'Chinese', 'language_code': 'zh' },
+        { 'id': 3, 'language': 'Korean', 'language_code': 'ko' }
+      ]
+      var browserDetectLang = navigator.language.split('-')[0];
+      var currectLang = languages.find((data:any)=> {
+        return data.language_code === browserDetectLang;
       });
-    } else {
+      if (currectLang) {
+        this.translate.use(currectLang.language_code);
+        this.sessionStorage.saveToLocalStorage('languageData', currectLang);
+      }else{
+        let language = {id: 1, language: 'english', language_code: 'en'};
+        this.sessionStorage.saveToLocalStorage('languageData', currectLang);
+        this.translate.setDefaultLang('en');
+      }
+    }
+    else{
       this.translate.use(data.language_code);
     }
   }
