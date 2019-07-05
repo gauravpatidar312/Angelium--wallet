@@ -17,6 +17,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   labelText: string = '';
 
   @Input() cardName: string = '';
+  @Input() cardId: number = 0;
   @Input() selectedCurrency: string = 'ANX';
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
