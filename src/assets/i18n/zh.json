@@ -40,6 +40,7 @@
     "password": "密码",
     "profit": "收益",
     "profile":"个人资料",
+    "option":"Option",
     "phone": "휴대전화",
     "reward": "奖励",
     "run": "运行",
@@ -114,7 +115,6 @@
       "commissionPaid":"佣金支付",
       "gainPaid":"获得报酬",
       "heavenRate":"天堂利率",
-      "hq":"hq",
       "id":"ID",
       "newHeaven":"新天堂",
       "releasable":"可释放",
@@ -199,7 +199,7 @@
         "phoneNumberIsInvalid":"电话号码无效",
         "RegisterFailed":"注册失败",
         "sentOTPtoMobile":"我们已将OTP码发送到您的电话号码。"
-      }      
+      }
     },
     "resetPassword":{
       "changePassword":"Change Password",

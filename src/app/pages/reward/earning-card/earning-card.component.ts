@@ -8,10 +8,12 @@ import { Component, Input } from '@angular/core';
 export class EarningCardComponent {
   flipped = false;
   @Input() cardName: string = '';
+  @Input() cardId: number = 0;
   @Input() selectedCurrency: string = 'BTC';
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
   @Input() percentage: number = 0;
+  @Input() infinity_name: string;
 
   toggleFlipView() {
     this.flipped = !this.flipped;

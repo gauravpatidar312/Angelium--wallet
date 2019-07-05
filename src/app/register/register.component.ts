@@ -67,15 +67,6 @@ export class RegisterComponent implements OnInit {
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
     });
-    this.storageService.getLangFormIndexDb().subscribe((data)=>{
-      if (!data) {
-        this.selectedLang = 'English';
-        this.registerForm.controls.user_language.setValue(1);
-      }else{
-        this.selectedLang = data.language;
-        this.registerForm.controls.user_language.setValue(data.id);
-      }
-    });
   }
 
   ngOnInit() {
@@ -130,6 +121,15 @@ export class RegisterComponent implements OnInit {
     .subscribe(([oldValue, newValue]) => {
       this.breakpoint = newValue;
     });
+
+    var lang = this.sessionStorageService.getFromLocalStorage('languageData');
+    if (!lang) {
+      this.selectedLang = 'English';
+      this.registerForm.controls.user_language.setValue(1);
+    }else{
+      this.selectedLang = lang.language;
+      this.registerForm.controls.user_language.setValue(lang.id);
+    }
   }
 
   ngOnDestroy() {
@@ -197,17 +197,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
     if (this.registerForm.controls.email.value !== this.registerForm.controls.confirm_your_email.value) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmEmaildonotMatch'),
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmEmailDoNotMatch'),
        this.translate.instant('common.register'));
       return;
     }
     if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmLoginPassworddonotMatch'), 
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmLoginPasswordDoNotMatch'), 
       this.translate.instant('common.register'));
       return;
     }
     if (this.registerForm.controls.trade_password.value !== this.registerForm.controls.confirm_trade_password.value) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmTradePassworddonotMatch'), this.translate.instant("common.register"));
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmTradePasswordDoNotMatch'), this.translate.instant("common.register"));
       return;
     }
 
@@ -257,7 +257,7 @@ export class RegisterComponent implements OnInit {
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.registerForm.controls.user_language.setValue(lan.id);
-    this.storageService.storeLangIndexDb(lan);
+    this.sessionStorageService.saveToLocalStorage('languageData', lan);
     this.getCapchaTranslation();
   }
 

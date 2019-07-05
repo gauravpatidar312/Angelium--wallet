@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="!isProduction" class="row">
   <div class="col-12 col-lg-6">
     <nb-card class="top-content">
       <div class="icon-container">
@@ -64,7 +64,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="!isProduction" class="row">
   <div class="col-md-12">
     <nb-card>
       <nb-tabset fullWidth>
@@ -370,9 +370,7 @@
   </div>
 </div>
 
-
-
-<div class="row">
+<div *ngIf="!isProduction" class="row">
   <div class="col-sm-6 col-lg-3" id="curr1">
     <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
   </div>
@@ -387,9 +385,7 @@
   </div>
 </div>
 
-
-
-<div class="row report-row">
+<div *ngIf="!isProduction" class="row report-row">
   <div class="col-sm-6 col-lg-3" id="curr5">
     <ngx-traffic [trafficHeading]="'pages.hq.totalUser'|translate"></ngx-traffic>
   </div>
@@ -410,7 +406,6 @@
       <nb-card-header>
        {{"pages.hq.userDatabase"|translate}}
       </nb-card-header>
-
       <nb-card-body id="card-user-database">
         <div [hidden]="!fetchingUsers"><span class="user-database-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
         <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchingUsers" (deleteConfirm)="onLoadConfirm($event)">

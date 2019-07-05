@@ -17,11 +17,13 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   labelText: string = '';
 
   @Input() cardName: string = '';
+  @Input() cardId: number = 0;
   @Input() selectedCurrency: string = 'ANX';
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
   @Input() livePrice: number = 0;
   @Input() percentage: number = 0;
+  @Input() infinity_name: string;
 
   isProduction: any = environment.production;
   intervalSubscription: Subscription;

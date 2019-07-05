@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>{{"common.profile" | translate}}</nb-card-header>
+      <nb-card-header>{{"common.option" | translate}}</nb-card-header>
       <nb-card-body>
         <div class="row">
           <div class="col-md-12">
@@ -10,7 +10,7 @@
               <nb-user
                 [picture]="userData?.avatar"
                 [name]="userData?.username"
-                title="{{'Rank ' + userData?.rank}}"
+                title="{{userData?.infinity_name + ' ' + userData?.rank}}"
                 size="large">
               </nb-user>
             </nb-card-body>
@@ -61,8 +61,8 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="title-col">{{"common.level" | translate}}</td>
-                  <td class="value-col">{{userData?.level}}</td>
+                  <td class="title-col">{{"pages.setting.rank" | translate}}</td>
+                  <td class="value-col">{{userData?.infinity_name + ' ' + userData?.rank}}</td>
                   <td class="action-col"></td>
                 </tr>
               </tbody>
@@ -282,7 +282,7 @@
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelUsernameDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <input type="text" [(ngModel)]="newUsername" 
+      <input type="text" [(ngModel)]="newUsername"
         placeholder="{{'pages.setting.usernameOnlyEnglish' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
@@ -301,7 +301,7 @@
     <nb-card-body class="image-scoll-card-body">
       <input type="password" [(ngModel)]="oldLoginPassword" placeholder="{{'pages.setting.oldPassword' | translate}}" nbInput/><br/><br/>
       <input type="password" [(ngModel)]="newLoginPassword" placeholder="{{'pages.setting.newPassword' | translate}}" nbInput/><br/><br/>
-      <input type="password" [(ngModel)]="confirmLoginPassword" 
+      <input type="password" [(ngModel)]="confirmLoginPassword"
       placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>

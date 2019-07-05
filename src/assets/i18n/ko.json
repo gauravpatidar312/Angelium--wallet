@@ -40,6 +40,7 @@
     "password": "비밀번호",
     "profit": "수익",
     "profile":"프로필",
+    "option":"Option",
     "phone": "手机号吗",
     "reward": "리워드",
     "run": "실행",
@@ -267,7 +268,7 @@
         "pleaseEnterTransferAmount":"Please enter transfer amount",
         "pleaseCheckReceiveAmount":"Please check receive amount.",
         "transferSuccessfullyCompleted":"Transfer successfully completed!",
-        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!",
         "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
       }
     }

@@ -40,6 +40,7 @@
     "password": "パスワード",
     "profit": "Profit",
     "profile":"プロフィール",
+    "option":"Option",
     "phone": "電話番号",
     "reward": "リワード",
     "run": "実行",
@@ -107,14 +108,13 @@
         "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
         "transactionSuccessfullyCompleted":"Transaction successfully completed!",
         "youDontHaveSufficientBalance":"You don't have sufficient balance."
-      } 
+      }
     },
     "hq":{
       "age":"Age",
       "commissionPaid":"Commission Paid",
       "gainPaid":"Gain Paid",
       "heavenRate":"Heaven Rate",
-      "hq":"hq",
       "id":"ID",
       "newHeaven":"New Heaven",
       "releasable":"Releasable",
@@ -151,8 +151,8 @@
         "userKycUploadSuccessfully": "User kyc upload successfully"
       }
     },
-    "login":{  
-      "dontHaveAnAccount": "Don't have an account",    
+    "login":{
+      "dontHaveAnAccount": "Don't have an account",
       "forgotPassword": "パスワードを忘れた",
       "helloLoginWithYourEmail" : "Hello! Log in with your email",
       "login": "ログイン",
@@ -268,7 +268,7 @@
         "pleaseEnterTransferAmount":"Please enter transfer amount",
         "pleaseCheckReceiveAmount":"Please check receive amount.",
         "transferSuccessfullyCompleted":"Transfer successfully completed!",
-        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!", 
+        "walletAddressCopiedSuccessfully":"Wallet address copied successfully!",
         "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
       }
     }

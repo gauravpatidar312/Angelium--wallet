@@ -90,10 +90,9 @@ export class SettingComponent implements OnInit {
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
     });
-    this.storageService.getLangFormIndexDb().subscribe((data)=>{
-      this.selectedLang = data.language;
-      this.translate.use(data.language_code);
-    });
+    var lang = this.sessionStorage.getFromLocalStorage('languageData');
+    this.selectedLang = lang.language;
+    this.translate.use(lang.language_code);
   }
 
   getProfileData() {
@@ -112,18 +111,25 @@ export class SettingComponent implements OnInit {
     this.userData.user_language = lan;
     this.httpService.put({'user_language': lan.id }, 'update_userlang/')
       .subscribe(res=>{
-        this.storageService.storeLangIndexDb(lan);
+        this.sessionStorage.saveToLocalStorage('languageData', lan);
         this.toastrService.success(
-          this.translate.instant('pages.setting.toastr.languageUpdateSuccessfully'), 
+          this.translate.instant('pages.setting.toastr.languageUpdateSuccessfully'),
           this.translate.instant('pages.setting.language'));
       });
     this.sessionStorage.updateUserState(this.userData);
   }
 
   ngOnInit() {
-    const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
-    this.r18modeSwitchText = userSettingInfo.r18mode;
-    this.userData = userSettingInfo;
+    this.userData = this.sessionStorage.getFromSession('userInfo');
+    this.r18modeSwitchText = this.userData.r18mode;
+    if (this.userData.infinity_mark === 1)
+      this.userData.infinity_name = 'SILVER ANGEL';
+    else if (this.userData.infinity_mark === 2)
+      this.userData.infinity_name = 'GOLD ANGEL';
+    else if (this.userData.infinity_mark === 3)
+      this.userData.infinity_name = 'PINK ANGEL';
+    else
+      this.userData.infinity_name = 'ANGEL';
   }
 
   sweetAlertAgeCfrm() {
@@ -151,7 +157,7 @@ export class SettingComponent implements OnInit {
   copyReferralLink() {
     if (this.userData.referral_link)
       this.toastrService.success(
-        this.translate.instant('pages.setting.toastr.linkCopiedSuccessfully'), 
+        this.translate.instant('pages.setting.toastr.linkCopiedSuccessfully'),
         this.translate.instant('pages.setting.referralLink'));
   }
 
@@ -185,7 +191,7 @@ export class SettingComponent implements OnInit {
   onChangeUsername(ref: any) {
     if (!this.newUsername || !this.newUsername.trim()) {
       this.toastrService.danger(
-        this.translate.instant('pages.setting.toastr.pleaseEnterUsername'), 
+        this.translate.instant('pages.setting.toastr.pleaseEnterUsername'),
         this.translate.instant('pages.setting.toastr.changeUsername')
       );
       return;
@@ -193,7 +199,7 @@ export class SettingComponent implements OnInit {
 
     if (!(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/.test(this.newUsername))) {
       this.toastrService.danger(
-        this.translate.instant('pages.setting.toastr.usernameMustEnglishWithoutSpace'), 
+        this.translate.instant('pages.setting.toastr.usernameMustEnglishWithoutSpace'),
         this.translate.instant('pages.setting.toastr.changeUsername')
       );
       return;
@@ -206,19 +212,19 @@ export class SettingComponent implements OnInit {
         if (res.status) {
           ref.close();
           this.toastrService.success(
-            this.translate.instant('pages.setting.toastr.usernameUpdatedSuccessfully'), 
+            this.translate.instant('pages.setting.toastr.usernameUpdatedSuccessfully'),
             this.translate.instant('pages.setting.toastr.changeUsername')
           );
           this.userData.username = this.newUsername;
           this.sessionStorage.updateUserState(this.userData);
           this.newUsername = null;
         } else {
-          this.toastrService.danger(this.shareDataService.getErrorMessage(res), 
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res),
             this.translate.instant('pages.setting.toastr.changeUsername')
           );
         }
       }, err => {
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err),
           this.translate.instant('pages.setting.toastr.changeUsername')
         );
       });
@@ -227,14 +233,14 @@ export class SettingComponent implements OnInit {
   changeLoginPasswordDialog(ref: any) {
     if (!(this.oldLoginPassword && this.newLoginPassword && this.confirmLoginPassword)) {
       this.toastrService.danger(
-        this.translate.instant('pages.setting.toastr.enterValueInAllFields'), 
+        this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
         this.translate.instant('pages.setting.toastr.changeLoginPassword')
       );
       return;
     }
     if (this.newLoginPassword !== this.confirmLoginPassword) {
       this.toastrService.danger(
-        this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'), 
+        this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'),
         this.translate.instant('pages.setting.toastr.changeLoginPassword')
       );
       return;
@@ -249,7 +255,7 @@ export class SettingComponent implements OnInit {
           this.oldLoginPassword = null;
           this.confirmLoginPassword = null;
           this.toastrService.success(
-            this.translate.instant('pages.setting.toastr.loginPasswordUpdated'), 
+            this.translate.instant('pages.setting.toastr.loginPasswordUpdated'),
             this.translate.instant('pages.setting.toastr.changeLoginPassword')
           );
         } else {
@@ -263,14 +269,14 @@ export class SettingComponent implements OnInit {
   changeTradePasswordDialog(ref: any) {
     if (!(this.oldTradePassword && this.newTradePassword && this.confirmTradePassword)) {
       this.toastrService.danger(
-        this.translate.instant('pages.setting.toastr.enterValueInAllFields'), 
+        this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
         this.translate.instant('pages.setting.toastr.changeTradePassword')
       );
       return;
     }
     if (this.newTradePassword !== this.confirmTradePassword) {
       this.toastrService.danger(
-        this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'), 
+        this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'),
         this.translate.instant('pages.setting.toastr.changeTradePassword')
       );
       return;
@@ -285,14 +291,14 @@ export class SettingComponent implements OnInit {
           this.oldTradePassword = null;
           this.confirmTradePassword = null;
           this.toastrService.success(
-            this.translate.instant('pages.setting.toastr.tradePasswordUpdated'), 
+            this.translate.instant('pages.setting.toastr.tradePasswordUpdated'),
             this.translate.instant('pages.setting.toastr.changeTradePassword')
           );
         } else {
           this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeTradePassword'));
         }
       }, err => {
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err),
           this.translate.instant('pages.setting.toastr.changeTradePassword')
         );
       });
@@ -327,12 +333,12 @@ export class SettingComponent implements OnInit {
         this.sessionStorage.updateUserState(this.userData);
         if (data.r18mode) {
           this.toastrService.success(
-            this.translate.instant('pages.setting.toastr.r18ModeUpdated'), 
+            this.translate.instant('pages.setting.toastr.r18ModeUpdated'),
             this.translate.instant('pages.setting.toastr.r18ModeEnable')
           );
         } else {
           this.toastrService.success(
-            this.translate.instant('pages.setting.toastr.r18ModeUpdated'), 
+            this.translate.instant('pages.setting.toastr.r18ModeUpdated'),
             this.translate.instant('pages.setting.toastr.r18ModeDisabled')
           );
         }
@@ -372,7 +378,7 @@ export class SettingComponent implements OnInit {
           // this.sessionStorage.updateFromSession('userInfo', apiData);
           this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success(
-            this.translate.instant('pages.setting.toastr.countryUpdate'), 
+            this.translate.instant('pages.setting.toastr.countryUpdate'),
             this.translate.instant('common.country')
           );
         }

@@ -8,6 +8,7 @@ import {LocalDataSource} from "ng2-smart-table";
 import {LogIn, LogInFailure, SetUserProfile} from "../../@core/store/actions/user.action";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../@core/store/app.state";
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 import {Browser} from "leaflet";
 import win = Browser.win;
@@ -21,6 +22,7 @@ declare let $: any;
 })
 
 export class HQComponent implements OnInit {
+  isProduction: boolean = environment.production;
   fetchingUsers: boolean = false;
   source: LocalDataSource = new LocalDataSource();
   settings = {
