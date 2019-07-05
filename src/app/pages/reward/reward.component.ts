@@ -263,7 +263,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     else if (this.userData.infinity_mark === 3)
       this.userData.infinity_name = 'PINK ANGEL';
     else
-      this.userData.infinity_name = 'BLUE ANGEL';
+      this.userData.infinity_name = 'ANGEL';
     const data = this.service.getData();
     const NewOBj = [];
     for (let x = 0; x < 10; x++) {

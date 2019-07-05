@@ -129,7 +129,7 @@ export class SettingComponent implements OnInit {
     else if (this.userData.infinity_mark === 3)
       this.userData.infinity_name = 'PINK ANGEL';
     else
-      this.userData.infinity_name = 'BLUE ANGEL';
+      this.userData.infinity_name = 'ANGEL';
   }
 
   sweetAlertAgeCfrm() {
