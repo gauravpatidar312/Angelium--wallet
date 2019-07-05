@@ -102,10 +102,10 @@
        <div class="col-md-6 downlineColumn">
         <ul id="downline-navigation" class="nav navbar-pill downLine">
           <li class="pointer li-margin">
-            <a data-toggle="pill" (click)="getDownlineTree('today')">Today</a>
+            <a data-toggle="pill" (click)="getDownlineTree('today')">{{'common.today' | translate | titlecase}}</a>
           </li>
           <li class="active pointer li-margin">
-            <a data-toggle="pill" (click)="getDownlineTree('total')">Total</a>
+            <a data-toggle="pill" (click)="getDownlineTree('total')">{{'common.total' | translate}}</a>
           </li>
         </ul>
       </div>
@@ -113,7 +113,7 @@
   </nb-card-header>
 
   <ng-template #noData>
-    <nb-card-body>There is no user in your down-line tree.</nb-card-body>
+    <nb-card-body>{{"pages.reward.downlineTree.noUserDownlineTree"|translate}}</nb-card-body>
   </ng-template>
 
   <nb-card-body id="downline-tree" class="tab-content" *ngIf="noDataSource; else noData">
