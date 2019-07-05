@@ -82,32 +82,33 @@ export class AppModule {
   constructor(private store: Store<AppState>,
               private sessionStorage: SessionStorageService,
               private storageService: IndexedDBStorageService) {
-    this.storageService.getSessionStorage().subscribe((data) => {
-      if (!data) {
-      } else {
-        // Check if user is already logged in on page refresh
-        if (this.sessionStorage.getSessionStorage('loggedIn')) {
+    this.checkSession();
+  }
+
+  async checkSession() {
+    const data = await this.storageService.getSessionStorage();
+    if (data) {
+      // Check if user is already logged in on page refresh
+      if (this.sessionStorage.getSessionStorage('loggedIn')) {
+        this.store.dispatch(new UserInfo(data));
+      } else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
+        let t0 = Number(window.localStorage['timestamp']);
+        if (isNaN(t0)) t0 = 0;
+        const t1 = new Date().getTime();
+        const duration = t1 - t0;
+        if (duration < 20 * 1000) {
+          this.sessionStorage.saveToSession('loggedIn', true);
           this.store.dispatch(new UserInfo(data));
-        }
-        else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
-          let t0 = Number(window.localStorage['timestamp']);
-          if (isNaN(t0)) t0 = 0;
-          const t1 = new Date().getTime();
-          const duration = t1 - t0;
-          if (duration < 20 * 1000) {
-            this.sessionStorage.saveToSession('loggedIn', true);
-            this.store.dispatch(new UserInfo(data));
-          } else {
-            // This means user has closed the tab and opened again so logged user out.
-            console.warn('DB cleared for logout on tab close');
-            this.storageService.deleteDatabase();
-          }
         } else {
-          // This means user is logged in and open new tab
-          this.store.dispatch(new UserInfo(data));
+          // This means user has closed the tab and opened again so logged user out.
+          console.warn('DB cleared for logout on tab close');
+          this.storageService.deleteDatabase();
         }
-        delete window.localStorage.timestamp;
+      } else {
+        // This means user is logged in and open new tab
+        this.store.dispatch(new UserInfo(data));
       }
-    });
+      delete window.localStorage.timestamp;
+    }
   }
 }

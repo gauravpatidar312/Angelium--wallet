@@ -1,8 +1,11 @@
 {
   "index": "/index.html",
+  "appData": {
+    "version": "2019.07.04.1"
+  },
   "assetGroups": [
     {
-      "name": "app",
+      "name": "app-files",
       "installMode": "prefetch",
       "resources": {
         "files": [
@@ -21,8 +24,9 @@
           "/*.(json)*"
         ]
       }
-    }, {
-      "name": "assets",
+    },
+    {
+      "name": "assets-files",
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
@@ -32,19 +36,20 @@
       }
     }
   ],
-  "dataGroups": [{
-    "name": "api-performance",
-    "urls": [
-      "/api/**",
-      "https://api.angelium.net/**"
-    ],
-    "version": 1,
-    "cacheConfig": {
-      "strategy": "freshness",
-      "maxSize": 100,
-      "maxAge": "3d",
-      "timeout": "3m"
+  "dataGroups": [
+    {
+      "name": "api-performance",
+      "urls": [
+        "/api/**",
+        "https://api.angelium.net/**"
+      ],
+      "version": 2,
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d",
+        "timeout": "3m"
+      }
     }
-  }
-]
+  ]
 }

@@ -9,10 +9,12 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import { map, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { AppState } from '../../../@core/store/app.state';
 import { AuthService } from '../../../_guards/auth.service';
 import { AuthActionTypes, LogIn, LogInFailure, ResetState, UserInfo, SetUserProfile, UpdateUserInfo } from '../actions/user.action';
 import { IndexedDBStorageService } from '../../../services/indexeddb-storage.service';
+import {SessionStorageService} from '../../../services/session-storage.service';
 import { Location } from "@angular/common";
 
 @Injectable()
@@ -24,6 +26,8 @@ export class AuthEffects{
     private router: Router,
     private store: Store<AppState>,
     private storageService: IndexedDBStorageService,
+    private sessionStorage: SessionStorageService,
+    private translate: TranslateService,
     location: Location,
   ) {
     this.router = router;
@@ -73,9 +77,11 @@ export class AuthEffects{
     map((action: UserInfo) => action.payload),
     map((user) => {
       this.storageService.saveToSession(user);
+      this.sessionStorage.saveToLocalStorage('languageData', user.user_language);
       console.log('this.redirectUrl', this.router.url);
       if (this.router.url !== '' && (this.router.url === '/login' || this.router.url.includes('register') || this.router.url.includes('/reset-password'))) {
-        this.router.navigate(['/pages/dashboard']);
+          this.translate.use(user.user_language.language_code);
+          this.router.navigate(['/pages/dashboard']);
       }
     })
   );

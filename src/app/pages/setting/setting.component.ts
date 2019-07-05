@@ -90,7 +90,7 @@ export class SettingComponent implements OnInit {
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
     });
-    var lang = this.sessionStorage.getFronLocalStorage('languageData');
+    var lang = this.sessionStorage.getFromLocalStorage('languageData');
     this.selectedLang = lang.language;
     this.translate.use(lang.language_code);
   }

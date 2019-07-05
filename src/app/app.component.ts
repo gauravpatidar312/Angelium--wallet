@@ -4,14 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import { TranslateService } from "@ngx-translate/core";
+import {TranslateService} from "@ngx-translate/core";
 import {AnalyticsService} from './@core/utils/analytics.service';
 import {NavigationStart, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
 import {SessionStorageService} from './services/session-storage.service';
-import { IndexedDBStorageService } from './services/indexeddb-storage.service';
+import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {AuthService} from './_guards/auth.service';
-
 
 @Component({
   selector: 'ngx-app',
@@ -25,7 +24,7 @@ export class AppComponent implements OnInit {
               public translate: TranslateService,
               private sessionStorage: SessionStorageService,
               private storageService: IndexedDBStorageService,
-              private authService: AuthService){ 
+              private authService: AuthService) {
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
         const userData = this.sessionStorage.getFromSession('userInfo');
@@ -45,7 +44,7 @@ export class AppComponent implements OnInit {
       }
     });
     
-    var lang = this.sessionStorage.getFronLocalStorage('languageData');
+    var lang = this.sessionStorage.getFromLocalStorage('languageData');
     this.setLanguage(lang);
   }
 
@@ -53,7 +52,6 @@ export class AppComponent implements OnInit {
     this.analytics.trackPageViews();
   }
 
-  
   setLanguage(data: any) {
     console.log(data);
     if (!data) {

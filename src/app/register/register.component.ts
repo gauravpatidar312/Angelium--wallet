@@ -122,7 +122,7 @@ export class RegisterComponent implements OnInit {
       this.breakpoint = newValue;
     });
 
-    var lang = this.sessionStorageService.getFronLocalStorage('languageData');
+    var lang = this.sessionStorageService.getFromLocalStorage('languageData');
     if (!lang) {
       this.selectedLang = 'English';
       this.registerForm.controls.user_language.setValue(1);

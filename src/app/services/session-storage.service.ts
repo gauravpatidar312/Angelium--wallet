@@ -53,7 +53,7 @@ export class SessionStorageService {
     }
   };
 
-  getFronLocalStorage = function(key): any {
+  getFromLocalStorage = function(key): any {
     if (localStorage[key]) {
       return JSON.parse(localStorage[key]);
     } else {
