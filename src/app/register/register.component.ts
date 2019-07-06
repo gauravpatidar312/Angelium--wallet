@@ -3,9 +3,7 @@ import {FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
-import { TranslateService } from "@ngx-translate/core";
-// import custom validator to validate that password and confirm password fields match
-import {MustMatch} from '../_helpers/must-match.validator';
+import { TranslateService } from '@ngx-translate/core';
 // import services
 import {ShareDataService} from '../services/share-data.service';
 import {HttpService} from '../services/http.service';
@@ -14,7 +12,7 @@ import {SessionStorageService} from '../services/session-storage.service';
 import { IndexedDBStorageService } from '../services/indexeddb-storage.service';
 import { NbDialogService } from '@nebular/theme';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
-declare let $: any;
+
 declare let jQuery: any;
 
 @Component({
@@ -71,9 +69,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.getLanguageData();
-    $(document).ready(() => {
-      $("#registerSlider").slideToUnlock({ useData: true});
-      $( document ).on("veryfiedCaptcha", (event, arg) => {
+    jQuery(document).ready(() => {
+      jQuery('#registerSlider').slideToUnlock({ useData: true});
+      jQuery( document ).on('veryfiedCaptcha', (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
           this.getCapchaTranslation();
@@ -146,7 +144,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmitOtp() {
     if (this.otpForm.invalid) {
-      this.toastrService.warning(this.translate.instant('pages.register.toastr.phoneNumberIsInvalid'), 
+      this.toastrService.warning(this.translate.instant('pages.register.toastr.phoneNumberIsInvalid'),
       this.translate.instant('common.sendSMS'));
       return;
     }
@@ -177,7 +175,7 @@ export class RegisterComponent implements OnInit {
   onSubmitRegistration() {
     if (!this.isVerifiedCaptcha) {
       this.toastrService.danger(
-        this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), 
+        this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'),
         this.translate.instant('common.register')
       );
       return;
@@ -192,7 +190,7 @@ export class RegisterComponent implements OnInit {
     }
 
     if (!this.isResubmit) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseSubmitOTPfirst'), 
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseSubmitOTPfirst'),
       this.translate.instant('common.register'));
       return;
     }
@@ -202,17 +200,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
     if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmLoginPasswordDoNotMatch'), 
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmLoginPasswordDoNotMatch'),
       this.translate.instant('common.register'));
       return;
     }
     if (this.registerForm.controls.trade_password.value !== this.registerForm.controls.confirm_trade_password.value) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmTradePasswordDoNotMatch'), this.translate.instant("common.register"));
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmTradePasswordDoNotMatch'), this.translate.instant('common.register'));
       return;
     }
 
     if (!this.registerForm.value.isAgree) {
-      this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseCheckAgreetoTermsandConditionBox'), 
+      this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseCheckAgreetoTermsandConditionBox'),
       this.translate.instant('common.register'));
       return;
     }
@@ -230,7 +228,7 @@ export class RegisterComponent implements OnInit {
     }, err => {
       console.log(err);
       this.formSubmitting = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),
         this.translate.instant('pages.register.toastr.RegisterFailed'));
 
     });
@@ -264,12 +262,12 @@ export class RegisterComponent implements OnInit {
   getCapchaTranslation(){
     if (this.isVerifiedCaptcha) {
       setTimeout(()=>{
-        $("#registerSlider").children(".text").text(
+        jQuery('#registerSlider').children('.text').text(
           this.translate.instant('common.verified'));
       },0);
     }else{
       setTimeout(()=>{
-        $("#registerSlider").children(".text").text(
+        jQuery('#registerSlider').children('.text').text(
           this.translate.instant('common.slideRightToVerify'));
       },1000);
     }

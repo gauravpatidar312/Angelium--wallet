@@ -7,14 +7,14 @@ import {
   NbDialogService
 } from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
-import { TranslateService } from "@ngx-translate/core";
+import {TranslateService} from "@ngx-translate/core";
 import {SessionStorageService} from '../../services/session-storage.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import {DatePipe} from '@angular/common'
 import {NbStepComponent} from '@nebular/theme/components/stepper/step.component';
 
-declare let $: any;
+declare let jQuery: any;
 
 @Component({
   selector: 'ngx-kyc',
@@ -98,7 +98,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
       this.statusPending();
     }
 
-    $('[data-fancybox]').fancybox({
+    jQuery('[data-fancybox]').fancybox({
       thumbs: false,
       hash: false,
       loop: true,
@@ -118,7 +118,9 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
 
   updateStateKYC() {
     if (this.userData.kyc_info && this.userData.kyc_info.status_description === 'pending') {
-      this.idFrontLabel = 'ID Proof (front side)';
+        this.idFrontLabel = 'ID Proof (front side)';
+        this.idBackLabel = 'ID Proof (back side)';
+        this.selfieLabel = 'Selfie';
       // this.idFrontLabel = this.userData.kyc_info.doc_photo;
       // this.idBackLabel = this.userData.kyc_info.doc_photo_back;
       // this.selfieLabel = this.userData.kyc_info.selfie;
@@ -145,14 +147,32 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
 
   fileChangeEvent(event: any, type): void {
     if (type === 'front') {
+      const fileSize = event.target.files[0].size;
+      /*1048576 byte = 1 MB*/
+      if (fileSize > (1048576 * 2)) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProofSize'), this.translate.instant('common.kyc'));
+        return;
+      }
       this.idFrontChangedEvent = event;
       this.idFrontLabel = event.target.files[0].name;
     }
     if (type === 'back') {
+      const fileSize = event.target.files[0].size;
+      /*1048576 byte = 1 MB*/
+      if (fileSize > (1048576 * 2)) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadBackSideIDProofSize'), this.translate.instant('common.kyc'));
+        return;
+      }
       this.idBackChangedEvent = event;
       this.idBackLabel = event.target.files[0].name;
     }
     if (type === 'selfie') {
+      const fileSize = event.target.files[0].size;
+      /*1048576 byte = 1 MB*/
+      if (fileSize > (1048576 * 2)) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadSelfieSize'), this.translate.instant('common.kyc'));
+        return;
+      }
       this.selfieChangedEvent = event;
       this.selfieLabel = event.target.files[0].name;
     }
@@ -167,41 +187,55 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
       } else {
         this.toastrService.danger(
           this.translate.instant('pages.kyc.toastr.pleaseSelectDOB'),
-          this.translate.instant('common.kyc')
-        );
+          this.translate.instant('common.kyc'));
         return;
       }
       if (this.idFrontChangedEvent !== '') {
         const file = this.idFrontChangedEvent.target.files[0];
+        const fileSize = file.size;
+        /*1048576 byte = 1 MB*/
+        if (fileSize > (1048576 * 2)) {
+          this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProofSize'), this.translate.instant('common.kyc'));
+          return;
+        }
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('doc_photo', newfile, newfile.name);
       } else {
         this.toastrService.danger(
           this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProof'),
-          this.translate.instant('common.kyc')
-        );
+          this.translate.instant('common.kyc'));
         return;
       }
       if (this.idBackChangedEvent !== '') {
         const file = this.idBackChangedEvent.target.files[0];
+        const fileSize = file.size;
+        /*1048576 byte = 1 MB*/
+        if (fileSize > (1048576 * 2)) {
+          this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadBackSideIDProofSize'), this.translate.instant('common.kyc'));
+          return;
+        }
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('doc_photo_back', newfile, newfile.name);
       } else {
         this.toastrService.danger(
           this.translate.instant('pages.kyc.toastr.uploadBackSideIDProof'),
-          this.translate.instant('common.kyc')
-        );
+          this.translate.instant('common.kyc'));
         return;
       }
       if (this.selfieChangedEvent !== '') {
         const file = this.selfieChangedEvent.target.files[0];
+        const fileSize = file.size;
+        /*1048576 byte = 1 MB*/
+        if (fileSize > (1048576 * 2)) {
+          this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadSelfieSize'), this.translate.instant('common.kyc'));
+          return;
+        }
         const newfile = new File([file], file.name, {type: file.type});
         formData.append('selfie', newfile, newfile.name);
       } else {
         this.toastrService.danger(
           this.translate.instant('pages.kyc.toastr.uploadSelfie'),
-          this.translate.instant('common.kyc')
-        );
+          this.translate.instant('common.kyc'));
         return;
       }
 
@@ -218,8 +252,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
           this.kycFormDisable = true;
           this.toastrService.success(
             this.translate.instant('pages.kyc.toastr.userKycUploadSuccessfully'),
-            this.translate.instant('common.kyc')
-          );
+            this.translate.instant('common.kyc'));
         }
       });
     }

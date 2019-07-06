@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from '../services/session-storage.service';
 import * as _ from 'lodash';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
-
 import { MENU_ITEMS } from './pages-menu';
 
 @Component({
@@ -26,8 +25,8 @@ export class PagesComponent implements OnInit {
     });
   }
 
-  setMenuTranslation(){
-    let menus = MENU_ITEMS;
+  setMenuTranslation() {
+    const menus = MENU_ITEMS;
     menus.forEach((item) => {
       this.setVisibility(item);
     });
@@ -35,6 +34,7 @@ export class PagesComponent implements OnInit {
   }
 
   setVisibility(item) {
+    delete item.hidden;
     if (!item.hidden && item.data && item.data.length)
       item.hidden = item.data.indexOf(this.userInfo.user_type) < 0;
     if (item.children && item.children.length) {

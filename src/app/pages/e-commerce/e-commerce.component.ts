@@ -9,7 +9,7 @@ import { ShareDataService } from '../../services/share-data.service';
 import {environment} from '../../../environments/environment';
 import * as _ from 'lodash';
 import {ToastrService} from '../../services/toastr.service';
-declare let $: any;
+declare let jQuery: any;
 
 interface CardSettings {
   title: string;
@@ -99,7 +99,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     public translate: TranslateService,
     private toastrService: ToastrService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
-    
+
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -117,12 +117,12 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     this.getAllCryptoBalance();
     this.getTotalinvestmentData();
   }
-  
+
   ngAfterViewInit(){
       if (this.shareDataService.showNotification) {
         setTimeout(() => {
           this.shareDataService.showNotification = false;
-          let el = $('#notifyCalender');
+          let el = jQuery('#notifyCalender');
           if (el.length > 0) {
             el[0].scrollIntoView();
           }

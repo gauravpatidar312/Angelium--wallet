@@ -11,7 +11,7 @@ import { AppState, selectAuthState } from '../@core/store/app.state';
 export class HttpService {
   getState = null;
   private userInfo: any = null;
-  constructor(public httpClient: HttpClient, private store: Store<AppState>,) {
+  constructor(public httpClient: HttpClient, private store: Store<AppState>) {
     this.getState = this.store.select(selectAuthState);
     this.getState.subscribe((state) => {
       this.userInfo = state.user;

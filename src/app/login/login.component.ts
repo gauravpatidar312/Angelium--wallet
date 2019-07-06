@@ -12,7 +12,6 @@ import {LogIn} from '../@core/store/actions/user.action';
 import {AppState, selectAuthState} from '../@core/store/app.state';
 import { AuthEffects } from '../@core/store/effects/auth.effect';
 
-declare let $: any;
 declare let jQuery: any;
 @Component({
   selector: 'ngx-login',
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
               public translate: TranslateService,
               private authService: AuthService,
               private store: Store<AppState>,
-              private authEffects: AuthEffects,) {
+              private authEffects: AuthEffects) {
     // const currentUser = this.authService.isAuthenticated();
     // if (currentUser) {
     //   this.router.navigate(['/pages/setting']);
@@ -43,9 +42,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    $(document).ready(() => {
-      $("#loginSlider").slideToUnlock({ useData: true});
-      $( document ).on("veryfiedCaptcha", (event, arg) => {
+    jQuery(document).ready(() => {
+      jQuery("#loginSlider").slideToUnlock({ useData: true});
+      jQuery( document ).on("veryfiedCaptcha", (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
           this.getCapchaTranslation();
@@ -63,12 +62,12 @@ export class LoginComponent implements OnInit {
   getCapchaTranslation(){
     if (this.isVerifiedCaptcha) {
       setTimeout(()=>{
-        $("#loginSlider").children(".text").text(
+        jQuery("#loginSlider").children(".text").text(
           this.translate.instant('common.verified'));
       },0);
     }else{
       setTimeout(()=>{
-        $("#loginSlider").children(".text").text(
+        jQuery("#loginSlider").children(".text").text(
           this.translate.instant('common.slideRightToVerify'));
       },1000);
     }
@@ -88,7 +87,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    
+
     this.formSubmitting = true;
     this.store.dispatch(new LogIn(this.loginForm.value));
     this.authEffects.LogInFailure.subscribe(res => {

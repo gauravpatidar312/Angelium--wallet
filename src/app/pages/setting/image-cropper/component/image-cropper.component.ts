@@ -6,7 +6,7 @@ import { DomSanitizer, SafeUrl, SafeStyle } from '@angular/platform-browser';
 import { MoveStart, Dimensions, CropperPosition, ImageCroppedEvent } from '../interfaces';
 import { resetExifOrientation, transformBase64BasedOnExifRotation } from '../utils/exif.utils';
 import { resizeCanvas } from '../utils/resize.utils';
-declare let $: any;
+declare let jQuery: any;
 
 export type OutputType = 'base64' | 'file' | 'both';
 
@@ -134,7 +134,7 @@ export class ImageCropperComponent implements OnChanges {
     }
 
     private loadImageFile(file: File): void {
-      $('.image-crop-container').width('100%');
+      jQuery('.image-crop-container').width('100%');
         const fileReader = new FileReader();
         fileReader.onload = (event: any) => {
             const imageType = file.type;
@@ -166,7 +166,7 @@ export class ImageCropperComponent implements OnChanges {
             this.originalSize.height = this.originalImage.height;
             this.cd.markForCheck();
             setTimeout(() => {
-              $('.image-crop-container').width('auto');
+              jQuery('.image-crop-container').width('auto');
             }, 100);
         };
         this.originalImage.src = imageBase64;

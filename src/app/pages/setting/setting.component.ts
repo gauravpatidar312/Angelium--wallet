@@ -15,7 +15,7 @@ import { IndexedDBStorageService } from '../../services/indexeddb-storage.servic
 import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
-declare let $: any;
+declare let jQuery: any;
 export let browserRefresh = false;
 
 @Component({
@@ -415,7 +415,7 @@ export class SettingComponent implements OnInit {
   openChatDialog() {
     (<any>window).$crisp.push(['do', 'chat:show']);
     (<any>window).$crisp.push(['do', 'chat:open']);
-    $('.crisp-client .crisp-1rjpbb7 .crisp-1rf4xdh .crisp-kquevr').attr('style', 'display: none !important;');​
+    jQuery('.crisp-client .crisp-1rjpbb7 .crisp-1rf4xdh .crisp-kquevr').attr('style', 'display: none !important;');​
   }
 
   cancelUploadDialog(ref) {

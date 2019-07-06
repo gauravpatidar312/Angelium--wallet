@@ -29,3 +29,6 @@
 .nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{ word-break: break-all;}
 .nb-theme-cosmic .tablemarginfix{ margin:0px!important; }
 .nopadd{ padding: 0px!important; }
+ .scrollable-container {
+  -webkit-overflow-scrolling: touch;
+}
