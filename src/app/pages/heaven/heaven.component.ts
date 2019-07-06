@@ -13,7 +13,7 @@ import { environment } from 'environments/environment';
 import { CustomRendererComponent } from './custom.component';
 import * as moment from 'moment';
 
-declare let $: any;
+declare let jQuery: any;
 
 @Component({
   selector: 'ngx-heaven',
@@ -337,7 +337,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenHistory(value) {
-    $('.heaven-history-spinner').height($('#heaven-history').height());
+    jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
     this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
       const data = res.results;
@@ -357,9 +357,9 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $('ul.downLine li a').click(function (e) {
-      $('ul.downLine li.active').removeClass('active');
-      $(this).parent('li').addClass('active');
+    jQuery('ul.downLine li a').click(function (e) {
+      jQuery('ul.downLine li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
     });
   }
 

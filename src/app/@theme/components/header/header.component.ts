@@ -12,7 +12,7 @@ import { SessionStorageService } from "../../../services/session-storage.service
 import { Router } from '@angular/router';
 import {environment} from '../../../../environments/environment';
 
-declare let $: any;
+declare let jQuery: any;
 
 @Component({
   selector: 'ngx-header',
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private shareDataService: ShareDataService,
     private sessionStorage: SessionStorageService,
     private router: Router,
-    public translate: TranslateService,) {
+    public translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.userMenu = [
         { title: this.translate.instant('common.profile'), link: '/pages/setting' },
@@ -83,8 +83,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $('.notificationCalender').click(() => {
-      let el = $('#notifyCalender');
+    jQuery('.notificationCalender').click(() => {
+      let el = jQuery('#notifyCalender');
       if (el.length > 0) {
         el[0].scrollIntoView();
       } else {
@@ -93,8 +93,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
     });
 
-    $('.layout-container div.content').click(() => {
-      if ($(window).width() < 1200 && $('.menu-sidebar').length && $('.menu-sidebar').hasClass('expanded')) {
+    jQuery('.layout-container div.content').click(() => {
+      if (jQuery(window).width() < 1200 && jQuery('.menu-sidebar').length && jQuery('.menu-sidebar').hasClass('expanded')) {
           this.toggleSidebar();
       }
     });

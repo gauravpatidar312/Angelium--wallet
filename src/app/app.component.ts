@@ -11,6 +11,7 @@ import {HttpService} from './services/http.service';
 import {SessionStorageService} from './services/session-storage.service';
 import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {AuthService} from './_guards/auth.service';
+import {SwUpdate} from '@angular/service-worker';
 
 @Component({
   selector: 'ngx-app',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   constructor(private analytics: AnalyticsService,
               private httpService: HttpService,
               private router: Router,
+              private swUpdate: SwUpdate,
               public translate: TranslateService,
               private sessionStorage: SessionStorageService,
               private storageService: IndexedDBStorageService,
@@ -43,13 +45,20 @@ export class AppComponent implements OnInit {
         }
       }
     });
-    
+
     var lang = this.sessionStorage.getFromLocalStorage('languageData');
     this.setLanguage(lang);
   }
 
   ngOnInit(): void {
     this.analytics.trackPageViews();
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        if (confirm('New version is available. Press OK to reload.')) {
+          window.location.reload();
+        }
+      });
+    }
   }
 
   setLanguage(data: any) {

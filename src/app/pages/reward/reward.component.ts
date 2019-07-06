@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 import {ShareDataService} from '../../services/share-data.service';
 import {ToastrService} from '../../services/toastr.service';
 
-declare var $: any
+declare let jQuery: any;
 
 interface CardSettings {
   title: string;
@@ -335,7 +335,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
   }
 
   getDownlineTree(val) {
-    $('.downline-tree-spinner').height($('#downline-tree').height());
+    jQuery('.downline-tree-spinner').height(jQuery('#downline-tree').height());
     this.fetchingDownlineTree = true;
     const value = val;
     const url = `downline_tree/?filter_type=${value}`;
@@ -360,13 +360,13 @@ export class RewardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $('ul.rewardLine li a').click(function (e) {
-      $('ul.rewardLine li.active').removeClass('active');
-      $(this).parent('li').addClass('active');
+    jQuery('ul.rewardLine li a').click(function (e) {
+      jQuery('ul.rewardLine li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
     });
-    $('ul.downLine li a').click(function (e) {
-      $('ul.downLine li.active').removeClass('active');
-      $(this).parent('li').addClass('active');
+    jQuery('ul.downLine li a').click(function (e) {
+      jQuery('ul.downLine li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
     });
   }
 }

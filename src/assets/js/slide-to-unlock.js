@@ -29,13 +29,13 @@ class slideToUnlock {
         this.settings = {
             // unlockText    : "Slide To Unlock",
             useData: false,
-            unlockfn: function () {               
+            unlockfn: function () {
                 $(document).trigger("veryfiedCaptcha", ['verified']);
             },
             lockfn: function () { },
             allowToLock: true,
             status: false
-        }
+        };
 
         // Establish our default settings
         this.settings = Object.assign(this.settings, options);

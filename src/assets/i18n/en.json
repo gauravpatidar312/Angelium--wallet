@@ -148,7 +148,10 @@
         "uploadFrontSideIDProof": "Please upload ID Proof (front side).",
         "uploadBackSideIDProof": "Please upload ID Proof (back side).",
         "uploadSelfie": "Please upload selfie.",
-        "userKycUploadSuccessfully": "User kyc upload successfully"
+        "userKycUploadSuccessfully": "User kyc upload successfully",
+        "uploadFrontSideIDProofSize": "ID Proof (front side) can't be uploaded, Maximum file size is 2 MB.",
+        "uploadBackSideIDProofSize": "ID Proof (back side) can't be uploaded, Maximum file size is 2 MB.",
+        "uploadSelfieSize": "Selfie can't be uploaded, Maximum file size is 2 MB."
       }
     },
     "login":{

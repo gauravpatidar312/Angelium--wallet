@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 import {Browser} from "leaflet";
 import win = Browser.win;
 
-declare let $: any;
+declare let jQuery: any;
 
 @Component({
   selector: 'ngx-hq',
@@ -89,7 +89,7 @@ export class HQComponent implements OnInit {
   }
 
   getUsersList() {
-    $('.user-database-spinner').height($('#card-user-database').height());
+    jQuery('.user-database-spinner').height(jQuery('#card-user-database').height());
     this.fetchingUsers = true;
     this.httpService.get(`users/?limit=10000`).subscribe((res?: any) => {
       if (res && res.results) {
