@@ -65,10 +65,10 @@ export class AppComponent implements OnInit {
     console.log(data);
     if (!data) {
       let languages = [
-        { 'id': 1, 'language': 'english', 'language_code': 'en' },
+        { 'id': 1, 'language': 'English', 'language_code': 'en' },
         { 'id': 2, 'language': 'Chinese', 'language_code': 'zh' },
         { 'id': 3, 'language': 'Korean', 'language_code': 'ko' }
-      ]
+      ];
       var browserDetectLang = navigator.language.split('-')[0];
       var currectLang = languages.find((data:any)=> {
         return data.language_code === browserDetectLang;
@@ -76,9 +76,9 @@ export class AppComponent implements OnInit {
       if (currectLang) {
         this.translate.use(currectLang.language_code);
         this.sessionStorage.saveToLocalStorage('languageData', currectLang);
-      }else{
-        let language = {id: 1, language: 'english', language_code: 'en'};
-        this.sessionStorage.saveToLocalStorage('languageData', currectLang);
+      } else {
+        let language = {id: 1, language: 'English', language_code: 'en'};
+        this.sessionStorage.saveToLocalStorage('languageData', language);
         this.translate.setDefaultLang('en');
       }
     }
