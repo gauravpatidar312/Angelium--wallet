@@ -76,6 +76,7 @@ export class AuthEffects{
     ofType(AuthActionTypes.USER_INFO),
     map((action: UserInfo) => action.payload),
     map((user) => {
+      user.user_language = user.user_language || {'id': 0, 'language': 'English', 'language_code': 'en'};
       this.storageService.saveToSession(user);
       this.sessionStorage.saveToLocalStorage('languageData', user.user_language);
       console.log('this.redirectUrl', this.router.url);

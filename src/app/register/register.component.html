@@ -5,7 +5,7 @@
         <nav class='navigation'>
           <a routerLink="/login" class='link' aria-label='Back'>
             <i class='icon nb-arrow-thin-left'></i></a>
-            <div class="status-dd-week dropdown" 
+            <div class="status-dd-week dropdown"
               [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
                  ngbDropdown>
               <button type="button" ngbDropdownToggle
@@ -16,9 +16,9 @@
                 {{ selectedLang }}
               </button>
               <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item {{selectedLang === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                <li class="dropdown-item {{selectedLang === lan?.language ? 'active' : ''}}" *ngFor="let lan of languageData"
                   (click)="changeLanguage(lan)">
-                  {{ lan.language }}
+                  {{ lan?.language }}
                 </li>
               </ul>
             </div>
@@ -36,7 +36,7 @@
                 <div class="col-md-9 col-12">
                   <label>
                     {{"pages.register.phoneNumber" | translate}}:</label>
-                  <international-phone-number [(ngModel)]="model.phone" 
+                  <international-phone-number [(ngModel)]="model.phone"
                     [maxlength]="20" [required]="true" #phone="ngModel" name="phone" [defaultCountry]="'jp'">
                   </international-phone-number>
                   <div
@@ -50,7 +50,7 @@
                 <div class="col-md-3 col-12 sent_btn">
                   <button type="submit" [disabled]="otpSubmitting || otpSubmitted"
                     class="btn btn-demo btn-success margint btnregister" size="large">
-                    <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' : 
+                    <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' :
                       "common.sendSMS" | translate }}
                     </span>
                     <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
@@ -61,7 +61,7 @@
             <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegistration()"  class="registerForm">
               <div class="form-group">
                 <label>{{"common.verificationCode" | translate}}:</label>
-                <input type="text" class="form-control" formControlName="otp_code"  
+                <input type="text" class="form-control" formControlName="otp_code"
                       placeholder="{{'common.verificationCode' | translate}}">
                 <div *ngIf="submitted && f.otp_code.errors" class="invalid-feedback">
                   <div *ngIf="f.otp_code.errors.required">
@@ -71,8 +71,8 @@
               </div>
               <div class="form-group">
                 <label>{{"common.username" | translate}}:</label>
-                <input type="text" class="form-control" 
-                  placeholder="{{'common.username' | translate}}" 
+                <input type="text" class="form-control"
+                  placeholder="{{'common.username' | translate}}"
                   formControlName="username">
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                   <div *ngIf="f.username.errors.required">
@@ -89,8 +89,8 @@
               <div class="row">
                 <div class="form-group col-md-6">
                   <label>{{"common.firstName" | translate}}:</label>
-                  <input type="text" class="form-control" 
-                    placeholder="{{'common.firstName' | translate}}" 
+                  <input type="text" class="form-control"
+                    placeholder="{{'common.firstName' | translate}}"
                     formControlName="first_name">
                   <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                     <div *ngIf="f.first_name.errors.required">
@@ -101,8 +101,8 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>{{"common.lastName" | translate}}:</label>
-                  <input type="text" class="form-control" 
-                    placeholder="{{'common.lastName' | translate}}" 
+                  <input type="text" class="form-control"
+                    placeholder="{{'common.lastName' | translate}}"
                     formControlName="last_name">
                   <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                     <div *ngIf="f.last_name.errors.required">
@@ -117,8 +117,8 @@
               </div>
               <div class="form-group">
                 <label>{{"common.emailAddress" | translate}}:</label>
-                <input type="email" class="form-control" 
-                  placeholder="{{'common.emailAddress' | translate}}" 
+                <input type="email" class="form-control"
+                  placeholder="{{'common.emailAddress' | translate}}"
                   formControlName="email">
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                   <div *ngIf="f.email.errors.required">
@@ -132,8 +132,8 @@
 
               <div class="form-group">
                 <label>{{"pages.register.confirmYourEmail" | translate}}:</label>
-                <input type="email" class="form-control" 
-                  placeholder="{{'pages.register.confirmYourEmail' | translate}}" 
+                <input type="email" class="form-control"
+                  placeholder="{{'pages.register.confirmYourEmail' | translate}}"
                   formControlName="confirm_your_email">
                 <div *ngIf="submitted && f.confirm_your_email.errors" class="invalid-feedback">
                   <div *ngIf="f.confirm_your_email.errors.required">
@@ -144,7 +144,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <label>
                   {{"pages.register.loginPassword" | translate}}:</label>
@@ -223,7 +223,7 @@
               </button>
               <div class="form-group">
                 <section class="another-action" aria-label="Sign in">
-                  {{"pages.register.alreadyHaveAnAccount" | translate}}? 
+                  {{"pages.register.alreadyHaveAnAccount" | translate}}?
                   <a routerLink="/login">{{"common.login" | translate}}</a>
                 </section>
               </div>
