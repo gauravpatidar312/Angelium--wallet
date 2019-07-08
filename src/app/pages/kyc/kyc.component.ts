@@ -1,18 +1,12 @@
 import {Component, AfterViewInit, Output, EventEmitter, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
-import {
-  NbMediaBreakpoint,
-  NbMediaBreakpointsService,
-  NbThemeService,
-  NbStepperComponent,
-  NbDialogService
-} from '@nebular/theme';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbStepperComponent, NbDialogService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 import {SessionStorageService} from '../../services/session-storage.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import {DatePipe} from '@angular/common'
-import {NbStepComponent} from '@nebular/theme/components/stepper/step.component';
+import {ShareDataService} from '../../services/share-data.service';
 
 declare let jQuery: any;
 
@@ -56,7 +50,8 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
 
   userData: any;
 
-  kycFormDisable = false;
+  isKYCUploaded = false;
+  isSubmitting = false;
 
   @ViewChild('stepper') stepper: NbStepperComponent;
 
@@ -68,6 +63,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
               private sessionService: SessionStorageService,
               private dialogService: NbDialogService,
               private toastrService: ToastrService,
+              private shareDataService: ShareDataService,
               public translate: TranslateService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -84,7 +80,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
     this.userData = this.sessionStorage.getFromSession('userInfo');
     this.userData.kyc_info = this.userData.kyc_info || {};
     if (this.userData.kyc_info.status_description === 'pending') {
-      this.kycFormDisable = true;
+      this.isKYCUploaded = true;
       this.updateStateKYC();
       // this.kycStep = 'pending';
     }
@@ -179,83 +175,91 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   }
 
   uploadKYC() {
-    if (!this.kycFormDisable) {
-      const formData: FormData = new FormData();
-      if (this.userData.kyc_info && this.userData.kyc_info.datefield) {
-        const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
-        formData.append('datefield', formatedData);
-      } else {
-        this.toastrService.danger(
-          this.translate.instant('pages.kyc.toastr.pleaseSelectDOB'),
-          this.translate.instant('common.kyc'));
-        return;
-      }
-      if (this.idFrontChangedEvent !== '') {
-        const file = this.idFrontChangedEvent.target.files[0];
-        const fileSize = file.size;
-        /*1048576 byte = 1 MB*/
-        if (fileSize > (1048576 * 2)) {
-          this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProofSize'), this.translate.instant('common.kyc'));
-          return;
-        }
-        const newfile = new File([file], file.name, {type: file.type});
-        formData.append('doc_photo', newfile, newfile.name);
-      } else {
-        this.toastrService.danger(
-          this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProof'),
-          this.translate.instant('common.kyc'));
-        return;
-      }
-      if (this.idBackChangedEvent !== '') {
-        const file = this.idBackChangedEvent.target.files[0];
-        const fileSize = file.size;
-        /*1048576 byte = 1 MB*/
-        if (fileSize > (1048576 * 2)) {
-          this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadBackSideIDProofSize'), this.translate.instant('common.kyc'));
-          return;
-        }
-        const newfile = new File([file], file.name, {type: file.type});
-        formData.append('doc_photo_back', newfile, newfile.name);
-      } else {
-        this.toastrService.danger(
-          this.translate.instant('pages.kyc.toastr.uploadBackSideIDProof'),
-          this.translate.instant('common.kyc'));
-        return;
-      }
-      if (this.selfieChangedEvent !== '') {
-        const file = this.selfieChangedEvent.target.files[0];
-        const fileSize = file.size;
-        /*1048576 byte = 1 MB*/
-        if (fileSize > (1048576 * 2)) {
-          this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadSelfieSize'), this.translate.instant('common.kyc'));
-          return;
-        }
-        const newfile = new File([file], file.name, {type: file.type});
-        formData.append('selfie', newfile, newfile.name);
-      } else {
-        this.toastrService.danger(
-          this.translate.instant('pages.kyc.toastr.uploadSelfie'),
-          this.translate.instant('common.kyc'));
-        return;
-      }
+    if (this.isKYCUploaded)
+      return;
 
-      this.httpService.post(formData, 'kyc/').subscribe((res?: any) => {
-        if (res.status_description === 'pending') {
-          this.userData.kyc_info = {};
-          this.userData.kyc_info = res;
-          if (this.userData.kyc_info.status_description === 'pending') {
-            this.statusPending();
-            this.updateStateKYC();
-          }
-
-          this.sessionService.updateUserState(this.userData);
-          this.kycFormDisable = true;
-          this.toastrService.success(
-            this.translate.instant('pages.kyc.toastr.userKycUploadSuccessfully'),
-            this.translate.instant('common.kyc'));
-        }
-      });
+    const formData: FormData = new FormData();
+    if (this.userData.kyc_info && this.userData.kyc_info.datefield) {
+      const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
+      formData.append('datefield', formatedData);
+    } else {
+      this.toastrService.danger(
+        this.translate.instant('pages.kyc.toastr.pleaseSelectDOB'),
+        this.translate.instant('common.kyc'));
+      return;
     }
+
+    if (this.idFrontChangedEvent) {
+      const file = this.idFrontChangedEvent.target.files[0];
+      const fileSize = file.size;
+      /*1048576 byte = 1 MB*/
+      if (fileSize > (1048576 * 2)) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProofSize'), this.translate.instant('common.kyc'));
+        return;
+      }
+      const newfile = new File([file], file.name, {type: file.type});
+      formData.append('doc_photo', newfile, newfile.name);
+    } else {
+      this.toastrService.danger(
+        this.translate.instant('pages.kyc.toastr.uploadFrontSideIDProof'),
+        this.translate.instant('common.kyc'));
+      return;
+    }
+
+    if (this.idBackChangedEvent) {
+      const file = this.idBackChangedEvent.target.files[0];
+      const fileSize = file.size;
+      /*1048576 byte = 1 MB*/
+      if (fileSize > (1048576 * 2)) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadBackSideIDProofSize'), this.translate.instant('common.kyc'));
+        return;
+      }
+      const newfile = new File([file], file.name, {type: file.type});
+      formData.append('doc_photo_back', newfile, newfile.name);
+    } else {
+      this.toastrService.danger(
+        this.translate.instant('pages.kyc.toastr.uploadBackSideIDProof'),
+        this.translate.instant('common.kyc'));
+      return;
+    }
+
+    if (this.selfieChangedEvent) {
+      const file = this.selfieChangedEvent.target.files[0];
+      const fileSize = file.size;
+      /*1048576 byte = 1 MB*/
+      if (fileSize > (1048576 * 2)) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.uploadSelfieSize'), this.translate.instant('common.kyc'));
+        return;
+      }
+      const newfile = new File([file], file.name, {type: file.type});
+      formData.append('selfie', newfile, newfile.name);
+    } else {
+      this.toastrService.danger(
+        this.translate.instant('pages.kyc.toastr.uploadSelfie'),
+        this.translate.instant('common.kyc'));
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.httpService.post(formData, 'kyc/').subscribe((res?: any) => {
+      this.isSubmitting = false;
+
+      if (res.status_description) {
+        this.userData.kyc_info = {};
+        this.userData.kyc_info = res;
+        this.statusPending();
+        this.updateStateKYC();
+
+        this.sessionService.updateUserState(this.userData);
+        this.isKYCUploaded = true;
+        this.toastrService.success(this.translate.instant('pages.kyc.toastr.userKycUploadSuccessfully'), this.translate.instant('common.kyc'));
+      } else {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.kyc'));
+      }
+    }, err => {
+      this.isSubmitting = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.kyc'));
+    });
   }
 
   ngOnDestroy() {
