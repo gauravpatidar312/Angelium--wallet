@@ -150,9 +150,9 @@
                       {{ selectedLang }}
                     </button>
                     <ul class="dropdown-menu" ngbDropdownMenu>
-                      <li class="dropdown-item {{selectedLang === lan.language ? 'active' : ''}}" *ngFor="let lan of languageData"
+                      <li class="dropdown-item {{selectedLang === lan?.language ? 'active' : ''}}" *ngFor="let lan of languageData"
                         (click)="changeLang(lan)">
-                        {{ lan.language }}
+                        {{ lan?.language }}
                       </li>
                     </ul>
                   </div>

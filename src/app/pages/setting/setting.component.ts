@@ -90,7 +90,7 @@ export class SettingComponent implements OnInit {
     this.httpService.get('languages/').subscribe(res=>{
       this.languageData = res;
     });
-    var lang = this.sessionStorage.getFromLocalStorage('languageData');
+    let lang = this.sessionStorage.getFromLocalStorage('languageData') || { 'id': 1, 'language': 'English', 'language_code': 'en' };
     this.selectedLang = lang.language;
     this.translate.use(lang.language_code);
   }
@@ -106,6 +106,7 @@ export class SettingComponent implements OnInit {
   }
 
   changeLang(lan: any){
+    lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.userData.user_language = lan;

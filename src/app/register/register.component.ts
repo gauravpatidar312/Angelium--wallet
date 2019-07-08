@@ -252,6 +252,7 @@ export class RegisterComponent implements OnInit {
   }
 
   changeLanguage(lan: any){
+    lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.registerForm.controls.user_language.setValue(lan.id);
