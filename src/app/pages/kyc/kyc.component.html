@@ -152,9 +152,6 @@
         </div>
         <div class="col-lg-6 offset-md-3">
           <div class="form-group">
-            <!-- <button nbButton class="form-control pointer" fullWidth status="success">
-                <span>Submit</span>
-              </button> -->
             <button class="font-bebasNeueBold btn btn-kyc btn-demo btn-success pointer" fullWidth style="width: 100%;"
               [disabled]="isKYCUploaded || isSubmitting" (click)="uploadKYC()">
               <i class="fa fa-spinner fa-spin text-white" *ngIf="isSubmitting"></i>

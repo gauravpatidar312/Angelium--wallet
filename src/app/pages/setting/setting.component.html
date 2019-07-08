@@ -10,7 +10,7 @@
               <nb-user
                 [picture]="userData?.avatar"
                 [name]="userData?.username"
-                title="{{userData?.infinity_name + ' ' + userData?.rank}}"
+                title="{{(userData?.infinity_name || '') + ' ' + userData?.rank}}"
                 size="large">
               </nb-user>
             </nb-card-body>
@@ -62,7 +62,7 @@
                 </tr>
                 <tr>
                   <td class="title-col">{{"pages.setting.rank" | translate}}</td>
-                  <td class="value-col">{{userData?.infinity_name + ' ' + userData?.rank}}</td>
+                  <td class="value-col">{{(userData?.infinity_name || '') + ' ' + userData?.rank}}</td>
                   <td class="action-col"></td>
                 </tr>
               </tbody>
