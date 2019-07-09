@@ -56,6 +56,7 @@ export class AuthService {
   }
 
   logout() {
+    this.shareDataService.changeData('');
     this.storageService.resetStorage();
     this.store.dispatch(new ResetState({}));
   }

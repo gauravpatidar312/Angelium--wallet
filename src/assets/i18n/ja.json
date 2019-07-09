@@ -272,7 +272,9 @@
         "pleaseCheckReceiveAmount":"Please check receive amount.",
         "transferSuccessfullyCompleted":"Transfer successfully completed!",
         "walletAddressCopiedSuccessfully":"Wallet address copied successfully!",
-        "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send"
+        "youDontHaveSufficientBalanceToSend":"You don't have sufficient balance to send",
+        "kycNotApproved": "KYC need to be approved before OTC function",
+        "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
   }

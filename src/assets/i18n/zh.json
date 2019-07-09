@@ -272,7 +272,9 @@
         "pleaseCheckReceiveAmount":"请确认接收金额。",
         "transferSuccessfullyCompleted":"转账成功！",
         "walletAddressCopiedSuccessfully":"钱包地址已成功复制！",
-        "youDontHaveSufficientBalanceToSend":"您余额不足"
+        "youDontHaveSufficientBalanceToSend":"您余额不足",
+        "kycNotApproved": "KYC need to be approved before OTC function",
+        "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
   }

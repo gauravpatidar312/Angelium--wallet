@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from '../services/session-storage.service';
-import * as _ from 'lodash';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
+import { ShareDataService } from '../services/share-data.service';
 import { MENU_ITEMS } from './pages-menu';
 
 @Component({
@@ -19,6 +19,7 @@ export class PagesComponent implements OnInit {
   userInfo: any;
 
   constructor(private sessionStorage: SessionStorageService,
+              private shareDataService: ShareDataService,
     public translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.setMenuTranslation();
@@ -48,5 +49,11 @@ export class PagesComponent implements OnInit {
   ngOnInit() {
     this.userInfo = this.sessionStorage.getFromSession('userInfo');
     this.setMenuTranslation();
+    this.shareDataService.currentData.subscribe(data => {
+      if (data) {
+        this.userInfo = data;
+        this.setMenuTranslation();
+      }
+    });
   }
 }

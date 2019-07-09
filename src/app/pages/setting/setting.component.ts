@@ -15,6 +15,7 @@ import { IndexedDBStorageService } from '../../services/indexeddb-storage.servic
 import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
+import * as _ from 'lodash';
 declare let jQuery: any;
 
 @Component({
@@ -86,13 +87,18 @@ export class SettingComponent implements OnInit {
   }
 
   getProfileData() {
+    this.userData = this.sessionStorage.getFromSession('userInfo');
     this.httpService.get('profile/').subscribe(data => {
-      this.userData = data;
+      this.userData = _.merge(this.userData, data);
       this.shareDataService.changeData(this.userData);
+      this.sessionStorage.updateUserState(this.userData);
+      if (this.userData.user_language && this.translate.currentLang !== this.userData.user_language.language_code) {
+        this.selectedLang = this.userData.user_language.language;
+        this.translate.use(this.userData.user_language.language_code);
+      }
       this.extraInfo();
     }, (err) => {
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.setting'));
-      this.userData = this.sessionStorage.getFromSession('userInfo');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.setting'));      this.userData = this.sessionStorage.getFromSession('userInfo');
       this.extraInfo();
     });
   }
@@ -429,9 +435,8 @@ export class SettingComponent implements OnInit {
       this.httpService.post(formData, 'avatar-upload/').subscribe((res?: any) => {
         if (res.status) {
           ref.close();
-          this.shareDataService.changeData(res);
           this.userData.avatar = res.avatar;
-          // this.sessionStorage.updateFromSession('userInfo', res);
+          this.shareDataService.changeData(this.userData);
           this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.userImageChanged'),
