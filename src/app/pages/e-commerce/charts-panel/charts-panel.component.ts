@@ -31,7 +31,6 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
     this.ordersProfitChartService.getOrderProfitChartSummary()
       .pipe(takeWhile(() => this.alive))
       .subscribe((summary) => {
-        console.log(summary)
         summary = _.cloneDeep(summary);
         summary.forEach((data)=>{
           data.title = tanslate.instant('common.'+data.languageKey);

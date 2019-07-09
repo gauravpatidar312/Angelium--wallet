@@ -192,6 +192,7 @@
       "repeatTradePassword": "거래 비밀번호 재입력",
       "realNameIsRequiredForKYC": "KYC 인증을 위한 실명이 필요합니다. 등록한 후 변경할 수 없습니다",
       "terms&Conditions" : "이용약관",
+      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",

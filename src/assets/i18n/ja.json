@@ -192,6 +192,7 @@
       "repeatTradePassword": "Repeat Trade Password",
       "realNameIsRequiredForKYC": "KYC流程需要真实姓名。 注册后无法更改",
       "terms&Conditions" : "Terms & Conditions",
+      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",

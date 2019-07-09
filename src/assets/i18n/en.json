@@ -193,6 +193,7 @@
       "repeatTradePassword": "Repeat Trade Password",
       "realNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
       "terms&Conditions" : "Terms & Conditions",
+      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",

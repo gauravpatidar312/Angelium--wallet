@@ -192,6 +192,7 @@
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "确认交易密码",
       "terms&Conditions" : "条款和条件",
+      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "需要用户名",
       "toastr":{
         "confirmEmailDoNotMatch":"电子邮件不匹配",
