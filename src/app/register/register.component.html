@@ -96,7 +96,9 @@
                     <div *ngIf="f.first_name.errors.required">
                       {{"messages.required" | translate: {'field': "common.firstName" | translate } }}
                     </div>
-                    <div *ngIf="f.first_name.errors.pattern">Please enter value in English language only.</div>
+                    <div *ngIf="f.first_name.errors.pattern">
+                      {{ "pages.register.enterValueInEnglish" | translate  }}
+                    </div>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -108,11 +110,13 @@
                     <div *ngIf="f.last_name.errors.required">
                       {{"messages.required" | translate: {'field': "common.lastName" | translate } }}
                     </div>
-                    <div *ngIf="f.last_name.errors.pattern">Please enter value in English language only.</div>
+                    <div *ngIf="f.last_name.errors.pattern">
+                      {{ "pages.register.enterValueInEnglish" | translate  }}
+                    </div>
                   </div>
                 </div>
                 <span class="form-group col-md-12 msg-font-size">
-                  {{"pages.register.RealNameIsRequiredForKYC" | translate}}.
+                  {{"pages.register.realNameIsRequiredForKYC" | translate}}.
                 </span>
               </div>
               <div class="form-group">

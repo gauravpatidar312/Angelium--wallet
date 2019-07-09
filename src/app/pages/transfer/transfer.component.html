@@ -229,8 +229,10 @@
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
-                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
-                      <span class="transfer-message font-nunitoSans">3% handling charge is applicable on each transaction.*</span>
+                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">
+                      *{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
+                      <span class="transfer-message font-nunitoSans">3%
+                        {{"pages.transfer.realNameIsRequiredForKYC" | translate}}*</span>
                     </div>
                   </div>
                 </div>
@@ -247,14 +249,14 @@
 <ng-template #tradePassword let-data let-ref="dialogRef">
   <nb-card>
     <nb-card-header>
-      Trade Password
+      {{"common.tradePassword" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradeDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <input type="password" [(ngModel)]="trade_password" placeholder="Trade password" nbInput/><br/><br/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">Submit</button>
+      <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">{{"common.submit" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

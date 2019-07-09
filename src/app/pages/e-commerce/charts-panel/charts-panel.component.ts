@@ -1,4 +1,5 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { takeWhile } from 'rxjs/operators';
 
 import { OrdersChartComponent } from './charts/orders-chart.component';
@@ -6,6 +7,7 @@ import { ProfitChartComponent } from './charts/profit-chart.component';
 import { OrdersChart } from '../../../@core/data/orders-chart';
 import { ProfitChart } from '../../../@core/data/profit-chart';
 import { OrderProfitChartSummary, OrdersProfitChartData } from '../../../@core/data/orders-profit-chart';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ngx-ecommerce-charts',
@@ -24,10 +26,16 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
   @ViewChild('ordersChart') ordersChart: OrdersChartComponent;
   @ViewChild('profitChart') profitChart: ProfitChartComponent;
 
-  constructor(private ordersProfitChartService: OrdersProfitChartData) {
+  constructor(private ordersProfitChartService: OrdersProfitChartData,
+    private tanslate: TranslateService) {
     this.ordersProfitChartService.getOrderProfitChartSummary()
       .pipe(takeWhile(() => this.alive))
       .subscribe((summary) => {
+        console.log(summary)
+        summary = _.cloneDeep(summary);
+        summary.forEach((data)=>{
+          data.title = tanslate.instant('common.'+data.languageKey);
+        });
         this.chartPanelSummary = summary;
       });
 

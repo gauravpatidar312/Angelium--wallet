@@ -21,10 +21,10 @@ declare const jQuery: any;
 export class TransferComponent implements OnInit {
   private alive = true;
   isProduction: any = environment.production;
-  sendType: string = this.translate.instant('common.select');
-  receiveType: string =  this.translate.instant('common.select');
+  sendType: string = 'SELECT';
+  receiveType: string =  'SELECT';
   fromType: string = 'ANX';
-  toType: string =  this.translate.instant('common.select');
+  toType: string =  'SELECT';
   fromTypes: string[] = ['ANX'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -121,9 +121,9 @@ export class TransferComponent implements OnInit {
         this.otcWallets = this.myWallets;
 
       if (!this.myWallets) {
-        this.sendType = this.translate.instant('common.select');
-        this.receiveType = this.translate.instant('common.select');
-        this.toType =  this.translate.instant('common.select');
+        this.sendType = 'SELECT';
+        this.receiveType = 'SELECT';
+        this.toType =  'SELECT';
       } else if (this.shareDataService.transferTab) {
         this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
         this.shareDataService.transferTab = null;
@@ -392,7 +392,7 @@ export class TransferComponent implements OnInit {
 
   onOTCTransfer() {
     if (this.isProduction) {
-      this.toastrService.danger('Feature coming soon! Stay tuned.', 'OTC');
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'), this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
 

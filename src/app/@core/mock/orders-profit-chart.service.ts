@@ -11,19 +11,23 @@ export class OrdersProfitChartService extends OrdersProfitChartData {
     {
       title: 'Total',
       value: 0,
+      languageKey: 'total'
     },
     {
       title: 'Last Month',
       value: 0,
+      languageKey: 'lastMonth'
     },
     {
       title: 'Last Week',
       value: 0,
+      languageKey: 'lastWeek'
     },
     {
       title: 'Today',
       value: 0,
-    },
+      languageKey: 'today'
+    }
   ];
 
   constructor(private ordersChartService: OrdersChartData,

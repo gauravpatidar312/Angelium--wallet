@@ -85,7 +85,7 @@
         </div>
         <div class="col-lg-6">
           <nb-card class="card-upload">
-            <nb-card-header class="card-header">{{"pages.kyc.upload" | translate}}</nb-card-header>
+            <nb-card-header class="card-header">{{"common.upload" | translate}}</nb-card-header>
             <nb-card-body class="font-nunitoSans uploadcss">
               <div class="form-group">
                 <div class="row full-name-inputs">
@@ -155,7 +155,7 @@
             <button class="font-bebasNeueBold btn btn-kyc btn-demo btn-success pointer" fullWidth style="width: 100%;"
               [disabled]="isKYCUploaded || isSubmitting" (click)="uploadKYC()">
               <i class="fa fa-spinner fa-spin text-white" *ngIf="isSubmitting"></i>
-              <span *ngIf="!isSubmitting">{{"pages.kyc.submit" | translate}}</span>
+              <span *ngIf="!isSubmitting">{{"common.submit" | translate}}</span>
             </button>
           </div>
         </div>
