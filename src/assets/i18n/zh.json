@@ -268,6 +268,7 @@
     "transfer":{
       "enterDestinationAddress" : "输入目的地地址",
       "destinationAddress" : "Destination Address",
+      "handlingChargeApplicableOnEachTransaction": "3% handling charge is applicable on each transaction.",
       "minimumAmountForBTCTransfer":"Minimum amount for BTC transfer is $100 for beta version.",
       "realNameIsRequiredForKYC": "Must be real name for KYC process. it cannot be changed",
       "receive": "接收",
