@@ -15,8 +15,8 @@ import { IndexedDBStorageService } from '../../services/indexeddb-storage.servic
 import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
+import * as _ from 'lodash';
 declare let jQuery: any;
-export let browserRefresh = false;
 
 @Component({
   selector: 'ngx-setting',
@@ -27,12 +27,7 @@ export class SettingComponent implements OnInit {
   isProduction: boolean = environment.production;
   evaIcons = [];
   selectedLang: string = 'SELECT';
-  languageData = [
-    // {'language': 'English', 'code': 'en'},
-    // {'language': 'Chinese', 'code': 'zh'},
-    // {'language': 'Japanese', 'code': 'ja'},
-    // {'language': 'Korean', 'code': 'ko'}
-  ]
+  languageData = [];
   private alive = true;
   userData: any;
   imageChangedEvent: any = '';
@@ -63,10 +58,6 @@ export class SettingComponent implements OnInit {
               private storageService: IndexedDBStorageService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
-    window.onload = (ev) => {
-      browserRefresh = true;
-      this.getProfileData();
-    };
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -96,13 +87,20 @@ export class SettingComponent implements OnInit {
   }
 
   getProfileData() {
-    if (browserRefresh) {
-      this.httpService.get('profile/').subscribe(data => {
-        this.r18modeSwitchText = data.r18mode;
-        this.userData = data;
-        this.shareDataService.changeData(data);
-      });
-    }
+    this.userData = this.sessionStorage.getFromSession('userInfo');
+    this.httpService.get('profile/').subscribe(data => {
+      this.userData = _.merge(this.userData, data);
+      this.shareDataService.changeData(this.userData);
+      this.sessionStorage.updateUserState(this.userData);
+      if (this.userData.user_language && this.translate.currentLang !== this.userData.user_language.language_code) {
+        this.selectedLang = this.userData.user_language.language;
+        this.translate.use(this.userData.user_language.language_code);
+      }
+      this.extraInfo();
+    }, (err) => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.setting'));      this.userData = this.sessionStorage.getFromSession('userInfo');
+      this.extraInfo();
+    });
   }
 
   changeLang(lan: any){
@@ -120,8 +118,7 @@ export class SettingComponent implements OnInit {
     this.sessionStorage.updateUserState(this.userData);
   }
 
-  ngOnInit() {
-    this.userData = this.sessionStorage.getFromSession('userInfo');
+  extraInfo() {
     this.r18modeSwitchText = this.userData.r18mode;
     if (this.userData.infinity_mark === 1)
       this.userData.infinity_name = 'SILVER ANGEL';
@@ -131,6 +128,10 @@ export class SettingComponent implements OnInit {
       this.userData.infinity_name = 'PINK ANGEL';
     else
       this.userData.infinity_name = 'ANGEL';
+  }
+
+  ngOnInit() {
+    this.getProfileData();
   }
 
   sweetAlertAgeCfrm() {
@@ -434,9 +435,8 @@ export class SettingComponent implements OnInit {
       this.httpService.post(formData, 'avatar-upload/').subscribe((res?: any) => {
         if (res.status) {
           ref.close();
-          this.shareDataService.changeData(res);
           this.userData.avatar = res.avatar;
-          // this.sessionStorage.updateFromSession('userInfo', res);
+          this.shareDataService.changeData(this.userData);
           this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.userImageChanged'),

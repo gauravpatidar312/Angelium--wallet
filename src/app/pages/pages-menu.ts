@@ -1,4 +1,3 @@
-import {NbMenuItem} from '@nebular/theme';
 import {AppConstants} from '../app.constants';
 
 export const MENU_ITEMS = [

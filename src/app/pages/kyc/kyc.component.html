@@ -2,7 +2,7 @@
   <div class="nb-card-wrap">
     <nb-card-header class="cardHeadercss">
       <div class="navigationKYC">
-        <h1 class="linkKYC" style="text-align: center">{{"common.kyc"|translate}}</h1>
+        <h1 class="linkKYC" style="text-align: center">{{"common.kyc" | translate}}</h1>
       </div>
     </nb-card-header>
     <nb-card-body>
@@ -10,13 +10,13 @@
         <nb-card-body>
           <nb-stepper #stepper orientation="horizontal" disableStepNavigation>
             <nb-step [label]="pending">
-              <ng-template #pending class="font-nunitoSans">{{"pages.kyc.input"|translate}}</ng-template>
+              <ng-template #pending class="font-nunitoSans">{{"pages.kyc.input" | translate}}</ng-template>
             </nb-step>
             <nb-step [label]="audit">
-              <ng-template #audit class="font-nunitoSans">{{"pages.kyc.audit"|translate}}</ng-template>
+              <ng-template #audit class="font-nunitoSans">{{"pages.kyc.audit" | translate}}</ng-template>
             </nb-step>
             <nb-step [label]="approved">
-              <ng-template #approved class="font-nunitoSans">{{"pages.kyc.approved"|translate}}</ng-template>
+              <ng-template #approved class="font-nunitoSans">{{"pages.kyc.approved" | translate}}</ng-template>
             </nb-step>
           </nb-stepper>
         </nb-card-body>
@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col-lg-6">
           <nb-card class="card-info">
-            <nb-card-header class="card-header">{{"pages.kyc.information"|translate}}</nb-card-header>
+            <nb-card-header class="card-header">{{"pages.kyc.information" | translate}}</nb-card-header>
             <nb-card-body>
               <div class="row">
                 <div class="col-md-12">
@@ -65,12 +65,12 @@
                           <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6 input-group kyc-margin" style="padding: 0px;">
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 ">
                               <label for="inputEmail3" class=" form-control-label font-nunitoSans"
-                                style="padding: 15px">{{"pages.kyc.dob"|translate}}</label>
+                                style="padding: 15px">{{"pages.kyc.dob" | translate}}</label>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 input-group kyc-margin">
                               <input nbInput placeholder="{{'pages.kyc.dob'|translate}}" [nbDatepicker]="userDOB"
                                 class="form-control font-nunitoSans" style="border-radius: 0.5rem;"
-                                [(ngModel)]="userData.kyc_info.datefield" [disabled]="kycFormDisable">
+                                [(ngModel)]="userData.kyc_info.datefield" [disabled]="isKYCUploaded">
                               <nb-datepicker #userDOB format="yyyy-MM-dd"></nb-datepicker>
                             </div>
                           </div>
@@ -85,7 +85,7 @@
         </div>
         <div class="col-lg-6">
           <nb-card class="card-upload">
-            <nb-card-header class="card-header">{{"pages.kyc.upload"|translate}}</nb-card-header>
+            <nb-card-header class="card-header">{{"pages.kyc.upload" | translate}}</nb-card-header>
             <nb-card-body class="font-nunitoSans uploadcss">
               <div class="form-group">
                 <div class="row full-name-inputs">
@@ -93,13 +93,13 @@
                     <input type="text" placeholder="{{'pages.kyc.idProofFront'|translate}}" class="form-control font-nunitoSans" [(ngModel)]="idFrontLabel" disabled />
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin smkycImage">
-                    <ng-container *ngIf="!kycFormDisable">
+                    <ng-container *ngIf="!isKYCUploaded">
                       <input type="file" style="display: none" #idFront (change)="fileChangeEvent($event, 'front')"
                         accept="image/x-png,image/gif,image/jpeg" />
                       <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idFront.click()"
-                        [disabled]="kycFormDisable"> Browse </button>
+                        [disabled]="isKYCUploaded"> {{"pages.kyc.browse" | translate}} </button>
                     </ng-container>
-                    <ng-container *ngIf="kycFormDisable">
+                    <ng-container *ngIf="false && isKYCUploaded">
                         <a data-fancybox="gallery" [href]="userData.kyc_info.doc_photo"  data-caption="ID Proof (front side)">
                             <img [src]="userData.kyc_info.doc_photo" class="kycImages pointer" alt="ID Proof (front side)"/>
                         </a>
@@ -113,13 +113,13 @@
                     <input type="text" placeholder="{{'pages.kyc.idProofBack'|translate}}" class="form-control font-nunitoSans" [(ngModel)]="idBackLabel" disabled />
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin smkycImage">
-                    <ng-container *ngIf="!kycFormDisable">
+                    <ng-container *ngIf="!isKYCUploaded">
                       <input type="file" style="display: none" #idBack (change)="fileChangeEvent($event, 'back')"
                         accept="image/x-png,image/gif,image/jpeg" />
                       <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idBack.click()"
-                        [disabled]="kycFormDisable"> {{"pages.kyc.browse"|translate}} </button>
+                        [disabled]="isKYCUploaded"> {{"pages.kyc.browse" | translate}} </button>
                     </ng-container>
-                    <ng-container *ngIf="kycFormDisable">
+                    <ng-container *ngIf="false && isKYCUploaded">
                       <a data-fancybox="gallery" [href]="userData.kyc_info.doc_photo_back"  data-caption="ID Proof (back side)">
                           <img [src]="userData.kyc_info.doc_photo_back" class="kycImages pointer" alt="ID Proof (back side)"/>
                       </a>
@@ -133,13 +133,13 @@
                     <input type="text" placeholder="{{'pages.kyc.selfie'|translate}}" class="form-control font-nunitoSans" [(ngModel)]="selfieLabel" disabled />
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-6 input-group kyc-margin smkycImage">
-                    <ng-container *ngIf="!kycFormDisable">
+                    <ng-container *ngIf="!isKYCUploaded">
                       <input type="file" style="display: none" #selfie (change)="fileChangeEvent($event, 'selfie')"
                         accept="image/x-png,image/gif,image/jpeg" />
                       <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="selfie.click()"
-                        [disabled]="kycFormDisable"> {{"pages.kyc.browse"|translate}} </button>
+                        [disabled]="isKYCUploaded"> {{"pages.kyc.browse" | translate}} </button>
                     </ng-container>
-                    <ng-container *ngIf="kycFormDisable">
+                    <ng-container *ngIf="false && isKYCUploaded">
                       <a data-fancybox="gallery" [href]="userData.kyc_info.selfie"  data-caption="Selfie">
                           <img [src]="userData.kyc_info.selfie" class="kycImages pointer" alt="Selfie"/>
                       </a>
@@ -152,12 +152,10 @@
         </div>
         <div class="col-lg-6 offset-md-3">
           <div class="form-group">
-            <!-- <button nbButton class="form-control pointer" fullWidth status="success">
-                <span>Submit</span>
-              </button> -->
             <button class="font-bebasNeueBold btn btn-kyc btn-demo btn-success pointer" fullWidth style="width: 100%;"
-              [disabled]="kycFormDisable" (click)="uploadKYC()">
-              {{"pages.kyc.submit"|translate}}
+              [disabled]="isKYCUploaded || isSubmitting" (click)="uploadKYC()">
+              <i class="fa fa-spinner fa-spin text-white" *ngIf="isSubmitting"></i>
+              <span *ngIf="!isSubmitting">{{"pages.kyc.submit" | translate}}</span>
             </button>
           </div>
         </div>
@@ -168,14 +166,14 @@
 <ng-template #dialog let-data let-ref="dialogRef">
     <nb-card>
       <nb-card-header>
-        {{"pages.kyc.idProofPreview"|translate}}
+        {{"pages.kyc.idProofPreview" | translate}}
         <i class="nb-close nb-icon-left fa-2x" (click)="closeDialog(ref)"></i>
       </nb-card-header>
       <nb-card-body class="image-scoll-card-body">
           <img [src]="selectedImage" />
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton class="upload-btn" size="small" (click)="closeDialog(ref)">{{"pages.kyc.close"|translate}}</button>
+        <button nbButton class="upload-btn" size="small" (click)="closeDialog(ref)">{{"pages.kyc.close" | translate}}</button>
       </nb-card-footer>
     </nb-card>
   </ng-template>

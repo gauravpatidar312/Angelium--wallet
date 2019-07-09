@@ -111,21 +111,4 @@ export class IndexedDBStorageService {
   deleteDatabase() {
     this.dbAngelium.deleteDatabase();
   }
-
-  updateSessionData = function (value) {
-    this.dbAngelium.getByKey('userInfo', 1).then((data) => {
-      if (data) {
-        value.uid = data.uid;
-        this.dbAngelium.update('userInfo', value).then(() => {
-        },
-          (error) => {
-            console.error(error);
-            return 'false';
-          });
-      }
-    }, (error) => {
-      console.error(error);
-      return 'false';
-    });
-  };
 }
