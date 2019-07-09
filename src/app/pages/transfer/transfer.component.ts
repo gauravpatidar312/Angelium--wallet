@@ -88,7 +88,7 @@ export class TransferComponent implements OnInit {
     mode: 'inline',
     noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
-      trx_timestamp: {
+      timestamp: {
         title: this.translate.instant('pages.transfer.date'),
         type: 'html',
         filter: false,
@@ -222,14 +222,15 @@ export class TransferComponent implements OnInit {
             obj.type = 'EOS';
           else if (key === 'ethTransactions')
             obj.type = 'ETH';
-          obj.trx_timestamp = moment(obj.trx_timestamp).format('YYYY.MM.DD');
+          obj.timestamp = moment(obj.trx_timestamp).format('YYYY.MM.DD');
           obj.direction = obj.direction === 'in' ? 'RECEIVE' : 'SEND';
           obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
+          obj.address = '';
           return obj;
         });
       });
       const mergeArray = _.merge(transfer_data.btcTransactions, transfer_data.eosTransactions, transfer_data.ethTransactions);
-      const transferData =_.sortBy(mergeArray, ['trx_timestamp']).reverse();
+      const transferData =_.sortBy(mergeArray, ['timestamp']).reverse();
       this.source.load(transferData);
       this.fetchTransferHistory = false;
     }, (err) => {
