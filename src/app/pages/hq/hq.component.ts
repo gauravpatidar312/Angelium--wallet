@@ -110,11 +110,9 @@ export class HQComponent implements OnInit {
       this.httpService.post(data, 'admin_login/').subscribe((res?: any) => {
         if (res.token) {
           this.store.dispatch(new SetUserProfile({ token: res.token }));
-          this.router.navigateByUrl('/pages/setting').then(() => {
-            setTimeout(() => {
-              window.location.reload();
-            }, 250);
-          });
+          setTimeout(() => {
+            this.router.navigateByUrl('/pages/setting');
+          }, 10);
         } else if (res.message) {
           this.toastrService.danger(res.message, 'Load User Session');
         }
