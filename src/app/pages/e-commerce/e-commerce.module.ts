@@ -52,6 +52,8 @@ import { DayCellComponent } from '../extra-components/calendar/day-cell/day-cell
 import { EchartsPieComponent } from '../charts/echarts/echarts-pie.component';
 import { EchartsAreaStackComponent } from '../charts/echarts/echarts-area-stack.component';
 import { StatusCardComponent } from '../dashboard/status-card/status-card.component';
+import {StatusCardFrontComponent} from '../dashboard/status-card/front-side/status-card-front.component';
+import {StatusCardBackComponent} from '../dashboard/status-card/back-side/status-card-back.component';
 @NgModule({
   imports: [
     ThemeModule,
@@ -100,6 +102,8 @@ import { StatusCardComponent } from '../dashboard/status-card/status-card.compon
     EarningLiveUpdateChartComponent,
     CalendarComponent,
     DayCellComponent,
+    StatusCardFrontComponent,
+    StatusCardBackComponent
   ],
   providers: [
     CountryOrdersMapService,

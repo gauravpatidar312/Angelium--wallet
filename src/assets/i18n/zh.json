@@ -94,6 +94,7 @@
       "enterAmount":"输入金额",
       "entryDate": "进入日期",
       "heavenHistory":"天堂历史记录",
+      "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日天堂之滴",
       "heavenId":"天堂 ID",
       "noDataFound":"没有找到数据",
@@ -102,6 +103,9 @@
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
       "totalHeaven": "天堂总计",
+      "date": "Date",
+      "type": "Type",
+      "heavenDrop": "Heaven Drop",
       "toastr":{
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
@@ -179,7 +183,10 @@
       "tree": "邀请历史及分支",
       "totalReward": "总奖励",
       "yourRank": "你的排行",
-      "yourReward": "你的奖励"
+      "yourReward": "你的奖励",
+      "rewardHistory": "Reward History",
+      "noDataFound":"No data found",
+      "date": "Date",
     },
     "register":{
       "alreadyHaveAnAccount": "已有账户",
@@ -262,6 +269,11 @@
       "receive": "接收",
       "send": "发送",
       "to": "To",
+      "transferHistory": "Trade History",
+      "date": "Date",
+      "action": "Action",
+      "type": "Type",
+      "address": "Address",
       "toastr":{
         "copyAddress":"复制地址",
         "featureComingSoonStayTuned":"功能即将推出！ 敬请关注",

@@ -94,6 +94,7 @@
       "enterAmount":"Enter Amount",
       "entryDate": "참여일",
       "heavenHistory":"Heaven History",
+      "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "오늘의 헤븐 드롭",
       "heavenId":"Heaven ID",
       "noDataFound":"No data found",
@@ -102,6 +103,9 @@
       "releaseDate": "완료일",
       "releaseSetting": "완료 설정",
       "totalHeaven": "총 헤븐",
+      "date": "Date",
+      "type": "Type",
+      "heavenDrop": "Heaven Drop",
       "toastr":{
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
@@ -179,7 +183,9 @@
       "tree": "다운라인 트리",
       "totalReward": "총 리워드",
       "yourRank": "당신의 랭킹",
-      "yourReward": "당신의 리워드"
+      "yourReward": "당신의 리워드",
+      "rewardHistory": "Reward History",
+      "noDataFound":"No data found",
     },
     "register":{
       "alreadyHaveAnAccount": "이미 가입하셨나요",
@@ -262,6 +268,11 @@
       "receive": "입금",
       "send": "출금",
       "to": "To",
+      "transferHistory": "Trade History",
+      "date": "Date",
+      "action": "Action",
+      "type": "Type",
+      "address": "Address",
       "toastr":{
         "copyAddress":"주소 복사",
         "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",

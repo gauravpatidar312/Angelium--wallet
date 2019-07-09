@@ -94,6 +94,7 @@
       "enterAmount":"Enter Amount",
       "entryDate": "Entry date",
       "heavenHistory":"Heaven History",
+      "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日のヘブンドロップ",
       "heavenId":"Heaven ID",
       "noDataFound":"No data found",
@@ -102,6 +103,9 @@
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
       "totalHeaven": "ヘブン合計",
+      "date": "Date",
+      "type": "Type",
+      "heavenDrop": "Heaven Drop",
       "toastr":{
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
@@ -179,7 +183,10 @@
       "tree": "ダウンラインツリー",
       "totalReward": "Total Reward",
       "yourRank": "あなたのランク",
-      "yourReward": "あなたのリワード"
+      "yourReward": "あなたのリワード",
+      "rewardHistory": "Reward History",
+      "noDataFound":"No data found",
+      "date": "Date",
     },
     "register":{
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
@@ -262,6 +269,11 @@
       "receive": "受信",
       "send": "送信",
       "to": "To",
+      "transferHistory": "Trade History",
+      "date": "Date",
+      "action": "Action",
+      "type": "Type",
+      "address": "Address",
       "toastr":{
         "copyAddress":"Copy Address",
         "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",

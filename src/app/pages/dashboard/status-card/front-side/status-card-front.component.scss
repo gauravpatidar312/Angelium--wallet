@@ -1,0 +1,13 @@
+@import '../../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/typography/typography';
+
+@include nb-install-component() {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  nb-card {
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+}

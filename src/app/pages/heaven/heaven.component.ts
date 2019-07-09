@@ -45,6 +45,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   fetchingTotalHeaven: boolean = false;
   fetchingHeavenDrop: boolean = false;
   fetchHeavenHistory: boolean = false;
+  fetchHeavenDropHistory: boolean = false;
 
   constructor(private service: SmartTableData,
               private shareDataService: ShareDataService,
@@ -94,6 +95,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getANXHistory();
     this.getHeavenReleaseSettings();
     this.getHeavenHistory('total');
+    this.getHeavenDropHistory();
   }
   selectedHeavenPlan = '';
 
@@ -120,7 +122,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     hideSubHeader: true,
     actions: false,
     pager: {
-      display: false,
+      display: true,
     },
     editable: true,
     mode: 'inline',
@@ -193,6 +195,69 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   source: LocalDataSource = new LocalDataSource();
+
+  heavenDrops = {
+    hideSubHeader: true,
+    actions: false,
+    pager: {
+      display: true,
+    },
+    editable: true,
+    mode: 'inline',
+    noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
+    columns: {
+      created: {
+        title: this.translate.instant('pages.heaven.date'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      user_heaven_id: {
+        title: this.translate.instant('pages.heaven.heavenId'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      heaven_amount: {
+        title: this.translate.instant('common.amount'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      currency_type: {
+        title: this.translate.instant('pages.heaven.type'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      plan: {
+        title: this.translate.instant('pages.heaven.plan'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      anx_bonus: {
+        title: this.translate.instant('pages.heaven.heavenDrop'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+    },
+  };
+
+  source_heavenDrop: LocalDataSource = new LocalDataSource();
 
   changePeriod(period: string, typeValue: string): void {
     if (typeValue === 'heaven')
@@ -347,6 +412,25 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchHeavenHistory = false;
     }, (err) => {
       this.fetchHeavenHistory = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+    });
+  }
+
+  getHeavenDropHistory() {
+    jQuery('.heaven-history-spinner').height(jQuery('#heaven-history-Drop').height());
+    this.fetchHeavenDropHistory = true;
+    this.httpService.get(`anx-heaven-history/`).subscribe((res?: any) => {
+      const data = res;
+      const heaven_drop_history_data = _.map(data, function(obj) {
+        obj.created = moment(obj.created, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
+        obj.anx_bonus = (ShareDataService.toFixedDown(obj.anx_bonus, 2)) + ' ANX';
+        return obj;
+      });
+      this.source_heavenDrop.load(_.sortBy(heaven_drop_history_data, ['created']).reverse());
+      this.fetchHeavenDropHistory = false;
+    }, (err) => {
+      this.fetchHeavenDropHistory = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }

@@ -11,6 +11,8 @@ import {environment} from 'environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import * as _ from 'lodash';
 import { IndexedDBStorageService } from '../../services/indexeddb-storage.service';
+import {LocalDataSource} from 'ng2-smart-table';
+import * as moment from 'moment';
 
 declare const jQuery: any;
 @Component({
@@ -46,6 +48,7 @@ export class TransferComponent implements OnInit {
   transfer_amount: number;
   destination_address: number;
   trade_password: any = '';
+  fetchTransferHistory: boolean = false;
 
   constructor(private httpService: HttpService,
               private dialogService: NbDialogService,
@@ -70,9 +73,68 @@ export class TransferComponent implements OnInit {
       });
   }
 
+  transfers = {
+    hideSubHeader: true,
+    actions: false,
+    pager: {
+      display: true,
+    },
+    editable: true,
+    mode: 'inline',
+    noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
+    columns: {
+      trx_timestamp: {
+        title: this.translate.instant('pages.transfer.date'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      direction: {
+        title: this.translate.instant('pages.transfer.action'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          if (cell === 'SEND')
+            return `<div class="heavenhistory-cell"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
+          else if (cell === 'RECEIVE')
+            return `<div class="heavenhistory-cell"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
+        },
+      },
+      quantity: {
+        title: this.translate.instant('common.amount'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      type: {
+        title: this.translate.instant('pages.transfer.type'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+      address: {
+        title: this.translate.instant('pages.transfer.address'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell">${cell}</div>`;
+        },
+      },
+    },
+  };
+
+  source: LocalDataSource = new LocalDataSource();
+
   async ngOnInit() {
     this.toggle = null;
     this.getWallets();
+    this.getTransferHistory();
     if (this.shareDataService.transferTab) {
       if (this.shareDataService.transferTab === 'RECEIVE') {
         this.setReceiveTab = true;
@@ -142,27 +204,56 @@ export class TransferComponent implements OnInit {
     });
   }
 
+  getTransferHistory() {
+    jQuery('.transfer-history-spinner').height(jQuery('#transfer-history').height());
+    this.fetchTransferHistory = true;
+    this.httpService.get(`transactions-history/`).subscribe((res?: any) => {
+      const data = res.data;
+      const transfer_data = _.each(data, function (array, key) {
+        _.map(array, function (obj) {
+          if (key === 'btcTransactions')
+            obj.type = 'BTC';
+          else if (key === 'eosTransactions')
+            obj.type = 'EOS';
+          else if (key === 'ethTransactions')
+            obj.type = 'ETH';
+          obj.trx_timestamp = moment(obj.trx_timestamp).format('YYYY.MM.DD');
+          obj.direction = obj.direction === 'in' ? 'RECEIVE' : 'SEND';
+          obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
+          return obj;
+        });
+      });
+      const mergeArray = _.merge(transfer_data.btcTransactions, transfer_data.eosTransactions, transfer_data.ethTransactions);
+      const transferData =_.sortBy(mergeArray, ['trx_timestamp']).reverse();
+      this.source.load(transferData);
+      this.fetchTransferHistory = false;
+    }, (err) => {
+      this.fetchTransferHistory = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.transfer'));
+    });
+  }
+
   copyAddress() {
     if (this.receiveWallet.address)
-      this.toastrService.success(this.translate.instant('pages.transfer.toastr.walletAddressCopiedSuccessfully'), 
+      this.toastrService.success(this.translate.instant('pages.transfer.toastr.walletAddressCopiedSuccessfully'),
       this.translate.instant('pages.transfer.toastr.copyAddress'));
   }
 
   openTradeDialog(dialog: TemplateRef<any>) {
     if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'), 
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
       this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'), 
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
       this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'), 
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
       this.translate.instant('pages.transfer.send'));
       return;
     }
@@ -191,7 +282,7 @@ export class TransferComponent implements OnInit {
           this.toastrService.danger(res.message, this.translate.instant('common.tradePassword'));
         }
       }, err => {
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err),
         this.translate.instant('common.tradePassword'));
       });
   }
@@ -266,12 +357,12 @@ export class TransferComponent implements OnInit {
         this.fetchingAmount = false;
         this.otcWallet.toAmount = 0;
         this.otcWallet.toDollar = 0;
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err),
         this.translate.instant('common.fetchingAmount'));
       });
     }, (err) => {
       this.fetchingAmount = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),
       this.translate.instant('common.fetchingAmount'));
     });
   }
@@ -326,19 +417,19 @@ export class TransferComponent implements OnInit {
 
   onSendTransfer() {
     if (this.isProduction && this.sendWallet.wallet_type === 'USDT') {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'), 
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
       this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'), 
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
       this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'), 
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
       this.translate.instant('pages.transfer.send'));
       return;
     }
@@ -371,7 +462,7 @@ export class TransferComponent implements OnInit {
         }, 15000);
 
         this.formSubmitting = false;
-        this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'), 
+        this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
         this.translate.instant('pages.transfer.send'));
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           this.myWallets = data;
@@ -392,7 +483,7 @@ export class TransferComponent implements OnInit {
 
   onOTCTransfer() {
     if (!this.fromOTCAmount || !Number(this.fromOTCAmount)) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterTransferAmount'), 
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterTransferAmount'),
       this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }

@@ -94,6 +94,7 @@
       "enterAmount":"Enter Amount",
       "entryDate": "Entry date",
       "heavenHistory": "Heaven History",
+      "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "Heaven Drop Today",
       "heavenId":"Heaven ID",
       "noDataFound":"No data found",
@@ -102,6 +103,9 @@
       "releaseDate": "Release date",
       "releaseSetting": "Release setting",
       "totalHeaven": "Total Heaven",
+      "date": "Date",
+      "type": "Type",
+      "heavenDrop": "Heaven Drop",
       "toastr":{
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
@@ -179,7 +183,10 @@
       "tree": "Tree",
       "totalReward": "Total Reward",
       "yourRank": "Your Rank",
-      "yourReward": "Your Reward"
+      "yourReward": "Your Reward",
+      "rewardHistory": "Reward History",
+      "date": "Date",
+      "noDataFound":"No data found"
     },
     "register":{
       "alreadyHaveAnAccount": "Already have an account",
@@ -262,6 +269,11 @@
       "receive": "Receive",
       "send": "Send",
       "to": "To",
+      "transferHistory": "Trade History",
+      "date": "Date",
+      "action": "Action",
+      "type": "Type",
+      "address": "Address",
       "toastr":{
         "copyAddress":"Copy Address",
         "featureComingSoonStayTuned":"Feature coming soon! Stay tuned",

@@ -13,10 +13,8 @@
     -moz-appearance: textfield;
   }
 
-  nb-card {
-    margin: 0;
-    height: calc(100vh - 2 * #{$auth-layout-padding});
-    overflow: auto;
+  /deep/ ng2-smart-table table tr th {
+    width: 20%;
   }
 
   .cardHeadercss {
@@ -25,10 +23,11 @@
 
   .navigation .link {
     text-decoration: none;
-    margin: 1.6em 1.6em 0 1.6em;
+    margin: 0;
     font-weight: nb-theme(font-weight-bold) !important;
     font-family: nb-theme(font-bebas);
     font-size: 3.4rem;
+    padding-top: 1.25rem;
     .icon {
       font-size: 2rem;
     }
@@ -154,6 +153,7 @@
    nb-card-body, nb-tab {
     overflow: unset !important;
   }
+
   /deep/ {
     nb-layout .layout .layout-container .content .columns nb-layout-column {
       padding: $auth-layout-padding;
@@ -162,6 +162,32 @@
         padding: 0;
       }
     }
+  }
+
+  .navbar-header {
+    font-family: nb-theme(font-bebas);
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .heavenHistory-tree {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  .transferHistory {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    padding: 1.25rem !important;
+  }
+
+  .transfer-history-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    height: 100px;
+    text-align: center;
   }
 }
 

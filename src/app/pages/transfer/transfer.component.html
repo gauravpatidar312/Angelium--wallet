@@ -7,7 +7,7 @@
         </h1>
       </div>
     </nb-card-header>
-    <nb-card-body class="row">
+    <nb-card-body class="row pt-0">
       <div class="col-lg-2 col-md-1 col-sm-12 col-xs-12"></div>
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
         <nb-tabset fullWidth>
@@ -45,7 +45,7 @@
                         <label for="Amount" class="text-link">
                           {{"common.amount" | translate}}
                         </label>
-                        <input type="number"  name="transfer_amount" class="form-control font-nunitoSans" 
+                        <input type="number"  name="transfer_amount" class="form-control font-nunitoSans"
                             placeholder="{{ 'common.amount' | translate }}" step="0.000001"
                                [(ngModel)]="transfer_amount" [disabled]="!sendWallet?.wallet_type"  (keyup)="setAmount(sendWallet?.wallet_type)"
                                value="{{0 | number : '1.0-6' }}">
@@ -243,6 +243,38 @@
     </nb-card-body>
   </div>
 </nb-card>
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header class="row transferHistory">
+        <div class="col-md-12">
+          <div class="navbar-header heavenHistory-tree">
+            {{"pages.transfer.transferHistory" | translate}}
+          </div>
+        </div>
+        <!-- <div class="col-md-6 heavenHistoryColumn">
+           <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
+             <li class="pointer li-margin">
+               <a data-toggle="pill" (click)="getHeavenHistory('today')">{{'common.today'|translate}}</a>
+             </li>
+             <li class="active pointer li-margin">
+               <a data-toggle="pill" (click)="getHeavenHistory('total')">{{'common.total'|translate}}</a>
+             </li>
+           </ul>
+         </div>-->
+      </nb-card-header>
+      <nb-card-body id="transfer-history">
+        <div [hidden]="!fetchTransferHistory"><span class="transfer-history-spinner">
+          <i class="fa fa-spinner fa-spin"></i></span></div>
+        <div style="overflow: auto;">
+          <ng2-smart-table [settings]="transfers" [source]="source" *ngIf="!fetchTransferHistory">
+          </ng2-smart-table>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
 
 <ng-template #tradePassword let-data let-ref="dialogRef">
   <nb-card>
