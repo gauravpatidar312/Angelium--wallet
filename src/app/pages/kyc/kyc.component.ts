@@ -53,6 +53,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   isKYCUploaded = false;
   isSubmitting = false;
 
+  firstStep: string;
+  secondStep: string;
+  thirdStep: string;
+
   @ViewChild('stepper') stepper: NbStepperComponent;
 
   constructor(public datepipe: DatePipe,
@@ -77,21 +81,27 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
+
+    this.firstStep = this.translate.instant('pages.kyc.input');
+    this.secondStep = this.translate.instant('pages.kyc.audit');
+    this.thirdStep = this.translate.instant('pages.kyc.approved');
+
     this.userData = this.sessionStorage.getFromSession('userInfo');
-    this.userData.kyc_info = this.userData.kyc_info || {};
-    if (this.userData.kyc_info.status_description === 'pending') {
-      this.isKYCUploaded = true;
-      this.updateStateKYC();
-      // this.kycStep = 'pending';
-    }
-    if (!this.userData.kyc_info.datefield) {
-      this.userData.kyc_info.datefield = '';
-    }
   }
 
   ngAfterViewInit() {
-    if (this.userData.kyc_info && this.userData.kyc_info.status_description === 'pending') {
-      this.statusPending();
+    if (this.userData.kyc_info) {
+      if (this.userData.kyc_info.status_description !== 'failed') {
+        this.isKYCUploaded = true;
+        this.updateStateKYC();
+      }
+      this.setStepper(this.userData.kyc_info.status_description);
+    }
+    this.stepper.selectedIndex = 2;
+
+    this.userData.kyc_info = this.userData.kyc_info || {};
+    if (!this.userData.kyc_info.datefield) {
+      this.userData.kyc_info.datefield = '';
     }
 
     jQuery('[data-fancybox]').fancybox({
@@ -106,20 +116,21 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  statusPending() {
-    setTimeout(() => {
-      this.stepper.selectedIndex = 1;
-    }, 7);
+  setStepper(status) {
+    if (status === 'pending')
+      this.stepper.steps.first.completed = true;
+    else if (status === 'confirmed') {
+      this.stepper.steps.map((step) => {
+        step.completed = true;
+      });
+    }
   }
 
   updateStateKYC() {
-    if (this.userData.kyc_info && this.userData.kyc_info.status_description === 'pending') {
+    if (this.userData.kyc_info && this.userData.kyc_info.status_description !== 'confirmed') {
         this.idFrontLabel = 'ID Proof (front side)';
         this.idBackLabel = 'ID Proof (back side)';
         this.selfieLabel = 'Selfie';
-      // this.idFrontLabel = this.userData.kyc_info.doc_photo;
-      // this.idBackLabel = this.userData.kyc_info.doc_photo_back;
-      // this.selfieLabel = this.userData.kyc_info.selfie;
     }
   }
 
@@ -243,15 +254,13 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
     this.isSubmitting = true;
     this.httpService.post(formData, 'kyc/').subscribe((res?: any) => {
       this.isSubmitting = false;
-
       if (res.status_description) {
-        this.userData.kyc_info = {};
         this.userData.kyc_info = res;
-        this.statusPending();
+        this.setStepper(this.userData.kyc_info.status_description);
         this.updateStateKYC();
 
-        this.sessionService.updateUserState(this.userData);
         this.isKYCUploaded = true;
+        this.sessionService.updateUserState(this.userData);
         this.toastrService.success(this.translate.instant('pages.kyc.toastr.userKycUploadSuccessfully'), this.translate.instant('common.kyc'));
       } else {
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.kyc'));
