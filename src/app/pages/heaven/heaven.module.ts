@@ -17,6 +17,9 @@ import { ChartModule } from 'angular2-chartjs';
 import { SolarComponent } from './solar/solar.component';
 import { CustomRendererComponent } from './custom.component';
 import { TranslateModule } from "@ngx-translate/core";
+import {StatusCardComponent} from './status-card/status-card.component';
+import {StatusCardFrontComponent} from './status-card/front-side/status-card-front.component';
+import {StatusCardBackComponent} from './status-card/back-side/status-card-back.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { TranslateModule } from "@ngx-translate/core";
     ProfitChartComponent,
     ECommerceLegendChartComponent,
     SolarComponent,
-    CustomRendererComponent
+    CustomRendererComponent,
+    StatusCardComponent,
+    StatusCardFrontComponent,
+    StatusCardBackComponent
   ],
   imports: [
     CommonModule,

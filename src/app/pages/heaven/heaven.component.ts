@@ -15,6 +15,15 @@ import * as moment from 'moment';
 
 declare let jQuery: any;
 
+interface CardSettings {
+  title: string;
+  value: number;
+  value_anx: number;
+  fetchingHeavenDropValue: boolean;
+  iconClass: string;
+  type: string;
+}
+
 @Component({
   selector: 'ngx-heaven',
   templateUrl: './heaven.component.html',
@@ -42,10 +51,50 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   days:any;
-  fetchingTotalHeaven: boolean = false;
-  fetchingHeavenDrop: boolean = false;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
+
+  totalHeavenDropCard: CardSettings = {
+    title: this.translate.instant('pages.heaven.heavenDropTotal'),
+    value: 0,
+    value_anx: 0,
+    fetchingHeavenDropValue: false,
+    iconClass: 'fa fa-university',
+    type: 'primary',
+  };
+  todayHeavenDropCard: CardSettings = {
+    title: this.translate.instant('pages.heaven.heavenDropToday'),
+    value: 0,
+    value_anx: 0,
+    fetchingHeavenDropValue: false,
+    iconClass: 'nb-bar-chart',
+    type: 'primary',
+  };
+
+  commonStatusCardsSet: CardSettings[] = [
+    this.totalHeavenDropCard,
+    this.todayHeavenDropCard,
+  ];
+  statusCards1: string;
+
+  statusCardsByThemes: {
+    default: CardSettings[];
+    cosmic: CardSettings[];
+    corporate: CardSettings[];
+  } = {
+    default: this.commonStatusCardsSet,
+    cosmic: this.commonStatusCardsSet,
+    corporate: [
+      {
+        ...this.totalHeavenDropCard,
+        type: 'primary',
+      },
+      {
+        ...this.todayHeavenDropCard,
+        type: 'primary',
+      },
+    ],
+  };
 
   constructor(private service: SmartTableData,
               private shareDataService: ShareDataService,
@@ -59,6 +108,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
+        this.statusCards1 = this.statusCardsByThemes[theme.name];
       });
 
     this.breakpoints = this.breakpointService.getBreakpointsMap();
@@ -89,7 +139,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
     this.getWallets();
-    this.getTotalHeaven();
     this.getHeavenDrop();
     this.getHeavenGraph();
     this.getANXHistory();
@@ -349,22 +398,15 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenDrop() {
-    this.fetchingHeavenDrop = true;
-    this.httpService.get('heaven-drop/').subscribe(res => {
-      this.heavenDrop = res;
-      this.fetchingHeavenDrop = false;
+    this.todayHeavenDropCard.fetchingHeavenDropValue = true;
+    this.httpService.get('heaven-drop/').subscribe((res?: any) => {
+      this.todayHeavenDropCard.value_anx = res.heaven_drop_today_anx;
+      this.todayHeavenDropCard.value = res.heaven_drop_today;
+      this.totalHeavenDropCard.value = res.heaven_drop_total;
+      this.totalHeavenDropCard.value_anx = res.heaven_drop_total_anx;
+      this.todayHeavenDropCard.fetchingHeavenDropValue = false;
     }, (err) => {
-      this.fetchingHeavenDrop = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
-    });
-  }
-  getTotalHeaven() {
-    this.fetchingTotalHeaven = true;
-    this.httpService.get('total-heaven/').subscribe((res?: any) => {
-      this.totalHeaven = res;
-      this.fetchingTotalHeaven = false;
-    }, (err) => {
-      this.fetchingTotalHeaven = false;
+      this.todayHeavenDropCard.fetchingHeavenDropValue = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }

@@ -11,13 +11,7 @@ export class StatusCardComponent implements OnDestroy {
   flipped = false;
   private alive = true;
   @Output() periodChange = new EventEmitter<string>();
-  @Input() title: string;
-  @Input() type: string;
-  @Input() value: string;
-  @Input() valueANX: number;
-  @Input() on = true;
-  @Input() id: number;
-  @Input() iconClass: string;
+  @Input() statusCard: any;
   @Input() fetchingAssetValue: boolean;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;

@@ -1,18 +1,18 @@
 <nb-card>
-  <div class="icon-container">
+<div class="icon-container">
     <div class="icon {{ statusCard.type }}">
       <ng-content></ng-content>
     </div>
-  </div>
+</div>
   <div class="details full-width">
     <div class="row">
       <div class="col-6 mt-2">
         <div class="title">{{ statusCard.title }}</div>
       </div>
-      <div class="col-6" *ngIf="fetchingAssetValue">
+      <div class="col-6" *ngIf="statusCard.fetchingHeavenDropValue">
         <div class="status text-white mt-0"><span><i class="fa fa-spinner spinner-color fa-spin"></i></span></div>
       </div>
-      <div class="col-6" ngClass="{'pr-3' : id === 2}" *ngIf="!fetchingAssetValue">
+      <div class="col-6" *ngIf="!statusCard.fetchingHeavenDropValue">
         <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
@@ -27,8 +27,7 @@
           </ul>
         </div>
         <div class="clearfix"></div>-->
-        <div class="status text-white" *ngIf="statusCard.id === 1"><span class="text-success">$</span>{{ statusCard.value | number : '1.0-2' }}</div>
-        <div class="status text-white" *ngIf="statusCard.id === 2">{{ statusCard.value_anx | number : '1.0-2' }} <span class="text-success">ANX</span></div>
+        <div class="status text-white"><span class="text-success">$</span>{{ statusCard.value | number : '1.0-2' }}</div>
         <div class="delta up" *ngIf="false">0%</div>
         <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
       </div>

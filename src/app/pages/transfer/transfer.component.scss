@@ -284,3 +284,16 @@
   float: right;
   background-color: #00d977 !important;
 }
+
+/deep/ .swal2-title {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/deep/ .swal2-styled.swal2-confirm{
+  background-color: #dc3545 !important;
+}
+
+/deep/ .swal2-styled.swal2-cancel{
+  background-color: #00d977 !important;
+}

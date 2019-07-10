@@ -78,6 +78,7 @@
       "articleTitle": "文章标题",
       "eventUpdate": "事件更新",
       "profitToday" : "今日收益",
+      "profitTodayTotal": "Profit Total",
       "portfolio": "组合",
       "systemUpdate": "系统更新",
       "totalAsset" : "资产总额",
@@ -103,6 +104,7 @@
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
       "totalHeaven": "天堂总计",
+      "heavenDropTotal": "Heaven Drop Total",
       "date": "Date",
       "type": "Type",
       "heavenDrop": "Heaven Drop",
@@ -266,6 +268,7 @@
     "transfer":{
       "enterDestinationAddress" : "输入目的地地址",
       "destinationAddress" : "Destination Address",
+      "otcWarnMessage": "Executing OTC before Episode 2: Exchange function implementation, you will lose special bonus in Episode 2, are you really sure to lose bonus and execute OTC?",
       "receive": "接收",
       "send": "发送",
       "to": "To",

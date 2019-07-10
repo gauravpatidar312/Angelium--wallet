@@ -10,7 +10,6 @@ import { takeWhile } from 'rxjs/operators';
 export class StatusCardBackComponent implements OnDestroy {
   private alive = true;
   @Input() statusCard: any;
-  @Input() fetchingAssetValue: boolean;
 
   constructor() {}
 

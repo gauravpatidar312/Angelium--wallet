@@ -11,8 +11,6 @@ import {environment} from '../../../../../environments/environment';
 export class StatusCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
   @Input() statusCard: any;
-  @Input() fetchingAssetValue: boolean;
-
   isProduction: any = environment.production;
   currentTheme: string;
 

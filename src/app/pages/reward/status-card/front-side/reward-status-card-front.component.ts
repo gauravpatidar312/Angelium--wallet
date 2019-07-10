@@ -4,14 +4,14 @@ import { takeWhile } from 'rxjs/operators';
 import {environment} from '../../../../../environments/environment';
 
 @Component({
-  selector: 'ngx-status-card-front',
-  styleUrls: ['./status-card-front.component.scss'],
-  templateUrl: './status-card-front.component.html',
+  selector: 'ngx-reward-status-card-front',
+  styleUrls: ['./reward-status-card-front.component.scss'],
+  templateUrl: './reward-status-card-front.component.html',
 })
-export class StatusCardFrontComponent implements OnDestroy, OnInit {
+export class RewardStatusCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
   @Input() statusCard: any;
-  @Input() fetchingAssetValue: boolean;
+  @Input() fetchingRewardValue: boolean;
 
   isProduction: any = environment.production;
   currentTheme: string;

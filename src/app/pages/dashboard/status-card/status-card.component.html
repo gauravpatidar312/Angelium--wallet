@@ -1,16 +1,16 @@
 <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
   <nb-card-front>
     <nb-card size="xsmall">
-      <ngx-status-card-front [title]="title" [id]="id" [type]="type" [value]="value" [valueANX]="valueANX" [fetchingAssetValue]="fetchingAssetValue">
-        <i [ngClass]="iconClass"></i>
+      <ngx-status-card-front [statusCard]="statusCard" [fetchingAssetValue]="fetchingAssetValue">
+        <i [ngClass]="statusCard.iconClass"></i>
       </ngx-status-card-front>
-      <i class="nb-arrow-right pointer mr-2" *ngIf="id === 2" (click)="toggleFlipView()"></i>
+      <i class="nb-arrow-right pointer mr-2" *ngIf="statusCard.id === 2" (click)="toggleFlipView()"></i>
     </nb-card>
   </nb-card-front>
   <nb-card-back>
     <nb-card size="xsmall">
-      <ngx-status-card-back [title]="title" [id]="id" [value]="value" [type]="type" [fetchingAssetValue]="fetchingAssetValue">
-        <i [ngClass]="iconClass"></i>
+      <ngx-status-card-back [statusCard]="statusCard" [fetchingAssetValue]="fetchingAssetValue">
+        <i [ngClass]="statusCard.iconClass"></i>
       </ngx-status-card-back>
       <i class="nb-arrow-right pointer mr-2" (click)="toggleFlipView()"></i>
     </nb-card>

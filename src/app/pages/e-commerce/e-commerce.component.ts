@@ -15,7 +15,9 @@ interface CardSettings {
   id: number;
   title: string;
   value: number;
-  valueANX: number;
+  value_anx: number;
+  totalProfitTitle: string;
+  total_profit_anx: number;
   iconClass: string;
   type: string;
 }
@@ -55,7 +57,9 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     id: 1,
     title: this.translate.instant('pages.dashboard.totalAsset'),
     value: 0,
-    valueANX: 0,
+    value_anx: 0,
+    totalProfitTitle: '',
+    total_profit_anx: 0,
     iconClass: 'fa fa-university',
     type: 'primary',
   };
@@ -63,7 +67,9 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     id: 2,
     title: this.translate.instant('pages.dashboard.profitToday'),
     value: 0,
-    valueANX: 0,
+    value_anx: 0,
+    totalProfitTitle: this.translate.instant('pages.dashboard.profitTodayTotal'),
+    total_profit_anx: 0,
     iconClass: 'fa fa-chart-line',
     type: 'primary',
   };
@@ -158,7 +164,8 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     this.httpService.get('asset/').subscribe((data?: any) => {
       this.assetCard.value = data.total_asset;
       this.gainCard.value = data.total_profit;
-      this.gainCard.valueANX = data.total_profit_anx || 0;
+      this.gainCard.value_anx = data.today_profit_anx || 0;
+      this.gainCard.total_profit_anx = data.total_profit_anx || 0;
       this.fetchingAssetValue = false;
       this.cryptoBalance = _.sortBy(_.filter(data.cryptos, (item) => {
         if (item.name === 'ANX')

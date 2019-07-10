@@ -293,7 +293,7 @@ $shadow-green: #00977e;
       }
     }
 
-    .nb-theme-cosmic nb-select > button[nbButton] {
+    /deep/ .nb-theme-cosmic nb-select > button[nbButton] {
       padding: 0.75rem !important;
 
       &::after {
@@ -303,11 +303,11 @@ $shadow-green: #00977e;
   }
 
   @media only screen and (width: 320px) {
-    .title {
+    /deep/ .title {
       font-size: 1.5rem !important;
     }
 
-    .status {
+   /deep/ .status {
       font-size: 1.9rem !important;
       margin-top: 10px !important;
     }

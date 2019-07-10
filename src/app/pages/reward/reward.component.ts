@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
-import { TranslateService } from "@ngx-translate/core";
+import {TranslateService} from "@ngx-translate/core";
 import {NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
 import {DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl} from '@angular/platform-browser';
@@ -18,8 +18,8 @@ declare let jQuery: any;
 
 interface CardSettings {
   title: string;
-  value: string;
-  percentage: string;
+  value: number;
+  value_anx: number;
   iconClass: string;
   type: string;
 }
@@ -111,7 +111,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       rewardrate: {
-        title: this.translate.instant('pages.reward.downlineTree.reward')+' '+ this.translate.instant('common.rate'),
+        title: this.translate.instant('pages.reward.downlineTree.reward') + ' ' + this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -119,7 +119,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downlinereward: {
-        title: this.translate.instant('common.downline')+" "+ this.translate.instant('common.rate'),
+        title: this.translate.instant('common.downline') + " " + this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -219,7 +219,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       anx_quantity: {
-        title: this.translate.instant('pages.reward.totalReward'),
+        title: this.translate.instant('pages.reward.downlineTree.reward'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -233,15 +233,15 @@ export class RewardComponent implements OnInit, AfterViewInit {
 
   totalRewardCard: CardSettings = {
     title: this.translate.instant('pages.reward.totalReward'),
-    value: '0',
-    percentage: '0',
+    value: 0,
+    value_anx: 0,
     iconClass: 'nb-home',
     type: 'primary',
   };
   todayRewadCard: CardSettings = {
     title: this.translate.instant('pages.reward.rewardToday'),
-    value: '0',
-    percentage: '0',
+    value: 0,
+    value_anx: 0,
     iconClass: 'nb-roller-shades',
     type: 'primary',
   };
@@ -277,6 +277,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
   angel_count: any;
   downline_heaven: any;
   total_users: any;
+
   constructor(private themeService: NbThemeService,
               private httpService: HttpService,
               private sanitizer: DomSanitizer,
@@ -295,12 +296,12 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.userData.infinity_name = 'PINK ANGEL';
     else
       this.userData.infinity_name = 'ANGEL';
-   /* const data = this.service.getData();
-    const NewOBj = [];
-    for (let x = 0; x < 10; x++) {
-      NewOBj.push(data[x]);
-    }
-    this.source.load(NewOBj);*/
+    /* const data = this.service.getData();
+     const NewOBj = [];
+     for (let x = 0; x < 10; x++) {
+     NewOBj.push(data[x]);
+     }
+     this.source.load(NewOBj);*/
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -318,15 +319,14 @@ export class RewardComponent implements OnInit, AfterViewInit {
 
   getReward() {
     this.fetchingRewardValue = true;
-    let url = `reward/`;
-    this.httpService.get(url).subscribe((res?: any) => {
+    this.httpService.get(`reward/`).subscribe((res?: any) => {
       if (res.total) {
         this.totalRewardCard.value = res.total.reward;
-        this.totalRewardCard.percentage = res.total.percentage;
+        this.totalRewardCard.value_anx = res.total.reward_anx;
       }
       if (res.daily) {
         this.todayRewadCard.value = res.daily.reward;
-        this.todayRewadCard.percentage = res.total.percentage;
+        this.todayRewadCard.value_anx = res.daily.reward_anx;
       }
       this.fetchingRewardValue = false;
     }, (err) => {
@@ -339,7 +339,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
   getDownlineAngel() {
     this.fetchingDownlineAngel = true;
     this.httpService.get(`downline-angel/`).subscribe((res?: any) => {
-        this.angel_count = res.angel_count;
+      this.angel_count = res.angel_count;
       this.fetchingDownlineAngel = false;
     }, (err) => {
       this.fetchingDownlineAngel = false;
@@ -388,7 +388,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     jQuery('.reward-history-spinner').height(jQuery('#reward-history').height());
     this.fetchingHistory = true;
     this.httpService.get(`reward-history/`).subscribe((res?: any) => {
-      const history_data = _.map(res, function(obj) {
+      const history_data = _.map(res, function (obj) {
         obj.date = moment(obj.date, 'YYYY-MM-DD').format('YYYY.MM.DD');
         obj.anx_quantity = ShareDataService.toFixedDown(obj.anx_quantity, 2);
         return obj;
