@@ -108,7 +108,9 @@
               <tr>
                 <td class="title-col">{{"common.kyc" | translate}}</td>
                 <td class="value-col">{{(userData?.kyc_info?.status_description || 'Not Submitted Yet')}}</td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/kyc"></i></td>
+                <td class="action-col iconpaddfix">
+                  <i class="nb-edit fa-2x" *ngIf="!userData?.kyc_info?.status_description || userData?.kyc_info?.status_description !== 'confirmed'" routerLink="/pages/kyc"></i>
+                </td>
               </tr>
               <tr>
                 <td class="title-col">{{"pages.setting.currency" | translate}}</td>
