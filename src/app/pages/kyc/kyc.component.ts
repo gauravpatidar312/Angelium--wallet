@@ -87,10 +87,11 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
     this.thirdStep = this.translate.instant('pages.kyc.approved');
 
     this.userData = this.sessionStorage.getFromSession('userInfo');
+    this.userData.kyc_info = this.userData.kyc_info || {};
   }
 
   ngAfterViewInit() {
-    if (this.userData.kyc_info) {
+    if (this.userData.kyc_info && this.userData.kyc_info.status_description) {
       if (this.userData.kyc_info.status_description !== 'failed') {
         this.isKYCUploaded = true;
         this.updateStateKYC();
@@ -99,7 +100,6 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
     }
     this.stepper.selectedIndex = 2;
 
-    this.userData.kyc_info = this.userData.kyc_info || {};
     if (!this.userData.kyc_info.datefield) {
       this.userData.kyc_info.datefield = '';
     }
