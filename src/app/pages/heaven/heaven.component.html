@@ -61,7 +61,7 @@
                 </ul>
               </div>
               <div class="clearfix"></div>-->
-              <div class="status status-margin text-white text-margin">{{heavenDrop?.total_amount | number : '1.0-2' }} <span class="text-success">ANX</span></div>
+              <div class="status status-margin text-white text-margin">{{heavenDrop?.total_amount | number : '1.0-2' }} <span class="text-success">{{"common.cryptos.anx" | translate}}</span></div>
               <div class="delta" *ngIf="false" [class.up]="heavenDrop?.percentage >= 0" [class.down]="heavenDrop?.percentage < 0">
                 {{heavenDrop?.percentage > 0 ? heavenDrop?.percentage : (-1 * heavenDrop?.percentage)}}%
               </div>
@@ -216,7 +216,7 @@
                 <div class="legend-item-color"
                      style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
                 </div>
-                <div class="legend-title">ANX</div>
+                <div class="legend-title">{{"common.cryptos.anx" | translate}}</div>
               </div>
               <div class="legend">
                 <div class="legend-item-color"

@@ -58,6 +58,7 @@
     "today": "今日",
     "top": "顶部",
     "tradePassword": "交易密码",
+    "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
     "username": "用户名",
     "upload":"上传",
     "verificationCode": "认证码",
@@ -114,21 +115,26 @@
     },
     "hq":{
       "age":"年龄",
+      "averageANX":"平均ANX",
+      "averageHeaven":"平均天堂",
+      "areYouSureToLoadTheSessionOfTheUser": "Are you sure to load the session of the user?",
       "commissionPaid":"佣金支付",
       "gainPaid":"获得报酬",
       "heavenRate":"天堂利率",
+      "heavenGrowth":"天堂增值",
       "id":"ID",
+      "leavingUser":"离开用户",
       "newHeaven":"新天堂",
+      "newUser":"新用户",
       "releasable":"可释放",
       "released":"已释放",
-      "userDatabase":"用户数据库",
-      "averageANX":"平均ANX",
-      "averageHeaven":"平均天堂",
-      "heavenGrowth":"天堂增值",
       "totalUser":"总用户数",
-      "newUser":"新用户",
-      "leavingUser":"离开用户",
-      "userGrowth":"用户增长"
+      "thereAreNoUsers": "There are no users.",
+      "userGrowth":"用户增长",
+      "toastr": {
+        "loadUserSession": "Load User Session",
+        "userDatabase":"用户数据库"
+      }
     },
     "kyc":{
       "audit":"审计",
@@ -167,6 +173,7 @@
     "reward":{
       "downlineAngel": "经我邀请的天使",
       "downlineHeaven": "下级天堂",
+      "heavenDrop": "Heaven Drop",
       "downlineTree": {
         "noUserDownlineTree": "您的下级分支中没有任何用户",
         "rank": "排行",
@@ -192,7 +199,6 @@
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "确认交易密码",
       "terms&Conditions" : "条款和条件",
-      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "需要用户名",
       "toastr":{
         "confirmEmailDoNotMatch":"电子邮件不匹配",
@@ -233,14 +239,15 @@
       "on": "ON",
       "off": "OFF",
       "qr": "二维",
+      "QRCode": "QR Code",
       "r18mode": "R-18禁模式",
       "referral": "转送",
       "rank": "排行",
+      "referralLink": "推荐链接",
       "reportBug": "报告错误",
       "support": "支持与帮助",
       "secretKey": "密钥",
       "2FA": "2FA",
-      "referralLink": "推荐链接",
       "toastr":{
         "changeUsername": "更改用户名",
         "changeLoginPassword": "更改登录密码",
@@ -270,7 +277,7 @@
       "destinationAddress" : "Destination Address",
       "handlingChargeApplicableOnEachTransaction": "3% handling charge is applicable on each transaction.",
       "minimumAmountForBTCTransfer":"Minimum amount for BTC transfer is $100 for beta version.",
-      "realNameIsRequiredForKYC": "Must be real name for KYC process. it cannot be changed",
+      "realNameIsRequiredForKYC": "KYC流程需要真实姓名。 注册后无法更改",
       "receive": "接收",
       "send": "发送",
       "to": "To",

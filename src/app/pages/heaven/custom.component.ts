@@ -19,9 +19,9 @@ import { TranslateService } from '@ngx-translate/core';
         {{value}}
       </button>
       <ul class="dropdown-menu" ngbDropdownMenu>
-        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '30', rowData.plan === 'Heaven 30' ? 'Heaven 30' : 'Another Heaven 30')">{{rowData.plan === 'Heaven 30' ? '' : 'Another'}} Heaven 30</li>
-        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '60', rowData.plan === 'Heaven 30' ? 'Heaven 60' : 'Another Heaven 60')">{{ rowData.plan === 'Heaven 30' ? '' : 'Another'}} Heaven 60</li>
-        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '90', rowData.plan === 'Heaven 30' ? 'Heaven 90' : 'Another Heaven 90')">{{rowData.plan === 'Heaven 30' ? '' : 'Another'}} Heaven 90</li>
+        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '30', rowData.plan === 'Heaven 30' ? 'Heaven 30' : 'Another Heaven 30')">{{rowData.plan === 'Heaven 30' ? '' : 'Another'}} {{"common.heaven" | translate}} 30</li>
+        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '60', rowData.plan === 'Heaven 30' ? 'Heaven 60' : 'Another Heaven 60')">{{ rowData.plan === 'Heaven 30' ? '' : 'Another'}} {{"common.heaven" | translate}} 60</li>
+        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '90', rowData.plan === 'Heaven 30' ? 'Heaven 90' : 'Another Heaven 90')">{{rowData.plan === 'Heaven 30' ? '' : 'Another'}} {{"common.heaven" | translate}} 90</li>
         <li class="dropdown-item" *ngIf="currentDate < releaseDate" (click)="releaseSettingChange(rowData, 'release', 'Stop')">Stop</li>
         <li class="dropdown-item" *ngIf="currentDate >= releaseDate" (click)="releaseSettingChange(rowData, 'release', 'Release')">Release</li>
       </ul>

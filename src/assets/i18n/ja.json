@@ -58,6 +58,7 @@
     "today": "Today",
     "top": "トップ",
     "tradePassword": "Trade Password",
+    "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
     "username": "ユーザーネーム",
     "upload":"Upload",
     "verificationCode": "認証コード",
@@ -114,21 +115,26 @@
     },
     "hq":{
       "age":"Age",
+      "averageANX":"Average ANX",
+      "averageHeaven":"Average Heaven",
+      "areYouSureToLoadTheSessionOfTheUser": "Are you sure to load the session of the user?",
       "commissionPaid":"Commission Paid",
       "gainPaid":"Gain Paid",
       "heavenRate":"Heaven Rate",
+      "heavenGrowth":"Heaven Growth",
       "id":"ID",
+      "leavingUser":"Leaving User",
       "newHeaven":"New Heaven",
+      "newUser":"New User",
       "releasable":"Releasable",
       "released":"Released",
-      "userDatabase":"User Database",
-      "averageANX":"Average ANX",
-      "averageHeaven":"Average Heaven",
-      "heavenGrowth":"Heaven Growth",
       "totalUser":"Total User",
-      "newUser":"New User",
-      "leavingUser":"Leaving User",
-      "userGrowth":"User Growth"
+      "thereAreNoUsers": "There are no users.",
+      "userGrowth":"User Growth",
+      "toastr": {
+        "loadUserSession": "Load User Session",
+        "userDatabase": "User Database"
+      }
     },
     "kyc":{
       "audit":"Audit",
@@ -167,6 +173,7 @@
     "reward":{
       "downlineAngel": "紹介したエンジェル",
       "downlineHeaven": "Downline Heaven",
+      "heavenDrop": "Heaven Drop",
       "downlineTree": {
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "ランク",
@@ -192,7 +199,6 @@
       "repeatTradePassword": "Repeat Trade Password",
       "realNameIsRequiredForKYC": "KYC流程需要真实姓名。 注册后无法更改",
       "terms&Conditions" : "Terms & Conditions",
-      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",

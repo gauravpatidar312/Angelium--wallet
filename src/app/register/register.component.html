@@ -30,7 +30,7 @@
             <img src="../../assets/images/angelium_logo.png" class="logo-image" />
             <h1 id="title" class="title">{{"common.register" | translate}}</h1>
             <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">
-              {{"pages.register.tryResendOtp" | translate}}
+              {{"common.tryResendOtp" | translate}}
             </p>
             <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()"  class="registerForm">
               <div class="form-group row">

@@ -58,6 +58,7 @@
     "today": "오늘",
     "top": "홈",
     "tradePassword": "거래 비밀번호",
+    "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
     "username": "사용자명",
     "upload":"업로드",
     "verificationCode": "인증번호",
@@ -114,21 +115,26 @@
     },
     "hq":{
       "age":"Age",
+      "averageANX":"Average ANX",
+      "averageHeaven":"Average Heaven",
+      "areYouSureToLoadTheSessionOfTheUser": "Are you sure to load the session of the user?",
       "commissionPaid":"Commission Paid",
       "gainPaid":"Gain Paid",
       "heavenRate":"Heaven Rate",
+      "heavenGrowth":"Heaven Growth",
       "id":"ID",
+      "leavingUser":"Leaving User",
       "newHeaven":"New Heaven",
+      "newUser":"New User",
       "releasable":"Releasable",
       "released":"Released",
-      "userDatabase":"User Database",
-      "averageANX":"Average ANX",
-      "averageHeaven":"Average Heaven",
-      "heavenGrowth":"Heaven Growth",
       "totalUser":"Total User",
-      "newUser":"New User",
-      "leavingUser":"Leaving User",
-      "userGrowth":"User Growth"
+      "thereAreNoUsers": "There are no users.",
+      "userGrowth":"User Growth",
+      "toastr": {
+        "userDatabase": "User Database",
+        "loadUserSession": "Load User Session"
+      }
     },
     "kyc":{
       "audit":"Audit",
@@ -167,6 +173,7 @@
     "reward":{
       "downlineAngel": "소개한 엔젤",
       "downlineHeaven": "다운라인 헤븐",
+      "heavenDrop": "Heaven Drop",
       "downlineTree": {
         "noUserDownlineTree": "다운라인 트리에 사용자가 없습니다",
         "rank": "랭킹",
@@ -192,7 +199,6 @@
       "repeatTradePassword": "거래 비밀번호 재입력",
       "realNameIsRequiredForKYC": "KYC 인증을 위한 실명이 필요합니다. 등록한 후 변경할 수 없습니다",
       "terms&Conditions" : "이용약관",
-      "tryResendOtp": "Did not receive OTP? Try RESEND when enabled.",
       "usernameUsRequired": "Username us required",
       "toastr":{
         "confirmEmailDoNotMatch":"Confirm e-mail do not match",
