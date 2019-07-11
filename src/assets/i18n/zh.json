@@ -151,6 +151,7 @@
       "browse":"浏览",
       "close":"Close",
       "dob":"生日",
+      "eachFileMustBeLessThan2MB": "Each file must be less than 2MB.",
       "idProofFront":"ID Proof (front side)",
       "idProofBack":"ID Proof (back side)",
       "input":"输入",
@@ -179,6 +180,18 @@
         "pleaseVerifyCaptcha":"请确认验证码"
       }
     },
+    "merge": {
+      "ANLUsername": "ANL Username",
+      "ANLUsernameIsRequired": "ANL username is required",
+      "ANLPassword": "ANL Password",
+      "ANLPasswordIsRequired": "ANL Password is required",
+      "XTRAVEL": "XTRAVEL",
+      "XTRAVELUsername": "XTRAVEL Username",
+      "XTRAVELUsernameIsRequired": "XTRAVEL username is required",
+      "XTRAVELPassword": "XTRAVEL Password",
+      "XTRAVELPasswordIsRequired": "XTRAVEL Password is required",
+      "yourOldXTRAVELAccountWillBeMergedToNewAccount": "Your old XTRAVEL account will be merged to new account."
+    },
     "reward":{
       "downlineAngel": "经我邀请的天使",
       "downlineHeaven": "下级天堂",
@@ -197,7 +210,7 @@
       "yourRank": "你的排行",
       "yourReward": "你的奖励",
       "rewardHistory": "Reward History",
-      "noDataFound":"No data found",
+      "noDataFound":"No data found"
     },
     "register":{
       "alreadyHaveAnAccount": "已有账户",
@@ -239,6 +252,7 @@
       "chatNow": "开始聊天",
       "clickToReport": "点击报告",
       "download": "Download",
+      "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名称",
       "eMail": "E-mail",
       "language": "语言",

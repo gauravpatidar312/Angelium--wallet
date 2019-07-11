@@ -151,6 +151,7 @@
       "browse":"Browse",
       "close":"Close",
       "dob":"Date of Birth",
+      "eachFileMustBeLessThan2MB": "Each file must be less than 2MB.",
       "idProofFront":"ID Proof (front side)",
       "idProofBack":"ID Proof (back side)",
       "input":"Input",
@@ -179,6 +180,18 @@
         "pleaseVerifyCaptcha":"Please verify captcha"
       }
     },
+    "merge": {
+      "ANLUsername": "ANL Username",
+      "ANLUsernameIsRequired": "ANL username is required",
+      "ANLPassword": "ANL Password",
+      "ANLPasswordIsRequired": "ANL Password is required",
+      "XTRAVEL": "XTRAVEL",
+      "XTRAVELUsername": "XTRAVEL Username",
+      "XTRAVELUsernameIsRequired": "XTRAVEL username is required",
+      "XTRAVELPassword": "XTRAVEL Password",
+      "XTRAVELPasswordIsRequired": "XTRAVEL Password is required",
+      "yourOldXTRAVELAccountWillBeMergedToNewAccount": "Your old XTRAVEL account will be merged to new account."
+    },
     "reward":{
       "downlineAngel": "紹介したエンジェル",
       "downlineHeaven": "Downline Heaven",
@@ -197,7 +210,7 @@
       "yourRank": "あなたのランク",
       "yourReward": "あなたのリワード",
       "rewardHistory": "Reward History",
-      "noDataFound":"No data found",
+      "noDataFound":"No data found"
     },
     "register":{
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
@@ -239,6 +252,7 @@
       "chatNow": "Chat now",
       "clickToReport": "Click to report",
       "download": "Download",
+      "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名前",
       "eMail": "Eメール",
       "language": "言語",

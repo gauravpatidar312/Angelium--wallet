@@ -84,7 +84,7 @@
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
-                      <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
+                      <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
                     </div>
                   </div>
                 </div>
@@ -285,7 +285,7 @@
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradeDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <input type="password" [(ngModel)]="trade_password" placeholder="Trade password" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="trade_password" placeholder="{{'common.tradePassword' | translate}}" nbInput/><br/><br/>
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">{{"common.submit" | translate}}</button>
