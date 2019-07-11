@@ -19,6 +19,7 @@
     "downline": "Downline",
     "days": "Days",
     "day": "Day",
+    "date": "Date",
     "emailAddress": "Email address",
     "email": "Email",
     "enter": "Enter",
@@ -52,6 +53,7 @@
     "sendSMS": "Send SMS",
     "setting": "Setting",
     "submit":"Submit",
+    "success": "Success",
     "transfer": "Transfer",
     "trade": "Trade",
     "total": "Total",
@@ -79,7 +81,9 @@
   "pages":{
     "dashboard":{
       "articleTitle": "Article Title",
+      "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "Event Update",
+      "ghost": "Ghost",
       "profitToday" : "Profit Today",
       "profitTodayTotal": "Profit Total",
       "portfolio": "PORTFOLIO",
@@ -108,7 +112,6 @@
       "releaseSetting": "Release setting",
       "totalHeaven": "Total Heaven",
       "heavenDropTotal": "Heaven Drop Total",
-      "date": "Date",
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
@@ -194,7 +197,6 @@
       "yourRank": "Your Rank",
       "yourReward": "Your Reward",
       "rewardHistory": "Reward History",
-      "date": "Date",
       "noDataFound":"No data found"
     },
     "register":{
@@ -292,7 +294,6 @@
       "send": "Send",
       "to": "To",
       "transferHistory": "Trade History",
-      "date": "Date",
       "action": "Action",
       "type": "Type",
       "address": "Address",

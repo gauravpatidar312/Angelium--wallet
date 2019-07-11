@@ -19,6 +19,7 @@
     "downline": "邀请好友",
     "days": "天",
     "day": "天",
+    "date": "Date",
     "emailAddress": "邮箱地址",
     "email": "电子邮箱",
     "enter": "输入",
@@ -52,6 +53,7 @@
     "sendSMS": "发送短信",
     "setting": "设置",
     "submit":"提交",
+    "success": "Success",
     "transfer": "转账",
     "trade": "交易",
     "total": "总计",
@@ -79,7 +81,9 @@
   "pages":{
     "dashboard":{
       "articleTitle": "文章标题",
+      "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "事件更新",
+      "ghost": "Ghost",
       "profitToday" : "今日收益",
       "profitTodayTotal": "Profit Total",
       "portfolio": "组合",
@@ -108,7 +112,6 @@
       "releaseSetting": "释放设置",
       "totalHeaven": "天堂总计",
       "heavenDropTotal": "Heaven Drop Total",
-      "date": "Date",
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
@@ -195,7 +198,6 @@
       "yourReward": "你的奖励",
       "rewardHistory": "Reward History",
       "noDataFound":"No data found",
-      "date": "Date"
     },
     "register":{
       "alreadyHaveAnAccount": "已有账户",
@@ -292,7 +294,6 @@
       "send": "发送",
       "to": "To",
       "transferHistory": "Trade History",
-      "date": "Date",
       "action": "Action",
       "type": "Type",
       "address": "Address",

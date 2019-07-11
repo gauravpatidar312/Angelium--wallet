@@ -19,6 +19,7 @@
     "downline": "다운라인",
     "days": "일",
     "day": "일",
+    "date": "Date",
     "emailAddress": "이메일",
     "email": "이메일",
     "enter": "입력",
@@ -52,6 +53,7 @@
     "sendSMS": "인증번호 전송",
     "setting": "설정",
     "submit":"제출",
+    "success": "Success",
     "transfer": "이체하기",
     "trade": "거래",
     "total": "총",
@@ -79,7 +81,9 @@
   "pages":{
     "dashboard":{
       "articleTitle": "기사 제목",
+      "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "이벤트 업데이트",
+      "ghost": "Ghost",
       "profitToday": "오늘의 이익",
       "profitTodayTotal": "Profit Total",
       "portfolio": "포트폴리오",
@@ -108,7 +112,6 @@
       "releaseSetting": "완료 설정",
       "totalHeaven": "총 헤븐",
       "heavenDropTotal": "Heaven Drop Total",
-      "date": "Date",
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
@@ -291,7 +294,6 @@
       "send": "출금",
       "to": "To",
       "transferHistory": "Trade History",
-      "date": "Date",
       "action": "Action",
       "type": "Type",
       "address": "Address",

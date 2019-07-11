@@ -90,7 +90,7 @@ export class TransferComponent implements OnInit {
     noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
       timestamp: {
-        title: this.translate.instant('pages.transfer.date'),
+        title: this.translate.instant('common.date'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {

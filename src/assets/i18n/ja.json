@@ -19,6 +19,7 @@
     "downline": "ダウンライン",
     "days": "Days",
     "day": "Day",
+    "date": "Date",
     "emailAddress": "Eメール",
     "email": "Eメール",
     "enter": "Enter",
@@ -52,6 +53,7 @@
     "sendSMS": "Send SMS",
     "setting": "設定",
     "submit":"Submit",
+    "success": "Success",
     "transfer": "TRANSFER",
     "trade": "Trade",
     "total": "Total",
@@ -79,7 +81,9 @@
   "pages":{
     "dashboard":{
       "articleTitle": "投稿記事名",
+      "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "イベント更新",
+      "ghost": "Ghost",
       "profitToday" : "今日の利益",
       "profitTodayTotal": "Profit Total",
       "portfolio": "ポートフォリオ",
@@ -108,7 +112,6 @@
       "releaseSetting": "Release Setting",
       "totalHeaven": "ヘブン合計",
       "heavenDropTotal": "Heaven Drop Total",
-      "date": "Date",
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
@@ -195,7 +198,6 @@
       "yourReward": "あなたのリワード",
       "rewardHistory": "Reward History",
       "noDataFound":"No data found",
-      "date": "Date"
     },
     "register":{
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
@@ -292,7 +294,6 @@
       "send": "送信",
       "to": "To",
       "transferHistory": "Trade History",
-      "date": "Date",
       "action": "Action",
       "type": "Type",
       "address": "Address",
