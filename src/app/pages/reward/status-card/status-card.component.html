@@ -4,7 +4,7 @@
       <ngx-reward-status-card-front [statusCard]="statusCard" [fetchingRewardValue]="fetchingRewardValue">
         <i [ngClass]="statusCard.iconClass"></i>
       </ngx-reward-status-card-front>
-      <i class="nb-arrow-right pointer mt-1 mr-2" (click)="toggleFlipView()"></i>
+      <i class="nb-arrow-right pointer arrow-margin" (click)="toggleFlipView()"></i>
     </nb-card>
   </nb-card-front>
   <nb-card-back>
@@ -12,7 +12,7 @@
       <ngx-reward-status-card-back [statusCard]="statusCard" [fetchingRewardValue]="fetchingRewardValue">
         <i [ngClass]="statusCard.iconClass"></i>
       </ngx-reward-status-card-back>
-      <i class="nb-arrow-right pointer mt-1 mr-2" (click)="toggleFlipView()"></i>
+      <i class="nb-arrow-right pointer arrow-margin" (click)="toggleFlipView()"></i>
     </nb-card>
   </nb-card-back>
 </nb-flip-card>

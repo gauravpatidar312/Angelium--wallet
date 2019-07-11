@@ -164,8 +164,8 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
     this.httpService.get('asset/').subscribe((data?: any) => {
       this.assetCard.value = data.total_asset;
       this.gainCard.value = data.total_profit;
-      this.gainCard.value_anx = data.today_profit_anx || 0;
-      this.gainCard.total_profit_anx = data.total_profit_anx || 0;
+      this.gainCard.value_anx = data.today_profit_anx;
+      this.gainCard.total_profit_anx = data.total_profit_anx;
       this.fetchingAssetValue = false;
       this.cryptoBalance = _.sortBy(_.filter(data.cryptos, (item) => {
         if (item.name === 'ANX')

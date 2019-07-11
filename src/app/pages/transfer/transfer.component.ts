@@ -102,9 +102,11 @@ export class TransferComponent implements OnInit {
         filter: false,
         valuePrepareFunction: (cell, row) => {
           if (cell === 'SEND')
-            return `<div class="heavenhistory-cell"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
           else if (cell === 'RECEIVE')
-            return `<div class="heavenhistory-cell"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
+          else
+            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-exchange"></i></span><span class="pl-3">${cell}</span></div>`;
         },
       },
       quantity: {
@@ -203,7 +205,7 @@ export class TransferComponent implements OnInit {
         this.httpService.get('asset/').subscribe((data?: any) => {
           const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
           this.anxWallet.wallet_amount = anxData.quantity;
-          this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 2);
+          this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
           this.setOTCAmount();
         });
       });
@@ -216,12 +218,17 @@ export class TransferComponent implements OnInit {
     this.httpService.get(`transactions-history/`).subscribe((res?: any) => {
       const data = res.data;
       const transfer_data = _.map(data, function (obj) {
-          obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
-          obj.direction = obj.direction === 'in' ? 'RECEIVE' : 'SEND';
-          obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
-          obj.address = '';
-          return obj;
-        });
+        if (obj.direction === 'in')
+          obj.direction = 'RECEIVE';
+        else if (obj.direction === 'out')
+          obj.direction = 'SEND';
+        else
+          obj.direction = 'OTC';
+        obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
+        obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
+        obj.address = obj.address || '';
+        return obj;
+      });
       const transferData =_.sortBy(transfer_data, ['timestamp']).reverse();
       this.source.load(transferData);
       this.fetchTransferHistory = false;
@@ -312,7 +319,7 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.transfer_amount = Number(Number(this.sendWallet.wallet_amount).toFixed(6));
+    this.transfer_amount = ShareDataService.toFixedDown(this.sendWallet.wallet_amount, 6);
     this.setAmount(this.sendWallet.wallet_type);
   }
 
@@ -366,7 +373,7 @@ export class TransferComponent implements OnInit {
   }
 
   setAnxMaxValue() {
-    this.fromOTCAmount = Number(Number(this.anxWallet.wallet_amount).toFixed(2));
+    this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
     this.setOTCAmount();
   }
 
@@ -536,7 +543,7 @@ export class TransferComponent implements OnInit {
               this.httpService.get('asset/').subscribe((data?: any) => {
                 const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
                 this.anxWallet.wallet_amount = anxData.quantity || 0;
-                this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 2);
+                this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
                 this.setOTCAmount();
               });
             });

@@ -451,7 +451,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       const heaven_history_data = _.map(data, function(obj) {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.total_received = (ShareDataService.toFixedDown(obj.total_received, 2)) + ' ANX';
+        obj.total_received = (ShareDataService.toFixedDown(obj.total_received, 0)) + ' ANX';
         obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
         return obj;
       });
@@ -471,7 +471,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       const heaven_drop_history_data = _.map(data, function(obj) {
         obj.created = moment(obj.created, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
-        obj.anx_bonus = (ShareDataService.toFixedDown(obj.anx_bonus, 2)) + ' ANX';
+        obj.anx_bonus = (ShareDataService.toFixedDown(obj.anx_bonus, 0)) + ' ANX';
         return obj;
       });
       this.source_heavenDrop.load(_.sortBy(heaven_drop_history_data, ['created']).reverse());

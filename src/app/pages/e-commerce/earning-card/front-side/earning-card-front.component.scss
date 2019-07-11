@@ -1,5 +1,6 @@
 @import '../../../../@theme/styles/themes';
 @import '~@nebular/theme/styles/global/typography/typography';
+@import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
   display: flex;
@@ -129,6 +130,12 @@
           border-bottom: 7px solid text-primary();
         }
       }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .sm-padding {
+      padding-left: 7px !important;
     }
   }
 }

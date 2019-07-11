@@ -225,8 +225,13 @@ $shadow-green: #00977e;
       color: nb-theme(card-fg);
       text-align: right;
       margin-right: 5px;
-      margin-top: 3px;
+      margin-top: 2px;
     }
+  }
+
+  nb-card .arrow-margin {
+    padding: 28px 9px 27px 0 !important;
+    font-size: 1.6rem !important;
   }
 
   @include nb-for-theme(cosmic) {
@@ -310,13 +315,6 @@ $shadow-green: #00977e;
 
    /deep/ .status {
       font-size: 1.9rem !important;
-      margin-top: 15px !important;
-    }
-  }
-
-  @media only screen and (width: 375px) {
-    /deep/ .status {
-      margin-top: 15px !important;
     }
   }
 

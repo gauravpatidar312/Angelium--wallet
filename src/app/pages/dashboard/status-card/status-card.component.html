@@ -4,7 +4,7 @@
       <ngx-status-card-front [statusCard]="statusCard" [fetchingAssetValue]="fetchingAssetValue">
         <i [ngClass]="statusCard.iconClass"></i>
       </ngx-status-card-front>
-      <i class="nb-arrow-right pointer mr-2" *ngIf="statusCard.id === 2" (click)="toggleFlipView()"></i>
+      <i class="nb-arrow-right pointer arrow-margin" *ngIf="statusCard.id === 2" (click)="toggleFlipView()"></i>
     </nb-card>
   </nb-card-front>
   <nb-card-back>
@@ -12,7 +12,7 @@
       <ngx-status-card-back [statusCard]="statusCard" [fetchingAssetValue]="fetchingAssetValue">
         <i [ngClass]="statusCard.iconClass"></i>
       </ngx-status-card-back>
-      <i class="nb-arrow-right pointer mr-2" (click)="toggleFlipView()"></i>
+      <i class="nb-arrow-right pointer arrow-margin" (click)="toggleFlipView()"></i>
     </nb-card>
   </nb-card-back>
 </nb-flip-card>

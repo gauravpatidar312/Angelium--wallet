@@ -1,5 +1,6 @@
 @import '../../@theme/styles/themes';
 @import "~@nebular/theme/styles/global/breakpoints";
+
 :host {
   $auth-layout-padding: 7.3rem;
 
@@ -84,7 +85,7 @@
   }
 
   /deep/ nb-tabset .tabset .tab, .font-nunitoSans {
-     font-family: nb-theme(font-nunito);
+    font-family: nb-theme(font-nunito);
   }
 
   .btn-primary {
@@ -104,6 +105,19 @@
     nb-card {
       border-radius: 0;
       height: auto;
+    }
+
+    .sm-padding-remove {
+      padding: 0 !important;
+    }
+
+    .sm-padding-margin-remove {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /deep/ ng2-smart-table table tr td .action-width {
+      width: 120px !important;
     }
   }
 
@@ -150,7 +164,7 @@
     padding: 0.5rem;
     font-size: 20px;
   }
-   nb-card-body, nb-tab {
+  nb-card-body, nb-tab {
     overflow: unset !important;
   }
 
@@ -290,10 +304,16 @@
   font-weight: bold !important;
 }
 
-/deep/ .swal2-styled.swal2-confirm{
+/deep/ .swal2-styled.swal2-confirm {
   background-color: #dc3545 !important;
 }
 
-/deep/ .swal2-styled.swal2-cancel{
+/deep/ .swal2-styled.swal2-cancel {
   background-color: #00d977 !important;
+}
+
+@media only screen and (width: 768px) {
+  /deep/ ng2-smart-table table tr td .action-width {
+    width: 120px !important;
+  }
 }
