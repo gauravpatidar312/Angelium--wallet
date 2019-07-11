@@ -10,8 +10,8 @@ import {takeWhile} from 'rxjs/internal/operators';
 export class StatusCardComponent implements OnDestroy {
   flipped = false;
   private alive = true;
+  @Output() periodChange = new EventEmitter<string>();
   @Input() statusCard: any;
-  @Input() fetchingRewardValue: boolean;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
   currentTheme: string;
@@ -24,7 +24,6 @@ export class StatusCardComponent implements OnDestroy {
         this.currentTheme = theme.name;
       });
 
-    this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(takeWhile(() => this.alive))

@@ -8,16 +8,11 @@ import {takeWhile} from 'rxjs/internal/operators';
   templateUrl: './status-card.component.html',
 })
 export class StatusCardComponent implements OnDestroy {
-
+  flipped = false;
   private alive = true;
   @Output() periodChange = new EventEmitter<string>();
-  @Input() title: string;
-  @Input() type: string;
-  @Input() value: string;
-  @Input() on = true;
+  @Input() statusCard: any;
   @Input() fetchingAssetValue: boolean;
-  typeOfPeriod: string = 'today';
-  types: string[] = ['today', 'week', 'month', 'total'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
   currentTheme: string;
@@ -38,9 +33,8 @@ export class StatusCardComponent implements OnDestroy {
       });
   }
 
-  changePeriod(period: string): void {
-    this.typeOfPeriod = period;
-    this.periodChange.emit(period);
+  toggleFlipView() {
+    this.flipped = !this.flipped;
   }
 
   ngOnDestroy() {

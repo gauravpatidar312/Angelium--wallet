@@ -25,6 +25,8 @@ import { HeavenChartComponent } from './charts-panel/charts/heaven-chart.compone
 import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/chart-panel-header.component';
 import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/chart-panel-summary.component';
 import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
+import {RewardStatusCardFrontComponent} from './status-card/front-side/reward-status-card-front.component';
+import {RewardStatusCardBackComponent} from './status-card/back-side/reward-status-card-back.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.compo
     EchartsAreaStackComponent,
     BubbleMapComponent,
     StatusCardComponent,
+    RewardStatusCardFrontComponent,
+    RewardStatusCardBackComponent,
     ECommerceChartsPanelComponent,
     RewardChartComponent,
     HeavenChartComponent,

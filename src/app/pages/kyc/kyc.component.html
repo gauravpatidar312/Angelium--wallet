@@ -9,14 +9,14 @@
       <nb-card class="col-md-12 col-lg-12 col-xxxl-12 kycstepcard">
         <nb-card-body>
           <nb-stepper #stepper orientation="horizontal" disableStepNavigation>
-            <nb-step [label]="pending">
-              <ng-template #pending class="font-nunitoSans">{{"pages.kyc.input" | translate}}</ng-template>
+            <nb-step [label]="firstStep">
+              <ng-template #pending class="font-nunitoSans">{{firstStep}}</ng-template>
             </nb-step>
-            <nb-step [label]="audit">
-              <ng-template #audit class="font-nunitoSans">{{"pages.kyc.audit" | translate}}</ng-template>
+            <nb-step [label]="secondStep">
+              <ng-template #audit class="font-nunitoSans">{{secondStep}}</ng-template>
             </nb-step>
-            <nb-step [label]="approved">
-              <ng-template #approved class="font-nunitoSans">{{"pages.kyc.approved" | translate}}</ng-template>
+            <nb-step [label]="thirdStep">
+              <ng-template #approved class="font-nunitoSans">{{thirdStep}}</ng-template>
             </nb-step>
           </nb-stepper>
         </nb-card-body>
@@ -24,7 +24,9 @@
       <div class="row">
         <div class="col-lg-6">
           <nb-card class="card-info">
-            <nb-card-header class="card-header">{{"pages.kyc.information" | translate}}</nb-card-header>
+            <nb-card-header class="card-header">
+              {{"pages.kyc.information" | translate}}
+            </nb-card-header>
             <nb-card-body>
               <div class="row">
                 <div class="col-md-12">
@@ -147,6 +149,7 @@
                   </div>
                 </div>
               </div>
+              <span class="upload-message">Each file must be less than 2MB.</span>
             </nb-card-body>
           </nb-card>
         </div>

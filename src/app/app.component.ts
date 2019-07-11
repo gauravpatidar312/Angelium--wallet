@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
       }
     });
 
-    var lang = this.sessionStorage.getFromLocalStorage('languageData');
+    const lang = this.sessionStorage.getFromLocalStorage('languageData');
     this.setLanguage(lang);
   }
 
@@ -64,25 +64,24 @@ export class AppComponent implements OnInit {
   setLanguage(data: any) {
     console.log(data);
     if (!data) {
-      let languages = [
+      const languages = [
         { 'id': 1, 'language': 'English', 'language_code': 'en' },
         { 'id': 2, 'language': 'Chinese', 'language_code': 'zh' },
         { 'id': 3, 'language': 'Korean', 'language_code': 'ko' }
       ];
-      var browserDetectLang = navigator.language.split('-')[0];
-      var currectLang = languages.find((data:any)=> {
+      const browserDetectLang = navigator.language.split('-')[0];
+      const currectLang = languages.find((data:any)=> {
         return data.language_code === browserDetectLang;
       });
       if (currectLang) {
         this.translate.use(currectLang.language_code);
         this.sessionStorage.saveToLocalStorage('languageData', currectLang);
       } else {
-        let language = {id: 1, language: 'English', language_code: 'en'};
+        const language = {id: 1, language: 'English', language_code: 'en'};
         this.sessionStorage.saveToLocalStorage('languageData', language);
         this.translate.setDefaultLang('en');
       }
-    }
-    else{
+    } else {
       this.translate.use(data.language_code);
     }
   }

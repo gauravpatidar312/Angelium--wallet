@@ -6,7 +6,7 @@
 $shadow-green: #00977e;
 
 @include nb-install-component() {
-  /deep/ nb-card {
+ /deep/ nb-card {
     flex-direction: row;
     align-items: center;
     height: 6rem;
@@ -39,6 +39,11 @@ $shadow-green: #00977e;
       border: 2px solid #7659ff;
     }
 
+    .spinner-color{
+      color: #a1a1e5;
+      font-size: 25px;
+    }
+
     /deep/ nb-progress-bar {
       height: 0.6rem;
       margin-top: 1rem;
@@ -61,11 +66,6 @@ $shadow-green: #00977e;
           height: 100%;
         }
       }
-    }
-
-    .spinner-color{
-      color: #a1a1e5;
-      font-size: 25px;
     }
 
     .delta {
@@ -154,7 +154,7 @@ $shadow-green: #00977e;
       }
     }
 
-    /deep/  &:hover {
+   /deep/ &:hover {
       background: lighten(nb-theme(card-bg), 5%);
 
       .icon {
@@ -212,7 +212,7 @@ $shadow-green: #00977e;
 
     .title {
       font-family: nb-theme(font-bebas);
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
@@ -220,6 +220,7 @@ $shadow-green: #00977e;
     .status {
       font-size: 30px;
       font-family: nb-theme(font-bebas-bold);
+      font-weight: nb-theme(font-weight-bold) !important;
       text-transform: uppercase;
       color: nb-theme(card-fg);
       text-align: right;
@@ -229,7 +230,7 @@ $shadow-green: #00977e;
   }
 
   @include nb-for-theme(cosmic) {
-   /deep/ nb-card {
+   /deep/  nb-card {
       &.off .icon-container {
         @include nb-ltr(border-right, 1px solid nb-theme(separator));
         @include nb-rtl(border-left, 1px solid nb-theme(separator));
@@ -263,7 +264,7 @@ $shadow-green: #00977e;
   }
 
   @include nb-for-theme(corporate) {
-  /deep/  nb-card {
+    /deep/ nb-card {
       .icon-container {
         height: auto;
       }
@@ -271,7 +272,7 @@ $shadow-green: #00977e;
   }
 
   @include media-breakpoint-down(sm) {
-  /deep/  nb-card {
+    /deep/ nb-card {
       .icon-container {
         .icon {
           width: 5rem !important;
@@ -293,7 +294,7 @@ $shadow-green: #00977e;
       }
     }
 
-    .nb-theme-cosmic nb-select > button[nbButton] {
+    /deep/ .nb-theme-cosmic nb-select > button[nbButton] {
       padding: 0.75rem !important;
 
       &::after {
@@ -302,13 +303,12 @@ $shadow-green: #00977e;
     }
   }
 
-  @media only screen and (width: 1024px) {
-    /deep/ .title {
-      font-size: 1.7rem !important;
-    }
-  }
   @media only screen and (width: 320px) {
-    /deep/ .status {
+    /deep/ .title {
+      font-size: 1.5rem !important;
+    }
+
+   /deep/ .status {
       font-size: 1.9rem !important;
       margin-top: 15px !important;
     }
@@ -319,7 +319,6 @@ $shadow-green: #00977e;
       margin-top: 15px !important;
     }
   }
-
 
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
     .status-dd-week {

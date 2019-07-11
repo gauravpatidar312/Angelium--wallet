@@ -1,9 +1,6 @@
 <div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards1">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value" [fetchingRewardValue]="fetchingRewardValue"
-      [percentage]="statusCard.percentage">
-      <i [ngClass]="statusCard.iconClass"></i>
-    </ngx-status-card>
+    <ngx-status-card [statusCard]="statusCard" [fetchingRewardValue]="fetchingRewardValue"></ngx-status-card>
   </div>
 </div>
 
@@ -90,6 +87,36 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header class="row rewardHistory">
+        <div class="col-md-12">
+          <div class="navbar-header rewardHistory-tree">
+            {{"pages.reward.rewardHistory" | translate}}
+          </div>
+        </div>
+        <!-- <div class="col-md-6 heavenHistoryColumn">
+           <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
+             <li class="pointer li-margin">
+               <a data-toggle="pill" (click)="getHeavenHistory('today')">{{'common.today'|translate}}</a>
+             </li>
+             <li class="active pointer li-margin">
+               <a data-toggle="pill" (click)="getHeavenHistory('total')">{{'common.total'|translate}}</a>
+             </li>
+           </ul>
+         </div>-->
+      </nb-card-header>
+      <nb-card-body id="reward-history">
+        <div [hidden]="!fetchingHistory"><span class="reward-history-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+        <div style="overflow: auto;">
+          <ng2-smart-table [settings]="reward_history" [source]="source" *ngIf="!fetchingHistory">
+          </ng2-smart-table>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
 
 <nb-card>
   <nb-card-header>

@@ -73,8 +73,28 @@
     border-radius: 0.5rem;
   }
 
+  .reward-history-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    height: 100px;
+    text-align: center;
+  }
+
   .fetchingDownline-margin {
     margin-top: 86px;
+  }
+
+  .rewardHistory {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    padding: 1.25rem !important;
+  }
+
+  .rewardHistory-tree {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
   }
 
   @include media-breakpoint-down(sm) {
