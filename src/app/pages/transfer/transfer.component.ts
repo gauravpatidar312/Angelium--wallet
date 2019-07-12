@@ -536,7 +536,6 @@ export class TransferComponent implements OnInit {
 
       const transferObj = {
         'user_wallet': this.otcWallet.id,
-        'transfer_amount': this.otcWallet.toAmount,
         'anx_amount': this.fromOTCAmount,
       };
 
