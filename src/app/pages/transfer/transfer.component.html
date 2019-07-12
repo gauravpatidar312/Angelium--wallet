@@ -7,7 +7,7 @@
         </h1>
       </div>
     </nb-card-header>
-    <nb-card-body class="row pt-0 sm-padding-margin-remove">
+    <nb-card-body class="row pt-4 m-0 sm-padding-margin-remove">
       <div class="col-lg-2 col-md-1 col-sm-12 col-xs-12"></div>
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 sm-padding-remove">
         <nb-tabset fullWidth>
@@ -104,7 +104,7 @@
                           {{"pages.transfer.to" | translate}}
                         </label>
                         <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn"
+                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
                                   [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                             'btn-primary': currentTheme !== 'default',
                                             'btn-sm': breakpoint.width <= breakpoints.is}">
@@ -134,7 +134,7 @@
                       <div class="form-group"><a class="form-control copy-icon" ngxClipboard [cbContent]="receiveWallet?.address" (click)="copyAddress()"><i class="fa fa-clone" title="Copy address"></i></a></div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 text-center" *ngIf="receiveWallet?.qrcode">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 pb-4 text-center" *ngIf="receiveWallet?.qrcode">
                       <img class="img-fluid barcode" [src]="receiveWallet?.qrcode" alt="">
                     </div>
                   </div>
@@ -181,7 +181,7 @@
                       </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center p-0">
-                      <div class="form-group mt-4">
+                      <div class="form-group mt-4 mb-4">
                         <div class="arrowtransfer"><i class="fas fa-arrow-down"></i></div>
                       </div>
                     </div>

@@ -201,17 +201,17 @@
   <div class="col-md-12">
     <nb-card>
       <nb-card-header class="row heavenhistory">
-        <div class="col-md-6">
+        <div class="col-6">
           <div class="navbar-header heavenHistory-tree">
             {{"pages.heaven.heavenHistory" | translate}}
           </div>
         </div>
-        <div class="col-md-6 heavenHistoryColumn">
+        <div class="col-6">
           <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
             <li class="pointer li-margin">
               <a data-toggle="pill" (click)="getHeavenHistory('today')">{{'common.today'|translate}}</a>
             </li>
-            <li class="active pointer li-margin">
+            <li class="active pointer">
               <a data-toggle="pill" (click)="getHeavenHistory('total')">{{'common.total'|translate}}</a>
             </li>
           </ul>

@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import * as _ from 'lodash';
 import {IndexedDBStorageService} from './indexeddb-storage.service';
-import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../@core/store/app.state';
+import {ResetState} from '../@core/store/actions/user.action';
+
+import * as _ from 'lodash';
 
 @Injectable()
 export class ShareDataService {
@@ -13,8 +16,8 @@ export class ShareDataService {
   showNotification = false;
   transferTab: string;
   transferTitle: string;
-  constructor( private storageService: IndexedDBStorageService,
-               private router: Router) {}
+  constructor(private storageService: IndexedDBStorageService,
+              private store: Store<AppState>) {}
 
   changeData(data: any) {
     this.messageSource.next(data);
@@ -30,8 +33,11 @@ export class ShareDataService {
 
     if (err.status === 401) {
       console.warn('DB cleared after 401 error');
-      this.storageService.deleteDatabase();
-      this.router.navigate(['']);
+
+      this.changeData('');
+      this.storageService.resetStorage();
+      this.store.dispatch(new ResetState({}));
+
       msg = 'Session expired. Please log in again.';
       return msg;
     }

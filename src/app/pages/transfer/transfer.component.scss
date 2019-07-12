@@ -101,6 +101,10 @@
     width: 94% !important;
   }
 
+  /deep/ ng2-smart-table table tr td .action-width {
+    white-space: nowrap;
+  }
+
   @include media-breakpoint-down(sm) {
     nb-card {
       border-radius: 0;
@@ -112,7 +116,7 @@
     }
 
     .sm-padding-margin-remove {
-      padding: 0 !important;
+      padding: 1.5rem 0 0 0 !important;
       margin: 0 !important;
     }
 
@@ -299,6 +303,10 @@
   background-color: #00d977 !important;
 }
 
+/deep/ .font-nunitoSans {
+  font-family: nb-theme(font-nunito);
+}
+
 /deep/ .swal2-title {
   color: #000000 !important;
   font-weight: bold !important;
@@ -312,8 +320,3 @@
   background-color: #00d977 !important;
 }
 
-@media only screen and (width: 768px) {
-  /deep/ ng2-smart-table table tr td .action-width {
-    width: 120px !important;
-  }
-}

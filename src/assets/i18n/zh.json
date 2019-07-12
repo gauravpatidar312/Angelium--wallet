@@ -135,19 +135,21 @@
       "userGrowth":"用户增长"
     },
     "kyc":{
-      "audit":"审计",
+      "audit":"Reviewing",
       "approved":"批准",
       "browse":"浏览",
       "close":"Close",
       "dob":"生日",
+      "failed": "Failed (submit again)",
       "idProofFront":"ID Proof (front side)",
       "idProofBack":"ID Proof (back side)",
-      "input":"输入",
+      "input":"Not submitted yet",
       "information":"信息",
       "idProofPreview":"ID Proof Preview",
       "mobileNumber": "手机号吗r",
       "selfie":"自拍",
       "submit":"提交",
+      "submitted": "Submitted",
       "upload":"上传",
       "toastr":{
         "pleaseSelectDOB": "Please select date of birth",
@@ -171,6 +173,7 @@
       }
     },
     "reward":{
+      "date": "Date",
       "downlineAngel": "经我邀请的天使",
       "downlineHeaven": "下级天堂",
       "downlineTree": {
@@ -187,8 +190,7 @@
       "yourRank": "你的排行",
       "yourReward": "你的奖励",
       "rewardHistory": "Reward History",
-      "noDataFound":"No data found",
-      "date": "Date",
+      "noDataFound":"No data found"
     },
     "register":{
       "alreadyHaveAnAccount": "已有账户",
@@ -224,19 +226,25 @@
       }
     },
     "setting": {
+      "angel": "ANGEL",
       "currency": "通货",
+      "comingSoon": "Coming soon",
       "confirmPassword": "确认密码",
       "name": "名称",
       "eMail": "E-mail",
+      "goldAngel": "GOLD ANGEL",
       "language": "语言",
       "merge": "合并",
+      "MergeOldData": "Merge your old data",
       "newPassword": "新密码",
       "oldPassword":"原密码",
+      "pinkAngel": "PINK ANGEL",
       "qr": "二维",
       "r18mode": "R-18禁模式",
       "referral": "转送",
       "rank": "排行",
       "secretKey": "密钥",
+      "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
       "referralLink": "推荐链接",
       "toastr":{

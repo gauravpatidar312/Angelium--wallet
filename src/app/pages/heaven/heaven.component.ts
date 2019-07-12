@@ -182,7 +182,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       heaven_amount: {
@@ -190,7 +190,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
         },
       },
       currency_type: {
@@ -198,7 +198,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
         },
       },
       plan: {
@@ -206,7 +206,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
         },
       },
       total_received: {
@@ -214,7 +214,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
         },
       },
       entry_date: {
@@ -222,7 +222,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       release_date: {
@@ -230,7 +230,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       release_settings: {
@@ -238,7 +238,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'custom',
         renderComponent: CustomRendererComponent,
         filter: false,
-        class: 'heavenhistory-cell text-center',
+        class: 'heavenhistory-cell text-center td-width',
       },
     },
   };
@@ -260,7 +260,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       user_heaven_id: {
@@ -268,7 +268,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       heaven_amount: {
@@ -276,7 +276,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       currency_type: {
@@ -284,15 +284,15 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
-        },
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
       },
+    },
       plan: {
         title: this.translate.instant('pages.heaven.plan'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       anx_bonus: {
@@ -300,7 +300,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
     },

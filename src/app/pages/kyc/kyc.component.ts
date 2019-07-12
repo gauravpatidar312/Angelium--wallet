@@ -117,12 +117,17 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   }
 
   setStepper(status) {
-    if (status === 'pending')
+    if (status === 'pending') {
+      this.firstStep = this.translate.instant('pages.kyc.submitted');
       this.stepper.steps.first.completed = true;
+    }
     else if (status === 'confirmed') {
       this.stepper.steps.map((step) => {
         step.completed = true;
       });
+    }
+    else if (status === 'failed') {
+      this.firstStep = this.translate.instant('pages.kyc.failed');
     }
   }
 

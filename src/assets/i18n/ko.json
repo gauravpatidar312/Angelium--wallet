@@ -135,19 +135,21 @@
       "userGrowth":"User Growth"
     },
     "kyc":{
-      "audit":"Audit",
+      "audit":"Reviewing",
       "approved":"승인 됨",
       "browse":"Browse",
       "close":"Close",
       "dob":"생년월일",
+      "failed": "Failed (submit again)",
       "idProofFront":"ID Proof (front side)",
       "idProofBack":"ID Proof (back side)",
-      "input":"Input",
+      "input":"Not submitted yet",
       "information":"정보",
       "idProofPreview":"ID Proof Preview",
       "mobileNumber": "휴대전화",
       "selfie":"Selfie",
       "submit":"제출",
+      "submitted": "Submitted",
       "upload":"업로드",
       "toastr":{
         "pleaseSelectDOB": "Please select date of birth",
@@ -171,6 +173,7 @@
       }
     },
     "reward":{
+      "date": "Date",
       "downlineAngel": "소개한 엔젤",
       "downlineHeaven": "다운라인 헤븐",
       "downlineTree": {
@@ -187,7 +190,7 @@
       "yourRank": "당신의 랭킹",
       "yourReward": "당신의 리워드",
       "rewardHistory": "Reward History",
-      "noDataFound":"No data found",
+      "noDataFound":"No data found"
     },
     "register":{
       "alreadyHaveAnAccount": "이미 가입하셨나요",
@@ -223,19 +226,25 @@
       }
     },
     "setting": {
+      "angel": "ANGEL",
       "currency": "통화",
+      "comingSoon": "Coming soon",
       "confirmPassword": "비밀번호 확인",
       "name": "이름",
       "eMail": "이메일",
+      "goldAngel": "GOLD ANGEL",
       "language": "언어",
       "merge": "통합",
+      "MergeOldData": "Merge your old data",
       "newPassword": "새로운 비밀번호",
       "oldPassword":"기존 비밀번호",
+      "pinkAngel": "PINK ANGEL",
       "qr": "QR",
       "r18mode": "R-18 모드",
       "referral": "추천코드",
       "rank": "랭킹",
       "secretKey": "Secret Key",
+      "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
       "referralLink": "Referral Link",
       "toastr":{

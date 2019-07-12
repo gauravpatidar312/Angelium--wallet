@@ -135,19 +135,21 @@
       "userGrowth":"User Growth"
     },
     "kyc":{
-      "audit":"Audit",
+      "audit":"Reviewing",
       "approved":"Approved",
       "browse":"Browse",
       "close":"Close",
       "dob":"Date of Birth",
+      "failed": "Failed (submit again)",
       "idProofFront":"ID Proof (front side)",
       "idProofBack":"ID Proof (back side)",
-      "input":"Input",
+      "input":"Not submitted yet",
       "information":"Information",
       "idProofPreview":"ID Proof Preview",
       "mobileNumber": "Mobile Number",
       "selfie":"Selfie",
       "submit":"Submit",
+      "submitted": "Submitted",
       "upload":"Upload",
       "toastr":{
         "pleaseSelectDOB": "Please select date of birth",
@@ -171,6 +173,7 @@
       }
     },
     "reward":{
+      "date": "Date",
       "downlineAngel": "紹介したエンジェル",
       "downlineHeaven": "Downline Heaven",
       "downlineTree": {
@@ -187,8 +190,7 @@
       "yourRank": "あなたのランク",
       "yourReward": "あなたのリワード",
       "rewardHistory": "Reward History",
-      "noDataFound":"No data found",
-      "date": "Date",
+      "noDataFound":"No data found"
     },
     "register":{
       "alreadyHaveAnAccount": "すでにアカウントを持っている",
@@ -224,20 +226,26 @@
       }
     },
     "setting": {
+      "angel": "ANGEL",
       "currency": "表示通貨",
+      "comingSoon": "Coming soon",
       "confirmPassword": "Confirm password",
       "name": "名前",
       "eMail": "Eメール",
+      "goldAngel": "GOLD ANGEL",
       "language": "言語",
       "merge": "統合",
+      "MergeOldData": "Merge your old data",
       "newPassword": "New Password",
       "oldPassword":"Old password",
+      "pinkAngel": "PINK ANGEL",
       "qr": "QR",
       "r18mode": "R-18モード",
       "referral": "リフェラル",
       "rank": "ランク",
       "referralLink": "Referral Link",
       "secretKey": "Secret Key",
+      "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
       "toastr":{
         "changeUsername": "Change Username",
