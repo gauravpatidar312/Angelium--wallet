@@ -1,10 +1,5 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import {ApplicationRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 import {AnalyticsService} from './@core/utils/analytics.service';
 import {NavigationStart, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
@@ -62,10 +57,12 @@ export class AppComponent implements OnInit {
       const everyTwoHoursOnceAppIsStable$ = concat(appIsStable$, everyTwoHours$);
       everyTwoHoursOnceAppIsStable$.subscribe(() => this.swUpdate.checkForUpdate());
 
+      // Checking for new update.
       this.swUpdate.available.subscribe((event) => {
-        console.log('current version is', event.current);
-        console.log('available version is', event.available);
+        console.log('current version is ', event.current);
+        console.log('available version is ', event.available);
         if (confirm('New version is available. Press OK to reload.')) {
+          // Activate new update files and reload the page.
           this.swUpdate.activateUpdate()
             .then(() => {
               document.location.reload(true);
@@ -73,8 +70,9 @@ export class AppComponent implements OnInit {
         }
       });
       this.swUpdate.activated.subscribe(event => {
-        console.log('old version was', event.previous);
-        console.log('new version is', event.current);
+        // Just display new version log in console.
+        console.log('old version was ', event.previous);
+        console.log('new version is ', event.current);
       });
     }
   }
@@ -111,5 +109,4 @@ export class AppComponent implements OnInit {
       window.localStorage['timestamp'] = new Date().getTime();
     }
   }
-
 }
