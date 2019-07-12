@@ -1,10 +1,5 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
+import {ApplicationRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 import {AnalyticsService} from './@core/utils/analytics.service';
 import {NavigationStart, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
@@ -12,6 +7,8 @@ import {SessionStorageService} from './services/session-storage.service';
 import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {AuthService} from './_guards/auth.service';
 import {SwUpdate} from '@angular/service-worker';
+import {concat, interval} from 'rxjs';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-app',
@@ -19,7 +16,8 @@ import {SwUpdate} from '@angular/service-worker';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private analytics: AnalyticsService,
+  constructor(private appRef: ApplicationRef,
+              private analytics: AnalyticsService,
               private httpService: HttpService,
               private router: Router,
               private swUpdate: SwUpdate,
@@ -53,10 +51,28 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.analytics.trackPageViews();
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
+      // Allow the app to stabilize first, before starting polling for updates with `interval()`.
+      const appIsStable$ = this.appRef.isStable.pipe(first(isStable => isStable === true));
+      const everyTwoHours$ = interval(2 * 60 * 60 * 1000);
+      const everyTwoHoursOnceAppIsStable$ = concat(appIsStable$, everyTwoHours$);
+      everyTwoHoursOnceAppIsStable$.subscribe(() => this.swUpdate.checkForUpdate());
+
+      // Checking for new update.
+      this.swUpdate.available.subscribe((event) => {
+        console.log('current version is ', event.current);
+        console.log('available version is ', event.available);
         if (confirm('New version is available. Press OK to reload.')) {
-          window.location.reload();
+          // Activate new update files and reload the page.
+          this.swUpdate.activateUpdate()
+            .then(() => {
+              document.location.reload(true);
+            });
         }
+      });
+      this.swUpdate.activated.subscribe(event => {
+        // Just display new version log in console.
+        console.log('old version was ', event.previous);
+        console.log('new version is ', event.current);
       });
     }
   }
@@ -93,5 +109,4 @@ export class AppComponent implements OnInit {
       window.localStorage['timestamp'] = new Date().getTime();
     }
   }
-
 }

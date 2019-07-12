@@ -107,7 +107,7 @@
               </tr>
               <tr>
                 <td class="title-col">{{"common.kyc" | translate}}</td>
-                <td class="value-col">{{(userData?.kyc_info?.status_description || "pages.setting.notSubmittedYet" | translate )}}</td>
+                <td class="value-col">{{(userData?.kyc_info?.status || "pages.kyc.input") | translate}}</td>
                 <td class="action-col iconpaddfix">
                   <i class="nb-edit fa-2x" *ngIf="!userData?.kyc_info?.status_description || userData?.kyc_info?.status_description !== 'confirmed'" routerLink="/pages/kyc"></i>
                 </td>
@@ -136,8 +136,7 @@
               </tr>
               <tr>
                 <td class="title-col">{{"pages.setting.merge" | translate}}</td>
-                <td>{{ ( isProduction ? "pages.setting.comingSoon" :  
-                  "pages.setting.mergeYourOldData") | translate }}</td>
+                <td>{{isProduction ? ("pages.setting.comingSoon" | translate) : ("pages.setting.mergeYourOldData" | translate)}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="!isProduction"></i></td>
               </tr>
               <tr>

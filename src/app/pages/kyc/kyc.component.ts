@@ -39,11 +39,11 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   breakpoints: any;
   currentTheme: string;
 
-  idFrontLabel: any = 'ID Proof (front side)';
+  idFrontLabel: any = this.translate.instant('pages.kyc.idProofFront');
   idFrontChangedEvent: any = '';
-  idBackLabel: any = 'ID Proof (back side)';
+  idBackLabel: any = this.translate.instant('pages.kyc.idProofBack');
   idBackChangedEvent: any = '';
-  selfieLabel: any = 'Selfie';
+  selfieLabel: any = this.translate.instant('pages.kyc.selfie');
   selfieChangedEvent: any = '';
 
   selectedImage = '';
@@ -117,20 +117,25 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   }
 
   setStepper(status) {
-    if (status === 'pending')
+    if (status === 'pending') {
+      this.firstStep = this.translate.instant('pages.kyc.submitted');
       this.stepper.steps.first.completed = true;
+    }
     else if (status === 'confirmed') {
       this.stepper.steps.map((step) => {
         step.completed = true;
       });
     }
+    else if (status === 'failed') {
+      this.firstStep = this.translate.instant('pages.kyc.failed');
+    }
   }
 
   updateStateKYC() {
     if (this.userData.kyc_info && this.userData.kyc_info.status_description !== 'confirmed') {
-        this.idFrontLabel = 'ID Proof (front side)';
-        this.idBackLabel = 'ID Proof (back side)';
-        this.selfieLabel = 'Selfie';
+        this.idFrontLabel = this.translate.instant('pages.kyc.idProofFront');
+        this.idBackLabel = this.translate.instant('pages.kyc.idProofBack');
+      this.selfieLabel = this.translate.instant('pages.kyc.selfie');
     }
   }
 

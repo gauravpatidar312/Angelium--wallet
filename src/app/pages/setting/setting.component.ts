@@ -26,7 +26,7 @@ declare let jQuery: any;
 export class SettingComponent implements OnInit {
   isProduction: boolean = environment.production;
   evaIcons = [];
-  selectedLang: string = 'SELECT';
+  selectedLang: string = this.translate.instant('common.select');
   languageData = [];
   private alive = true;
   userData: any;
@@ -121,13 +121,22 @@ export class SettingComponent implements OnInit {
   extraInfo() {
     this.r18modeSwitchText = this.userData.r18mode;
     if (this.userData.infinity_mark === 1)
-      this.userData.infinity_name = 'SILVER ANGEL';
+      this.userData.infinity_name = this.translate.instant('pages.setting.silverAngel');
     else if (this.userData.infinity_mark === 2)
-      this.userData.infinity_name = 'GOLD ANGEL';
+      this.userData.infinity_name = this.translate.instant('pages.setting.goldAngel');
     else if (this.userData.infinity_mark === 3)
-      this.userData.infinity_name = 'PINK ANGEL';
+      this.userData.infinity_name = this.translate.instant('pages.setting.pinkAngel');
     else
-      this.userData.infinity_name = 'ANGEL';
+      this.userData.infinity_name = this.translate.instant('pages.setting.angel');
+
+    if (this.userData.kyc_info) {
+      if (this.userData.kyc_info.status_description === 'pending')
+        this.userData.kyc_info.status = 'pages.kyc.audit';
+      else if (this.userData.kyc_info.status_description === 'confirmed')
+        this.userData.kyc_info.status = 'pages.kyc.approved';
+      else if (this.userData.kyc_info.status_description === 'failed')
+        this.userData.kyc_info.status = 'pages.kyc.failed';
+    }
   }
 
   ngOnInit() {
@@ -194,16 +203,14 @@ export class SettingComponent implements OnInit {
     if (!this.newUsername || !this.newUsername.trim()) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.pleaseEnterUsername'),
-        this.translate.instant('pages.setting.toastr.changeUsername')
-      );
+        this.translate.instant('pages.setting.toastr.changeUsername'));
       return;
     }
 
     if (!(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/.test(this.newUsername))) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.usernameMustEnglishWithoutSpace'),
-        this.translate.instant('pages.setting.toastr.changeUsername')
-      );
+        this.translate.instant('pages.setting.toastr.changeUsername'));
       return;
     }
 

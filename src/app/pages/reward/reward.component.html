@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-xxl-12">
     <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-12" id="curr1">
+      <div class="col -lg-4 col-md-4 col-sm-4 col-12" id="curr1">
         <ngx-earning-card cardName='{{"pages.reward.yourRank" | translate}}' [cardId]="1" [selectedCurrency]="'ANX'" [amount]="userData?.level" [quantity]="userData?.rank" [infinity_name]="userData?.infinity_name"
           [percentage]="0"></ngx-earning-card>
       </div>
@@ -121,17 +121,17 @@
 <nb-card>
   <nb-card-header>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="navbar-header downline-tree">
           {{"common.downline" | translate}} {{"pages.reward.tree" | translate}}
         </div>
       </div>
-       <div class="col-md-6 downlineColumn">
+       <div class="col-6 downlineColumn">
         <ul id="downline-navigation" class="nav navbar-pill downLine">
           <li class="pointer li-margin">
             <a data-toggle="pill" (click)="getDownlineTree('today')">{{'common.today' | translate | titlecase}}</a>
           </li>
-          <li class="active pointer li-margin">
+          <li class="active pointer">
             <a data-toggle="pill" (click)="getDownlineTree('total')">{{'common.total' | translate}}</a>
           </li>
         </ul>
@@ -144,74 +144,74 @@
   </ng-template>
 
   <nb-card-body id="downline-tree" class="tab-content" *ngIf="noDataSource; else noData">
-    <div [hidden]="!fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
-    <div class="tab-pane active" *ngIf="!fetchingDownlineTree">
-      <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
-        <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-        <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
-        <ng-container nbTreeGridColumnDef="level">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"common.level" | translate}}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <nb-tree-grid-row-toggle style="float: right;" [expanded]="row.expanded" *ngIf="row.data.arrow === true">
-            </nb-tree-grid-row-toggle>
-            {{row.data.level}}
-          </td>
-        </ng-container>
-        <ng-container nbTreeGridColumnDef="username">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"common.username" | translate}}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <div class="downline-cell">{{row.data.username}}</div>
-          </td>
-        </ng-container>
+      <div [hidden]="!fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+      <div class="tab-pane active" *ngIf="!fetchingDownlineTree">
+        <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
+          <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+          <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+          <ng-container nbTreeGridColumnDef="level">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+              {{"common.level" | translate}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              <nb-tree-grid-row-toggle style="float: right;" [expanded]="row.expanded" *ngIf="row.data.arrow === true">
+              </nb-tree-grid-row-toggle>
+              {{row.data.level}}
+            </td>
+          </ng-container>
+          <ng-container nbTreeGridColumnDef="username">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+              {{"common.username" | translate}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              <div class="downline-cell">{{row.data.username}}</div>
+            </td>
+          </ng-container>
 
-        <ng-container nbTreeGridColumnDef="rank">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"pages.reward.downlineTree.rank" | translate}}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            {{row.data.rank}}
-          </td>
-        </ng-container>
+          <ng-container nbTreeGridColumnDef="rank">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+              {{"pages.reward.downlineTree.rank" | translate}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              {{row.data.rank}}
+            </td>
+          </ng-container>
 
-        <ng-container nbTreeGridColumnDef="heaven">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"common.heaven" | translate}}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <span class="text-success">$</span>{{row.data.heaven.toFixed(2)}}
-          </td>
-        </ng-container>
+          <ng-container nbTreeGridColumnDef="heaven">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+              {{"common.heaven" | translate}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              <span class="text-success">$</span>{{row.data.heaven.toFixed(2)}}
+            </td>
+          </ng-container>
+          
+          <ng-container nbTreeGridColumnDef="reward">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{"pages.reward.heavenDrop" | translate}}</th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(0)}} <span class="text-success">ANX</span></div>
+            </td>
+          </ng-container>
 
-        <ng-container nbTreeGridColumnDef="reward">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{"pages.reward.heavenDrop" | translate}}</th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-          <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(0)}} <span class="text-success">ANX</span></div>
-          </td>
-        </ng-container>
+          <ng-container nbTreeGridColumnDef="rate">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+              {{"common.rate" | translate}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              {{row.data.rate}}<span>%</span>
+            </td>
+          </ng-container>
 
-        <ng-container nbTreeGridColumnDef="rate">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"common.rate" | translate}}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            {{row.data.rate}}<span>%</span>
-          </td>
-        </ng-container>
-
-        <ng-container nbTreeGridColumnDef="your_reward">
-          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-            {{"pages.reward.downlineTree.your_reward" | translate}}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            {{row.data.your_reward.toFixed(0)}} <span class="text-success">ANX</span>
-          </td>
-        </ng-container>
-      </table>
-    </div>
+          <ng-container nbTreeGridColumnDef="your_reward">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+              {{"pages.reward.downlineTree.your_reward" | translate}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              {{row.data.your_reward.toFixed(0)}} <span class="text-success">ANX</span>
+            </td>
+          </ng-container>
+        </table>
+      </div>
     <!-- <div id="downlineweek" class="tab-pane fade">
         <table class="table table-hover table-bordered downlineTree">
             <thead style="background-color: #494299;">

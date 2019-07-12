@@ -293,10 +293,17 @@ $shadow-green: #00977e;
       .status {
         font-size: 2.1rem !important;
       }
+      .status-margin {
+        margin-right: -27px;
+      }
       .status-dd-week {
         width: 67% !important;
         font-size: 0.8rem !important;
       }
+    }
+
+    nb-card .arrow-margin {
+      margin-top: -34px;
     }
 
     /deep/ .nb-theme-cosmic nb-select > button[nbButton] {

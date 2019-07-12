@@ -95,7 +95,7 @@ export class TransferComponent implements OnInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans">${cell}</div>`;
         },
       },
       direction: {
@@ -104,11 +104,11 @@ export class TransferComponent implements OnInit {
         filter: false,
         valuePrepareFunction: (cell, row) => {
           if (cell === 'SEND')
-            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell font-nunitoSans action-width"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
           else if (cell === 'RECEIVE')
-            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell font-nunitoSans action-width"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
           else
-            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-exchange"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell font-nunitoSans action-width"><span><i class="fa fa-exchange"></i></span><span class="pl-3">${cell}</span></div>`;
         },
       },
       quantity: {
@@ -116,7 +116,7 @@ export class TransferComponent implements OnInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans">${cell}</div>`;
         },
       },
       crypto: {
@@ -124,7 +124,7 @@ export class TransferComponent implements OnInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans">${cell}</div>`;
         },
       },
       address: {
@@ -132,7 +132,7 @@ export class TransferComponent implements OnInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans">${cell}</div>`;
         },
       },
     },
@@ -206,7 +206,7 @@ export class TransferComponent implements OnInit {
 
         this.httpService.get('asset/').subscribe((data?: any) => {
           const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
-          this.anxWallet.wallet_amount = anxData.quantity;
+          this.anxWallet.wallet_amount = anxData.quantity || 0;
           this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
           this.setOTCAmount();
         });
@@ -231,8 +231,7 @@ export class TransferComponent implements OnInit {
         obj.address = obj.address || '';
         return obj;
       });
-      const transferData =_.sortBy(transfer_data, ['timestamp']).reverse();
-      this.source.load(transferData);
+      this.source.load(transfer_data);
       this.fetchTransferHistory = false;
     }, (err) => {
       this.fetchTransferHistory = false;
