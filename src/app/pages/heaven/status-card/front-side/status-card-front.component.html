@@ -27,7 +27,7 @@
           </ul>
         </div>
         <div class="clearfix"></div>-->
-        <div class="status text-white">{{ (statusCard.value_anx || 0) | number : '1.0-0' }} <span class="text-success">ANX</span></div>
+        <div class="status text-white">{{ (statusCard.value_anx || 0) | number : '1.0-0' }} <span class="text-success">{{"common.cryptos.anx" | translate}}</span></div>
         <div class="delta up" *ngIf="false">0%</div>
         <!--<nb-progress-bar class="progress-container" [value]="75"></nb-progress-bar>-->
       </div>
