@@ -62,16 +62,15 @@
                   </div>
                   <div class="form-group">
                     <div class="row full-name-inputs">
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div class="row">
                           <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6 input-group kyc-margin" style="padding: 0px;">
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 ">
-                              <label for="inputEmail3" class=" form-control-label font-nunitoSans"
-                                style="padding: 15px">{{"pages.kyc.dob" | translate}}</label>
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6">
+                              <label for="inputEmail3" class=" form-control-label font-nunitoSans dob-padding">{{"pages.kyc.dob" | translate}}</label>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 input-group kyc-margin">
                               <input nbInput placeholder="{{'pages.kyc.dob'|translate}}" [nbDatepicker]="userDOB"
-                                class="form-control font-nunitoSans" style="border-radius: 0.5rem;"
+                                class="form-control font-nunitoSans dob-input-margin" style="border-radius: 0.5rem;"
                                 [(ngModel)]="userData.kyc_info.datefield" [disabled]="isKYCUploaded">
                               <nb-datepicker #userDOB format="yyyy-MM-dd"></nb-datepicker>
                             </div>
@@ -149,11 +148,13 @@
                   </div>
                 </div>
               </div>
-              <span class="upload-message">{{"pages.kyc.eachFileMustBeLessThan2MB" | translate}}</span>
+              <span class="upload-message upload-message-margin">
+                {{"pages.kyc.eachFileMustBeLessThan2MB" | translate}}
+              </span>
             </nb-card-body>
           </nb-card>
         </div>
-        <div class="col-lg-6 offset-md-3">
+        <div class="col-lg-6 offset-md-3 sm-margin">
           <div class="form-group">
             <button class="font-bebasNeueBold btn btn-kyc btn-demo btn-success pointer" fullWidth style="width: 100%;"
               [disabled]="isKYCUploaded || isSubmitting" (click)="uploadKYC()">

@@ -35,6 +35,11 @@
     padding: 0px;
   }
 
+  .dob-padding {
+    padding: 15px;
+    white-space: nowrap;
+  }
+
   /deep/ nb-stepper .step-content {
     text-align: center;
     padding: 0px;
@@ -192,6 +197,13 @@
         width: 1%;
       }
     }
+    .upload-message-margin {
+      margin-left: 7px;
+    }
+
+    .sm-margin {
+      margin: 0 25px;
+    }
   }
 }
 
@@ -217,6 +229,18 @@
       width: 1%;
     }
 
+  }
+}
+
+@media only screen and (width: 768px) {
+  .sm-margin {
+   margin: 0 25px;
+  }
+}
+
+@media only screen and (width: 1024px) {
+  .dob-input-margin {
+    margin-left: 35px !important;
   }
 }
 
