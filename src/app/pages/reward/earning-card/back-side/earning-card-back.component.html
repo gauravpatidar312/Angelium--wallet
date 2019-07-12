@@ -1,10 +1,10 @@
 <nb-card-header>
-  Earnings
+  {{"pages.dashboard.earnings" | translate}}
 </nb-card-header>
 <nb-card-body>
   <div class="chart-info">
     <div class="title" [style.color]="color">{{ selectedCurrency }}</div>
-    <div class="time-period">Last week</div>
+    <div class="time-period">{{"common.lastWeek" | translate}}</div>
     <div class="value">{{ value }}%</div>
   </div>
   <ngx-earning-pie-chart [values]="earningPieChartData"

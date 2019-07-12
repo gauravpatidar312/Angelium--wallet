@@ -83,6 +83,7 @@
   "pages":{
     "dashboard":{
       "articleTitle": "Article Title",
+      "earnings":"Earnings",
       "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "Event Update",
       "ghost": "Ghost",
@@ -204,6 +205,7 @@
       "downlineHeaven": "Downline Heaven",
       "heavenDrop":"Heaven Drop",
       "downlineTree": {
+        "downlineTree":"Downline Tree",
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank",
         "reward": "Reward",
