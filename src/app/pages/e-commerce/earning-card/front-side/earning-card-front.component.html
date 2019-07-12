@@ -16,8 +16,8 @@
 <nb-card-body>
   <div class="chart-info">
     <div class="row">
-      <div class="col-6">
-        <div class="text-daily text-default">{{ quantity | number: (selectedCurrency === 'ANX' ? '1.0-2' : '1.0-6') }}</div>
+      <div class="col-6 sm-padding">
+        <div class="text-daily text-default">{{ quantity | number: (selectedCurrency === 'ANX' ? '1.0-0' : '1.0-6') }}</div>
       </div>
       <div class="col-6" style="align-self: flex-end;">
         <div class="title text-right"><span class="text-success">$</span>{{amount | number: '1.0-2'}}</div>

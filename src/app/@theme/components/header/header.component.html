@@ -31,7 +31,7 @@
     </nb-action>
     <nb-action class="control-item pt-2" *ngIf="totalAnxLiveValue && !isProduction"><span class="text-success">$</span>{{totalAnxLiveValue | number:'1.2-2'}}
     </nb-action>
-    <nb-action class="control-item pt-2" *ngIf="anxValue && !isProduction">A = ${{anxValue | number:'1.2-2'}}</nb-action>
+    <nb-action class="control-item pt-2" *ngIf="anxValue && !isProduction">A = ${{anxValue | number:'1.0-0'}}</nb-action>
     <!-- <nb-action class="control-item" icon="nb-email"></nb-action> -->
     <!-- <nb-action class="control-item">
       <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>

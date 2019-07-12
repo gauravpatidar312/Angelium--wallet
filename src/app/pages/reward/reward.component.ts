@@ -215,7 +215,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="rewardtblcss">${cell}</div>`;
+          return `<div class="rewardtblcss downlineTree">${cell}</div>`;
         },
       },
       anx_quantity: {
@@ -223,7 +223,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="rewardtblcss">${cell}</div>`;
+          return `<div class="rewardtblcss downlineTree">${cell}</div>`;
         },
       },
     },
@@ -390,7 +390,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     this.httpService.get(`reward-history/`).subscribe((res?: any) => {
       const history_data = _.map(res, function (obj) {
         obj.date = moment(obj.date, 'YYYY-MM-DD').format('YYYY.MM.DD');
-        obj.anx_quantity = ShareDataService.toFixedDown(obj.anx_quantity, 2);
+        obj.anx_quantity = ShareDataService.toFixedDown(obj.anx_quantity, 0) + ' ' + 'ANX';
         return obj;
       });
       this.source.load(_.sortBy(history_data, ['date']).reverse());

@@ -7,9 +7,9 @@
         </h1>
       </div>
     </nb-card-header>
-    <nb-card-body class="row pt-0">
+    <nb-card-body class="row pt-0 sm-padding-margin-remove">
       <div class="col-lg-2 col-md-1 col-sm-12 col-xs-12"></div>
-      <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+      <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 sm-padding-remove">
         <nb-tabset fullWidth>
           <nb-tab tabTitle='{{"pages.transfer.send" | translate}}'>
             <form class="mt-5 transfer-form">
@@ -172,11 +172,11 @@
                         <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
                                name="fromOTCAmount" step="0.01"
                                [required]="true" [(ngModel)]="fromOTCAmount" (keyup)="setOTCAmount()"
-                               value="{{0 | number : '1.0-2' }}">
+                               value="{{0 | number : '1.0-0' }}">
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                         <span class="transfer-amount" *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.0-2' }}</span>
                         <span class="available-amount" (click)="setAnxMaxValue()" title="Click to use whole amount">
-                          {{((anxWallet?.wallet_amount || 0) | number : '1.0-2') + ' ANX / max' }}
+                          {{((anxWallet?.wallet_amount || 0) | number : '1.0-0') + ' ANX / max' }}
                         </span>
                       </div>
                     </div>

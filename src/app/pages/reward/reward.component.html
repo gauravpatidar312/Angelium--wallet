@@ -189,7 +189,7 @@
         <ng-container nbTreeGridColumnDef="reward">
           <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{"pages.reward.heavenDrop" | translate}}</th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-          <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(2)}} <span class="text-success">ANX</span></div>
+          <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(0)}} <span class="text-success">ANX</span></div>
           </td>
         </ng-container>
 
@@ -207,7 +207,7 @@
             {{"pages.reward.downlineTree.your_reward" | translate}}
           </th>
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            {{row.data.your_reward.toFixed(2)}} <span class="text-success">ANX</span>
+            {{row.data.your_reward.toFixed(0)}} <span class="text-success">ANX</span>
           </td>
         </ng-container>
       </table>

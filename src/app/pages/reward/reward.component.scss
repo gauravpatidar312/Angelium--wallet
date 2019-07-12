@@ -207,7 +207,7 @@ table.table-bordered > tbody > tr > td {
   word-break: break-all;
 }
 
-.downlineTree {
+/deep/ .downlineTree {
  font-family: nb-theme(font-nunito);
 }
 
@@ -340,7 +340,7 @@ table.table-bordered > tbody > tr > td {
 
 /deep/ .nb-tree-grid-cell{ padding-left: 10px!important; white-space: pre; }
 
-/deep/ .nb-arrow-right::before{
+/deep/ #downline-tree .nb-arrow-right::before{
   color: #ffffff;
   font-size: 1.2rem;
   font-weight: bold;
@@ -368,7 +368,23 @@ table.table-bordered > tbody > tr > td {
 .li-margin {
   margin-right: 15px;
 }
-/deep/.all-columns{ background: #494299!important; }
-/deep/ .nb-tree-grid-header-cell{ font-weight: 400!important; }
-/deep/ table.table-bordered{ table-layout: auto;}
-/deep/ .cdk-column-your_reward{ white-space: pre; }
+
+/deep/ .all-columns {
+  background: #494299 !important;
+}
+
+/deep/ .nb-tree-grid-header-cell {
+  font-weight: 400 !important;
+}
+
+/deep/ table.table-bordered {
+  table-layout: auto;
+}
+
+/deep/ .cdk-column-your_reward {
+  white-space: pre;
+}
+
+/deep/ ng2-smart-table-title > a {
+  font-family: nb-theme(font-nunito) !important;
+}

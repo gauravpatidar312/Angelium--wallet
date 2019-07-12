@@ -52,6 +52,7 @@ export class TransferComponent implements OnInit {
   destination_address: number;
   trade_password: any = '';
   fetchTransferHistory: boolean = false;
+  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   constructor(private httpService: HttpService,
               private dialogService: NbDialogService,
@@ -103,9 +104,11 @@ export class TransferComponent implements OnInit {
         filter: false,
         valuePrepareFunction: (cell, row) => {
           if (cell === 'SEND')
-            return `<div class="heavenhistory-cell"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-arrow-right"></i></span><span class="pl-3">${cell}</span></div>`;
           else if (cell === 'RECEIVE')
-            return `<div class="heavenhistory-cell"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
+            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-arrow-left"></i></span><span class="pl-3">${cell}</span></div>`;
+          else
+            return `<div class="heavenhistory-cell action-width"><span><i class="fa fa-exchange"></i></span><span class="pl-3">${cell}</span></div>`;
         },
       },
       quantity: {
@@ -204,7 +207,7 @@ export class TransferComponent implements OnInit {
         this.httpService.get('asset/').subscribe((data?: any) => {
           const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
           this.anxWallet.wallet_amount = anxData.quantity;
-          this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 2);
+          this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
           this.setOTCAmount();
         });
       });
@@ -217,12 +220,17 @@ export class TransferComponent implements OnInit {
     this.httpService.get(`transactions-history/`).subscribe((res?: any) => {
       const data = res.data;
       const transfer_data = _.map(data, function (obj) {
-          obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
-          obj.direction = obj.direction === 'in' ? 'RECEIVE' : 'SEND';
-          obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
-          obj.address = '';
-          return obj;
-        });
+        if (obj.direction === 'in')
+          obj.direction = 'RECEIVE';
+        else if (obj.direction === 'out')
+          obj.direction = 'SEND';
+        else
+          obj.direction = 'OTC';
+        obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
+        obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
+        obj.address = obj.address || '';
+        return obj;
+      });
       const transferData =_.sortBy(transfer_data, ['timestamp']).reverse();
       this.source.load(transferData);
       this.fetchTransferHistory = false;
@@ -239,7 +247,7 @@ export class TransferComponent implements OnInit {
   }
 
   openTradeDialog(dialog: TemplateRef<any>) {
-    if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && !(this.user.username === 'forex711' || this.user.username === 'RAMY' || this.user.username === 'Riogrande')) {
+    if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
       this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
       this.translate.instant('pages.transfer.send'));
       return;
@@ -313,7 +321,7 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.transfer_amount = Number(Number(this.sendWallet.wallet_amount).toFixed(6));
+    this.transfer_amount = ShareDataService.toFixedDown(this.sendWallet.wallet_amount, 6);
     this.setAmount(this.sendWallet.wallet_type);
   }
 
@@ -367,7 +375,7 @@ export class TransferComponent implements OnInit {
   }
 
   setAnxMaxValue() {
-    this.fromOTCAmount = Number(Number(this.anxWallet.wallet_amount).toFixed(2));
+    this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
     this.setOTCAmount();
   }
 
@@ -415,7 +423,7 @@ export class TransferComponent implements OnInit {
   }
 
   onSendTransfer() {
-    if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && !(this.user.username === 'forex711' || this.user.username === 'RAMY' || this.user.username === 'Riogrande')) {
+    if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
       this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
       this.translate.instant('pages.transfer.send'));
       return;
@@ -481,7 +489,7 @@ export class TransferComponent implements OnInit {
   }
 
   onOTCTransfer() {
-    if (this.isProduction && this.user.user_type !== AppConstants.ROLES.ADMIN && !(this.user.username === 'forex711' || this.user.username === 'RAMY' || this.user.username === 'Riogrande')) {
+    if (this.isProduction && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
       if (!this.user.kyc_info || this.user.kyc_info.status_description !== 'confirmed')
         this.toastrService.info(this.translate.instant('pages.transfer.toastr.kycNotApproved'), this.translate.instant('pages.transfer.toastr.otc'));
       else
@@ -491,17 +499,17 @@ export class TransferComponent implements OnInit {
 
     if (!this.fromOTCAmount || !Number(this.fromOTCAmount)) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterTransferAmount'),
-      this.translate.instant('pages.transfer.toastr.otc'));
+        this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
     if (Number(this.fromOTCAmount) > Number(this.anxWallet.wallet_amount)) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
-      this.translate.instant('pages.transfer.toastr.otc'));
+        this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
     if (!this.otcWallet || !this.otcWallet.toAmount) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseCheckReceiveAmount'),
-       this.translate.instant('pages.transfer.toastr.otc'));
+        this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
 
@@ -516,7 +524,7 @@ export class TransferComponent implements OnInit {
       'transfer_amount': this.otcWallet.toAmount,
       'anx_amount': this.fromOTCAmount,
     };
-    this.formSubmitting = true;
+
     Swal.fire({
       title: this.translate.instant('pages.transfer.toastr.otc'),
       text: this.translate.instant('pages.transfer.otcWarnMessage'),
@@ -525,31 +533,33 @@ export class TransferComponent implements OnInit {
       confirmButtonText: 'Yes',
       cancelButtonText: 'No'
     }).then((result) => {
-      if (result.value) {
-        this.httpService.post(transferObj, 'transfer-otc/').subscribe((res?: any) => {
-          if (res.status) {
-            this.formSubmitting = false;
-            this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
-              this.translate.instant('pages.transfer.toastr.otc'));
-            this.httpService.get('anx-price/').subscribe((price) => {
-              this.anxWallet.anx_price = Number(price['anx_price']);
+      if (!result.value)
+        return;
 
-              this.httpService.get('asset/').subscribe((data?: any) => {
-                const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
-                this.anxWallet.wallet_amount = anxData.quantity || 0;
-                this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 2);
-                this.setOTCAmount();
-              });
-            });
-          } else {
-            this.formSubmitting = false;
-            this.toastrService.danger(res.message, this.translate.instant('pages.transfer.toastr.otc'));
-          }
-        }, err => {
+      this.formSubmitting = true;
+      this.httpService.post(transferObj, 'transfer-otc/').subscribe((res?: any) => {
+        if (res.status) {
           this.formSubmitting = false;
-          this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.toastr.otc'));
-        });
-      }
+          this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
+            this.translate.instant('pages.transfer.toastr.otc'));
+          this.httpService.get('anx-price/').subscribe((price) => {
+            this.anxWallet.anx_price = Number(price['anx_price']);
+
+            this.httpService.get('asset/').subscribe((data?: any) => {
+              const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
+              this.anxWallet.wallet_amount = anxData.quantity || 0;
+              this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
+              this.setOTCAmount();
+            });
+          });
+        } else {
+          this.formSubmitting = false;
+          this.toastrService.danger(res.message, this.translate.instant('pages.transfer.toastr.otc'));
+        }
+      }, err => {
+        this.formSubmitting = false;
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.toastr.otc'));
+      });
     });
   }
 }
