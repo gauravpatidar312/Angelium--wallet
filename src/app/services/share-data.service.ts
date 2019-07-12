@@ -6,6 +6,7 @@ import {AppState} from '../@core/store/app.state';
 import {ResetState} from '../@core/store/actions/user.action';
 
 import * as _ from 'lodash';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ShareDataService {
@@ -17,7 +18,8 @@ export class ShareDataService {
   transferTab: string;
   transferTitle: string;
   constructor(private storageService: IndexedDBStorageService,
-              private store: Store<AppState>) {}
+              private store: Store<AppState>,
+              private translate:TranslateService) {}
 
   changeData(data: any) {
     this.messageSource.next(data);
@@ -29,7 +31,7 @@ export class ShareDataService {
   }
 
   getErrorMessage(err: any) {
-    let msg = 'Something went wrong. We request you to try after sometime.';
+    let msg = this.translate.instant('common.somethingWentWrong');
 
     if (err.status === 401) {
       console.warn('DB cleared after 401 error');
@@ -38,7 +40,7 @@ export class ShareDataService {
       this.storageService.resetStorage();
       this.store.dispatch(new ResetState({}));
 
-      msg = 'Session expired. Please log in again.';
+      msg = this.translate.instant('common.sessionExpired');
       return msg;
     }
 
@@ -59,7 +61,7 @@ export class ShareDataService {
       msg = err[Object.keys(err)[0]];
 
     if (msg === 'true' || typeof msg !== 'string')
-      msg = 'Something went wrong. We request you to try after sometime.';
+      msg = this.translate.instant('common.somethingWentWrong');
 
     return msg;
   }

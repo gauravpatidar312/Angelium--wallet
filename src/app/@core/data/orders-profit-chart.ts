@@ -5,6 +5,7 @@ import { ProfitChart  } from './profit-chart';
 export interface OrderProfitChartSummary {
   title: string;
   value: number;
+  languageKey: string;
 }
 
 export abstract class OrdersProfitChartData {

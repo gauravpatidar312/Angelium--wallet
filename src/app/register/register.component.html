@@ -29,8 +29,9 @@
           <div>
             <img src="../../assets/images/angelium_logo.png" class="logo-image" />
             <h1 id="title" class="title">{{"common.register" | translate}}</h1>
-            <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">Did not receive OTP? Try RESEND when
-              enabled.</p>
+            <p class="sub-title title" *ngIf="isResubmit && otpSubmitted">
+              {{"common.tryResendOtp" | translate}}
+            </p>
             <form #otpForm="ngForm" (ngSubmit)="onSubmitOtp()"  class="registerForm">
               <div class="form-group row">
                 <div class="col-md-9 col-12">
@@ -96,7 +97,9 @@
                     <div *ngIf="f.first_name.errors.required">
                       {{"messages.required" | translate: {'field': "common.firstName" | translate } }}
                     </div>
-                    <div *ngIf="f.first_name.errors.pattern">Please enter value in English language only.</div>
+                    <div *ngIf="f.first_name.errors.pattern">
+                      {{ "pages.register.enterValueInEnglish" | translate  }}
+                    </div>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -108,11 +111,13 @@
                     <div *ngIf="f.last_name.errors.required">
                       {{"messages.required" | translate: {'field': "common.lastName" | translate } }}
                     </div>
-                    <div *ngIf="f.last_name.errors.pattern">Please enter value in English language only.</div>
+                    <div *ngIf="f.last_name.errors.pattern">
+                      {{ "pages.register.enterValueInEnglish" | translate  }}
+                    </div>
                   </div>
                 </div>
                 <span class="form-group col-md-12 msg-font-size">
-                  {{"pages.register.RealNameIsRequiredForKYC" | translate}}.
+                  {{"pages.register.realNameIsRequiredForKYC" | translate}}.
                 </span>
               </div>
               <div class="form-group">

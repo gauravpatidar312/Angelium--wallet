@@ -39,11 +39,11 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   breakpoints: any;
   currentTheme: string;
 
-  idFrontLabel: any = 'ID Proof (front side)';
+  idFrontLabel: any = this.translate.instant('pages.kyc.idProofFront');
   idFrontChangedEvent: any = '';
-  idBackLabel: any = 'ID Proof (back side)';
+  idBackLabel: any = this.translate.instant('pages.kyc.idProofBack');
   idBackChangedEvent: any = '';
-  selfieLabel: any = 'Selfie';
+  selfieLabel: any = this.translate.instant('pages.kyc.selfie');
   selfieChangedEvent: any = '';
 
   selectedImage = '';
@@ -133,9 +133,9 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
 
   updateStateKYC() {
     if (this.userData.kyc_info && this.userData.kyc_info.status_description !== 'confirmed') {
-        this.idFrontLabel = 'ID Proof (front side)';
-        this.idBackLabel = 'ID Proof (back side)';
-        this.selfieLabel = 'Selfie';
+        this.idFrontLabel = this.translate.instant('pages.kyc.idProofFront');
+        this.idBackLabel = this.translate.instant('pages.kyc.idProofBack');
+      this.selfieLabel = this.translate.instant('pages.kyc.selfie');
     }
   }
 

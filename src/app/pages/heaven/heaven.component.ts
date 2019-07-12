@@ -256,7 +256,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
       created: {
-        title: this.translate.instant('pages.heaven.date'),
+        title: this.translate.instant('common.date'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -414,7 +414,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
       if (!this.myWallets) {
-        this.walletType = 'SELECT';
+        this.walletType = this.translate.instant('common.select');
       } else if (this.shareDataService.transferTitle) {
         this.walletType = this.shareDataService.transferTitle;
         this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};

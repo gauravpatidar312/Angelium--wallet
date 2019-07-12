@@ -185,9 +185,9 @@
               <span class="text-success">$</span>{{row.data.heaven.toFixed(2)}}
             </td>
           </ng-container>
-
+          
           <ng-container nbTreeGridColumnDef="reward">
-            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Heaven Drop</th>
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{"pages.reward.heavenDrop" | translate}}</th>
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
               <div class="downline-heavenDrop-cell"> {{row.data.reward.toFixed(0)}} <span class="text-success">ANX</span></div>
             </td>

@@ -84,7 +84,7 @@
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
-                      <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
+                      <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
                     </div>
                   </div>
                 </div>
@@ -169,7 +169,7 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">{{"common.amount" | translate}}</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount"
+                        <input type="number" class="font-nunitoSans form-control" placeholder="{{'common.amount' | translate}}"
                                name="fromOTCAmount" step="0.01"
                                [required]="true" [(ngModel)]="fromOTCAmount" (keyup)="setOTCAmount()"
                                value="{{0 | number : '1.0-0' }}">
@@ -209,7 +209,7 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">{{"common.amount" | translate}}</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="Amount" step="0.000001"
+                        <input type="number" class="font-nunitoSans form-control" placeholder="{{'common.amount' | translate}}" step="0.000001"
                                [disabled]="true" value="{{otcWallet?.toAmount | number : '1.0-6'}}">
                         <span class="transfer-amount" *ngIf="!fetchingAmount && false">${{ otcWallet?.toDollar | number : '1.0-2' }}</span>
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
@@ -229,8 +229,10 @@
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
-                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">*Minimum amount for BTC transfer is $100 for beta version.</span>
-                      <span class="transfer-message font-nunitoSans">3% handling charge is applicable on each transaction.*</span>
+                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">
+                      *{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
+                      <span class="transfer-message font-nunitoSans">
+                        {{"pages.transfer.handlingChargeApplicableOnEachTransaction" | translate}}*</span>
                     </div>
                   </div>
                 </div>
@@ -279,14 +281,14 @@
 <ng-template #tradePassword let-data let-ref="dialogRef">
   <nb-card>
     <nb-card-header>
-      Trade Password
+      {{"common.tradePassword" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelTradeDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
-      <input type="password" [(ngModel)]="trade_password" placeholder="Trade password" nbInput/><br/><br/>
+      <input type="password" [(ngModel)]="trade_password" placeholder="{{'common.tradePassword' | translate}}" nbInput/><br/><br/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">Submit</button>
+      <button nbButton class="submit-btn" size="small" (click)="tradPasswordDialog(ref)">{{"common.submit" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

@@ -26,7 +26,7 @@
         </div>
       </nb-card-body>
       <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '30'}"
-              (click)="selectedHeavenPlan = '30'">{{"common.select" | translate}}
+        (click)="selectedHeavenPlan = '30'">{{"common.select" | translate}}
       </button>
     </nb-card>
   </div>
@@ -50,7 +50,7 @@
         </div>
       </nb-card-body>
       <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '60'}"
-              (click)="selectedHeavenPlan = '60'">{{"common.select" | translate}}
+        (click)="selectedHeavenPlan = '60'">{{"common.select" | translate}}
       </button>
     </nb-card>
   </div>
@@ -74,7 +74,7 @@
         </div>
       </nb-card-body>
       <button class="table_bg font-size-button" [ngClass]="{'selectedHeaven':selectedHeavenPlan === '90'}"
-              (click)="selectedHeavenPlan = '90'">{{"common.select" | translate}}
+        (click)="selectedHeavenPlan = '90'">{{"common.select" | translate}}
       </button>
     </nb-card>
   </div>
@@ -90,16 +90,16 @@
                 {{"common.from" | translate}}
               </label>
               <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-                   ngbDropdown>
+                ngbDropdown>
                 <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn b-color-wallet"
-                        [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
                                  'btn-primary': currentTheme !== 'default',
                                  'btn-sm': breakpoint.width <= breakpoints.is}">
                   {{ walletType }}
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                   <li class="dropdown-item" *ngFor="let wallet of myWallets"
-                      (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
+                    (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
                     {{ wallet.wallet_type }}
                   </li>
                 </ul>
@@ -112,14 +112,14 @@
                 {{"common.amount" | translate}}
               </label>
               <input type="number" [required]="true" [(ngModel)]="heaven_amount"
-                     placeholder="{{'pages.heaven.enterAmount' | translate}}"
-                     step="0.000001" [disabled]="!wallet?.wallet_type"
-                     class="form-control input-padding font-avenir" (keyup)="setAmount(wallet?.wallet_type)"/>
+                placeholder="{{'pages.heaven.enterAmount' | translate}}" step="0.000001"
+                [disabled]="!wallet?.wallet_type" class="form-control input-padding font-avenir"
+                (keyup)="setAmount(wallet?.wallet_type)" />
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
               <span class="transfer-amount"
-                    *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
+                *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
-                    title="Click to use whole amount">
+                title="Click to use whole amount">
                 {{maxAmount + ' ' + (wallet?.wallet_type) + ' / max' }}
               </span>
             </div>
@@ -128,11 +128,10 @@
             <div class="form-group">
               <label class="d-none d-md-block">&nbsp;</label>
               <button [disabled]="formSubmitting || fetchingAmount || !myWallets?.length || !wallet?.wallet_type"
-                      (click)="onCreateHeaven()"
-                      class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
-                  <span *ngIf="!(formSubmitting || fetchingAmount)">
-                    {{"common.run" | translate}}
-                  </span>
+                (click)="onCreateHeaven()" class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
+                <span *ngIf="!(formSubmitting || fetchingAmount)">
+                  {{"common.run" | translate}}
+                </span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
               </button>
             </div>
@@ -151,13 +150,13 @@
           <div class="legends">
             <div class="legend">
               <div class="legend-item-color"
-                   style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
+                style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
               </div>
-              <div class="legend-title">ANX</div>
+              <div class="legend-title">{{"common.cryptos.anx" | translate}}</div>
             </div>
             <div class="legend">
               <div class="legend-item-color"
-                   style="background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);">
+                style="background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);">
               </div>
               <div class="legend-title">{{'common.heaven'|translate}}</div>
             </div>
@@ -219,7 +218,7 @@
       </nb-card-header>
       <nb-card-body id="heaven-history">
         <div [hidden]="!fetchHeavenHistory"><span class="heaven-history-spinner"><i
-          class="fa fa-spinner fa-spin"></i></span></div>
+              class="fa fa-spinner fa-spin"></i></span></div>
         <div style="overflow: auto;">
           <ng2-smart-table class="heaven-history" [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
           </ng2-smart-table>
@@ -250,7 +249,7 @@
       </nb-card-header>
       <nb-card-body id="heaven-drop-history">
         <div [hidden]="!fetchHeavenDropHistory"><span class="heaven-history-spinner"><i
-          class="fa fa-spinner fa-spin"></i></span></div>
+              class="fa fa-spinner fa-spin"></i></span></div>
         <div style="overflow: auto;">
           <ng2-smart-table [settings]="heavenDrops" [source]="source_heavenDrop" *ngIf="!fetchHeavenDropHistory">
           </ng2-smart-table>

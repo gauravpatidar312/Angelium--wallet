@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                   <td class="title-col">{{"pages.setting.qr" | translate}}</td>
-                  <td class="value-col">Download QR Code of your referral link</td>
+                  <td class="value-col">{{"pages.setting.downloadQRCodeOfYourReferralLink" | translate}}</td>
                   <td class="action-col text-center td-padding">
                     <i class="ion-archive down-qrCode-icon fa-2x" (click)="openDialog(QRdialog)"></i>
                   </td>
@@ -96,7 +96,7 @@
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeTradePassword)"></i></td>
               </tr>
               <tr *ngIf="!isProduction">
-                <td class="title-col">2FA</td>
+                <td class="title-col">{{"pages.setting.2FA" | translate}}</td>
                 <td class="value-col">**************</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
@@ -114,7 +114,7 @@
               </tr>
               <tr>
                 <td class="title-col">{{"pages.setting.currency" | translate}}</td>
-                <td class="value-col">USD</td>
+                <td class="value-col">{{"pages.setting.usd" | translate}}</td>
                 <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
@@ -124,18 +124,19 @@
                     <label class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? '': 'active'}}"
                       (click)="r18mode(false)">
                       <input type="radio" name="options">
-                      OFF
+                      {{"pages.setting.off" | translate}}
                     </label>
                     <label  class="btn btn-secondary paddfix btn-sm {{ r18modeSwitchText ? 'active': ''}}"
                       (click)="r18mode(true)">
-                      <input type="radio" name="options"> ON
+                      <input type="radio" name="options"> 
+                      {{"pages.setting.on" | translate}}
                     </label>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="title-col">{{"pages.setting.merge" | translate}}</td>
-                <td>{{isProduction ? ("pages.setting.comingSoon" | translate) : ("pages.setting.MergeOldData" | translate)}}</td>
+                <td>{{isProduction ? ("pages.setting.comingSoon" | translate) : ("pages.setting.mergeYourOldData" | translate)}}</td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="!isProduction"></i></td>
               </tr>
               <tr>
@@ -288,7 +289,7 @@
         placeholder="{{'pages.setting.usernameOnlyEnglish' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="onChangeUsername(ref)">{{"pages.kyc.submit" | translate}}</button>
+      <button nbButton class="submit-btn" size="small" (click)="onChangeUsername(ref)">{{"common.submit" | translate}}</button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelUsernameDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
@@ -307,7 +308,7 @@
       placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="changeLoginPasswordDialog(ref)">{{"pages.kyc.submit" | translate}}</button>
+      <button nbButton class="submit-btn" size="small" (click)="changeLoginPasswordDialog(ref)">{{"common.submit" | translate}}</button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelLoginPasswordDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
@@ -325,7 +326,7 @@
       <input type="password" [(ngModel)]="confirmTradePassword" placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">{{"pages.kyc.submit" | translate}}</button>
+      <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">{{"common.submit" | translate}}</button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelTradePasswordDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
@@ -334,7 +335,7 @@
 <ng-template #dialog let-data let-ref="dialogRef">
   <nb-card>
     <nb-card-header>
-      Upload image
+      {{"pages.setting.uploadImage" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelUploadDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
@@ -359,7 +360,7 @@
       </div>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">Upload</button>
+      <button nbButton class="upload-btn" size="small" (click)="uploadPicture(ref)">{{"common.upload" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
@@ -367,7 +368,7 @@
 <ng-template #QRdialog let-data let-refQR="dialogRef">
   <nb-card>
     <nb-card-header>
-      QR Code  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
+      {{"pages.setting.QRCode" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <ngx-qrcode
@@ -379,7 +380,7 @@
       </ngx-qrcode>
     </nb-card-body>
     <nb-card-footer class="text-center">
-      <button nbButton size="small" (click)="downloadQR()">Download</button>
+      <button nbButton size="small" (click)="downloadQR()">{{"pages.setting.download" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

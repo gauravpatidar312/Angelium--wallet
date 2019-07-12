@@ -32,7 +32,7 @@ export class HQComponent implements OnInit {
       delete: true,
     },
     editable: false,
-    noDataMessage: 'There are no users.',
+    noDataMessage: this.translate.instant('pages.hq.thereAreNoUsers'),
     /*add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -95,17 +95,17 @@ export class HQComponent implements OnInit {
       if (res && res.results) {
         this.source.load(res.results);
       } else if (res.message) {
-        this.toastrService.danger(res.message, 'User Database');
+        this.toastrService.danger(res.message, this.translate.instant('pages.hq.toastr.userDatabase'));
       }
       this.fetchingUsers = false;
     }, (err) => {
       this.fetchingUsers = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'User Database');
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.userDatabase'));
     });
   }
 
   onLoadConfirm(event): void {
-    if (window.confirm('Are you sure to load the session of the user?')) {
+    if (window.confirm(this.translate.instant('pages.hq.areYouSureToLoadTheSessionOfTheUser'))) {
       const data = {'user_id': event.data.id};
       this.httpService.post(data, 'admin_login/').subscribe((res?: any) => {
         if (res.token) {
@@ -114,10 +114,10 @@ export class HQComponent implements OnInit {
             this.router.navigateByUrl('/pages/setting');
           }, 10);
         } else if (res.message) {
-          this.toastrService.danger(res.message, 'Load User Session');
+          this.toastrService.danger(res.message, this.translate.instant('pages.hq.toastr.loadUserSession'));
         }
       }, (err) => {
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Load User Session');
+          this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.loadUserSession'));
       });
     }
     event.confirm.reject();

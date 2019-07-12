@@ -128,8 +128,8 @@
       <nb-card-body>
         <div class="form-group">
           <input type="text" placeholder="Project" class="form-control" />
-          <small class="form-text ml-2 mt-1">A block of help text that breaks into a new line and may extend beyond one
-            line.
+          <small class="form-text ml-2 mt-1">
+            {{ "pages.dashboard.blockOfHelpText" | translate }}
           </small>
         </div>
         <div class="input-group mb-4">
@@ -139,8 +139,12 @@
           <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
         </div>
         <div class="size-container text-right">
-          <button class="btn btn-primary btn btn-sm btn-demo btn-hero-secondary mr-2">Ghost</button>
-          <button class="btn btn-success btn btn-sm btn-demo btn-hero-success">Success</button>
+          <button class="btn btn-primary btn btn-sm btn-demo btn-hero-secondary mr-2">
+            {{ "pages.dashboard.ghost" | translate }}
+          </button>
+          <button class="btn btn-success btn btn-sm btn-demo btn-hero-success">
+            {{ "common.success" | translate }}
+          </button>
         </div>
       </nb-card-body>
     </nb-card>

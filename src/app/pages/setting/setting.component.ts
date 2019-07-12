@@ -26,7 +26,7 @@ declare let jQuery: any;
 export class SettingComponent implements OnInit {
   isProduction: boolean = environment.production;
   evaIcons = [];
-  selectedLang: string = 'SELECT';
+  selectedLang: string = this.translate.instant('common.select');
   languageData = [];
   private alive = true;
   userData: any;

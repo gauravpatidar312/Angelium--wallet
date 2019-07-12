@@ -24,11 +24,12 @@ declare const jQuery: any;
 export class TransferComponent implements OnInit {
   private alive = true;
   isProduction: any = environment.production;
+  sendType: string = 'SELECT';
+  receiveType: string =  'SELECT';
   user: any;
-  sendType: string = this.translate.instant('common.select');
-  receiveType: string =  this.translate.instant('common.select');
+
   fromType: string = 'ANX';
-  toType: string =  this.translate.instant('common.select');
+  toType: string =  'SELECT';
   fromTypes: string[] = ['ANX'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -90,7 +91,7 @@ export class TransferComponent implements OnInit {
     noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
       timestamp: {
-        title: this.translate.instant('pages.transfer.date'),
+        title: this.translate.instant('common.date'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -191,9 +192,9 @@ export class TransferComponent implements OnInit {
         this.otcWallets = this.myWallets;
 
       if (!this.myWallets) {
-        this.sendType = this.translate.instant('common.select');
-        this.receiveType = this.translate.instant('common.select');
-        this.toType =  this.translate.instant('common.select');
+        this.sendType = 'SELECT';
+        this.receiveType = 'SELECT';
+        this.toType =  'SELECT';
       } else if (this.shareDataService.transferTab) {
         this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
         this.shareDataService.transferTab = null;

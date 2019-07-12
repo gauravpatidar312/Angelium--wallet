@@ -211,7 +211,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     noDataMessage: this.translate.instant('pages.reward.noDataFound'),
     columns: {
       date: {
-        title: this.translate.instant('pages.reward.date'),
+        title: this.translate.instant('common.date'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {

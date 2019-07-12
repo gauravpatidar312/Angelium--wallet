@@ -4,67 +4,67 @@
   <div class="col-md-8 offset-md-2 nb-card-wrap">
       <nb-card-header class="cardHeadercss">
         <div class="navigation">
-          <h1 class="link" style="text-align: center">MERGE</h1>
+          <h1 class="link" style="text-align: center">{{"pages.setting.merge" |translate | uppercase}}</h1>
         </div>
       </nb-card-header>
       <nb-card-body>
         <div class="mergeBlock">
           <nb-tabset style="justify-content: center;">
-            <nb-tab tabTitle="ANL">
+            <nb-tab tabTitle="{{'common.cryptos.anl' | translate}}">
               <div class="adjustment" style="margin-top: 2rem;">
                 <form [formGroup]="anlForm" (ngSubmit)="onANLSubmit()" class="width-full" aria-labelledby="title">
                   <div class="form-group">
-                    <label class="label" for="input-email">ANL Username</label>
-                    <input class="form-control" fullWidth="text" placeholder="ANL Username" autofocus
+                    <label class="label" for="input-email">{{"pages.merge.ANLUsername" | translate}}</label>
+                    <input class="form-control" fullWidth="text" placeholder="{{'pages.merge.ANLUsername' | translate}}" autofocus
                       formControlName="anlusername">
                     <div *ngIf="submitted && f.anlusername.errors" class="invalid-feedback">
-                      <div *ngIf="f.anlusername.errors.required">ANL username is required</div>
+                      <div *ngIf="f.anlusername.errors.required">{{"pages.merge.ANLUsernameIsRequired" | translate}}</div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="label" for="input-password">ANL Password</label>
+                    <label class="label" for="input-password">{{"pages.merge.ANLPassword" | translate}}</label>
                     <input class="form-control" fullWidth name="password" type="password" formControlName="anlpassword"
-                      placeholder="ANL Password">
+                      placeholder="{{'pages.merge.ANLPassword' | translate}}">
                     <div *ngIf="submitted && f.anlpassword.errors" class="invalid-feedback">
-                      <div *ngIf="f.anlpassword.errors.required">ANL Password is required</div>
+                      <div *ngIf="f.anlpassword.errors.required">{{"pages.merge.ANLPasswordIsRequired" | translate}}</div>
                     </div>
                   </div>
-                  <p class="sub-title title">Your old XTRAVEL account will be merged to new account.</p>
+                  <p class="sub-title title">{{"pages.merge.yourOldXTRAVELAccountWillBeMergedToNewAccount" | translate}}</p>
                   <div class="form-group">
                     <button nbButton [disabled]="formSubmitting" class="form-control pointer" fullWidth
                       status="success">
-                      <span *ngIf="!formSubmitting">Submit</span>
+                      <span *ngIf="!formSubmitting">{{"common.submit" | translate}}</span>
                       <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
                     </button>
                   </div>
                 </form>
               </div>
             </nb-tab>
-            <nb-tab tabTitle="XTRAVEL">
+            <nb-tab tabTitle="{{'pages.merge.XTRAVEL' | translate}}">
               <div class="adjustment" style="margin-top: 2rem;">
                 <form [formGroup]="xtravelForm" (ngSubmit)="onXtravelSubmit()" class="width-full"
                   aria-labelledby="title">
                   <div class="form-group">
-                    <label class="label" for="input-email">XTRAVEL Username</label>
-                    <input class="form-control" fullWidth="text" placeholder="XTRAVEL Username" autofocus
+                    <label class="label" for="input-email">{{"pages.merge.XTRAVELUsername" | translate}}</label>
+                    <input class="form-control" fullWidth="text" placeholder="{{'pages.merge.XTRAVELUsername' | translate}}" autofocus
                       formControlName="xtravelusername">
                     <div *ngIf="xtravelsubmitted && fxtravel.xtravelusername.errors" class="invalid-feedback">
-                      <div *ngIf="fxtravel.xtravelusername.errors.required">XTRAVEL username is required</div>
+                      <div *ngIf="fxtravel.xtravelusername.errors.required">{{"pages.merge.XTRAVELUsernameIsRequired" | translate}}</div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="label" for="input-password">XTRAVEL Password</label>
+                    <label class="label" for="input-password">{{"pages.merge.XTRAVELPassword" | translate}}</label>
                     <input class="form-control" fullWidth name="password" type="password"
-                      formControlName="xtravelpassword" placeholder="XTRAVEL Password">
+                      formControlName="xtravelpassword" placeholder="{{'pages.merge.XTRAVELPassword' | translate}}">
                     <div *ngIf="xtravelsubmitted && fxtravel.xtravelpassword.errors" class="invalid-feedback">
-                      <div *ngIf="fxtravel.xtravelpassword.errors.required">XTRAVEL Password is required</div>
+                      <div *ngIf="fxtravel.xtravelpassword.errors.required">{{"pages.merge.XTRAVELPasswordIsRequired" | translate}}</div>
                     </div>
                   </div>
-                  <p class="sub-title title">Your old XTRAVEL account will be merged to new account.</p>
+                  <p class="sub-title title">{{"pages.merge.yourOldXTRAVELAccountWillBeMergedToNewAccount" | translate}}</p>
                   <div class="form-group">
                     <button nbButton [disabled]="xtravelformSubmitting" class="form-control pointer" fullWidth
                       status="success">
-                      <span *ngIf="!xtravelformSubmitting">Submit</span>
+                      <span *ngIf="!xtravelformSubmitting">{{"common.submit" | translate}}</span>
                       <i class="fa fa-spinner fa-spin text-white" *ngIf="xtravelformSubmitting"></i>
                     </button>
                   </div>
