@@ -337,7 +337,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchingAmount = false;
       this.wallet.walletDollar = 0;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
-
     });
   }
 

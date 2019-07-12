@@ -263,6 +263,8 @@ export class TransferComponent implements OnInit {
       return;
     }
 
+    this.setAmount(this.sendWallet.wallet_type);
+
     this.dialogService.open(dialog,  {
       closeOnBackdropClick: false,
       autoFocus: false,
@@ -351,6 +353,8 @@ export class TransferComponent implements OnInit {
     this.httpService.post(obj, 'convert_to_crypto/').subscribe((rate?: any) => {
       if (rate.ERROR || rate.Error) {
         this.fetchingAmount = false;
+        this.otcWallet.toAmount = 0;
+        this.otcWallet.toDollar = 0;
         this.toastrService.danger(rate.ERROR || rate.Error, this.translate.instant('common.fetchingAmount'));
         return;
       }
@@ -517,11 +521,7 @@ export class TransferComponent implements OnInit {
     //   return;
     // }
 
-    const transferObj = {
-      'user_wallet': this.otcWallet.id,
-      'transfer_amount': this.otcWallet.toAmount,
-      'anx_amount': this.fromOTCAmount,
-    };
+    this.setOTCAmount();
 
     Swal.fire({
       title: this.translate.instant('pages.transfer.toastr.otc'),
@@ -533,6 +533,12 @@ export class TransferComponent implements OnInit {
     }).then((result) => {
       if (!result.value)
         return;
+
+      const transferObj = {
+        'user_wallet': this.otcWallet.id,
+        'transfer_amount': this.otcWallet.toAmount,
+        'anx_amount': this.fromOTCAmount,
+      };
 
       this.formSubmitting = true;
       this.httpService.post(transferObj, 'transfer-otc/').subscribe((res?: any) => {
