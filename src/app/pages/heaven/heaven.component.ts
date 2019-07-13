@@ -285,7 +285,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       currency_type: {
-        title: this.translate.instant('pages.heaven.type'),
+        title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {

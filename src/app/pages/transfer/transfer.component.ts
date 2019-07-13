@@ -120,7 +120,7 @@ export class TransferComponent implements OnInit {
         },
       },
       crypto: {
-        title: this.translate.instant('pages.transfer.type'),
+        title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
