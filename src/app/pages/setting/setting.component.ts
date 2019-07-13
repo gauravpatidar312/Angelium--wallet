@@ -44,8 +44,8 @@ export class SettingComponent implements OnInit {
   confirmTradePassword: any = '';
   oldTradePassword: any = '';
   breakpoints: any;
-  selectedTicket:string = 'SELECT';
-  issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
+  selectedTicket:string = this.translate.instant('common.select');
+  issueTypes: any = [this.translate.instant('pages.setting.unableToRegister'), this.translate.instant('pages.setting.notGettingCorrectData'), this.translate.instant('pages.setting.unableToLogin')];
   ticketTitle:any = '';
   ticketDescription:any = '';
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
@@ -109,13 +109,6 @@ export class SettingComponent implements OnInit {
 
   changeIssue(issue){
     this.selectedTicket=issue;
-  }
-
-  onIssueSubmit(ticketForm){
-    if(ticketForm.valid){
-      console.log("hello")
-    }
-
   }
 
   changeLang(lan: any){
@@ -360,7 +353,7 @@ export class SettingComponent implements OnInit {
     if (!(this.ticketTitle && this.ticketDescription && this.selectedTicket !== 'select' )) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
-        this.translate.instant('pages.setting.toastr.createTicket')
+        this.translate.instant('pages.setting.createTicket')
       );
       return;
     }
@@ -372,12 +365,12 @@ export class SettingComponent implements OnInit {
       this.selectedTicket = 'select';
       this.toastrService.success(
         this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
-        this.translate.instant('pages.setting.toastr.createTicket')
+        this.translate.instant('pages.setting.createTicket')
       );
     },
     err => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err),
-        this.translate.instant('pages.setting.toastr.createTicket')
+        this.translate.instant('pages.setting.createTicket')
       );
     });
   }
