@@ -424,7 +424,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
       if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-        this.myWallets = _.filter(this.myWallets, (wallet) => {
+        this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
             return wallet.wallet_type !== 'USDT';
           }) || [];
       }
