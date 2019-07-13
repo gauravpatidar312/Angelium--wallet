@@ -44,8 +44,8 @@ export class SettingComponent implements OnInit {
   confirmTradePassword: any = '';
   oldTradePassword: any = '';
   breakpoints: any;
-  selectedTicket:string = this.translate.instant('common.select');
-  issueTypes: any = [this.translate.instant('pages.setting.unableToRegister'), this.translate.instant('pages.setting.notGettingCorrectData'), this.translate.instant('pages.setting.unableToLogin')];
+  selectedTicket:string = 'select';
+  issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
   ticketTitle:any = '';
   ticketDescription:any = '';
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
