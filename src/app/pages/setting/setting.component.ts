@@ -44,6 +44,10 @@ export class SettingComponent implements OnInit {
   confirmTradePassword: any = '';
   oldTradePassword: any = '';
   breakpoints: any;
+  selectedTicket:string = 'SELECT';
+  issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
+  ticketTitle:any = '';
+  ticketDescription:any = '';
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
   constructor(private toastrService: ToastrService,
@@ -101,6 +105,17 @@ export class SettingComponent implements OnInit {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.setting'));      this.userData = this.sessionStorage.getFromSession('userInfo');
       this.extraInfo();
     });
+  }
+
+  changeIssue(issue){
+    this.selectedTicket=issue;
+  }
+
+  onIssueSubmit(ticketForm){
+    if(ticketForm.valid){
+      console.log("hello")
+    }
+
   }
 
   changeLang(lan: any){
@@ -332,6 +347,39 @@ export class SettingComponent implements OnInit {
     this.newTradePassword = null;
     this.oldTradePassword = null;
     this.confirmTradePassword = null;
+  }
+
+  cancelTicketDialog(ref){
+    ref.close();
+    this.ticketTitle = null;
+    this.ticketDescription = null;
+    this.selectedTicket = 'select';
+  }
+
+  createTicketDialog(ref){
+    if (!(this.ticketTitle && this.ticketDescription && this.selectedTicket !== 'select' )) {
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
+        this.translate.instant('pages.setting.toastr.createTicket')
+      );
+      return;
+    }
+    let ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
+    console.log(ticketData);
+    this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
+      this.ticketTitle = null;
+      this.ticketDescription = null;
+      this.selectedTicket = 'select';
+      this.toastrService.success(
+        this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
+        this.translate.instant('pages.setting.toastr.createTicket')
+      );
+    },
+    err => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),
+        this.translate.instant('pages.setting.toastr.createTicket')
+      );
+    });
   }
 
   updateR18mode(data: any) {

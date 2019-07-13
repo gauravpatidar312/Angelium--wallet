@@ -171,6 +171,11 @@
                 <td><a class="pointer text-color" href="https://forms.gle/DWYtsKGqz3SA8bWo7" target="_blank">{{"pages.setting.clickToReport" | translate}}</a></td>
                 <td></td>
               </tr>
+              <tr>
+                <td class="title-col">Support Ticket</td>
+                <td><a class="pointer chatHover" (click)="openDialog(createTicket)">Create Ticket</a></td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -381,6 +386,35 @@
     </nb-card-body>
     <nb-card-footer class="text-center">
       <button nbButton size="small" (click)="downloadQR()">{{"pages.setting.download" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #createTicket let-data let-ref="dialogRef">
+  <nb-card class="changePassword">
+    <nb-card-header>Create Ticket
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelTicketDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <input type="type" [(ngModel)]="ticketTitle" placeholder="Ticket title" nbInput /><br /><br />
+      <input type="type" [(ngModel)]="ticketDescription" placeholder="Ticket des" nbInput /><br/><br/>
+      <div class="status-dd-week dropup" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown placement="top">
+        <button type="button" ngbDropdownToggle class="btn b-language-size btn-padding" [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                      'btn-primary': currentTheme !== 'default',
+                                      'btn-sm': breakpoint.width <= breakpoints.is}">
+          {{ selectedTicket }}
+        </button>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li class="dropdown-item {{selectedTicket === issue ? 'active' : ''}}" *ngFor="let issue of issueTypes"
+            (click)="changeIssue(issue)">
+            {{ issue }}
+          </li>
+        </ul>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="createTicketDialog(ref)">{{"common.submit" | translate}}</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelTicketDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
