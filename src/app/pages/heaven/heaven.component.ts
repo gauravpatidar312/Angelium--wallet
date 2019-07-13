@@ -6,11 +6,12 @@ import { SmartTableData } from '../../@core/data/smart-table';
 import { HttpService } from '../../services/http.service';
 import * as _ from 'lodash';
 
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from '../../services/toastr.service';
 import { ShareDataService } from '../../services/share-data.service';
 import { environment } from 'environments/environment';
 import { CustomRendererComponent } from './custom.component';
+import { SessionStorageService } from '../../services/session-storage.service';
 import * as moment from 'moment';
 
 declare let jQuery: any;
@@ -33,6 +34,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
   isProduction: any = environment.production;
+  user: any;
   heavenDrop: any;
   totalHeaven: any;
   heavenType: string = 'week';
@@ -53,6 +55,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   days:any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
+  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   totalHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
@@ -102,8 +105,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
               private breakpointService: NbMediaBreakpointsService,
               private httpService: HttpService,
               private toastrService: ToastrService,
+              private sessionStorage: SessionStorageService,
               public translate: TranslateService) {
-    // const data = this.service.getData();
+    this.user = this.sessionStorage.getFromSession('userInfo');
+
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -354,6 +359,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.toastrService.danger('Feature coming soon! Stay tuned.', 'Heaven');
       return;
     }*/
+    if (this.isProduction && this.wallet.wallet_type === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+        this.translate.instant('common.heaven'));
+      return;
+    }
 
     if (!this.heaven_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
@@ -413,6 +423,12 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
+      if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
+        this.myWallets = _.filter(this.myWallets, (wallet) => {
+            return wallet.wallet_type !== 'USDT';
+          }) || [];
+      }
+
       if (!this.myWallets) {
         this.walletType = this.translate.instant('common.select');
       } else if (this.shareDataService.transferTitle) {
