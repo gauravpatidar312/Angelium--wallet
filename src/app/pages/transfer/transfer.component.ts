@@ -188,7 +188,7 @@ export class TransferComponent implements OnInit {
       this.myWallets = _.sortBy(res, ['wallet_type']);
       if (this.isProduction) {
         if (this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-          this.myWallets = _.filter(this.myWallets, (wallet) => {
+          this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
               return wallet.wallet_type !== 'USDT';
             }) || [];
         }
