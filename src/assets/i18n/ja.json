@@ -286,6 +286,7 @@
       "support": "Support",
       "secretKey": "Secret Key",
       "silverAngel": "SILVER ANGEL",
+      "supportTicket": "Support Ticket",
       "2FA": "2FA",
       "ticketTitle": "Ticket title",
       "ticketDescription": "Ticket Description",
@@ -305,6 +306,7 @@
         "r18ModeEnable": "R-18 MODE ENABLED",
         "r18ModeDisabled": "R-18 MODE DISABLED",
         "tradePasswordUpdated": "Trade password updated successfully",
+        "ticketSuccessfullyCreated": "Ticket successfully created",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
