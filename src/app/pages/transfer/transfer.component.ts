@@ -492,11 +492,14 @@ export class TransferComponent implements OnInit {
   }
 
   onOTCTransfer() {
-    if (this.isProduction && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      if (!this.user.kyc_info || this.user.kyc_info.status_description !== 'confirmed')
-        this.toastrService.info(this.translate.instant('pages.transfer.toastr.kycNotApproved'), this.translate.instant('pages.transfer.toastr.otc'));
-      else
-        this.toastrService.info(this.translate.instant('pages.transfer.toastr.otcComingSoon'), this.translate.instant('pages.transfer.toastr.otc'));
+    if (this.isProduction && this.otcWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+        this.translate.instant('pages.transfer.toastr.otc'));
+      return;
+    }
+
+    if (!this.user.kyc_info || this.user.kyc_info.status_description !== 'confirmed') {
+      this.toastrService.info(this.translate.instant('pages.transfer.toastr.kycNotApproved'), this.translate.instant('pages.transfer.toastr.otc'));
       return;
     }
 
@@ -537,7 +540,6 @@ export class TransferComponent implements OnInit {
 
       const transferObj = {
         'user_wallet': this.otcWallet.id,
-        'transfer_amount': this.otcWallet.toAmount,
         'anx_amount': this.fromOTCAmount,
       };
 
