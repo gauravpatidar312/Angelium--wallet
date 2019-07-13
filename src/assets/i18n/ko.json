@@ -261,6 +261,7 @@
       "confirmPassword": "비밀번호 확인",
       "chatNow": "Chat now",
       "clickToReport": "Click to report",
+      "createTicket": "Create Ticket",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "이름",
@@ -286,6 +287,8 @@
       "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
       "referralLink": "Referral Link",
+      "ticketTitle": "Ticket title",
+      "ticketDescription": "Ticket Description",
       "toastr":{
         "changeUsername": "사용자명 변경",
         "changeLoginPassword": "로그인 비밀번호 변경",

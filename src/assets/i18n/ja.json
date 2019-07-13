@@ -261,6 +261,7 @@
       "confirmPassword": "Confirm password",
       "chatNow": "Chat now",
       "clickToReport": "Click to report",
+      "createTicket": "Create Ticket",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名前",
@@ -286,6 +287,8 @@
       "secretKey": "Secret Key",
       "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
+      "ticketTitle": "Ticket title",
+      "ticketDescription": "Ticket Description",
       "toastr":{
         "changeUsername": "Change Username",
         "changeLoginPassword": "Change Login Password",

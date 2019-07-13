@@ -261,6 +261,7 @@
       "confirmPassword": "确认密码",
       "chatNow": "开始聊天",
       "clickToReport": "点击报告",
+      "createTicket": "Create Ticket",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名称",
@@ -286,6 +287,8 @@
       "secretKey": "密钥",
       "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
+      "ticketTitle":"Ticket title",
+      "ticketDescription": "Ticket Description",
       "toastr":{
         "changeUsername": "更改用户名",
         "changeLoginPassword": "更改登录密码",
