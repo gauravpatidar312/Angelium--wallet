@@ -83,6 +83,7 @@
   "pages":{
     "dashboard":{
       "articleTitle": "Article Title",
+      "earnings":"Earnings",
       "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "Event Update",
       "ghost": "Ghost",
@@ -204,6 +205,7 @@
       "downlineHeaven": "Downline Heaven",
       "heavenDrop":"Heaven Drop",
       "downlineTree": {
+        "downlineTree":"Downline Tree",
         "noUserDownlineTree": "There is no user in your down-line tree",
         "rank": "Rank",
         "reward": "Reward",
@@ -254,11 +256,14 @@
     },
     "setting": {
       "angel": "ANGEL",
+      "reloadCacheMessage" : "Are you sure to clear the cache and reload the page?",
       "currency": "Currency",
       "comingSoon": "Coming soon",
       "confirmPassword": "Confirm password",
       "chatNow": "Chat now",
       "clickToReport": "Click to report",
+      "clearCache": "Clean Cache",
+      "createTicket": "Create Ticket",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink":"Download QR Code of your referral link",
       "name": "Name",
@@ -283,8 +288,11 @@
       "support": "Support",
       "secretKey": "Secret Key",
       "silverAngel": "SILVER ANGEL",
-      "timezone": "Timezone",
+      "supportTicket":"Support Ticket",
       "2FA": "2FA",
+      "ticketTitle": "Ticket title",
+      "ticketDescription":"Ticket Description",
+      "timezone": "Timezone",
       "toastr":{
         "changeUsername": "Change Username",
         "changeLoginPassword": "Change Login Password",
@@ -301,6 +309,7 @@
         "r18ModeEnable": "R-18 MODE ENABLED",
         "r18ModeDisabled": "R-18 MODE DISABLED",
         "tradePasswordUpdated": "Trade password updated successfully",
+        "ticketSuccessfullyCreated": "Ticket successfully created",
         "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",

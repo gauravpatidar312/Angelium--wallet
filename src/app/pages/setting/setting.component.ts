@@ -43,6 +43,10 @@ export class SettingComponent implements OnInit, OnDestroy {
   confirmTradePassword: any = '';
   oldTradePassword: any = '';
   breakpoints: any;
+  selectedTicket:string = 'select';
+  issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
+  ticketTitle:any = '';
+  ticketDescription:any = '';
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
   constructor(private toastrService: ToastrService,
@@ -113,7 +117,11 @@ export class SettingComponent implements OnInit, OnDestroy {
     });
   }
 
-  changeLang(lan: any) {
+  changeIssue(issue){
+    this.selectedTicket=issue;
+  }
+
+  changeLang(lan: any){
     lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
@@ -144,7 +152,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   }
 
   reloadCache() {
-    if (confirm('Are you sure to clear the cache and reload the page?')) {
+    if (confirm(this.translate.instant('pages.setting.reloadCacheMessage'))) {
       document.location.reload(true);
     }
   }
@@ -353,6 +361,39 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.newTradePassword = null;
     this.oldTradePassword = null;
     this.confirmTradePassword = null;
+  }
+
+  cancelTicketDialog(ref){
+    ref.close();
+    this.ticketTitle = null;
+    this.ticketDescription = null;
+    this.selectedTicket = 'select';
+  }
+
+  createTicketDialog(ref){
+    if (!(this.ticketTitle && this.ticketDescription && this.selectedTicket !== 'select' )) {
+      this.toastrService.danger(
+        this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
+        this.translate.instant('pages.setting.createTicket')
+      );
+      return;
+    }
+    let ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
+    console.log(ticketData);
+    this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
+      if (res.status) {
+        this.cancelTicketDialog(ref);
+        this.toastrService.success(
+          this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
+          this.translate.instant('pages.setting.createTicket')
+        );
+      }
+    },
+    err => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),
+        this.translate.instant('pages.setting.createTicket')
+      );
+    });
   }
 
   updateR18mode(data: any) {

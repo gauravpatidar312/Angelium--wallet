@@ -83,6 +83,7 @@
   "pages":{
     "dashboard":{
       "articleTitle": "文章标题",
+      "earnings": "Earnings",
       "blockOfHelpText": "A block of help text that breaks into a new line and may extend beyond one line.",
       "eventUpdate": "事件更新",
       "ghost": "Ghost",
@@ -204,6 +205,7 @@
       "downlineHeaven": "下级天堂",
       "heavenDrop": "Heaven Drop",
       "downlineTree": {
+        "downlineTree": "Downline Tree",
         "noUserDownlineTree": "您的下级分支中没有任何用户",
         "rank": "排行",
         "reward": "奖励",
@@ -254,11 +256,14 @@
     },
     "setting": {
       "angel": "ANGEL",
+      "reloadCacheMessage" : "Are you sure to clear the cache and reload the page?",
       "currency": "通货",
       "comingSoon": "Coming soon",
       "confirmPassword": "确认密码",
       "chatNow": "开始聊天",
       "clickToReport": "点击报告",
+      "clearCache": "Clean Cache",
+      "createTicket": "Create Ticket",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名称",
@@ -283,7 +288,10 @@
       "support": "支持与帮助",
       "secretKey": "密钥",
       "silverAngel": "SILVER ANGEL",
+      "supportTicket": "Support Ticket",
       "2FA": "2FA",
+      "ticketTitle":"Ticket title",
+      "ticketDescription": "Ticket Description",
       "timezone": "Timezone",
       "toastr":{
         "changeUsername": "更改用户名",
@@ -301,6 +309,7 @@
         "r18ModeEnable": "R-18模式启用",
         "r18ModeDisabled": "R-18模式已禁用",
         "tradePasswordUpdated": "交易密码已成功更新",
+        "ticketSuccessfullyCreated": "Ticket successfully created",
         "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "用户头像更改成功",
         "usernameUpdatedSuccessfully": "用户名已成功更新",
