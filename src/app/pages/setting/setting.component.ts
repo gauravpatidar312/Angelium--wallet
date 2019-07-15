@@ -104,7 +104,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       this.userData = _.merge(this.userData, data);
       this.shareDataService.changeData(this.userData);
       this.sessionStorage.updateUserState(this.userData);
-      this.selectedTimezone = this.userData.timezone;
+      this.selectedTimezone = this.userData.default_timezone;
       if (this.userData.user_language && this.translate.currentLang !== this.userData.user_language.language_code) {
         this.selectedLang = this.userData.user_language.language;
         this.translate.use(this.userData.user_language.language_code);
@@ -137,10 +137,10 @@ export class SettingComponent implements OnInit, OnDestroy {
   }
 
   changeTimezone(timezone: any) {
-    if(this.userData.timezone === timezone)
+    if(this.userData.default_timezone === timezone)
       return;
-    this.userData.timezone = timezone;
-    this.httpService.put({'timezone': timezone}, 'update-timezones/')
+    this.userData.default_timezone = timezone;
+    this.httpService.put({'default_timezone': timezone}, 'update-timezones/')
       .subscribe((res?: any) => {
         if (!res.status)
           return;
