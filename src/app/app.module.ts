@@ -22,6 +22,8 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {RegisterComponent} from './register/register.component';
 import {TermsConditionsComponent} from './register/terms-conditions/terms-conditions.component';
+import { ParticlesModule } from 'angular-particle';
+
 // services
 import {SessionStorageService} from "./services/session-storage.service";
 import {ToastrService} from "./services/toastr.service";
@@ -53,7 +55,7 @@ import {environment} from '../environments/environment';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule,
+    FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

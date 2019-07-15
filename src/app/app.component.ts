@@ -13,9 +13,13 @@ import {ShareDataService} from "./services/share-data.service";
 
 @Component({
   selector: 'ngx-app',
-  template: '<router-outlet></router-outlet>',
+  template: '<particles [style]="particleStyle" [width]="particlewidth" [height]="particleheight" [params]="particleParams"></particles><router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
+  particleStyle: object = {};
+  particleParams: object = {};
+  particlewidth: number = 100;
+  particleheight: number = 100;
 
   constructor(private appRef: ApplicationRef,
               private analytics: AnalyticsService,
@@ -80,6 +84,52 @@ export class AppComponent implements OnInit {
         console.log('new version is ', event.current);
       });
     }
+
+    this.particleStyle = {
+      'position': 'fixed',
+      'width': '100%',
+      'height': '100%',
+      'top': 0,
+      'left': 0,
+      'right': 0,
+      'bottom': 0,
+      'background-image': 'url("../assets/images/theme-bg.jpg")',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-position': '50% 50%',
+    };
+
+    this.particleParams = {
+      'particles': {
+        'color': {
+          'value': '#ffffff',
+        },
+        'opacity': {
+          'value': 1,
+          'random': false,
+        },
+        'size': {
+          'value': 3,
+          'random': true,
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#ffffff',
+          'opacity': 0.9,
+          'width': 1,
+        },
+        'move': {
+          'enable': true,
+          'speed': 3,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'bounce',
+        },
+      },
+      'retina_detect': true,
+    };
   }
 
   setLanguage(data: any) {
