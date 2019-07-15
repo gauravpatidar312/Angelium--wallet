@@ -41,12 +41,17 @@ export class SettingComponent implements OnInit, OnDestroy {
   newUsername: any = '';
   newTradePassword: any = '';
   confirmTradePassword: any = '';
+  verificationCode:any = ''
   oldTradePassword: any = '';
   breakpoints: any;
   selectedTicket:string = 'select';
   issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
   ticketTitle:any = '';
   ticketDescription:any = '';
+  otpSubmitted: boolean = false;
+  otpSubmitting: boolean = false;
+  isResubmit: boolean = false;
+  resubmitTime: number = 60 * 1000;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
   constructor(private toastrService: ToastrService,
@@ -309,7 +314,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   }
 
   changeTradePasswordDialog(ref: any) {
-    if (!(this.oldTradePassword && this.newTradePassword && this.confirmTradePassword)) {
+    if (!((this.verificationCode || this.oldTradePassword) && this.newTradePassword && this.confirmTradePassword)) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
         this.translate.instant('pages.setting.toastr.changeTradePassword'));
@@ -322,14 +327,29 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
     const endpoint = 'change-trade-password/';
-    const apiData = {'old_trade_password': this.oldTradePassword, 'trade_password': this.newTradePassword};
+    var apiData;
+    if (!this.verificationCode){
+      apiData = {
+        'old_trade_password': this.oldTradePassword,  
+        'trade_password': this.newTradePassword
+      }
+    }
+    else{
+      apiData = {  
+        'code': this.verificationCode,  'trade_password': this.newTradePassword
+      }
+    }
+    
     this.httpService.put(apiData, endpoint)
       .subscribe((res?: any) => {
+        console.log(res);
         if (res.status) {
           ref.close();
           this.newTradePassword = null;
           this.oldTradePassword = null;
           this.confirmTradePassword = null;
+          this.verificationCode = null;
+          this.isResubmit = true;
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.tradePasswordUpdated'),
             this.translate.instant('pages.setting.toastr.changeTradePassword'));
@@ -360,6 +380,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     ref.close();
     this.newTradePassword = null;
     this.oldTradePassword = null;
+    this.verificationCode = null;
     this.confirmTradePassword = null;
   }
 
@@ -510,5 +531,28 @@ export class SettingComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  onSubmitOtp() {
+    this.otpSubmitted = true;
+    this.otpSubmitting = true;
+    let data = { 'phone': this.userData.phone };
+    this.httpService.post(data, 'forgot-password/').subscribe((res) => {
+      this.isResubmit = true;
+      this.otpSubmitting = false;
+
+      if (res['status']) {
+        setTimeout(() => {
+          this.otpSubmitted = false;
+          this.resubmitTime += (60 * 1000);
+        }, this.resubmitTime);
+        this.toastrService.success(this.translate.instant('pages.register.toastr.sentOTPtoMobile'),
+        this.translate.instant('common.sendSMS'));
+      }
+    }, err => {
+      this.otpSubmitting = false;
+      this.otpSubmitted = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.sendSMS'));
+    });
   }
 }

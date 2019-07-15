@@ -505,3 +505,18 @@
 /deep/ .ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
   border-color: transparent;
 }
+/deep/ .trade-text{ text-align: center; }
+/deep/ .paddbtnfix{ padding-left:0px!important; }
+/deep/ .sent-btn{ padding: 0.65rem 0.9rem!important;width: 100%; }
+
+@media only screen and (max-width: 768px) {
+  /deep/.paddbtnfix{
+    padding-left:15px!important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  /deep/.paddbtnfix{
+    padding-right:15px!important;
+  }
+}
