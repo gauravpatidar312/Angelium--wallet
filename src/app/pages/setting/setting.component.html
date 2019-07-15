@@ -74,7 +74,12 @@
   </div>
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>{{"common.option" | translate}}</nb-card-header>
+      <nb-card-header>
+        <div class="row">
+          <div class="col-8">{{"common.option" | translate}}</div>
+          <div class="col-4 clean-cache-margin text-right"><a class="clean-cache-text pointer" (click)="reloadCache()">Clear Cache</a></div>
+        </div>
+      </nb-card-header>
       <nb-card-body>
         <div class="col-md-12 nopadd font-nunitoSans">
           <table class="table borderless tablemarginfix">

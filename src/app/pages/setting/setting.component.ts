@@ -143,6 +143,12 @@ export class SettingComponent implements OnInit, OnDestroy {
       });
   }
 
+  reloadCache() {
+    if (confirm('Are you sure to clear the cache and reload the page?')) {
+      document.location.reload(true);
+    }
+  }
+
   extraInfo() {
     this.r18modeSwitchText = this.userData.r18mode;
     if (this.userData.infinity_mark === 1)

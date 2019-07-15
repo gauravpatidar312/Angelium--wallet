@@ -199,7 +199,6 @@
     }
   }
 
-
   .image-scoll-card-body {
     overflow: unset !important;
   }
@@ -267,6 +266,21 @@
     @include nb-for-theme(cosmic) {
       color: nb-theme(color-primary);
     }
+  }
+
+  .clean-cache-text {
+    font-family: NunitoSans;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .clean-cache-margin {
+    margin-top: -4px;
+  }
+
+  .clean-cache-text:hover {
+    color: #26df8b !important;
+    text-decoration: underline;
   }
 
   @include media-breakpoint-down(sm) {
