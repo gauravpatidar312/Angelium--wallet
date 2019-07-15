@@ -360,13 +360,13 @@ export class SettingComponent implements OnInit {
     let ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
     console.log(ticketData);
     this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
-      this.ticketTitle = null;
-      this.ticketDescription = null;
-      this.selectedTicket = 'select';
-      this.toastrService.success(
-        this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
-        this.translate.instant('pages.setting.createTicket')
-      );
+      if (res.status) {
+        this.cancelTicketDialog(ref);
+        this.toastrService.success(
+          this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
+          this.translate.instant('pages.setting.createTicket')
+        );
+      }
     },
     err => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err),
