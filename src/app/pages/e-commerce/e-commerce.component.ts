@@ -46,6 +46,7 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
   private alive = true;
 
   isProduction: any = environment.production;
+  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
   cryptoBalance: CryptoBalance[] = [];
   cryptoData: any;
   user: any;
@@ -185,7 +186,14 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
         else if (item.name === 'ANLP')
           item.order = 8;
 
-        return !this.isProduction || ['XP', 'USDT', 'ANLP'].indexOf(item.name) === -1;
+        let enabled = true;
+        if (this.isProduction) {
+          if (['XP', 'ANLP'].indexOf(item.name) >= 0)
+            enabled = false;
+          else if (item.name === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1)
+            enabled = false;
+        }
+        return enabled;
       }), 'order');
 
       this.fetchingCryptos = false;
