@@ -23,7 +23,7 @@
   }
 
   .iconpaddfix {
-    padding: 0px 0.75rem;
+    padding: 0 0.75rem;
   }
   .paddfix {
     padding: 0 1.5rem;
@@ -272,7 +272,7 @@
   @include media-breakpoint-down(sm) {
     .table .title-col {
       font-size: 12.5px;
-      padding: 15px 6px 15px 6px !important;
+      padding: 15px 6px !important;
     }
     .down-qrCode-icon {
       margin-left: 0;
@@ -288,12 +288,39 @@
         width: 1%;
       }
     }
+
+    .timeZone-btn-padding {
+      width: 150px;
+    }
+
+    .btn-padding {
+      padding: 0.625rem 1.5rem !important;
+    }
+
+    /deep/ .ng-select.ng-select-opened>.ng-select-container {
+      width: auto !important;
+      height: auto !important;
+      min-height: auto !important;
+      padding: 0.6rem 0 !important;
+    }
+
+    /deep/ .ng-select .ng-select-container {
+      width: auto !important;
+      height: auto !important;
+      min-height: auto !important;
+      padding: 0.6rem 0 !important;
+    }
   }
 
   @include media-breakpoint-down(xs) {
     button:not(.btn-icon) {
       padding: 0.75rem 1rem;
       font-size: 0.75rem;
+    }
+
+    .timeZone-btn-padding {
+      padding: 0.75rem 1rem !important;
+      width: 150px !important;
     }
   }
 }
@@ -338,6 +365,12 @@
   }
 }
 
+@media (width: 768px) {
+  /deep/ .ng-dropdown-panel .ng-dropdown-panel-items {
+    height: 145px !important;
+  }
+}
+
 .nb-icon-left {
   float: right;
   cursor: pointer;
@@ -349,19 +382,19 @@
   cursor: pointer;
 }
 
- .changePassword {
-   width: 325px;
- }
+.changePassword {
+  width: 325px;
+}
 
-  .changePassword .input-rectangle {
-    width: 100%;
-  }
+.changePassword .input-rectangle {
+  width: 100%;
+}
 
-  .upload-btn {
-    float: right;
-  }
+.upload-btn {
+  float: right;
+}
 
-  .submit-btn {
+.submit-btn {
   float: right;
   background-color: #00d977 !important;
 }
@@ -389,7 +422,7 @@
   color: #595959 !important;
   font-size: 1.45em !important;
 }
-.ref-link-icon{
+.ref-link-icon {
   display: inline-block;
   position: relative;
   font-size: 15px;
@@ -398,4 +431,63 @@
 .down-qrCode-icon {
   display: inline-block;
   font-size: 22px;
+}
+
+/deep/ .ng-select.ng-select-opened>.ng-select-container {
+  background: #7659ff !important;
+  border: 2px solid transparent;
+  min-height: 29px !important;
+  height: 29px !important;
+  width: 250px !important;
+}
+
+/deep/ .ng-select .ng-select-container .ng-value-container .ng-input>input {
+  color: #ffffff !important;
+}
+
+/deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  background-color: #3d3780 !important;
+  color: #ffffff !important;
+}
+
+/deep/ .ng-select .ng-select-container {
+  background-color: #7659ff;
+  border: 2px solid transparent;
+  color: #ffffff !important;
+  min-height: 29px !important;
+  height: 29px !important;
+  border-radius: 5px;
+  width: 250px !important;
+}
+
+/deep/ .ng-dropdown-panel {
+  background-color: #fff;
+  border: 2px solid #7659ff !important;
+}
+
+/deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: #654ddb !important;
+  color: #ffffff !important;
+}
+
+/deep/ .ng-select .ng-arrow-wrapper .ng-arrow {
+  border-color:#ffffff transparent transparent !important;
+}
+
+/deep/ .ng-select:focus, /deep/ .ng-select:active {
+  outline: none !important;
+}
+
+/deep/ .dropup {
+  outline: none !important;
+}
+
+/deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  color: #ffffff !important;
+  background-color: #8970ff !important;
+  border-color: transparent;
+}
+
+/deep/ .ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
+  border-color: transparent;
 }

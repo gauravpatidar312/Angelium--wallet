@@ -284,6 +284,7 @@
       "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
       "referralLink": "Referral Link",
+      "timezone": "Timezone",
       "toastr":{
         "changeUsername": "사용자명 변경",
         "changeLoginPassword": "로그인 비밀번호 변경",
@@ -300,6 +301,7 @@
         "r18ModeEnable": "R-18 MODE ENABLED",
         "r18ModeDisabled": "R-18 MODE DISABLED",
         "tradePasswordUpdated": "Trade password updated successfully",
+        "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."

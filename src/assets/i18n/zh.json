@@ -284,6 +284,7 @@
       "secretKey": "密钥",
       "silverAngel": "SILVER ANGEL",
       "2FA": "2FA",
+      "timezone": "Timezone",
       "toastr":{
         "changeUsername": "更改用户名",
         "changeLoginPassword": "更改登录密码",
@@ -300,6 +301,7 @@
         "r18ModeEnable": "R-18模式启用",
         "r18ModeDisabled": "R-18模式已禁用",
         "tradePasswordUpdated": "交易密码已成功更新",
+        "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "用户头像更改成功",
         "usernameUpdatedSuccessfully": "用户名已成功更新",
         "usernameMustEnglishWithoutSpace": "用户名必须是英文，没有空格。"

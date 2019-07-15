@@ -1,17 +1,14 @@
-import {HostListener, Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit, OnDestroy, TemplateRef} from '@angular/core';
 import {icons} from 'eva-icons';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbDialogService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
-import {NavigationStart, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 import {DialogNamePromptComponent} from './dialog-prompt/dialog-prompt.component';
 import {ImageCroppedEvent} from './image-cropper/interfaces/image-cropped-event.interface';
-import { TranslateService } from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
 import {SessionStorageService} from '../../services/session-storage.service';
-import { IndexedDBStorageService } from '../../services/indexeddb-storage.service';
 import {environment} from '../../../environments/environment';
 import Swal from 'sweetalert2';
 
@@ -23,11 +20,13 @@ declare let jQuery: any;
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss'],
 })
-export class SettingComponent implements OnInit {
+export class SettingComponent implements OnInit, OnDestroy {
   isProduction: boolean = environment.production;
   evaIcons = [];
-  selectedLang: string = this.translate.instant('common.select');
+  selectedLang: string = 'SELECT';
+  selectedTimezone: string = 'SELECT';
   languageData = [];
+  timezoneData = [];
   private alive = true;
   userData: any;
   imageChangedEvent: any = '';
@@ -51,11 +50,9 @@ export class SettingComponent implements OnInit {
               private httpService: HttpService,
               private shareDataService: ShareDataService,
               private sessionStorage: SessionStorageService,
-              private router: Router,
               public translate: TranslateService,
               private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService,
-              private storageService: IndexedDBStorageService) {
+              private breakpointService: NbMediaBreakpointsService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
     this.themeService.getJsTheme()
@@ -66,24 +63,35 @@ export class SettingComponent implements OnInit {
 
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
-    .pipe(takeWhile(() => this.alive))
-    .subscribe(([oldValue, newValue]) => {
-      this.breakpoint = newValue;
-    });
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(([oldValue, newValue]) => {
+        this.breakpoint = newValue;
+      });
     this.getLanguageData();
+    this.getTimezoneData();
   }
 
   ngOnDestroy() {
     this.alive = false;
   }
 
-  getLanguageData(){
-    this.httpService.get('languages/').subscribe(res=>{
+  getLanguageData() {
+    this.httpService.get('languages/').subscribe((res?: any) => {
       this.languageData = res;
     });
-    let lang = this.sessionStorage.getFromLocalStorage('languageData') || { 'id': 1, 'language': 'English', 'language_code': 'en' };
+    const lang = this.sessionStorage.getFromLocalStorage('languageData') || {
+        'id': 1,
+        'language': 'English',
+        'language_code': 'en'
+      };
     this.selectedLang = lang.language;
     this.translate.use(lang.language_code);
+  }
+
+  getTimezoneData() {
+    this.httpService.get('all-timezones/').subscribe((res?: any) => {
+      this.timezoneData = res.all_timezone;
+    });
   }
 
   getProfileData() {
@@ -92,30 +100,47 @@ export class SettingComponent implements OnInit {
       this.userData = _.merge(this.userData, data);
       this.shareDataService.changeData(this.userData);
       this.sessionStorage.updateUserState(this.userData);
+      this.selectedTimezone = this.userData.timezone;
       if (this.userData.user_language && this.translate.currentLang !== this.userData.user_language.language_code) {
         this.selectedLang = this.userData.user_language.language;
         this.translate.use(this.userData.user_language.language_code);
       }
       this.extraInfo();
     }, (err) => {
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.setting'));      this.userData = this.sessionStorage.getFromSession('userInfo');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.setting'));
+      this.userData = this.sessionStorage.getFromSession('userInfo');
       this.extraInfo();
     });
   }
 
-  changeLang(lan: any){
+  changeLang(lan: any) {
     lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
     this.userData.user_language = lan;
-    this.httpService.put({'user_language': lan.id }, 'update_userlang/')
-      .subscribe(res=>{
+    this.httpService.put({'user_language': lan.id}, 'update_userlang/')
+      .subscribe(res => {
         this.sessionStorage.saveToLocalStorage('languageData', lan);
         this.toastrService.success(
           this.translate.instant('pages.setting.toastr.languageUpdateSuccessfully'),
           this.translate.instant('pages.setting.language'));
       });
     this.sessionStorage.updateUserState(this.userData);
+  }
+
+  changeTimezone(timezone: any) {
+    if(this.userData.timezone === timezone)
+      return;
+    this.userData.timezone = timezone;
+    this.httpService.put({'timezone': timezone}, 'update-timezones/')
+      .subscribe((res?: any) => {
+        if (!res.status)
+          return;
+        this.toastrService.success(
+          this.translate.instant('pages.setting.toastr.timezoneUpdateSuccessfully'),
+          this.translate.instant('pages.setting.timezone'));
+        this.sessionStorage.updateUserState(this.userData);
+      });
   }
 
   extraInfo() {
@@ -222,20 +247,17 @@ export class SettingComponent implements OnInit {
           ref.close();
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.usernameUpdatedSuccessfully'),
-            this.translate.instant('pages.setting.toastr.changeUsername')
-          );
+            this.translate.instant('pages.setting.toastr.changeUsername'));
           this.userData.username = this.newUsername;
           this.sessionStorage.updateUserState(this.userData);
           this.newUsername = null;
         } else {
           this.toastrService.danger(this.shareDataService.getErrorMessage(res),
-            this.translate.instant('pages.setting.toastr.changeUsername')
-          );
+            this.translate.instant('pages.setting.toastr.changeUsername'));
         }
       }, err => {
         this.toastrService.danger(this.shareDataService.getErrorMessage(err),
-          this.translate.instant('pages.setting.toastr.changeUsername')
-        );
+          this.translate.instant('pages.setting.toastr.changeUsername'));
       });
   }
 
@@ -243,15 +265,13 @@ export class SettingComponent implements OnInit {
     if (!(this.oldLoginPassword && this.newLoginPassword && this.confirmLoginPassword)) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
-        this.translate.instant('pages.setting.toastr.changeLoginPassword')
-      );
+        this.translate.instant('pages.setting.toastr.changeLoginPassword'));
       return;
     }
     if (this.newLoginPassword !== this.confirmLoginPassword) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'),
-        this.translate.instant('pages.setting.toastr.changeLoginPassword')
-      );
+        this.translate.instant('pages.setting.toastr.changeLoginPassword'));
       return;
     }
     const endpoint = 'change-password/';
@@ -265,8 +285,7 @@ export class SettingComponent implements OnInit {
           this.confirmLoginPassword = null;
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.loginPasswordUpdated'),
-            this.translate.instant('pages.setting.toastr.changeLoginPassword')
-          );
+            this.translate.instant('pages.setting.toastr.changeLoginPassword'));
         } else {
           this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeLoginPassword'));
         }
@@ -279,15 +298,13 @@ export class SettingComponent implements OnInit {
     if (!(this.oldTradePassword && this.newTradePassword && this.confirmTradePassword)) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.enterValueInAllFields'),
-        this.translate.instant('pages.setting.toastr.changeTradePassword')
-      );
+        this.translate.instant('pages.setting.toastr.changeTradePassword'));
       return;
     }
     if (this.newTradePassword !== this.confirmTradePassword) {
       this.toastrService.danger(
         this.translate.instant('pages.setting.toastr.passwordsDoNotMatch'),
-        this.translate.instant('pages.setting.toastr.changeTradePassword')
-      );
+        this.translate.instant('pages.setting.toastr.changeTradePassword'));
       return;
     }
     const endpoint = 'change-trade-password/';
@@ -301,15 +318,13 @@ export class SettingComponent implements OnInit {
           this.confirmTradePassword = null;
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.tradePasswordUpdated'),
-            this.translate.instant('pages.setting.toastr.changeTradePassword')
-          );
+            this.translate.instant('pages.setting.toastr.changeTradePassword'));
         } else {
           this.toastrService.danger(res.message, this.translate.instant('pages.setting.toastr.changeTradePassword'));
         }
       }, err => {
         this.toastrService.danger(this.shareDataService.getErrorMessage(err),
-          this.translate.instant('pages.setting.toastr.changeTradePassword')
-        );
+          this.translate.instant('pages.setting.toastr.changeTradePassword'));
       });
   }
 
@@ -343,13 +358,11 @@ export class SettingComponent implements OnInit {
         if (data.r18mode) {
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.r18ModeUpdated'),
-            this.translate.instant('pages.setting.toastr.r18ModeEnable')
-          );
+            this.translate.instant('pages.setting.toastr.r18ModeEnable'));
         } else {
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.r18ModeUpdated'),
-            this.translate.instant('pages.setting.toastr.r18ModeDisabled')
-          );
+            this.translate.instant('pages.setting.toastr.r18ModeDisabled'));
         }
       }
     });
@@ -381,15 +394,14 @@ export class SettingComponent implements OnInit {
 
   updateSettingPageData(apiData: any, endpoint: string) {
     this.httpService.post(apiData, endpoint)
-      .subscribe(res => {
+      .subscribe((res?: any) => {
         if (res.status === 'country updated') {
           this.userData.country = apiData.country;
           // this.sessionStorage.updateFromSession('userInfo', apiData);
           this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.countryUpdate'),
-            this.translate.instant('common.country')
-          );
+            this.translate.instant('common.country'));
         }
       }, err => {
         console.log(err);
@@ -415,7 +427,7 @@ export class SettingComponent implements OnInit {
   }
 
   openDialog(dialog: TemplateRef<any>) {
-    this.dialogService.open(dialog,  {
+    this.dialogService.open(dialog, {
       closeOnBackdropClick: false,
       autoFocus: false,
     });
@@ -447,8 +459,7 @@ export class SettingComponent implements OnInit {
           this.sessionStorage.updateUserState(this.userData);
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.userImageChanged'),
-            this.translate.instant('pages.setting.toastr.pictureUpdated')
-          );
+            this.translate.instant('pages.setting.toastr.pictureUpdated'));
         }
       });
     }

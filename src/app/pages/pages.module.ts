@@ -23,6 +23,7 @@ import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -47,6 +48,7 @@ const PAGES_COMPONENTS = [
     NgxQRCodeModule,
     TranslateModule,
     InternationalPhoneNumberModule,
+    NgSelectModule,
     NbDateFnsDateModule.forRoot({
       parseOptions: { awareOfUnicodeTokens: true },
       formatOptions: { awareOfUnicodeTokens: true },

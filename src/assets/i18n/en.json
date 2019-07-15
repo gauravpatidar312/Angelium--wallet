@@ -283,6 +283,7 @@
       "support": "Support",
       "secretKey": "Secret Key",
       "silverAngel": "SILVER ANGEL",
+      "timezone": "Timezone",
       "2FA": "2FA",
       "toastr":{
         "changeUsername": "Change Username",
@@ -300,6 +301,7 @@
         "r18ModeEnable": "R-18 MODE ENABLED",
         "r18ModeDisabled": "R-18 MODE DISABLED",
         "tradePasswordUpdated": "Trade password updated successfully",
+        "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
         "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
