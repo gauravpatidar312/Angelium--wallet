@@ -120,7 +120,7 @@ export class TransferComponent implements OnInit {
         },
       },
       crypto: {
-        title: this.translate.instant('pages.transfer.type'),
+        title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -186,9 +186,15 @@ export class TransferComponent implements OnInit {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
-      if (this.isProduction)
+      if (this.isProduction) {
+        if (this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
+          this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
+              return wallet.wallet_type !== 'USDT';
+            }) || [];
+        }
+
         this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
-      else
+      } else
         this.otcWallets = this.myWallets;
 
       if (!this.myWallets) {

@@ -1,7 +1,7 @@
 {
   "common":{
     "admin":"Admin",
-    "assets": "Assets",
+    "assets": "Asset",
     "amount" : "Amount",
     "country": "Country",
     "cancel": "Cancel",
@@ -227,7 +227,7 @@
       "confirmYourEmail": "Confirm your E-mail",
       "enterValueInEnglish":"Please enter value in English language only.",
       "loginPassword": "Login Password",
-      "phoneNumber": "Phone number",      
+      "phoneNumber": "Phone number",
       "repeatLoginPassword": "Repeat Login Password",
       "repeatTradePassword": "Repeat Trade Password",
       "realNameIsRequiredForKYC": "Real name is required for KYC process. it cannot be changed after registration",
