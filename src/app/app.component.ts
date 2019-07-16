@@ -93,7 +93,6 @@ export class AppComponent implements OnInit {
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-position': '50% 50%',
-      'opacity': 0.9,
     };
 
     this.particleParams = {
@@ -133,7 +132,6 @@ export class AppComponent implements OnInit {
   }
 
   setLanguage(data: any) {
-    console.log(data);
     if (!data) {
       const languages = [
         { 'id': 1, 'language': 'English', 'language_code': 'en' },
