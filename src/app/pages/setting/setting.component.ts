@@ -401,7 +401,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.ticketSubmitting = true;
     this.ticketSubmitted = true;
     let ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
-    console.log(ticketData);
+    
     this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
       this.ticketSubmitting = false;
       this.isTicketResubmit = true;

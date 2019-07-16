@@ -93,7 +93,6 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmitResetPassword() {
     this.resetPasswordForm.controls.phone.setValue(this.model.phone);
-    console.log(this.resetPasswordForm.value);
 
     this.submitted = true;
     // stop here if form is invalid
