@@ -122,4 +122,11 @@ export class HQComponent implements OnInit {
     }
     event.confirm.reject();
   }
+
+  ngAfterViewInit() {
+    jQuery('ul.rewardLine li a').click(function (e) {
+      jQuery('ul.rewardLine li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
+    });
+  }
 }

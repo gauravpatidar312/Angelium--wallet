@@ -53,7 +53,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   isResubmit: boolean = false;
   isTicketResubmit:boolean = false;
   ticketSubmitting: boolean = false;
-  ticketSubmitted: boolean = false;
+  
   resubmitTime: number = 60 * 1000;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
@@ -399,7 +399,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
     this.ticketSubmitting = true;
-    this.ticketSubmitted = true;
+    
     let ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
     
     this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
@@ -407,7 +407,6 @@ export class SettingComponent implements OnInit, OnDestroy {
       this.isTicketResubmit = true;
       if (res.status) {
         this.cancelTicketDialog(ref);
-        this.ticketSubmitted = false;
         this.toastrService.success(
           this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
           this.translate.instant('pages.setting.createTicket')
@@ -416,7 +415,6 @@ export class SettingComponent implements OnInit, OnDestroy {
     },
     err => {
       this.ticketSubmitting = false;
-      this.ticketSubmitted = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err),
         this.translate.instant('pages.setting.createTicket')
       );
