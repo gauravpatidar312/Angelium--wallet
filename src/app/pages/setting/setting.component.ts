@@ -395,7 +395,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
     let ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
-    console.log(ticketData);
+    
     this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
       if (res.status) {
         this.cancelTicketDialog(ref);
