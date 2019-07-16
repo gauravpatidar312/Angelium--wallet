@@ -342,14 +342,8 @@ export class SettingComponent implements OnInit, OnDestroy {
     
     this.httpService.put(apiData, endpoint)
       .subscribe((res?: any) => {
-        console.log(res);
         if (res.status) {
-          ref.close();
-          this.newTradePassword = null;
-          this.oldTradePassword = null;
-          this.confirmTradePassword = null;
-          this.verificationCode = null;
-          this.isResubmit = true;
+          this.cancelTradePasswordDialog(ref);
           this.toastrService.success(
             this.translate.instant('pages.setting.toastr.tradePasswordUpdated'),
             this.translate.instant('pages.setting.toastr.changeTradePassword'));
@@ -382,6 +376,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.oldTradePassword = null;
     this.verificationCode = null;
     this.confirmTradePassword = null;
+    this.isResubmit = false;
   }
 
   cancelTicketDialog(ref){

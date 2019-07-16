@@ -511,12 +511,12 @@
 
 @media only screen and (max-width: 768px) {
   /deep/.paddbtnfix{
-    padding-left:15px!important;
+    padding-left:10px!important;
   }
 }
 
 @media only screen and (max-width: 360px) {
   /deep/.paddbtnfix{
-    padding-right:15px!important;
+    padding-right:4px!important;
   }
 }
