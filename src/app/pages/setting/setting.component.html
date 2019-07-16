@@ -448,7 +448,9 @@
       </div>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton class="submit-btn" size="small" (click)="createTicketDialog(ref)">{{"common.submit" | translate}}</button>
+      <button nbButton class="btn submit-btn col-md-4" size="small" [disabled]="ticketSubmitting || ticketSubmitted" 
+      (click)="createTicketDialog(ref)"><span *ngIf="!ticketSubmitting">{{isTicketResubmit ? 'RESEND' : 'common.submit' | translate}}</span>
+      <i class="fa fa-spinner fa-spin text-white" *ngIf="ticketSubmitting"></i></button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelTicketDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>
