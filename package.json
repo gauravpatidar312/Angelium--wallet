@@ -17,8 +17,8 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve  --host 0.0.0.0",
-    "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --aot --build-optimizer",
+    "start": "ng serve --host 0.0.0.0",
+    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --aot --build-optimizer",
     "build:prod": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --aot --build-optimizer --prod",
     "test": "ng test",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",

@@ -89,18 +89,18 @@ export class AppComponent implements OnInit {
       'position': 'fixed',
       'width': '100%',
       'height': '100%',
-      'top': 0,
-      'left': 0,
-      'right': 0,
-      'bottom': 0,
       'background-image': 'url("../assets/images/theme-bg.jpg")',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-position': '50% 50%',
+      'opacity': 0.9,
     };
 
     this.particleParams = {
       'particles': {
+        'number': {
+          'value': 55,
+        },
         'color': {
           'value': '#ffffff',
         },
