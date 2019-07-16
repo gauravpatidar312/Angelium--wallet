@@ -78,9 +78,9 @@ import {environment} from '../environments/environment';
   entryComponents: [TermsConditionsComponent]
 })
 export class AppModule {
-
   constructor(private store: Store<AppState>,
               private sessionStorage: SessionStorageService,
+              private shareDataService: ShareDataService,
               private storageService: IndexedDBStorageService) {
     this.checkSession();
   }
@@ -90,7 +90,13 @@ export class AppModule {
     if (data) {
       // Check if user is already logged in on page refresh
       if (this.sessionStorage.getSessionStorage('loggedIn')) {
-        this.store.dispatch(new UserInfo(data));
+        // Check user it at login screen then auto logout user.
+        if(this.shareDataService.autoLogOut) {
+          this.storageService.resetStorage();
+          this.shareDataService.autoLogOut = false;
+        }
+        else
+          this.store.dispatch(new UserInfo(data));
       } else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
         let t0 = Number(window.localStorage['timestamp']);
         if (isNaN(t0)) t0 = 0;

@@ -9,6 +9,7 @@ import {AuthService} from './_guards/auth.service';
 import {SwUpdate} from '@angular/service-worker';
 import {concat, interval} from 'rxjs';
 import {first} from 'rxjs/operators';
+import {ShareDataService} from "./services/share-data.service";
 
 @Component({
   selector: 'ngx-app',
@@ -24,9 +25,13 @@ export class AppComponent implements OnInit {
               public translate: TranslateService,
               private sessionStorage: SessionStorageService,
               private storageService: IndexedDBStorageService,
+              private shareDataService: ShareDataService,
               private authService: AuthService) {
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
+        if(event.url === '/' || event.url === '/login') {
+          this.shareDataService.autoLogOut = true;
+        }
         const userData = this.sessionStorage.getFromSession('userInfo');
         if (!userData || (userData && !userData.is_admin)) {
           this.httpService.get('maintenance/').subscribe((res?: any) => {
