@@ -45,6 +45,7 @@ import {IndexedDBStorageService} from "./services/indexeddb-storage.service";
 import {UserInfo} from './@core/store/actions/user.action';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {GamesModule} from './games/games.module';
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent],
@@ -66,7 +67,8 @@ import {environment} from '../environments/environment';
     }),
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    GamesModule
   ],
   bootstrap: [AppComponent],
   providers: [

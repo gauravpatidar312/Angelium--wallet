@@ -1,6 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { RewardModule } from './reward/reward.module';
-// import { HeavenModule } from './heaven/heaven.module';
 import { HQModule } from './hq/hq.module';
 import { NgModule } from '@angular/core';
 import { NbDialogModule } from '@nebular/theme';
@@ -38,7 +37,6 @@ const PAGES_COMPONENTS = [
     MiscellaneousModule,
     RewardModule,
     Ng2SmartTableModule,
-    // HeavenModule,
     ImageCropperModule,
     ThemeModule,
     HQModule,

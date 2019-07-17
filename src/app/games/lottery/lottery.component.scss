@@ -1,0 +1,304 @@
+@import "../../@theme/styles/themes";
+@import "../../../../node_modules/@nebular/theme/styles/global/_breakpoints";
+
+/deep/ .games-lottery .layout-container {
+  background-image: url('/assets/images/angel-lottery.jpg');
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position: center;
+}
+
+/deep/ .games-lottery .main-content {
+  padding: 0 !important;
+}
+
+.bc-color {
+  padding: 2.25rem 2.25rem 0.75rem;
+  background-color: #2f296b;
+}
+
+/deep/ .games-lottery nb-sidebar.menu-sidebar {
+  display: none;
+}
+
+/deep/ .games-lottery .logo-containter .display-none {
+  display: block !important;
+}
+
+/deep/ .games-lottery .header-container .navigation i {
+  display: none !important;
+}
+
+/deep/ .games-lottery nb-sidebar.compacted.start.fixed ~ .content {
+  margin-left: 0 !important;
+}
+
+/deep/ .user-picture.background {
+  color: #3d3780 !important;
+}
+
+.div-flex {
+  display: flex;
+}
+
+.div-id {
+  font-size: 20px;
+  margin-top: 7px;
+}
+
+.div-prize {
+  font-size: 20px;
+  margin-top: 7px;
+  min-width: 86px;
+  white-space: nowrap;
+}
+.work-break {
+  white-space: nowrap;
+}
+
+.challenger-div-height {
+  height: 800px;
+}
+
+.subdiv-margin {
+   margin-top: 300px;
+}
+
+.challenger-title {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #ffffff;
+}
+.div-xpAmount {
+  font-size: 20px;
+  margin-top: 7px;
+  min-width: 110px;
+  text-align: right;
+  color: #26df8b !important;
+}
+
+.div-picture {
+  width: 36px;
+  margin: 0 20px;
+}
+
+.round-div {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.winner-div {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 25px;
+  white-space: nowrap;
+}
+
+.time-div {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 5.25rem;
+  color: #cbe00d !important;
+}
+
+.winner-id-span {
+  width: 20px;
+  display: inline-block;
+  color: #ffffff;
+  text-align: right;
+}
+
+.winner-xpAmount-span {
+  width: 150px;
+  display: inline-block;
+  color: #26df8b !important;
+  text-align: right;
+}
+
+.winner-name-span {
+  width: 130px;
+  display: inline-block;
+  color: #ffffff;
+  text-align: right;
+}
+.div-name {
+  font-size: 22px;
+  color: #26df8b !important;
+}
+
+.div-user-name {
+  font-size: 22px;
+  color: #d1d1ff !important;
+}
+
+.info-user-width {
+  width: 100px;
+}
+/deep/ .user-picture.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/deep/ .user-picture.background {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/deep/ .user-picture {
+  position: relative;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/deep/ .user-picture {
+  height: 2.5rem;
+  width: 2.5rem;
+  background: #a1a1e5;
+  border: solid 2px #00f9a6;
+}
+
+.text-space {
+  white-space: nowrap;
+  color: #ffffff !important;
+  font-size: 16px;
+}
+.title-header {
+  font-family: nb-theme(font-bebas-bold);
+  font-size: 22px;
+  padding: 1.25rem !important;
+}
+
+/deep/ nb-user .user-name, /deep/ nb-user .user-title {
+  font-family: nb-theme(font-nunito) !important;
+}
+
+.list-height {
+  min-height: 100px;
+}
+
+.span-font-size {
+  font-size: 45px;
+  margin-left: 10px;
+}
+
+.message {
+  color: white;
+  padding: 7px 15px 7px 15px;
+  background-color: #ad82d7;
+  line-height: 26px;
+  font-size: 16px;
+  border-radius: 7px;
+  width: 400px;
+  position: relative;
+}
+
+.message:after {
+  left: 0%;
+  margin-top: 13px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #ad82d7;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.challenger-header {
+  font-family: nb-theme(font-bebas-bold);
+  font-size: 22px;
+  padding-left: 1.25rem !important;
+}
+
+.font-nunitoSans {
+  font-family: nb-theme(font-nunito);
+}
+
+.font-bebasNeueBold {
+  font-family: nb-theme(font-bebas-bold);
+}
+
+.dropDown-padding {
+  padding: 14px !important;
+}
+
+.navbar-pill {
+  justify-content: flex-end;
+}
+
+.li-margin {
+  margin-right: 15px;
+}
+
+.label-color {
+  color: #00bb66 !important;
+}
+
+#heavenHistory-navigation li.active > a {
+  text-decoration: underline 2px;
+  border-radius: 2px;
+  border-bottom: 5px solid #26df8b;
+  text-decoration-color: #26df8b;
+  font-family: nb-theme(font-avenir);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+#heavenHistory-navigation li > a {
+  padding: 10px;
+  text-decoration: none;
+  font-family: nb-theme(font-avenir);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.btn-run {
+  background-image: linear-gradient(to right, #00D9BB, #00DA79);
+  letter-spacing: 2px;
+  padding: 0.5rem;
+  font-size: 20px;
+}
+
+.b-color-wallet {
+  background-image: linear-gradient(to right, #ad59ff, #7659ff);
+  border: 1px;
+}
+
+@media (min-width: 375px) and (max-width: 480px) {
+  .time-div {
+    font-size: 4rem;
+  }
+}
+@media only screen and (width: 320px) {
+  .time-div {
+    font-size: 3.45rem;
+  }
+
+  .winner-xpAmount-span {
+    width: 142px !important;
+  }
+}
+@media (min-width: 300px) and (max-width: 480px) {
+  #heavenHistory-navigation {
+    padding-left: 0px;
+  }
+  #heavenHistory-navigation li > a {
+    padding: 5px;
+  }
+}

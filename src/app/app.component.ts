@@ -1,7 +1,7 @@
 import {ApplicationRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AnalyticsService} from './@core/utils/analytics.service';
-import {NavigationStart, Router} from '@angular/router';
+import {NavigationStart, NavigationEnd, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
 import {SessionStorageService} from './services/session-storage.service';
 import {IndexedDBStorageService} from './services/indexeddb-storage.service';
@@ -9,7 +9,7 @@ import {AuthService} from './_guards/auth.service';
 import {SwUpdate} from '@angular/service-worker';
 import {concat, interval} from 'rxjs';
 import {first} from 'rxjs/operators';
-
+declare let jQuery: any;
 @Component({
   selector: 'ngx-app',
   template: '<router-outlet></router-outlet>',
@@ -41,11 +41,14 @@ export class AppComponent implements OnInit {
             }
           });
         }
+      } else if (event instanceof NavigationEnd) {
+        this.setPageClass();
       }
     });
 
     const lang = this.sessionStorage.getFromLocalStorage('languageData');
     this.setLanguage(lang);
+    this.setPageClass();
   }
 
   ngOnInit(): void {
@@ -74,6 +77,22 @@ export class AppComponent implements OnInit {
         console.log('old version was ', event.previous);
         console.log('new version is ', event.current);
       });
+    }
+  }
+
+  setPageClass() {
+    if(this.router.url && this.router.url !== '/') {
+      let url = this.router.url.replace(/^\/+|\/+$/g, '');
+      let menu = jQuery('.scrollable-container');
+      if(url && menu) {
+        menu.removeClass(function (index, css) {
+          return (css.match(/(^|\s)pages-\S+/g) || []).join(' ');
+        });
+        menu.removeClass(function (index, css) {
+          return (css.match(/(^|\s)games-\S+/g) || []).join(' ');
+        });
+        menu.addClass(url.replace(/[\/ ]/g, '-'));
+      }
     }
   }
 

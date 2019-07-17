@@ -8,6 +8,7 @@ import {MaintenanceComponent} from './maintenance/maintenance.component';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', canActivate: [AuthGuard] },
+  { path: 'games', loadChildren: 'app/games/games.module#GamesModule', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 
   {
