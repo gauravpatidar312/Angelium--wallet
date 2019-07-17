@@ -190,8 +190,8 @@ export class ECommerceComponent implements AfterViewInit, OnDestroy {
         if (this.isProduction) {
           if (['XP', 'ANLP'].indexOf(item.name) >= 0)
             enabled = false;
-          else if (item.name === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1)
-            enabled = false;
+          /*else if (item.name === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1)
+            enabled = false;*/
         }
         return enabled;
       }), 'order');

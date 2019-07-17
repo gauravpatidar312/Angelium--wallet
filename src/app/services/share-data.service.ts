@@ -14,6 +14,7 @@ export class ShareDataService {
   private messageSource = new BehaviorSubject<any>('');
   currentData = this.messageSource.asObservable();
 
+  autoLogOut = false;
   showNotification = false;
   transferTab: string;
   transferTitle: string;

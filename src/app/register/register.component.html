@@ -51,8 +51,7 @@
                 <div class="col-md-3 col-12 sent_btn">
                   <button type="submit" [disabled]="otpSubmitting || otpSubmitted"
                     class="btn btn-demo btn-success margint btnregister" size="large">
-                    <span *ngIf="!otpSubmitting">{{isResubmit ? 'RESEND' :
-                      "common.sendSMS" | translate }}
+                    <span *ngIf="!otpSubmitting">{{isResubmit ? ('common.resend' | translate ) : ('common.sendSMS' | translate) }}
                     </span>
                     <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
                   </button>

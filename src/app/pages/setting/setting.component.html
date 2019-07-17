@@ -346,6 +346,24 @@
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <input type="password" [(ngModel)]="oldTradePassword" placeholder="{{'pages.setting.oldPassword' | translate}}" nbInput/><br/><br/>
+      <p class="trade-text">- {{"pages.setting.or" | translate}} -</p>
+      
+      <div class="row">
+        <div class="col-md-7 col-12">
+          <input type="text" [(ngModel)]="verificationCode" placeholder="{{'common.verificationCode' | translate}}" nbInput/><br/><br/>
+        </div>
+        <div class="col-md-5 col-12  paddbtnfix">
+          <button type="submit" [disabled]="otpSubmitting || otpSubmitted" 
+            class="btn btn-success sent-btn"
+            size="large" (click)="onSubmitOtp()">
+            <span *ngIf="!otpSubmitting">
+              {{isResubmit ? ('common.resend' | translate ) : ('common.sendSMS' | translate)}}
+            </span>
+            <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
+          </button><br/><br/>
+        </div>
+      </div>
+      
       <input type="password" [(ngModel)]="newTradePassword" placeholder="{{'pages.setting.newPassword' | translate}}" nbInput/><br/><br/>
       <input type="password" [(ngModel)]="confirmTradePassword" placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>

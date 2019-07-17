@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import {APP_BASE_HREF} from '@angular/common';
+import {APP_BASE_HREF, DecimalPipe} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
@@ -22,6 +22,8 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {RegisterComponent} from './register/register.component';
 import {TermsConditionsComponent} from './register/terms-conditions/terms-conditions.component';
+import { ParticlesModule } from 'angular-particle';
+
 // services
 import {SessionStorageService} from "./services/session-storage.service";
 import {ToastrService} from "./services/toastr.service";
@@ -54,7 +56,7 @@ import {GamesModule} from './games/games.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule,
+    FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
@@ -72,7 +74,7 @@ import {GamesModule} from './games/games.module';
   ],
   bootstrap: [AppComponent],
   providers: [
-    SessionStorageService, ToastrService, AuthService,
+    SessionStorageService, ToastrService, AuthService, DecimalPipe,
     ShareDataService,
     {provide: APP_BASE_HREF, useValue: '/'},
     IndexedDBStorageService
@@ -80,9 +82,9 @@ import {GamesModule} from './games/games.module';
   entryComponents: [TermsConditionsComponent]
 })
 export class AppModule {
-
   constructor(private store: Store<AppState>,
               private sessionStorage: SessionStorageService,
+              private shareDataService: ShareDataService,
               private storageService: IndexedDBStorageService) {
     this.checkSession();
   }
@@ -92,7 +94,13 @@ export class AppModule {
     if (data) {
       // Check if user is already logged in on page refresh
       if (this.sessionStorage.getSessionStorage('loggedIn')) {
-        this.store.dispatch(new UserInfo(data));
+        // Check user it at login screen then auto logout user.
+        if(this.shareDataService.autoLogOut) {
+          this.storageService.resetStorage();
+          this.shareDataService.autoLogOut = false;
+        }
+        else
+          this.store.dispatch(new UserInfo(data));
       } else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
         let t0 = Number(window.localStorage['timestamp']);
         if (isNaN(t0)) t0 = 0;

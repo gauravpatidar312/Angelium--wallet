@@ -9,12 +9,18 @@ import {AuthService} from './_guards/auth.service';
 import {SwUpdate} from '@angular/service-worker';
 import {concat, interval} from 'rxjs';
 import {first} from 'rxjs/operators';
+import {ShareDataService} from "./services/share-data.service";
+
 declare let jQuery: any;
 @Component({
   selector: 'ngx-app',
-  template: '<router-outlet></router-outlet>',
+  template: '<particles [style]="particleStyle" [width]="particlewidth" [height]="particleheight" [params]="particleParams"></particles><router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
+  particleStyle: object = {};
+  particleParams: object = {};
+  particlewidth: number = 100;
+  particleheight: number = 100;
 
   constructor(private appRef: ApplicationRef,
               private analytics: AnalyticsService,
@@ -24,9 +30,13 @@ export class AppComponent implements OnInit {
               public translate: TranslateService,
               private sessionStorage: SessionStorageService,
               private storageService: IndexedDBStorageService,
+              private shareDataService: ShareDataService,
               private authService: AuthService) {
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
+        if(event.url === '/' || event.url === '/login') {
+          this.shareDataService.autoLogOut = true;
+        }
         const userData = this.sessionStorage.getFromSession('userInfo');
         if (!userData || (userData && !userData.is_admin)) {
           this.httpService.get('maintenance/').subscribe((res?: any) => {
@@ -78,6 +88,51 @@ export class AppComponent implements OnInit {
         console.log('new version is ', event.current);
       });
     }
+
+    this.particleStyle = {
+      'position': 'fixed',
+      'width': '100%',
+      'height': '100%',
+      'background-image': 'url("../assets/images/theme-bg.jpg")',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-position': '50% 50%',
+    };
+
+    this.particleParams = {
+      'particles': {
+        'number': {
+          'value': 55,
+        },
+        'color': {
+          'value': '#ffffff',
+        },
+        'opacity': {
+          'value': 1,
+          'random': false,
+        },
+        'size': {
+          'value': 3,
+          'random': true,
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#ffffff',
+          'opacity': 0.9,
+          'width': 1,
+        },
+        'move': {
+          'enable': true,
+          'speed': 3,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'bounce',
+        },
+      },
+      'retina_detect': true,
+    };
   }
 
   setPageClass() {
@@ -97,7 +152,6 @@ export class AppComponent implements OnInit {
   }
 
   setLanguage(data: any) {
-    console.log(data);
     if (!data) {
       const languages = [
         { 'id': 1, 'language': 'English', 'language_code': 'en' },

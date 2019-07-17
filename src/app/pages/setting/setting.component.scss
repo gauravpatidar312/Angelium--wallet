@@ -174,11 +174,6 @@
     display: table-cell;
   }
 
-  .dropdown-menu {
-    background-color: #3d3780 !important;
-    border: 2px solid #7659ff !important;
-  }
-
   .form-group label {
     padding: 0 0 0.75rem;
   }
@@ -504,4 +499,24 @@
 
 /deep/ .ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
   border-color: transparent;
+}
+/deep/ .trade-text{ text-align: center; }
+/deep/ .paddbtnfix{ padding-left:0px!important; }
+/deep/ .sent-btn{ padding: 0.65rem 0.9rem!important;width: 100%; }
+
+@media only screen and (max-width: 768px) {
+  /deep/.paddbtnfix{
+    padding-left:10px!important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  /deep/.paddbtnfix{
+    padding-right:4px!important;
+  }
+}
+
+/deep/ .dropdown-menu.show {
+  background-color: #3d3780 !important;
+  border: 2px solid #7659ff !important;
 }
