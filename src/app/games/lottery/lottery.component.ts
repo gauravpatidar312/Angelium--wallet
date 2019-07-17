@@ -12,6 +12,7 @@ declare let jQuery: any;
 export class LotteryComponent implements OnInit, AfterViewInit {
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
+  myWallets: any = [];
 
   constructor() {}
 
