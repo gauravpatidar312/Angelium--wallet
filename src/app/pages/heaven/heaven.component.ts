@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -20,7 +21,7 @@ interface CardSettings {
   title: string;
   value: number;
   value_anx: number;
-  fetchingHeavenDropValue: boolean;
+  fetchingValue: boolean;
   iconClass: string;
   type: string;
 }
@@ -61,7 +62,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
     value: 0,
     value_anx: 0,
-    fetchingHeavenDropValue: false,
+    fetchingValue: true,
     iconClass: 'fa fa-university',
     type: 'primary',
   };
@@ -69,7 +70,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     title: this.translate.instant('pages.heaven.heavenDropToday'),
     value: 0,
     value_anx: 0,
-    fetchingHeavenDropValue: false,
+    fetchingValue: true,
     iconClass: 'nb-bar-chart',
     type: 'primary',
   };
@@ -100,6 +101,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   constructor(private service: SmartTableData,
+              private decimalPipe: DecimalPipe,
               private shareDataService: ShareDataService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -219,7 +221,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell} <span class="text-success">ANX</span></div>`;
         },
       },
       entry_date: {
@@ -305,7 +307,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">ANX</span></div>`;
         },
       },
     },
@@ -407,15 +409,16 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenDrop() {
-    this.todayHeavenDropCard.fetchingHeavenDropValue = true;
     this.httpService.get('heaven-drop/').subscribe((res?: any) => {
-      this.todayHeavenDropCard.value_anx = res.heaven_drop_today_anx;
-      this.todayHeavenDropCard.value = res.heaven_drop_today;
+      this.totalHeavenDropCard.fetchingValue = false;
       this.totalHeavenDropCard.value = res.heaven_drop_total;
       this.totalHeavenDropCard.value_anx = res.heaven_drop_total_anx;
-      this.todayHeavenDropCard.fetchingHeavenDropValue = false;
+      this.todayHeavenDropCard.fetchingValue = false;
+      this.todayHeavenDropCard.value = res.heaven_drop_today;
+      this.todayHeavenDropCard.value_anx = res.heaven_drop_today_anx;
     }, (err) => {
-      this.todayHeavenDropCard.fetchingHeavenDropValue = false;
+      this.totalHeavenDropCard.fetchingValue = false;
+      this.todayHeavenDropCard.fetchingValue = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
@@ -463,11 +466,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fetchHeavenHistory = true;
     this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
       const data = res.results;
-      const heaven_history_data = _.map(data, function(obj) {
+      const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.total_received = (ShareDataService.toFixedDown(obj.total_received, 0)) + ' ANX';
-        obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
+        obj.total_received = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.total_received, 0), '1.0-0');
+        obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
         return obj;
       });
       this.source.load(heaven_history_data);
@@ -483,10 +486,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fetchHeavenDropHistory = true;
     this.httpService.get(`anx-heaven-history/`).subscribe((res?: any) => {
       const data = res;
-      const heaven_drop_history_data = _.map(data, function(obj) {
+      const heaven_drop_history_data = _.map(data, (obj?: any) => {
         obj.created = moment(obj.created, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
-        obj.anx_bonus = (ShareDataService.toFixedDown(obj.anx_bonus, 0)) + ' ANX';
+        obj.anx_bonus = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.anx_bonus, 0), '1.0-0');
+        obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
         return obj;
       });
       this.source_heavenDrop.load(_.sortBy(heaven_drop_history_data, ['created']).reverse());

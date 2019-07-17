@@ -1,4 +1,5 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
+import {DecimalPipe} from '@angular/common';
 import {NbDialogService, NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
 import {AppConstants} from '../../app.constants';
@@ -55,6 +56,7 @@ export class TransferComponent implements OnInit {
   usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   constructor(private httpService: HttpService,
+              private decimalPipe: DecimalPipe,
               private dialogService: NbDialogService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -225,7 +227,7 @@ export class TransferComponent implements OnInit {
     this.fetchTransferHistory = true;
     this.httpService.get(`transactions-history/`).subscribe((res?: any) => {
       const data = res.data;
-      const transfer_data = _.map(data, function (obj) {
+      const transfer_data = _.map(data, (obj?: any) => {
         if (obj.direction === 'in')
           obj.direction = 'RECEIVE';
         else if (obj.direction === 'out')
@@ -233,7 +235,7 @@ export class TransferComponent implements OnInit {
         else
           obj.direction = 'OTC';
         obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
-        obj.quantity = ShareDataService.toFixedDown(obj.quantity, 6);
+        obj.quantity = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.quantity, 6), '1.0-6');
         obj.address = obj.address || '';
         return obj;
       });

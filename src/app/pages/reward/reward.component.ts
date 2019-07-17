@@ -1,18 +1,18 @@
-import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import {Component, OnInit,  AfterViewInit} from '@angular/core';
+import {DecimalPipe} from '@angular/common';
 import {LocalDataSource} from 'ng2-smart-table';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 import {NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
-import {DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl} from '@angular/platform-browser';
-import {NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder} from '@nebular/theme';
-import * as moment from 'moment';
-import * as _ from 'lodash';
 
 import {HttpService} from '../../services/http.service';
 import {SessionStorageService} from '../../services/session-storage.service';
 import {environment} from '../../../environments/environment';
 import {ShareDataService} from '../../services/share-data.service';
 import {ToastrService} from '../../services/toastr.service';
+
+import * as moment from 'moment';
+import * as _ from 'lodash';
 
 declare let jQuery: any;
 
@@ -24,7 +24,7 @@ interface CardSettings {
   type: string;
 }
 
-export interface yourrewardElement {
+export interface rewardElement {
   level: number;
   yourreward: number;
   rewardrate: string;
@@ -63,7 +63,7 @@ interface FSEntry {
 @Component({
   selector: 'ngx-reward',
   templateUrl: './reward.component.html',
-  styleUrls: ['./reward.component.scss']
+  styleUrls: ['./reward.component.scss'],
 })
 export class RewardComponent implements OnInit, AfterViewInit {
 
@@ -80,7 +80,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
   fetchingDownlineAngel: boolean = false;
   fetchingHistory: boolean = false;
 
-  rewardData: yourrewardElement[] = [
+  rewardData: rewardElement[] = [
     {level: 1, yourreward: 131131, rewardrate: '100%', downlinereward: 131, heaven: 131, downline: 14},
     {level: 2, yourreward: 131131, rewardrate: '10%', downlinereward: 131, heaven: 131, downline: 14},
     {level: 3, yourreward: 131131, rewardrate: '10%', downlinereward: 131, heaven: 131, downline: 14},
@@ -119,7 +119,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         },
       },
       downlinereward: {
-        title: this.translate.instant('common.downline') + " " + this.translate.instant('common.rate'),
+        title: this.translate.instant('common.downline') + ' ' + this.translate.instant('common.rate'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -223,7 +223,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="rewardtblcss downlineTree">${cell}</div>`;
+          return `<div class="rewardtblcss downlineTree">${cell} <span class="text-success">ANX</span></div>`;
         },
       },
     },
@@ -238,7 +238,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     iconClass: 'nb-home',
     type: 'primary',
   };
-  todayRewadCard: CardSettings = {
+  todayRewardCard: CardSettings = {
     title: this.translate.instant('pages.reward.rewardToday'),
     value: 0,
     value_anx: 0,
@@ -248,7 +248,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
 
   commonStatusCardsSet: CardSettings[] = [
     this.totalRewardCard,
-    this.todayRewadCard,
+    this.todayRewardCard,
   ];
   statusCards1: string;
 
@@ -265,7 +265,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         type: 'primary',
       },
       {
-        ...this.todayRewadCard,
+        ...this.todayRewardCard,
         type: 'primary',
       },
     ],
@@ -279,14 +279,12 @@ export class RewardComponent implements OnInit, AfterViewInit {
   total_users: any;
 
   constructor(private themeService: NbThemeService,
+              private decimalPipe: DecimalPipe,
               private httpService: HttpService,
-              private sanitizer: DomSanitizer,
               private sessionStorage: SessionStorageService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
               public translate: TranslateService) {
-
     this.userData = this.sessionStorage.getFromSession('userInfo');
     if (this.userData.infinity_mark === 1)
       this.userData.infinity_name = 'SILVER ANGEL';
@@ -325,8 +323,8 @@ export class RewardComponent implements OnInit, AfterViewInit {
         this.totalRewardCard.value_anx = res.total.reward_anx;
       }
       if (res.daily) {
-        this.todayRewadCard.value = res.daily.reward;
-        this.todayRewadCard.value_anx = res.daily.reward_anx;
+        this.todayRewardCard.value = res.daily.reward;
+        this.todayRewardCard.value_anx = res.daily.reward_anx;
       }
       this.fetchingRewardValue = false;
     }, (err) => {
@@ -369,14 +367,10 @@ export class RewardComponent implements OnInit, AfterViewInit {
   getDownlineTree(val) {
     jQuery('.downline-tree-spinner').height(jQuery('#downline-tree').height());
     this.fetchingDownlineTree = true;
-    const value = val;
-    const url = `downline_tree/?filter_type=${value}`;
+    const url = `downline_tree/?filter_type=${val}`;
     this.httpService.get(url).subscribe((res?: any) => {
       this.dataSource = res;
-      if (res.length !== 0)
-        this.noDataSource = true;
-      else
-        this.noDataSource = false;
+      this.noDataSource = !!res.length;
       this.fetchingDownlineTree = false;
     }, (err) => {
       this.fetchingDownlineTree = false;
@@ -388,9 +382,9 @@ export class RewardComponent implements OnInit, AfterViewInit {
     jQuery('.reward-history-spinner').height(jQuery('#reward-history').height());
     this.fetchingHistory = true;
     this.httpService.get(`reward-history/`).subscribe((res?: any) => {
-      const history_data = _.map(res, function (obj) {
+      const history_data = _.map(res, (obj?: any) => {
         obj.date = moment(obj.date, 'YYYY-MM-DD').format('YYYY.MM.DD');
-        obj.anx_quantity = ShareDataService.toFixedDown(obj.anx_quantity, 0) + ' ' + 'ANX';
+        obj.anx_quantity = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.anx_quantity, 0), '1.0-0');
         return obj;
       });
       this.source.load(_.sortBy(history_data, ['date']).reverse());
