@@ -502,7 +502,12 @@
 }
 /deep/ .trade-text{ text-align: center; }
 /deep/ .paddbtnfix{ padding-left:0px!important; }
-/deep/ .sent-btn{ padding: 0.65rem 0.9rem!important;width: 100%; }
+
+/deep/ .sent-btn{ 
+  padding: 0.65rem 0.9rem!important; 
+  font-family: nb-theme(font-nunito);
+  width: 100%;
+}
 
 @media only screen and (max-width: 768px) {
   /deep/.paddbtnfix{
