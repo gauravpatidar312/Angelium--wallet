@@ -1,5 +1,6 @@
-<div class="row m-0">
-  <div class="col-12 challenger-div-height">
+<div class="lottery-container">
+  <div class="row m-0">
+    <div class="col-12 challenger-div-height">
       <div class="subdiv-margin">
         <div class="challenger-title font-bebasNeueBold">CHALLENGE YOUR DESTINY</div>
         <div class="round-div">ROUND #123</div>
@@ -24,183 +25,189 @@
           1 0 : 2 9 : 3 7
         </div>
       </div>
+    </div>
   </div>
-</div>
-
-<div class="bc-color">
-  <div class="row">
-    <div class="col-lg-6" id="betting">
-      <nb-card>
-        <nb-card-header class="title-header">Betting</nb-card-header>
-        <nb-card-body id="betting-body">
-          <div class="row">
-            <div class="col-md-12 mb-3 text-center">
-              <span class="text-space">1BET : <span class="span-font-size">500 XP</span></span>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group font-nunitoSans">
-                <label class="label-color">
-                  Betting Amount
-                </label>
-                <input type="number" [required]="true"
-                       class="form-control input-padding"/>
+  <div class="bc-color">
+    <div class="row">
+      <div class="col-lg-6" id="betting">
+        <nb-card>
+          <nb-card-header class="title-header">Betting</nb-card-header>
+          <nb-card-body id="betting-body">
+            <div class="row">
+              <div class="col-md-12 mb-3 text-center">
+                <span class="text-space">1BET : <span class="span-font-size">500 XP</span></span>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group total-amount font-nunitoSans">
-                <label class="label-color">
-                  Assets
-                </label>
-                <span class="float-right">1.448447 ETH</span>
-                <div class="status-dd-week mb-1 dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-                     ngbDropdown>
-                  <button type="button" ngbDropdownToggle class="font-avenir btn-primary dropDown-padding btn b-color-wallet">
-                    SELECT
-                  </button>
-                  <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li class="dropdown-item" *ngFor="let wallet of myWallets">
-                      {{ wallet.wallet_type }}
-                    </li>
-                  </ul>
+              <div class="col-lg-6">
+                <div class="form-group font-nunitoSans">
+                  <label class="label-color">
+                    Betting Amount
+                  </label>
+                  <input type="number" [required]="true"
+                         class="form-control input-padding"/>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group total-amount font-nunitoSans">
+                  <label class="label-color">
+                    Assets
+                  </label>
+                  <span class="float-right">1.448447 ETH</span>
+                  <div class="status-dd-week mb-1 dropdown"
+                       [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+                       ngbDropdown>
+                    <button type="button" ngbDropdownToggle
+                            class="font-avenir btn-primary dropDown-padding btn b-color-wallet">
+                      SELECT
+                    </button>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                      <li class="dropdown-item" *ngFor="let wallet of myWallets">
+                        {{ wallet.wallet_type }}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-12 p-0">
-            <div class="form-group font-nunitoSans">
-              <label class="label-color">Challenge comment (Optional)</label>
-              <input type="text" class="form-control input-padding"/>
+            <div class="col-12 p-0">
+              <div class="form-group font-nunitoSans">
+                <label class="label-color">Challenge comment (Optional)</label>
+                <input type="text" class="form-control input-padding"/>
+              </div>
             </div>
-          </div>
-          <div class="col-12 p-0">
-            <div class="form-group font-nunitoSans">
-              <label class="label-color">Winning comment (Optional)</label>
-              <input type="text" class="form-control input-padding"/>
+            <div class="col-12 p-0">
+              <div class="form-group font-nunitoSans">
+                <label class="label-color">Winning comment (Optional)</label>
+                <input type="text" class="form-control input-padding"/>
+              </div>
             </div>
-          </div>
-          <div class="col-12 p-0">
-            <div class="form-group">
-              <label class="d-none d-md-block">&nbsp;</label>
-              <button class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
+            <div class="col-12 p-0">
+              <div class="form-group">
+                <label class="d-none d-md-block">&nbsp;</label>
+                <button class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
                 <span>
                   RUN
                 </span>
-              </button>
-            </div>
-          </div>
-        </nb-card-body>
-        <nb-card-footer id="betting-footer">
-          <span class="label-color font-nunitoSans">How to Pay? </span>
-          <div class="mt-2 font-nunitoSans"> Place your bet with my asset in your wallet.The random number algorythm in the smartcontract will fairly prize from all the bet.</div>
-        </nb-card-footer>
-      </nb-card>
-    </div>
-    <div class="col-lg-6">
-      <nb-card>
-        <nb-card-header>
-          <div class="row">
-            <div class="col-md-6 col-sm-12 challenger-header">
-              Challenger
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
-                <li class="pointer li-margin">
-                  <a data-toggle="pill">Comment</a>
-                </li>
-                <li class="active pointer">
-                  <a data-toggle="pill">Address</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nb-card-header>
-        <nb-list class="list-height" id="challenges-body">
-          <nb-list-item *ngFor="let user of users">
-            <div class="user-container" style="display: flex;">
-              <div class="div-picture m-0">
-                <div class="user-picture background image">{{user.picture}}</div>
-              </div>
-              <div class="info-container info-user-width ml-3">
-                <div [ngClass]="{'label-color': user.message}" class="user-name div-user-name work-break font-bebasNeueBold">{{ user.name }}</div>
-                <div class="user-title work-break">{{ user.title }}</div>
-              </div>
-              <div class="ml-4" *ngIf="user.message">
-                <div class="message">{{user.message}}</div>
+                </button>
               </div>
             </div>
-          </nb-list-item>
-        </nb-list>
-      </nb-card>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <nb-card>
-        <nb-card-header>
-          <div class="row">
-            <div class="col-md-6 col-sm-6 challenger-header">
-              Winners
+          </nb-card-body>
+          <nb-card-footer id="betting-footer">
+            <span class="label-color font-nunitoSans">How to Pay? </span>
+            <div class="mt-2 font-nunitoSans"> Place your bet with my asset in your wallet.The random number algorythm
+              in the smartcontract will fairly prize from all the bet.
             </div>
-            <div class="col-md-6 col-sm-6">
-              <div class="float-right">
-                <span class="mr-3 pointer"><i class="fa fa-chevron-left"></i></span>
-                <span class="font-nunitoSans">ROUND #123</span>
-                <span class="ml-3 pointer"><i class="fa fa-chevron-right"></i></span>
+          </nb-card-footer>
+        </nb-card>
+      </div>
+      <div class="col-lg-6">
+        <nb-card>
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 challenger-header">
+                Challenger
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
+                  <li class="pointer li-margin">
+                    <a data-toggle="pill">Comment</a>
+                  </li>
+                  <li class="active pointer">
+                    <a data-toggle="pill">Address</a>
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <nb-list>
-            <nb-list-item *ngFor="let winnerUser of winnerUsers">
-              <div class="user-container">
-                <div class="div-flex">
-                  <div class="mr-2 div-id">{{ winnerUser.id}}</div>
-                  <div class="mr-2 div-prize">{{ winnerUser.prizeName}}</div>
-                  <div class="mr-2 div-xpAmount work-break">{{
-                    winnerUser.XPAmount}}
+          </nb-card-header>
+          <nb-list class="list-height" id="challenges-body">
+            <nb-list-item *ngFor="let user of users">
+              <div class="user-container" style="display: flex;">
+                <div class="div-picture m-0">
+                  <div class="user-picture background image">{{user.picture}}</div>
+                </div>
+                <div class="info-container info-user-width ml-3">
+                  <div [ngClass]="{'label-color': user.message}"
+                       class="user-name div-user-name work-break font-bebasNeueBold">{{ user.name }}
                   </div>
-                  <div class="div-picture">
-                    <div class="user-picture background image">{{winnerUser.picture}}</div>
-                  </div>
-                  <div class="info-container mr-2">
-                    <div class="user-name div-name work-break font-bebasNeueBold">{{ winnerUser.name }}</div>
-                    <div class="user-title work-break">{{ winnerUser.title }}</div>
-                  </div>
-                  <div class="ml-4" *ngIf="winnerUser.message">
-                    <div class="message">{{winnerUser.message}}</div>
-                  </div>
+                  <div class="user-title work-break">{{ user.title }}</div>
+                </div>
+                <div class="ml-4" *ngIf="user.message">
+                  <div class="message">{{user.message}}</div>
                 </div>
               </div>
             </nb-list-item>
           </nb-list>
-        </nb-card-body>
-      </nb-card>
+        </nb-card>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-12">
-      <nb-card>
-        <nb-card-header>
-          <div class="row">
-            <div class="col-md-6 challenger-header">
-              Smart Contracts
-            </div>
-            <div class="col-md-6">
-              <div class="float-right">
-                <span class="mr-3 pointer"><i class="fa fa-chevron-left"></i></span>
-                <span class="font-nunitoSans">ROUND #123</span>
-                <span class="ml-3 pointer"><i class="fa fa-chevron-right"></i></span>
+    <div class="row">
+      <div class="col-12">
+        <nb-card>
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 challenger-header">
+                Winners
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div class="float-right">
+                  <span class="mr-3 pointer"><i class="fa fa-chevron-left"></i></span>
+                  <span class="font-nunitoSans">ROUND #123</span>
+                  <span class="ml-3 pointer"><i class="fa fa-chevron-right"></i></span>
+                </div>
               </div>
             </div>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <div style="height: 200px;"></div>
-        </nb-card-body>
-      </nb-card>
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item *ngFor="let winnerUser of winnerUsers">
+                <div class="user-container">
+                  <div class="div-flex">
+                    <div class="mr-2 div-id">{{ winnerUser.id}}</div>
+                    <div class="mr-2 div-prize">{{ winnerUser.prizeName}}</div>
+                    <div class="mr-2 div-xpAmount work-break">{{
+                      winnerUser.XPAmount}}
+                    </div>
+                    <div class="div-picture">
+                      <div class="user-picture background image">{{winnerUser.picture}}</div>
+                    </div>
+                    <div class="info-container mr-2">
+                      <div class="user-name div-name work-break font-bebasNeueBold">{{ winnerUser.name }}</div>
+                      <div class="user-title work-break">{{ winnerUser.title }}</div>
+                    </div>
+                    <div class="ml-4" *ngIf="winnerUser.message">
+                      <div class="message">{{winnerUser.message}}</div>
+                    </div>
+                  </div>
+                </div>
+              </nb-list-item>
+            </nb-list>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <nb-card>
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-6 challenger-header">
+                Smart Contracts
+              </div>
+              <div class="col-md-6">
+                <div class="float-right">
+                  <span class="mr-3 pointer"><i class="fa fa-chevron-left"></i></span>
+                  <span class="font-nunitoSans">ROUND #123</span>
+                  <span class="ml-3 pointer"><i class="fa fa-chevron-right"></i></span>
+                </div>
+              </div>
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div style="height: 200px;"></div>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
   </div>
 </div>

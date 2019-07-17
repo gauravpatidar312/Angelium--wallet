@@ -136,17 +136,17 @@ export class AppComponent implements OnInit {
   }
 
   setPageClass() {
-    if(this.router.url && this.router.url !== '/') {
-      let url = this.router.url.replace(/^\/+|\/+$/g, '');
-      let menu = jQuery('.scrollable-container');
-      if(url && menu) {
-        menu.removeClass(function (index, css) {
+    if (this.router.url && this.router.url !== '/') {
+      const url = this.router.url.replace(/^\/+|\/+$/g, '');
+      const bodyTag = jQuery('body');
+      if (url) {
+        bodyTag.removeClass(function (index, css) {
           return (css.match(/(^|\s)pages-\S+/g) || []).join(' ');
         });
-        menu.removeClass(function (index, css) {
+        bodyTag.removeClass(function (index, css) {
           return (css.match(/(^|\s)games-\S+/g) || []).join(' ');
         });
-        menu.addClass(url.replace(/[\/ ]/g, '-'));
+        bodyTag.addClass(url.replace(/[\/ ]/g, '-'));
       }
     }
   }
