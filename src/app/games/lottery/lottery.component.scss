@@ -3,6 +3,7 @@
 
 /deep/ .games-lottery .particles-container {
   background-image: url('/assets/images/angel-lottery.jpg') !important;
+  opacity: 0.6;
 }
 
 /deep/ .games-lottery .main-content {
@@ -15,6 +16,10 @@
 
 /deep/ .games-lottery .logo-containter .display-none {
   display: block !important;
+}
+
+/deep/ .games-lottery  .layout {
+  background: none !important;
 }
 
 /deep/ .games-lottery .header-container .navigation i {
@@ -98,7 +103,9 @@
     text-align: center;
     margin-top: 25px;
     font-size: 5.25rem;
-    color: #cbe00d !important;
+    color: #b7ff05 !important;
+    font-family: nb-theme(font-bebas);
+    letter-spacing: 10px;
   }
 
   .winner-id-span {
