@@ -357,15 +357,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCreateHeaven() {
-    /*if (this.isProduction) {
-      this.toastrService.danger('Feature coming soon! Stay tuned.', 'Heaven');
-      return;
-    }*/
-    if (this.isProduction && this.wallet.wallet_type === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
+    /*if (this.isProduction && this.wallet.wallet_type === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
       this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
         this.translate.instant('common.heaven'));
       return;
-    }
+    }*/
 
     if (!this.heaven_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
@@ -426,11 +422,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
-      if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
+      /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
         this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
             return wallet.wallet_type !== 'USDT';
           }) || [];
-      }
+      }*/
 
       if (!this.myWallets) {
         this.walletType = this.translate.instant('common.select');
