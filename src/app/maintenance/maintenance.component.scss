@@ -36,24 +36,15 @@
   }
 
   .title-font {
+    margin-top: 2rem;
     font-size: 35px;
+    font-family: nb-theme(font-bebas-light);
   }
 
-  .navigation {
-    .link {
-      text-decoration: none;
-
-      .icon {
-        font-size: 2rem;
-      }
-    }
-
-    .sub-title {
-      font-size: 13px;
-      color: #d1d1ff;
-      margin: 1rem 0 0;
-      font-family: NunitoSans !important;
-    }
+  .sub-title {
+    font-size: 18px;
+    margin-top: 2rem;
+    font-family: nb-theme(font-nunito);
   }
 
   .logo-image {
