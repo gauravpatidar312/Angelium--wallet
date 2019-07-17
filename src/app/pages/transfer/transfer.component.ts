@@ -154,7 +154,7 @@ export class TransferComponent implements OnInit {
       }
     }
 
-    let angeliumnInfo: any = await this.storageService.getAngeliumStorage();
+    const angeliumnInfo: any = await this.storageService.getAngeliumStorage();
     if (angeliumnInfo) {
       if (angeliumnInfo.waitTime) {
         const waitTime = new Date(angeliumnInfo.waitTime);
@@ -226,7 +226,7 @@ export class TransferComponent implements OnInit {
     jQuery('.transfer-history-spinner').height(jQuery('#transfer-history').height());
     this.fetchTransferHistory = true;
     this.httpService.get(`transactions-history/`).subscribe((res?: any) => {
-      const data = res.data;
+      const data = _.orderBy(res.data, ['timestamp'], ['desc']);
       const transfer_data = _.map(data, (obj?: any) => {
         if (obj.direction === 'in')
           obj.direction = 'RECEIVE';

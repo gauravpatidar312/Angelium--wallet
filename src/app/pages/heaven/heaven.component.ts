@@ -465,7 +465,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
     this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
-      const data = res.results;
+      const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
@@ -485,7 +485,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history-Drop').height());
     this.fetchHeavenDropHistory = true;
     this.httpService.get(`anx-heaven-history/`).subscribe((res?: any) => {
-      const data = res;
+      const data = _.orderBy(res, ['created', 'user_heaven_id'], ['desc']);
       const heaven_drop_history_data = _.map(data, (obj?: any) => {
         obj.created = moment(obj.created, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.anx_bonus = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.anx_bonus, 0), '1.0-0');

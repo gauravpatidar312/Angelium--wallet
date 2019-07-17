@@ -387,7 +387,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
         obj.anx_quantity = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.anx_quantity, 0), '1.0-0');
         return obj;
       });
-      this.source.load(_.sortBy(history_data, ['date']).reverse());
+      this.source.load(_.orderBy(history_data, ['date'], ['desc']));
       this.fetchingHistory = false;
     }, (err) => {
       this.fetchingHistory = false;
