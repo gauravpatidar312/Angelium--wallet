@@ -2,7 +2,6 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 import {NbDialogService, NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
-import {AppConstants} from '../../app.constants';
 import {ShareDataService} from '../../services/share-data.service';
 import {SessionStorageService} from '../../services/session-storage.service';
 import {IndexedDBStorageService} from '../../services/indexeddb-storage.service';
@@ -34,7 +33,6 @@ export class TransferComponent implements OnInit {
   fromTypes: string[] = ['ANX'];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
-  currentTheme: string;
   setReceiveTab: boolean = false;
   setOTCTab: boolean = false;
   submitted: boolean = false;
@@ -67,12 +65,6 @@ export class TransferComponent implements OnInit {
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute) {
     this.user = this.sessionStorage.getFromSession('userInfo');
-
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
 
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
