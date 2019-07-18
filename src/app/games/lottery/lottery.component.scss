@@ -18,7 +18,7 @@
   display: block !important;
 }
 
-/deep/ .games-lottery  .layout {
+/deep/ .games-lottery .layout {
   background: none !important;
 }
 
@@ -290,6 +290,13 @@
       font-size: 4rem;
     }
   }
+
+  @media only screen and (width: 425px) {
+    .margin-top-div {
+      margin-top: 5px;
+    }
+  }
+
   @media only screen and (width: 320px) {
     .time-div {
       font-size: 3.45rem;
@@ -298,6 +305,10 @@
     .winner-xpAmount-span {
       width: 142px !important;
     }
+
+    .fix-width {
+      min-width: 245px;
+    }
   }
   @media (min-width: 300px) and (max-width: 480px) {
     #heavenHistory-navigation {
@@ -305,6 +316,24 @@
     }
     #heavenHistory-navigation li > a {
       padding: 5px;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    .time-div {
+      letter-spacing: 7px !important;
+    }
+    .padding-remove-xs {
+      padding: 0;
+    }
+    .margin-top-div {
+      margin-top: 5px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .padding-row {
+      padding: 0;
     }
   }
 }
