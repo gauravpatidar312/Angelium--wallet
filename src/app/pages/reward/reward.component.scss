@@ -182,6 +182,7 @@ table.table-bordered > tbody > tr > td {
 /deep/ .rewardtblcss {
   padding-right: 40px;
   position: relative;
+  white-space: nowrap;
 }
 /deep/ .rewardtblcss span {
   word-break: break-all;

@@ -1,17 +1,19 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { RewardModule } from './reward/reward.module';
-import { HQModule } from './hq/hq.module';
 import { NgModule } from '@angular/core';
 import { NbDialogModule } from '@nebular/theme';
+import { TranslateModule } from '@ngx-translate/core';
+import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
+
+import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ThemeModule } from '../@theme/theme.module';
-import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { RewardModule } from './reward/reward.module';
+import { HQModule } from './hq/hq.module';
 import { SettingComponent } from './setting/setting.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { KYCComponent } from './kyc/kyc.component';
@@ -20,9 +22,6 @@ import { DialogNamePromptComponent } from './setting/dialog-prompt/dialog-prompt
 import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
-import { TranslateModule } from '@ngx-translate/core';
-import { NbDateFnsDateModule } from '@nebular/date-fns';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -33,8 +32,6 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
-    ECommerceModule,
-    MiscellaneousModule,
     RewardModule,
     Ng2SmartTableModule,
     ImageCropperModule,
@@ -67,5 +64,6 @@ const PAGES_COMPONENTS = [
     DialogNamePromptComponent,
   ],
 })
+
 export class PagesModule {
 }
