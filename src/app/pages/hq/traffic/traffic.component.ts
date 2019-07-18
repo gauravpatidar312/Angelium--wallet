@@ -1,5 +1,4 @@
 import { Component, OnDestroy, Input } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 import { TrafficChartData } from '../../../@core/data/traffic-chart';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,8 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
       <nb-card-header>
         <span>{{trafficHeading}}</span>
         <div class="dropdown ghost-dropdown" ngbDropdown>
-          <button type="button" class="btn btn-sm" ngbDropdownToggle
-                  [ngClass]="{ 'btn-success': currentTheme == 'default', 'btn-primary': currentTheme != 'default'}">
+          <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
             {{ type }}
           </button>
           <ul ngbDropdownMenu class="dropdown-menu">
@@ -32,19 +30,11 @@ export class TrafficComponent implements OnDestroy {
   @Input() trafficHeading: string;
   private alive = true;
   trafficChartPoints: number[];
-  type = this.translate.instant("common.month");
-  types = [this.translate.instant("common.week"), this.translate.instant("common.month"), this.translate.instant("common.year")];
-  currentTheme: string;
+  type = this.translate.instant('common.month');
+  types = [this.translate.instant('common.week'), this.translate.instant('common.month'), this.translate.instant('common.year')];
 
-  constructor(private themeService: NbThemeService,
-              private trafficChartService: TrafficChartData,
-              private translate:TranslateService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-      this.currentTheme = theme.name;
-    });
-
+  constructor(private trafficChartService: TrafficChartData,
+              private translate: TranslateService) {
     this.trafficChartService.getTrafficChartData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((data) => {

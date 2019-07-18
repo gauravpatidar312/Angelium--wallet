@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +21,7 @@ declare let jQuery: any;
   styleUrls: ['./register.component.scss'],
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnDestroy, OnInit {
   private alive = true;
   model: any = {};
   registerForm: FormGroup;
@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
   otpSubmitting: boolean = false;
   isResubmit: boolean = false;
   resubmitTime: number = 60 * 1000;
-  currentTheme: string;
   breakpoints: any;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   selectedLang: string = 'SELECT';
@@ -40,7 +39,7 @@ export class RegisterComponent implements OnInit {
     // {'language': 'Chinese', 'code': 'zh'},
     // {'language': 'Japanese', 'code': 'ja'},
     // {'language': 'Korean', 'code': 'ko'}
-  ]
+  ];
 
   @ViewChild('otpForm') otpForm: NgForm;
 
@@ -48,7 +47,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
-              private router: Router,
               private activatedRoute: ActivatedRoute,
               private toastrService: ToastrService,
               private sessionStorageService: SessionStorageService,
@@ -61,8 +59,8 @@ export class RegisterComponent implements OnInit {
     this.getCapchaTranslation();
   }
 
-  getLanguageData(){
-    this.httpService.get('languages/').subscribe(res=>{
+  getLanguageData() {
+    this.httpService.get('languages/').subscribe(res => {
       this.languageData = res;
     });
   }
@@ -70,14 +68,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.getLanguageData();
     jQuery(document).ready(() => {
-      jQuery('#registerSlider').slideToUnlock({ useData: true});
-      jQuery( document ).on('veryfiedCaptcha', (event, arg) => {
+      jQuery('#registerSlider').slideToUnlock({useData: true});
+      jQuery(document).on('veryfiedCaptcha', (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
           this.getCapchaTranslation();
         }
+      });
     });
-   });
     this.registerForm = this.formBuilder.group({
       invitation_code: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -95,8 +93,8 @@ export class RegisterComponent implements OnInit {
       isAgree: [false],
     });
 
-    this.activatedRoute.params.subscribe( async(params?: any) => {
-      let info: any = await this.storageService.getAngeliumStorage();
+    this.activatedRoute.params.subscribe(async (params?: any) => {
+      const info: any = await this.storageService.getAngeliumStorage();
       if (params.invitation_code) {
         this.storageService.saveToAngeliumSession({'invitationCode': params.invitation_code});
         this.registerForm.controls.invitation_code.setValue(params.invitation_code);
@@ -107,24 +105,18 @@ export class RegisterComponent implements OnInit {
       }
     });
 
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
-
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
-    .pipe(takeWhile(() => this.alive))
-    .subscribe(([oldValue, newValue]) => {
-      this.breakpoint = newValue;
-    });
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(([oldValue, newValue]) => {
+        this.breakpoint = newValue;
+      });
 
-    var lang = this.sessionStorageService.getFromLocalStorage('languageData');
+    const lang = this.sessionStorageService.getFromLocalStorage('languageData');
     if (!lang) {
       this.selectedLang = 'English';
       this.registerForm.controls.user_language.setValue(1);
-    }else{
+    } else {
       this.selectedLang = lang.language;
       this.registerForm.controls.user_language.setValue(lang.id);
     }
@@ -145,7 +137,7 @@ export class RegisterComponent implements OnInit {
   onSubmitOtp() {
     if (this.otpForm.invalid) {
       this.toastrService.warning(this.translate.instant('pages.register.toastr.phoneNumberIsInvalid'),
-      this.translate.instant('common.sendSMS'));
+        this.translate.instant('common.sendSMS'));
       return;
     }
 
@@ -162,7 +154,7 @@ export class RegisterComponent implements OnInit {
         }, this.resubmitTime);
 
         this.toastrService.success(this.translate.instant('pages.register.toastr.sentOTPtoMobile'),
-        this.translate.instant('common.sendSMS'));
+          this.translate.instant('common.sendSMS'));
       }
     }, err => {
       this.otpSubmitting = false;
@@ -181,7 +173,6 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.registerForm.controls.phone.setValue(this.model.phone);
-    console.log(this.registerForm.value);
 
     this.submitted = true;
     // stop here if form is invalid
@@ -191,17 +182,17 @@ export class RegisterComponent implements OnInit {
 
     if (!this.isResubmit) {
       this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseSubmitOTPfirst'),
-      this.translate.instant('common.register'));
+        this.translate.instant('common.register'));
       return;
     }
     if (this.registerForm.controls.email.value !== this.registerForm.controls.confirm_your_email.value) {
       this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmEmailDoNotMatch'),
-       this.translate.instant('common.register'));
+        this.translate.instant('common.register'));
       return;
     }
     if (this.registerForm.controls.password.value !== this.registerForm.controls.confirm_password.value) {
       this.toastrService.danger(this.translate.instant('pages.register.toastr.confirmLoginPasswordDoNotMatch'),
-      this.translate.instant('common.register'));
+        this.translate.instant('common.register'));
       return;
     }
     if (this.registerForm.controls.trade_password.value !== this.registerForm.controls.confirm_trade_password.value) {
@@ -211,7 +202,7 @@ export class RegisterComponent implements OnInit {
 
     if (!this.registerForm.value.isAgree) {
       this.toastrService.danger(this.translate.instant('pages.register.toastr.pleaseCheckAgreetoTermsandConditionBox'),
-      this.translate.instant('common.register'));
+        this.translate.instant('common.register'));
       return;
     }
 
@@ -220,13 +211,9 @@ export class RegisterComponent implements OnInit {
 
     this.formSubmitting = true;
     this.httpService.post(this.registerForm.value, 'register/').subscribe(res => {
-      this.storageService.saveToAngeliumSession({'invitationCode': null });
+      this.storageService.saveToAngeliumSession({'invitationCode': null});
       this.sessionStorageService.updateUserStateWithToken(res);
-      // this.sessionStorageService.saveToSession('userInfo', res);
-      // this.sessionStorageService.deleteFromSession('invitationCode');
-      // this.getUserSettingInfo();
     }, err => {
-      console.log(err);
       this.formSubmitting = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err),
         this.translate.instant('pages.register.toastr.RegisterFailed'));
@@ -234,24 +221,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // getUserSettingInfo() {
-  //   this.httpService.get('profile/').subscribe(data => {
-  //     this.sessionStorageService.updateFromSession('userInfo', data);
-  //     this.router.navigate(['pages/dashboard']);
-  //   }, err => {
-  //     console.log(err);
-  //     this.formSubmitting = false;
-  //     this.toastrService.danger(ShareDataService.getErrorMessage(err), 'Profile');
-  //   });
-  // }
-
   openTermsConditions() {
-    this.dialogService.open(TermsConditionsComponent,  {
+    this.dialogService.open(TermsConditionsComponent, {
       closeOnBackdropClick: false,
     });
   }
 
-  changeLanguage(lan: any){
+  changeLanguage(lan: any) {
     lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
@@ -260,17 +236,17 @@ export class RegisterComponent implements OnInit {
     this.getCapchaTranslation();
   }
 
-  getCapchaTranslation(){
+  getCapchaTranslation() {
     if (this.isVerifiedCaptcha) {
-      setTimeout(()=>{
+      setTimeout(() => {
         jQuery('#registerSlider').children('.text').text(
           this.translate.instant('common.verified'));
-      },0);
-    }else{
-      setTimeout(()=>{
+      }, 0);
+    } else {
+      setTimeout(() => {
         jQuery('#registerSlider').children('.text').text(
           this.translate.instant('common.slideRightToVerify'));
-      },1000);
+      }, 1000);
     }
   }
 }

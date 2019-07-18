@@ -147,14 +147,9 @@
               <tr>
                 <td class="title-col">{{"pages.setting.language" | translate}}</td>
                 <td colspan="2" class="td-padding">
-                  <div class="status-dd-week dropup"
-                    [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-                       ngbDropdown placement="top">
-                    <button type="button" ngbDropdownToggle
-                      class="btn b-language-size btn-padding"
-                            [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                   'btn-primary': currentTheme !== 'default',
-                                   'btn-sm': breakpoint.width <= breakpoints.is}">
+                  <div class="status-dd-week dropup" ngbDropdown placement="top">
+                    <button type="button" ngbDropdownToggle class="btn b-language-size btn-padding btn-primary"
+                            [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
                       {{ selectedLang }}
                     </button>
                     <ul class="dropdown-menu" ngbDropdownMenu>
@@ -169,9 +164,7 @@
               <tr>
                 <td class="title-col">{{"pages.setting.timezone" | translate}}</td>
                 <td colspan="2" class="td-padding">
-                  <div class="status-dd-week dropup"
-                       [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-                       ngbDropdown placement="top">
+                  <div class="status-dd-week dropup" ngbDropdown placement="top">
                     <ng-select [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
                       <ng-option *ngFor="let timezone of timezoneData" [value]="timezone">
                         {{timezone}}
@@ -347,13 +340,13 @@
     <nb-card-body class="image-scoll-card-body">
       <input type="password" [(ngModel)]="oldTradePassword" placeholder="{{'pages.setting.oldPassword' | translate}}" nbInput/><br/><br/>
       <p class="trade-text">- {{"pages.setting.or" | translate}} -</p>
-      
+
       <div class="row">
         <div class="col-md-7 col-12">
           <input type="text" [(ngModel)]="verificationCode" placeholder="{{'common.verificationCode' | translate}}" nbInput/><br/><br/>
         </div>
         <div class="col-md-5 col-12  paddbtnfix">
-          <button type="submit" [disabled]="otpSubmitting || otpSubmitted" 
+          <button type="submit" [disabled]="otpSubmitting || otpSubmitted"
             class="btn btn-success sent-btn"
             size="large" (click)="onSubmitOtp()">
             <span *ngIf="!otpSubmitting">
@@ -363,7 +356,7 @@
           </button><br/><br/>
         </div>
       </div>
-      
+
       <input type="password" [(ngModel)]="newTradePassword" placeholder="{{'pages.setting.newPassword' | translate}}" nbInput/><br/><br/>
       <input type="password" [(ngModel)]="confirmTradePassword" placeholder="{{'pages.setting.confirmPassword' | translate}}" nbInput/>
     </nb-card-body>
@@ -435,10 +428,8 @@
     <nb-card-body class="image-scoll-card-body">
       <input type="type" [(ngModel)]="ticketTitle" placeholder="{{'pages.setting.ticketTitle' | translate}}" nbInput /><br /><br />
       <input type="type" [(ngModel)]="ticketDescription" placeholder="{{'pages.setting.ticketDescription' | translate}}" nbInput /><br/><br/>
-      <div class="status-dd-week dropup" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown placement="top">
-        <button type="button" ngbDropdownToggle class="btn b-language-size btn-padding" [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                      'btn-primary': currentTheme !== 'default',
-                                      'btn-sm': breakpoint.width <= breakpoints.is}">
+      <div class="status-dd-week dropup" ngbDropdown placement="top">
+        <button type="button" ngbDropdownToggle class="btn b-language-size btn-padding btn-primary" [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
           {{ selectedTicket }}
         </button>
         <ul class="dropdown-menu" ngbDropdownMenu>
