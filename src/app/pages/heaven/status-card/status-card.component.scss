@@ -213,6 +213,7 @@ $shadow-green: #00977e;
     .title {
       font-family: nb-theme(font-bebas);
       font-size: 1.9rem;
+      white-space: nowrap;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
@@ -222,6 +223,7 @@ $shadow-green: #00977e;
       font-family: nb-theme(font-bebas-bold);
       font-weight: nb-theme(font-weight-bold) !important;
       text-transform: uppercase;
+      white-space: nowrap;
       color: nb-theme(card-fg);
       text-align: right;
       margin-right: 5px;
@@ -342,6 +344,12 @@ $shadow-green: #00977e;
     /deep/ .status {
       margin-top: 24px !important;
       margin-right: -22px !important;
+    }
+  }
+
+  @media only screen and (min-device-width : 1200px) and (max-device-width : 1230px) {
+    /deep/ .status-padding {
+      padding-right: 0 !important;
     }
   }
 }
