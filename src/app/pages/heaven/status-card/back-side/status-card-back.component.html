@@ -6,14 +6,14 @@
 </div>
   <div class="details full-width">
     <div class="row">
-      <div class="col-md-7 col-xs-12 mt-2">
+      <div class="col-md-6 col-xs-12 mt-2">
         <div class="title">{{ statusCard.title }}</div>
       </div>
 
-      <div class="col-md-5 col-xs-12 mt-1" *ngIf="statusCard.fetchingHeavenDropValue">
+      <div class="col-md-6 col-xs-12 mt-1" *ngIf="statusCard.fetchingValue">
         <div class="status text-white mt-0"><span><i class="fa fa-spinner spinner-color fa-spin"></i></span></div>
       </div>
-      <div class="col-md-5 col-xs-12" *ngIf="!statusCard.fetchingHeavenDropValue">
+      <div class="col-md-6 col-xs-12" *ngIf="!statusCard.fetchingValue">
 
         <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
           <button type="button" ngbDropdownToggle class="btn"
