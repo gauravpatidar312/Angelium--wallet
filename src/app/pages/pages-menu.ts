@@ -64,4 +64,10 @@ export const MENU_ITEMS = [
     link: '/pages/hq',
     languageKey: 'hq',
   },
+  {
+    title: 'Lottery',
+    icon: 'nb-paper-plane',
+    link: '/games/lottery',
+    languageKey: 'lottery',
+  },
 ];
