@@ -197,7 +197,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       currency_type: {
@@ -205,7 +205,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       plan: {
@@ -213,7 +213,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       total_received: {
@@ -221,7 +221,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width"">${cell} <span class="text-success">ANX</span></div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">ANX</span></div>`;
         },
       },
       entry_date: {

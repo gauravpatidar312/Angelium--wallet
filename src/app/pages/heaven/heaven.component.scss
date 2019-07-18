@@ -412,7 +412,7 @@
       float: left;
       width: 56px;
       text-align: right;
-      margin-top: 0px;
+      margin-top: 0;
     }
 
     .month-day-value {
@@ -535,7 +535,7 @@
 
   @media (min-width: 300px) and (max-width: 480px) {
     #heavenHistory-navigation {
-      padding-left: 0px;
+      padding-left: 0;
     }
     #heavenHistory-navigation li > a {
       padding: 5px;
@@ -555,11 +555,6 @@
       font-family: nb-theme(font-nunito);
     }
   }
-
-  //   :host /deep/ ng2-smart-title {
-  //     color: grey;
-  //     font-family: nb-theme(font-nunito);
-  // }
 
   /* headers grid color*/
   /deep/ ng2-smart-table-title > a {
