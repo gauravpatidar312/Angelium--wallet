@@ -47,7 +47,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   chartLegend: { iconColor: string; title: string }[];
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
-  currentTheme: string;
   heaven_amount: any;
   wallet: any;
   maxAmount: number;
@@ -75,30 +74,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     type: 'primary',
   };
 
-  commonStatusCardsSet: CardSettings[] = [
+  statusCards: CardSettings[] = [
     this.totalHeavenDropCard,
     this.todayHeavenDropCard,
   ];
-  statusCards1: string;
-
-  statusCardsByThemes: {
-    default: CardSettings[];
-    cosmic: CardSettings[];
-    corporate: CardSettings[];
-  } = {
-    default: this.commonStatusCardsSet,
-    cosmic: this.commonStatusCardsSet,
-    corporate: [
-      {
-        ...this.totalHeavenDropCard,
-        type: 'primary',
-      },
-      {
-        ...this.todayHeavenDropCard,
-        type: 'primary',
-      },
-    ],
-  };
 
   constructor(private service: SmartTableData,
               private decimalPipe: DecimalPipe,
@@ -110,13 +89,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
               private sessionStorage: SessionStorageService,
               public translate: TranslateService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
-
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-        this.statusCards1 = this.statusCardsByThemes[theme.name];
-      });
 
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -132,12 +104,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
-
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(takeWhile(() => this.alive))
