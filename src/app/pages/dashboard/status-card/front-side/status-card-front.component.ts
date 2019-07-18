@@ -1,6 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 
 @Component({
@@ -14,14 +12,8 @@ export class StatusCardFrontComponent implements OnDestroy, OnInit {
   @Input() fetchingAssetValue: boolean;
 
   isProduction: any = environment.production;
-  currentTheme: string;
 
-  constructor(private themeService: NbThemeService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
+  constructor() {
   }
 
   ngOnInit() {}
