@@ -1,5 +1,5 @@
-import {Component, AfterViewInit, Output, EventEmitter, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
-import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbStepperComponent, NbDialogService} from '@nebular/theme';
+import {Component, AfterViewInit, Output, EventEmitter, OnDestroy, ViewChild} from '@angular/core';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbStepperComponent} from '@nebular/theme';
 import {takeWhile} from 'rxjs/internal/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionStorageService} from '../../services/session-storage.service';
@@ -37,7 +37,6 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   };
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
-  currentTheme: string;
 
   idFrontLabel: any = this.translate.instant('pages.kyc.idProofFront');
   idFrontChangedEvent: any = '';
@@ -65,16 +64,9 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
               private sessionStorage: SessionStorageService,
               private httpService: HttpService,
               private sessionService: SessionStorageService,
-              private dialogService: NbDialogService,
               private toastrService: ToastrService,
               private shareDataService: ShareDataService,
               public translate: TranslateService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
-
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(takeWhile(() => this.alive))
