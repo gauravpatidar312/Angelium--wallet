@@ -297,7 +297,7 @@
     }
   }
 
-  @media only screen and (width: 320px) {
+  @media (min-width: 300px) and (max-width: 360px) {
     .time-div {
       font-size: 3.45rem;
     }
@@ -310,6 +310,13 @@
       min-width: 245px;
     }
   }
+
+  @media (min-width: 340px) and (max-width: 360px) {
+    .fix-width {
+      min-width: 285px !important;
+    }
+  }
+
   @media (min-width: 300px) and (max-width: 480px) {
     #heavenHistory-navigation {
       padding-left: 0;
@@ -322,6 +329,7 @@
   @include media-breakpoint-down(xs) {
     .time-div {
       letter-spacing: 7px !important;
+      font-size: 4rem !important;
     }
     .padding-remove-xs {
       padding: 0;
@@ -331,9 +339,19 @@
     }
   }
 
+  @media (min-width: 300px) and (max-width: 348px) {
+    .time-div {
+      letter-spacing: 5px !important;
+    }
+  }
+
   @include media-breakpoint-down(sm) {
     .padding-row {
-      padding: 0;
+      padding: 0 !important;
+    }
+
+    .padding-left-remove {
+      padding-left: 0 !important;
     }
   }
 }
