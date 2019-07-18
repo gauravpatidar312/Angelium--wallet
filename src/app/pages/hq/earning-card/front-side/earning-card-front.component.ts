@@ -40,6 +40,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     let element3 = document.getElementById('curr3').getElementsByClassName('curre');
     element3[0].innerHTML = this.translate.instant("pages.hq.averageHeaven");
   }
+  
   // changeCurrency(currency) {
   //   if (this.selectedCurrency !== currency) {
   //     this.selectedCurrency = currency;

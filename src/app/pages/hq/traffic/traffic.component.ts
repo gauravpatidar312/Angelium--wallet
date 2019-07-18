@@ -22,7 +22,8 @@ import { TranslateService } from '@ngx-translate/core';
         </div>
       </nb-card-header>
       <nb-card-body class="p-0">
-        <ngx-traffic-chart [points]="trafficChartPoints"></ngx-traffic-chart>
+        <ngx-traffic-chart [trafficValue]="trafficValue"
+          [points]="trafficChartPoints"></ngx-traffic-chart>
       </nb-card-body>
     </nb-card>
   `,
@@ -30,6 +31,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class TrafficComponent implements OnDestroy {
 
   @Input() trafficHeading: string;
+  @Input() trafficValue: number;
+
   private alive = true;
   trafficChartPoints: number[];
   type = this.translate.instant("common.month");
