@@ -49,6 +49,7 @@
     "repeat": "重复",
     "rate": "利率",
     "resend": "RESEND",
+    "report": "Report",
     "slideRightToVerify": "滑动验证",
     "select": "选择",
     "sendSMS": "发送短信",
@@ -293,7 +294,7 @@
       "silverAngel": "SILVER ANGEL",
       "supportTicket": "Support Ticket",
       "2FA": "2FA",
-      "ticketTitle":"Ticket title",
+      "ticketTitle":"Ticket Title",
       "ticketDescription": "Ticket Description",
       "timezone": "Timezone",
       "toastr":{

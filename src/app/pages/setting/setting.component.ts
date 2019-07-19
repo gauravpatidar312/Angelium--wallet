@@ -390,6 +390,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       );
       return;
     }
+
     this.ticketSubmitting = true;    
 
     const ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
@@ -398,7 +399,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       this.ticketSubmitting = false;
       this.isTicketResubmit = true;
       if (res.status) {
-        this.cancelTicketDialog(ref);
+        // this.cancelTicketDialog(ref);
         this.toastrService.success(
           this.translate.instant('pages.setting.toastr.ticketSuccessfullyCreated'),
           this.translate.instant('pages.setting.createTicket')

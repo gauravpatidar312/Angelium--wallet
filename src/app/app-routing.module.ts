@@ -5,6 +5,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 import {MaintenanceComponent} from './maintenance/maintenance.component';
+import {ReportBugComponent} from './report-bug/report-bug.component';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', canActivate: [AuthGuard] },
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'maintenance',
     component: MaintenanceComponent,
+  },
+  {
+    path: 'report',
+    component: ReportBugComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },

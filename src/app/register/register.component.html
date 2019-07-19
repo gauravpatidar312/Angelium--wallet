@@ -221,12 +221,19 @@
                 </span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
               </button>
+
+              
               <div class="form-group">
-                <section class="another-action" aria-label="Sign in">
-                  {{"pages.register.alreadyHaveAnAccount" | translate}}?
-                  <a routerLink="/login">{{"common.login" | translate}}</a>
+                <section class="another-action">
+                  <a routerLink="/report/">{{"common.report" | translate}}</a>
+                  <span aria-label="Sign in">
+                    {{"pages.register.alreadyHaveAnAccount" | translate}}?
+                    <a routerLink="/login">{{"common.login" | translate}}</a>
+                  </span>
                 </section>
               </div>
+              
+              
             </form>
           </div>
         </nb-auth-block>
