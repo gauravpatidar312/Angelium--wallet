@@ -202,7 +202,7 @@
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">{{"common.amount" | translate}}</label>
                         <input type="number" class="font-nunitoSans form-control" placeholder="{{'common.amount' | translate}}" step="0.000001"
-                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.0-6'}}">
+                               [disabled]="true" value="{{otcWallet?.toAmount | number : '1.0-20'}}">
                         <span class="transfer-amount" *ngIf="!fetchingAmount && false">${{ otcWallet?.toDollar | number : '1.0-2' }}</span>
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                       </div>

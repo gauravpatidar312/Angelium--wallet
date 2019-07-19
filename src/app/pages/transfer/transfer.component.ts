@@ -207,7 +207,7 @@ export class TransferComponent implements OnInit {
         this.httpService.get('asset/').subscribe((data?: any) => {
           const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
           this.anxWallet.wallet_amount = anxData.quantity || 0;
-          this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
+          this.fromOTCAmount = this.anxWallet.wallet_amount;
           this.setOTCAmount();
         });
       });
@@ -322,7 +322,7 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.transfer_amount = ShareDataService.toFixedDown(this.sendWallet.wallet_amount, 6);
+    this.transfer_amount = this.sendWallet.wallet_amount;
     this.setAmount(this.sendWallet.wallet_type);
   }
 
@@ -378,7 +378,7 @@ export class TransferComponent implements OnInit {
   }
 
   setAnxMaxValue() {
-    this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
+    this.fromOTCAmount = this.anxWallet.wallet_amount;
     this.setOTCAmount();
   }
 

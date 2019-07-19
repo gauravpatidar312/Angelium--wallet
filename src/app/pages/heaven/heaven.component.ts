@@ -290,7 +290,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.walletType = period;
       this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
       this.maxAmount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
-      this.heaven_amount = this.maxAmount;
+      this.heaven_amount = this.wallet.wallet_amount;
       this.setAmount(this.walletType);
     }
     this.periodChange.emit(period);
@@ -318,7 +318,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    this.heaven_amount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
+    this.heaven_amount = this.wallet.wallet_amount;
     this.setAmount(this.wallet.wallet_type);
   }
 
@@ -339,7 +339,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    if (Number(this.heaven_amount) > ShareDataService.toFixedDown(this.wallet.wallet_amount, 6)) {
+    if (Number(this.heaven_amount) > this.wallet.wallet_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.heaven'));
       return;
     }
@@ -399,7 +399,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (this.shareDataService.transferTitle) {
         this.walletType = this.shareDataService.transferTitle;
         this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
+        this.heaven_amount = this.wallet.wallet_amount;
         this.setAmount(this.walletType);
         this.shareDataService.transferTitle = null;
       }
