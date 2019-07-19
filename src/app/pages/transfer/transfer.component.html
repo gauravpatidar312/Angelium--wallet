@@ -21,11 +21,9 @@
                         <label for="BTC" class="text-link">
                           {{"common.from" | translate}}
                         </label>
-                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
-                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                            'btn-primary': currentTheme !== 'default',
-                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                        <div class="status-dd-week dropdown" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn btn-primary dropDown-padding"
+                                  [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
                             {{ sendType }}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
@@ -103,11 +101,9 @@
                         <label for="BTC" class="text-link">
                           {{"pages.transfer.to" | translate}}
                         </label>
-                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
-                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                            'btn-primary': currentTheme !== 'default',
-                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                        <div class="status-dd-week dropdown" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn btn-primary dropDown-padding"
+                                  [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
                             {{ receiveType}}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
@@ -150,11 +146,9 @@
                     <div class="col">
                       <div class="form-group">
                         <label for="ANX" class="text-link">{{"common.from" | translate}}</label>
-                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
-                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                            'btn-primary': currentTheme !== 'default',
-                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                        <div class="status-dd-week dropdown" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn btn-primary dropDown-padding"
+                                  [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
                             {{ fromType}}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
@@ -190,11 +184,9 @@
                         <label for="BTC" class="text-link">
                           {{"pages.transfer.to" | translate}}
                         </label>
-                        <div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-                          <button type="button" ngbDropdownToggle class="btn dropDown-padding"
-                                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                                            'btn-primary': currentTheme !== 'default',
-                                            'btn-sm': breakpoint.width <= breakpoints.is}">
+                        <div class="status-dd-week dropdown" ngbDropdown>
+                          <button type="button" ngbDropdownToggle class="btn btn-primary dropDown-padding"
+                                  [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
                             {{ toType }}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>

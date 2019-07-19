@@ -4,7 +4,7 @@ import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 import {Router} from '@angular/router';
 import {ShareDataService} from '../../../../services/share-data.service';
-import {environment} from '../../../../../environments/environment';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -13,16 +13,12 @@ import {environment} from '../../../../../environments/environment';
 })
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
-  labelText: string = '';
 
-  @Input() cardName: string = '';
-  @Input() cardId: number = 0;
   @Input() selectedCurrency: string = 'ANX';
   @Input() amount: number = 0;
   @Input() quantity: number = 0;
   @Input() livePrice: number = 0;
   @Input() percentage: number = 0;
-  @Input() infinity_name: string;
 
   isProduction: any = environment.production;
   intervalSubscription: Subscription;
@@ -55,7 +51,8 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
         this.tokenName = 'ANX';
         break;
       case 'HEAVEN':
-        this.tokenName = 'ANX';
+        this.quantity = null;
+        this.tokenName = null;
         break;
       case 'ANL':
         this.tokenName = 'ANL';
@@ -67,13 +64,6 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
         this.tokenName = this.selectedCurrency;
         break;
     }
-
-    if(this.cardName === 'Your Rank') {
-      this.labelText = '~LV.';
-    } else if(this.cardName === 'Downline Heaven') {
-      this.labelText = '$';
-    }
-
     this.getEarningCardData(this.selectedCurrency);
   }
 
@@ -82,8 +72,9 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
       this.shareDataService.transferTab = currency;
       this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['/pages/transfer']);
-    }
-    else if (currency === 'HEAVEN') {
+    } else if (currency === 'HEAVEN') {
+      if (selectedCurrency !== 'HEAVEN')
+        this.shareDataService.transferTitle = selectedCurrency;
       this.router.navigate(['pages/heaven']);
     }
   }

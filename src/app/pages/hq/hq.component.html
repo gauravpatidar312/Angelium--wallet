@@ -1,4 +1,4 @@
-<div *ngIf="!isProduction" class="row">
+<!--<div *ngIf="!isProduction" class="row">
   <div class="col-12 col-lg-6">
     <nb-card class="top-content">
       <div class="icon-container">
@@ -62,7 +62,7 @@
       </div>
     </nb-card>
   </div>
-</div>
+</div>-->
 <div class="row" >
   <div class="col-lg-12">
     <nb-card>
@@ -398,7 +398,7 @@
   </div>
 </div>
 
-<div *ngIf="!isProduction" class="row">
+<div class="row">
   <div class="col-sm-6 col-lg-3" id="curr1">
     <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
   </div>
@@ -413,18 +413,28 @@
   </div>
 </div>
 
-<div *ngIf="!isProduction" class="row report-row">
+<div class="row report-row">
   <div class="col-sm-6 col-lg-3" id="curr5">
-    <ngx-traffic [trafficHeading]="'pages.hq.totalUser'|translate"></ngx-traffic>
+    <!-- Total user -->
+    <ngx-traffic [trafficValue]="anxData.total_user" [trafficHeading]="'pages.hq.totalUser'|translate"></ngx-traffic>
   </div>
   <div class="col-sm-6 col-lg-3" id="curr6">
-    <ngx-traffic [trafficHeading]="'pages.hq.newUser'|translate"></ngx-traffic>
+    <!-- New User -->
+    <ngx-traffic  
+      [trafficValue]="anxData.today_registered_user"
+      [trafficHeading]="'pages.hq.newUser'|translate"></ngx-traffic>
   </div>
   <div class="col-sm-6 col-lg-3" id="curr7">
-    <ngx-traffic [trafficHeading]="'pages.hq.leavingUser'|translate"></ngx-traffic>
+    <!-- Leaving user -->
+    <ngx-traffic 
+      [trafficValue]="0"
+      [trafficHeading]="'pages.hq.leavingUser'|translate"></ngx-traffic>
   </div>
   <div class="col-sm-6 col-lg-3" id="curr8">
-    <ngx-traffic [trafficHeading]="'pages.hq.userGrowth'|translate"></ngx-traffic>
+    <!-- User Growth -->
+    <ngx-traffic 
+      [trafficValue]="0"
+      [trafficHeading]="'pages.hq.userGrowth'|translate"></ngx-traffic>
   </div>
 </div>
 

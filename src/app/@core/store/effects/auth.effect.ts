@@ -75,11 +75,10 @@ export class AuthEffects{
   UserInfo: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.USER_INFO),
     map((action: UserInfo) => action.payload),
-    map((user) => {
+    map((user?: any) => {
       user.user_language = user.user_language || {'id': 0, 'language': 'English', 'language_code': 'en'};
       this.storageService.saveToSession(user);
       this.sessionStorage.saveToLocalStorage('languageData', user.user_language);
-      console.log('this.redirectUrl', this.router.url);
       if (this.router.url !== '' && (this.router.url === '/login' || this.router.url.includes('register') || this.router.url.includes('/reset-password'))) {
           this.translate.use(user.user_language.language_code);
           this.router.navigate(['/pages/dashboard']);

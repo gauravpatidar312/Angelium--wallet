@@ -15,16 +15,9 @@ export class StatusCardComponent implements OnDestroy {
   @Input() fetchingAssetValue: boolean;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
-  currentTheme: string;
 
   constructor(private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
-
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(takeWhile(() => this.alive))

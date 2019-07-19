@@ -212,20 +212,22 @@ $shadow-green: #00977e;
 
     .title {
       font-family: nb-theme(font-bebas);
-      font-size: 1.7rem;
+      font-size: 1.9rem;
+      white-space: nowrap;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
 
     .status {
-      font-size: 28px;
+      font-size: 30px;
       font-family: nb-theme(font-bebas-bold);
       font-weight: nb-theme(font-weight-bold) !important;
       text-transform: uppercase;
+      white-space: nowrap;
       color: nb-theme(card-fg);
       text-align: right;
       margin-right: 5px;
-      margin-top: 0px;
+      margin-top: 2px;
     }
   }
 
@@ -289,7 +291,6 @@ $shadow-green: #00977e;
       }
       .title {
         font-size: 1.7rem;
-        line-height: 35px !important;
       }
       .status {
         font-size: 2.1rem !important;
@@ -328,14 +329,28 @@ $shadow-green: #00977e;
     .status-dd-week {
       width: 55% !important;
     }
-     /deep/ .title {
-      font-size: 1.6rem !important;
-    }
   }
 
   @media only screen and (min-device-width : 1024px) and (max-device-width : 1170px) {
+    nb-card .arrow-margin {
+      margin-top: -34px;
+    }
+
     /deep/ .title {
+      width: 200px;
+      margin-top: -8px;
+    }
+
+    /deep/ .status {
+      margin-top: 24px !important;
+      margin-right: -22px !important;
       width: 100%;
+    }
+  }
+
+  @media only screen and (min-device-width : 1200px) and (max-device-width : 1230px) {
+    /deep/ .status-padding {
+      padding-right: 0 !important;
     }
   }
 }

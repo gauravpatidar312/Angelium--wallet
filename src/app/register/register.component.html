@@ -5,14 +5,10 @@
         <nav class='navigation'>
           <a routerLink="/login" class='link' aria-label='Back'>
             <i class='icon nb-arrow-thin-left'></i></a>
-            <div class="status-dd-week dropdown"
-              [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-                 ngbDropdown>
+            <div class="status-dd-week dropdown" ngbDropdown>
               <button type="button" ngbDropdownToggle
-                class="btn b-language-size"
-                      [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                             'btn-primary': currentTheme !== 'default',
-                             'btn-sm': breakpoint.width <= breakpoints.is}">
+                class="btn b-language-size btn-primary"
+                      [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
                 {{ selectedLang }}
               </button>
               <ul class="dropdown-menu" ngbDropdownMenu>

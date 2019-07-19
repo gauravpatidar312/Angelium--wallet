@@ -3,19 +3,27 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 @include nb-install-component() {
-  nb-card-header {
-    padding: 0;
-    border: none;
-  }
+  nb-card {
+    height: 228px;
 
-  nb-card-body {
-    padding: 0;
-    position: relative;
-  }
+    &.r18 {
+      height: 456px;
+    }
 
-  nb-card-footer {
-    padding: 1rem 0;
-    border: none;
+    nb-card-header {
+      padding: 0;
+      border: none;
+    }
+
+    nb-card-body {
+      padding: 0;
+      position: relative;
+    }
+
+    nb-card-footer {
+      padding: 1rem 0;
+      border: none;
+    }
   }
 
   .cameras-card-header {
@@ -79,7 +87,6 @@
     position: relative;
     background-position: center;
     background-size: cover;
-    height: 50%;
     padding: 0;
 
     span {
@@ -88,9 +95,9 @@
       width: 100%;
       color: white;
       background: rgba(0, 0, 0, 0.4);
-      font-family: nb-theme(font-secondary);
+      font-family: nb-theme(font-bebas);
       font-weight: nb-theme(font-weight-bolder);
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       padding: 0.5rem 1rem;
     }
 
@@ -170,6 +177,26 @@
       }
       span {
         display: none;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    nb-card {
+      height: 684px;
+
+      &.r18 {
+        height: 1368px;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    nb-card {
+      height: 684px;
+
+      &.r18 {
+        height: 1368px;
       }
     }
   }

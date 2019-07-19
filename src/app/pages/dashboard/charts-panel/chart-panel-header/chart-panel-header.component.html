@@ -1,7 +1,9 @@
-<div class="chart-header">
-  <ngx-legend-chart [legendItems]="chartLegend"></ngx-legend-chart>
-
-  <div class="dropdown" ngbDropdown>
+<div class="chart-header row">
+  <div class="col-lg-8 col-xl-9 col-md-9 col-sm-8">
+    <ngx-legend-chart [legendItems]="chartLegend"></ngx-legend-chart>
+  </div>
+  <div class=" col-lg-4 col-xl-3 col-md-3 col-sm-3">
+     <div class="dropdown" ngbDropdown>
     <button type="button" ngbDropdownToggle class="btn btn-primary"
             [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
       {{ type }}
@@ -12,4 +14,5 @@
       </li>
     </ul>
   </div>
+</div>
 </div>

@@ -30,7 +30,6 @@ export class SettingComponent implements OnInit, OnDestroy {
   private alive = true;
   userData: any;
   imageChangedEvent: any = '';
-  currentTheme: string;
   croppedImage: any = '';
   croppedImageSize: any = '';
   userImageBase64: any;
@@ -41,13 +40,13 @@ export class SettingComponent implements OnInit, OnDestroy {
   newUsername: any = '';
   newTradePassword: any = '';
   confirmTradePassword: any = '';
-  verificationCode:any = ''
+  verificationCode: any = '';
   oldTradePassword: any = '';
   breakpoints: any;
-  selectedTicket:string = 'select';
+  selectedTicket: string = 'select';
   issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
-  ticketTitle:any = '';
-  ticketDescription:any = '';
+  ticketTitle: any = '';
+  ticketDescription: any = '';
   otpSubmitted: boolean = false;
   otpSubmitting: boolean = false;
   isResubmit: boolean = false;
@@ -66,12 +65,6 @@ export class SettingComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
-
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
 
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -125,11 +118,11 @@ export class SettingComponent implements OnInit, OnDestroy {
     });
   }
 
-  changeIssue(issue){
-    this.selectedTicket=issue;
+  changeIssue(issue) {
+    this.selectedTicket = issue;
   }
 
-  changeLang(lan: any){
+  changeLang(lan: any) {
     lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
     this.translate.use(lan.language_code);
@@ -145,7 +138,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   }
 
   changeTimezone(timezone: any) {
-    if(this.userData.default_timezone === timezone)
+    if (this.userData.default_timezone === timezone)
       return;
     this.userData.default_timezone = timezone;
     this.httpService.put({'default_timezone': timezone}, 'update-timezones/')
@@ -330,19 +323,18 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
     const endpoint = 'change-trade-password/';
-    var apiData;
-    if (!this.verificationCode){
+    let apiData;
+    if (!this.verificationCode) {
       apiData = {
-        'old_trade_password': this.oldTradePassword,  
+        'old_trade_password': this.oldTradePassword,
         'trade_password': this.newTradePassword
-      }
-    }
-    else{
-      apiData = {  
+      };
+    } else {
+      apiData = {
         'code': this.verificationCode,  'trade_password': this.newTradePassword
-      }
+      };
     }
-    
+
     this.httpService.put(apiData, endpoint)
       .subscribe((res?: any) => {
         if (res.status) {
@@ -382,14 +374,14 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.isResubmit = false;
   }
 
-  cancelTicketDialog(ref){
+  cancelTicketDialog(ref) {
     ref.close();
     this.ticketTitle = null;
     this.ticketDescription = null;
     this.selectedTicket = 'select';
   }
 
-  createTicketDialog(ref){
+  createTicketDialog(ref) {
     if (!(this.ticketTitle && this.ticketDescription && this.selectedTicket !== 'select' )) {
       this.ticketSubmitting = false;
       this.toastrService.danger(
@@ -398,12 +390,11 @@ export class SettingComponent implements OnInit, OnDestroy {
       );
       return;
     }
-    this.ticketSubmitting = true;
-    
-    let ticketData = { 'title': this.ticketTitle, 
-    'description': this.ticketDescription, 
-    'issue_type': this.selectedTicket };
-    console.log(ticketData);
+
+    this.ticketSubmitting = true;    
+
+    const ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
+
     this.httpService.post(ticketData, 'ticket/').subscribe((res?: any) => {
       this.ticketSubmitting = false;
       this.isTicketResubmit = true;
@@ -478,7 +469,8 @@ export class SettingComponent implements OnInit, OnDestroy {
             this.translate.instant('common.country'));
         }
       }, err => {
-        console.log(err);
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err),
+          this.translate.instant('common.country'));
       });
   }
 
@@ -542,7 +534,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   onSubmitOtp() {
     this.otpSubmitted = true;
     this.otpSubmitting = true;
-    let data = { 'phone': this.userData.phone };
+    const data = { 'phone': this.userData.phone };
     this.httpService.post(data, 'forgot-password/').subscribe((res) => {
       this.isResubmit = true;
       this.otpSubmitting = false;
