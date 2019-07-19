@@ -87,10 +87,13 @@
   }
 
   .another-action {
-    text-align: center;
+    margin-left: 0px!important;
+    margin-right:0px!important;
     margin: 1.8em;
   }
-
+  .another-action > a{ float: left; }
+  .another-action > span{ float: right; }
+  
   a.term-link {
     font-family: NunitoSans;
     color: #00f9a6 !important;
