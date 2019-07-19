@@ -55,7 +55,7 @@ export class ReportBugComponent implements OnInit {
     history.back();
   }
 
-  createTicketDialog(ref) {
+  createTicketDialog() {
     if (!(this.ticketTitle && this.ticketDescription && this.selectedTicket !== 'select')) {
       this.ticketSubmitting = false;
       this.toastrService.danger(
