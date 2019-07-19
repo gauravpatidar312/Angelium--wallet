@@ -1,7 +1,5 @@
-import {Component, Input, OnInit, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ViewCell} from 'ng2-smart-table';
-import {NbThemeService} from '@nebular/theme';
-import {takeWhile} from 'rxjs/operators';
 import {ShareDataService} from '../../services/share-data.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
@@ -11,11 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   template: `
     <div class="dropdown ghost-dropdown" ngbDropdown>
-      <button type="button" class="btn btn-sm" ngbDropdownToggle
-              style="background-color: transparent;"
-              [ngClass]="{
-    'btn-success': currentTheme === 'default',
-    'btn-primary': currentTheme !== 'default'}">
+      <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle style="background-color: transparent;">
         {{value}}
       </button>
       <ul class="dropdown-menu" ngbDropdownMenu>
@@ -28,23 +22,15 @@ import { TranslateService } from '@ngx-translate/core';
     </div>`
 })
 export class CustomRendererComponent implements ViewCell, OnInit{
-  private alive = true;
   @Input() value: any;    // This hold the cell value
   @Input() rowData: any;  // This holds the entire row object
   currentDate: any;
   releaseDate: any;
-  currentTheme: string;
 
-  constructor(private themeService: NbThemeService,
-              private httpService: HttpService,
+  constructor(private httpService: HttpService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private translate:TranslateService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -63,8 +49,7 @@ export class CustomRendererComponent implements ViewCell, OnInit{
       if (res.status) {
         this.toastrService.success(this.translate.instant('pages.heaven.toastr.releaseSettingSavedSuccessfully'),
         this.translate.instant('pages.heaven.heavenHistory'));
-      }
-      else {
+      } else {
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.heavenHistory'));
       }
     }, (err) => {

@@ -1,28 +1,26 @@
 <nb-card-header class="nb-front-card">
-  <div class="curre">{{ cardName }}</div>
-  <!--<div class="dropdown ghost-dropdown" ngbDropdown *ngIf="currencies[selectedCurrency]">
+  <div class="curre">{{ selectedCurrency }}</div>
+  <div class="dropdown ghost-dropdown" ngbDropdown *ngIf="currencies[selectedCurrency]">
     <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
-      &nbsp;
+      <!--{{currencyType[selectedCurrency]}}--> &nbsp;
     </button>
     <ul class="dropdown-menu" ngbDropdownMenu>
       <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
     </ul>
-  </div>-->
+  </div>
 </nb-card-header>
 
 <nb-card-body>
   <div class="chart-info">
     <div class="row">
-      <div class="col-6">
-        <div class="text-daily text-default">{{ quantity | number : '1.0-0' }}</div>
+      <div class="col-6 sm-padding">
+        <div class="text-daily text-default">{{ quantity | number: (selectedCurrency === 'ANX' ? '1.0-0' : '1.0-6') }}</div>
       </div>
       <div class="col-6" style="align-self: flex-end;">
-        <div class="title text-right"><span class="text-success">{{ labelText }}</span>{{ cardId === 3 ? '' : (amount | number : '1.0-2')}}
-      </div>
+        <div class="title text-right"><span class="text-success">$</span>{{amount | number: '1.0-2'}}</div>
       </div>
     </div>
-    <div *ngIf="cardId === 1">{{infinity_name}}</div>
-    <!-- <div class="value">{{tokenName}} = $ {{livePrice | number : '1.2-2' }}</div> -->
+    <div class="value" *ngIf="tokenName">{{tokenName}} = $ {{livePrice | number : '1.0-2' }}</div>
     <div class="delta" *ngIf="false"
          [class.up]="percentage >= 0"
          [class.down]="percentage < 0">

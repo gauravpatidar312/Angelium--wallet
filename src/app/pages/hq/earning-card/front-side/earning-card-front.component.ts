@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
 import { interval , Subscription } from 'rxjs';
 import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
@@ -10,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./earning-card-front.component.scss'],
   templateUrl: './earning-card-front.component.html',
 })
+
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
 
@@ -17,37 +17,22 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
 
   intervalSubscription: Subscription;
   currencies: string[] = ['Bitcoin', 'Tether', 'Ethereum'];
-  currentTheme: string;
   earningLiveUpdateCardData: LiveUpdateChart;
   liveUpdateChartData: { value: [string, number] }[];
 
-  constructor(private themeService: NbThemeService,
-              private earningService: EarningData,
-              private translate:TranslateService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
+  constructor(private earningService: EarningData,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
     this.getEarningCardData(this.selectedCurrency);
-    let element1 = document.getElementById('curr1').getElementsByClassName('curre');
+    const element1 = document.getElementById('curr1').getElementsByClassName('curre');
     element1[0].innerHTML = 'ANX';
-    let element2 = document.getElementById('curr2').getElementsByClassName('curre');
-    element2[0].innerHTML = this.translate.instant("pages.hq.averageANX");
-    let element3 = document.getElementById('curr3').getElementsByClassName('curre');
-    element3[0].innerHTML = this.translate.instant("pages.hq.averageHeaven");
+    const element2 = document.getElementById('curr2').getElementsByClassName('curre');
+    element2[0].innerHTML = this.translate.instant('pages.hq.averageANX');
+    const element3 = document.getElementById('curr3').getElementsByClassName('curre');
+    element3[0].innerHTML = this.translate.instant('pages.hq.averageHeaven');
   }
-  
-  // changeCurrency(currency) {
-  //   if (this.selectedCurrency !== currency) {
-  //     this.selectedCurrency = currency;
-
-  //     this.getEarningCardData(this.selectedCurrency);
-  //   }
-  // }
 
   private getEarningCardData(currency) {
     this.earningService.getEarningCardData(currency)

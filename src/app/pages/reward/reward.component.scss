@@ -182,6 +182,7 @@ table.table-bordered > tbody > tr > td {
 /deep/ .rewardtblcss {
   padding-right: 40px;
   position: relative;
+  white-space: nowrap;
 }
 /deep/ .rewardtblcss span {
   word-break: break-all;
@@ -385,4 +386,11 @@ table.table-bordered > tbody > tr > td {
 
 /deep/ ng2-smart-table-title > a {
   font-family: nb-theme(font-nunito) !important;
+}
+
+@include media-breakpoint-down(xs) {
+ /deep/ .rewardtblcss {
+   width: auto !important;
+   padding: 0 !important;
+ }
 }

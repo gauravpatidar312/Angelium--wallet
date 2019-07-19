@@ -13,13 +13,11 @@
       <div class="col-md-6 col-xs-12 mt-1" *ngIf="statusCard.fetchingValue">
         <div class="status text-white mt-0"><span><i class="fa fa-spinner spinner-color fa-spin"></i></span></div>
       </div>
-      <div class="col-md-6 col-xs-12" *ngIf="!statusCard.fetchingValue">
 
-        <!--<div class="status-dd-week dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
-          <button type="button" ngbDropdownToggle class="btn"
-                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
-                               'btn-primary': currentTheme !== 'default',
-                               'btn-sm': breakpoint.width <= breakpoints.is}">
+      <div class="col-md-6 status-padding col-xs-12" *ngIf="!statusCard.fetchingValue">
+        <!--<div class="status-dd-week dropdown" ngbDropdown>
+          <button type="button" ngbDropdownToggle class="btn btn-primary"
+                  [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
             {{ typeOfPeriod }}
           </button>
           <ul class="dropdown-menu" ngbDropdownMenu>

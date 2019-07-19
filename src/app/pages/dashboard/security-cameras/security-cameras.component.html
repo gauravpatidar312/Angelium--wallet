@@ -1,5 +1,5 @@
-<nb-card size="xlarge">
-  <nb-card-header>
+<nb-card size="medium" [ngClass]="{'r18': r18mode}">
+  <!-- <nb-card-header>
     <div class="cameras-card-header">
       <span class="cameras-card-title">Security Cameras</span>
       <span class="cameras-filter">
@@ -11,7 +11,7 @@
         </a>
       </span>
     </div>
-  </nb-card-header>
+  </nb-card-header> -->
   <nb-card-body>
     <div class="cameras single-view" *ngIf="isSingleView">
       <div class="camera" [style.background-image]="'url(' + selectedCamera.source + ')'">
@@ -19,13 +19,14 @@
       </div>
     </div>
     <div class="cameras" *ngIf="!isSingleView">
-      <div class="camera col-sm-6" *ngFor="let camera of cameras" [style.background-image]="'url(' + camera.source + ')'"
-           (click)="selectCamera(camera)">
+      <div class="camera col-lg-4" *ngFor="let camera of cameras"
+        [style.background-image]="'url(' + camera.source + ')'"
+        [hidden]="!camera.display">
         <span>{{ camera.title }}</span>
       </div>
     </div>
   </nb-card-body>
-  <nb-card-footer>
+  <!-- <nb-card-footer>
     <nb-actions size="medium" fullWidth>
       <nb-action>
         <i class="nb-pause-outline"></i><span>Pause</span>
@@ -40,5 +41,5 @@
         <i class="nb-gear"></i><span>Setup</span>
       </nb-action>
     </nb-actions>
-  </nb-card-footer>
+  </nb-card-footer> -->
 </nb-card>

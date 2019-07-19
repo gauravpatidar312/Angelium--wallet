@@ -1,9 +1,7 @@
 <nb-card-header>
   <div class="curre">{{ selectedCurrency }} </div>
   <div class="dropdown ghost-dropdown" ngbDropdown>
-    <button type="button" class="btn btn-sm" ngbDropdownToggle [ngClass]="{
-              'btn-success': currentTheme === 'default',
-              'btn-primary': currentTheme !== 'default'}">
+    <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
       {{"common.month"|translate}}
     </button>
     <ul ngbDropdownMenu class="dropdown-menu">

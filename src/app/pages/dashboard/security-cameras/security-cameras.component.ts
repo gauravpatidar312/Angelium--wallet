@@ -1,6 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Camera, SecurityCamerasData } from '../../../@core/data/security-cameras';
-import { takeWhile } from 'rxjs/operators';
+import {Component, OnDestroy} from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
+import {Camera, SecurityCamerasData} from '../../../@core/data/security-cameras';
+import {takeWhile, map} from 'rxjs/operators';
+import {SessionStorageService} from '../../../services/session-storage.service';
+import {IndexedDBStorageService} from '../../../services/indexeddb-storage.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ngx-security-cameras',
@@ -14,13 +18,25 @@ export class SecurityCamerasComponent implements OnDestroy {
   cameras: Camera[];
   selectedCamera: Camera;
   isSingleView = false;
-
-  constructor(private securityCamerasService: SecurityCamerasData) {
+  r18mode: boolean;
+  cloneCameras = [];
+  constructor(private securityCamerasService: SecurityCamerasData,
+              private sessionStorage: SessionStorageService,
+              public translate: TranslateService,
+              private storageService: IndexedDBStorageService) {
+    const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
+    this.r18mode = userSettingInfo.r18mode;
     this.securityCamerasService.getCamerasData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((cameras: Camera[]) => {
-        this.cameras = cameras;
-        this.selectedCamera = this.cameras[0];
+        this.cloneCameras = _.cloneDeep(cameras);
+        let cloneCameras = _.cloneDeep(cameras);
+        cloneCameras.map((cam) => {
+          cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
+          cam.title = this.translate.instant('pages.dashboard.securityCamera.' + cam.title.toLowerCase());
+        });
+        this.cameras = cloneCameras;
+        this.selectedCamera = cloneCameras[0];
       });
   }
 

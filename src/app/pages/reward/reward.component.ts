@@ -73,7 +73,6 @@ export class RewardComponent implements OnInit, AfterViewInit {
 
   private alive = true;
   isProduction: any = environment.production;
-  currentTheme: string;
   fetchingRewardValue: boolean = false;
   fetchingDownlineTree: boolean = false;
   fetchingDownlineHeaven: boolean = false;
@@ -246,32 +245,10 @@ export class RewardComponent implements OnInit, AfterViewInit {
     type: 'primary',
   };
 
-  commonStatusCardsSet: CardSettings[] = [
+  statusCards: CardSettings[] = [
     this.totalRewardCard,
     this.todayRewardCard,
   ];
-  statusCards1: string;
-
-  statusCardsByThemes: {
-    default: CardSettings[];
-    cosmic: CardSettings[];
-    corporate: CardSettings[];
-  } = {
-    default: this.commonStatusCardsSet,
-    cosmic: this.commonStatusCardsSet,
-    corporate: [
-      {
-        ...this.totalRewardCard,
-        type: 'primary',
-      },
-      {
-        ...this.todayRewardCard,
-        type: 'primary',
-      },
-    ],
-  };
-
-  downlineData: downlineElement[];
 
   userData: any;
   angel_count: any;
@@ -294,19 +271,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
       this.userData.infinity_name = 'PINK ANGEL';
     else
       this.userData.infinity_name = 'ANGEL';
-    /* const data = this.service.getData();
-     const NewOBj = [];
-     for (let x = 0; x < 10; x++) {
-     NewOBj.push(data[x]);
-     }
-     this.source.load(NewOBj);*/
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-        this.statusCards1 = this.statusCardsByThemes[theme.name];
-        console.log(this.statusCards1)
-      });
+
     this.getDownlineTree('total');
     this.getDownlinecount();
     this.getReward();

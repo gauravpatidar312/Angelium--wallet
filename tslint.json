@@ -3,13 +3,6 @@
     "node_modules/codelyzer"
   ],
   "rules": {
-    "trailing-comma": [
-      true,
-      {
-        "multiline": "always",
-        "singleline": "never"
-      }
-    ],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -30,7 +23,7 @@
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": [
-      true,
+      false,
       120
     ],
     "member-access": false,

@@ -1,8 +1,3 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import {APP_BASE_HREF, DecimalPipe} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,28 +20,26 @@ import {TermsConditionsComponent} from './register/terms-conditions/terms-condit
 import { ParticlesModule } from 'angular-particle';
 
 // services
-import {SessionStorageService} from "./services/session-storage.service";
-import {ToastrService} from "./services/toastr.service";
-import {AuthService} from "./_guards/auth.service";
-import {AuthGuard} from './_guards/auth.guard';
-import {ShareDataService} from "./services/share-data.service";
+import {SessionStorageService} from './services/session-storage.service';
+import {ToastrService} from './services/toastr.service';
+import {AuthService} from './_guards/auth.service';
+import {ShareDataService} from './services/share-data.service';
 import {MaintenanceComponent} from './maintenance/maintenance.component';
-import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
-}
-
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 
 import {reducers, AppState} from './@core/store/app.state';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './@core/store/effects/auth.effect';
 import {StoreModule, Store} from '@ngrx/store';
-import {IndexedDBStorageService} from "./services/indexeddb-storage.service";
+import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {UserInfo} from './@core/store/actions/user.action';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent],
