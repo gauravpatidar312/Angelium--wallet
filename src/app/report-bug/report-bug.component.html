@@ -1,0 +1,55 @@
+<nb-layout>
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-header>
+        <nav class='navigation pointer'>
+          <a class='link' aria-label='Back' (click)="back()">
+            <i class='icon nb-arrow-thin-left'></i></a>
+        </nav>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-auth-block>
+            <h1 id="title" class="title">{{"pages.setting.createTicket" | translate}}</h1>
+              <div class="form-group">
+                <label class="label" for="input-email">{{"pages.setting.ticketTitle" | translate}}:</label>
+                <input class="form-control" fullWidth name="ticketTitle" 
+                  type="type" [(ngModel)]="ticketTitle"
+                  placeholder="{{'pages.setting.ticketTitle' | translate}}" autofocus>
+              </div>
+              <div class="form-group">
+                <label class="label" for="ticket-description">{{"pages.setting.ticketDescription" | translate}}:</label>
+                <textarea class="form-control" rows="4" fullWidth name="ticketDescription" 
+                  type="type" [(ngModel)]="ticketDescription" 
+                  placeholder="{{'pages.setting.ticketDescription' | translate}}"></textarea>
+              </div>
+
+              <div class="form-group select-btn"
+                [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"  ngbDropdown
+                placement="bottom">
+                <button type="button" 
+                  ngbDropdownToggle 
+                  class="btn btn-primary dropdownbtn"
+                  [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                                'btn-primary': currentTheme !== 'default',
+                                'btn-sm': breakpoint.width <= breakpoints.is}">
+                  {{ selectedTicket }}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item {{selectedTicket === issue ? 'active' : ''}}" *ngFor="let issue of issueTypes"
+                    (click)="changeIssue(issue)">
+                    {{ issue }}
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="form-group">
+                <button nbButton [disabled]="ticketSubmitting" class="form-control pointer loginBtnCss" 
+                type="submit" fullWidth status="success" 
+                (click)="createTicketDialog()">{{"common.submit" | translate}}
+                </button>
+              </div>
+        </nb-auth-block>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>
