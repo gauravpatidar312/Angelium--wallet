@@ -22,6 +22,8 @@ declare let jQuery: any;
 })
 
 export class HQComponent implements OnInit {
+  anxData:any = {};
+  
   isProduction: boolean = environment.production;
   fetchingUsers: boolean = false;
   source: LocalDataSource = new LocalDataSource();
@@ -83,9 +85,18 @@ export class HQComponent implements OnInit {
               private shareDataService: ShareDataService,
               public translate: TranslateService) {
     this.getUsersList();
+    this.getAnxStatus();
   }
 
   ngOnInit() {
+  }
+
+  getAnxStatus(){
+    this.httpService.get(`anx_status/`).subscribe((res?: any) => {
+      if (res.status) {
+        this.anxData = res.data;
+      }
+    });
   }
 
   getUsersList() {
@@ -121,5 +132,12 @@ export class HQComponent implements OnInit {
       });
     }
     event.confirm.reject();
+  }
+
+  ngAfterViewInit() {
+    jQuery('ul.rewardLine li a').click(function (e) {
+      jQuery('ul.rewardLine li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
+    });
   }
 }

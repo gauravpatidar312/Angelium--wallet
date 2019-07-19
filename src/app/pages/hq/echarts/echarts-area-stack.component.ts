@@ -36,7 +36,8 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           data: ['Total Heaven', 'New Heaven', 'Releasable', 'Released', 'Gain Paid', 'Commission Paid','Profit'],
           textStyle: {
             color: echarts.textColor,
-            fontSize: 15
+            fontSize: 15,
+            fontStyle: 'NunitoSans'
           }
         },
         grid: {
@@ -61,6 +62,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
             axisLabel: {
               textStyle: {
                 color: echarts.textColor,
+                fontStyle: 'NunitoSans'
               },
             },
           },
@@ -81,6 +83,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
             axisLabel: {
               textStyle: {
                 color: echarts.textColor,
+                fontStyle: 'NunitoSans'
               },
             },
           },
@@ -140,6 +143,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
                 position: 'top',
                 textStyle: {
                   color: echarts.textColor,
+                  fontStyle: 'NunitoSans'
                 },
               },
             },

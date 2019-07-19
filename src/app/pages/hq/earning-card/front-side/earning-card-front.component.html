@@ -15,11 +15,13 @@
 <nb-card-body>
   <div class="chart-info">
     <div class="title"><span class="color-green">$</span> 300</div>
-    <div class="value" style="float:right;">{{ earningLiveUpdateCardData.dailyIncome | ngxNumberWithCommas }}</div>
-    <div class="delta" [class.up]="earningLiveUpdateCardData.delta.up"
+    <div class="value" style="float:right;">
+      {{ earningLiveUpdateCardData.dailyIncome | ngxNumberWithCommas }}
+    </div>
+    <!-- <div class="delta" [class.up]="earningLiveUpdateCardData.delta.up"
       [class.down]="!earningLiveUpdateCardData.delta.up">
       {{ earningLiveUpdateCardData.delta.value }}%
-    </div>
+    </div> -->
   </div>
   <ngx-earning-live-update-chart [liveUpdateChartData]="liveUpdateChartData">
   </ngx-earning-live-update-chart>

@@ -9,7 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./traffic.component.scss'],
   template: `
     <div class="chart-info">
-      <div class="title">300 <span class="title-price">%</span></div>
+      <div class="title">{{trafficValue}} 
+        <!--
+          <span class="title-price">%</span>
+        -->
+      </div>
     </div>
     <div echarts
          [options]="option"
@@ -23,6 +27,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
   private alive = true;
 
   @Input() points: number[];
+  @Input() trafficValue: number;
 
   type = this.translate.instant("common.month");
   types = [this.translate.instant("common.week"), this.translate.instant("common.month"), this.translate.instant("common.year")];
@@ -35,8 +40,8 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
     this.layoutService.onChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
-      )
-      .subscribe(() => this.resizeChart());
+      ).subscribe(() => this.resizeChart());
+
   }
 
   ngAfterViewInit() {
