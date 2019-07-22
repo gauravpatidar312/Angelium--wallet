@@ -26,6 +26,8 @@ import {EchartsAreaStackComponent} from '../common-components/echarts/echarts-ar
 import {StatusCardComponent} from './status-card/status-card.component';
 import {StatusCardFrontComponent} from './status-card/front-side/status-card-front.component';
 import {StatusCardBackComponent} from './status-card/back-side/status-card-back.component';
+import {TrafficComponent} from './traffic/traffic.component';
+import {TrafficChartComponent} from './traffic/traffic-chart.component';
 @NgModule({
   imports: [
     ThemeModule,
@@ -55,7 +57,9 @@ import {StatusCardBackComponent} from './status-card/back-side/status-card-back.
     CalendarComponent,
     DayCellComponent,
     StatusCardFrontComponent,
-    StatusCardBackComponent
+    StatusCardBackComponent,
+    TrafficComponent,
+    TrafficChartComponent,
   ],
   providers: [],
 })

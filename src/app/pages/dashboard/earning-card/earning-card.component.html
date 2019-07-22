@@ -1,8 +1,7 @@
 <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
   <nb-card-front>
     <nb-card size="xsmall">
-      <ngx-earning-card-front [selectedCurrency]="selectedCurrency" [amount]="amount"
-                              [quantity]="quantity" [percentage]="percentage"  [livePrice]="livePrice"></ngx-earning-card-front>
+      <ngx-earning-card-front [selectedCurrency]="selectedCurrency" [currency]="currency"></ngx-earning-card-front>
       <i class="nb-arrow-right" *ngIf="false" (click)="toggleFlipView()"></i>
     </nb-card>
   </nb-card-front>

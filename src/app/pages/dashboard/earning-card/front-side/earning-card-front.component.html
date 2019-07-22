@@ -5,7 +5,9 @@
       <!--{{currencyType[selectedCurrency]}}--> &nbsp;
     </button>
     <ul class="dropdown-menu" ngbDropdownMenu>
-      <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]" (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}</li>
+      <li class="dropdown-item" *ngFor="let currency of currencies[selectedCurrency]"
+          (click)="changeCurrency(currency, selectedCurrency)">{{ currency }}
+      </li>
     </ul>
   </div>
 </nb-card-header>
@@ -14,20 +16,24 @@
   <div class="chart-info">
     <div class="row">
       <div class="col-6 sm-padding">
-        <div class="text-daily text-default">{{ quantity | number: (selectedCurrency === 'ANX' ? '1.0-0' : '1.0-6') }}</div>
+        <div class="text-daily text-default">{{ currency.quantity | number: (selectedCurrency === 'ANX' ? '1.0-0' :
+          '1.0-6') }}
+        </div>
       </div>
       <div class="col-6" style="align-self: flex-end;">
-        <div class="title text-right"><span class="text-success">$</span>{{amount | number: '1.0-2'}}</div>
+        <div class="title text-right"><span class="text-success">$</span>{{currency.dollar_amount | number: '1.0-2'}}</div>
       </div>
     </div>
-    <div class="value" *ngIf="tokenName">{{tokenName}} = $ {{livePrice | number : '1.0-2' }}</div>
+    <div class="value" *ngIf="tokenName">{{tokenName}} = $ {{(currency.livePrice || 0) | number : '1.0-2' }}</div>
     <div class="delta" *ngIf="false"
-         [class.up]="percentage >= 0"
-         [class.down]="percentage < 0">
-      {{ percentage > 0 ? percentage : (-1 * percentage) }}%
+         [class.up]="currency.percentage >= 0"
+         [class.down]="currency.percentage < 0">
+      {{ currency.percentage > 0 ? currency.percentage : (-1 * currency.percentage) }}%
     </div>
   </div>
-  <ngx-earning-live-update-chart
-    [liveUpdateChartData]="liveUpdateChartData">
+  <ngx-earning-live-update-chart *ngIf="!(currency.order === 3 || currency.order === 4 || currency.order === 7)"
+                                 [liveUpdateChartData]="liveUpdateChartData">
   </ngx-earning-live-update-chart>
+  <ngx-traffic-chart *ngIf="currency.order === 3 || currency.order === 4 || currency.order === 7"
+                     [points]="trafficChartPoints"></ngx-traffic-chart>
 </nb-card-body>
