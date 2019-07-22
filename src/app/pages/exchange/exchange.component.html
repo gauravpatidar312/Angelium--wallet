@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-lg-3">
+    <ngx-pair></ngx-pair>
+    <ngx-trade></ngx-trade>
+  </div>
+  <div class="col-lg-6 nopadd">
+    <nb-card class="card-shadow">
+      <nb-card-header>Graph</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card class="card-shadow">
+      <nb-card-body>
+        <div class="row">
+          <ul id="main-navigation" class="nav navbar-pill mytradeLine">
+          <li class="pointer active" > 
+            <a data-toggle="pill">MY OPEN ORDERS</a>
+          </li>
+          <li class="pointer">
+            <a data-toggle="pill">MY TRADE HISTORY</a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Pair</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total Price</th>
+                <th>Fill %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>07.13 22:42</td>
+                <td>ANX / BTC</td>
+                <td><span class="text-success">BUY</span></td>
+                <td>0.8871 BTC</td>
+                <td>9,236,543 ANX</td>
+                <td>0.32444 BTC</td>
+                <td>37.4%</td>
+              </tr>
+               <tr>
+                <td>07.13 22:42</td>
+                <td>ANX / BTC</td>
+                <td><span class="text-danger">SELL</span></td>
+                <td>0.8871 BTC</td>
+                <td>9,236,543 ANX</td>
+                <td>0.32444 BTC</td>
+                <td>37.4%</td>
+              </tr>
+               <tr>
+                <td>07.13 22:42</td>
+                <td>ANX / BTC</td>
+                <td><span class="text-success">BUY</span></td>
+                <td>0.8871 BTC</td>
+                <td>9,236,543 ANX</td>
+                <td>0.32444 BTC</td>
+                <td>37.4%</td>
+              </tr>
+               <tr>
+                <td>07.13 22:42</td>
+                <td>ANX / BTC</td>
+                <td><span class="text-danger">SELL</span></td>
+                <td>0.8871 BTC</td>
+                <td>9,236,543 ANX</td>
+                <td>0.32444 BTC</td>
+                <td>37.4%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+  <div class="col-lg-3">
+    <ngx-board></ngx-board>
+    <ngx-trade-history></ngx-trade-history>
+  </div>
+</div>

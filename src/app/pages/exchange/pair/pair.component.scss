@@ -1,0 +1,38 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  nb-card-header {
+    font-family: nb-theme(font-bebas);
+    font-size: 1.75rem;
+  }
+  
+}
+.minheight{
+  min-height: 250px;
+}
+.headsection{
+  border-bottom: 0px;
+  padding-bottom: 0px!important;
+}
+.pairtable{width: 100%;}
+
+.pairtable th{
+  color:#b9e80c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+  font-family: nb-theme(font-bebas-book);
+}
+.pairtable td{
+  color:#ffffff;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 20px;
+}
+.pairtable td.changetext{
+  text-align: right;
+}
+.pairtable tbody tr:nth-of-type(even) {
+  background: #87a1b730;
+}
