@@ -63,5 +63,5 @@ export const MENU_ITEMS = [
     icon: 'nb-person',
     link: '/pages/hq',
     languageKey: 'hq',
-  },
+  }
 ];

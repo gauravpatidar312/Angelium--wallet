@@ -3,6 +3,21 @@
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
     <div class="logo" (click)="goToHome()"><img class="header-logo" src="/assets/images/header-logo.png"> <!--<span class="logo-text">ANGELIUM</span>--></div>
   </div>
+
+  <ul id="main-navigation" class="nav navbar-pill headerLine">
+    <li class="pointer" routerLink="/pages/wallet" routerLinkActive="active" 
+      [routerLinkActiveOptions]="{exact: true}"
+    ><a data-toggle="pill">
+       <i class="fa fa-wallet"></i> Wallet</a>
+    </li>
+    <li class="pointer" routerLink="/pages/exchange"  routerLinkActive="active" 
+      [routerLinkActiveOptions]="{exact: true}">
+      <a data-toggle="pill"><i class="iconsize nb-shuffle"></i> 
+        Exchange
+      </a>
+    </li>
+  </ul>
+
   <!-- <div class="col-md-12 col-lg-6">
   <nb-card-body class="select-group">
       <nb-select placeholder="Settings" outline status="primary">
