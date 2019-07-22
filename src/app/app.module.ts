@@ -35,11 +35,25 @@ import {UserInfo} from './@core/store/actions/user.action';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import { ReportBugComponent } from './report-bug/report-bug.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+export const firebaseConfig = {
+  apiKey: '<enter you api key here>',
+  authDomain: 'my-pwa-first-notification.firebaseapp.com',
+  databaseURL: 'https://my-pwa-first-notification.firebaseio.com',
+  projectId: 'my-pwa-first-notification',
+  storageBucket: 'my-pwa-first-notification.appspot.com',
+  messagingSenderId: '1019013830321'
+};
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent, ReportBugComponent],
@@ -59,6 +73,9 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
