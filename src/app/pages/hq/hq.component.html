@@ -397,46 +397,44 @@
     </nb-card>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-sm-6 col-lg-3" id="curr1">
-    <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
+<!--
+  <div class="row">
+    <div class="col-sm-6 col-lg-3" id="curr1">
+      <ngx-earning-card (selectedCurrency)="'abc'"></ngx-earning-card>
+    </div>
+    <div class="col-sm-6 col-lg-3" id="curr2">
+      <ngx-earning-card></ngx-earning-card>
+    </div>
+    <div class="col-sm-6 col-lg-3" id="curr3">
+      <ngx-earning-card></ngx-earning-card>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <ngx-traffic [trafficHeading]="'pages.hq.heavenGrowth'|translate"></ngx-traffic>
+    </div>
   </div>
-  <div class="col-sm-6 col-lg-3" id="curr2">
-    <ngx-earning-card></ngx-earning-card>
+-->
+<!--
+  <div class="row report-row">
+    <div class="col-sm-6 col-lg-3" id="curr5">
+      <ngx-traffic [trafficValue]="anxData.total_user" [trafficHeading]="'pages.hq.totalUser'|translate"></ngx-traffic>
+    </div>
+    <div class="col-sm-6 col-lg-3" id="curr6">
+      <ngx-traffic  
+        [trafficValue]="anxData.today_registered_user"
+        [trafficHeading]="'pages.hq.newUser'|translate"></ngx-traffic>
+    </div>
+    <div class="col-sm-6 col-lg-3" id="curr7">
+      <ngx-traffic 
+        [trafficValue]="0"
+        [trafficHeading]="'pages.hq.leavingUser'|translate"></ngx-traffic>
+    </div>
+    <div class="col-sm-6 col-lg-3" id="curr8">
+      <ngx-traffic 
+        [trafficValue]="0"
+        [trafficHeading]="'pages.hq.userGrowth'|translate"></ngx-traffic>
+    </div>
   </div>
-  <div class="col-sm-6 col-lg-3" id="curr3">
-    <ngx-earning-card></ngx-earning-card>
-  </div>
-  <div class="col-sm-6 col-lg-3">
-    <ngx-traffic [trafficHeading]="'pages.hq.heavenGrowth'|translate"></ngx-traffic>
-  </div>
-</div>
-
-<div class="row report-row">
-  <div class="col-sm-6 col-lg-3" id="curr5">
-    <!-- Total user -->
-    <ngx-traffic [trafficValue]="anxData.total_user" [trafficHeading]="'pages.hq.totalUser'|translate"></ngx-traffic>
-  </div>
-  <div class="col-sm-6 col-lg-3" id="curr6">
-    <!-- New User -->
-    <ngx-traffic  
-      [trafficValue]="anxData.today_registered_user"
-      [trafficHeading]="'pages.hq.newUser'|translate"></ngx-traffic>
-  </div>
-  <div class="col-sm-6 col-lg-3" id="curr7">
-    <!-- Leaving user -->
-    <ngx-traffic 
-      [trafficValue]="0"
-      [trafficHeading]="'pages.hq.leavingUser'|translate"></ngx-traffic>
-  </div>
-  <div class="col-sm-6 col-lg-3" id="curr8">
-    <!-- User Growth -->
-    <ngx-traffic 
-      [trafficValue]="0"
-      [trafficHeading]="'pages.hq.userGrowth'|translate"></ngx-traffic>
-  </div>
-</div>
+-->
 
 <div class="row">
   <div class="col-md-12">

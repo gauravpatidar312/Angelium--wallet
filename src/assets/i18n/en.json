@@ -49,6 +49,7 @@
     "repeat": "Repeat",
     "rate": "Rate",
     "resend": "RESEND",
+    "report":"Report",
     "slideRightToVerify": "Slide right to verify",
     "select": "Select",
     "sendSMS": "Send SMS",
@@ -293,7 +294,7 @@
       "silverAngel": "SILVER ANGEL",
       "supportTicket":"Support Ticket",
       "2FA": "2FA",
-      "ticketTitle": "Ticket title",
+      "ticketTitle": "Ticket Title",
       "ticketDescription":"Ticket Description",
       "timezone": "Timezone",
       "toastr":{

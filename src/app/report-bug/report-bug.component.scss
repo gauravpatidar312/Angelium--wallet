@@ -1,0 +1,78 @@
+@import '../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+:host {
+  $auth-layout-padding: 2.5rem;
+
+  nb-card {
+    margin: 0;
+    height: calc(100vh - 2 * #{$auth-layout-padding});
+  }
+
+  nb-card-body {
+    display: flex;
+    width: 100%;
+  }
+
+  nb-auth-block {
+    margin: auto;
+  }
+
+  @include media-breakpoint-down(sm) {
+    nb-card {
+      height: 100vh;
+    }
+  }
+
+  /deep/ {
+    nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding: $auth-layout-padding;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+      }
+    }
+  }
+
+  .navigation {
+    .link {
+      text-decoration: none;
+      color: #00f9a6;
+      .icon {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .title {
+    text-align: center;
+    font-family: NunitoSansRegular;
+  }
+
+  .loginBtnCss {
+    font-family: BebasNeueBold !important;
+    font-size: 18px;
+  }
+}
+/deep/ .dropdown-menu.show {
+  background-color: #3d3780 !important;
+  border: 2px solid #7659ff !important;
+}
+/deep/ .dropdown-menu.show .dropdown-item {
+  text-transform: capitalize;
+}
+
+.dropdownbtn{
+  text-transform: capitalize;
+}
+
+.form-group > .form-control {
+  font-family: NunitoSans;
+}
+.form-group {
+  font-family: NunitoSans;
+}
+/deep/ .select-btn {
+  margin-top: 1.40rem;
+  margin-bottom: 1.40rem;
+}
