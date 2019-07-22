@@ -344,6 +344,25 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
+    let validateEndpoint = '';
+    if (this.wallet.wallet_type === 'BTC')
+      validateEndpoint = 'validate_btc/';
+    else if (this.wallet.wallet_type === 'USDT')
+      validateEndpoint = 'validate_usdt/';
+    if (validateEndpoint) {
+      this.httpService.post({'amount': this.heaven_amount}, validateEndpoint).subscribe((res?: any) => {
+        if (res.status)
+          this.createHeavenApi();
+        else
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.heaven'));
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+      });
+    } else
+      this.createHeavenApi();
+  }
+
+  createHeavenApi() {
     const obj = {
       'heaven_amount': this.heaven_amount,
       'plan': this.selectedHeavenPlan,
