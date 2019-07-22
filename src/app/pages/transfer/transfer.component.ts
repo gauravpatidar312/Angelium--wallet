@@ -89,7 +89,7 @@ export class TransferComponent implements OnInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans action-width">${cell}</div>`;
         },
       },
       direction: {
@@ -226,7 +226,7 @@ export class TransferComponent implements OnInit {
           obj.direction = 'SEND';
         else
           obj.direction = 'OTC';
-        obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
+        obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD HH:mm');
         obj.quantity = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.quantity, 6), '1.0-6');
         obj.address = obj.address || '';
         return obj;
