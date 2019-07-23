@@ -146,6 +146,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"用户增长",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase":"用户数据库"
       }

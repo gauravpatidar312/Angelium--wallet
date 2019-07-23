@@ -146,8 +146,9 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
-        "userDatabase": "User Database",
-        "loadUserSession": "Load User Session"
+        "hq": "HQ",
+        "loadUserSession": "Load User Session",
+        "userDatabase": "User Database"
       }
     },
     "kyc":{
