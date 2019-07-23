@@ -6,47 +6,71 @@
     font-family: nb-theme(font-bebas);
     font-size: 1.75rem;
   }
-  nb-card-body {
-    overflow: visible;
-  }
+  nb-card-body { overflow: visible; }
 }
-.minheight{
-  min-height: 250px;
-}
-.headsection{
-  border-bottom: 0px;
-  padding-bottom: 0px!important;
-}
-.tradeLine{
-padding:0px!important;
-margin: 0px;
-}
-.tradeLine li{
-width:50%!important;
-}
-  #main-navigation li > a {
-    padding: 5px;
-    text-decoration: none;
-    font-family: nb-theme(font-nunito);
-    font-size: 1rem;
-    font-weight: 400;
-    display: inline-block;
-    color: #ffffff;
-    padding: 0px 15px;
-    border-bottom: 2px solid transparent;
-    font-weight: 500;
-    width: 100%;
-  }
 
-  #main-navigation li > a i{
-    padding-right: 8px;
-    font-size: 17px;
-    float: left;
-  }
- 
-  #main-navigation li.active > a { border-bottom: 2px solid #26df8b; }
-  #main-navigation li > a { border-bottom: 2px solid #b2beea; }
 
-  .navbar-pill {
-    justify-content: flex-end;
-  }
+.minheight{ min-height: 250px; }
+.tradeLine{ padding:0px!important; margin: 0px 0px 20px 0px; }
+.tradeLine li{ width:50%!important; }
+
+#main-navigation li > a {
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-block;
+  color: #ffffff;
+  line-height: 40px;
+  padding: 0px 15px;
+  border-bottom: 2px solid transparent;
+  font-weight: 400;
+  width: 100%;
+}
+
+#main-navigation li > a i{
+  padding-right: 8px;
+  font-size: 17px;
+  float: left;
+}
+
+#main-navigation li.active > a { border-bottom: 2px solid #2542db; color: #ffffff; }
+#main-navigation li > a { border-bottom: 2px solid #575bc7; color: #575bc7; }
+
+.navbar-pill { justify-content: flex-end; }
+
+.has-feedback {
+  position: relative;
+}
+.has-feedback .form-control {
+  padding-right: 42.5px;
+  border: 1px solid #575bc7;
+  border-radius: 0.3rem;
+  background-color: transparent;
+}
+.has-feedback label~.form-control-feedback {
+  top: 31px;
+}
+.nb-theme-cosmic .form-control-feedback {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+.form-control-feedback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  pointer-events: none;
+  color: #575bc7;
+}
+.label-right{ float: right; color: #2542db;}
+.label-max{ float: right; color: #575bc7; }
+.btn-primary{
+  background-color: #007bff!important;
+  margin-top: 30px;
+  border-radius: 0.3rem;
+  font-weight: bold;
+}

@@ -5,15 +5,15 @@
   </div>
 
   <ul id="main-navigation" class="nav navbar-pill headerLine">
-    <li class="pointer" routerLink="/pages/wallet" routerLinkActive="active" 
+    <li class="pointer" routerLinkActive="active" 
       [routerLinkActiveOptions]="{exact: true}"
-    ><a data-toggle="pill">
+    ><a data-toggle="pill" routerLink="/pages/wallet">
        <i class="fa fa-wallet"></i> Wallet</a>
     </li>
-    <li class="pointer" routerLink="/pages/exchange"  routerLinkActive="active" 
+    <li class="pointer" routerLinkActive="active" 
       [routerLinkActiveOptions]="{exact: true}">
-      <a data-toggle="pill"><i class="iconsize nb-shuffle"></i> 
-        Exchange
+      <a data-toggle="pill" routerLink="/pages/exchange">
+        <i class="iconsize nb-shuffle"></i> Exchange
       </a>
     </li>
   </ul>

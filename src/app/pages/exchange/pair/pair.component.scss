@@ -11,18 +11,14 @@
 .minheight{
   min-height: 250px;
 }
-.headsection{
-  border-bottom: 0px;
-  padding-bottom: 0px!important;
-}
+
 .pairtable{width: 100%;}
 
 .pairtable th{
-  color:#b9e80c;
+  color:#b8f710;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 1.2rem;
-  font-family: nb-theme(font-bebas-book);
+  font-size: 1.0rem;
 }
 .pairtable td{
   color:#ffffff;
@@ -32,6 +28,7 @@
 }
 .pairtable td.changetext{
   text-align: right;
+  color:#00ff57;
 }
 .pairtable tbody tr:nth-of-type(even) {
   background: #87a1b730;

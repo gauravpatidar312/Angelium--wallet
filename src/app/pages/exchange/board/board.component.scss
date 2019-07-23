@@ -17,45 +17,46 @@
   border-bottom: 0px;
   padding-bottom: 0px!important;
 }
-.textgreen{
-  color:green!important;
-}
-.textyellow{
-  color:yellow!important;
+
+.total-text{
+  color: #cee80b;
 }
 .secondaryhead{
   display:block!important;
-  font-size: 12px;
+  font-size: 15px;
+  color: #575bc7;
+  font-weight: 400;
 }
-.pairtable{width: 100%;}
+.boardtable{width: 100%;}
 
-.pairtable th{
+.boardtable th{
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 1.2rem;
-  font-family: nb-theme(font-bebas-book);
-  border-bottom: 1px solid #f5f5f5;
+  font-size: 1.0rem;
+  border-bottom: 1px solid #575bc7;
 }
+
 .totalfield{
-    border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
-    font-size: 1.2rem !important;
+  border-bottom: 1px solid #575bc7;
+  border-top: 1px solid #575bc7;
+  font-size: 1.2rem !important;
   font-family: nb-theme(font-bebas-book);
-    padding: 5px 0px 0px 0px!important;
-    font-weight: 600;
+  padding: 5px 0px 0px 0px!important;
+  font-weight: 600;
 }
-.pairtable th:first-child, .pairtable td:first-child{
+
+.boardtable th:first-child, .boardtable td:first-child{
   padding-left:10px!important;
 }
-.pairtable th span.total{
+.boardtable th span.total{
   color:#b9e80c;
 }
-.pairtable td{
+.boardtable td{
   color:#ffffff;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
 }
-.pairtable td.changetext{
+.boardtable td.changetext{
   text-align: right;
 }
