@@ -23,6 +23,10 @@ declare const jQuery: any;
 })
 export class TransferComponent implements OnInit {
   private alive = true;
+  minerFee : number = 0;
+  minMinutes : number = 0;
+  maxMinutes : number = 0;
+  fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   sendType: string = 'SELECT';
   receiveType: string =  'SELECT';
@@ -177,6 +181,20 @@ export class TransferComponent implements OnInit {
     // }
   }
 
+  setMinerFee(fee: number) {
+    this.minerFee = fee;
+    if (this.minerFee === 10) {
+      this.minMinutes = 20;
+      this.maxMinutes = 50;
+    } else if (this.minerFee === 20) {
+      this.minMinutes = 10;
+      this.maxMinutes = 20;
+    } else if (this.minerFee === 30) {
+      this.minMinutes = 5;
+      this.maxMinutes = 10;
+    }
+  }
+
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
@@ -246,11 +264,11 @@ export class TransferComponent implements OnInit {
   }
 
   openTradeDialog(dialog: TemplateRef<any>) {
-    /*if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+    if (this.sendWallet.wallet_type === 'USDT' && !this.minerFee) {
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
       this.translate.instant('pages.transfer.send'));
       return;
-    }*/
+    }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
@@ -426,11 +444,11 @@ export class TransferComponent implements OnInit {
   }
 
   onSendTransfer() {
-    /*if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+    if (this.sendWallet.wallet_type === 'USDT' && !this.minerFee) {
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
       this.translate.instant('pages.transfer.send'));
       return;
-    }*/
+    }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
@@ -444,17 +462,14 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    // Disabled this check for now
-    // if (this.sendWallet.wallet_type === 'BTC' && this.sendWallet.walletDollar < 100) {
-    //   this.toastrService.danger('Minimum amount for BTC transfer is $100 for beta version.', 'OTC');
-    //   return;
-    // }
-
-    const transferObj = {
+    const transferObj: any = {
       'user_wallet': this.sendWallet.id,
       'destination_address': this.destination_address,
       'transfer_amount': Number(this.transfer_amount),
     };
+    if (this.sendWallet.wallet_type === 'USDT') {
+      transferObj.miner_fee = this.minerFee;
+    }
 
     this.waitFlag = true;
     this.formSubmitting = true;

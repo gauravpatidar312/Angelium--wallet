@@ -108,17 +108,28 @@
               <label style="color: #00ff00">
                 {{"common.amount" | translate}}
               </label>
-              <input type="number" [required]="true" [(ngModel)]="heaven_amount"
+              <div class="input-group">
+                <div class="status-dd-week input-group-prepend input-group-btn dropdown" *ngIf="walletType === 'USDT'" ngbDropdown>
+                  <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet">
+                    <label *ngIf="!minerFee">{{"common.fee" | translate}}</label>
+                    <label *ngIf="minerFee">${{minerFee}}</label>
+                  </button>
+                  <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li class="dropdown-item" *ngFor="let fee of fees"
+                      (click)="setMinerFee(fee)">${{fee}}</li>
+                  </ul>
+                </div>
+                <input type="number" [required]="true" [(ngModel)]="heaven_amount"
                 placeholder="{{'pages.heaven.enterAmount' | translate}}" step="0.000001"
                 [disabled]="!wallet?.wallet_type" class="form-control input-padding font-avenir"
                 (keyup)="setAmount(wallet?.wallet_type)" />
-              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
-              <span class="transfer-amount"
-                *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
+                <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                <span class="transfer-amount" *ngIf="!fetchingAmount">${{ wallet?.walletDollar | number : '1.0-2' }}</span>
+              </div>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
-                title="Click to use whole amount">
-                {{maxAmount + ' ' + (wallet?.wallet_type) + ' / max' }}
-              </span>
+              title="Click to use whole amount">
+              {{maxAmount + ' ' + (wallet?.wallet_type) + ' / max' }}
+              </span>          
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
@@ -133,6 +144,7 @@
               </button>
             </div>
           </div>
+          <span class="miner-fee" *ngIf="walletType === 'USDT' && minerFee">{{"pages.heaven.minerFeeMessage" | translate:{"min": minMinutes, "max": maxMinutes} }}</span>
         </div>
       </nb-card-body>
     </nb-card>
