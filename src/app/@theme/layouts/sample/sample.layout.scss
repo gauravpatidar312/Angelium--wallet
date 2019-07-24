@@ -7,6 +7,11 @@
     flex: 0.15 !important;
   }
 
+  nb-layout-footer {
+    margin-left: -50px;
+    z-index: 1001;
+  }
+
   nb-sidebar.settings-sidebar {
     $sidebar-width: 19rem;
 
@@ -177,6 +182,12 @@
 
     .main-btn {
       display: none;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    nb-layout-footer {
+      margin-left: 0;
     }
   }
 }
