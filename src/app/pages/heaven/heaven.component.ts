@@ -34,6 +34,10 @@ interface CardSettings {
 export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
+  minerFee : number = 0;
+  minMinutes : number = 0;
+  maxMinutes : number = 0;
+  fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   user: any;
   heavenDrop: any;
@@ -315,6 +319,20 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  setMinerFee(fee: number) {
+    this.minerFee = fee;
+    if (this.minerFee === 10) {
+      this.minMinutes = 20;
+      this.maxMinutes = 50;
+    } else if (this.minerFee === 20) {
+      this.minMinutes = 10;
+      this.maxMinutes = 20;
+    } else if (this.minerFee === 30) {
+      this.minMinutes = 5;
+      this.maxMinutes = 10;
+    }
+  }
+
   setMaxValue() {
     if (!this.wallet || !this.wallet.wallet_amount) {
       return;
@@ -325,11 +343,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCreateHeaven() {
-    /*if (this.isProduction && this.wallet.wallet_type === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+    if (this.wallet.wallet_type === 'USDT' && !this.minerFee) {
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
         this.translate.instant('common.heaven'));
       return;
-    }*/
+    }
 
     if (!this.heaven_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
@@ -365,11 +383,15 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   createHeavenApi() {
-    const obj = {
+    const obj: any = {
       'heaven_amount': this.heaven_amount,
       'plan': this.selectedHeavenPlan,
       'user_wallet': this.wallet.id,
     };
+    if (this.wallet.wallet_type === 'USDT') {
+      obj.miner_fee = this.minerFee;
+    }
+
     this.formSubmitting = true;
     this.httpService.post(obj, 'create-heaven/').subscribe((res?: any) => {
       if (res.status) {

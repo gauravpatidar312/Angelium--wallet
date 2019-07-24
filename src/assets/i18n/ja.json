@@ -24,6 +24,7 @@
     "email": "Eメール",
     "enter": "Enter",
     "emailMustBeValid": "Email must be a valid email address",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"Fetching Amount",
     "firstName": "名",
@@ -110,6 +111,7 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日のヘブンドロップ",
       "heavenId":"Heaven ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"No data found",
       "plan": "Plan",
       "release": "Release",
@@ -124,6 +126,7 @@
         "cancelText": "Cancel",
         "confirmText": "Yes, Sure!",
         "convertReleaseText": "Are you sure to release the heaven now?",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
         "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
@@ -150,6 +153,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase": "User Database"
       }

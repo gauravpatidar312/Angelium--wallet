@@ -24,6 +24,7 @@
     "email": "电子邮箱",
     "enter": "输入",
     "emailMustBeValid": "电子邮件必须是有效的电子邮件地址",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"获取金额",
     "firstName": "名",
@@ -110,6 +111,7 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日天堂之滴",
       "heavenId":"天堂 ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"没有找到数据",
       "plan": "计划",
       "release": "Release",
@@ -124,6 +126,7 @@
         "cancelText": "Cancel",
         "confirmText": "Yes, Sure!",
         "convertReleaseText": "Are you sure to release the heaven now?",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
         "releaseSettingSavedSuccessfully":"释放设置已成功保存！",
@@ -150,6 +153,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"用户增长",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase":"用户数据库"
       }
