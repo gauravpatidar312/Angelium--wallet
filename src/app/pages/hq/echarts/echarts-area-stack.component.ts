@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 
 @Component({
   selector: 'ngx-echarts-area-stack',
+  styleUrls: ['./echarts-area-stack.component.scss'],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
