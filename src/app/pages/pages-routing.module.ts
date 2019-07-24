@@ -55,14 +55,13 @@ const routes: Routes = [{
       component: CompanyComponent,
     },
     {
-      path: 'db',
+      path: 'admin',
       component: DbComponent,
     },
     {
       path: 'merge',
       component: MergeComponent,
     },
-    
     {
       path: '**',
       redirectTo: 'dashboard',
