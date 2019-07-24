@@ -223,6 +223,12 @@
 
   .total-amount {
     position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        margin-bottom: 0;
+      }
+    }
     span {
       position: absolute;
       &.transfer-amount {
@@ -332,6 +338,12 @@
 
   .myWallets nb-card-body {
     overflow: unset !important;
+    .miner-fee {
+      width: 100%;
+      display: block;
+      text-align: right;
+      padding-right: 15px;
+    }
   }
 
   .font-size-button {

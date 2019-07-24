@@ -39,16 +39,27 @@
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                      <div class="form-group total-amount">
+                      <div class="form-group total-amount font-avenir">
                         <label for="Amount" class="text-link">
                           {{"common.amount" | translate}}
                         </label>
-                        <input type="number"  name="transfer_amount" class="form-control font-nunitoSans"
-                            placeholder="{{ 'common.amount' | translate }}" step="0.000001"
-                               [(ngModel)]="transfer_amount" [disabled]="!sendWallet?.wallet_type"  (keyup)="setAmount(sendWallet?.wallet_type)"
-                               value="{{0 | number : '1.0-6' }}">
-                        <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
-                        <span class="transfer-amount" *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.0-2' }}</span>
+                        <div class="input-group">
+                          <div class="status-dd-week input-group-prepend input-group-btn dropdown" *ngIf="sendType === 'USDT'" ngbDropdown>
+                            <button type="button" class="btn btn-primary dropDown-padding font-avenir b-color-wallet" ngbDropdownToggle>
+                              <label *ngIf="!minerFee">{{ "common.fee" | translate}}</label>
+                              <label class="white-font" *ngIf="minerFee">${{minerFee}}</label>
+                            </button>
+                            <ul class="dropdown-menu" ngbDropdownMenu>
+                              <li class="dropdown-item" (click)="setMinerFee(fee)" *ngFor="let fee of fees">${{fee}}</li>
+                            </ul>
+                          </div>
+                          <input type="number"  name="transfer_amount" class="form-control font-nunitoSans"
+                          placeholder="{{ 'common.amount' | translate }}" step="0.000001"
+                          [(ngModel)]="transfer_amount" [disabled]="!sendWallet?.wallet_type"  (keyup)="setAmount(sendWallet?.wallet_type)"
+                          value="{{0 | number : '1.0-6' }}">
+                          <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                          <span class="transfer-amount" *ngIf="!fetchingAmount">${{ sendWallet?.walletDollar | number : '1.0-2' }}</span>
+                        </div>
                         <span class="available-amount" (click)="setSendMaxValue()" *ngIf="sendWallet?.wallet_type"
                               title="Click to use whole amount">
                           {{(sendWallet?.wallet_amount | number : '1.0-6') + ' ' + (sendWallet?.wallet_type) + ' / max' }}
@@ -84,6 +95,7 @@
                       </div>
                       <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
                     </div>
+                    <span class="miner-fee" *ngIf="sendType === 'USDT' && minerFee">{{"pages.heaven.minerFeeMessage" | translate:{"min": minMinutes, "max": maxMinutes} }}</span>
                   </div>
                 </div>
               </div>
