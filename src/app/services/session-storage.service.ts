@@ -60,8 +60,4 @@ export class SessionStorageService {
       return false;
     }
   };
-
-  removeFromLocalStorage = function(key): any {
-    localStorage.removeItem(key);
-  };
 }

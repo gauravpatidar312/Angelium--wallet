@@ -38,7 +38,6 @@ export class AuthService {
       this.httpService.post(data, 'jwt/api-token-auth/').subscribe((res?: any) => {
         if (res.token) {
           this.sessionStorage.saveToSession('loggedIn', true);
-          this.sessionStorage.saveToLocalStorage('rememberMe', data.rememberMe);
           observer.next(res);
           observer.complete();
         } else {
@@ -58,7 +57,6 @@ export class AuthService {
 
   logout() {
     this.shareDataService.changeData('');
-    this.sessionStorage.removeFromLocalStorage('rememberMe');
     this.storageService.resetStorage();
     this.store.dispatch(new ResetState({}));
   }

@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   formSubmitting: boolean = false;
   isVerifiedCaptcha = false;
-  rememberMe: boolean = false;
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
@@ -56,7 +55,6 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      rememberMe: [false],
     });
   }
 
