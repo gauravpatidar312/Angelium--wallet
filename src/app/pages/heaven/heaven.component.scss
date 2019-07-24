@@ -312,6 +312,20 @@
     font-family: nb-theme(font-bebas-bold);
   }
 
+  /deep/ .btn-success {
+    color: #ffffff !important;
+    background-color: #24de8a !important;
+    border-color: transparent !important;
+  }
+  /deep/ .btn.btn-success {
+    background-color: #24de8a !important;
+    cursor: pointer;
+  }
+
+  /deep/ .release-btn {
+    width: 100%;
+    cursor: pointer;
+  }
   .table_bg:hover {
     background-image: linear-gradient(to right, #00D9BB, #00DA79);
     border: 2px solid #03d87c;
@@ -575,3 +589,16 @@
     white-space: nowrap;
   }
 }
+/deep/ .swal2-title {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/deep/ .swal2-styled.swal2-confirm {
+  background-color: #dc3545 !important;
+}
+
+/deep/ .swal2-styled.swal2-cancel {
+  background-color: #00d977 !important;
+}
+
