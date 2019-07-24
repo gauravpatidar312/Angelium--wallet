@@ -112,6 +112,7 @@
       "heavenId":"天堂 ID",
       "noDataFound":"没有找到数据",
       "plan": "计划",
+      "release": "Release",
       "received": "已接收",
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
@@ -120,6 +121,9 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "cancelText": "Cancel",
+        "confirmText": "Yes, Sure!",
+        "convertReleaseText": "Are you sure to release the heaven now?",
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
         "releaseSettingSavedSuccessfully":"释放设置已成功保存！",

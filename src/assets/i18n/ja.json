@@ -112,6 +112,7 @@
       "heavenId":"Heaven ID",
       "noDataFound":"No data found",
       "plan": "Plan",
+      "release": "Release",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
@@ -120,6 +121,9 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "cancelText": "Cancel",
+        "confirmText": "Yes, Sure!",
+        "convertReleaseText": "Are you sure to release the heaven now?",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
         "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
