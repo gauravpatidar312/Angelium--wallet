@@ -46,11 +46,26 @@
       color: #00bb66;
     }
   }
+
+  .miner-fee {
+    width: 100%;
+    display: block;
+    text-align: right;
+    padding-right: 15px;
+  }
+
   .trans-receive {
     justify-content: flex-end;
   }
   .total-amount {
     position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        color: white;
+        margin-bottom: 0;
+      }
+    }
     span {
       position: absolute;
       &.transfer-amount {
