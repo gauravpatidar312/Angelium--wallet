@@ -1,0 +1,37 @@
+
+<div class="row" >
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="dropdown dropdown-graph ghost-dropdown" ngbDropdown>
+              <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
+                {{graph_type}} &nbsp;
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item pointer" *ngFor="let graph_type of graph_types" (click)="changeGraph(graph_type)">{{ graph_type }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 hqColumn">
+            <ul id="main-navigation" class="nav navbar-pill rewardLine">
+              <li class="pointer active margin-li" (click)="changeType('today')"><a data-toggle="pill" >{{'common.today' | translate | titlecase}}</a></li>
+              <li class="pointer margin-li" (click)="changeType('week')"><a data-toggle="pill" >{{'common.week' | translate}}</a></li>
+              <li class="pointer margin-li" (click)="changeType('month')"><a data-toggle="pill" >{{'common.month' | translate}}</a></li>
+              <li class="pointer" (click)="changeType('total')"><a data-toggle="pill" >{{'common.total' | translate}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </nb-card-header>
+
+      <nb-card-body class="tab-content">
+        <div [hidden]="!fetchingGraphData" class="fetchingGraphData"><span><i class="fa fa-spinner fa-spin"></i></span></div>
+        <div id="today" *ngIf="!fetchingGraphData" class="tab-pane active">
+          <ngx-echarts-area-stack *ngIf="graph_type !== 'ANX Reward'" [graphData]="graphData"></ngx-echarts-area-stack>
+          <ngx-chart-line *ngIf="graph_type === 'ANX Reward'" [graphData]="graphData"></ngx-chart-line>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

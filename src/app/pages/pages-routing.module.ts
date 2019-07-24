@@ -10,6 +10,8 @@ import {HeavenComponent} from './heaven/heaven.component';
 import {MergeComponent} from './merge/merge.component';
 import {RewardComponent} from './reward/reward.component';
 import {HQComponent} from './hq/hq.component';
+import { CompanyComponent } from './company/company.component';
+import { DbComponent } from './db/db.component';
 
 const routes: Routes = [{
   path: '',
@@ -49,9 +51,18 @@ const routes: Routes = [{
       component: HQComponent,
     },
     {
+      path: 'company',
+      component: CompanyComponent,
+    },
+    {
+      path: 'db',
+      component: DbComponent,
+    },
+    {
       path: 'merge',
       component: MergeComponent,
     },
+    
     {
       path: '**',
       redirectTo: 'dashboard',
