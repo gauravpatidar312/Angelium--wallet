@@ -50,7 +50,7 @@
     "repeat": "재입력",
     "rate": "이율",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "밀어서 인증하기",
     "select": "선택",
     "sendSMS": "인증번호 전송",
@@ -149,8 +149,9 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
-        "userDatabase": "User Database",
-        "loadUserSession": "Load User Session"
+        "hq": "HQ",
+        "loadUserSession": "Load User Session",
+        "userDatabase": "User Database"
       }
     },
     "kyc":{

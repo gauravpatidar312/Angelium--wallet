@@ -50,7 +50,7 @@
     "repeat": "重复",
     "rate": "利率",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "滑动验证",
     "select": "选择",
     "sendSMS": "发送短信",
@@ -149,6 +149,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"用户增长",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase":"用户数据库"
       }

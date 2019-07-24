@@ -69,31 +69,37 @@
       <nb-card-header>
         <div class="row">
           <div class="col-md-6">
-            <div class="navbar-header">
-              Area Stack
+            <div class="dropdown dropdown-graph ghost-dropdown" ngbDropdown>
+              <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
+                {{graph_type}} &nbsp;
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item pointer" *ngFor="let graph_type of graph_types" (click)="changeGraph(graph_type)">{{ graph_type }}</li>
+              </ul>
             </div>
           </div>
           <div class="col-md-6 hqColumn">
             <ul id="main-navigation" class="nav navbar-pill rewardLine">
-              <li class="pointer active" style="margin-right:15px;"><a data-toggle="pill" >{{'common.today' | translate | titlecase}}</a></li>
-              <li class="pointer" style="margin-right:15px;"><a data-toggle="pill" >{{'common.week' | translate}}</a></li>
-              <li class="pointer" style="margin-right:15px;"><a data-toggle="pill" >{{'common.month' | translate}}</a></li>
-              <li class="pointer" ><a data-toggle="pill" >{{'common.total' | translate}}</a></li>
+              <li class="pointer active margin-li" (click)="changeType('today')"><a data-toggle="pill" >{{'common.today' | translate | titlecase}}</a></li>
+              <li class="pointer margin-li" (click)="changeType('week')"><a data-toggle="pill" >{{'common.week' | translate}}</a></li>
+              <li class="pointer margin-li" (click)="changeType('month')"><a data-toggle="pill" >{{'common.month' | translate}}</a></li>
+              <li class="pointer" (click)="changeType('total')"><a data-toggle="pill" >{{'common.total' | translate}}</a></li>
             </ul>
           </div>
         </div>
       </nb-card-header>
 
       <nb-card-body class="tab-content">
-        <div id="today" class="tab-pane active">
-          <ngx-echarts-area-stack></ngx-echarts-area-stack>
+        <div [hidden]="!fetchingGraphData" class="fetchingGraphData"><span><i class="fa fa-spinner fa-spin"></i></span></div>
+        <div id="today" *ngIf="!fetchingGraphData" class="tab-pane active">
+          <ngx-echarts-area-stack [graphData]="graphData"></ngx-echarts-area-stack>
         </div>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
 
-<div *ngIf="!isProduction" class="row">
+<div *ngIf="false" class="row">
   <div class="col-md-12">
     <nb-card>
       <nb-tabset fullWidth>
@@ -419,17 +425,17 @@
       <ngx-traffic [trafficValue]="anxData.total_user" [trafficHeading]="'pages.hq.totalUser'|translate"></ngx-traffic>
     </div>
     <div class="col-sm-6 col-lg-3" id="curr6">
-      <ngx-traffic  
+      <ngx-traffic
         [trafficValue]="anxData.today_registered_user"
         [trafficHeading]="'pages.hq.newUser'|translate"></ngx-traffic>
     </div>
     <div class="col-sm-6 col-lg-3" id="curr7">
-      <ngx-traffic 
+      <ngx-traffic
         [trafficValue]="0"
         [trafficHeading]="'pages.hq.leavingUser'|translate"></ngx-traffic>
     </div>
     <div class="col-sm-6 col-lg-3" id="curr8">
-      <ngx-traffic 
+      <ngx-traffic
         [trafficValue]="0"
         [trafficHeading]="'pages.hq.userGrowth'|translate"></ngx-traffic>
     </div>

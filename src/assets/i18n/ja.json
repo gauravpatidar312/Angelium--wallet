@@ -50,7 +50,7 @@
     "repeat": "Repeat",
     "rate": "利率",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "Slide right to verify",
     "select": "選択",
     "sendSMS": "Send SMS",
@@ -149,6 +149,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase": "User Database"
       }

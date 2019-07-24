@@ -18,8 +18,7 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
 })
 export class OrdersChartComponent implements AfterViewInit, OnDestroy, OnChanges {
 
-  @Input()
-  ordersChartData: OrdersChart;
+  @Input() ordersChartData: OrdersChart;
 
   private alive = true;
 

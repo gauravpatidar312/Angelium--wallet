@@ -462,6 +462,31 @@ export class TransferComponent implements OnInit {
       return;
     }
 
+    // Disabled this check for now
+    // if (this.sendWallet.wallet_type === 'BTC' && this.sendWallet.walletDollar < 100) {
+    //   this.toastrService.danger('Minimum amount for BTC transfer is $100 for beta version.', 'OTC');
+    //   return;
+    // }
+
+    let validateEndpoint = '';
+    if (this.sendWallet.wallet_type === 'BTC')
+      validateEndpoint = 'validate_btc/';
+    else if (this.sendWallet.wallet_type === 'USDT')
+      validateEndpoint = 'validate_usdt/';
+    if (validateEndpoint) {
+      this.httpService.post({'amount': Number(this.transfer_amount)}, validateEndpoint).subscribe((res?: any) => {
+        if (res.status)
+          this.sendTransferApi();
+        else
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.transfer.send'));
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.send'));
+      });
+    } else
+      this.sendTransferApi();
+  }
+
+  sendTransferApi() {
     const transferObj: any = {
       'user_wallet': this.sendWallet.id,
       'destination_address': this.destination_address,
@@ -476,14 +501,14 @@ export class TransferComponent implements OnInit {
     this.httpService.post(transferObj, 'transfer/').subscribe((res?: any) => {
       if (res.status) {
         // 15 seconds wait time for next transaction.
-        let currentTime = new Date();
+        const currentTime = new Date();
         currentTime.setSeconds(currentTime.getSeconds() + 15);
         // this.sessionStorageService.saveToSession('waitTime', currentTime);
-        this.storageService.saveToAngeliumSession({'waitTime': currentTime });
+        this.storageService.saveToAngeliumSession({'waitTime': currentTime});
         setTimeout(() => {
           this.waitFlag = false;
           // this.sessionStorageService.deleteFromSession('waitTime');
-          this.storageService.saveToAngeliumSession({'waitTime': null });
+          this.storageService.saveToAngeliumSession({'waitTime': null});
         }, 15000);
 
         this.formSubmitting = false;
