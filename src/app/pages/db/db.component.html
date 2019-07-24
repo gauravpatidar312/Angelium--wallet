@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+       {{"pages.hq.toastr.userDatabase"|translate}}
+      </nb-card-header>
+      <nb-card-body id="card-user-database">
+        <div [hidden]="!fetchingUsers"><span class="user-database-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+        <ng2-smart-table [settings]="settings" [source]="source" *ngIf="!fetchingUsers" (deleteConfirm)="onLoadConfirm($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
