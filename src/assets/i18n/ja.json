@@ -24,6 +24,7 @@
     "email": "Eメール",
     "enter": "Enter",
     "emailMustBeValid": "Email must be a valid email address",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"Fetching Amount",
     "firstName": "名",
@@ -110,6 +111,7 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日のヘブンドロップ",
       "heavenId":"Heaven ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"No data found",
       "plan": "Plan",
       "received": "Received",
@@ -120,6 +122,7 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
         "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
