@@ -123,8 +123,6 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
-        "cancelText": "Cancel",
-        "confirmText": "Yes, Sure!",
         "convertReleaseText": "Are you sure to release the heaven now?",
         "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"请输入金额",
@@ -360,5 +358,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }
