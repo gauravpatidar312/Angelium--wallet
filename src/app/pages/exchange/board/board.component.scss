@@ -60,3 +60,10 @@
 .boardtable td.changetext{
   text-align: right;
 }
+
+.available-items{
+  max-height:350px!important;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto!important;
+}

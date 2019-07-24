@@ -8,7 +8,6 @@
   }
   nb-card-body {
     overflow: visible;
-    margin-bottom: 47px;
   }
 }
 .trade-histary-table{width: 100%;}
@@ -30,4 +29,11 @@
 }
 .trade-histary-table tbody tr:nth-of-type(even) {
   background: #87a1b730;
+}
+.available-items{
+  min-height:200px!important;
+  max-height:200px!important;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto!important;
 }

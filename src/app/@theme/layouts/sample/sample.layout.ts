@@ -32,9 +32,29 @@ import {StateService} from '../../../@core/utils';
         <nb-menu [items]="subMenu"></nb-menu>
       </nb-layout-column>
 
-      <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
+      <nb-layout-footer fixed class="footer-fix">
+        <ngx-footer></ngx-footer> 
       </nb-layout-footer>
+
+      <nb-layout-footer class="bottom-menu">
+        <ul id="main-navigation" class="nav navbar-pill headerLine">
+          
+          <li class="pointer" routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}"
+          ><a data-toggle="pill" routerLink="/pages/wallet">
+             <i class="fa fa-wallet"></i> Wallet</a>
+          </li>
+
+          <li class="pointer" routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            <a data-toggle="pill" routerLink="/pages/exchange">
+              <i class="iconsize nb-shuffle"></i> Exchange
+            </a>
+          </li>
+        </ul>
+      </nb-layout-footer>
+      
+
     </nb-layout>
   `,
 })

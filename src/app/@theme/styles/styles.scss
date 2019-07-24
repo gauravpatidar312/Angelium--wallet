@@ -25,10 +25,69 @@
   @include ngx-pace-theme();
 };
 
+@include media-breakpoint-down(xl) {
+  .bottom-menu nav { display: none!important; }
+}
+@include media-breakpoint-down(lg) {
+  .bottom-menu nav { display: block!important; }
+  .bottom-menu { position: fixed!important; bottom: 0px!important; 
+    width: 100%!important;  
+  }
+  .bottom-menu nav li{ width: 50%!important;}
+  .bottom-menu nav li a{ display: block!important; text-align: center;}
+  .mobpaddfix{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .footer-fix{ padding-bottom: 75px; }
+}
+@include media-breakpoint-down(xs) {
+  .bottom-menu nav {  display: block!important; }
+  .bottom-menu { position: fixed!important; bottom: 0px!important;
+    width: 100%!important;  
+  }
+  .bottom-menu nav li{ width: 50%!important;}
+  .bottom-menu nav li a{ display: block!important; text-align: center;}
+  .mobpaddfix{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .footer-fix{ padding-bottom: 75px; }
+}
+
+@include media-breakpoint-down(sm) {
+  .bottom-menu nav { display: block!important; }
+  .bottom-menu { position: fixed!important; bottom: 0px!important;
+    width: 100%!important;  
+  }
+  .bottom-menu nav li{ width: 50%!important;}
+  .bottom-menu nav li a{ display: block!important; text-align: center;}
+  .mobpaddfix{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .footer-fix{ padding-bottom: 75px; }
+}
+@include media-breakpoint-down(md) {
+  .bottom-menu nav { display: block!important; }
+  .bottom-menu { position: fixed!important; bottom: 0px!important;
+    width: 100%!important;  
+  }
+  .bottom-menu nav li{ width: 50%!important;}
+  .bottom-menu nav li a{ display: block!important; text-align: center;}
+  .mobpaddfix{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .footer-fix{ padding-bottom: 75px; }
+}
+
+.bottom-menu nav{ background: #3d3780!important; padding: 2px!important; }
+.bottom-menu nav ul{ padding-left: 0rem!important; }
 .pointer { cursor: pointer !important;}
 .nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{ word-break: break-all;}
 .nb-theme-cosmic .tablemarginfix{ margin:0px!important; }
-.nopadd{ padding: 0px!important; }
+.nopadd{ padding: 0px; }
  .scrollable-container {
   -webkit-overflow-scrolling: touch;
    opacity: 0.85;

@@ -6,7 +6,7 @@
     font-family: nb-theme(font-bebas);
     font-size: 1.75rem;
   }
-  nb-card-body { overflow: visible; }
+  nb-card-body { overflow: visible; padding-top: 12px;}
 }
 
 
@@ -57,7 +57,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 0;
   display: block;
   width: 34px;
   height: 34px;
@@ -70,7 +70,7 @@
 .label-max{ float: right; color: #575bc7; }
 .btn-primary{
   background-color: #007bff!important;
-  margin-top: 30px;
+  margin-top: 25px;
   border-radius: 0.3rem;
   font-weight: bold;
 }
