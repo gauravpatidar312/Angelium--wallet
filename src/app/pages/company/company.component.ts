@@ -29,8 +29,15 @@ export class CompanyComponent implements OnInit, AfterViewInit {
   isProduction: boolean = environment.production;
   fetchingUsers: boolean = false;
   source: LocalDataSource = new LocalDataSource();
-  graph_types: any = ['Total Users', 'New Users', 'Heaven Users', 'Heaven Volume', 'ANX Reward', 'Heaven Release'];
-  graph_type: string = 'Total Users';
+  graph_types: any = ['New Users', 'Total Users', 'Heaven Users', 'Heaven Volume', 'Heaven Released', 'Upcoming Release', 'ANX Reward'];
+  graph_type: string = 'New Users';
+  blankData = {
+    'data': [],
+    'series': [{
+      'name': '',
+      'data': [0, 0, 0, 0, 0],
+      'xAxis': []
+    }]};
   settings = {
     actions: {
       add: false,
@@ -90,7 +97,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
               public translate: TranslateService) {
     this.getUsersList();
     this.getAnxStatus();
-    this.getTotalUsers('today');
+    this.getNewUsers('today');
   }
 
   ngOnInit() {
@@ -104,8 +111,9 @@ export class CompanyComponent implements OnInit, AfterViewInit {
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
+      this.graphData = this.blankData;
       this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
     });
   }
 
@@ -117,8 +125,9 @@ export class CompanyComponent implements OnInit, AfterViewInit {
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
+      this.graphData = this.blankData;
       this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
     });
   }
 
@@ -130,8 +139,9 @@ export class CompanyComponent implements OnInit, AfterViewInit {
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
+      this.graphData = this.blankData;
       this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
     });
   }
 
@@ -143,21 +153,37 @@ export class CompanyComponent implements OnInit, AfterViewInit {
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
+      this.graphData = this.blankData;
       this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
     });
   }
 
-  getHeavenRelease(value) {
+  getHeavenReleased(value) {
     jQuery('.fetchingGraphData').height(jQuery('#today').height());
     this.fetchingGraphData = true;
-    this.httpService.get(`heaven-release-graph/?graph_type=${value}`).subscribe((res?: any) => {
+    this.httpService.get(`heaven-released-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
+      this.graphData = this.blankData;
       this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
+    });
+  }
+
+  getUpcomingRelease(value) {
+    jQuery('.fetchingGraphData').height(jQuery('#today').height());
+    this.fetchingGraphData = true;
+    this.httpService.get(`new-heaven-release-graph/?graph_type=${value}`).subscribe((res?: any) => {
+      this.graphData = res.data;
+      this.userValue = value;
+      this.fetchingGraphData = false;
+    }, (err) => {
+      this.graphData = this.blankData;
+      this.fetchingGraphData = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
     });
   }
 
@@ -169,8 +195,9 @@ export class CompanyComponent implements OnInit, AfterViewInit {
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
+      this.graphData = this.blankData;
       this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.company'));
     });
   }
 
@@ -230,12 +257,15 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     } else if (graphType === 'Heaven Volume') {
       this.graph_type = 'Heaven Volume';
       this.getHeavenVolume(this.userValue);
+    } else if (graphType === 'Heaven Released') {
+      this.graph_type = 'Heaven Released';
+      this.getHeavenReleased(this.userValue);
+    } else if (graphType === 'Upcoming Release') {
+      this.graph_type = 'Upcoming Release';
+      this.getUpcomingRelease(this.userValue);
     } else if (graphType === 'ANX Reward') {
       this.graph_type = 'ANX Reward';
       this.getANXReward(this.userValue);
-    } else if (graphType === 'Heaven Release') {
-      this.graph_type = 'Heaven Release';
-      this.getHeavenRelease(this.userValue);
     }
   }
 
@@ -248,10 +278,12 @@ export class CompanyComponent implements OnInit, AfterViewInit {
       this.getHeavenUser(value);
     else if (this.graph_type === 'Heaven Volume')
       this.getHeavenVolume(value);
+    else if (this.graph_type === 'Heaven Released')
+      this.getHeavenReleased(value);
+    else if (this.graph_type === 'Upcoming Release')
+      this.getUpcomingRelease(value);
     else if (this.graph_type === 'ANX Reward')
       this.getANXReward(value);
-    else if (this.graph_type === 'Heaven Release')
-      this.getHeavenRelease(value);
   }
 
   ngAfterViewInit() {
