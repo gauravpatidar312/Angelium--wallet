@@ -17,7 +17,7 @@ import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
 import {ChartLineComponent} from './charts/chart-line.component';
-import { DbComponent } from './db.component';
+import { AdminComponent } from './admin.component';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { DbComponent } from './db.component';
     EarningLiveUpdateChartComponent,
     EchartsAreaStackComponent,
     TrafficComponent,
-    DbComponent,
+    AdminComponent,
     TrafficChartComponent,
     ECommerceLegendChartComponent,
     ChartLineComponent
@@ -50,4 +50,4 @@ import { DbComponent } from './db.component';
   ]
 })
 
-export class DbModule { }
+export class AdminModule { }

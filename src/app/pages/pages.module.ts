@@ -23,7 +23,7 @@ import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
 import { CompanyModule } from './company/company.module';
-import { DbModule } from './db/db.module';
+import { AdminModule } from './admin/admin.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -39,7 +39,7 @@ const PAGES_COMPONENTS = [
     ImageCropperModule,
     ThemeModule,
     HQModule,
-    DbModule,
+    AdminModule,
     CompanyModule,
     HeavenModule,
     NbDialogModule.forChild(),

@@ -31,7 +31,7 @@ export const MENU_ITEMS = [
     data: [AppConstants.ROLES.ADMIN],
     title: 'Admin',
     icon: 'nb-lightbulb',
-    link: '/pages/db',
+    link: '/pages/admin',
     languageKey: 'admin',
   },
   // // {
