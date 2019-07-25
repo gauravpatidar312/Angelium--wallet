@@ -1,4 +1,4 @@
-import {AppConstants} from '../app.constants';
+import { AppConstants } from '../app.constants';
 
 export const MENU_ITEMS = [
   {
@@ -21,31 +21,6 @@ export const MENU_ITEMS = [
     languageKey: 'reward',
   },
   {
-    data: [AppConstants.ROLES.ADMIN, AppConstants.ROLES.COMPANY],
-    title: 'Reward',
-    icon: 'nb-lightbulb',
-    languageKey: 'reward',
-    children: [
-      {
-        title: 'Investor',
-        link: '/pages/reward',
-        languageKey: 'investor',
-      },
-      {
-        data: [AppConstants.ROLES.COMPANY],
-        title: 'Company',
-        link: '/pages/reward',
-        languageKey: 'company',
-      },
-      {
-        data: [AppConstants.ROLES.ADMIN],
-        title: 'Admin',
-        link: '/pages/reward',
-        languageKey: 'admin',
-      },
-    ],
-  },
-  {
     title: 'Transfer',
     icon: 'nb-shuffle',
     link: '/pages/transfer',
@@ -58,10 +33,17 @@ export const MENU_ITEMS = [
     languageKey: 'setting',
   },
   {
-    data: [AppConstants.ROLES.ADMIN],
-    title: 'HQ',
+    data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
+    title: 'Company',
     icon: 'nb-person',
-    link: '/pages/hq',
-    languageKey: 'hq',
-  }
+    link: '/pages/company',
+    languageKey: 'company',
+  },
+  {
+    data: [AppConstants.ROLES.ADMIN],
+    title: 'Admin',
+    icon: 'nb-person',
+    link: '/pages/admin',
+    languageKey: 'admin',
+  },
 ];

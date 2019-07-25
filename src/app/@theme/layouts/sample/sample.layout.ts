@@ -6,6 +6,8 @@ import {
 
 import {StateService} from '../../../@core/utils';
 
+declare let jQuery: any;
+
 // TODO: move layouts into the framework
 @Component({
   selector: 'ngx-sample-layout',
@@ -32,8 +34,8 @@ import {StateService} from '../../../@core/utils';
         <nb-menu [items]="subMenu"></nb-menu>
       </nb-layout-column>
 
-      <nb-layout-footer fixed class="footer-fix">
-        <ngx-footer></ngx-footer> 
+      <nb-layout-footer fixed>
+        <ngx-footer></ngx-footer>
       </nb-layout-footer>
 
       <nb-layout-footer class="bottom-menu">
@@ -133,6 +135,31 @@ export class SampleLayoutComponent implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+      
+  }
+
+  ngAfterViewInit(){
+    var value = 0;
+    jQuery('.bottom-menu').fadeOut();
+    jQuery.fn.scrollEnd = function(callback, timeout) { 
+      jQuery('.scrollable-container').scroll(function(){
+        var $this = jQuery(this);
+        var scrollPos = $this.scrollTop();
+        if (scrollPos > value) { // scroll down  
+            jQuery('.bottom-menu').fadeIn('slow');
+        }
+        value = scrollPos;
+        if ($this.data('scrollTimeout')) {
+          clearTimeout($this.data('scrollTimeout'));
+
+        }
+        $this.data('scrollTimeout', setTimeout(callback, timeout));
+      });
+    };
+
+    jQuery(window).scrollEnd(function(){
+      jQuery('.bottom-menu').fadeOut();
+    }, 4000);
   }
 
   ngOnDestroy() {

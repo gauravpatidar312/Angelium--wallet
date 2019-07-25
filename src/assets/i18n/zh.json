@@ -24,6 +24,7 @@
     "email": "电子邮箱",
     "enter": "输入",
     "emailMustBeValid": "电子邮件必须是有效的电子邮件地址",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"获取金额",
     "firstName": "名",
@@ -49,7 +50,7 @@
     "repeat": "重复",
     "rate": "利率",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "滑动验证",
     "select": "选择",
     "sendSMS": "发送短信",
@@ -110,8 +111,10 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日天堂之滴",
       "heavenId":"天堂 ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"没有找到数据",
       "plan": "计划",
+      "release": "Release",
       "received": "已接收",
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
@@ -120,9 +123,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
-        "releaseSettingSavedSuccessfully":"释放设置已成功保存！",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"交易完成！",
         "youDontHaveSufficientBalance":"您余额不足。"
       }
@@ -146,6 +152,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"用户增长",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase":"用户数据库"
       }
@@ -352,5 +359,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }

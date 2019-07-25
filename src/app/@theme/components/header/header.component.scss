@@ -26,9 +26,7 @@
     position: relative;
     padding-left: 10px;
   }
-.headerLine{
-  line-height: 65px;
-}
+  .headerLine{ line-height: 65px; }
   /deep/ .delta {
     position: absolute;
     display: inline-block;
@@ -323,6 +321,7 @@
 #main-navigation li.active > a {
   border-bottom: 2px solid #26df8b;
 }
+
 .navbar-header {
   font-family: nb-theme(font-nunito);
   font-weight: 500;

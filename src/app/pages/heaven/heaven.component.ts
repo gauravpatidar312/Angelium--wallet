@@ -34,10 +34,15 @@ interface CardSettings {
 export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
+  minerFee : number = 0;
+  minMinutes : number = 0;
+  maxMinutes : number = 0;
+  fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   user: any;
   heavenDrop: any;
   totalHeaven: any;
+  heavenHistoryType: string = 'total';
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
@@ -104,13 +109,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.breakpoints = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(([oldValue, newValue]) => {
-        this.breakpoint = newValue;
-      });
-
     this.getWallets();
     this.getHeavenDrop();
     this.getHeavenGraph();
@@ -119,8 +117,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getHeavenHistory('total');
     this.getHeavenDropHistory();
   }
-  selectedHeavenPlan = '';
 
+  selectedHeavenPlan = '';
 
   settings = {
     // add: {
@@ -212,6 +210,14 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         renderComponent: CustomRendererComponent,
         filter: false,
         class: 'heavenhistory-cell text-center td-width',
+        onComponentInitFunction: (instance) => {
+          instance.onReleaseFailed.subscribe((row) => {
+            this.source.update(row, row); // to refresh the row to re-render UI.
+          });
+          instance.onReleaseSaved.subscribe((row) => {
+            this.source.remove(row); // to remove row on release successfully.
+          });
+        }
       },
     },
   };
@@ -313,6 +319,20 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  setMinerFee(fee: number) {
+    this.minerFee = fee;
+    if (this.minerFee === 10) {
+      this.minMinutes = 20;
+      this.maxMinutes = 50;
+    } else if (this.minerFee === 20) {
+      this.minMinutes = 10;
+      this.maxMinutes = 20;
+    } else if (this.minerFee === 30) {
+      this.minMinutes = 5;
+      this.maxMinutes = 10;
+    }
+  }
+
   setMaxValue() {
     if (!this.wallet || !this.wallet.wallet_amount) {
       return;
@@ -323,11 +343,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCreateHeaven() {
-    /*if (this.isProduction && this.wallet.wallet_type === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+    if (this.wallet.wallet_type === 'USDT' && !this.minerFee) {
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
         this.translate.instant('common.heaven'));
       return;
-    }*/
+    }
 
     if (!this.heaven_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.pleaseEnterAmount'), this.translate.instant('common.heaven'));
@@ -344,11 +364,34 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    const obj = {
+    let validateEndpoint = '';
+    if (this.wallet.wallet_type === 'BTC')
+      validateEndpoint = 'validate_btc/';
+    else if (this.wallet.wallet_type === 'USDT')
+      validateEndpoint = 'validate_usdt/';
+    if (validateEndpoint) {
+      this.httpService.post({'amount': this.heaven_amount}, validateEndpoint).subscribe((res?: any) => {
+        if (res.status)
+          this.createHeavenApi();
+        else
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.heaven'));
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+      });
+    } else
+      this.createHeavenApi();
+  }
+
+  createHeavenApi() {
+    const obj: any = {
       'heaven_amount': this.heaven_amount,
       'plan': this.selectedHeavenPlan,
       'user_wallet': this.wallet.id,
     };
+    if (this.wallet.wallet_type === 'USDT') {
+      obj.miner_fee = this.minerFee;
+    }
+
     this.formSubmitting = true;
     this.httpService.post(obj, 'create-heaven/').subscribe((res?: any) => {
       if (res.status) {
@@ -424,9 +467,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenHistory(value) {
+    this.heavenHistoryType = value;
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
-    this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
+    this.httpService.get(`heaven-history/?filter_type=${this.heavenHistoryType}`).subscribe((res?: any) => {
       const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');

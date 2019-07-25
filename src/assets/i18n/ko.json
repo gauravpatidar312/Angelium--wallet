@@ -24,6 +24,7 @@
     "email": "이메일",
     "enter": "입력",
     "emailMustBeValid": "Email must be a valid email address",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"Fetching Amount",
     "firstName": "명",
@@ -49,7 +50,7 @@
     "repeat": "재입력",
     "rate": "이율",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "밀어서 인증하기",
     "select": "선택",
     "sendSMS": "인증번호 전송",
@@ -110,8 +111,10 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "오늘의 헤븐 드롭",
       "heavenId":"Heaven ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"No data found",
       "plan": "계획",
+      "release": "Release",
       "received": "Received",
       "releaseDate": "완료일",
       "releaseSetting": "완료 설정",
@@ -120,9 +123,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
-        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"Transaction successfully completed!",
         "youDontHaveSufficientBalance":"You don't have sufficient balance."
       }
@@ -146,8 +152,9 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
-        "userDatabase": "User Database",
-        "loadUserSession": "Load User Session"
+        "hq": "HQ",
+        "loadUserSession": "Load User Session",
+        "userDatabase": "User Database"
       }
     },
     "kyc":{
@@ -352,5 +359,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }

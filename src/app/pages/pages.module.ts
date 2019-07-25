@@ -23,6 +23,9 @@ import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
 import { ExchangeModule } from './exchange/exchange.module';
+import { CompanyModule } from './company/company.module';
+import { AdminModule } from './admin/admin.module';
+
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -38,6 +41,8 @@ const PAGES_COMPONENTS = [
     ImageCropperModule,
     ThemeModule,
     HQModule,
+    AdminModule,
+    CompanyModule,
     HeavenModule,
     NbDialogModule.forChild(),
     ClipboardModule,

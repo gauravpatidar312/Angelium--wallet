@@ -24,6 +24,7 @@
     "email": "Eメール",
     "enter": "Enter",
     "emailMustBeValid": "Email must be a valid email address",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"Fetching Amount",
     "firstName": "名",
@@ -49,7 +50,7 @@
     "repeat": "Repeat",
     "rate": "利率",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "Slide right to verify",
     "select": "選択",
     "sendSMS": "Send SMS",
@@ -110,8 +111,10 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日のヘブンドロップ",
       "heavenId":"Heaven ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"No data found",
       "plan": "Plan",
+      "release": "Release",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
@@ -120,9 +123,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
-        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"Transaction successfully completed!",
         "youDontHaveSufficientBalance":"You don't have sufficient balance."
       }
@@ -146,6 +152,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase": "User Database"
       }
@@ -352,5 +359,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }
