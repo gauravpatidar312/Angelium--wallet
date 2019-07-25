@@ -11,7 +11,7 @@ import {MergeComponent} from './merge/merge.component';
 import {RewardComponent} from './reward/reward.component';
 import {HQComponent} from './hq/hq.component';
 import {ExchangeComponent} from './exchange/exchange.component';
-import {WalletComponent} from './wallet/wallet.component';
+
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -56,10 +56,6 @@ const routes: Routes = [{
     {
       path: 'exchange',
       component: ExchangeComponent,
-    },
-    {
-      path: 'wallet',
-      component: WalletComponent,
     },
     {
       path: '**',

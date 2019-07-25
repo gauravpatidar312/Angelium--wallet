@@ -82,7 +82,7 @@
   .footer-fix{ padding-bottom: 75px; }
 }
 
-.bottom-menu nav{ background: #3d3780!important; padding: 2px!important; }
+.bottom-menu nav{ background: #3d3780!important; padding: 0px!important; }
 .bottom-menu nav ul{ padding-left: 0rem!important; }
 .pointer { cursor: pointer !important;}
 .nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{ word-break: break-all;}
@@ -93,3 +93,4 @@
    opacity: 0.85;
 }
 html{top:0px!important;}
+.layout-container{ overflow-x: hidden!important;}

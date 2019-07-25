@@ -41,7 +41,7 @@ import {StateService} from '../../../@core/utils';
           
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}"
-          ><a data-toggle="pill" routerLink="/pages/wallet">
+          ><a data-toggle="pill" routerLink="/pages/dashboard">
              <i class="fa fa-wallet"></i> Wallet</a>
           </li>
 

@@ -23,7 +23,6 @@ import { HeavenModule } from './heaven/heaven.module';
 import { MergeComponent } from './merge/merge.component';
 import { ImageCropperModule } from './setting/image-cropper/image-cropper.module';
 import { ExchangeModule } from './exchange/exchange.module';
-import { WalletComponent } from './wallet/wallet.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -58,8 +57,7 @@ const PAGES_COMPONENTS = [
     TransferComponent,
     KYCComponent,
     DialogNamePromptComponent,
-    MergeComponent,
-    WalletComponent,
+    MergeComponent
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '#' },
