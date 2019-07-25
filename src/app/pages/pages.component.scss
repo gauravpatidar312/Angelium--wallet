@@ -30,5 +30,19 @@
       left: auto !important;
       right: 2px !important;
     }
+
+    /deep/ nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding-top: 22px;
+    }
+
+    /deep/ nb-sidebar.menu-sidebar .scrollable {
+      border-radius: 0 !important;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    /deep/ nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding-top: 28px;
+    }
   }
 }
