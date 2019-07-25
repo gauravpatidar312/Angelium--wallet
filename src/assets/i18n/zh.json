@@ -124,6 +124,7 @@
       "heavenDrop": "Heaven Drop",
       "toastr":{
         "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
         "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
