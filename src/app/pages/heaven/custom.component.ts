@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {ViewCell} from 'ng2-smart-table';
 import {ShareDataService} from '../../services/share-data.service';
+import {SessionStorageService} from '../../services/session-storage.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
 import * as moment from 'moment';
@@ -52,13 +53,16 @@ export class CustomRendererComponent implements ViewCell, OnInit {
   @Output() onReleaseSaved: EventEmitter<any> = new EventEmitter();
   currentDate: any;
   releaseDate: any;
+  user: any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenRelease: boolean = false;
 
   constructor(private httpService: HttpService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private sessionStorage: SessionStorageService) {
+    this.user = this.sessionStorage.getFromSession('userInfo');
   }
 
   ngOnInit() {
@@ -86,6 +90,11 @@ export class CustomRendererComponent implements ViewCell, OnInit {
   }
 
   onReleaseSetting(data) {
+    if (!this.user.kyc_info || this.user.kyc_info.status_description !== 'confirmed') {
+      this.toastrService.info(this.translate.instant('pages.heaven.toastr.kycNotApproved'), this.translate.instant('pages.heaven.release'));
+      return;
+    }
+
     Swal.fire({
       title: this.translate.instant('pages.heaven.release'),
       text: this.translate.instant('pages.heaven.toastr.convertReleaseText'),

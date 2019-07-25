@@ -23,9 +23,9 @@ declare const jQuery: any;
 })
 export class TransferComponent implements OnInit {
   private alive = true;
-  minerFee : number = 0;
-  minMinutes : number = 0;
-  maxMinutes : number = 0;
+  minerFee: number = 0;
+  minMinutes: number = 0;
+  maxMinutes: number = 0;
   fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   sendType: string = 'SELECT';
