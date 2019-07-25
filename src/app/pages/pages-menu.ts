@@ -14,7 +14,6 @@ export const MENU_ITEMS = [
     languageKey: 'heaven',
   },
   {
-    data: [AppConstants.ROLES.USER],
     title: 'Reward',
     icon: 'nb-lightbulb',
     link: '/pages/reward',
