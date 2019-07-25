@@ -32,7 +32,7 @@ export class SecurityCamerasComponent implements OnDestroy {
         this.cloneCameras = _.cloneDeep(cameras);
         let cloneCameras = _.cloneDeep(cameras);
         cloneCameras.map((cam) => {
-          cam.display = (this.r18mode || ['XLOVE', 'XCASINO', 'XWISH'].indexOf(cam.title) < 0);
+          cam.display = (this.r18mode || ['XLOVE', 'XGAMES', 'XWISH'].indexOf(cam.title) < 0);
           cam.title = this.translate.instant('pages.dashboard.securityCamera.' + cam.title.toLowerCase());
         });
         this.cameras = cloneCameras;
