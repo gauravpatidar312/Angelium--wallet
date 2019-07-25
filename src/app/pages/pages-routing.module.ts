@@ -62,7 +62,6 @@ const routes: Routes = [{
       path: 'merge',
       component: MergeComponent,
     },
-    
     {
       path: '**',
       redirectTo: 'dashboard',
