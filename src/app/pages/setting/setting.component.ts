@@ -34,6 +34,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   croppedImageSize: any = '';
   userImageBase64: any;
   r18modeSwitchText: boolean;
+  tfamodeSwitchText: boolean;
   newLoginPassword: any = '';
   confirmLoginPassword: any = '';
   oldLoginPassword: any = '';
@@ -52,7 +53,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   isResubmit: boolean = false;
   isTicketResubmit:boolean = false;
   ticketSubmitting: boolean = false;
-  
+
   resubmitTime: number = 60 * 1000;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
@@ -391,7 +392,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.ticketSubmitting = true;    
+    this.ticketSubmitting = true;
 
     const ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
 
@@ -442,6 +443,21 @@ export class SettingComponent implements OnInit, OnDestroy {
       } else {
         this.sweetAlertAgeCfrm();
       }
+    }
+  }
+
+  openTFAMode(mode, template) {
+    if (!mode) {
+      this.tfamodeSwitchText = mode;
+      return;
+    }
+
+    if (this.tfamodeSwitchText !== mode) {
+      this.tfamodeSwitchText = mode;
+      this.dialogService.open(template, {
+        closeOnBackdropClick: false,
+        autoFocus: false,
+      });
     }
   }
 
