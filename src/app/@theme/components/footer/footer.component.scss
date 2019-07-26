@@ -8,6 +8,10 @@
   justify-content: space-between;
   align-items: center;
 
+  .created-by {
+    font-size: 18px;
+  }
+
   .socials {
     font-size: 2rem;
 
@@ -21,12 +25,11 @@
       }
     }
   }
-  .font-nunitoSans {
-    font-family: nb-theme(font-nunito);
+  .font-bebas {
+    font-family: nb-theme(font-bebas);
   }
 
   .angelium-text {
-    font-family: nb-theme(font-bebas-bold);
     font-weight: 400;
     letter-spacing: 1px;
     margin-left: 4px;

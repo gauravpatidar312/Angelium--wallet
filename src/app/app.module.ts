@@ -10,7 +10,6 @@ import {InternationalPhoneNumberModule} from 'ngx-international-phone-number';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from './login/login.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 import {ForgetPasswordComponent} from './forget-password/forget-password.component';
@@ -35,6 +34,7 @@ import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {UserInfo} from './@core/store/actions/user.action';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import { ReportBugComponent } from './report-bug/report-bug.component';
 import {GamesModule} from './games/games.module';
 
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -43,14 +43,14 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent, ReportBugComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
-    NgbModule.forRoot(),
+    
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     TranslateModule.forRoot({

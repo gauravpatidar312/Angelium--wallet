@@ -46,11 +46,26 @@
       color: #00bb66;
     }
   }
+
+  .miner-fee {
+    width: 100%;
+    display: block;
+    text-align: right;
+    padding-right: 15px;
+  }
+
   .trans-receive {
     justify-content: flex-end;
   }
   .total-amount {
     position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        color: white;
+        margin-bottom: 0;
+      }
+    }
     span {
       position: absolute;
       &.transfer-amount {
@@ -138,7 +153,7 @@
     color: #14ffbe;
   }
   .dropdown-menu {
-    background-color: #3d3780 !important;
+    background-color: #100b48 !important;
     border: 2px solid #7659ff !important;
   }
   .copy-icon {

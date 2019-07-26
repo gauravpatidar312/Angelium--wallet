@@ -42,7 +42,7 @@
     font-family: nb-theme(font-nunito);
 
     tbody tr:nth-child(2n) {
-      background-color: #3a347a;
+      background-color: #111550;
     }
     tr td, .table tr th {
       border: 1px solid #342e73;
@@ -455,7 +455,7 @@
 }
 
 /deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-  background-color: #3d3780 !important;
+  background-color: #100b48 !important;
   color: #ffffff !important;
 }
 
@@ -502,7 +502,12 @@
 }
 /deep/ .trade-text{ text-align: center; }
 /deep/ .paddbtnfix{ padding-left:0px!important; }
-/deep/ .sent-btn{ padding: 0.65rem 0.9rem!important;width: 100%; }
+
+/deep/ .sent-btn{
+  padding: 0.65rem 0.9rem!important;
+  font-family: nb-theme(font-nunito);
+  width: 100%;
+}
 
 @media only screen and (max-width: 768px) {
   /deep/.paddbtnfix{
@@ -517,6 +522,6 @@
 }
 
 /deep/ .dropdown-menu.show {
-  background-color: #3d3780 !important;
+  background-color: #100b48 !important;
   border: 2px solid #7659ff !important;
 }

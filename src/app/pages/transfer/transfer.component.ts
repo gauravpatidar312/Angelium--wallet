@@ -23,6 +23,10 @@ declare const jQuery: any;
 })
 export class TransferComponent implements OnInit {
   private alive = true;
+  minerFee: number = 0;
+  minMinutes: number = 0;
+  maxMinutes: number = 0;
+  fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   sendType: string = 'SELECT';
   receiveType: string =  'SELECT';
@@ -89,7 +93,7 @@ export class TransferComponent implements OnInit {
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans action-width">${cell}</div>`;
         },
       },
       direction: {
@@ -177,6 +181,20 @@ export class TransferComponent implements OnInit {
     // }
   }
 
+  setMinerFee(fee: number) {
+    this.minerFee = fee;
+    if (this.minerFee === 10) {
+      this.minMinutes = 20;
+      this.maxMinutes = 50;
+    } else if (this.minerFee === 20) {
+      this.minMinutes = 10;
+      this.maxMinutes = 20;
+    } else if (this.minerFee === 30) {
+      this.minMinutes = 5;
+      this.maxMinutes = 10;
+    }
+  }
+
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
@@ -207,7 +225,7 @@ export class TransferComponent implements OnInit {
         this.httpService.get('asset/').subscribe((data?: any) => {
           const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
           this.anxWallet.wallet_amount = anxData.quantity || 0;
-          this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
+          this.fromOTCAmount = this.anxWallet.wallet_amount;
           this.setOTCAmount();
         });
       });
@@ -226,7 +244,7 @@ export class TransferComponent implements OnInit {
           obj.direction = 'SEND';
         else
           obj.direction = 'OTC';
-        obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD');
+        obj.timestamp = moment(obj.timestamp).format('YYYY.MM.DD HH:mm');
         obj.quantity = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.quantity, 6), '1.0-6');
         obj.address = obj.address || '';
         return obj;
@@ -246,11 +264,11 @@ export class TransferComponent implements OnInit {
   }
 
   openTradeDialog(dialog: TemplateRef<any>) {
-    /*if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+    if (this.sendWallet.wallet_type === 'USDT' && !this.minerFee) {
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
       this.translate.instant('pages.transfer.send'));
       return;
-    }*/
+    }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
@@ -322,7 +340,7 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-    this.transfer_amount = ShareDataService.toFixedDown(this.sendWallet.wallet_amount, 6);
+    this.transfer_amount = this.sendWallet.wallet_amount;
     this.setAmount(this.sendWallet.wallet_type);
   }
 
@@ -378,7 +396,7 @@ export class TransferComponent implements OnInit {
   }
 
   setAnxMaxValue() {
-    this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
+    this.fromOTCAmount = this.anxWallet.wallet_amount;
     this.setOTCAmount();
   }
 
@@ -426,11 +444,11 @@ export class TransferComponent implements OnInit {
   }
 
   onSendTransfer() {
-    /*if (this.isProduction && this.sendWallet.wallet_type === 'USDT' && this.user.user_type !== AppConstants.ROLES.ADMIN && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-      this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+    if (this.sendWallet.wallet_type === 'USDT' && !this.minerFee) {
+      this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
       this.translate.instant('pages.transfer.send'));
       return;
-    }*/
+    }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
@@ -450,25 +468,47 @@ export class TransferComponent implements OnInit {
     //   return;
     // }
 
-    const transferObj = {
+    let validateEndpoint = '';
+    if (this.sendWallet.wallet_type === 'BTC')
+      validateEndpoint = 'validate_btc/';
+    else if (this.sendWallet.wallet_type === 'USDT')
+      validateEndpoint = 'validate_usdt/';
+    if (validateEndpoint) {
+      this.httpService.post({'amount': Number(this.transfer_amount)}, validateEndpoint).subscribe((res?: any) => {
+        if (res.status)
+          this.sendTransferApi();
+        else
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.transfer.send'));
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.transfer.send'));
+      });
+    } else
+      this.sendTransferApi();
+  }
+
+  sendTransferApi() {
+    const transferObj: any = {
       'user_wallet': this.sendWallet.id,
       'destination_address': this.destination_address,
       'transfer_amount': Number(this.transfer_amount),
     };
+    if (this.sendWallet.wallet_type === 'USDT') {
+      transferObj.miner_fee = this.minerFee;
+    }
 
     this.waitFlag = true;
     this.formSubmitting = true;
     this.httpService.post(transferObj, 'transfer/').subscribe((res?: any) => {
       if (res.status) {
         // 15 seconds wait time for next transaction.
-        let currentTime = new Date();
+        const currentTime = new Date();
         currentTime.setSeconds(currentTime.getSeconds() + 15);
         // this.sessionStorageService.saveToSession('waitTime', currentTime);
-        this.storageService.saveToAngeliumSession({'waitTime': currentTime });
+        this.storageService.saveToAngeliumSession({'waitTime': currentTime});
         setTimeout(() => {
           this.waitFlag = false;
           // this.sessionStorageService.deleteFromSession('waitTime');
-          this.storageService.saveToAngeliumSession({'waitTime': null });
+          this.storageService.saveToAngeliumSession({'waitTime': null});
         }, 15000);
 
         this.formSubmitting = false;

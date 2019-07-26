@@ -27,10 +27,31 @@
 
 .pointer { cursor: pointer !important;}
 .nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{ word-break: break-all;}
-.nb-theme-cosmic .tablemarginfix{ margin:0px!important; }
-.nopadd{ padding: 0px!important; }
+.nb-theme-cosmic .tablemarginfix{ margin:0 !important; }
+.nopadd{ padding: 0 !important; }
  .scrollable-container {
   -webkit-overflow-scrolling: touch;
    opacity: 0.85;
 }
-html{top:0px!important;}
+html{top: 0 !important;}
+
+.nb-theme-cosmic {
+  nb-card,
+  nb-sidebar.menu-sidebar .scrollable,
+  nb-layout .layout nb-layout-header nav,
+  .layout-container .content nb-layout-footer nav {
+    box-shadow: 0 0 4px #06d691 !important;
+    -webkit-box-shadow: 0 0 4px #06d691 !important;
+    -moz-box-shadow: 0 0 4px #06d691 !important;
+  }
+
+  nb-layout .layout nb-layout-header nav {
+    background: linear-gradient(to bottom, #321a69, #311a77);
+  }
+
+  nb-card.no-glow {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+  };
+}

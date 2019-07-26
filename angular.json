@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-admin-demo": {
+    "ngx-admin-anx": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -53,7 +53,7 @@
               "node_modules/echarts/dist/echarts.min.js",
               "node_modules/echarts/dist/extension/bmap.min.js",
               "node_modules/chart.js/dist/Chart.min.js",
-              "src/assets/js/jquery-3.4.1.min.js",            
+              "src/assets/js/jquery-3.4.1.min.js",
               "src/assets/js/slide-to-unlock.js",
               "src/assets/js/jquery.fancybox.min.js"
             ]
@@ -83,18 +83,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "ngx-admin-anx:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-admin-demo:build:production"
+              "browserTarget": "ngx-admin-anx:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "ngx-admin-anx:build"
           }
         },
         "test": {
@@ -153,7 +153,7 @@
         }
       }
     },
-    "ngx-admin-demo-e2e": {
+    "ngx-admin-anx-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -162,7 +162,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-admin-demo:serve"
+            "devServerTarget": "ngx-admin-anx:serve"
           }
         },
         "lint": {
@@ -177,7 +177,7 @@
       }
     }
   },
-  "defaultProject": "ngx-admin-demo",
+  "defaultProject": "ngx-admin-anx",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "ngx",

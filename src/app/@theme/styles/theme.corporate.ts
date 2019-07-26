@@ -117,7 +117,7 @@ export const CORPORATE_THEME = {
       chartGradientTo: 'rgba(113, 158, 252, 1)',
       chartGradientFrom: 'rgba(113, 158, 252, 1)',
       chartAxisSplitLine: '#ebeef2',
-      chartShadowLineColor: '#2f296b',
+      chartShadowLineColor: '#100b48b8',
 
       chartLineBottomShadowColor: 'rgba(113, 158, 252, 1)',
 

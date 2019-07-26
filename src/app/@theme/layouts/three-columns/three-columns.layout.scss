@@ -143,10 +143,6 @@
         height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
         @include nb-ltr(border-top-right-radius, 0);
         @include nb-rtl(border-top-left-radius, 0);
-
-        .scrollable {
-          padding-top: 0;
-        }
       }
     }
 
