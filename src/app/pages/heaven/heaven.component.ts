@@ -42,6 +42,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   user: any;
   heavenDrop: any;
   totalHeaven: any;
+  heavenHistoryType: string = 'total';
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
@@ -108,13 +109,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.breakpoints = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(([oldValue, newValue]) => {
-        this.breakpoint = newValue;
-      });
-
     this.getWallets();
     this.getHeavenDrop();
     this.getHeavenGraph();
@@ -123,8 +117,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getHeavenHistory('total');
     this.getHeavenDropHistory();
   }
-  selectedHeavenPlan = '';
 
+  selectedHeavenPlan = '';
 
   settings = {
     // add: {
@@ -216,6 +210,17 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         renderComponent: CustomRendererComponent,
         filter: false,
         class: 'heavenhistory-cell text-center td-width',
+        onComponentInitFunction: (instance) => {
+          instance.onReleaseFailed.subscribe((row) => {
+            this.source.update(row, row); // to refresh the row to re-render UI.
+          });
+          instance.onReleaseSaved.subscribe((row) => {
+            this.source.remove(row); // to remove row on release successfully.
+          });
+          instance.onReleaseRefresh.subscribe((row) => {
+            this.source.refresh(); // to refresh row on release button click to show spinner.
+          });
+        }
       },
     },
   };
@@ -465,9 +470,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenHistory(value) {
+    this.heavenHistoryType = value;
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
-    this.httpService.get(`heaven-history/?filter_type=${value}`).subscribe((res?: any) => {
+    this.httpService.get(`heaven-history/?filter_type=${this.heavenHistoryType}`).subscribe((res?: any) => {
       const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');

@@ -97,7 +97,7 @@
       "totalAsset" : "アセット合計",
       "securityCamera":{
         "xlove": "XLOVE",
-        "xcasino": "XCASINO",
+        "xgames": "XGAMES",
         "xwish": "XWISH",
         "xtravel": "XTRAVEL",
         "xmall": "XMALL",
@@ -114,6 +114,7 @@
       "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"No data found",
       "plan": "Plan",
+      "release": "Release",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",
@@ -122,10 +123,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
         "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
-        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"Transaction successfully completed!",
         "youDontHaveSufficientBalance":"You don't have sufficient balance."
       }
@@ -360,5 +363,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }

@@ -97,7 +97,7 @@
       "totalAsset" : "资产总额",
       "securityCamera":{
         "xlove": "XLOVE",
-        "xcasino": "XCASINO",
+        "xgames": "XGAMES",
         "xwish": "XWISH",
         "xtravel": "XTRAVEL",
         "xmall": "XMALL",
@@ -114,6 +114,7 @@
       "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"没有找到数据",
       "plan": "计划",
+      "release": "Release",
       "received": "已接收",
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
@@ -122,10 +123,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
         "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
-        "releaseSettingSavedSuccessfully":"释放设置已成功保存！",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"交易完成！",
         "youDontHaveSufficientBalance":"您余额不足。"
       }
@@ -360,5 +363,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }
