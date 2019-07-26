@@ -16,12 +16,12 @@ import win = Browser.win;
 declare let jQuery: any;
 
 @Component({
-  selector: 'ngx-db',
-  templateUrl: './db.component.html',
-  styleUrls: ['./db.component.scss'],
+  selector: 'ngx-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss'],
 })
 
-export class DbComponent implements OnInit, AfterViewInit {
+export class AdminComponent implements OnInit, AfterViewInit {
   anxData: any = {};
   graphData: any;
   userValue: string = 'today';

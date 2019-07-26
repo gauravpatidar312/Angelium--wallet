@@ -102,8 +102,8 @@ export class CustomRendererComponent implements ViewCell, OnInit {
       text: this.translate.instant('pages.heaven.toastr.convertReleaseText'),
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: this.translate.instant('pages.swal.yesSure'),
-      cancelButtonText: this.translate.instant('pages.swal.cancel')
+      confirmButtonText: this.translate.instant('swal.yesSure'),
+      cancelButtonText: this.translate.instant('swal.cancel')
     }).then((result) => {
       if (!result.value)
         return;

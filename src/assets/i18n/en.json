@@ -97,7 +97,7 @@
       "totalAsset" : "Total Asset",
       "securityCamera":{
         "xlove": "XLOVE",
-        "xcasino": "XCASINO",
+        "xgames": "XGAMES",
         "xwish": "XWISH",
         "xtravel": "XTRAVEL",
         "xmall": "XMALL",
@@ -128,7 +128,7 @@
         "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
-        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"Transaction successfully completed!",
         "youDontHaveSufficientBalance":"You don't have sufficient balance."
       }
