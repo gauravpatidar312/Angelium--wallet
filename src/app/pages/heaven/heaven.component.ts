@@ -217,6 +217,9 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           instance.onReleaseSaved.subscribe((row) => {
             this.source.remove(row); // to remove row on release successfully.
           });
+          instance.onReleaseRefresh.subscribe((row) => {
+            this.source.refresh(); // to refresh row on release button click to show spinner.
+          });
         }
       },
     },
