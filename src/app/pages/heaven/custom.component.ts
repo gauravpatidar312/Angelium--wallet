@@ -13,9 +13,9 @@ declare let jQuery: any;
 @Component({
   template: `
     <div class="pointer" *ngIf="(rowData.transaction_type === 'stop' && value === 'Release' && !rowData.showDropdown)">
-      <button type="button" (click)="onReleaseSetting(rowData)" class="btn release-btn btn-sm btn-success">
-        <span *ngIf="!fetchHeavenRelease">Release</span>
-        <span *ngIf="fetchHeavenRelease"><i class="fa fa-spinner fa-spin text-white"></i></span>
+      <button type="button" (click)="onReleaseSetting(rowData)" [disabled]="rowData.fetchHeavenRelease" class="btn release-btn btn-sm btn-success">
+        <span *ngIf="!rowData.fetchHeavenRelease">Release</span>
+        <span [hidden]="!rowData.fetchHeavenRelease"><i class="fa fa-spinner fa-spin text-white"></i></span>
       </button>
     </div>
     <div class="dropdown ghost-dropdown"
@@ -51,11 +51,10 @@ export class CustomRendererComponent implements ViewCell, OnInit {
   @Input() rowData: any;  // This holds the entire row object
   @Output() onReleaseFailed: EventEmitter<any> = new EventEmitter();
   @Output() onReleaseSaved: EventEmitter<any> = new EventEmitter();
+  @Output() onReleaseRefresh: EventEmitter<any> = new EventEmitter();
   currentDate: any;
   releaseDate: any;
   user: any;
-  fetchHeavenHistory: boolean = false;
-  fetchHeavenRelease: boolean = false;
 
   constructor(private httpService: HttpService,
               private shareDataService: ShareDataService,
@@ -90,6 +89,9 @@ export class CustomRendererComponent implements ViewCell, OnInit {
   }
 
   onReleaseSetting(data) {
+    if (this.rowData.fetchHeavenRelease)
+      return;
+
     if (!this.user.kyc_info || this.user.kyc_info.status_description !== 'confirmed') {
       this.toastrService.info(this.translate.instant('pages.heaven.toastr.kycNotApproved'), this.translate.instant('pages.heaven.release'));
       return;
@@ -105,21 +107,26 @@ export class CustomRendererComponent implements ViewCell, OnInit {
     }).then((result) => {
       if (!result.value)
         return;
-      this.fetchHeavenRelease = true;
+
+      this.rowData.fetchHeavenRelease = true;
+      this.onReleaseRefresh.emit(this.rowData);
       this.httpService.post({heaven_id: data.hid}, 'heaven-release/').subscribe((res?: any) => {
         if (res.status) {
-          this.fetchHeavenRelease = false;
+          this.rowData.fetchHeavenRelease = false;
+          this.onReleaseRefresh.emit(this.rowData);
           this.toastrService.success(this.translate.instant('pages.heaven.toastr.releaseSettingSavedSuccessfully'),
             this.translate.instant('pages.heaven.release'));
           this.onReleaseSaved.emit(this.rowData);
         } else {
-          this.fetchHeavenRelease = false;
+          this.rowData.fetchHeavenRelease = false;
+          this.onReleaseRefresh.emit(this.rowData);
           this.rowData.showDropdown = true;
           this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.release'));
           this.onReleaseFailed.emit(this.rowData);
         }
       }, (err) => {
-        this.fetchHeavenRelease = false;
+        this.rowData.fetchHeavenRelease = false;
+        this.onReleaseRefresh.emit(this.rowData);
         this.rowData.showDropdown = true;
         this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.heaven.release'));
         this.onReleaseFailed.emit(this.rowData);
