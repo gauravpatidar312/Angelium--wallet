@@ -9,7 +9,7 @@
   nb-card-body {
     overflow: visible;
   }
-  
+ 
 }
 nb-card-body {
   padding: 10px 30px
@@ -92,25 +92,22 @@ table tbody tr:nth-of-type(even) {
 
 
 @media all and (max-width: 800px) {
+ 
   .wrapper{
     display: flex;
     flex-direction: column;
   }
-  
   .main{
     flex:1;
   }
   .five{
-    order: 1
+    order:1
   }
   .four{
-    // flex:2;
     order: 2;
   }
-  
   .six{
     order: 3
   }
-
-
 }
+
