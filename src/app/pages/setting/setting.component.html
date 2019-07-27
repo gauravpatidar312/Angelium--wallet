@@ -142,10 +142,9 @@
               <tr>
                 <td class="title-col">{{"pages.setting.merge" | translate}}</td>
                 <td>
-                  <span *ngIf="isProduction">{{"pages.setting.comingSoon" | translate}}</span>
-                  <a *ngIf="!isProduction" href="https://member.angelium.net/?anl_request=1" target="_blank">{{"pages.setting.clickHere" | translate}}</a>
+                  <a class="pointer text-color" href="https://member.angelium.net/?anl_request=1&e={{userData?.email}}" target="_blank">{{"pages.setting.clickHere" | translate}}</a>
                 </td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="false"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
                 <td class="title-col">{{"pages.setting.language" | translate}}</td>

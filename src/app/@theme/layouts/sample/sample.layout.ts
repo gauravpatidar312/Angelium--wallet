@@ -149,16 +149,14 @@ export class SampleLayoutComponent implements OnDestroy {
         var $this = jQuery(this);
         var width = $this.width();
         var scrollPos = $this.scrollTop();
-        
-   
+
         if (scrollPos > value && width < 900) { // scroll down  
-            jQuery('.bottom-menu').fadeIn('slow');
+            jQuery('.bottom-menu').fadeIn();
         }
         value = scrollPos;
         
         if ($this.data('scrollTimeout')) {
           clearTimeout($this.data('scrollTimeout'));
-
         }
         $this.data('scrollTimeout', setTimeout(callback, timeout));
       });
