@@ -82,6 +82,9 @@ table tbody tr:nth-of-type(even) {
   overflow-y: auto!important;
   overflow-x:auto;
 }
+.available{
+  overflow-x:hidden !important;
+}
 
 .items_margin{
   margin-bottom: 28px;
@@ -92,8 +95,15 @@ table tbody tr:nth-of-type(even) {
 
 
 @media all and (max-width: 800px) {
- 
+ .items_margin{
+  margin-bottom: 0px;
+
+ }
   .wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  .row{
     display: flex;
     flex-direction: column;
   }
