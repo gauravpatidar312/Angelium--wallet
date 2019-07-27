@@ -115,6 +115,7 @@
       "noDataFound":"No data found",
       "plan": "Plan",
       "release": "Release",
+      "releaseInProgress": "RELEASE IN PROGRESS...",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release Setting",

@@ -115,6 +115,7 @@
       "noDataFound":"没有找到数据",
       "plan": "计划",
       "release": "Release",
+      "releaseInProgress": "RELEASE IN PROGRESS...",
       "received": "已接收",
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
