@@ -57,7 +57,7 @@ nb-card-body{
   font-weight: 400;
 }
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.70rem;
   font-family: 'Nunito Sans', sans-serif;
 }
 .form-control-feedback {
@@ -81,3 +81,16 @@ nb-card-body{
   border-radius: 0.3rem;
   font-weight: bold;
 }
+.available-items{
+  min-height:auto!important;
+  width: 100%;
+  // overflow-x: hidden;
+  overflow-y: hidden!important;
+  overflow-x:hidden;
+}
+
+.items_margin{
+  margin-bottom: 28px;
+}
+
+/deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }

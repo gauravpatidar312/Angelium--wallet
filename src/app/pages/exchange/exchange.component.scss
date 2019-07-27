@@ -9,6 +9,7 @@
   nb-card-body {
     overflow: visible;
   }
+  
 }
 nb-card-body {
   padding: 10px 30px
@@ -90,14 +91,26 @@ table tbody tr:nth-of-type(even) {
 
 
 
-@media all and (min-width: 800px) {
-  // .main    { flex: 3 0px; }
-  .one { order: 1; } 
-  .two    { order: 2; }
-  .three { order: 3; }
-  .four  { order: 5; }
-  .five  { order: 4; }
-  .six  { order: 6; }
+@media all and (max-width: 800px) {
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main{
+    flex:1;
+  }
+  .five{
+    order: 1
+  }
+  .four{
+    // flex:2;
+    order: 2;
+  }
+  
+  .six{
+    order: 3
+  }
 
 
 }
