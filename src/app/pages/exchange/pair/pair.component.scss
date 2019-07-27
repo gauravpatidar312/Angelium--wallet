@@ -1,16 +1,16 @@
-@import '../../../@theme/styles/themes';
-@import '~@nebular/theme/styles/global/breakpoints';
+// @import '../../../@theme/styles/themes';
+// @import '~@nebular/theme/styles/global/breakpoints';
 
-@include nb-install-component() {
-  nb-card-header {
-    font-family: nb-theme(font-bebas);
-    font-size: 1.75rem;
-  }
+// @include nb-install-component() {
+//   nb-card-header {
+//     font-family: nb-theme(font-bebas);
+//     font-size: 1.75rem;
+//   }
   
-}
-.minheight{
-  min-height: 250px;
-}
+// }
+// .minheight{
+//   min-height: 250px;
+// }
 
 .pairtable{width: 100%;}
 
@@ -20,23 +20,106 @@
   letter-spacing: 1px;
   font-size: 1.0rem;
 }
-.pairtable td{
+// .pairtable td{
+//   color:#ffffff;
+//   text-transform: uppercase;
+//   font-size: 12px;
+//   line-height: 20px;
+// }
+// .pairtable td.changetext{
+//   text-align: right;
+//   color:#00ff57;
+// }
+// .pairtable tbody tr:nth-of-type(even) {
+//   background: #87a1b730;
+// }
+// .available-items{
+//   min-height:200px!important;
+//   max-height:200px!important;
+//   width: 100%;
+//   overflow-x: hidden;
+//   overflow-y: hidden!important;
+// }
+
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  nb-card-header {
+    font-family: nb-theme(font-bebas);
+    font-size: 1.75rem;
+  }
+  nb-card-body {
+    overflow: visible;
+  }
+}
+
+nb-card-body {
+  padding: 10px 30px
+  }
+.minheight{
+  min-height: 250px;
+}
+.headsection{
+  border-bottom: 0px;
+  padding-bottom: 0px!important;
+}
+
+
+
+.theading-text{
+  color: #cee80b;
+}
+.secondaryhead{
+  display:block!important;
+  font-size: 15px;
+  color: #575bc7;
+  font-weight: 400;
+}
+.boardtable{width: 100%;}
+
+.boardtable th{
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.0rem;
+  border-bottom: 1px solid #575bc7;
+}
+.positionSet{
+  padding-top: 10px;
+}
+
+.totalfield{
+  border-bottom: 1px solid #575bc7;
+  border-top: 1px solid #575bc7;
+  font-size: 1.2rem !important;
+  font-family: nb-theme(font-bebas-book);
+  padding: 5px 0px 0px 0px!important;
+  font-weight: 600;
+}
+
+
+.boardtable th span.total{
+  color:#b9e80c;
+}
+.boardtable td{
   color:#ffffff;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
+  font-family: 'Nunito Sans', sans-serif;
 }
-.pairtable td.changetext{
+.boardtable td.changetext{
   text-align: right;
-  color:#00ff57;
 }
-.pairtable tbody tr:nth-of-type(even) {
-  background: #87a1b730;
-}
+.boardtable tr:nth-child(even) {background: #111550}
+
 .available-items{
-  min-height:200px!important;
-  max-height:200px!important;
+  max-height:350px!important;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto!important;
+  overflow-y: hidden!important;
 }
+.bigSize{
+  font-size: 20px;
+}
+

@@ -10,7 +10,11 @@
     overflow: visible;
   }
 }
-.trade-histary-table{width: 100%;}
+nb-card-body {
+  padding: 10px 30px
+  }
+.trade-histary-table{width: 100%;    white-space: nowrap;
+}
 .trade-histary-table th{
   color:#b9e80c;
   text-transform: uppercase;
@@ -23,6 +27,7 @@
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .trade-histary-table td.changetext{
   text-align: right;
@@ -32,7 +37,7 @@
 }
 .available-items{
   min-height:200px!important;
-  max-height:200px!important;
+  max-height:232px!important;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto!important;

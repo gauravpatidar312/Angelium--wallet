@@ -10,23 +10,29 @@
     overflow: visible;
   }
 }
-
+nb-card-body {
+  padding: 10px 30px
+  }
 /deep/ .headsection{
   border-bottom: 0px!important;
   padding-bottom: 0px!important;
 }
 .chartimg{ width:100%; margin-bottom: 87px;max-height: 275px; }
 
+.empty_width{
+  max-width: 325px;;
+}
 #main-navigation li > a {
-  padding: 5px;
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 1.60rem;
+  font-family: BebasNeue;
   display: inline-block;
   color: #ffffff;
-  line-height: 26px;
-  padding: 0px 8px;
+  line-height: 40px;
+  padding: 0px 15px;
   border-bottom: 2px solid transparent;
+  font-weight: 400;
+  width: 100%;
 }
 
 #main-navigation li > a i{
@@ -35,13 +41,16 @@
   float: left;
 }
 
-#main-navigation li.active > a { border-bottom: 2px solid #2542db; color: #ffffff; }
-#main-navigation li > a { border-bottom: 2px solid #575bc7; color: #575bc7; }
-
-.navbar-pill {
-  justify-content: flex-end;
+#main-navigation li.active > a { border-bottom: 2px solid #26df8b; color: #26df8b; }
+#main-navigation li > a { border-bottom: 2px solid #fff; color: #fff; }
+ul#main-navigation{
+  padding-left: 0px!important;
 }
+.table{
+  margin-bottom: 0rem !important;
+  white-space: nowrap;
 
+}
 .table th, .table td {
   padding: 0.45rem;
   vertical-align: top;
@@ -52,16 +61,12 @@
   border-bottom: 0px solid #dee2e6;
   color: #7dff01;
 }
-tbody tr{ color: #ffffff; font-size: 12px;}
+tbody tr{ color: #ffffff; font-size: 12px;    font-family: 'Nunito Sans', sans-serif;}
 table tbody tr:nth-of-type(even) {
-  background: #87a1b730;
+  background: #111550;
 }
-
-.mytradeLine{
-  padding:0px!important;
-  margin: 0px 10px 10px 10px;
-  float: left;
-}
+.tradeLine{ padding:0px!important; margin: 0px 0px 20px 0px; }
+.tradeLine li{ width:50%!important; }
 
 /deep/ .pink-text{ color: #f90f94!important; }
 /deep/ .green-text{ color: #00ff57!important; }
@@ -69,11 +74,25 @@ table tbody tr:nth-of-type(even) {
 /deep/ .light-blue-text{ color: #575bc7!important; }
 
 .available-items{
-  min-height:240px!important;
-  max-height:240px!important;
+  min-height:auto!important;
+  max-height:271px !important;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto!important;
 }
 
 /deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
+
+
+
+@media all and (min-width: 800px) {
+  // .main    { flex: 3 0px; }
+  .one { order: 1; } 
+  .two    { order: 2; }
+  .three { order: 3; }
+  .four  { order: 5; }
+  .five  { order: 4; }
+  .six  { order: 6; }
+
+
+}

@@ -19,5 +19,9 @@ export class TradeComponent implements OnInit {
       jQuery('ul.tradeLine li.active').removeClass('active');
       jQuery(this).parent('li').addClass('active');
     });
+    jQuery('logo-containter.navigation a').click(function (e) {
+    alert('Hello ')
+    });
+  
   }
 }

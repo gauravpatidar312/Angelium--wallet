@@ -10,6 +10,10 @@
     overflow: visible;
   }
 }
+nb-card-body {
+  padding: 10px 30px
+  }
+
 .minheight{
   min-height: 250px;
 }
@@ -18,7 +22,9 @@
   padding-bottom: 0px!important;
 }
 
-.total-text{
+
+
+.theading-text{
   color: #cee80b;
 }
 .secondaryhead{
@@ -35,6 +41,9 @@
   font-size: 1.0rem;
   border-bottom: 1px solid #575bc7;
 }
+.positionSet{
+  padding-top: 10px;
+}
 
 .totalfield{
   border-bottom: 1px solid #575bc7;
@@ -45,17 +54,20 @@
   font-weight: 600;
 }
 
-.boardtable th:first-child, .boardtable td:first-child{
-  padding-left:10px!important;
-}
+
 .boardtable th span.total{
   color:#b9e80c;
 }
 .boardtable td{
-  color:#ffffff;
+  // color:#ffffff;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
+}
+.boardtable tr{
+  color:#ffffff;
+  font-family: 'Nunito Sans', sans-serif;
+
 }
 .boardtable td.changetext{
   text-align: right;
@@ -65,5 +77,8 @@
   max-height:350px!important;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto!important;
+  overflow-y: hidden!important;
+}
+.bigSize{
+  font-size: 20px;
 }

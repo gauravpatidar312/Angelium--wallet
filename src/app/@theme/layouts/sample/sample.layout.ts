@@ -39,18 +39,18 @@ declare let jQuery: any;
       </nb-layout-footer>
 
       <nb-layout-footer class="bottom-menu">
-        <ul id="main-navigation" class="nav navbar-pill headerLine">
+        <ul id="main-navigation"  class="nav navbar-pill headerLine">
           
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}"
           ><a data-toggle="pill" routerLink="/pages/dashboard">
-             <i class="fa fa-wallet"></i> Wallet</a>
+             <i class="fa fa-wallet" style="float:none"></i> Wallet</a>
           </li>
 
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}">
             <a data-toggle="pill" routerLink="/pages/exchange">
-              <i class="iconsize nb-shuffle"></i> Exchange
+              <i class="iconsize nb-shuffle" style="float:none"></i> Exchange
             </a>
           </li>
         </ul>
@@ -140,15 +140,22 @@ export class SampleLayoutComponent implements OnDestroy {
 
   ngAfterViewInit(){
     var value = 0;
+    
     jQuery('.bottom-menu').fadeOut();
     jQuery.fn.scrollEnd = function(callback, timeout) { 
+     
+     
       jQuery('.scrollable-container').scroll(function(){
         var $this = jQuery(this);
+        var width = $this.width();
         var scrollPos = $this.scrollTop();
-        if (scrollPos > value) { // scroll down  
+        
+   
+        if (scrollPos > value && width < 900) { // scroll down  
             jQuery('.bottom-menu').fadeIn('slow');
         }
         value = scrollPos;
+        
         if ($this.data('scrollTimeout')) {
           clearTimeout($this.data('scrollTimeout'));
 
@@ -159,7 +166,7 @@ export class SampleLayoutComponent implements OnDestroy {
 
     jQuery(window).scrollEnd(function(){
       jQuery('.bottom-menu').fadeOut();
-    }, 4000);
+    }, 10000);
   }
 
   ngOnDestroy() {
