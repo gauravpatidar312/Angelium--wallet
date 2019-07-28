@@ -146,7 +146,7 @@
                      *ngIf="!(userData?.kyc_info && userData?.kyc_info?.status_description === 'confirmed')">
                     {{"pages.setting.clickHere" | translate}}
                   </a>
-                  <a class="pointer text-color" href="https://member.angelium.net/?anl_request=1&e={{userData?.npemail}}"
+                  <a class="pointer text-color" href="https://member.angelium.net/?anl_request=1&e={{userData?.email}}"
                      *ngIf="userData?.kyc_info && userData?.kyc_info?.status_description === 'confirmed'" target="_blank">
                     {{"pages.setting.clickHere" | translate}}
                   </a>
