@@ -52,7 +52,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   isResubmit: boolean = false;
   isTicketResubmit:boolean = false;
   ticketSubmitting: boolean = false;
-  
+
   resubmitTime: number = 60 * 1000;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
@@ -391,7 +391,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.ticketSubmitting = true;    
+    this.ticketSubmitting = true;
 
     const ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
 
@@ -497,6 +497,10 @@ export class SettingComponent implements OnInit, OnDestroy {
       closeOnBackdropClick: false,
       autoFocus: false,
     });
+  }
+
+  showKYCToastr() {
+    this.toastrService.info(this.translate.instant('pages.heaven.toastr.kycNotApproved'), this.translate.instant('pages.setting.merge'));
   }
 
   openChatDialog() {
