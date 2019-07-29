@@ -585,6 +585,10 @@ export class SettingComponent implements OnInit, OnDestroy {
     });
   }
 
+  showKYCToastr() {
+    this.toastrService.info(this.translate.instant('pages.heaven.toastr.kycNotApproved'), this.translate.instant('pages.setting.merge'));
+  }
+
   openChatDialog() {
     (<any>window).$crisp.push(['do', 'chat:show']);
     (<any>window).$crisp.push(['do', 'chat:open']);

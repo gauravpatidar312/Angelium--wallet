@@ -115,6 +115,7 @@
       "noDataFound":"No data found",
       "plan": "계획",
       "release": "Release",
+      "releaseInProgress": "RELEASE IN PROGRESS...",
       "received": "Received",
       "releaseDate": "완료일",
       "releaseSetting": "완료 설정",

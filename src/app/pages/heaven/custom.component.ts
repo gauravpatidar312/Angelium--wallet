@@ -12,14 +12,17 @@ declare let jQuery: any;
 
 @Component({
   template: `
+    <div class="process-padding" *ngIf="rowData.transaction_type === 'withdraw-requested'">
+        <span>{{"pages.heaven.releaseInProgress" | translate}}</span>
+    </div>
     <div class="pointer" *ngIf="(rowData.transaction_type === 'stop' && value === 'Release' && !rowData.showDropdown)">
       <button type="button" (click)="onReleaseSetting(rowData)" [disabled]="rowData.fetchHeavenRelease" class="btn release-btn btn-sm btn-success">
-        <span *ngIf="!rowData.fetchHeavenRelease">Release</span>
+        <span *ngIf="!rowData.fetchHeavenRelease">{{"pages.heaven.release" | translate}}</span>
         <span [hidden]="!rowData.fetchHeavenRelease"><i class="fa fa-spinner fa-spin text-white"></i></span>
       </button>
     </div>
     <div class="dropdown ghost-dropdown"
-         *ngIf="!(rowData.transaction_type === 'stop' && value === 'Release' && !rowData.showDropdown)" ngbDropdown>
+         *ngIf="!((rowData.transaction_type === 'stop' || rowData.transaction_type === 'withdraw-requested') && value === 'Release' && !rowData.showDropdown)" ngbDropdown>
       <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle style="background-color: transparent;">
         {{value}}
       </button>
