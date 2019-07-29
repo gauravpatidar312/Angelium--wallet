@@ -6,28 +6,43 @@
   opacity: 0.6;
 }
 
-/deep/ .games-lottery .main-content {
-  padding: 0 !important;
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-/deep/ .games-lottery nb-sidebar.menu-sidebar {
-  display: none;
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
-/deep/ .games-lottery .logo-containter .display-none {
-  display: block !important;
-}
+/deep/ .games-lottery {
+  .main-content {
+    padding: 0 !important;
+  }
 
-/deep/ .games-lottery .layout {
-  background: none !important;
-}
+  nb-sidebar.menu-sidebar {
+    display: none;
+  }
 
-/deep/ .games-lottery .header-container .navigation i {
-  display: none !important;
-}
+  .logo-containter .display-none {
+    display: block !important;
+  }
 
-/deep/ .games-lottery nb-sidebar.compacted.start.fixed ~ .content {
-  margin-left: 0 !important;
+  .layout {
+    background: none !important;
+  }
+
+  .header-container .navigation i {
+    display: none !important;
+  }
+
+  nb-sidebar.compacted.start.fixed ~ .content {
+    margin-left: 0 !important;
+  }
+
+  nb-layout-footer {
+    margin-left: 0 !important;
+  }
 }
 
 .lottery-container {
@@ -37,7 +52,7 @@
 
   .bc-color {
     padding: 2.25rem 2.25rem 0.75rem;
-    background-color: #2f296b;
+    background-color: #100b48b8;
   }
 
   .div-flex {
@@ -71,7 +86,9 @@
     text-align: center;
     font-size: 3.5rem;
     color: #ffffff;
+    text-shadow: 3px 3px #100b48;
   }
+
   .div-xpAmount {
     font-size: 20px;
     margin-top: 7px;
@@ -88,8 +105,9 @@
   .round-div {
     text-align: center;
     margin-top: 40px;
-    font-size: 20px;
+    font-size: 30px;
     color: #ffffff;
+    text-shadow: 3px 3px #100b48;
   }
 
   .winner-div {
@@ -106,6 +124,7 @@
     color: #b7ff05 !important;
     font-family: nb-theme(font-bebas);
     letter-spacing: 10px;
+    text-shadow: 3px 3px #100b48;
   }
 
   .winner-id-span {
@@ -113,6 +132,7 @@
     display: inline-block;
     color: #ffffff;
     text-align: right;
+    text-shadow: 3px 3px #100b48;
   }
 
   .winner-xpAmount-span {
@@ -120,13 +140,15 @@
     display: inline-block;
     color: #26df8b !important;
     text-align: right;
+    text-shadow: 3px 3px #100b48;
   }
 
   .winner-name-span {
-    width: 130px;
+    width: 98px;
     display: inline-block;
     color: #ffffff;
     text-align: right;
+    text-shadow: 3px 3px #100b48;
   }
   .div-name {
     font-size: 22px;
@@ -187,10 +209,6 @@
     font-family: nb-theme(font-nunito) !important;
   }
 
-  .list-height {
-    min-height: 100px;
-  }
-
   .span-font-size {
     font-size: 45px;
     margin-left: 10px;
@@ -203,7 +221,7 @@
     line-height: 26px;
     font-size: 16px;
     border-radius: 7px;
-    width: 400px;
+    min-width: 400px;
     position: relative;
   }
 
@@ -285,6 +303,13 @@
     border: 1px;
   }
 
+  /deep/ .dropdown-menu {
+    background-color: #100b48 !important;
+    color: #ffffff !important;
+    border: 2px solid #7659ff !important;
+  }
+
+
   @media (min-width: 375px) and (max-width: 480px) {
     .time-div {
       font-size: 4rem;
@@ -326,10 +351,25 @@
     }
   }
 
+  @include media-breakpoint-down(sm) {
+    .time-div {
+      letter-spacing: 7px !important;
+      font-size: 3rem !important;
+    }
+
+    .padding-row {
+      padding: 0 !important;
+    }
+
+    .padding-left-remove {
+      padding-left: 0 !important;
+    }
+  }
+
   @include media-breakpoint-down(xs) {
     .time-div {
       letter-spacing: 7px !important;
-      font-size: 4rem !important;
+      font-size: 3rem !important;
     }
     .padding-remove-xs {
       padding: 0;
@@ -342,16 +382,7 @@
   @media (min-width: 300px) and (max-width: 348px) {
     .time-div {
       letter-spacing: 5px !important;
-    }
-  }
-
-  @include media-breakpoint-down(sm) {
-    .padding-row {
-      padding: 0 !important;
-    }
-
-    .padding-left-remove {
-      padding-left: 0 !important;
+      font-size: 2.9rem !important;
     }
   }
 }
