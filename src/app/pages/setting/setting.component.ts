@@ -34,6 +34,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   croppedImageSize: any = '';
   userImageBase64: any;
   r18modeSwitchText: boolean;
+  tfamodeSwitchText: boolean;
   newLoginPassword: any = '';
   confirmLoginPassword: any = '';
   oldLoginPassword: any = '';
@@ -44,15 +45,17 @@ export class SettingComponent implements OnInit, OnDestroy {
   oldTradePassword: any = '';
   breakpoints: any;
   selectedTicket: string = 'select';
-  issueTypes: any = ['unable to register', 'not getting correct data', 'unable to login'];
   ticketTitle: any = '';
   ticketDescription: any = '';
   otpSubmitted: boolean = false;
   otpSubmitting: boolean = false;
   isResubmit: boolean = false;
-  isTicketResubmit:boolean = false;
+  isTicketResubmit: boolean = false;
   ticketSubmitting: boolean = false;
-  
+  secretKey: string = '';
+  qrCode: string = '';
+  tfaOtp: string = '';
+
   resubmitTime: number = 60 * 1000;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
 
@@ -103,6 +106,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.userData = this.sessionStorage.getFromSession('userInfo');
     this.httpService.get('profile/').subscribe(data => {
       this.userData = _.merge(this.userData, data);
+      this.tfamodeSwitchText = this.userData.is_2fa_enable;
       this.shareDataService.changeData(this.userData);
       this.sessionStorage.updateUserState(this.userData);
       this.selectedTimezone = this.userData.default_timezone;
@@ -391,7 +395,7 @@ export class SettingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.ticketSubmitting = true;    
+    this.ticketSubmitting = true;
 
     const ticketData = { 'title': this.ticketTitle, 'description': this.ticketDescription, 'issue_type': this.selectedTicket };
 
@@ -443,6 +447,88 @@ export class SettingComponent implements OnInit, OnDestroy {
         this.sweetAlertAgeCfrm();
       }
     }
+  }
+
+  openTFAModal(mode, template) {
+    if (this.tfamodeSwitchText !== mode) {
+      this.tfamodeSwitchText = mode;
+      if (mode) {
+        this.httpService.get('secret-key-2fa/').subscribe((res?: any) => {
+          if (res.status) {
+            this.secretKey = res.secret_key;
+            this.qrCode = res.qr_code;
+          } else {
+            this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.setting.2FA'));
+          }
+        }, (err) => {
+          this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
+        });
+        this.dialogService.open(template, {
+          closeOnBackdropClick: false,
+          autoFocus: false,
+        }).onClose.subscribe(data => {
+          if (!data)
+            this.tfamodeSwitchText = !this.tfamodeSwitchText;
+        });
+      } else {
+        Swal.fire({
+          title: 'Disable 2FA',
+          text: 'Are you sure to disable Two Factor Authentication?',
+          type: 'info',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'Cancel'
+        }).then((result) => {
+          if (result.value) {
+            this.httpService.put({'is_2fa_enable': false}, 'update-2fa/').subscribe((resUpdate?: any) => {
+              if (resUpdate.status) {
+                this.userData.is_2fa_enable = false;
+                this.sessionStorage.updateUserState(this.userData);
+                this.toastrService.success(this.translate.instant('pages.setting.toastr.2FADisabled'), this.translate.instant('pages.setting.2FA'));
+              } else {
+                this.toastrService.danger(this.shareDataService.getErrorMessage(resUpdate), this.translate.instant('pages.setting.2FA'));
+              }
+            }, (err) => {
+              this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
+            });
+          } else {
+            this.tfamodeSwitchText = !this.tfamodeSwitchText;
+          }
+        });
+        return;
+      }
+    }
+  }
+
+  verifyOTP(ref: any) {
+    if (!this.tfaOtp)
+      return;
+
+    const data = {
+      'email': this.userData.email,
+      'otp': this.tfaOtp
+    };
+    this.httpService.post(data, 'verify-2fa-otp/').subscribe((res?: any) => {
+      if (res.status) {
+        this.httpService.put({'is_2fa_enable': true}, 'update-2fa/').subscribe((resUpdate?: any) => {
+          if (resUpdate.status) {
+            this.tfaOtp = null;
+            this.userData.is_2fa_enable = true;
+            this.sessionStorage.updateUserState(this.userData);
+            this.toastrService.success(this.translate.instant('pages.setting.toastr.2FAEnabled'), this.translate.instant('pages.setting.2FA'));
+            ref.close(true);
+          } else {
+            this.toastrService.danger(this.shareDataService.getErrorMessage(resUpdate), this.translate.instant('pages.setting.2FA'));
+          }
+        }, (err) => {
+          this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
+        });
+      } else {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.setting.2FA'));
+      }
+    }, (err) => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
+    });
   }
 
   openCountryDialog(type: any, value: any) {
@@ -497,6 +583,10 @@ export class SettingComponent implements OnInit, OnDestroy {
       closeOnBackdropClick: false,
       autoFocus: false,
     });
+  }
+
+  showKYCToastr() {
+    this.toastrService.info(this.translate.instant('pages.heaven.toastr.kycNotApproved'), this.translate.instant('pages.setting.merge'));
   }
 
   openChatDialog() {

@@ -72,6 +72,7 @@
   }
   nb-card-body {
     overflow: visible;
+    justify-content: center;
   }
   $auth-layout-padding: 0.5rem;
 
@@ -422,7 +423,21 @@
 .image-scoll-card-body {
   max-height: calc(100vh - 190px);
   overflow-y: auto;
+  text-align: center;
 }
+
+.tfa-width {
+  width: 362px;
+  color: #e5e5e5;
+  .text-2fa {
+    font-size: 15px;
+  }
+  .qr-code-tfa {
+    -webkit-box-shadow: 0 0 15px #06d691;
+    box-shadow: 0 0 15px #06d691;
+  }
+}
+
 .image-cropper-width {
   max-width: 290px !important;
   max-height: 290px !important;
@@ -518,6 +533,21 @@
 @media only screen and (max-width: 360px) {
   /deep/.paddbtnfix{
     padding-right:4px!important;
+  }
+}
+
+@media only screen and (width: 375px) {
+  .tfa-width {
+    width: 310px;
+  }
+}
+
+@media only screen and (width: 320px) {
+  .tfa-width {
+    width: 270px;
+  }
+  .otp-margin {
+    margin-top: 3px;
   }
 }
 
