@@ -80,7 +80,7 @@ export class AppModule {
   }
 
   async checkSession() {
-    const data = await this.storageService.getSessionStorage();
+    const data: any = await this.storageService.getSessionStorage();
     if (data) {
       // Check if user is already logged in on page refresh
       if (this.sessionStorage.getSessionStorage('loggedIn')) {
@@ -100,7 +100,7 @@ export class AppModule {
           this.store.dispatch(new UserInfo(data));
         } else {
           const rememberUser = this.sessionStorage.getFromLocalStorage('rememberMe');
-          if (rememberUser) {
+          if (rememberUser && !data.is_2fa_enable) {
             this.sessionStorage.saveToSession('loggedIn', true);
             this.store.dispatch(new UserInfo(data));
           } else {

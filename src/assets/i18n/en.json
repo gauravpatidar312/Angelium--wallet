@@ -279,7 +279,7 @@
       "name": "Name",
       "eMail": "E-mail",
       "enable2FA": "Enable 2FA",
-      "enterOTP": "Enter OTP from App",
+      "enterOTP": "Enter OTP",
       "goldAngel": "GOLD ANGEL",
       "language": "Language",
       "merge": "Merge",
@@ -328,7 +328,9 @@
         "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
-        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space.",
+        "2FAEnabled": "Two factor authentication activated.",
+        "2FADisabled": "Two factor authentication deactivated."
       },
       "usernameOnlyEnglish": "New Username (English only)",
       "usd": "usd",

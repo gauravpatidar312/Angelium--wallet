@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-column>
-    <nb-card>
+    <nb-card class="login-container">
       <nb-card-header>
         <nav class='navigation'>
           <a routerLink="#" class='link' aria-label='Login'>
@@ -14,7 +14,7 @@
             <h1 id="title" class="title">
               {{"pages.login.login" | translate}}</h1>
             <p class="sub-title title">{{"pages.login.helloLoginWithYourEmail" | translate}}.</p>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="width-full loginForm" aria-labelledby="title">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin(loginOTPTemplate)" class="width-full loginForm" aria-labelledby="title">
               <div class="form-group">
                 <label class="label" for="input-email">{{"common.emailAddress" | translate}}:</label>
                 <input class="form-control" fullWidth name="email"
@@ -74,3 +74,18 @@
     </nb-card>
   </nb-layout-column>
 </nb-layout>
+
+<ng-template #loginOTPTemplate let-data let-refOTP="dialogRef">
+  <nb-card class="nb-card-width">
+    <nb-card-header>
+      {{"pages.setting.enterOTP" | translate}}
+      <i class="nb-close nb-icon-left fa-2x" (click)="refOTP.close()"></i>
+    </nb-card-header>
+    <nb-card-body>
+      <input type="text" class="input-width" [(ngModel)]="tfaOtp" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput />
+    </nb-card-body>
+    <nb-card-footer class="text-center">
+      <button nbButton size="small" (click)="verifyOTP(refOTP)">{{"pages.kyc.submit" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

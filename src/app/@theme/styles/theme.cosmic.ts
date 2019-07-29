@@ -118,11 +118,11 @@ export const COSMIC_THEME = {
       chartGradientTo: '#00c7c7',
       chartGradientFrom: '#00d977',
       chartAxisSplitLine: 'rgba(161, 161 ,229, 0.2)',
-      chartShadowBarColor: '#100b48b8',
+      chartShadowBarColor: 'rgba(16, 11, 72, 0.72)',
 
       chartLineBottomShadowColor: '#00977e',
 
-      chartInnerLineColor: '#100b48b8',
+      chartInnerLineColor: 'rgba(16, 11, 72, 0.72)',
     },
 
     echarts: {

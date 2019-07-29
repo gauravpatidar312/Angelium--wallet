@@ -1,16 +1,16 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, TemplateRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import {ShareDataService} from '../services/share-data.service';
-import {HttpService} from '../services/http.service';
+import {TranslateService} from '@ngx-translate/core';
+import {NbDialogService} from '@nebular/theme';
 import {SessionStorageService} from '../services/session-storage.service';
 import {ToastrService} from '../services/toastr.service';
-import {AuthService} from '../_guards/auth.service';
+import {HttpService} from '../services/http.service';
+import {ShareDataService} from '../services/share-data.service';
 import {Store} from '@ngrx/store';
-import {LogIn} from '../@core/store/actions/user.action';
-import {AppState, selectAuthState} from '../@core/store/app.state';
-import { AuthEffects } from '../@core/store/effects/auth.effect';
+import {LogIn, UserInfo} from '../@core/store/actions/user.action';
+import {AppState} from '../@core/store/app.state';
+import {AuthEffects} from '../@core/store/effects/auth.effect';
 
 declare let jQuery: any;
 @Component({
@@ -25,27 +25,25 @@ export class LoginComponent implements OnInit {
   formSubmitting: boolean = false;
   isVerifiedCaptcha = false;
   rememberMe: boolean = false;
+  tfaOtp: string;
+  user: any;
+  otpDialog: any;
 
-  constructor(private httpService: HttpService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private sessionStorageService: SessionStorageService,
+  constructor(private formBuilder: FormBuilder,
               private toastrService: ToastrService,
               public translate: TranslateService,
-              private authService: AuthService,
+              private dialogService: NbDialogService,
               private store: Store<AppState>,
+              private httpService: HttpService,
+              private shareDataService: ShareDataService,
               private authEffects: AuthEffects) {
-    // const currentUser = this.authService.isAuthenticated();
-    // if (currentUser) {
-    //   this.router.navigate(['/pages/setting']);
-    // }
     this.getCapchaTranslation();
   }
 
   ngOnInit() {
     jQuery(document).ready(() => {
-      jQuery("#loginSlider").slideToUnlock({ useData: true});
-      jQuery( document ).on("veryfiedCaptcha", (event, arg) => {
+      jQuery("#loginSlider").slideToUnlock({useData: true});
+      jQuery(document).on("veryfiedCaptcha", (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
           this.getCapchaTranslation();
@@ -58,20 +56,36 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       rememberMe: [false]
     });
+
+    this.authEffects.AskOTPFor2FA.subscribe((res?: any) => {
+      this.user = res.payload;
+      this.dialogService.open(this.otpDialog, {
+        closeOnBackdropClick: false,
+        autoFocus: false,
+      }).onClose.subscribe(data => {
+        if (data) {
+          return this.store.dispatch(new UserInfo(this.user));
+        } else {
+          this.formSubmitting = false;
+        }
+      });
+    });
+    this.authEffects.LogInFailure.subscribe((res?: any) => {
+      this.formSubmitting = false;
+    });
   }
 
-
-  getCapchaTranslation(){
+  getCapchaTranslation() {
     if (this.isVerifiedCaptcha) {
-      setTimeout(()=>{
+      setTimeout(() => {
         jQuery("#loginSlider").children(".text").text(
           this.translate.instant('common.verified'));
-      },0);
-    }else{
-      setTimeout(()=>{
+      }, 0);
+    } else {
+      setTimeout(() => {
         jQuery("#loginSlider").children(".text").text(
           this.translate.instant('common.slideRightToVerify'));
-      },1000);
+      }, 1000);
     }
   }
 
@@ -79,7 +93,26 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  onSubmitLogin() {
+  verifyOTP(ref: any) {
+    if (!this.tfaOtp)
+      return;
+
+    const data = {
+      'email': this.user.email,
+      'otp': this.tfaOtp
+    };
+    this.httpService.post(data, 'verify-2fa-otp/').subscribe((res?: any) => {
+      if (res.status) {
+        ref.close(true);
+      } else {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.setting.2FA'));
+      }
+    }, (err) => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
+    });
+  }
+
+  onSubmitLogin(dialog: TemplateRef<any>) {
     if (!this.isVerifiedCaptcha) {
       this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
       return;
@@ -90,14 +123,8 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.otpDialog = dialog;
     this.formSubmitting = true;
     this.store.dispatch(new LogIn(this.loginForm.value));
-    this.authEffects.LogInFailure.subscribe(res => {
-      if (res.hasOwnProperty('payload')) {
-        if (res.payload.hasOwnProperty('error')) {
-          this.formSubmitting = false;
-        }
-      }
-    });
   }
 }

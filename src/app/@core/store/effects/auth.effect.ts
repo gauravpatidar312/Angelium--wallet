@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { AppState } from '../../../@core/store/app.state';
 import { AuthService } from '../../../_guards/auth.service';
-import { AuthActionTypes, LogIn, LogInFailure, ResetState, UserInfo, SetUserProfile, UpdateUserInfo } from '../actions/user.action';
+import { AuthActionTypes, LogIn, LogInFailure, ResetState, UserInfo, SetUserProfile, UpdateUserInfo, AskOTPFor2FA } from '../actions/user.action';
 import { IndexedDBStorageService } from '../../../services/indexeddb-storage.service';
 import {SessionStorageService} from '../../../services/session-storage.service';
 import { Location } from "@angular/common";
@@ -63,7 +63,11 @@ export class AuthEffects{
       return this.authService.getProfile()
         .map(user => {
           user.token = data.token;
-          return this.store.dispatch(new UserInfo(user));
+          if (user.is_2fa_enable) {
+            return this.store.dispatch(new AskOTPFor2FA(user));
+          } else {
+            return this.store.dispatch(new UserInfo(user));
+          }
         })
         .catch((error) => {
           return of(new LogInFailure({ error }));
@@ -101,10 +105,14 @@ export class AuthEffects{
     ofType(AuthActionTypes.LOGIN_SUCCESS),
   );
 
-
   @Effect({ dispatch: false })
   LogInFailure: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_FAILURE)
+  );
+
+  @Effect({ dispatch: false })
+  AskOTPFor2FA: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.ASK_OTP_FOR_2FA)
   );
 
   @Effect({ dispatch: false })

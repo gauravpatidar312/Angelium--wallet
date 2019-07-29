@@ -105,12 +105,12 @@
                 <td class="value-col iconpaddfix" colspan="2">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary paddfix btn-sm {{ tfamodeSwitchText ? '': 'active'}}"
-                      (click)="openTFAMode(false)">
+                      (click)="openTFAModal(false)">
                       <input type="radio" name="options">
                       {{"pages.setting.off" | translate}}
                     </label>
                     <label  class="btn btn-secondary paddfix btn-sm {{ tfamodeSwitchText ? 'active': ''}}"
-                      (click)="openTFAMode(true, tfaTemplate)">
+                      (click)="openTFAModal(true, tfaTemplate)">
                       <input type="radio" name="options">
                       {{"pages.setting.on" | translate}}
                     </label>
@@ -180,7 +180,7 @@
                 <td class="title-col">{{"pages.setting.timezone" | translate}}</td>
                 <td colspan="2" class="td-padding">
                   <div class="status-dd-week dropup" ngbDropdown placement="top">
-                    <ng-select [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
+                    <ng-select autocomplete="false" [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
                       <ng-option *ngFor="let timezone of timezoneData" [value]="timezone">
                         {{timezone}}
                       </ng-option>
@@ -383,10 +383,10 @@
   </nb-card>
 </ng-template>
 
-<ng-template #tfaTemplate let-data let-refQR="dialogRef">
+<ng-template #tfaTemplate let-data let-ref2FA="dialogRef">
   <nb-card class="tfa-width">
     <nb-card-header class="image-scoll-card-body">
-      {{"pages.setting.enable2FA" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="refQR.close()"></i>
+      {{"pages.setting.enable2FA" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="ref2FA.close()"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <div class="enable-2fa text-2fa">{{"pages.setting.scanQRCodeText" | translate}}</div><br><br>
@@ -394,16 +394,16 @@
       <ngx-qrcode
         id="QR_Canvas"
         [qrc-element-type]="elementType"
-        [qrc-value]="userData?.referral_link"
+        [qrc-value]="qrCode"
         qrc-class="aclass"
         qrc-errorCorrectionLevel="L">
       </ngx-qrcode><br>
-      <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}</span><span class="text-2fa">{{secretKey}}</span><br><br>
+      <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}: </span><span class="text-2fa">{{secretKey}}</span><br><br>
       <span class="enable-2fa mr-3">{{"pages.setting.OTP" | translate}}</span>
       <input type="type" class="otp-margin" [(ngModel)]="tfaOtp" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput /><br /><br />
     </nb-card-body>
     <nb-card-footer class="text-center">
-      <button nbButton size="small" (click)="enable2FA()">{{"pages.setting.enable2FA" | translate}}</button>
+      <button nbButton size="small" (click)="verifyOTP(ref2FA)">{{"pages.setting.enable2FA" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
