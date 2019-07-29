@@ -49,7 +49,6 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
-    
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     TranslateModule.forRoot({
@@ -86,11 +85,10 @@ export class AppModule {
       // Check if user is already logged in on page refresh
       if (this.sessionStorage.getSessionStorage('loggedIn')) {
         // Check user it at login screen then auto logout user.
-        if(this.shareDataService.autoLogOut) {
+        if (this.shareDataService.autoLogOut) {
           this.storageService.resetStorage();
           this.shareDataService.autoLogOut = false;
-        }
-        else
+        } else
           this.store.dispatch(new UserInfo(data));
       } else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
         let t0 = Number(window.localStorage['timestamp']);
@@ -101,9 +99,15 @@ export class AppModule {
           this.sessionStorage.saveToSession('loggedIn', true);
           this.store.dispatch(new UserInfo(data));
         } else {
-          // This means user has closed the tab and opened again so logged user out.
-          console.warn('DB cleared for logout on tab close');
-          this.storageService.resetStorage();
+          const rememberUser = this.sessionStorage.getFromLocalStorage('rememberMe');
+          if (rememberUser) {
+            this.sessionStorage.saveToSession('loggedIn', true);
+            this.store.dispatch(new UserInfo(data));
+          } else {
+            // This means user has closed the tab and opened again so logged user out.
+            console.warn('DB cleared for logout on tab close');
+            this.storageService.resetStorage();
+          }
         }
       } else {
         // This means user is logged in and open new tab

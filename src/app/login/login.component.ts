@@ -97,35 +97,5 @@ export class LoginComponent implements OnInit {
         }
       }
     });
-    // this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
-    //   if (res.token) {
-    //     this.sessionStorageService.saveToSession('userInfo', res);
-    //     if (this.sessionStorageService.getFromSession('invitationCode')) {
-    //       this.sessionStorageService.deleteFromSession('invitationCode');
-    //     }
-    //     this.getUserSettingInfo();
-    //   } else {
-    //     this.formSubmitting = false;
-    //     this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
-    //   }
-    // });
-    // this.httpService.post(this.loginForm.value, 'jwt/api-token-auth/').subscribe((res?: any) => {
-    //   if (res.token) {
-    //     this.sessionStorageService.saveToSession('userInfo', res);
-    //     if (this.sessionStorageService.getFromSession('invitationCode')) {
-    //       this.sessionStorageService.deleteFromSession('invitationCode');
-    //     }
-    //     this.getUserSettingInfo();
-    //   } else {
-    //     this.formSubmitting = false;
-    //     this.toastrService.danger(ShareDataService.getErrorMessage(res), 'Login Failed');
-    //   }
-    // });
   }
-
-  // getUserSettingInfo() {
-  //   this.httpService.get('profile/').subscribe(data => {
-  //     this.router.navigate(['pages/dashboard']);
-  //   });
-  // }
 }
