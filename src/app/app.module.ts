@@ -37,6 +37,7 @@ import {environment} from '../environments/environment';
 import { ReportBugComponent } from './report-bug/report-bug.component';
 
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ExChangeModule } from './ex-change/ex-change.module';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -49,7 +50,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
-    
+    ExChangeModule,
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     TranslateModule.forRoot({
