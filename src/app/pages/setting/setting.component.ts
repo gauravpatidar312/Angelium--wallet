@@ -53,6 +53,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   isTicketResubmit: boolean = false;
   ticketSubmitting: boolean = false;
   secretKey: string = '';
+  qrCode: string = '';
   tfaOtp: string = '';
 
   resubmitTime: number = 60 * 1000;
@@ -455,6 +456,7 @@ export class SettingComponent implements OnInit, OnDestroy {
         this.httpService.get('secret-key-2fa/').subscribe((res?: any) => {
           if (res.status) {
             this.secretKey = res.secret_key;
+            this.qrCode = res.qr_code;
           } else {
             this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.setting.2FA'));
           }

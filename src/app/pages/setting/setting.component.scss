@@ -429,8 +429,12 @@
 .tfa-width {
   width: 362px;
   color: #e5e5e5;
-  .text-2fa{
+  .text-2fa {
     font-size: 15px;
+  }
+  .qr-code-tfa {
+    -webkit-box-shadow: 0 0 15px #06d691;
+    box-shadow: 0 0 15px #06d691;
   }
 }
 

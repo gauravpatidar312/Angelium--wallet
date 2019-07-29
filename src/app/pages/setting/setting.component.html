@@ -396,14 +396,8 @@
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
       <div class="enable-2fa text-2fa">{{"pages.setting.scanQRCodeText" | translate}}</div><br><br>
-      <span  class="enable-2fa">{{"pages.setting.QRCode" | translate}}</span><br><br>
-      <ngx-qrcode
-        id="QR_Canvas"
-        [qrc-element-type]="elementType"
-        [qrc-value]="secretKey"
-        qrc-class="aclass"
-        qrc-errorCorrectionLevel="L">
-      </ngx-qrcode><br>
+      <span class="enable-2fa">{{"pages.setting.QRCode" | translate}}</span><br><br>
+      <img class="qr-code-tfa" [src]="qrCode"><br><br>
       <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}: </span><span class="text-2fa">{{secretKey}}</span><br><br>
       <span class="enable-2fa mr-3">{{"pages.setting.OTP" | translate}}</span>
       <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput /><br /><br />
