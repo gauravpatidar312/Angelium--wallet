@@ -34,6 +34,7 @@ export class SettingComponent implements OnInit, OnDestroy {
   croppedImageSize: any = '';
   userImageBase64: any;
   r18modeSwitchText: boolean;
+  tfamodeSwitchText: boolean;
   newLoginPassword: any = '';
   confirmLoginPassword: any = '';
   oldLoginPassword: any = '';
@@ -442,6 +443,21 @@ export class SettingComponent implements OnInit, OnDestroy {
       } else {
         this.sweetAlertAgeCfrm();
       }
+    }
+  }
+
+  openTFAMode(mode, template) {
+    if (!mode) {
+      this.tfamodeSwitchText = mode;
+      return;
+    }
+
+    if (this.tfamodeSwitchText !== mode) {
+      this.tfamodeSwitchText = mode;
+      this.dialogService.open(template, {
+        closeOnBackdropClick: false,
+        autoFocus: false,
+      });
     }
   }
 
