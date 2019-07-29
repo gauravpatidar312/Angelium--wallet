@@ -86,13 +86,14 @@ table tbody tr:nth-of-type(even) {
   overflow-x:hidden !important;
 }
 
+/deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
+
+.tradingview-widget-container {
+  overflow: auto;
+}
 .items_margin{
   margin-bottom: 28px;
 }
-
-/deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
-
-
 
 @media all and (max-width: 800px) {
  .items_margin{
