@@ -140,7 +140,6 @@ export class AppComponent implements OnInit {
       const url = this.router.url.replace(/^\/+|\/+$/g, '');
       const bodyTag = jQuery('body');
       if (url) {
-        console.log(url)
         bodyTag.removeClass(function (index, css) {
           return (css.match(/(^|\s)pages-\S+/g) || []).join(' ');
         });
@@ -148,7 +147,7 @@ export class AppComponent implements OnInit {
           return (css.match(/(^|\s)games-\S+/g) || []).join(' ');
         });
         bodyTag.removeClass(function (index, css) {
-          return (css.match(/(^|\s)exchange\S+/g) || []).join(' ');
+          return (css.match(/(^|\s)exchange \S+/g) || []).join(' ');
         });
         bodyTag.addClass(url.replace(/[\/ ]/g, '-'));
       }
