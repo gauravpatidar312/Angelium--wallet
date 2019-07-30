@@ -144,6 +144,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(['pages/dashboard']);
   }
 
+  goToSetting() {
+    this.router.navigate(['pages/setting']);
+  }
+
   startSearch() {
     this.analyticsService.trackEvent('startSearch');
   }

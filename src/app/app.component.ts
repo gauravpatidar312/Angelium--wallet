@@ -1,7 +1,7 @@
 import {ApplicationRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AnalyticsService} from './@core/utils/analytics.service';
-import {NavigationStart, Router} from '@angular/router';
+import {NavigationStart, NavigationEnd, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
 import {SessionStorageService} from './services/session-storage.service';
 import {IndexedDBStorageService} from './services/indexeddb-storage.service';
@@ -11,6 +11,7 @@ import {concat, interval} from 'rxjs';
 import {first} from 'rxjs/operators';
 import {ShareDataService} from "./services/share-data.service";
 
+declare let jQuery: any;
 @Component({
   selector: 'ngx-app',
   template: '<particles [style]="particleStyle" [width]="particlewidth" [height]="particleheight" [params]="particleParams"></particles><router-outlet></router-outlet>',
@@ -50,11 +51,14 @@ export class AppComponent implements OnInit {
             }
           });
         }
+      } else if (event instanceof NavigationEnd) {
+        this.setPageClass();
       }
     });
 
     const lang = this.sessionStorage.getFromLocalStorage('languageData');
     this.setLanguage(lang);
+    this.setPageClass();
   }
 
   ngOnInit(): void {
@@ -129,6 +133,22 @@ export class AppComponent implements OnInit {
       },
       'retina_detect': true,
     };
+  }
+
+  setPageClass() {
+    if (this.router.url && this.router.url !== '/') {
+      const url = this.router.url.replace(/^\/+|\/+$/g, '');
+      const bodyTag = jQuery('body');
+      if (url) {
+        bodyTag.removeClass(function (index, css) {
+          return (css.match(/(^|\s)pages-\S+/g) || []).join(' ');
+        });
+        bodyTag.removeClass(function (index, css) {
+          return (css.match(/(^|\s)games-\S+/g) || []).join(' ');
+        });
+        bodyTag.addClass(url.replace(/[\/ ]/g, '-'));
+      }
+    }
   }
 
   setLanguage(data: any) {

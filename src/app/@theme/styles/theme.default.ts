@@ -119,7 +119,7 @@ export const DEFAULT_THEME = {
       chartGradientTo: '#3edd81',
       chartGradientFrom: '#3bddaf',
       chartAxisSplitLine: '#ebeef2',
-      chartShadowLineColor: '#100b48b8',
+      chartShadowLineColor: 'rgba(16, 11, 72, 0.72)',
 
       chartLineBottomShadowColor: '#eceff4',
 

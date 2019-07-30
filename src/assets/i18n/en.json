@@ -39,6 +39,7 @@
     "lastMonth": "Last Month",
     "lastWeek": "Last Week",
     "lastName": "Last Name",
+    "lottery": "Lottery",
     "month": "Month",
     "password": "Password",
     "profit": "Profit",
@@ -83,6 +84,23 @@
   },
   "footer":{
     "allRightsReservedBy": "All rights reserved by"
+  },
+  "games":{
+    "lottery":{
+      "changeYourDestiny": "CHALLENGE YOUR DESTINY",
+      "betting": "Betting",
+      "bettingAmount": "Betting Amount",
+      "assets": "Assets",
+      "challengeComment": "Challenge comment (Optional)",
+      "winningComment": "Winning comment (Optional)",
+      "howToPay?": "How to Pay?",
+      "playMessage": "Place your bet with my asset in your wallet. The random number algorithm in the smartContract will fairly prize from all the bet.",
+      "challenger": "Challenger",
+      "comment": "Comment",
+      "address": "Address",
+      "winners": "Winners",
+      "smartContracts": "Smart Contracts"
+    }
   },
   "pages":{
     "dashboard":{
@@ -280,6 +298,8 @@
       "downloadQRCodeOfYourReferralLink":"Download QR Code of your referral link",
       "name": "Name",
       "eMail": "E-mail",
+      "enable2FA": "Enable 2FA",
+      "enterOTP": "Enter OTP",
       "goldAngel": "GOLD ANGEL",
       "language": "Language",
       "merge": "Merge",
@@ -290,6 +310,7 @@
       "on": "ON",
       "off": "OFF",
       "or": "OR",
+      "OTP": "OTP",
       "pinkAngel": "PINK ANGEL",
       "qr": "QR",
       "QRCode" : "QR Code",
@@ -298,6 +319,7 @@
       "rank": "Rank",
       "referralLink": "Referral Link",
       "reportBug": "Report bug",
+      "scanQRCodeText": "Scan the following QR code or enter the following secret key in Google Authenticator app",
       "support": "Support",
       "secretKey": "Secret Key",
       "silverAngel": "SILVER ANGEL",
@@ -326,7 +348,9 @@
         "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
-        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space.",
+        "2FAEnabled": "Two factor authentication activated.",
+        "2FADisabled": "Two factor authentication deactivated."
       },
       "usernameOnlyEnglish": "New Username (English only)",
       "usd": "usd",

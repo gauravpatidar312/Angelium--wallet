@@ -102,8 +102,20 @@
               </tr>
               <tr *ngIf="!isProduction">
                 <td class="title-col">{{"pages.setting.2FA" | translate}}</td>
-                <td class="value-col">**************</td>
-                <td class="action-col iconpaddfix"></td>
+                <td class="value-col iconpaddfix" colspan="2">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary paddfix btn-sm {{ tfamodeSwitchText ? '': 'active'}}"
+                      (click)="openTFAModal(false)">
+                      <input type="radio" name="options">
+                      {{"pages.setting.off" | translate}}
+                    </label>
+                    <label  class="btn btn-secondary paddfix btn-sm {{ tfamodeSwitchText ? 'active': ''}}"
+                      (click)="openTFAModal(true, tfaTemplate)">
+                      <input type="radio" name="options">
+                      {{"pages.setting.on" | translate}}
+                    </label>
+                  </div>
+                </td>
               </tr>
               <tr *ngIf="!isProduction">
                 <td class="title-col">{{"pages.setting.secretKey" | translate}}</td>
@@ -174,7 +186,7 @@
                 <td class="title-col">{{"pages.setting.timezone" | translate}}</td>
                 <td colspan="2" class="td-padding">
                   <div class="status-dd-week dropup" ngbDropdown placement="top">
-                    <ng-select [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
+                    <ng-select autocomplete="false" [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
                       <ng-option *ngFor="let timezone of timezoneData" [value]="timezone">
                         {{timezone}}
                       </ng-option>
@@ -373,6 +385,25 @@
     <nb-card-footer>
       <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">{{"common.submit" | translate}}</button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelTradePasswordDialog(ref)">{{"common.cancel" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #tfaTemplate let-data let-ref2FA="dialogRef">
+  <nb-card class="tfa-width">
+    <nb-card-header class="image-scoll-card-body">
+      {{"pages.setting.enable2FA" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="ref2FA.close()"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <div class="enable-2fa text-2fa">{{"pages.setting.scanQRCodeText" | translate}}</div><br><br>
+      <span class="enable-2fa">{{"pages.setting.QRCode" | translate}}</span><br><br>
+      <img class="qr-code-tfa" [src]="qrCode"><br><br>
+      <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}: </span><span class="text-2fa">{{secretKey}}</span><br><br>
+      <span class="enable-2fa mr-3">{{"pages.setting.OTP" | translate}}</span>
+      <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput /><br /><br />
+    </nb-card-body>
+    <nb-card-footer class="text-center">
+      <button nbButton size="small" (click)="verifyOTP(ref2FA)">{{"pages.setting.enable2FA" | translate}}</button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

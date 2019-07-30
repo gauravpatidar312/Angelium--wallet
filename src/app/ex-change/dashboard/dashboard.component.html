@@ -1,4 +1,149 @@
-<ngx-board></ngx-board>
+<!-- <ngx-board></ngx-board>
 <ngx-pair></ngx-pair>
 <ngx-trade></ngx-trade>
 <ngx-trade-history></ngx-trade-history>
+ -->
+
+<div class="row wrapper d-flex">
+    <div class="col-lg-3">
+      <ngx-pair class="main one order-1"></ngx-pair>
+      <ngx-trade class="main two"></ngx-trade>
+    </div>
+    <div class="col-lg-6 nopadd mobpaddfix">
+      <nb-card class="main three">
+        <nb-card-body class="trade-chart">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div id="tradingview_58f3c" class="twc"></div>
+          </div>
+          <!-- TradingView Widget END -->
+        </nb-card-body>
+      </nb-card>
+  
+      <nb-card class="main four">
+          <nb-card-header class="headsection">  <ul id="main-navigation" class="nav  mytradeLine empty_width">
+              <li class="pointer active">
+                <a data-toggle="pill">MY OPEN ORDERS</a>
+              </li>
+              <li class="pointer">
+                <a data-toggle="pill">MY TRADE HISTORY</a>
+              </li>
+            </ul></nb-card-header>
+  
+        <nb-card-body>
+          <div class="clearfix"></div>
+  
+          <div class="row">
+              <div class="available available-items">
+  
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th width="14%">Time</th>
+                  <th width="14%">Pair</th>
+                  <th width="10%" align="center">Type</th>
+                  <th width="15%">Price</th>
+                  <th width="18%">Amount</th>
+                  <th width="17%">Total Price</th>
+                  <th width="12%" class="text-right">Fill %</th>
+                </tr>
+              </thead>
+            </table>
+              </div> 
+            <div class="available-items items_margin">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td width="14%">07.13 22:42</td>
+                    <td width="14%">ANX / BTC</td>
+                    <td width="10%" align="center"><span class="pink-text">BUY</span></td>
+                    <td width="15%">0.8871 BTC</td>
+                    <td width="18%">9,236,543 ANX</td>
+                    <td width="17%">0.32444 BTC</td>
+                    <td width="12%" align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="green-text">SELL</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="pink-text">BUY</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="green-text">SELL</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="pink-text">BUY</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="green-text">SELL</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="pink-text">BUY</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="green-text">SELL</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                  <tr>
+                    <td>07.13 22:42</td>
+                    <td>ANX / BTC</td>
+                    <td align="center"><span class="pink-text">BUY</span></td>
+                    <td>0.8871 BTC</td>
+                    <td>9,236,543 ANX</td>
+                    <td>0.32444 BTC</td>
+                    <td align="right">37.4%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+  
+    </div>
+    <div class="col-lg-3">
+      <ngx-board class="main five"></ngx-board>
+      <ngx-trade-history class="main six"></ngx-trade-history>
+    </div>
+  </div>
