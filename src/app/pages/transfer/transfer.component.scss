@@ -14,9 +14,6 @@
     -moz-appearance: textfield;
   }
 
-  /deep/ ng2-smart-table table tr th {
-    width: 20%;
-  }
 
   .cardHeadercss {
     padding: 0px;
@@ -133,10 +130,6 @@
     .sm-padding-margin-remove {
       padding: 1.5rem 0 0 0 !important;
       margin: 0 !important;
-    }
-
-    /deep/ ng2-smart-table table tr td .action-width {
-      width: 120px !important;
     }
   }
 
