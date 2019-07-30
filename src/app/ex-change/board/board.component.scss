@@ -1,4 +1,3 @@
-
 @import '../../@theme/styles/themes';
 @import '~@nebular/theme/styles/global/breakpoints';
 
@@ -9,9 +8,6 @@
   }
   nb-card-body {
     overflow: visible;
-  }
-  .no_set_padding{
-    padding-left: 17px;
   }
 }
 nb-card-body {
@@ -25,8 +21,11 @@ nb-card-body {
   border-bottom: 0px;
   padding-bottom: 0px!important;
 }
-.no_set_padding{
-  padding-left: 45px;
+
+
+
+.theading-text{
+  color: #cee80b;
 }
 .secondaryhead{
   display:block!important;
@@ -34,11 +33,6 @@ nb-card-body {
   color: #575bc7;
   font-weight: 400;
 }
-
-.theading-text{
-  color: #cee80b;
-}
-
 .boardtable{width: 100%;}
 
 .boardtable th{
@@ -50,7 +44,6 @@ nb-card-body {
 .positionSet{
   padding-top: 10px;
 }
-.boardtable tr:nth-child(even) {background: #111550}
 
 .totalfield{
   border-bottom: 1px solid #575bc7;

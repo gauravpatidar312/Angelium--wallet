@@ -11,6 +11,10 @@ import { PairComponent } from './pair/pair.component';
 
 import { ExChangeRoutingModule } from './ex-change-routing.module';
 import { ExChangeComponent } from './ex-change.component';
+import { BoardComponent } from './board/board.component';
+import { TradeHistoryComponent } from './trade-history/trade-history.component';
+import { TradeComponent } from './trade/trade.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const ExChange_COMPONENTS = [
   ExChangeComponent,
@@ -18,7 +22,7 @@ const ExChange_COMPONENTS = [
 
 @NgModule({
   imports: [
-ExChangeRoutingModule,
+    ExChangeRoutingModule,
     ThemeModule,
     Ng2SmartTableModule,
     ThemeModule,
@@ -31,6 +35,10 @@ ExChangeRoutingModule,
   declarations: [
     ...ExChange_COMPONENTS,
     PairComponent,
+    BoardComponent,
+    TradeHistoryComponent,
+    TradeComponent,
+    DashboardComponent,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '#' },
