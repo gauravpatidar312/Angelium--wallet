@@ -46,14 +46,13 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-export const firebaseConfig = {
-  apiKey: '<enter you api key here>',
-  authDomain: 'my-pwa-first-notification.firebaseapp.com',
-  databaseURL: 'https://my-pwa-first-notification.firebaseio.com',
-  projectId: 'my-pwa-first-notification',
-  storageBucket: 'my-pwa-first-notification.appspot.com',
-  messagingSenderId: '1019013830321'
-};
+const firebaseConfig = {
+  apiKey: "AIzaSyCdsmDvoHA-o2UnraISqN5UKcIt3VPGl94",
+  databaseURL: "https://angelium-71cf5.firebaseio.com",
+  projectId: "angelium-71cf5",
+  messagingSenderId: "185609886814",
+  appId: "1:185609886814:web:ee499886fd962d54"
+}
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent, ReportBugComponent],

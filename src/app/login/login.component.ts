@@ -11,6 +11,7 @@ import {Store} from '@ngrx/store';
 import {LogIn} from '../@core/store/actions/user.action';
 import {AppState, selectAuthState} from '../@core/store/app.state';
 import { AuthEffects } from '../@core/store/effects/auth.effect';
+import {MessagingService} from '../messaging.service';
 
 declare let jQuery: any;
 @Component({
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
               public translate: TranslateService,
               private authService: AuthService,
               private store: Store<AppState>,
-              private authEffects: AuthEffects) {
+              private authEffects: AuthEffects,
+              private msgService: MessagingService) {
     // const currentUser = this.authService.isAuthenticated();
     // if (currentUser) {
     //   this.router.navigate(['/pages/setting']);
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      dev_id: ['']
     });
   }
 
@@ -77,7 +80,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  onSubmitLogin() {
+  async onSubmitLogin() {
+    var token = await this.msgService.getToken();
+    this.loginForm.controls.dev_id.setValue(token);
+
     if (!this.isVerifiedCaptcha) {
       this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
       return;

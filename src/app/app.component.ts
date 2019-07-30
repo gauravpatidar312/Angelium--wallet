@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
     this.msgService.getPermission();
     this.msgService.receiveMessage();
     this.message = this.msgService.currentMessage;
+    
     this.analytics.trackPageViews();
     if (this.swUpdate.isEnabled) {
       // Allow the app to stabilize first, before starting polling for updates with `interval()`.

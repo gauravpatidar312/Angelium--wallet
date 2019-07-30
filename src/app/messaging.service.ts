@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-
 import 'rxjs/add/operator/take';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable, empty, from, of, throwError, pipe } from 'rxjs';
+import { mergeMap, catchError, map, switchMap, concat, defaultIfEmpty } from 'rxjs/operators';
+import { FirebaseOptions, FirebaseAppConfig, runOutsideAngular } from '@angular/fire';
+import {ToastrService} from './services/toastr.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +16,8 @@ export class MessagingService {
   messaging = firebase.messaging();
   currentMessage: any = new BehaviorSubject(null);
 
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) { }
-
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,
+    private toastrService: ToastrService) {}
 
   updateToken(token) {
     this.afAuth.authState.take(1).subscribe(user => {
@@ -27,11 +31,9 @@ export class MessagingService {
   getPermission() {
     this.messaging.requestPermission()
       .then(() => {
-        console.log('Notification permission granted.');
         return this.messaging.getToken();
       })
       .then(token => {
-        console.log(token);
         this.updateToken(token);
       })
       .catch((err) => {
@@ -39,11 +41,19 @@ export class MessagingService {
       });
   }
 
+  async getToken(){
+    var tokan:any;
+    await this.messaging.getToken().then(val=>{
+      tokan = val;
+    });
+    return tokan;
+  }
+
   receiveMessage() {
     this.messaging.onMessage((payload) => {
-      console.log('Message received.', payload);
+      this.toastrService.success(payload.notification.body, payload.notification.title);
       this.currentMessage.next(payload);
     });
-
   }
+
 }
