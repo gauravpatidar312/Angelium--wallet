@@ -284,6 +284,7 @@
     },
     "setting": {
       "angel": "ANGEL",
+      "ageConfirmation": "Age Confirmation",
       "reloadCacheMessage" : "Are you sure to clear the cache and reload the page?",
       "currency": "通货",
       "comingSoon": "Coming soon",
@@ -293,6 +294,7 @@
       "clickToReport": "点击报告",
       "clearCache": "Clean Cache",
       "createTicket": "Create Ticket",
+      "disableTFA": "Disable 2FA",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名称",
@@ -328,10 +330,12 @@
       "ticketDescription": "Ticket Description",
       "timezone": "Timezone",
       "toastr":{
+        "ageConfirmationText": "Are you really over 18?",
         "changeUsername": "更改用户名",
         "changeLoginPassword": "更改登录密码",
         "changeTradePassword": "更改交易密码",
         "countryUpdate": "国家更新成功",
+        "disableTFAText": "Are you sure to disable Two Factor Authentication?",
         "enterValueInAllFields": "请在所有字段中输入值。",
         "languageUpdateSuccessfully": "语言更新成功！",
         "linkCopiedSuccessfully": "链接复制成功！",

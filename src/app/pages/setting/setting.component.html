@@ -400,10 +400,13 @@
       <img class="qr-code-tfa" [src]="qrCode"><br><br>
       <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}: </span><span class="text-2fa">{{secretKey}}</span><br><br>
       <span class="enable-2fa mr-3">{{"pages.setting.OTP" | translate}}</span>
-      <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput /><br /><br />
+      <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" (keyup.enter)="verifyOTP(ref2FA)" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput /><br /><br />
     </nb-card-body>
     <nb-card-footer class="text-center">
-      <button nbButton size="small" (click)="verifyOTP(ref2FA)">{{"pages.setting.enable2FA" | translate}}</button>
+      <button nbButton [disabled]="otpSubmitting" size="small" class="button-width" (click)="verifyOTP(ref2FA)">
+        <span *ngIf="!otpSubmitting">{{"pages.setting.enable2FA" | translate}}</span>
+        <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
+      </button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
