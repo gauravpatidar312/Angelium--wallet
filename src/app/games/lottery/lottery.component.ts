@@ -1,4 +1,5 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
@@ -22,15 +23,20 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   walletType: string = 'SELECT';
   selectWallet: any;
   betData: any;
+  totalBetAmount: any;
   lotteryData: any;
   winnerData: any;
-  smartDetailData: any;
+  smartContract: any;
   timerData: any;
-  stateDateTimer: any;
-  endDateTimer: any;
+  stateDate: any;
+  lotteryDate: any;
   isComment: boolean = true;
+  placeLottery: any = [];
+  formSubmitting: boolean = false;
+  fetchingAmount: boolean = false;
 
   constructor(private httpService: HttpService,
+              private http: HttpClient,
               private toastrService: ToastrService,
               private shareDataService: ShareDataService,
               public translate: TranslateService) {
@@ -70,6 +76,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     this.getCurrentLotteryDetail();
     this.getWallet();
     this.getLotteryList();
+    this.getSmartContract();
   }
 
   getCurrentLotteryDetail() {
@@ -77,10 +84,21 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       this.currentLotteryData = res;
       this.setTimer();
       this.getBetList();
-      this.getSmartDetail();
+      this.getWinnerList();
       const winnerCounts = _.times(this.currentLotteryData.max_winners, String);
+      const self = this;
       this.max_winners = _.map(winnerCounts, function (value) {
-        return _.sum([Number(value), 1]);
+        const obj: any = {};
+        obj.winnerId = Number(value) + 1;
+        if (obj.winnerId === 1)
+          obj.prizeText = self.translate.instant('games.lottery.stPrize');
+        else if (obj.winnerId === 2)
+          obj.prizeText = self.translate.instant('games.lottery.ndPrize');
+        else if (obj.winnerId === 3)
+          obj.prizeText = self.translate.instant('games.lottery.rdPrize');
+        else
+          obj.prizeText = self.translate.instant('games.lottery.thPrize');
+        return obj;
       });
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
@@ -112,16 +130,18 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   getWinnerList() {
-    this.httpService.get('game/get-winner-list/').subscribe((res?: any) => {
-      this.winnerData = res.data;
-    }, (err) => {
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
-    });
-  }
-
-  getSmartDetail() {
-    this.httpService.get(`game/get-smart-contract-detail/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
-      this.smartDetailData = res;
+    this.httpService.get(`game/get-lottery-winner-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
+      this.winnerData = _.map(res, (winner) => {
+        if (winner.winner_rank === 1)
+          winner.prizeText = this.translate.instant('games.lottery.stPrize');
+        else if (winner.winner_rank === 2)
+          winner.prizeText = this.translate.instant('games.lottery.ndPrize');
+        else if (winner.winner_rank === 3)
+          winner.prizeText = this.translate.instant('games.lottery.rdPrize');
+        else
+          winner.prizeText = this.translate.instant('games.lottery.thPrize');
+        return winner;
+      });
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -129,6 +149,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
   onChangeWallet(walletType: string): void {
     this.walletType = walletType;
+    this.setAmount(this.placeLottery.bet_amount);
     if (this.walletType !== 'SELECT') {
       this.selectWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
@@ -142,8 +163,74 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getSmartContract() {
+    this.http.get('assets/smart-contract.cpp', { responseType: 'text' }).subscribe((data?: any) => {
+      this.smartContract = data;
+    });
+  }
+
   changeBetList(value) {
     this.isComment = value === 'Comment' ? true : false;
+  }
+
+  onPlaceLottery() {
+    if (!(this.selectWallet && this.selectWallet.wallet_type)) {
+      this.toastrService.danger(this.translate.instant('games.lottery.toastr.selectWalletType'), this.translate.instant('common.lottery'));
+      return;
+    }
+
+    if (!this.placeLottery.bet_amount) {
+      this.toastrService.danger(this.translate.instant('games.lottery.toastr.betAmountMessage'), this.translate.instant('common.lottery'));
+      return;
+    }
+
+    if (Number(this.placeLottery.bet_amount) > Number(this.currentLotteryData.max_bet)) {
+      this.toastrService.danger(this.translate.instant('games.lottery.toastr.youDontHaveSufficientBetToTotalBets'),
+        this.translate.instant('common.lottery'));
+      return;
+    }
+
+    if (Number(this.totalBetAmount) > Number(this.selectWallet.wallet_amount)) {
+      this.toastrService.danger(this.translate.instant('games.lottery.toastr.youDontHaveSufficientBalanceToBetting'),
+        this.translate.instant('common.lottery'));
+      return;
+    }
+
+    const placeLotteryData = {
+      'lottery_id': this.currentLotteryData.lottery_id,
+      'bet_amount': this.placeLottery.bet_amount,
+      'user_wallet': this.selectWallet.id,
+      'comment': this.placeLottery.comment || '',
+      'winning_comment': this.placeLottery.winning_comment || ''
+    };
+
+    this.formSubmitting = true;
+    this.httpService.post(placeLotteryData, 'game/place-lottery-bet/').subscribe((res?: any) => {
+      if (res.data) {
+        this.formSubmitting = false;
+        this.getBetList();
+        this.getWinnerList();
+        this.toastrService.success(this.translate.instant('games.lottery.toastr.bettingSuccessfullyCompleted'), this.translate.instant('common.lottery'));
+      }
+    }, (err) => {
+      this.formSubmitting = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
+    });
+  }
+
+  setAmount(value) {
+    if (!value) {
+      this.totalBetAmount = '';
+      return;
+    }
+    this.fetchingAmount = true;
+    this.httpService.get(`game/get-currency-calculation/?lottery_id=${this.currentLotteryData.lottery_id}&bet_amount=${this.placeLottery.bet_amount}&currency=${this.selectWallet.wallet_type}`).subscribe((res?: any) => {
+      this.fetchingAmount = false;
+      this.totalBetAmount = res.amount;
+    }, (err) => {
+      this.fetchingAmount = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
+    });
   }
 
   setTimer() {
@@ -151,9 +238,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     const endDate = moment(this.currentLotteryData.end_datetime);
     const currentDate = moment();
     if (startDate > currentDate) {
-      this.stateDateTimer = startDate;
+      this.stateDate = moment(startDate).format('YYYY.MM.DD HH:mm:ss');
     } else if (endDate <= currentDate) {
-      this.endDateTimer = 'End lottery';
+      this.lotteryDate = 'Lottery finished';
     } else {
       this.timerData = Observable
         .interval(1000)
@@ -180,5 +267,6 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
     const challengeDiv = jQuery('#betting-body').height() + jQuery('#betting-footer').height() + 70;
     jQuery('#challenges-body').css({height: challengeDiv});
+    jQuery('#challenges-body').css({maxHeight: challengeDiv});
   }
 }

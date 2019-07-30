@@ -449,7 +449,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     }
   }
 
-  openTFAModal(mode, template) {
+  openTFAModal(mode, template?: any) {
     if (this.tfamodeSwitchText !== mode) {
       this.tfamodeSwitchText = mode;
       if (mode) {
