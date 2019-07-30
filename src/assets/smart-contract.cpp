@@ -4,6 +4,8 @@
 #include <eosiolib/symbol.hpp>
 #include "oraclize/eos_api.hpp"
 
+
+
 using namespace eosio;
 
 class [[eosio::contract]] lottery : public eosio::contract {
@@ -55,8 +57,8 @@ class [[eosio::contract]] lottery : public eosio::contract {
         {
             records.emplace(user, [&]( auto& row ) {
                 row.user = user;
-                row.betAmount = number;
-                row.lotteryid = lotteryid;
+                row.betAmount = betAmount;
+                row.lotteryid = number;
                 row.ccomment = ccomment;
                 row.wincomment = wincomment;
             });
@@ -66,7 +68,7 @@ class [[eosio::contract]] lottery : public eosio::contract {
             permission_level{user,"active"_n},
             "angeliumsoul"_n,
             "transfer"_n,
-            std::make_tuple(user,_self,betAmount,"Placing Bet XP Tokens")
+            std::make_tuple(user,_self,betAmount,std::string("Placing Bet XP Tokens"))
         ).send();
     }
 
