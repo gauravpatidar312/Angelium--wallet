@@ -144,7 +144,7 @@ input[type='number'] {
   }
 
   .winner-name-span {
-    width: 98px;
+    width: 130px;
     display: inline-block;
     color: #ffffff;
     text-align: right;
@@ -309,6 +309,52 @@ input[type='number'] {
     border: 2px solid #7659ff !important;
   }
 
+  .smartContract {
+    max-height: 400px;
+    color: #d1d1ff;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  }
+
+  /deep/ .input-group .form-control:first-child:not(:only-child), .input-group .input-group-addon:first-child, .input-group .input-group-prepend .btn:first-child, .input-group .input-group-btn .btn:first-child {
+    border-top-right-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+  }
+
+
+  .total-amount {
+    position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        color: white;
+        margin-bottom: 0;
+      }
+    }
+    span {
+      position: absolute;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
+    }
+  }
 
   @media (min-width: 375px) and (max-width: 480px) {
     .time-div {
