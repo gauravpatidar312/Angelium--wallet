@@ -1,9 +1,9 @@
 <nb-card class="board">
-    <nb-card-header class="headsection">Pair</nb-card-header>
-    <nb-card-body>
-      <div class="row">
-          <div class="available-items">
-  
+  <nb-card-header class="headsection">Pair</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="available-items">
+
         <table class="boardtable">
           <thead>
             <tr>
@@ -19,70 +19,17 @@
             </tr>
           </thead>
         </table>
-          </div>
-        <div class="available-items">
-          <table class="boardtable">
-     
-              <tr>
-                <td class="text-left positionSet">0.0033</td>
-                <td class="text-center positionSet">65.6542</td>
-                <td class="changetext positionSet">0.8771</td>
-              </tr>
-               <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-              <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-               <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-              <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-               <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-               <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-              <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-              <tr>
-                <td class="text-left">ANX/BTC</td>
-                <td class="text-center">65.6542</td>
-                <td class="changetext">0.8771</td>
-              </tr>
-              <tr>
-                  <td class="text-left">ANX/BTC</td>
-                  <td class="text-center">65.6542</td>
-                  <td class="changetext">0.8771</td>
-                </tr>
-              <tr>
-                  <td class="text-left">ANX/BTC</td>
-                  <td class="text-center">65.6542</td>
-                  <td class="changetext">0.8771</td>
-                </tr>
-             
-          </table>
-        </div>
       </div>
-    </nb-card-body>
-  </nb-card>
-  
-  
+      <div class="available-items">
+        <table class="boardtable">
+
+          <tr *ngFor="let pair of pairs">
+            <td class="text-left positionSet" (click)="clickPair(pair)">{{pair.symbol.split(':')[1]}}</td>
+            <td class="text-center">65.6542</td>
+            <td class="changetext positionSet">0.8771</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

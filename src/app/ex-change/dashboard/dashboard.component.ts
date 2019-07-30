@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ViewChild, OnInit } from '@angular/core';
+import { PairComponent } from '../pair/pair.component';
 declare let jQuery: any;
 declare const TradingView: any;
 @Component({
@@ -7,9 +8,10 @@ declare const TradingView: any;
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  
+dataSet:string;
   constructor() { }
-
+  
   ngOnInit() {
   }
 
@@ -18,23 +20,13 @@ export class DashboardComponent implements OnInit {
       jQuery('ul.mytradeLine li.active').removeClass('active');
       jQuery(this).parent('li').addClass('active');
     });
-    new TradingView.widget(
-      {
-        "width": 800,
-        "height": 500,
-        "symbol": "BITFINEX:XRPUSD",
-        "timezone": "Etc/UTC",
-        "theme": "Dark",
-        "style": "1",
-        "locale": "en",
-        "toolbar_bg": "#f1f3f6",
-        "enable_publishing": false,
-        "withdateranges": true,
-        "range": "5d",
-        "allow_symbol_change": true,
-        "container_id": "tradingview_58f3c"
-      }
-    );
+    
+    
+  }
+
+
+  receiveMessage($event) {
+    new TradingView.widget($event);
   }
 
 }

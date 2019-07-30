@@ -43,7 +43,7 @@
 
 
   .twc > div { 
-    background-color: yellow;
+    // background-color: yellow;
     height: 355px !important;
     width: 100% !important
   }
@@ -105,7 +105,7 @@ ul#main-navigation{
   border-bottom: 0px solid #dee2e6;
   color: #7dff01;
 }
-tbody tr{ color: #ffffff; font-size: 12px;    font-family: 'Nunito Sans', sans-serif;}
+tbody tr{ color: #ffffff; font-size: 12px; cursor: pointer;   font-family: 'Nunito Sans', sans-serif;}
 table tbody tr:nth-of-type(even) {
   background: #111550;
 }
@@ -137,31 +137,37 @@ table tbody tr:nth-of-type(even) {
 .items_margin{
   margin-bottom: 28px;
 }
-
-@media all and (max-width: 800px) {
- .items_margin{
-  margin-bottom: 0px;
-
- }
-  .wrapper{
+.wrapper {
     display: flex;
-    flex-direction: column;
-  }
-  .row{
-    display: flex;
-    flex-direction: column;
-  }
-  .main{
-    flex:1;
-  }
-  .five{
-    order:1
-  }
-  .four{
-    order: 2;
-  }
-  .six{
-    order: 3
-  }
+    flex-wrap: wrap;
 }
 
+.col-lg-12 {
+    display: flex;
+    flex: 0 0 100%;
+}
+
+.thing {
+    background-color: #eaeaea;
+    flex: 1;
+    margin: 10px;
+    padding: 15px;
+}
+
+@media screen and ( max-width: 800px) {
+    .four {
+        order: 1;
+    }
+    .b {
+        order: 2;
+    }
+    .c {
+        order: 4;
+    }
+    .d {
+        order: 3;
+    }
+    .b > div {
+        background-color: red;
+    }
+}
