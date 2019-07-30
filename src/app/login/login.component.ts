@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean = false;
   formSubmitting: boolean = false;
+  otpSubmitting: boolean = false;
   isVerifiedCaptcha = false;
   rememberMe: boolean = false;
   tfaOtp: string;
@@ -101,13 +102,17 @@ export class LoginComponent implements OnInit {
       'email': this.user.email,
       'otp': this.tfaOtp
     };
+
+    this.otpSubmitting = true;
     this.httpService.post(data, 'verify-2fa-otp/').subscribe((res?: any) => {
       if (res.status) {
         ref.close(true);
       } else {
+        this.otpSubmitting = false;
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.setting.2FA'));
       }
     }, (err) => {
+      this.otpSubmitting = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
     });
   }

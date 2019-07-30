@@ -189,12 +189,12 @@ export class SettingComponent implements OnInit, OnDestroy {
 
   sweetAlertAgeCfrm() {
     Swal.fire({
-      title: 'Age Confirmation',
-      text: 'Are you really over 18?',
+      title: this.translate.instant('pages.setting.ageConfirmation'),
+      text: this.translate.instant('pages.setting.toastr.ageConfirmationText'),
       type: 'info',
       showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
+      confirmButtonText: this.translate.instant('swal.yesSure'),
+      cancelButtonText: this.translate.instant('swal.cancel')
     }).then((result) => {
       if (result.value) {
         this.userData.age_confirm = true;
@@ -449,7 +449,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     }
   }
 
-  openTFAModal(mode, template) {
+  openTFAModal(mode, template?: any) {
     if (this.tfamodeSwitchText !== mode) {
       this.tfamodeSwitchText = mode;
       if (mode) {
@@ -472,12 +472,12 @@ export class SettingComponent implements OnInit, OnDestroy {
         });
       } else {
         Swal.fire({
-          title: 'Disable 2FA',
-          text: 'Are you sure to disable Two Factor Authentication?',
+          title: this.translate.instant('pages.setting.disableTFA'),
+          text: this.translate.instant('pages.setting.toastr.disableTFAText'),
           type: 'info',
           showCancelButton: true,
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'Cancel'
+          confirmButtonText: this.translate.instant('swal.yesSure'),
+          cancelButtonText: this.translate.instant('swal.cancel')
         }).then((result) => {
           if (result.value) {
             this.httpService.put({'is_2fa_enable': false}, 'update-2fa/').subscribe((resUpdate?: any) => {
@@ -508,25 +508,32 @@ export class SettingComponent implements OnInit, OnDestroy {
       'email': this.userData.email,
       'otp': this.tfaOtp
     };
+
+    this.otpSubmitting = true;
     this.httpService.post(data, 'verify-2fa-otp/').subscribe((res?: any) => {
       if (res.status) {
         this.httpService.put({'is_2fa_enable': true}, 'update-2fa/').subscribe((resUpdate?: any) => {
           if (resUpdate.status) {
             this.tfaOtp = null;
+            this.otpSubmitting = false;
             this.userData.is_2fa_enable = true;
             this.sessionStorage.updateUserState(this.userData);
             this.toastrService.success(this.translate.instant('pages.setting.toastr.2FAEnabled'), this.translate.instant('pages.setting.2FA'));
             ref.close(true);
           } else {
+            this.otpSubmitting = false;
             this.toastrService.danger(this.shareDataService.getErrorMessage(resUpdate), this.translate.instant('pages.setting.2FA'));
           }
         }, (err) => {
+          this.otpSubmitting = false;
           this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
         });
       } else {
+        this.otpSubmitting = false;
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.setting.2FA'));
       }
     }, (err) => {
+      this.otpSubmitting = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.setting.2FA'));
     });
   }
