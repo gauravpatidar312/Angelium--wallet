@@ -9,20 +9,20 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ThemeModule } from '../@theme/theme.module';
 import { PairComponent } from './pair/pair.component';
 
-import { ExChangeRoutingModule } from './ex-change-routing.module';
-import { ExChangeComponent } from './ex-change.component';
+import { ExchangeRoutingModule } from './exchange-routing.module';
+import { ExchangeComponent } from './exchange.component';
 import { BoardComponent } from './board/board.component';
 import { TradeHistoryComponent } from './trade-history/trade-history.component';
 import { TradeComponent } from './trade/trade.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const ExChange_COMPONENTS = [
-  ExChangeComponent,
+  ExchangeComponent,
 ];
 
 @NgModule({
   imports: [
-    ExChangeRoutingModule,
+    ExchangeRoutingModule,
     ThemeModule,
     Ng2SmartTableModule,
     ThemeModule,
@@ -44,4 +44,4 @@ const ExChange_COMPONENTS = [
     { provide: APP_BASE_HREF, useValue: '#' },
   ],
 })
-export class ExChangeModule { }
+export class ExchangeModule { }

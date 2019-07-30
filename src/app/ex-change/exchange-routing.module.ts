@@ -1,12 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import { ExChangeComponent } from './ex-change.component';
-import { PairComponent } from './pair/pair.component';
+import { ExchangeComponent } from './exchange.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [{
   path: '',
-  component: ExChangeComponent,
+  component: ExchangeComponent,
   children: [{
     path: '',
     component: DashboardComponent,
@@ -17,5 +16,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ExChangeRoutingModule {
+export class ExchangeRoutingModule {
 }
