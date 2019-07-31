@@ -78,11 +78,11 @@
 <ng-template #loginOTPTemplate let-data let-refOTP="dialogRef">
   <nb-card class="nb-card-width">
     <nb-card-header>
-      {{"pages.setting.enterOTP" | translate}}
+      {{"pages.setting.googleCode" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="refOTP.close()"></i>
     </nb-card-header>
     <nb-card-body>
-      <input type="password" class="input-width" [(ngModel)]="tfaOtp" (keyup.enter)="verifyOTP(refOTP)" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput />
+      <input type="password" class="input-width" [(ngModel)]="tfaOtp" (keyup.enter)="verifyOTP(refOTP)" placeholder="{{'pages.setting.2FAcode' | translate}}" nbInput />
     </nb-card-body>
     <nb-card-footer class="text-center">
       <button nbButton [disabled]="otpSubmitting" size="small" class="button-width" (click)="verifyOTP(refOTP)">
