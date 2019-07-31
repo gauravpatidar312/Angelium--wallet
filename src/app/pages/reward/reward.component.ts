@@ -2,8 +2,7 @@ import {Component, OnInit,  AfterViewInit} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 import {LocalDataSource} from 'ng2-smart-table';
 import {TranslateService} from '@ngx-translate/core';
-import {NbThemeService} from '@nebular/theme';
-import {takeWhile} from 'rxjs/operators';
+import {NbThemeService, NbGetters, NbTreeGridDataSource, NbTreeGridDataSourceBuilder} from '@nebular/theme';
 
 import {HttpService} from '../../services/http.service';
 import {SessionStorageService} from '../../services/session-storage.service';
@@ -66,10 +65,11 @@ interface FSEntry {
   styleUrls: ['./reward.component.scss'],
 })
 export class RewardComponent implements OnInit, AfterViewInit {
-
   allColumns = ['level', 'username', 'rank', 'heaven', 'reward', 'rate', 'your_reward'];
   noDataSource: boolean = false;
-  dataSource: TreeNode<FSEntry>[] = [];
+  dataSource: NbTreeGridDataSource<FSEntry>;
+  downlineTreeData: FSEntry[] = [];
+  downlineFilter: string = 'total';
 
   private alive = true;
   isProduction: any = environment.production;
@@ -261,6 +261,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
               private sessionStorage: SessionStorageService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
+              private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
               public translate: TranslateService) {
     this.userData = this.sessionStorage.getFromSession('userInfo');
     if (this.userData.infinity_mark === 1)
@@ -272,7 +273,7 @@ export class RewardComponent implements OnInit, AfterViewInit {
     else
       this.userData.infinity_name = 'ANGEL';
 
-    this.getDownlineTree('total');
+    this.getDownlineTree(this.downlineFilter);
     this.getDownlinecount();
     this.getReward();
     this.getDownlineAngel();
@@ -329,13 +330,40 @@ export class RewardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getUser(userData, idValue) {
+    let obj: any = null;
+    userData.some(function find(user) {
+      if (user.data.id === idValue) {
+        obj = user;
+        return true;
+      }
+      return Array.isArray(user.children) && user.children.some(find);
+    });
+    return obj;
+  }
+
+  getChildren(row?: any) {
+    if (row.expanded)
+      return;
+
+    const dataRow: any = this.getUser(this.downlineTreeData, row.data.id);
+    const url = `downline_tree/?filter_type=${this.downlineFilter}&parent-id=${row.data.id}&parent-level=${row.data.level}`;
+    this.httpService.get(url).subscribe((res?: any) => {
+      dataRow.children = res;
+      dataRow.expanded = true;
+      this.dataSource = this.dataSourceBuilder.create(this.downlineTreeData);
+    });
+  }
+
   getDownlineTree(val) {
+    this.downlineFilter = val;
     jQuery('.downline-tree-spinner').height(jQuery('#downline-tree').height());
     this.fetchingDownlineTree = true;
-    const url = `downline_tree/?filter_type=${val}`;
+    const url = `downline_tree/?filter_type=${this.downlineFilter}`;
     this.httpService.get(url).subscribe((res?: any) => {
-      this.dataSource = res;
-      this.noDataSource = !!res.length;
+      this.noDataSource = !res.length;
+      this.downlineTreeData = res;
+      this.dataSource = this.dataSourceBuilder.create(this.downlineTreeData);
       this.fetchingDownlineTree = false;
     }, (err) => {
       this.fetchingDownlineTree = false;
