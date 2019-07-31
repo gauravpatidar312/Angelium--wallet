@@ -28,8 +28,7 @@
       <nb-card-body class="tab-content">
         <div [hidden]="!fetchingGraphData" class="fetchingGraphData"><span><i class="fa fa-spinner fa-spin"></i></span></div>
         <div id="today" *ngIf="!fetchingGraphData" class="tab-pane active">
-          <ngx-echarts-area-stack *ngIf="graph_type !== 'ANX Reward'" [graphData]="graphData"></ngx-echarts-area-stack>
-          <ngx-chart-line *ngIf="graph_type === 'ANX Reward'" [graphData]="graphData"></ngx-chart-line>
+          <ngx-echarts-area-stack [graphData]="graphData"></ngx-echarts-area-stack>
         </div>
       </nb-card-body>
     </nb-card>

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {SmartTableData} from '../../@core/data/smart-table';
 import {ShareDataService} from '../../services/share-data.service';
@@ -21,16 +21,11 @@ declare let jQuery: any;
   styleUrls: ['./admin.component.scss'],
 })
 
-export class AdminComponent implements OnInit, AfterViewInit {
+export class AdminComponent implements OnInit {
   anxData: any = {};
-  graphData: any;
-  userValue: string = 'today';
-  fetchingGraphData: boolean = false;
   isProduction: boolean = environment.production;
   fetchingUsers: boolean = false;
   source: LocalDataSource = new LocalDataSource();
-  graph_types: any = ['Total Users', 'New Users', 'Heaven Users', 'Heaven Volume', 'ANX Reward', 'Heaven Release'];
-  graph_type: string = 'Total Users';
   settings = {
     actions: {
       add: false,
@@ -40,15 +35,15 @@ export class AdminComponent implements OnInit, AfterViewInit {
     editable: false,
     noDataMessage: this.translate.instant('pages.hq.thereAreNoUsers'),
     /*add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },*/
+     addButtonContent: '<i class="nb-plus"></i>',
+     createButtonContent: '<i class="nb-checkmark"></i>',
+     cancelButtonContent: '<i class="nb-close"></i>',
+     },
+     edit: {
+     editButtonContent: '<i class="nb-edit"></i>',
+     saveButtonContent: '<i class="nb-checkmark"></i>',
+     cancelButtonContent: '<i class="nb-close"></i>',
+     },*/
     delete: {
       deleteButtonContent: '<i class="nb-checkmark"></i>',
       confirmDelete: true,
@@ -90,88 +85,9 @@ export class AdminComponent implements OnInit, AfterViewInit {
               public translate: TranslateService) {
     this.getUsersList();
     this.getAnxStatus();
-    this.getTotalUsers('today');
   }
 
   ngOnInit() {
-  }
-
-  getTotalUsers(value) {
-    jQuery('.fetchingGraphData').height(jQuery('#today').height());
-    this.fetchingGraphData = true;
-    this.httpService.get(`heaven-all-user-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
-      this.graphData = res.data;
-      this.userValue = value;
-      this.fetchingGraphData = false;
-    }, (err) => {
-      this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
-    });
-  }
-
-  getNewUsers(value) {
-    jQuery('.fetchingGraphData').height(jQuery('#today').height());
-    this.fetchingGraphData = true;
-    this.httpService.get(`heaven-user-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
-      this.graphData = res.data;
-      this.userValue = value;
-      this.fetchingGraphData = false;
-    }, (err) => {
-      this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
-    });
-  }
-
-  getHeavenUser(value) {
-    jQuery('.fetchingGraphData').height(jQuery('#today').height());
-    this.fetchingGraphData = true;
-    this.httpService.get(`heaven-plan-user-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
-      this.graphData = res.data;
-      this.userValue = value;
-      this.fetchingGraphData = false;
-    }, (err) => {
-      this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
-    });
-  }
-
-  getHeavenVolume(value) {
-    jQuery('.fetchingGraphData').height(jQuery('#today').height());
-    this.fetchingGraphData = true;
-    this.httpService.get(`heaven-plan-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
-      this.graphData = res.data;
-      this.userValue = value;
-      this.fetchingGraphData = false;
-    }, (err) => {
-      this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
-    });
-  }
-
-  getHeavenRelease(value) {
-    jQuery('.fetchingGraphData').height(jQuery('#today').height());
-    this.fetchingGraphData = true;
-    this.httpService.get(`heaven-release-graph/?graph_type=${value}`).subscribe((res?: any) => {
-      this.graphData = res.data;
-      this.userValue = value;
-      this.fetchingGraphData = false;
-    }, (err) => {
-      this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
-    });
-  }
-
-  getANXReward(value) {
-    jQuery('.fetchingGraphData').height(jQuery('#today').height());
-    this.fetchingGraphData = true;
-    this.httpService.get(`ANX-reward-graph/?graph_type=${value}`).subscribe((res?: any) => {
-      this.graphData = res.data;
-      this.userValue = value;
-      this.fetchingGraphData = false;
-    }, (err) => {
-      this.fetchingGraphData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.hq'));
-    });
   }
 
   getAnxStatus() {
@@ -215,49 +131,5 @@ export class AdminComponent implements OnInit, AfterViewInit {
       });
     }
     event.confirm.reject();
-  }
-
-  changeGraph(graphType) {
-    if (graphType === 'Total Users') {
-      this.graph_type = 'Total Users';
-      this.getTotalUsers(this.userValue);
-    } else if (graphType === 'New Users') {
-      this.graph_type = 'New Users';
-      this.getNewUsers(this.userValue);
-    } else if (graphType === 'Heaven Users') {
-      this.graph_type = 'Heaven Users';
-      this.getHeavenUser(this.userValue);
-    } else if (graphType === 'Heaven Volume') {
-      this.graph_type = 'Heaven Volume';
-      this.getHeavenVolume(this.userValue);
-    } else if (graphType === 'ANX Reward') {
-      this.graph_type = 'ANX Reward';
-      this.getANXReward(this.userValue);
-    } else if (graphType === 'Heaven Release') {
-      this.graph_type = 'Heaven Release';
-      this.getHeavenRelease(this.userValue);
-    }
-  }
-
-  changeType(value) {
-    if (this.graph_type === 'Total Users')
-      this.getTotalUsers(value);
-    else if (this.graph_type === 'New Users')
-      this.getNewUsers(value);
-    else if (this.graph_type === 'Heaven Users')
-      this.getHeavenUser(value);
-    else if (this.graph_type === 'Heaven Volume')
-      this.getHeavenVolume(value);
-    else if (this.graph_type === 'ANX Reward')
-      this.getANXReward(value);
-    else if (this.graph_type === 'Heaven Release')
-      this.getHeavenRelease(value);
-  }
-
-  ngAfterViewInit() {
-    jQuery('ul.rewardLine li a').click(function (e) {
-      jQuery('ul.rewardLine li.active').removeClass('active');
-      jQuery(this).parent('li').addClass('active');
-    });
   }
 }
