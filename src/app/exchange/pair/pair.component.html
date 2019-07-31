@@ -1,33 +1,32 @@
-<nb-card class="board">
-  <nb-card-header class="headsection">Pair</nb-card-header>
-  <nb-card-body>
-    <div class="row">
-      <div class="available-items">
 
-        <table class="boardtable">
+<nb-card class="board">
+    <nb-card-header>Pair</nb-card-header>
+
+  <nb-card-body>
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="boardtable available-items">
+
+        <table class="table table-condensed">
           <thead>
             <tr>
-              <th class="text-left">
-                <span class="theading-text">PAIR</span>
-              </th>
-              <th class="text-right no_set_padding">
-                <span class="theading-text">Price</span>
-              </th>
-              <th class="text-right">
-                <span class="theading-text">Change</span>
-              </th>
+              <th class="text-left" width="14%">Pair</th>
+              <th class="text-center" width="14%">Price</th>
+              <th class="text-right" width="12%" class="text-right">Change</th>
             </tr>
           </thead>
         </table>
       </div>
-      <div class="available-items">
-        <table class="boardtable">
-
-          <tr *ngFor="let pair of pairs">
-            <td class="text-left positionSet" (click)="clickPair(pair)">{{pair.symbol.split(':')[1]}}</td>
-            <td class="text-center">65.6542</td>
-            <td class="changetext positionSet">0.8771</td>
-          </tr>
+      <div class="available available-items items_margin">
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let pair of pairs">
+              <td width="14%" class="text-left" (click)="clickPair(pair)">{{pair.symbol.split(':')[1]}}</td>
+              <td width="14%" class="text-center">65.6542</td>
+              <td width="12%" class="text-right">0.8771</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

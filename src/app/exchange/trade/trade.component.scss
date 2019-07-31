@@ -34,7 +34,13 @@ nb-card-body{
   font-size: 17px;
   float: left;
 }
+.tab-content{
+  display: none;
+}
 
+.tab-content.active{
+  display: inherit;
+}
 #main-navigation-trade li.active > a { border-bottom: 2px solid #26df8b; color: #26df8b; }
 #main-navigation-trade li > a { border-bottom: 2px solid #fff; color: #fff; }
 
@@ -75,12 +81,26 @@ nb-card-body{
 }
 .label-right{ float: right; color: #fff;}
 .label-max{ float: right; color: #fff; }
-.btn-primary{
-  background-color: #007bff!important;
-  margin: 5px 20px 14px 16px;
-  border-radius: 0.3rem;
-  font-weight: bold;
+
+.btn-danger{
+  background-color: #ff0000!important;
+  
 }
+button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-success.pointer {
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 20px;
+  font-family: BebasNeue;
+}
+
+button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 20px;
+  font-family: BebasNeue;
+
+}
+
 .available-items{
   min-height:auto!important;
   width: 100%;

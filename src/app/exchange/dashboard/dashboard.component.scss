@@ -9,14 +9,17 @@
     nb-card-body {
       overflow: visible;
     }
-   
+  
   }
 
+  
 
 
 /deep/ .exchange {
   
-
+  .main-content{
+    padding: 1.25rem 1.25rem 0.75rem!important; 
+  }
   nb-sidebar.menu-sidebar {
     display: none;
   }
@@ -25,14 +28,16 @@
     display: block !important;
   }
 
-  .layout {
-    background: none !important;
-  }
+  
 
   .header-container .navigation i {
     display: none !important;
   }
+  .trade-chart{
+    padding: 0!important;
 
+    border-radius: 0.5rem;
+  }
   nb-sidebar.compacted.start.fixed ~ .content {
     margin-left: 0 !important;
   }
@@ -44,11 +49,11 @@
 
   .twc > div { 
     // background-color: yellow;
-    height: 355px !important;
+    height: 500px !important;
     width: 100% !important
   }
   .twc > div > div {
-    height: 355px !important;
+    height: 500px !important;
     width: 100% !important;
   }
 }
@@ -103,9 +108,9 @@ ul#main-navigation{
 .table thead th{
   border-top: 0px solid #dee2e6;
   border-bottom: 0px solid #dee2e6;
-  color: #7dff01;
+  color: #cee80b;
 }
-tbody tr{ color: #ffffff; font-size: 12px; cursor: pointer;   font-family: 'Nunito Sans', sans-serif;}
+tbody tr{ padding:0px;color: #ffffff; font-size: 12px; cursor: pointer;   font-family: 'Nunito Sans', sans-serif;}
 table tbody tr:nth-of-type(even) {
   background: #111550;
 }

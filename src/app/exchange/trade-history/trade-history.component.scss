@@ -37,8 +37,9 @@ nb-card-body {
   background: #87a1b730;
 }
 .available-items{
+  height: 352px;
   min-height:200px!important;
-  max-height:232px!important;
+  max-height:352px!important;
   width: 100%;
   overflow-x: auto;
   overflow-y: auto!important;

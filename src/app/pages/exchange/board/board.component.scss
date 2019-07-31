@@ -69,6 +69,8 @@ nb-card-body {
   font-family: 'Nunito Sans', sans-serif;
 
 }
+.boardtable tr:nth-child(even) {background: #87a1b730;}
+
 .boardtable td.changetext{
   text-align: right;
 }

@@ -1,47 +1,86 @@
 <nb-card class="trade">
-  <nb-card-header class="headsection">Trade</nb-card-header>
+  <nb-card-header>Trade</nb-card-header>
   <nb-card-body>
       <div class="available-items">
-    <ul id="main-navigation-trade" class="nav navbar-pill tradeLine">
-      <li class="pointer active" > 
+    <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
+      <li class="pointer active tab-link" data-tab="tab-1" > 
         <a data-toggle="pill">BUY ANX</a>
       </li>
-      <li class="pointer">
+      <li class="pointer tab-link" data-tab="tab-2">
         <a data-toggle="pill">SELL ANX</a>
       </li>
     </ul>
-    <form>
-      <div class="form-group">
-        <div class="form-group has-feedback">
-          <label class="text-success">Price</label>
-          <label class="label-right">$ 5.1</label>
-          <input type="text" class="form-control" name="btc">
-          <span class="form-control-feedback">BTC</span>
-        </div>
+
+
+
+    <div id="tab-1" class="tab-content active">
+        <form>
+            <div class="form-group">
+              <div class="form-group has-feedback">
+                <label class="text-success">Price</label>
+                <label class="label-right">$ 5.1</label>
+                <input type="text" class="form-control" name="btc">
+                <span class="form-control-feedback">BTC</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-group has-feedback">
+                <label class="text-success">Amount</label>
+                <label class="label-max">MAX</label>
+                <input type="text" class="form-control" name="btc">
+                <span class="form-control-feedback">ANX</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-group has-feedback">
+                <label class="text-success">Total</label>
+                <label class="label-right">$ 5.1</label>
+                <input type="text" class="form-control" name="btc">
+                <span class="form-control-feedback">BTC</span>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer"
+                size="large" >
+                <span>Place buy order</span>
+              </button>
+            </div>
+          </form>
       </div>
-      <div class="form-group">
-        <div class="form-group has-feedback">
-          <label class="text-success">Amount</label>
-          <label class="label-max">MAX</label>
-          <input type="text" class="form-control" name="btc">
-          <span class="form-control-feedback">ANX</span>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-group has-feedback">
-          <label class="text-success">Total</label>
-          <label class="label-right">$ 5.1</label>
-          <input type="text" class="form-control" name="btc">
-          <span class="form-control-feedback">BTC</span>
-        </div>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary pointer"
-          size="large" >
-          <span>Place buy order</span>
-        </button>
-      </div>
-    </form>
+      <div id="tab-2" class="tab-content">
+          <form>
+              <div class="form-group">
+                <div class="form-group has-feedback">
+                  <label class="text-success">Price</label>
+                  <label class="label-right">$ 5.1</label>
+                  <input type="text" class="form-control" name="btc">
+                  <span class="form-control-feedback">BTC</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group has-feedback">
+                  <label class="text-success">Amount</label>
+                  <label class="label-max">MAX</label>
+                  <input type="text" class="form-control" name="btc">
+                  <span class="form-control-feedback">ANX</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group has-feedback">
+                  <label class="text-success">Total</label>
+                  <label class="label-right">$ 5.1</label>
+                  <input type="text" class="form-control" name="btc">
+                  <span class="form-control-feedback">BTC</span>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer"
+                  size="large" >
+                  <span>Place Sell order</span>
+                </button>
+              </div>
+            </form>
+       </div>
     </div>
   </nb-card-body>
 

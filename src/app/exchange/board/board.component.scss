@@ -36,18 +36,20 @@ nb-card-body {
 .boardtable{width: 100%;}
 
 .boardtable th{
-  text-transform: uppercase;
+  // text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1.0rem;
-  border-bottom: 1px solid #575bc7;
+  border-bottom: 1px solid #342e73;
 }
+.boardtableEven { background: #87a1b730}
+
 .positionSet{
   padding-top: 10px;
 }
 
 .totalfield{
-  border-bottom: 1px solid #575bc7;
-  border-top: 1px solid #575bc7;
+  border-bottom: 1px solid #342e73;
+  border-top: 1px solid #342e73;
   font-size: 1.2rem !important;
   font-family: nb-theme(font-bebas-book);
   padding: 5px 0px 0px 0px!important;
@@ -59,7 +61,7 @@ nb-card-body {
   color:#b9e80c;
 }
 .boardtable td{
-  // color:#ffffff;
+  padding: 0px;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
@@ -79,6 +81,7 @@ nb-card-body {
   overflow-x: hidden;
   overflow-y: hidden!important;
 }
+
 .bigSize{
   font-size: 20px;
 }

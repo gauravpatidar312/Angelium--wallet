@@ -42,19 +42,22 @@ nb-card-body {
 .boardtable{width: 100%;}
 
 .boardtable th{
-  text-transform: uppercase;
+  // text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1.0rem;
-  border-bottom: 1px solid #575bc7;
+  border-bottom: 1px solid #342e73;
+}
+.available{
+  height: 250px;
 }
 .positionSet{
   padding-top: 10px;
 }
-.boardtable tr:nth-child(even) {background: #111550}
+.boardtable tr:nth-child(even) {background: #87a1b730}
 
 .totalfield{
-  border-bottom: 1px solid #575bc7;
-  border-top: 1px solid #575bc7;
+  border-bottom: 1px solid #342e73;
+  border-top: 1px solid #342e73;
   font-size: 1.2rem !important;
   font-family: nb-theme(font-bebas-book);
   padding: 5px 0px 0px 0px!important;
@@ -71,6 +74,42 @@ nb-card-body {
   font-size: 12px;
   line-height: 20px;
 }
+
+.table {
+margin-bottom: 0;
+}
+.table th, .table td {
+   padding: 0; 
+
+}
+.table thead th {
+  border-top: 0px solid #dee2e6;
+  border-bottom: 0px solid #dee2e6;
+  color: #cee80b;
+}
+tbody tr {
+  padding: 0px;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 20px;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+
+}
+ tbody tr:nth-of-type(even) {
+  background: #87a1b730;
+}
+.table td {
+  vertical-align: top;
+  border-top: 0px solid #dee2e6;
+
+  padding: 0px;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 20px;
+}
 .boardtable tr{
   cursor: pointer;
   color:#ffffff;
@@ -80,7 +119,9 @@ nb-card-body {
 .boardtable td.changetext{
   text-align: right;
 }
-
+.available{
+  height: 352px;
+}
 .available-items{
   max-height:250px!important;
   width: 100%;

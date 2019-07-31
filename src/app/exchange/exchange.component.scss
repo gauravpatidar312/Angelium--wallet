@@ -1,6 +1,6 @@
 @import '../@theme/styles/themes';
+@import '../@theme/styles/font-size';
 @import '~@nebular/theme/styles/global/breakpoints';
-
 @include nb-install-component() {
   nb-card-header {
     font-family: nb-theme(font-bebas);
@@ -9,7 +9,17 @@
   nb-card-body {
     overflow: visible;
   }
- 
+  .scrollable-container {
+    background-color: #100b48b8!important;
+  }
+
+  .nb-theme-cosmic nb-layout .layout .layout-container .content .columns nb-layout-column {
+    padding: 1.25rem 1.25rem 0.75rem !important;
+}
+}
+ngx-sample-layout{
+  background-color: #100b48b8!important;
+
 }
 nb-card-body {
   padding: 10px 30px
