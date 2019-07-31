@@ -138,23 +138,19 @@
       </div>
     </div>
   </nb-card-header>
-
-  <ng-template #noData>
-    <nb-card-body>{{"pages.reward.downlineTree.noUserDownlineTree"|translate}}</nb-card-body>
-  </ng-template>
-
-  <nb-card-body id="downline-tree" class="tab-content" *ngIf="noDataSource; else noData">
+  <nb-card-body *ngIf="noDataSource">{{"pages.reward.downlineTree.noUserDownlineTree"|translate}}</nb-card-body>
+  <nb-card-body *ngIf="!noDataSource" id="downline-tree" class="tab-content">
       <div [hidden]="!fetchingDownlineTree"><span class="downline-tree-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
-      <div class="tab-pane active" *ngIf="!fetchingDownlineTree">
+      <div class="tab-pane active div-downline" *ngIf="!fetchingDownlineTree">
         <table class="table table-hover table-bordered downlineTree" [nbTreeGrid]="dataSource" equalColumnsWidth>
           <tr class="all-columns" nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-          <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+          <tr nbTreeGridRow [clickToToggle]="false" class="level-{{row.data.level}}"  *nbTreeGridRowDef="let row; columns: allColumns"></tr>
           <ng-container nbTreeGridColumnDef="level">
             <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
               {{"common.level" | translate}}
             </th>
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
-              <nb-tree-grid-row-toggle style="float: right;" [expanded]="row.expanded" *ngIf="row.data.arrow === true">
+              <nb-tree-grid-row-toggle (click)="getChildren(row)" class="level-arrow" [expanded]="row.expanded" *ngIf="row.data.arrow === true">
               </nb-tree-grid-row-toggle>
               {{row.data.level}}
             </td>
