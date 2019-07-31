@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
   async onSubmitLogin() {
     var token = await this.msgService.getToken();
     this.loginForm.controls.dev_id.setValue(token);
-
+    console.log(this.loginForm.value);
     if (!this.isVerifiedCaptcha) {
       this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
       return;

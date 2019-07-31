@@ -42,15 +42,18 @@ export class MessagingService {
   }
 
   async getToken(){
-    var tokan:any;
+    var tokan:any = '';
     await this.messaging.getToken().then(val=>{
       tokan = val;
-    });
+    }).catch((err=>{
+      tokan = '';
+    }));
     return tokan;
   }
 
   receiveMessage() {
     this.messaging.onMessage((payload) => {
+      console.log(payload);
       this.toastrService.success(payload.notification.body, payload.notification.title);
       this.currentMessage.next(payload);
     });
