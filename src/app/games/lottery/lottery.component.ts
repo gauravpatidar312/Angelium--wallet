@@ -18,10 +18,12 @@ declare let jQuery: any;
 
 export class LotteryComponent implements OnInit, AfterViewInit {
   myWallets: any = [];
-  max_winners: any = [];
+  estimatedWinners: any = [];
   currentLotteryData: any;
   walletType: string = 'SELECT';
   selectWallet: any;
+  selectedLottery: any;
+  winnerTextMessage: string;
   betData: any;
   totalBetAmount: any;
   lotteryData: any;
@@ -34,6 +36,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   placeLottery: any = [];
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
+  fetchingWinner: boolean = false;
+  fetchingBetList: boolean = false;
 
   constructor(private httpService: HttpService,
               private http: HttpClient,
@@ -41,36 +45,6 @@ export class LotteryComponent implements OnInit, AfterViewInit {
               private shareDataService: ShareDataService,
               public translate: TranslateService) {
   }
-
-  winnerUsers: { id: number, prizeName: string, XPAmount: string, picture: string, name: string, title: string, message: string }[] = [
-    {
-      id: 1,
-      prizeName: 'ST PRIZE',
-      XPAmount: '122000 XP',
-      picture: 'CE',
-      name: 'RYELU08233',
-      title: 'silver angel 12',
-      message: 'wish me luck!!'
-    },
-    {
-      id: 2,
-      prizeName: 'ND PRIZE',
-      XPAmount: '41240 XP',
-      picture: 'BK',
-      name: 'RYELU08233',
-      title: 'silver angel 12',
-      message: 'wish me luck!!'
-    },
-    {
-      id: 3,
-      prizeName: 'RD PRIZE',
-      XPAmount: '12720 XP ',
-      picture: 'J',
-      name: 'RYELU08233',
-      title: 'silver angel 12',
-      message: 'wish me luck!!'
-    },
-  ];
 
   ngOnInit() {
     this.getCurrentLotteryDetail();
@@ -82,24 +56,11 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   getCurrentLotteryDetail() {
     this.httpService.get('game/get-current-lottery-detail/').subscribe((res?: any) => {
       this.currentLotteryData = res;
+      this.selectedLottery = this.currentLotteryData;
       this.setTimer();
       this.getBetList();
-      this.getWinnerList();
-      const winnerCounts = _.times(this.currentLotteryData.max_winners, String);
-      const self = this;
-      this.max_winners = _.map(winnerCounts, function (value) {
-        const obj: any = {};
-        obj.winnerId = Number(value) + 1;
-        if (obj.winnerId === 1)
-          obj.prizeText = self.translate.instant('games.lottery.stPrize');
-        else if (obj.winnerId === 2)
-          obj.prizeText = self.translate.instant('games.lottery.ndPrize');
-        else if (obj.winnerId === 3)
-          obj.prizeText = self.translate.instant('games.lottery.rdPrize');
-        else
-          obj.prizeText = self.translate.instant('games.lottery.thPrize');
-        return obj;
-      });
+      this.getWinnerList(this.currentLotteryData.lottery_id);
+      this.getPrizeList();
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -114,8 +75,48 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   getBetList() {
+    this.fetchingBetList = true;
     this.httpService.get(`game/get-bet-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
-      this.betData = res;
+      this.betData = _.map(res, (data) => {
+        if (data.level === 1)
+          data.level = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
+        else if (data.level === 2)
+          data.level = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
+        else if (data.level === 3)
+          data.level = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
+        else
+          data.level = _.lowerCase(this.translate.instant('pages.setting.angel'));
+        return data;
+      });
+      this.fetchingBetList = false;
+    }, (err) => {
+      this.fetchingBetList = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
+    });
+  }
+
+  getPrizeList() {
+    this.httpService.get(`game/get-estimated-prize-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
+      this.estimatedWinners = _.map(res, (winner) => {
+        if (winner.winner_rank === 1)
+          winner.prizeText = this.translate.instant('games.lottery.stPrize');
+        else if (winner.winner_rank === 2)
+          winner.prizeText = this.translate.instant('games.lottery.ndPrize');
+        else if (winner.winner_rank === 3)
+          winner.prizeText = this.translate.instant('games.lottery.rdPrize');
+        else
+          winner.prizeText = this.translate.instant('games.lottery.thPrize');
+
+        if (winner.level === 1)
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
+        else if (winner.level === 2)
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
+        else if (winner.level === 3)
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
+        else
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.angel'));
+        return winner;
+      });
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -123,14 +124,15 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
   getLotteryList() {
     this.httpService.get('game/get-lottery-list/').subscribe((res?: any) => {
-      this.lotteryData = res.data;
+      this.lotteryData = res;
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
   }
 
-  getWinnerList() {
-    this.httpService.get(`game/get-lottery-winner-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
+  getWinnerList(value) {
+    this.fetchingWinner = true;
+    this.httpService.get(`game/get-winners-list/?lottery_id=${value}`).subscribe((res?: any) => {
       this.winnerData = _.map(res, (winner) => {
         if (winner.winner_rank === 1)
           winner.prizeText = this.translate.instant('games.lottery.stPrize');
@@ -140,16 +142,39 @@ export class LotteryComponent implements OnInit, AfterViewInit {
           winner.prizeText = this.translate.instant('games.lottery.rdPrize');
         else
           winner.prizeText = this.translate.instant('games.lottery.thPrize');
+
+        if (winner.level === 1)
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
+        else if (winner.level === 2)
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
+        else if (winner.level === 3)
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
+        else
+          winner.level = _.lowerCase(this.translate.instant('pages.setting.angel'));
         return winner;
       });
+
+      if (!this.winnerData.length) {
+        if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id)
+          this.winnerTextMessage = 'Lottery is running, stay tuned. We will announce winners after lottery finishes.';
+        else
+          this.winnerTextMessage = 'Winners have not been announce yet. Stay tuned!';
+      }
+      this.fetchingWinner = false;
     }, (err) => {
+      this.fetchingWinner = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
   }
 
+  onChangeLottery(lottery: string): void {
+    this.selectedLottery = lottery;
+    this.getWinnerList(this.selectedLottery.lottery_id);
+  }
+
   onChangeWallet(walletType: string): void {
     this.walletType = walletType;
-    this.setAmount(this.placeLottery.bet_amount);
+    this.calculateAmount();
     if (this.walletType !== 'SELECT') {
       this.selectWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
@@ -164,13 +189,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   getSmartContract() {
-    this.http.get('assets/smart-contract.cpp', { responseType: 'text' }).subscribe((data?: any) => {
+    this.http.get('assets/smart-contract.cpp', {responseType: 'text'}).subscribe((data?: any) => {
       this.smartContract = data;
     });
-  }
-
-  changeBetList(value) {
-    this.isComment = value === 'Comment' ? true : false;
   }
 
   onPlaceLottery() {
@@ -209,7 +230,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       if (res.data) {
         this.formSubmitting = false;
         this.getBetList();
-        this.getWinnerList();
+        this.getWinnerList(this.currentLotteryData.lottery_id);
+        this.getPrizeList();
         this.toastrService.success(this.translate.instant('games.lottery.toastr.bettingSuccessfullyCompleted'), this.translate.instant('common.lottery'));
       }
     }, (err) => {
@@ -218,8 +240,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  setAmount(value) {
-    if (!value) {
+  calculateAmount() {
+    if (!this.placeLottery.bet_amount) {
       this.totalBetAmount = '';
       return;
     }
@@ -238,14 +260,21 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     const endDate = moment(this.currentLotteryData.end_datetime);
     const currentDate = moment();
     if (startDate > currentDate) {
+      this.currentLotteryData.status = 'upcoming';
       this.stateDate = moment(startDate).format('YYYY.MM.DD HH:mm:ss');
     } else if (endDate <= currentDate) {
+      this.currentLotteryData.status = 'past';
       this.lotteryDate = 'Lottery finished';
     } else {
+      this.currentLotteryData.status = 'running';
       this.timerData = Observable
         .interval(1000)
         .map(() => {
-          return endDate.valueOf() - moment().valueOf();
+          const value: number = endDate.valueOf() - moment().valueOf();
+          if (value === 0)
+            document.location.reload(true);
+          else
+            return value;
         })
         .map((millis: number) => {
           return moment.duration(millis);
