@@ -100,10 +100,22 @@
                 </td>
                 <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" (click)="openDialog(changeTradePassword)"></i></td>
               </tr>
-              <tr *ngIf="!isProduction">
+              <tr>
                 <td class="title-col">{{"pages.setting.2FA" | translate}}</td>
-                <td class="value-col">**************</td>
-                <td class="action-col iconpaddfix"></td>
+                <td class="value-col iconpaddfix" colspan="2">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary paddfix btn-sm {{ tfamodeSwitchText ? '': 'active'}}"
+                      (click)="openTFAModal(false)">
+                      <input type="radio" name="options">
+                      {{"pages.setting.off" | translate}}
+                    </label>
+                    <label  class="btn btn-secondary paddfix btn-sm {{ tfamodeSwitchText ? 'active': ''}}"
+                      (click)="openTFAModal(true, tfaTemplate)">
+                      <input type="radio" name="options">
+                      {{"pages.setting.on" | translate}}
+                    </label>
+                  </div>
+                </td>
               </tr>
               <tr *ngIf="!isProduction">
                 <td class="title-col">{{"pages.setting.secretKey" | translate}}</td>
@@ -142,10 +154,16 @@
               <tr>
                 <td class="title-col">{{"pages.setting.merge" | translate}}</td>
                 <td>
-                  <span *ngIf="isProduction">{{"pages.setting.comingSoon" | translate}}</span>
-                  <a *ngIf="!isProduction" href="https://member.angelium.net/?anl_request=1" target="_blank">{{"pages.setting.clickHere" | translate}}</a>
+                  <a class="pointer text-color" (click)="showKYCToastr()"
+                     *ngIf="!(userData?.kyc_info && userData?.kyc_info?.status_description === 'confirmed')">
+                    {{"pages.setting.clickHere" | translate}}
+                  </a>
+                  <a class="pointer text-color" href="https://member.angelium.net/?anl_request=1&e={{userData?.email}}"
+                     *ngIf="userData?.kyc_info && userData?.kyc_info?.status_description === 'confirmed'" target="_blank">
+                    {{"pages.setting.clickHere" | translate}}
+                  </a>
                 </td>
-                <td class="action-col iconpaddfix"><i class="nb-edit fa-2x" routerLink="/pages/merge" *ngIf="false"></i></td>
+                <td class="action-col iconpaddfix"></td>
               </tr>
               <tr>
                 <td class="title-col">{{"pages.setting.language" | translate}}</td>
@@ -168,7 +186,7 @@
                 <td class="title-col">{{"pages.setting.timezone" | translate}}</td>
                 <td colspan="2" class="td-padding">
                   <div class="status-dd-week dropup" ngbDropdown placement="top">
-                    <ng-select [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
+                    <ng-select autocomplete="false" [(ngModel)]="selectedTimezone" (close)="changeTimezone(selectedTimezone)" [clearable]="false">
                       <ng-option *ngFor="let timezone of timezoneData" [value]="timezone">
                         {{timezone}}
                       </ng-option>
@@ -367,6 +385,28 @@
     <nb-card-footer>
       <button nbButton class="submit-btn" size="small" (click)="changeTradePasswordDialog(ref)">{{"common.submit" | translate}}</button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelTradePasswordDialog(ref)">{{"common.cancel" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #tfaTemplate let-data let-ref2FA="dialogRef">
+  <nb-card class="tfa-width">
+    <nb-card-header class="image-scoll-card-body">
+      {{"pages.setting.enable2FA" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="ref2FA.close()"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <div class="enable-2fa text-2fa">{{"pages.setting.scanQRCodeText" | translate}}</div><br><br>
+      <span class="enable-2fa">{{"pages.setting.QRCode" | translate}}</span><br><br>
+      <img class="qr-code-tfa" [src]="qrCode"><br><br>
+      <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}: </span><span class="text-2fa">{{secretKey}}</span><br><br>
+      <span class="enable-2fa mr-3">{{"pages.setting.googleCode" | translate}}:</span>
+      <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" (keyup.enter)="verifyOTP(ref2FA)" placeholder="{{'pages.setting.2FAcode' | translate}}" nbInput /><br /><br />
+    </nb-card-body>
+    <nb-card-footer class="text-center">
+      <button nbButton [disabled]="otpSubmitting" size="small" class="button-width" (click)="verifyOTP(ref2FA)">
+        <span *ngIf="!otpSubmitting">{{"pages.setting.enable2FA" | translate}}</span>
+        <i class="fa fa-spinner fa-spin text-white" *ngIf="otpSubmitting"></i>
+      </button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

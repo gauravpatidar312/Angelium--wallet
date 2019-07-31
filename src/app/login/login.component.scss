@@ -4,24 +4,52 @@
 :host {
   $auth-layout-padding: 2.5rem;
 
-  nb-card {
+  nb-card.login-container {
     margin: 0;
     height: calc(100vh - 2 * #{$auth-layout-padding});
+
+
+    nb-card-body {
+      display: flex;
+      width: 100%;
+    }
+
+    nb-auth-block {
+      margin: auto;
+    }
   }
 
-  nb-card-body {
-    display: flex;
+  .button-width {
+    min-width: 89px;
+  }
+
+  .nb-card-width {
+    width: 320px;
+  }
+
+  .nb-card-input {
+    width:70%;
+  }
+
+  .input-width {
     width: 100%;
   }
 
-  nb-auth-block {
-    margin: auto;
+  .nb-icon-left {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
   }
 
   @include media-breakpoint-down(sm) {
-    nb-card {
+    nb-card.login-container {
       height: 100vh;
     }
+
+    nb-card.nb-card-width {
+      width: 260px;
+    }
+
   }
 
   /deep/ {
@@ -47,7 +75,7 @@
       font-size: 13px;
       color: #d1d1ff;
       margin: 1rem 0 0;
-      font-family: NunitoSans !important;      
+      font-family: NunitoSans !important;
     }
   }
 
@@ -63,7 +91,7 @@
   }
 
   .sub-title {
-    font-family: NunitoSans !important;      
+    font-family: NunitoSans !important;
   }
   .forgot-password {
     float: right;
@@ -108,26 +136,26 @@
 
   /deep/ .locked {
     font-size: 18px;
-    border: 2px solid #7659ff; 
-    // background-color: #eff3ea;   
+    border: 2px solid #7659ff;
+    // background-color: #eff3ea;
     // border: 3px solid #7659ff;
 }
 
 /deep/ .green.unlock {
   background: rgba(8, 122, 252, 0.5);
 }
- 
+
 
 /deep/ .unlocked {
   background-image: linear-gradient(to right, #ad59ff, #7659ff);
 }
 
-/deep/ .slideToUnlock {   
+/deep/ .slideToUnlock {
   position:relative;
   text-align: center;
   height: 42px;
   line-height: 38px;
-  border-radius: 25px;  
+  border-radius: 25px;
 }
 
 /deep/ .progressBar {
@@ -135,9 +163,9 @@
   left:0;
   top:0;
   width: 0;
-  height: 100%; 
+  height: 100%;
   border-radius: 25px;
- } 
+ }
  /deep/ .text {
   position: absolute;
   font-family: NunitoSans;
@@ -146,7 +174,7 @@
   left:0;
   top:0;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   font-weight: 500;
   border-radius: 25px;
   // text-transform: uppercase;
@@ -158,7 +186,7 @@
       -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none; /* Non-prefixed version, currently
                                 supported by Chrome and Opera */
- } 
+ }
 
  /deep/ .drag {
   position: absolute;
@@ -186,7 +214,7 @@
   margin: -6px;
   color:#7659ff;
   /* font-weight: 900; */
-} 
+}
 /deep/ .sliderCss {
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;

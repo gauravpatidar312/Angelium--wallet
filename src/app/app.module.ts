@@ -40,8 +40,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import {GamesModule} from './games/games.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -62,7 +63,6 @@ const firebaseConfig = {
     HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
-    
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     TranslateModule.forRoot({
@@ -77,7 +77,8 @@ const firebaseConfig = {
     AngularFireAuthModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    GamesModule
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -97,16 +98,15 @@ export class AppModule {
   }
 
   async checkSession() {
-    const data = await this.storageService.getSessionStorage();
+    const data: any = await this.storageService.getSessionStorage();
     if (data) {
       // Check if user is already logged in on page refresh
       if (this.sessionStorage.getSessionStorage('loggedIn')) {
         // Check user it at login screen then auto logout user.
-        if(this.shareDataService.autoLogOut) {
+        if (this.shareDataService.autoLogOut) {
           this.storageService.resetStorage();
           this.shareDataService.autoLogOut = false;
-        }
-        else
+        } else
           this.store.dispatch(new UserInfo(data));
       } else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
         let t0 = Number(window.localStorage['timestamp']);
@@ -117,9 +117,15 @@ export class AppModule {
           this.sessionStorage.saveToSession('loggedIn', true);
           this.store.dispatch(new UserInfo(data));
         } else {
-          // This means user has closed the tab and opened again so logged user out.
-          console.warn('DB cleared for logout on tab close');
-          this.storageService.resetStorage();
+          const rememberUser = this.sessionStorage.getFromLocalStorage('rememberMe');
+          if (rememberUser && !data.is_2fa_enable) {
+            this.sessionStorage.saveToSession('loggedIn', true);
+            this.store.dispatch(new UserInfo(data));
+          } else {
+            // This means user has closed the tab and opened again so logged user out.
+            console.warn('DB cleared for logout on tab close');
+            this.storageService.resetStorage();
+          }
         }
       } else {
         // This means user is logged in and open new tab

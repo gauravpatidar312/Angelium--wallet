@@ -8,6 +8,7 @@ export enum AuthActionTypes {
   UPDATE_USER_INFO = '[Auth] Update User Info',
   RESET_STATE = '[Auth] Reset State',
   LOGIN_FAILURE = '[Auth] Login Failure',
+  ASK_OTP_FOR_2FA = '[Auth] Ask OTP If 2FA Enabled',
 }
 
 export class LogIn implements Action {
@@ -45,6 +46,11 @@ export class ResetState implements Action {
   constructor(public payload: any) {}
 }
 
+export class AskOTPFor2FA implements Action {
+  readonly type = AuthActionTypes.ASK_OTP_FOR_2FA;
+  constructor(public payload: any) {}
+}
+
 export type All =
   | LogIn
   | LogInSuccess
@@ -52,4 +58,5 @@ export type All =
   | UserInfo
   | UpdateUserInfo
   | ResetState
-  | LogInFailure;
+  | LogInFailure
+  | AskOTPFor2FA;
