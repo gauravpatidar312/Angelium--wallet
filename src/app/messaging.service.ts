@@ -17,9 +17,7 @@ export class MessagingService {
   currentMessage: any = new BehaviorSubject(null);
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,
-    private toastrService: ToastrService) {
-    console.log(firebase.messaging.isSupported());
-  }
+    private toastrService: ToastrService) {}
 
   updateToken(token) {
     this.afAuth.authState.take(1).subscribe(user => {
@@ -37,6 +35,7 @@ export class MessagingService {
         return this.messaging.getToken();
       })
       .then(token => {
+        console.log(token);
         this.updateToken(token);
       })
       .catch((err) => {
