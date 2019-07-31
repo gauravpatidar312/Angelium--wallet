@@ -13,11 +13,13 @@ import {ToastrService} from './services/toastr.service';
   providedIn: 'root'
 })
 export class MessagingService {
-  messaging = firebase.messaging();
+  messaging = firebase.messaging.isSupported() ? firebase.messaging() : null;
   currentMessage: any = new BehaviorSubject(null);
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,
-    private toastrService: ToastrService) {}
+    private toastrService: ToastrService) {
+    console.log(firebase.messaging.isSupported());
+  }
 
   updateToken(token) {
     this.afAuth.authState.take(1).subscribe(user => {
@@ -29,6 +31,7 @@ export class MessagingService {
   }
 
   getPermission() {
+    if (!this.messaging) return;
     this.messaging.requestPermission()
       .then(() => {
         return this.messaging.getToken();
@@ -43,6 +46,7 @@ export class MessagingService {
 
   async getToken(){
     var tokan:any = '';
+    if (!this.messaging) return;
     await this.messaging.getToken().then(val=>{
       tokan = val;
     }).catch((err=>{
@@ -52,6 +56,7 @@ export class MessagingService {
   }
 
   receiveMessage() {
+    if (!this.messaging) return;
     this.messaging.onMessage((payload) => {
       console.log(payload);
       this.toastrService.success(payload.notification.body, payload.notification.title);
