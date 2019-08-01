@@ -6,20 +6,27 @@
     <div class="clearfix"></div>
 
     <div class="row">
-      <div class="boardtable available-items">
+      <div class=" available-items">
 
-        <table class="table table-condensed">
+        <table class="table table-condensed boardtable">
           <thead>
-            <tr>
-              <th class="text-left" width="14%">Pair</th>
-              <th class="text-center" width="14%">Price</th>
-              <th class="text-right" width="12%" class="text-right">Change</th>
-            </tr>
+            
+              <tr>
+                <th class="text-left">
+                  <span class="theading-text">Pair</span>
+    
+                </th>
+                <th class="text-center">
+                  <span class="theading-text">Price</span>
+                
+                </th>
+                <th class="text-right">
+                  <span class="theading-text">Change</span>
+              
+                </th>
+              </tr>
+          
           </thead>
-        </table>
-      </div>
-      <div class="available available-items items_margin">
-        <table class="table table-striped">
           <tbody>
             <tr *ngFor="let pair of pairs">
               <td width="14%" class="text-left" (click)="clickPair(pair)">{{pair.symbol.split(':')[1]}}</td>
@@ -29,6 +36,7 @@
           </tbody>
         </table>
       </div>
+     
     </div>
   </nb-card-body>
 </nb-card>

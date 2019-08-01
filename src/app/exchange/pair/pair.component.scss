@@ -38,15 +38,19 @@ nb-card-body {
 .theading-text{
   color: #cee80b;
 }
-
+.row{
+  height: 270px;
+}
 .boardtable{width: 100%;}
 
 .boardtable th{
   // text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1.0rem;
-  border-bottom: 1px solid #342e73;
+  border-bottom: 1px solid #342e73!important;
 }
+
+
 .available{
   height: 250px;
 }
@@ -114,7 +118,7 @@ tbody tr {
   cursor: pointer;
   color:#ffffff;
   font-family: 'Nunito Sans', sans-serif;
-
+  white-space: nowrap;
 }
 .boardtable td.changetext{
   text-align: right;

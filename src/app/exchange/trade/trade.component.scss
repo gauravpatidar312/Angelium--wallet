@@ -44,7 +44,9 @@ nb-card-body{
 #main-navigation-trade li.active > a { border-bottom: 2px solid #26df8b; color: #26df8b; }
 #main-navigation-trade li > a { border-bottom: 2px solid #fff; color: #fff; }
 
-.navbar-pill { justify-content: flex-end; }
+.navbar-pill { justify-content: flex-end;
+  white-space: nowrap;
+ }
 
 .has-feedback {
   position: relative;
