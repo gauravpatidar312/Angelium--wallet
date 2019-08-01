@@ -1,8 +1,9 @@
 {
-  "common":{
+  "common": {
     "admin":"Admin",
     "assets": "Asset",
     "amount" : "Amount",
+    "blackJack": "Black Jack",
     "country": "Country",
     "cancel": "Cancel",
     "cryptos":{
