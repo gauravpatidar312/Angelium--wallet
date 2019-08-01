@@ -8,7 +8,15 @@
   }
   nb-card-body { overflow: visible; }
 }
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 nb-card-body{
   padding: 0px 20px !important;
 }
