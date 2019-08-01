@@ -87,8 +87,9 @@
   "games":{
     "lottery":{
       "address": "Address",
-      "assets": "Assets",
+      "asset": "Asset",
       "betting": "Betting",
+      "betNotAvailable": "There is no bets yet! Be the first and start betting!",
       "challengeComment": "Challenge comment (Optional)",
       "changeYourDestiny": "CHALLENGE YOUR DESTINY",
       "challenger": "Challenger",
@@ -105,10 +106,13 @@
       "winningComment": "Winning comment (Optional)",
       "toastr":{
         "betAmountMessage": "Please enter betting amount.",
-        "bettingSuccessfullyCompleted":"Betting successfully completed!",
-        "selectWalletType": "Please select any walletType.",
-        "youDontHaveSufficientBetToTotalBets":"You don't have sufficient bet to total bets.",
-        "youDontHaveSufficientBalanceToBetting":"You don't have sufficient balance to betting"
+        "betDisableText": "Betting is disabled!",
+        "bettingSuccessfullyCompleted":"Bet successfully placed!",
+        "noDataFoundCurrentLottery": "Lottery is running, stay tuned. We will announce winners after lottery finishes.",
+        "noDataFoundWinnerList": "Winners have not been announced yet. Stay tuned!",
+        "selectWalletType": "Please select asset.",
+        "betLimitExceed": "Total bets must be less than {{maxBet}}.",
+        "betAmountExceed": "You don't have sufficient balance to place bet."
       }
     }
   },

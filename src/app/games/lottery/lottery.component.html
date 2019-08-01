@@ -31,13 +31,16 @@
           <nb-card-header class="title-header">{{"games.lottery.betting" | translate}}</nb-card-header>
           <nb-card-body id="betting-body">
             <div class="row">
+              <div class="col-md-12 text-center" *ngIf="currentLotteryData?.status != 'running'">
+                {{"games.lottery.toastr.betDisableText" | translate}}
+              </div>
               <div class="col-md-12 mb-3 text-center">
                 <span class="text-space">1BET : <span class="span-font-size">{{currentLotteryData?.bet_amount | number : '1.0-0'}} XP</span></span>
               </div>
               <div class="col-lg-6">
                 <div class="form-group font-nunitoSans">
                   <label class="label-color">
-                    {{"games.lottery.assets" | translate}}
+                    {{"games.lottery.asset" | translate}}
                   </label>
                   <span class="float-right" *ngIf="selectWallet">{{(selectWallet?.wallet_amount | number : '1.0-6') + ' ' + (selectWallet?.wallet_type)}}</span>
                   <div class="status-dd-week mb-1 dropdown" ngbDropdown>
@@ -84,7 +87,7 @@
             <div class="col-12 p-0">
               <div class="form-group">
                 <label class="d-none d-md-block">&nbsp;</label>
-                <button [disabled]="(formSubmitting || fetchingAmount || currentLotteryData?.status !== 'running')" (click)="onPlaceLottery()" class="btn btn-block btn-success pointer btn-rectangle btn-run font-bebasNeueBold">
+                <button [disabled]="(formSubmitting || !selectWallet?.wallet_type || fetchingAmount || currentLotteryData?.status !== 'running')" (click)="onPlaceLottery()" class="btn btn-block btn-success pointer btn-rectangle btn-run font-bebasNeueBold">
                 <span *ngIf="!(formSubmitting || fetchingAmount)">
                  {{"common.run" | translate}}
                 </span>
@@ -122,7 +125,10 @@
               <nb-list-item *ngIf="fetchingBetList">
                 <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
               </nb-list-item>
-              <nb-list-item [hidden]="fetchingBetList" *ngFor="let user of betData">
+              <nb-list-item [ngClass]="{ 'p-0': betData }" *ngIf="!(betData && fetchingBetList)">
+                <span>{{betNotAvailable}}</span>
+              </nb-list-item>
+              <nb-list-item [hidden]="betData && fetchingBetList" *ngFor="let user of betData">
                 <div class="user-container" style="display: flex;">
                   <div class="div-picture m-0">
                     <div *ngIf="!user.profile_picture" class="user-picture background image"></div>
@@ -172,7 +178,7 @@
           <nb-card-body>
             <div class="col-md-12" *ngIf="!winnerData">{{winnerTextMessage}}</div>
             <nb-list id="winnerList">
-              <nb-list-item *ngIf="fetchingWinner">
+              <nb-list-item class="spinner-width" [hidden]="!fetchingWinner">
                 <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
               </nb-list-item>
               <nb-list-item *ngIf="fetchingWinner && !winnerData">

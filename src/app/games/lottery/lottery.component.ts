@@ -24,6 +24,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   selectWallet: any;
   selectedLottery: any;
   winnerTextMessage: string;
+  betNotAvailable: string;
   betData: any;
   totalBetAmount: any;
   lotteryData: any;
@@ -88,6 +89,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
           data.level = _.lowerCase(this.translate.instant('pages.setting.angel'));
         return data;
       });
+
+      if (!this.betData.length)
+          this.betNotAvailable = this.translate.instant('games.lottery.betNotAvailable');
       this.fetchingBetList = false;
     }, (err) => {
       this.fetchingBetList = false;
@@ -131,6 +135,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   getWinnerList(value) {
+    jQuery('.spinner-width').height(jQuery('#winnerList').height());
     this.fetchingWinner = true;
     this.httpService.get(`game/get-winners-list/?lottery_id=${value}`).subscribe((res?: any) => {
       this.winnerData = _.map(res, (winner) => {
@@ -156,9 +161,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
       if (!this.winnerData.length) {
         if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id)
-          this.winnerTextMessage = 'Lottery is running, stay tuned. We will announce winners after lottery finishes.';
+          this.winnerTextMessage = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
         else
-          this.winnerTextMessage = 'Winners have not been announce yet. Stay tuned!';
+          this.winnerTextMessage =  this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
       }
       this.fetchingWinner = false;
     }, (err) => {
@@ -206,13 +211,13 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     }
 
     if (Number(this.placeLottery.bet_amount) > Number(this.currentLotteryData.max_bet)) {
-      this.toastrService.danger(this.translate.instant('games.lottery.toastr.youDontHaveSufficientBetToTotalBets'),
+      this.toastrService.danger(this.translate.instant('games.lottery.toastr.betLimitExceed', {'maxBet': this.currentLotteryData.max_bet}),
         this.translate.instant('common.lottery'));
       return;
     }
 
     if (Number(this.totalBetAmount) > Number(this.selectWallet.wallet_amount)) {
-      this.toastrService.danger(this.translate.instant('games.lottery.toastr.youDontHaveSufficientBalanceToBetting'),
+      this.toastrService.danger(this.translate.instant('games.lottery.toastr.betAmountExceed'),
         this.translate.instant('common.lottery'));
       return;
     }
@@ -285,6 +290,12 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       this.timerData.hours = this.timerData.map(date => ('0' + date.hours()).slice(-2));
       this.timerData.minutes = this.timerData.map(date => ('0' + date.minutes()).slice(-2));
       this.timerData.seconds = this.timerData.map(date => ('0' + date.seconds()).slice(-2));
+    }
+
+    if (this.currentLotteryData.status === 'running') {
+      const challengeDiv = jQuery('#betting-body').height() + jQuery('#betting-footer').height() + 70 - 17;
+      jQuery('#challenges-body').css({height: challengeDiv});
+      jQuery('#challenges-body').css({maxHeight: challengeDiv});
     }
   }
 
