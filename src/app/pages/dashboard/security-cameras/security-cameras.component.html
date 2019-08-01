@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="cameras" *ngIf="!isSingleView">
-      <div class="camera col-lg-4" *ngFor="let camera of cameras"
+      <div (click)="onImageClick(camera.title)" class="camera pointer col-lg-4" *ngFor="let camera of cameras"
         [style.background-image]="'url(' + camera.source + ')'"
         [hidden]="!camera.display">
         <span>{{ camera.title }}</span>

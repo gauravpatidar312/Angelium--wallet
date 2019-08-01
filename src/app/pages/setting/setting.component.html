@@ -399,8 +399,8 @@
       <span class="enable-2fa">{{"pages.setting.QRCode" | translate}}</span><br><br>
       <img class="qr-code-tfa" [src]="qrCode"><br><br>
       <span class="enable-2fa mr-2">{{"pages.setting.secretKey" | translate}}: </span><span class="text-2fa">{{secretKey}}</span><br><br>
-      <span class="enable-2fa mr-3">{{"pages.setting.OTP" | translate}}</span>
-      <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" (keyup.enter)="verifyOTP(ref2FA)" placeholder="{{'pages.setting.enterOTP' | translate}}" nbInput /><br /><br />
+      <span class="enable-2fa mr-3">{{"pages.setting.googleCode" | translate}}:</span>
+      <input type="password" class="otp-margin" [(ngModel)]="tfaOtp" (keyup.enter)="verifyOTP(ref2FA)" placeholder="{{'pages.setting.2FAcode' | translate}}" nbInput /><br /><br />
     </nb-card-body>
     <nb-card-footer class="text-center">
       <button nbButton [disabled]="otpSubmitting" size="small" class="button-width" (click)="verifyOTP(ref2FA)">

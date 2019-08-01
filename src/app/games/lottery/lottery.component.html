@@ -4,22 +4,22 @@
       <div class="subdiv-margin">
         <div class="challenger-title font-bebasNeueBold"> {{"games.lottery.changeYourDestiny" | translate}}</div>
         <div class="round-div">{{currentLotteryData?.name}}</div>
-        <div class="winner-div" *ngFor="let winner of max_winners">
+        <div class="winner-div" *ngFor="let winner of estimatedWinners">
           <div>
-            <span class="winner-id-span">{{winner}}</span>
-            <span class="winner-name-span">PRIZE</span>
-            <span class="winner-xpAmount-span">122000 XP</span>
+            <span class="winner-id-span">{{winner.winner_rank}}</span>
+            <span class="winner-name-span">{{winner.prizeText}}</span>
+            <span class="winner-xpAmount-span">{{winner.amount}} XP</span>
           </div>
         </div>
         <div class="time-div" *ngIf="timerData">
           {{timerData?.days | async}} : {{timerData?.hours | async}} : {{timerData?.minutes | async}} :
           {{timerData?.seconds | async}}
         </div>
-        <div class="time-div" *ngIf="stateDateTimer">
-          {{stateDateTimer}}
+        <div class="time-div" *ngIf="stateDate">
+          {{stateDate}}
         </div>
-        <div class="time-div" *ngIf="endDateTimer">
-          {{endDateTimer}}
+        <div class="time-div" *ngIf="lotteryDate">
+          {{lotteryDate}}
         </div>
       </div>
     </div>
@@ -37,18 +37,9 @@
               <div class="col-lg-6">
                 <div class="form-group font-nunitoSans">
                   <label class="label-color">
-                    {{"games.lottery.bettingAmount" | translate}}
-                  </label>
-                  <input type="number" [required]="true"
-                         class="form-control input-padding"/>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group total-amount font-nunitoSans">
-                  <label class="label-color">
                     {{"games.lottery.assets" | translate}}
                   </label>
-                  <span class="float-right" *ngIf="selectWallet">{{(selectWallet?.wallet_amount | number : '1.0-6') + ' ' + (selectWallet?.wallet_type) }}</span>
+                  <span class="float-right" *ngIf="selectWallet">{{(selectWallet?.wallet_amount | number : '1.0-6') + ' ' + (selectWallet?.wallet_type)}}</span>
                   <div class="status-dd-week mb-1 dropdown" ngbDropdown>
                     <button type="button" ngbDropdownToggle
                             class="font-avenir btn-primary dropDown-padding btn b-color-wallet">
@@ -63,26 +54,41 @@
                   </div>
                 </div>
               </div>
+              <div class="col-lg-6">
+                <div class="form-group total-amount font-nunitoSans">
+                  <label class="label-color">
+                    {{"games.lottery.totalBets" | translate}}
+                  </label>
+                  <div class="input-group">
+                    <input type="number" onkeydown="if(event.key==='.'){event.preventDefault();}" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
+                           [(ngModel)]="placeLottery.bet_amount" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type"
+                           min="1" step="1" class="form-control input-padding"/>
+                    <span class="transfer-amount mr-2"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                    <span class="transfer-amount mr-2" *ngIf="!fetchingAmount">{{ totalBetAmount | number : '1.0-8'}}</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-12 p-0">
               <div class="form-group font-nunitoSans">
                 <label class="label-color"> {{"games.lottery.challengeComment" | translate}} </label>
-                <input type="text" class="form-control input-padding"/>
+                <input type="text" [(ngModel)]="placeLottery.comment" class="form-control input-padding"/>
               </div>
             </div>
             <div class="col-12 p-0">
               <div class="form-group font-nunitoSans">
                 <label class="label-color"> {{"games.lottery.winningComment" | translate}} </label>
-                <input type="text" class="form-control input-padding"/>
+                <input type="text" [(ngModel)]="placeLottery.winning_comment" class="form-control input-padding"/>
               </div>
             </div>
             <div class="col-12 p-0">
               <div class="form-group">
                 <label class="d-none d-md-block">&nbsp;</label>
-                <button class="btn btn-block btn-success btn-rectangle btn-run font-bebasNeueBold">
-                <span>
+                <button [disabled]="(formSubmitting || fetchingAmount || currentLotteryData?.status !== 'running')" (click)="onPlaceLottery()" class="btn btn-block btn-success pointer btn-rectangle btn-run font-bebasNeueBold">
+                <span *ngIf="!(formSubmitting || fetchingAmount)">
                  {{"common.run" | translate}}
                 </span>
+                  <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                 </button>
               </div>
             </div>
@@ -103,36 +109,40 @@
               <div class="col-6 padding-left-remove fix-width padding-remove-xs">
                 <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
                   <li class="pointer active li-margin">
-                    <a data-toggle="pill" (click)="changeBetList('Comment')">{{"games.lottery.comment" | translate}} </a>
+                    <a data-toggle="pill" (click)="isComment=true">{{"games.lottery.comment" | translate}} </a>
                   </li>
                   <li class="pointer">
-                    <a data-toggle="pill" (click)="changeBetList('Address')">{{"games.lottery.address" | translate}} </a>
+                    <a data-toggle="pill" (click)="isComment=false">{{"games.lottery.address" | translate}} </a>
                   </li>
                 </ul>
               </div>
             </div>
           </nb-card-header>
-          <nb-list class="list-height" id="challenges-body">
-            <nb-list-item *ngFor="let user of betData">
-              <div class="user-container" style="display: flex;">
-                <div class="div-picture m-0">
-                  <div class="user-picture background image">{{user.profile_picture}}</div>
-                </div>
-                <div class="info-container info-user-width ml-3">
-                  <div [ngClass]="{'label-color': user.comment}"
-                       class="user-name div-user-name work-break font-bebasNeueBold">{{ user.username }}
+            <nb-list class="list-height" id="challenges-body">
+              <nb-list-item *ngIf="fetchingBetList">
+                <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
+              </nb-list-item>
+              <nb-list-item [hidden]="fetchingBetList" *ngFor="let user of betData">
+                <div class="user-container" style="display: flex;">
+                  <div class="div-picture m-0">
+                    <div *ngIf="!user.profile_picture" class="user-picture background image"></div>
+                    <img *ngIf="user.profile_picture" src="{{user.profile_picture}}" class="user-picture background image">
                   </div>
-                  <div class="user-title work-break">{{ user.level }}{{user.rank}}</div>
+                  <div class="info-container info-user-width ml-3">
+                    <div [ngClass]="{'label-color': user.comment}"
+                         class="user-name div-user-name work-break font-bebasNeueBold">{{ user.username }}
+                    </div>
+                    <div class="user-title work-break">{{ user.level}}  {{user.rank}}</div>
+                  </div>
+                  <div class="ml-4" *ngIf="user.comment && isComment">
+                    <div class="message">{{user.comment}}</div>
+                  </div>
+                  <div class="ml-4" *ngIf="user.asset_address && !isComment">
+                    <div class="message">{{user.asset_address}}</div>
+                  </div>
                 </div>
-                <div class="ml-4" *ngIf="user.comment && isComment">
-                  <div class="message">{{user.comment}}</div>
-                </div>
-                <div class="ml-4" *ngIf="user.asset_address && !isComment">
-                  <div class="message">{{user.asset_address}}</div>
-                </div>
-              </div>
-            </nb-list-item>
-          </nb-list>
+              </nb-list-item>
+            </nb-list>
         </nb-card>
       </div>
     </div>
@@ -147,32 +157,43 @@
               </div>
               <div class="col-6 padding-left-remove fix-width margin-top-div padding-remove-xs">
                 <div class="float-right">
-                  <span class="mr-3 pointer"><i class="fa fa-chevron-left"></i></span>
-                  <span class="font-nunitoSans">ROUND #123</span>
-                  <span class="ml-3 pointer"><i class="fa fa-chevron-right"></i></span>
+                  <div class="dropdown dropdown-lottery ghost-dropdown" ngbDropdown>
+                    <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
+                      {{selectedLottery?.name}} &nbsp;
+                    </button>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                      <li class="dropdown-item pointer" *ngFor="let lottery of lotteryData" (click)="onChangeLottery(lottery)">{{ lottery?.name }}</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </nb-card-header>
           <nb-card-body>
-            <nb-list>
-              <nb-list-item *ngFor="let winnerUser of winnerUsers">
+            <div class="col-md-12" *ngIf="!winnerData">{{winnerTextMessage}}</div>
+            <nb-list id="winnerList">
+              <nb-list-item *ngIf="fetchingWinner">
+                <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
+              </nb-list-item>
+              <nb-list-item *ngIf="fetchingWinner && !winnerData">
+                <span>{{winnerTextMessage}}</span>
+              </nb-list-item>
+              <nb-list-item [hidden]="fetchingWinner && winnerData" *ngFor="let winnerUser of winnerData">
                 <div class="user-container">
                   <div class="div-flex">
-                    <div class="mr-2 div-id">{{ winnerUser.id}}</div>
-                    <div class="mr-2 div-prize">{{ winnerUser.prizeName}}</div>
-                    <div class="mr-2 div-xpAmount work-break">{{
-                      winnerUser.XPAmount}}
-                    </div>
+                    <div class="mr-2 div-id">{{ winnerUser.winner_rank}}</div>
+                    <div class="mr-2 div-prize">{{ winnerUser.prizeText}}</div>
+                    <div class="mr-2 div-xpAmount work-break">{{winnerUser.winning_value}} XP</div>
                     <div class="div-picture">
-                      <div class="user-picture background image">{{winnerUser.picture}}</div>
+                      <div *ngIf="!winnerUser.profile_picture" class="user-picture background image"></div>
+                      <img *ngIf="winnerUser.profile_picture" src="{{winnerUser.profile_picture}}" class="user-picture background image">
                     </div>
                     <div class="info-container mr-2">
-                      <div class="user-name div-name work-break font-bebasNeueBold">{{ winnerUser.name }}</div>
-                      <div class="user-title work-break">{{ winnerUser.title }}</div>
+                      <div class="user-name div-name work-break font-bebasNeueBold">{{ winnerUser.username }}</div>
+                      <div class="user-title work-break">{{ winnerUser.level }}  {{winnerUser.rank}}</div>
                     </div>
-                    <div class="ml-4" *ngIf="winnerUser.message">
-                      <div class="message">{{winnerUser.message}}</div>
+                    <div class="ml-4" *ngIf="winnerUser.winning_comment">
+                      <div class="message">{{winnerUser.winning_comment}}</div>
                     </div>
                   </div>
                 </div>
@@ -188,20 +209,13 @@
         <nb-card>
           <nb-card-header>
             <div class="row">
-              <div class="col-6 fix-width padding-remove-xs challenger-header">
-                {{"games.lottery.smartContracts" | translate}}
-              </div>
-              <div class="col-6 padding-left-remove fix-width margin-top-div padding-remove-xs">
-                <div class="float-right">
-                  <span class="mr-3 pointer"><i class="fa fa-chevron-left"></i></span>
-                  <span class="font-nunitoSans">ROUND #123</span>
-                  <span class="ml-3 pointer"><i class="fa fa-chevron-right"></i></span>
-                </div>
+              <div class="col-12 fix-width padding-remove-xs challenger-header">
+                {{"games.lottery.smartContract" | translate}}
               </div>
             </div>
           </nb-card-header>
           <nb-card-body>
-            <div style="min-height: 50px;">{{smartDetailData?.smartContracts}}</div>
+            <pre class="smartContract noselect">{{smartContract}}</pre>
           </nb-card-body>
         </nb-card>
       </div>

@@ -6,15 +6,6 @@
   opacity: 0.6;
 }
 
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 /deep/ .games-lottery {
   .main-content {
     padding: 0 !important;
@@ -86,7 +77,6 @@ input[type='number'] {
     text-align: center;
     font-size: 3.5rem;
     color: #ffffff;
-    text-shadow: 3px 3px #100b48;
   }
 
   .div-xpAmount {
@@ -107,7 +97,6 @@ input[type='number'] {
     margin-top: 40px;
     font-size: 30px;
     color: #ffffff;
-    text-shadow: 3px 3px #100b48;
   }
 
   .winner-div {
@@ -124,7 +113,6 @@ input[type='number'] {
     color: #b7ff05 !important;
     font-family: nb-theme(font-bebas);
     letter-spacing: 10px;
-    text-shadow: 3px 3px #100b48;
   }
 
   .winner-id-span {
@@ -132,7 +120,6 @@ input[type='number'] {
     display: inline-block;
     color: #ffffff;
     text-align: right;
-    text-shadow: 3px 3px #100b48;
   }
 
   .winner-xpAmount-span {
@@ -140,15 +127,13 @@ input[type='number'] {
     display: inline-block;
     color: #26df8b !important;
     text-align: right;
-    text-shadow: 3px 3px #100b48;
   }
 
   .winner-name-span {
-    width: 98px;
+    width: 130px;
     display: inline-block;
     color: #ffffff;
     text-align: right;
-    text-shadow: 3px 3px #100b48;
   }
   .div-name {
     font-size: 22px;
@@ -163,6 +148,7 @@ input[type='number'] {
   .info-user-width {
     width: 100px;
   }
+
   /deep/ .user-picture.background {
     display: flex;
     align-items: center;
@@ -188,8 +174,8 @@ input[type='number'] {
   }
 
   /deep/ .user-picture {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2.9rem;
+    width: 2.9rem;
     background: #a1a1e5;
     border: solid 2px #00f9a6;
   }
@@ -225,18 +211,17 @@ input[type='number'] {
     position: relative;
   }
 
-  .message:after {
-    left: 0%;
-    margin-top: 13px;
-    border: solid transparent;
-    content: ' ';
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #ad82d7;
-    border-width: 10px;
-    margin-left: -10px;
+  .message::before {
+    font-family: 'Font Awesome 5 Free';
+    content: '\f0dd';
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    color: #ad82d7;
+    font-size: 40px;
+    margin-top: -46px;
+    margin-left: -27px;
   }
 
   .challenger-header {
@@ -267,6 +252,13 @@ input[type='number'] {
 
   .label-color {
     color: #00bb66 !important;
+  }
+
+  .winner-list-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    text-align: center;
   }
 
   #heavenHistory-navigation li.active > a {
@@ -309,6 +301,50 @@ input[type='number'] {
     border: 2px solid #7659ff !important;
   }
 
+  .smartContract {
+    max-height: 400px;
+    color: #d1d1ff;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  }
+
+  .total-amount {
+    position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        color: white;
+        margin-bottom: 0;
+      }
+    }
+    span {
+      position: absolute;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
+    }
+  }
+
+  .dropdown-lottery{
+    width: 180px !important;
+  }
 
   @media (min-width: 375px) and (max-width: 480px) {
     .time-div {

@@ -4,6 +4,7 @@ import {Camera, SecurityCamerasData} from '../../../@core/data/security-cameras'
 import {takeWhile, map} from 'rxjs/operators';
 import {SessionStorageService} from '../../../services/session-storage.service';
 import {IndexedDBStorageService} from '../../../services/indexeddb-storage.service';
+import {ToastrService} from '../../../services/toastr.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -23,6 +24,7 @@ export class SecurityCamerasComponent implements OnDestroy {
   constructor(private securityCamerasService: SecurityCamerasData,
               private sessionStorage: SessionStorageService,
               public translate: TranslateService,
+              private toastrService: ToastrService,
               private storageService: IndexedDBStorageService) {
     const userSettingInfo = this.sessionStorage.getFromSession('userInfo');
     this.r18mode = userSettingInfo.r18mode;
@@ -47,5 +49,10 @@ export class SecurityCamerasComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  onImageClick(title: any) {
+    this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
+      this.translate.instant('pages.dashboard.securityCamera.' + title.toLowerCase()));
   }
 }

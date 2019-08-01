@@ -137,6 +137,10 @@ html{top: 0 !important;}
     -moz-box-shadow: 0 0 4px #06d691 !important;
   }
 
+  .layout-container .content nb-layout-footer nav {
+    padding: 0.25rem !important;
+  }
+
   nb-layout .layout nb-layout-header nav {
     background: linear-gradient(to bottom, #321a69, #311a77);
   }
@@ -147,3 +151,11 @@ html{top: 0 !important;}
     -moz-box-shadow: none !important;
   };
 }
+.input-group .form-control:first-child:not(:only-child), .input-group .input-group-addon:first-child, .input-group .input-group-prepend .btn:first-child, .input-group .input-group-btn .btn:first-child {
+  border-top-right-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+}
+.input-group > .form-control:focus, .input-group > .custom-select:focus, .input-group > .custom-file:focus {
+  z-index: 0 !important;
+}
+
