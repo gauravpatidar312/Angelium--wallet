@@ -68,8 +68,17 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   getWallet() {
-    this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = _.sortBy(res, ['wallet_type']);
+    this.httpService.get('asset/').subscribe((data?: any) => {
+      const cryptosData = _.filter(data.cryptos, (crypto?: any) => {
+        return !(crypto.name === 'ANL' || crypto.name === 'HEAVEN' || crypto.name === 'ANLP');
+      });
+      const walletData = _.map(cryptosData, function (obj?: any) {
+        const item: any = {};
+        item.wallet_type = obj.name;
+        item.wallet_amount = obj.quantity;
+        return item;
+      });
+      this.myWallets = _.sortBy(walletData, ['wallet_type']);
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -179,7 +188,6 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
   onChangeWallet(walletType: string): void {
     this.walletType = walletType;
-    this.calculateAmount();
     if (this.walletType !== 'SELECT') {
       this.selectWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
@@ -191,6 +199,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
         });
       }
     }
+    this.calculateAmount();
   }
 
   getSmartContract() {
@@ -205,12 +214,12 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    if (!this.placeLottery.bet_amount) {
+    if (!this.placeLottery.bet_number) {
       this.toastrService.danger(this.translate.instant('games.lottery.toastr.betAmountMessage'), this.translate.instant('common.lottery'));
       return;
     }
 
-    if (Number(this.placeLottery.bet_amount) > Number(this.currentLotteryData.max_bet)) {
+    if (Number(this.placeLottery.bet_number) > Number(this.currentLotteryData.max_bet)) {
       this.toastrService.danger(this.translate.instant('games.lottery.toastr.betLimitExceed', {'maxBet': this.currentLotteryData.max_bet}),
         this.translate.instant('common.lottery'));
       return;
@@ -224,8 +233,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
     const placeLotteryData = {
       'lottery_id': this.currentLotteryData.lottery_id,
-      'bet_amount': this.placeLottery.bet_amount,
-      'user_wallet': this.selectWallet.id,
+      'bet_number': this.placeLottery.bet_number,
+      'currency_type': this.selectWallet.wallet_type,
       'comment': this.placeLottery.comment || '',
       'winning_comment': this.placeLottery.winning_comment || ''
     };
@@ -246,12 +255,12 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   calculateAmount() {
-    if (!this.placeLottery.bet_amount) {
+    if (!this.placeLottery.bet_number) {
       this.totalBetAmount = '';
       return;
     }
     this.fetchingAmount = true;
-    this.httpService.get(`game/get-currency-calculation/?lottery_id=${this.currentLotteryData.lottery_id}&bet_amount=${this.placeLottery.bet_amount}&currency=${this.selectWallet.wallet_type}`).subscribe((res?: any) => {
+    this.httpService.get(`game/get-currency-calculation/?lottery_id=${this.currentLotteryData.lottery_id}&bet_number=${this.placeLottery.bet_number}&currency=${this.selectWallet.wallet_type}`).subscribe((res?: any) => {
       this.fetchingAmount = false;
       this.totalBetAmount = res.amount;
     }, (err) => {

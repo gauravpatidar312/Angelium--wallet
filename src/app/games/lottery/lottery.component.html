@@ -64,7 +64,7 @@
                   </label>
                   <div class="input-group">
                     <input type="number" onkeydown="if(event.key==='.'){event.preventDefault();}" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
-                           [(ngModel)]="placeLottery.bet_amount" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type"
+                           [(ngModel)]="placeLottery.bet_number" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type"
                            min="1" step="1" class="form-control input-padding"/>
                     <span class="transfer-amount mr-2"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                     <span class="transfer-amount mr-2" *ngIf="!fetchingAmount">{{ totalBetAmount | number : '1.0-8'}}</span>
@@ -125,7 +125,7 @@
               <nb-list-item *ngIf="fetchingBetList">
                 <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
               </nb-list-item>
-              <nb-list-item [ngClass]="{ 'p-0': betData }" *ngIf="!(betData && fetchingBetList)">
+              <nb-list-item [ngClass]="{ 'p-0': !betNotAvailable }" *ngIf="!(betData && fetchingBetList)">
                 <span>{{betNotAvailable}}</span>
               </nb-list-item>
               <nb-list-item [hidden]="betData && fetchingBetList" *ngFor="let user of betData">
