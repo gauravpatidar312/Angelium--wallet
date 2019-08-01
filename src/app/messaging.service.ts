@@ -44,13 +44,8 @@ export class MessagingService {
 
   async getToken(){
     var tokan:any = '';
-    if (!this.messaging) return;
-    await this.messaging.getToken().then(val=>{
-      tokan = val;
-    }).catch((err=>{
-      tokan = '';
-    }));
-    return tokan;
+    if (!this.messaging) return tokan;
+    return await this.messaging.getToken();
   }
 
   receiveMessage() {
