@@ -49,11 +49,11 @@
 
   .twc > div { 
     // background-color: yellow;
-    height: 500px !important;
+    height: 580px !important;
     width: 100% !important
   }
   .twc > div > div {
-    height: 500px !important;
+    height: 580px !important;
     width: 100% !important;
   }
 }
@@ -114,9 +114,11 @@ ul#main-navigation{
   border-top: 0px solid #dee2e6;
   border-bottom: 0px solid #dee2e6;
   color: #cee80b;
+  font-size: 12px;
   padding: 0px 0.75rem!important;
+  font-family: 'Nunito Sans', sans-serif;
 }
-tbody tr{ padding:0px;color: #ffffff; font-size: 12px; cursor: pointer;   font-family: 'Nunito Sans', sans-serif;}
+tbody tr{ font-family: 'Nunito Sans', sans-serif; padding:0px;color: #ffffff; font-size: 12px; cursor: pointer;   font-family: 'Nunito Sans', sans-serif;}
 table tbody tr:nth-of-type(even) {
   background: #87a1b730;
 }
