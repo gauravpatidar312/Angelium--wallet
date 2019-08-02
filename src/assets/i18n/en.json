@@ -3,6 +3,7 @@
     "admin":"Admin",
     "assets": "Asset",
     "amount" : "Amount",
+    "angelium": "Angelium",
     "blackJack": "Black Jack",
     "country": "Country",
     "cancel": "Cancel",
@@ -74,7 +75,10 @@
     "verificationCode": "Verification code",
     "verified": "Verified",
     "week": "Week",
-    "year": "Year"
+    "year": "Year",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} is required"

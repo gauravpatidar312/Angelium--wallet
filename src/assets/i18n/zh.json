@@ -3,6 +3,7 @@
     "admin":"Admin",
     "assets": "资产",
     "amount" : "数量",
+    "angelium": "Angelium",
     "blackJack": "Black Jack",
     "country": "国家",
     "cancel": "撤销",
@@ -73,7 +74,10 @@
     "verificationCode": "认证码",
     "verified": "验证通过",
     "week": "周",
-    "year": "年"
+    "year": "年",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} 必填"

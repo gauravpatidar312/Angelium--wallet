@@ -3,6 +3,7 @@
     "admin":"Admin",
     "assets": "Asset",
     "amount" : "数量",
+    "angelium": "Angelium",
     "blackJack": "Black Jack",
     "country": "国",
     "cancel": "Cancel",
@@ -73,7 +74,10 @@
     "verificationCode": "認証コード",
     "verified": "Verified",
     "week": "週",
-    "year": "年"
+    "year": "年",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} が必要です"
