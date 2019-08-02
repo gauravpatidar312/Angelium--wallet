@@ -231,3 +231,41 @@
     }
   }
 }
+
+.close-btn {
+  float: right;
+  font-size: 20px;
+}
+
+.image-div {
+  min-width: 140px;
+}
+
+.image-width {
+  border-radius: 0.5rem;
+  box-shadow: rgb(6, 214, 145) 0 0 4px 0;
+}
+
+.game-name-font {
+  font-size: 1.5rem;
+  font-family: nb-theme(font-bebas);
+}
+
+@include media-breakpoint-down(sm) {
+  /deep/ .image-scoll-card-body {
+    width: 260px;
+  }
+
+  /deep/ .image-div {
+    text-align: center;
+  }
+
+  /deep/ .lottery-margin {
+    margin-top: 10px;
+  }
+
+  /deep/ .image-width {
+    width: 140px;
+    height: 140px;
+  }
+}
