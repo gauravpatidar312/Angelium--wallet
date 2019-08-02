@@ -38,6 +38,7 @@ import { ReportBugComponent } from './report-bug/report-bug.component';
 import {GamesModule} from './games/games.module';
 
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ExchangeModule } from './exchange/exchange.module';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -50,6 +51,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
+    ExchangeModule,
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     TranslateModule.forRoot({

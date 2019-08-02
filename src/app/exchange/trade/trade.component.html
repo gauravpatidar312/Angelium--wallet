@@ -1,0 +1,86 @@
+<nb-card class="trade">
+  <nb-card-header>Trade</nb-card-header>
+  <nb-card-body>
+      <div class="available-items">
+    <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
+      <li class="pointer active tab-link" data-tab="tab-1"> 
+        <a data-toggle="pill">BUY ANX</a>
+      </li>
+      <li class="pointer tab-link" data-tab="tab-2">
+        <a data-toggle="pill">SELL ANX</a>
+      </li>
+    </ul>
+
+    <div id="tab-1" class="tab-content active">
+      <form (ngSubmit)="submitTradeBuy()">
+        <div class="form-group">
+          <div class="form-group has-feedback">
+            <label class="text-success">Price</label>
+            <label class="label-right">$ 5.1</label>
+            <input type="number" class="form-control" name="price" [(ngModel)]="tradeByu.price">
+            <span class="form-control-feedback">BTC</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group has-feedback">
+            <label class="text-success">Amount</label>
+            <label class="label-max">MAX</label>
+            <input type="number" class="form-control" name="amount" [(ngModel)]="tradeByu.amount">
+            <span class="form-control-feedback">ANX</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group has-feedback">
+            <label class="text-success">Total</label>
+            <label class="label-right">$ 5.1</label>
+            <input type="text" class="form-control" name="btc" value="0">
+            <span class="form-control-feedback">BTC</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large" [disabled]="formSubmittingBuy">
+            <span *ngIf="!formSubmittingBuy">Place buy order</span>
+            <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingBuy"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div id="tab-2" class="tab-content" >
+      <form (ngSubmit)="submitTradeSell()">
+        <div class="form-group">
+          <div class="form-group has-feedback">
+            <label class="text-success">Price</label>
+            <label class="label-right">$ 5.1</label>
+            <input type="number" class="form-control" name="price" [(ngModel)]="tradeSell.price">
+            <span class="form-control-feedback">BTC</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group has-feedback">
+            <label class="text-success">Amount</label>
+            <label class="label-max">MAX</label>
+            <input type="number" class="form-control" name="amount" [(ngModel)]="tradeSell.amount">
+            <span class="form-control-feedback">ANX</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group has-feedback">
+            <label class="text-success">Total</label>
+            <label class="label-right">$ 5.1</label>
+            <input type="text" class="form-control" name="btc" value="0">
+            <span class="form-control-feedback">BTC</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large" [disabled]="formSubmittingSell">
+            <span *ngIf="!formSubmittingSell">Place Sell order</span>
+            <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingSell"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    </div>
+  </nb-card-body>
+
+</nb-card>
