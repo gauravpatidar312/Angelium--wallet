@@ -1,0 +1,46 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  nb-card-header {
+    font-family: nb-theme(font-bebas);
+    font-size: 1.75rem;
+  }
+  nb-card-body {
+    overflow: visible;
+  }
+}
+nb-card-body {
+  padding: 10px 30px
+  }
+.trade-histary-table{width: 100%;    white-space: nowrap;
+}
+.trade-histary-table th{
+  color:#b9e80c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+  font-family: nb-theme(font-bebas-book);
+}
+.trade-histary-table td{
+  color:#ffffff;
+  padding: 0px 8px;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 20px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.trade-histary-table td.changetext{
+  text-align: right;
+}
+.trade-histary-table tbody tr:nth-of-type(even) {
+  background: #87a1b730;
+}
+.available-items{
+  height: 352px;
+  min-height:200px!important;
+  max-height:272px!important;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto!important;
+}

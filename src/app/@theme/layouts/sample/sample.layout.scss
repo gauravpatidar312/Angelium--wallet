@@ -34,6 +34,7 @@
       padding: 3.4rem 0.25rem;
     }
 
+
     /deep/ .main-container {
       width: $sidebar-width;
       background: nb-theme(color-bg);
@@ -200,3 +201,38 @@
     }
   }
 }
+
+#main-navigation li > a {
+  text-decoration: none;
+  font-family: nb-theme(font-nunito);
+  line-height:63px;
+  font-size: 1.2rem;
+  display: inline-block;
+  color: #ffffff;
+  padding: 1px 25px;
+  border-bottom: 2px solid transparent;
+  font-weight: 400;
+  outline: transparent!important;
+}
+.pointer{ outline: none!important; }
+#main-navigation li > a i{
+  padding-right: 8px;
+  font-size: 17px;
+  float: left;
+  line-height: 63px;
+}
+.iconsize{
+  font-size:24px!important;
+}
+#main-navigation li.active > a i{
+  color:#ffffff;
+}
+#main-navigation li.active > a {
+  border-bottom: 2px solid #ffffff;
+}
+.navbar-header {
+  font-family: nb-theme(font-nunito);
+  font-weight: 500;
+  font-size: 22px;
+}
+.navbar-pill { justify-content: flex-end; }

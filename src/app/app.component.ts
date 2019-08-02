@@ -153,6 +153,9 @@ export class AppComponent implements OnInit {
         bodyTag.removeClass(function (index, css) {
           return (css.match(/(^|\s)games-\S+/g) || []).join(' ');
         });
+        bodyTag.removeClass(function (index, css) {
+          return (css.match(/(^|\s)exchange \S+/g) || []).join(' ');
+        });
         bodyTag.addClass(url.replace(/[\/ ]/g, '-'));
       }
     }

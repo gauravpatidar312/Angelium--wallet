@@ -306,6 +306,10 @@
     color: #d1d1ff;
   }
 
+  /deep/ nb-list-item {
+    border-bottom: none !important;
+  }
+
   .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -388,6 +392,9 @@
   }
 
   @include media-breakpoint-down(sm) {
+    .message {
+      min-width: max-content;
+    }
     .time-div {
       letter-spacing: 7px !important;
       font-size: 3rem !important;

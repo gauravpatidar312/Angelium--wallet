@@ -43,6 +43,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {GamesModule} from './games/games.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+import { ExchangeModule } from './exchange/exchange.module';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -63,6 +64,7 @@ const firebaseConfig = {
     HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
+    ExchangeModule,
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     TranslateModule.forRoot({
