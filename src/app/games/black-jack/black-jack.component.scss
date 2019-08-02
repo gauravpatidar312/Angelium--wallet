@@ -1,0 +1,57 @@
+/deep/ .games-black-jack {
+  .main-content {
+    padding: 0 !important;
+  }
+
+  nb-sidebar.menu-sidebar {
+    display: none;
+  }
+
+  .logo-containter {
+    img {
+      vertical-align: middle;
+    }
+    .display-none {
+      display: block !important;
+    }
+  }
+
+  .layout {
+    background: none !important;
+  }
+
+  .header-container .navigation i {
+    display: none !important;
+  }
+
+  nb-sidebar.compacted.start.fixed ~ .content {
+    margin-left: 0 !important;
+  }
+
+  nb-layout-footer {
+    display: none !important;
+  }
+}
+
+.game-container {
+  margin-top: 0;
+}
+
+.black-jack {
+  position: relative;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#block-game {
+  position: relative;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}

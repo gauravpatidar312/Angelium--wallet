@@ -52,4 +52,11 @@ export const MENU_ITEMS = [
     link: '/games/lottery',
     languageKey: 'lottery',
   },
+  {
+    data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
+    title: 'Black Jack',
+    icon: 'nb-paper-plane',
+    link: '/games/black-jack',
+    languageKey: 'blackJack',
+  },
 ];

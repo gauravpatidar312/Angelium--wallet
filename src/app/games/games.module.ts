@@ -10,6 +10,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { LotteryComponent } from './lottery/lottery.component';
 import { GamesRoutingModule } from './games-routing.module';
 import { GamesComponent } from './games.component';
+import { BlackJackComponent } from './black-jack/black-jack.component';
 
 const GAMES_COMPONENTS = [
   GamesComponent,
@@ -30,6 +31,7 @@ const GAMES_COMPONENTS = [
   declarations: [
     ...GAMES_COMPONENTS,
     LotteryComponent,
+    BlackJackComponent,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '#' },
