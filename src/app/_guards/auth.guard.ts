@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     return Observable.create((observer: any) => {
       const url: string = state.url;
       const data: any = route.data;
-      if(!this.user)
+      if (!this.user)
         this.user = this.sessionStorage.getFromSession('userInfo');
 
       setTimeout(() => {
@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
           observer.next(false);
           observer.complete();
         }
-      }, 300);
+      }, 600);
     });
   }
 }
