@@ -19,10 +19,10 @@
       <nb-card-header >
         <ul id="main-navigation" class="nav  mytradeLine empty_width">
           <li class="pointer active">
-            <a data-toggle="pill">MY OPEN ORDERS</a>
+            <a data-toggle="pill" (click)="getOpenOrder()">MY OPEN ORDERS</a>
           </li>
           <li class="pointer">
-            <a data-toggle="pill">MY TRADE HISTORY</a>
+            <a data-toggle="pill" (click)="getMyTradeHistory()">MY TRADE HISTORY</a>
           </li>
         </ul>
       </nb-card-header>
@@ -30,9 +30,9 @@
       <nb-card-body>
         <div class="clearfix"></div>
 
-        <div class="row">
-          <div class="available-items">
-
+        <div class="row" *ngIf="!tradeTabValue">
+          <div *ngIf="noDataOpenTrade"><span>No open order available</span></div>
+          <div class="available-items" *ngIf="!noDataOpenTrade">
             <table class="table table-condensed">
               <thead>
                 <tr>
@@ -47,53 +47,68 @@
               </thead>
             </table>
           </div>
-          <div class="available-items">
+          <div class="available-items" *ngIf="!noDataOpenTrade">
             <table class="table table-striped">
               <tbody>
-                <tr>
-                  <td width="14%" class="text-left">07.13 22:42</td>
-                  <td width="14%" class="text-center">ANX / BTC</td>
-                  <td width="10%" class="text-center"><span class="green-text">SELL</span></td>
-                  <td width="15%" class="text-center">0.8871 BTC</td>
-                  <td width="18%" class="text-center">9,236,543 ANX</td>
-                  <td width="17%" class="text-center">0.32444 BTC</td>
-                  <td width="12%" class="text-right">37.4%</td>
+                <tr *ngFor="let buy of tradeBuy">
+                  <td width="14%" class="text-left">{{buy.timestamp | date:'MM.yy hh:mm'}}</td>
+                  <td width="14%" class="text-center">{{buy.pair}}</td>
+                  <td width="10%" class="text-center"><span class="green-text">BUY</span></td>
+                  <td width="15%" class="text-center">{{buy.price}}</td>
+                  <td width="18%" class="text-center">{{buy.amount}}</td>
+                  <td width="17%" class="text-center">{{buy.price * buy.amount}}</td>
+                  <td width="12%" class="text-right">{{buy.filled}}%</td>
                 </tr>
-                <tr>
-                  <td width="14%" class="text-left">07.13 22:42</td>
-                  <td width="14%" class="text-center">ANX / BTC</td>
-                  <td width="10%" class="text-center"><span class="pink-text">BUY</span></td>
-                  <td width="15%" class="text-center">0.8871 BTC</td>
-                  <td width="18%" class="text-center">9,236,543 ANX</td>
-                  <td width="17%" class="text-center">0.32444 BTC</td>
-                  <td width="12%" class="text-right">37.4%</td>
+                <tr *ngFor="let sell of tradeSell">
+                  <td width="14%" class="text-left">{{sell.timestamp | date:'MM.yy hh:mm'}}</td>
+                  <td width="14%" class="text-center">{{sell.pair}}</td>
+                  <td width="10%" class="text-center"><span class="pink-text">SELL</span></td>
+                  <td width="15%" class="text-center">{{sell.price}}</td>
+                  <td width="18%" class="text-center">{{sell.amount}}</td>
+                  <td width="17%" class="text-center">{{sell.price * sell.amount}}</td>
+                  <td width="12%" class="text-right">{{sell.filled}}%</td>
                 </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- <span class="fetchingDownLine">
+            <i class="fa fa-spinner fetchingDownline-margin spinner-color fa-spin"></i>
+          </span> -->
+        </div>
+
+        <div class="row" *ngIf="tradeTabValue">
+          <div *ngIf="noDataTradeHistory"><span>No trade history available</span></div>
+          <div class="available-items" *ngIf="!noDataTradeHistory">
+            <table class="table table-condensed">
+              <thead>
                 <tr>
-                  <td width="14%" class="text-left">07.13 22:42</td>
-                  <td width="14%" class="text-center">ANX / BTC</td>
-                  <td width="10%" class="text-center"><span class="green-text">SELL</span></td>
-                  <td width="15%" class="text-center">0.8871 BTC</td>
-                  <td width="18%" class="text-center">9,236,543 ANX</td>
-                  <td width="17%" class="text-center">0.32444 BTC</td>
-                  <td width="12%" class="text-right">37.4%</td>
+                  <th class="text-left" width="14%">Time</th>
+                  <th class="text-center" width="14%">Pair</th>
+                  <th class="text-center" width="10%" align="center">Type</th>
+                  <th class="text-center" width="15%">Price</th>
+                  <th class="text-center" width="18%">Amount</th>
+                  <th class="text-center" width="17%">Total Price</th>
+                  <th class="text-right" width="12%" class="text-right">Fill %</th>
                 </tr>
-                <tr>
-                  <td width="14%" class="text-left">07.13 22:42</td>
-                  <td width="14%" class="text-center">ANX / BTC</td>
-                  <td width="10%" class="text-center"><span class="pink-text">BUY</span></td>
-                  <td width="15%" class="text-center">0.8871 BTC</td>
-                  <td width="18%" class="text-center">9,236,543 ANX</td>
-                  <td width="17%" class="text-center">0.32444 BTC</td>
-                  <td width="12%" class="text-right">37.4%</td>
-                </tr>
-                <tr>
-                  <td width="14%" class="text-left">07.13 22:42</td>
-                  <td width="14%" class="text-center">ANX / BTC</td>
-                  <td width="10%" class="text-center"><span class="green-text">SELL</span></td>
-                  <td width="15%" class="text-center">0.8871 BTC</td>
-                  <td width="18%" class="text-center">9,236,543 ANX</td>
-                  <td width="17%" class="text-center">0.32444 BTC</td>
-                  <td width="12%" class="text-right">37.4%</td>
+              </thead>
+            </table>
+          </div>
+          <div class="available-items" *ngIf="!noDataTradeHistory">
+            <table class="table table-striped">
+              <tbody>
+                <tr *ngFor="let history of myTradeHistory">
+                  <td width="14%" class="text-left">{{history.timestamp | date:'MM.yy hh:mm'}}</td>
+                  <td width="14%" class="text-center">{{history.pair}}</td>
+                  <td width="10%" class="text-center">
+                    <span class="{{history.buy ? 'green-text' : 'pink-text' }}">
+                      {{history.buy ? 'BUY' : 'SELL' }}
+                    </span>
+                  </td>
+                  <td width="15%" class="text-center">{{history.price}}</td>
+                  <td width="18%" class="text-center">{{history.amount}}</td>
+                  <td width="17%" class="text-center">{{history.price * history.amount}}</td>
+                  <td width="12%" class="text-right">{{history.filled}}%</td>
                 </tr>
               </tbody>
             </table>

@@ -137,6 +137,14 @@
         "xschool": "XSCHOOL"
       }
     },
+    "exchange":{
+      "tradeBuy": "Trade buy",
+      "tradeBuySuccessfully": "Trade buy successfully",
+      "tradeBuyError": "Trade buy error",
+      "tradeSell": "Trade sell",
+      "tradeSellSuccessfully": "Trade sell successfully",
+      "tradeSellError": "Trade sell error"
+    },
     "heaven":{
       "enterAmount":"输入金额",
       "entryDate": "进入日期",

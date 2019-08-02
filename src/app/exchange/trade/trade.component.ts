@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
@@ -16,7 +17,8 @@ export class TradeComponent implements OnInit {
   formSubmittingBuy:boolean = false;
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
-              private shareDataService: ShareDataService,) {
+              private shareDataService: ShareDataService,
+              public translate: TranslateService,) {
 
   }
   tradeByu = {
@@ -62,11 +64,11 @@ export class TradeComponent implements OnInit {
       if (res.status) {
         this.tradeByu.price = 0;
         this.tradeByu.amount = 0;
-        this.toastrService.success('Trade buy', 'Trade buy successfully');
+        this.toastrService.success(this.translate.instant('pages.exchange.tradeBuy'), this.translate.instant('pages.exchange.tradeBuySuccessfully'));
       }
     }, err=>{
       this.formSubmittingBuy = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Trade buy error');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.tradeBuyError'));
     });
   }
 
@@ -78,11 +80,11 @@ export class TradeComponent implements OnInit {
       if (res.status) {
         this.tradeSell.price = 0;
         this.tradeSell.amount = 0;
-        this.toastrService.success('Trade sell', 'Trade sell successfully');
+        this.toastrService.success(this.translate.instant('pages.exchange.tradeSell'), this.translate.instant('pages.exchange.tradeSellSuccessfully'));
       }
     }, err=>{
       this.formSubmittingSell = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'Trade sell error');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.tradeSellError'));
     });
   }
 }

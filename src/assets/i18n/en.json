@@ -138,6 +138,14 @@
         "xschool": "XSCHOOL"
       }
     },
+    "exchange":{
+      "tradeBuy": "Trade buy",
+      "tradeBuySuccessfully": "Trade buy successfully",
+      "tradeBuyError": "Trade buy error",
+      "tradeSell": "Trade sell",
+      "tradeSellSuccessfully": "Trade sell successfully",
+      "tradeSellError": "Trade sell error"
+    },
     "heaven":{
       "enterAmount":"Enter Amount",
       "entryDate": "Entry date",

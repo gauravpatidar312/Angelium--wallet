@@ -33,7 +33,8 @@
           <div class="form-group has-feedback">
             <label class="text-success">Total</label>
             <label class="label-right">$ 5.1</label>
-            <input type="text" class="form-control" name="btc" value="0">
+            <input type="text" class="form-control" name="btc" 
+              [value]="tradeByu.price * tradeByu.amount" disabled>
             <span class="form-control-feedback">BTC</span>
           </div>
         </div>
@@ -68,7 +69,8 @@
           <div class="form-group has-feedback">
             <label class="text-success">Total</label>
             <label class="label-right">$ 5.1</label>
-            <input type="text" class="form-control" name="btc" value="0">
+            <input type="text" class="form-control" name="total" 
+              [value]="tradeSell.price * tradeSell.amount" disabled>
             <span class="form-control-feedback">BTC</span>
           </div>
         </div>
