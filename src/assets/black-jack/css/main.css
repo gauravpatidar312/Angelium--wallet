@@ -3,7 +3,7 @@ root {
 }
 
 body {
-  background-color: #000;
+  background-color: rgba(16, 11, 72, 0.72);
   background-repeat: repeat-x;
   background-position: top;
 }

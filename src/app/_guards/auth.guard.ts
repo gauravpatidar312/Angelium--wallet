@@ -10,20 +10,25 @@ import {SessionStorageService} from '../services/session-storage.service';
 })
 
 export class AuthGuard implements CanActivate {
+  user: any;
+
   constructor(private toastrService: ToastrService,
               public translate: TranslateService,
               private router: Router,
               private sessionStorage: SessionStorageService) {
+    this.user = this.sessionStorage.getFromSession('userInfo');
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return Observable.create((observer: any) => {
       const url: string = state.url;
       const data: any = route.data;
-      const user = this.sessionStorage.getFromSession('userInfo');
+      if(!this.user)
+        this.user = this.sessionStorage.getFromSession('userInfo');
+
       setTimeout(() => {
-        if (user && url) {
-          if (!data.role || data.role.indexOf(user.user_type) >= 0) {
+        if (this.user && url) {
+          if (!data.role || data.role.indexOf(this.user.user_type) >= 0) {
             observer.next(true);
             observer.complete();
           } else {
@@ -37,7 +42,7 @@ export class AuthGuard implements CanActivate {
           observer.next(false);
           observer.complete();
         }
-      }, 600);
+      }, 300);
     });
   }
 }

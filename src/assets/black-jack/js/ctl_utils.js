@@ -223,7 +223,8 @@ function sizeHandler() {
             $("#canvas").css("top",fOffsetY+"px");
         }
 
-        $("#canvas").css("left",fOffsetX+"px");
+        // $("#canvas").css("left",fOffsetX+"px");
+        $("#canvas").css("left", 0 +"px");
 
         fullscreenHandler();
 };
@@ -274,7 +275,7 @@ function createSprite(oSpriteSheet, szState, iRegX,iRegY,iWidth, iHeight){
 	}
 
 	var hitObject = new createjs.Shape();
-	hitObject .graphics.beginFill("#000000").drawRect(-iRegX, -iRegY, iWidth, iHeight);
+	hitObject .graphics.beginFill("#100b48").drawRect(-iRegX, -iRegY, iWidth, iHeight);
 
 	oRetSprite.hitArea = hitObject;
 
