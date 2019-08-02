@@ -10,17 +10,14 @@ declare let jQuery: any;
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'ngx-sample-layout',
-  styleUrls: ['./sample.layout.scss'],
+  selector: 'ngx-sample-no-sidebar',
+  styleUrls: ['./sample-no-sidebar.layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
         <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive [end]="sidebar.id === 'end'">
-        <ng-content select="nb-menu"></ng-content>
-      </nb-sidebar>
 
       <nb-layout-column class="main-content">
         <ng-content select="router-outlet"></ng-content>
@@ -61,7 +58,7 @@ declare let jQuery: any;
   `,
 })
 
-export class SampleLayoutComponent implements OnDestroy {
+export class SampleNoSidebarComponent implements OnDestroy {
   subMenu: NbMenuItem[] = [
     {
       title: 'PAGE LEVEL MENU',

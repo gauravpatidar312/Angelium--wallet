@@ -24,6 +24,7 @@
     "email": "Email",
     "enter": "Enter",
     "emailMustBeValid": "Email must be a valid email address",
+    "exchange": "exchange",
     "fee": "FEE",
     "from": "From",
     "fetchingAmount":"Fetching Amount",

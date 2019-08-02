@@ -1,0 +1,90 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  nb-card-header {
+    font-family: nb-theme(font-bebas);
+    font-size: 1.75rem;
+  }
+  nb-card-body {
+    overflow: visible;
+  }
+}
+nb-card-body {
+  padding: 10px 30px
+  }
+
+.minheight{
+  min-height: 250px;
+}
+.headsection{
+  border-bottom: 0px;
+  padding-bottom: 0px!important;
+}
+
+
+
+.theading-text{
+  color: #cee80b;
+}
+.secondaryhead{
+  display:block!important;
+  font-size: 15px;
+  color: #575bc7;
+  font-weight: 400;
+}
+.boardtable{width: 100%;}
+
+.boardtable th{
+  // text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  border-bottom: 1px solid #342e73;
+}
+.boardtableEven { background: #87a1b730}
+
+.positionSet{
+  padding-top: 10px;
+}
+
+.totalfield{
+  border-bottom: 1px solid #342e73;
+  border-top: 1px solid #342e73;
+  font-size: 1.2rem !important;
+  font-family: nb-theme(font-bebas-book);
+  padding: 5px 0px 0px 0px!important;
+  font-weight: 600;
+}
+
+
+.boardtable th span.total{
+  color:#b9e80c;
+}
+.boardtable td{
+  padding: 0px;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 20px;
+}
+.boardtable tr{
+  color:#ffffff;
+  font-family: 'Nunito Sans', sans-serif;
+
+}
+.boardtable td.changetext{
+  text-align: right;
+}
+.tr-position{
+  margin-top: 5px;
+
+}
+.available-items{
+  max-height:350px!important;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden!important;
+}
+
+.bigSize{
+  font-size: 20px;
+}
