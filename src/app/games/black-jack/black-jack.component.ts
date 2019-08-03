@@ -1,8 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, TemplateRef, OnInit} from '@angular/core';
+import {HttpService} from '../../services/http.service';
+import {NbDialogService} from '@nebular/theme';
+import {Router} from '@angular/router';
+import {ToastrService} from '../../services/toastr.service';
+import {TranslateService} from '@ngx-translate/core';
+import {ShareDataService} from '../../services/share-data.service';
 
 declare let jQuery: any, CMain: any, parent: any, getParamValue: any;
-declare let TEXT_SHARE_IMAGE: any, TEXT_SHARE_TITLE: any, TEXT_SHARE_MSG1: any, TEXT_SHARE_MSG2: any,
-  TEXT_SHARE_SHARE1: any;
+declare let TEXT_SHARE_IMAGE: any, TEXT_SHARE_TITLE: any, TEXT_SHARE_MSG1: any, TEXT_SHARE_MSG2: any, TEXT_SHARE_SHARE1: any;
 declare let isIOS: any, sizeHandler: any;
 import * as _ from 'lodash';
 
@@ -13,6 +18,12 @@ import * as _ from 'lodash';
 })
 
 export class BlackJackComponent implements OnInit {
+  displayGame: boolean = false;
+  availableWallets: any[] = [];
+  fetchingWallets: boolean = false;
+  userMoney: number;
+  @ViewChild('selectWalletDialog') selectWalletDialog: TemplateRef<any>;
+
   gameStyles: string[] = [
     'assets/black-jack/css/reset.css',
     'assets/black-jack/css/main.css',
@@ -52,13 +63,48 @@ export class BlackJackComponent implements OnInit {
     'assets/black-jack/js/CCreditsPanel.js'
   ];
 
-  constructor() {
+  constructor(private httpService: HttpService,
+              private dialogService: NbDialogService,
+              private router: Router,
+              private toastrService: ToastrService,
+              public translate: TranslateService,
+              private shareDataService: ShareDataService) {
   }
 
   ngOnInit() {
+    this.getUserWallet();
     this.loadStyles();
     this.loadScripts();
+  }
+
+  playNow(wallet: any, ref: any) {
+    ref.close(true);
+    this.userMoney = wallet.dollar_amount;
+    this.displayGame = true;
     this.loadGame();
+  }
+
+  getUserWallet() {
+    this.fetchingWallets = true;
+    this.dialogService.open(this.selectWalletDialog, {
+      closeOnBackdropClick: false,
+      autoFocus: false,
+    }).onClose.subscribe(data => {
+      if (!data)
+        this.router.navigate(['pages/dashboard']);
+    });
+
+    this.httpService.get('asset/').subscribe((res?: any) => {
+      this.fetchingWallets = false;
+      if (res.cryptos) {
+        this.availableWallets = _.filter(res.cryptos, (wallet) => {
+          return wallet.dollar_amount > 0;
+        });
+      }
+    }, (err) => {
+      this.fetchingWallets = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.blackJack'));
+    });
   }
 
   loadGame() {
@@ -66,12 +112,12 @@ export class BlackJackComponent implements OnInit {
       const oMain = new CMain({
         win_occurrence: 40,          // WIN OCCURRENCE PERCENTAGE. VALUES BETWEEN 0-100
         min_bet: 1,                  // MIN BET PLAYABLE BY USER. DEFAULT IS 0.1$
-        max_bet: 300,                // MAX BET PLAYABLE BY USER.
+        max_bet: Math.round(this.userMoney * 0.30),                // MAX BET PLAYABLE BY USER.
         bet_time: 10000,             // WAITING TIME FOR PLAYER BETTING
-        money: 1000,                 // STARING CREDIT FOR THE USER
+        money: this.userMoney,                 // STARING CREDIT FOR THE USER
         blackjack_payout: 1.5,       // PAYOUT WHEN USER WINS WITH BLACKJACK (DEFAULT IS 3 TO 2). BLACKJACK OCCURS WHEN USER GET 21 WITH FIRST 2 CARDS
         game_cash: 500,              // GAME CASH AVAILABLE WHEN GAME STARTS
-        show_credits: true,          // ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
+        show_credits: false,          // ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
         fullscreen: true,            // SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
         check_orientation: true,     // SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
       });

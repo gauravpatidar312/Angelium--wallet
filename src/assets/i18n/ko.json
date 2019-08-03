@@ -90,6 +90,10 @@
     "allRightsReservedBy": "All rights reserved by"
   },
   "games":{
+    "blackJack": {
+      "noBalance": "You don't have balance. Please add balance to play.",
+      "playNow": "PLAY NOW"
+    },
     "lottery":{
       "address": "Address",
       "asset": "Asset",
