@@ -79,7 +79,7 @@ export class BlackJackComponent implements OnInit {
 
   playNow(wallet: any, ref: any) {
     ref.close(true);
-    this.userMoney = wallet.dollar_amount;
+    this.userMoney = ShareDataService.toFixedDown(wallet.dollar_amount, 2);
     this.displayGame = true;
     this.loadGame();
   }

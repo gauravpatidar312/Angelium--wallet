@@ -24,7 +24,7 @@
         <div class="msg-font" *ngIf="!availableWallets.length"> {{"games.blackJack.noBalance" | translate}}</div>
         <tr *ngFor="let wallet of availableWallets">
           <td class="center-text">{{wallet.name}}</td>
-          <td class="text-success center-text">${{wallet.dollar_amount}}</td>
+          <td class="text-success center-text">${{wallet.dollar_amount | number: '1.0-2'}}</td>
           <td>
             <button class="btn btn-block btn-success btn-play" (click)="playNow(wallet, ref)">
               {{"games.blackJack.playNow" | translate}}
