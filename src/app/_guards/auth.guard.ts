@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
           observer.next(false);
           observer.complete();
         }
-      }, 600);
+      }, 0);
     });
   }
 }
