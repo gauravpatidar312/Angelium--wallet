@@ -23,9 +23,9 @@ export class TradeComponent implements OnInit {
   }
   tradeByu = {
     'ordertype': 'limit',
-    'pair':'ANX/BTC',
-    'from':'ANX',
-    'to':'BTC',
+    'pair':'anx/btc',
+    'from':'anx',
+    'to':'btc',
     'amount': 0,
     'price': 0,
     'buy': true,
@@ -33,17 +33,28 @@ export class TradeComponent implements OnInit {
   }
   tradeSell = {
     'ordertype': 'limit',
-    'pair': 'ANX/BTC',
-    'from': 'ANX',
-    'to': 'BTC',
+    'pair': 'anx/btc',
+    'from': 'anx',
+    'to': 'btc',
     'amount': 0,
     'price': 0,
     'buy': false,
     'status': 1
   }
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.shareDataService.currentPair.subscribe((data?:any)=> {
+      if (data) {
+        this.tradeByu.from = data.from;
+        this.tradeByu.to = data.to;
+        this.tradeByu.pair = data.pair;
 
+        this.tradeSell.from = data.from;
+        this.tradeSell.to = data.to;
+        this.tradeSell.pair = data.pair;
+      }
+    });
+  }
 
   ngAfterViewInit() {
     jQuery('ul.tabs li').click(function (e) {
@@ -57,6 +68,8 @@ export class TradeComponent implements OnInit {
   }
 
   submitTradeBuy(){
+    console.log(this.tradeByu);
+    console.log(this.tradeSell);
     if (this.tradeByu.price == 0 || this.tradeByu.amount == 0) return;
     this.formSubmittingBuy = true;
     this.httpService.post(this.tradeByu, 'exchange/order_add/').subscribe((res?:any)=>{
@@ -87,4 +100,6 @@ export class TradeComponent implements OnInit {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.tradeSellError'));
     });
   }
+
+
 }

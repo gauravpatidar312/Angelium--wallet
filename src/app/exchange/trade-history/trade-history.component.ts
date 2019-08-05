@@ -12,7 +12,7 @@ export class TradeHistoryComponent implements OnInit {
   constructor(private httpService:HttpService) { }
 
   ngOnInit() {
-    let data = { 'pair': 'ANX/BTC' };
+    let data = { 'pair': 'anx/btc' };
     this.tradeHistorySpinner = true;
     this.httpService.post(data, '/exchange/trades/').subscribe((res:any)=>{
       if(res.success){

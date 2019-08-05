@@ -11,6 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class ShareDataService {
 
+  private messagePair = new BehaviorSubject(null);
+  currentPair = this.messagePair.asObservable();
+
   private messageSource = new BehaviorSubject<any>('');
   currentData = this.messageSource.asObservable();
 
@@ -24,6 +27,12 @@ export class ShareDataService {
 
   changeData(data: any) {
     this.messageSource.next(data);
+  }
+
+  changePair(data: any) { 
+    data['from'] = data.pair.split('/')[0];
+    data['to'] = data.pair.split('/')[1];
+    this.messagePair.next(data);
   }
 
   static toFixedDown(number: number, digits: number = 0) {

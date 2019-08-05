@@ -4,10 +4,10 @@
       <div class="available-items">
     <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
       <li class="pointer active tab-link" data-tab="tab-1"> 
-        <a data-toggle="pill">BUY ANX</a>
+        <a data-toggle="pill">BUY {{this.tradeByu.from | uppercase}}</a>
       </li>
       <li class="pointer tab-link" data-tab="tab-2">
-        <a data-toggle="pill">SELL ANX</a>
+        <a data-toggle="pill">SELL {{this.tradeByu.from | uppercase}}</a>
       </li>
     </ul>
 
@@ -18,7 +18,7 @@
             <label class="text-success">Price</label>
             <label class="label-right">$ 5.1</label>
             <input type="number" class="form-control" name="price" [(ngModel)]="tradeByu.price">
-            <span class="form-control-feedback">BTC</span>
+            <span class="form-control-feedback">{{this.tradeByu.to | uppercase}}</span>
           </div>
         </div>
         <div class="form-group">
@@ -26,7 +26,7 @@
             <label class="text-success">Amount</label>
             <label class="label-max">MAX</label>
             <input type="number" class="form-control" name="amount" [(ngModel)]="tradeByu.amount">
-            <span class="form-control-feedback">ANX</span>
+            <span class="form-control-feedback">{{this.tradeByu.from | uppercase}}</span>
           </div>
         </div>
         <div class="form-group">
@@ -35,7 +35,7 @@
             <label class="label-right">$ 5.1</label>
             <input type="text" class="form-control" name="btc" 
               [value]="tradeByu.price * tradeByu.amount" disabled>
-            <span class="form-control-feedback">BTC</span>
+            <span class="form-control-feedback">{{this.tradeByu.to | uppercase}}</span>
           </div>
         </div>
         <div class="text-center">

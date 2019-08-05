@@ -62,27 +62,10 @@ export class PairComponent implements OnInit, AfterViewInit {
   }
 
   clickPair(data){
-    this.messageEvent.emit(data)
+    this.shareDataService.changePair(data);
+    this.messageEvent.emit(data);
   }
-
-  // {
-  //   "width": 355,
-  //   "height": 355,
-  //   "symbol": "NASDAQ:AAPL",
-  //   "interval": "D",
-  //   "timezone": "Etc/UTC",
-  //   "theme": "Dark",
-  //   "style": "1",
-  //   "locale": "en",
-  //   "toolbar_bg": "#f1f3f6",
-  //   "enable_publishing": false,
-  //   "withdateranges": true,
-  //   "range": "5d",
-  //   "allow_symbol_change": true,
-  //   "container_id": "tradingview_58f3c",
-  //   "price": "2.55",
-  //   "change": "0.333"
-  // },
+  
   getPaireData(){
     this.fatchPaireSpinner = true;
     this.httpService.get('exchange/traded_pairs/').subscribe((res?:any)=>{
@@ -106,7 +89,8 @@ export class PairComponent implements OnInit, AfterViewInit {
             'allow_symbol_change': true,
             'container_id': 'tradingview_58f3c',
             'price': val.price,
-            'change': val.change
+            'change': val.change,
+            'pair': val.name
           });
         });
         this.clickPair(this.pairs[0]);
