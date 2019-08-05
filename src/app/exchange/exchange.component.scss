@@ -132,3 +132,8 @@ table tbody tr:nth-of-type(even) {
   }
 }
 
+/deep/ .fetching-spinner {
+  display: block;
+  font-size: 30px;
+  text-align: center;
+}

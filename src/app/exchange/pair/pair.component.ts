@@ -1,5 +1,8 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
+import {HttpService} from '../../services/http.service';
+import {ToastrService} from '../../services/toastr.service';
+import {ShareDataService} from '../../services/share-data.service';
 
 import {NbMediaBreakpoint} from '@nebular/theme';
 
@@ -13,154 +16,19 @@ declare let jQuery: any;
 
 export class PairComponent implements OnInit, AfterViewInit {
   @Output() messageEvent = new EventEmitter<any>();
-
+  fatchPaireSpinner:boolean = false;
+  fatchPaireData:boolean = false;
   breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
   myWallets: any = [];
   setPair:any;
-  pairs = [
-    {
-      "width": 355,
-      "height": 355,
-      "symbol": "NASDAQ:AAPL",
-      "interval": "D",
-      "timezone": "Etc/UTC",
-      "theme": "Dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "withdateranges": true,
-      "range": "5d",
-      "allow_symbol_change": true,
-      "container_id": "tradingview_58f3c"
-    },
-    {
-      "width": 355,
-      "height": 355,    
-      "symbol": "BITSTAMP:BTCUSD",
-      "interval": "D",
-      "timezone": "Etc/UTC",
-      "theme": "Dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "withdateranges": true,
-      "range": "5d",
-      "allow_symbol_change": true,
-      "container_id": "tradingview_58f3c"
-    },
-    {
-      "width": 355,
-      "height": 355,
-      "symbol": "BITMEX:XBTUSD",
-  "interval": "D",
-  "timezone": "Etc/UTC",
-      "theme": "Dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "withdateranges": true,
-      "range": "5d",
-      "allow_symbol_change": true,
-      "container_id": "tradingview_58f3c"
-    },
-    {
-      "width": 355,
-      "height": 355,
-      "symbol": "BITFINEX:BTCUSD",
-      "interval": "D",
-      "timezone": "Etc/UTC",
-      "theme": "Dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "withdateranges": true,
-      "range": "5d",
-      "allow_symbol_change": true,
-      "container_id": "tradingview_58f3c"
-    },
-    {
-      "width": 355,
-      "height": 355,
-      "symbol": "BITFINEX:XRPUSD",
-      "timezone": "Etc/UTC",
-      "theme": "Dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "withdateranges": true,
-      "range": "5d",
-      "allow_symbol_change": true,
-      "container_id": "tradingview_58f3c"
-    },
-    // {
-    //   "width": 355,
-    //   "height": 355,
-    //   "symbol": "BINANCE:BTCUSDT",
-    //   "interval": "D",
-    //   "timezone": "Etc/UTC",
-    //   "theme": "Dark",
-    //   "style": "1",
-    //   "locale": "en",
-    //   "toolbar_bg": "#f1f3f6",
-    //   "enable_publishing": false,
-    //   "withdateranges": true,
-    //   "range": "5d",
-    //   "allow_symbol_change": true,
-    //   "container_id": "tradingview_58f3c"
-    // },
-    // {
-    //   "width": 355,
-    //   "height": 355,
-    //   "symbol": "FX:EURUSD",
-    //   "timezone": "Etc/UTC",
-    //   "theme": "Dark",
-    //   "style": "1",
-    //   "locale": "en",
-    //   "toolbar_bg": "#f1f3f6",
-    //   "enable_publishing": false,
-    //   "withdateranges": true,
-    //   "range": "5d",
-    //   "allow_symbol_change": true,
-    //   "container_id": "tradingview_58f3c"
-    // },
-    // {
-    //   "width": 355,
-    //   "height": 355,
-    //   "symbol": "FX:GBPUSD",
-    //   "timezone": "Etc/UTC",
-    //   "theme": "Dark",
-    //   "style": "1",
-    //   "locale": "en",
-    //   "toolbar_bg": "#f1f3f6",
-    //   "enable_publishing": false,
-    //   "withdateranges": true,
-    //   "range": "5d",
-    //   "allow_symbol_change": true,
-    //   "container_id": "tradingview_58f3c"
-    // },
-    // {
-    //   "width": 355,
-    //   "height": 355,
-    //   "symbol": "FX:GBPJPY",
-    //   "timezone": "Etc/UTC",
-    //   "theme": "Dark",
-    //   "style": "1",
-    //   "locale": "en",
-    //   "toolbar_bg": "#f1f3f6",
-    //   "enable_publishing": false,
-    //   "withdateranges": true,
-    //   "range": "5d",
-    //   "allow_symbol_change": true,
-    //   "container_id": "tradingview_58f3c"
-    // }
-  ]
-  constructor() {}
+  pairs = [];
+  
+  constructor(private httpService: HttpService,
+              private toastrService: ToastrService,
+              private shareDataService: ShareDataService) {
+    this.getPaireData();
+  }
 
   users: { picture: string, name: string, title: string, message: string }[] = [
     { picture: 'CE', name: 'RYELU08233', title: 'silver angel 12', message: 'wish me luck!!' },
@@ -191,11 +59,58 @@ export class PairComponent implements OnInit, AfterViewInit {
 
     const challengeDiv = jQuery('#betting-body').height() + jQuery('#betting-footer').height() + 70;
     jQuery('#challenges-body').css({ maxHeight: challengeDiv});
-    this.clickPair(this.pairs[0])
   }
 
   clickPair(data){
     this.messageEvent.emit(data)
+  }
 
+  // {
+  //   "width": 355,
+  //   "height": 355,
+  //   "symbol": "NASDAQ:AAPL",
+  //   "interval": "D",
+  //   "timezone": "Etc/UTC",
+  //   "theme": "Dark",
+  //   "style": "1",
+  //   "locale": "en",
+  //   "toolbar_bg": "#f1f3f6",
+  //   "enable_publishing": false,
+  //   "withdateranges": true,
+  //   "range": "5d",
+  //   "allow_symbol_change": true,
+  //   "container_id": "tradingview_58f3c",
+  //   "price": "2.55",
+  //   "change": "0.333"
+  // },
+  getPaireData(){
+    this.fatchPaireSpinner = true;
+    this.httpService.get('exchange/traded_pairs/').subscribe((res?:any)=>{
+      if (res.status) {
+        this.fatchPaireSpinner = false;
+        this.fatchPaireData = true;
+        res.data.traded_pairs.map(val=>{
+          this.pairs.push({
+            'width': 355,
+            'height': 355,
+            'symbol': val.name.replace('/', ''),
+            'interval': 'D',
+            "timezone": 'Etc/UTC',
+            'theme': 'Dark',
+            'style': '1',
+            'locale': 'en',
+            'toolbar_bg': '#f1f3f6',
+            'enable_publishing': false,
+            'withdateranges': true,
+            'range': '5d',
+            'allow_symbol_change': true,
+            'container_id': 'tradingview_58f3c',
+            'price': val.price,
+            'change': val.change
+          });
+        });
+        this.clickPair(this.pairs[0]);
+      }
+    });
   }
 }

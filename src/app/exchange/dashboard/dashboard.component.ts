@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
   tradeBuy = [];
   tradeSell = [];
   myTradeHistory = [];
-  tradeTabValue:boolean = false;
+  tradeTab1:boolean = false;
+  tradeTab2:boolean = false;
+  fatchTradeData:boolean = false;
   noDataOpenTrade:boolean = false;
   noDataTradeHistory:boolean = false;
   constructor(private httpService: HttpService,
@@ -38,9 +40,13 @@ export class DashboardComponent implements OnInit {
 
   getOpenOrder(){
     let data = {'pair': 'ANX/BTC' };
+    this.tradeTab1 = false;
+    this.tradeTab2 = false;
+    this.fatchTradeData = true;
     this.httpService.post(data, 'exchange/order_open/').subscribe((res?:any)=>{
       if (res.status) {
-        this.tradeTabValue = false;
+        this.fatchTradeData = false;
+        this.tradeTab1 = true;
         this.tradeBuy = res.data.buy;
         this.tradeSell = res.data.sell;
         if (this.tradeBuy.length == 0 && this.tradeSell.length == 0) 
@@ -48,20 +54,28 @@ export class DashboardComponent implements OnInit {
         else
           this.noDataOpenTrade = false; 
       }
+    }, (err)=>{ 
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My open trade error');
     });
   }
 
   getMyTradeHistory(){
     let data = {'pair': 'ANX/BTC' };
+    this.tradeTab1 = false;
+    this.tradeTab2 = false;
+    this.fatchTradeData = true;
     this.httpService.post(data, 'exchange/mytrades/').subscribe((res?:any)=>{
       if (res.status) {
-        this.tradeTabValue = true;
+        this.fatchTradeData = false;
+        this.tradeTab2 = true;
         this.myTradeHistory = res.data;
         if (this.myTradeHistory.length == 0)  
           this.noDataTradeHistory = true;
         else 
           this.noDataTradeHistory = false; 
       }
+    }, (err)=>{
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My trade error');
     });
   }
 
