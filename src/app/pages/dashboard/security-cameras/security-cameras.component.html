@@ -51,13 +51,17 @@
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
         <div class="row">
-          <div class="col-md-6 image-div col-sm-12 pointer">
+          <div class="col-md-4 image-div col-sm-12 pointer">
+            <img class="pointer image-width" (click)="onGameTemplate('lottery')" src="../../assets/images/lottery.jpg">
+            <div class="text-center game-name-font pt-2">{{"common.lottery" | translate}}</div>
+          </div>
+          <div class="col-md-4 game-margin image-div col-sm-12 pointer">
               <img class="pointer image-width" (click)="onGameTemplate('black-jack')" src="../../assets/images/black_jack.jpg">
               <div class="text-center game-name-font pt-2">{{"common.blackJack" | translate}}</div>
           </div>
-          <div class="col-md-6 lottery-margin image-div col-sm-12 pointer">
-            <img class="pointer image-width" (click)="onGameTemplate('lottery')" src="../../assets/images/lottery.jpg">
-            <div class="text-center game-name-font pt-2">{{"common.lottery" | translate}}</div>
+          <div class="col-md-4 game-margin image-div col-sm-12 pointer">
+            <img class="pointer image-width" (click)="onGameTemplate('baccarat')" src="../../assets/images/baccarat.jpg">
+            <div class="text-center game-name-font pt-2">{{"common.baccarat" | translate}}</div>
           </div>
         </div>
     </nb-card-body>

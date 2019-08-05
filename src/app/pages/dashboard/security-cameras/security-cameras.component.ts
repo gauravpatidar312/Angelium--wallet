@@ -67,6 +67,8 @@ export class SecurityCamerasComponent implements OnDestroy {
       this.router.navigate(['/games/black-jack']);
     else if (value === 'lottery')
       this.router.navigate(['/games/lottery']);
+    else if (value === 'baccarat')
+      this.router.navigate(['/games/baccarat']);
   }
 
   onImageClick(title: any, template?: any) {

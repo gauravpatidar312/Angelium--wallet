@@ -15,7 +15,7 @@
       <span class="text-uppercase">{{"common.blackJack" | translate}}</span>
       <i class="nb-close nb-icon-left fa-2x" (click)="ref.close()"></i>
     </nb-card-header>
-    <nb-card-body class="image-scoll-card-body">
+    <nb-card-body>
       <div class="text-center" [hidden]="!fetchingWallets">
         <span class="heaven-history-spinner"><i class="fa fa-spinner fa-spin"></i></span>
       </div>
@@ -23,8 +23,8 @@
         <tbody>
         <div class="msg-font" *ngIf="!availableWallets.length"> {{"games.blackJack.noBalance" | translate}}</div>
         <tr *ngFor="let wallet of availableWallets">
-          <td class="center-text">{{wallet.name}}</td>
-          <td class="text-success center-text">${{wallet.dollar_amount | number: '1.0-2'}}</td>
+          <td class="text-break center-text">{{wallet.name}}</td>
+          <td class="text-break text-success center-text">${{wallet.dollar_amount | number: '1.0-2'}}</td>
           <td>
             <button class="btn btn-block btn-success btn-play" (click)="playNow(wallet, ref)">
               {{"games.blackJack.playNow" | translate}}
