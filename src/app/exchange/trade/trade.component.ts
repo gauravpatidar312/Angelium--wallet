@@ -68,8 +68,6 @@ export class TradeComponent implements OnInit {
   }
 
   submitTradeBuy(){
-    console.log(this.tradeByu);
-    console.log(this.tradeSell);
     if (this.tradeByu.price == 0 || this.tradeByu.amount == 0) return;
     this.formSubmittingBuy = true;
     this.httpService.post(this.tradeByu, 'exchange/order_add/').subscribe((res?:any)=>{
@@ -100,6 +98,4 @@ export class TradeComponent implements OnInit {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.tradeSellError'));
     });
   }
-
-
 }

@@ -2,7 +2,7 @@
 
   <div class="col-lg-2">
     <ngx-pair (messageEvent)="receiveMessage($event)" class="main one order-1"></ngx-pair>
-    <ngx-trade class="main two" (messageEvent)="receiveMessage($event)"></ngx-trade>
+    <ngx-trade class="main two"></ngx-trade>
   </div>
   <div class="col-lg-7 nopadd mobpaddfix">
     <nb-card class="main three">
@@ -17,12 +17,12 @@
 
     <nb-card class="main four">
       <nb-card-header >
-        <ul id="main-navigation" class="nav  mytradeLine empty_width">
+        <ul id="main-navigation" class="nav mytradeLine empty_width">
           <li class="pointer active">
-            <a data-toggle="pill" (click)="getOpenOrder()">MY OPEN ORDERS</a>
+            <a data-toggle="pill" (click)="getOpenOrder(currentPair.pair)">MY OPEN ORDERS</a>
           </li>
           <li class="pointer">
-            <a data-toggle="pill" (click)="getMyTradeHistory()">MY TRADE HISTORY</a>
+            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair.pair)">MY TRADE HISTORY</a>
           </li>
         </ul>
       </nb-card-header>

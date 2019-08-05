@@ -21,15 +21,21 @@ export class DashboardComponent implements OnInit {
   fatchTradeData:boolean = false;
   noDataOpenTrade:boolean = false;
   noDataTradeHistory:boolean = false;
+  currentPair:any;
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
               private shareDataService: ShareDataService,
-              public translate: TranslateService) {
-    this.getOpenOrder();
-  }
+              public translate: TranslateService) {}
 
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.shareDataService.currentPair.subscribe((data?:any)=> {
+      if (data) {
+        this.currentPair = data;
+        this.getOpenOrder(data.pair);
+      }
+    });
+  }
 
   ngAfterViewInit() {
     jQuery('ul.mytradeLine li a').click(function (e) {
@@ -38,8 +44,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getOpenOrder(){
-    let data = {'pair': 'ANX/BTC' };
+  getOpenOrder(pair: any){
+    let data = {'pair': pair };
     this.tradeTab1 = false;
     this.tradeTab2 = false;
     this.fatchTradeData = true;
@@ -59,8 +65,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getMyTradeHistory(){
-    let data = {'pair': 'ANX/BTC' };
+  getMyTradeHistory(pair: any){
+    let data = {'pair': pair };
     this.tradeTab1 = false;
     this.tradeTab2 = false;
     this.fatchTradeData = true;
