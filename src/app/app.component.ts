@@ -9,7 +9,8 @@ import {AuthService} from './_guards/auth.service';
 import {SwUpdate} from '@angular/service-worker';
 import {concat, interval} from 'rxjs';
 import {first} from 'rxjs/operators';
-import {ShareDataService} from "./services/share-data.service";
+import {ShareDataService} from './services/share-data.service';
+import {MessagingService} from './messaging.service';
 
 declare let jQuery: any;
 @Component({
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   particleParams: object = {};
   particlewidth: number = 100;
   particleheight: number = 100;
+  message: string;
 
   constructor(private appRef: ApplicationRef,
               private analytics: AnalyticsService,
@@ -31,7 +33,8 @@ export class AppComponent implements OnInit {
               private sessionStorage: SessionStorageService,
               private storageService: IndexedDBStorageService,
               private shareDataService: ShareDataService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private msgService: MessagingService) {
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
         if(event.url === '/' || event.url === '/login') {
@@ -62,6 +65,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.msgService.getPermission();
+    this.msgService.receiveMessage();
+    this.message = this.msgService.currentMessage;
+    
     this.analytics.trackPageViews();
     if (this.swUpdate.isEnabled) {
       // Allow the app to stabilize first, before starting polling for updates with `interval()`.

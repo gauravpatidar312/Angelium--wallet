@@ -1,40 +1,41 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { LoginComponent } from './login/login.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from './_guards/auth.guard';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {LoginComponent} from './login/login.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {RegisterComponent} from './register/register.component';
 import {MaintenanceComponent} from './maintenance/maintenance.component';
 import {ReportBugComponent} from './report-bug/report-bug.component';
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', canActivate: [AuthGuard] },
-  { path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule', canActivate: [AuthGuard] },
-  { path: 'games', loadChildren: 'app/games/games.module#GamesModule', canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-
+  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule'},
+  {path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule'},
+  {path: 'games', loadChildren: 'app/games/games.module#GamesModule'},
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'register',
     redirectTo: 'register/',
   },
   {
     path: 'register/:invitation_code',
-    component: RegisterComponent,
+    component: RegisterComponent
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent,
+    component: ResetPasswordComponent
   },
   {
     path: 'maintenance',
-    component: MaintenanceComponent,
+    component: MaintenanceComponent
   },
   {
     path: 'report',
     component: ReportBugComponent,
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' },
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', redirectTo: 'login'},
 ];
 
 const config: ExtraOptions = {
@@ -45,5 +46,6 @@ const config: ExtraOptions = {
   imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
 })
+
 export class AppRoutingModule {
 }

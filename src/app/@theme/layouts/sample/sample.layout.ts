@@ -5,6 +5,7 @@ import {
 } from '@nebular/theme';
 
 import {StateService} from '../../../@core/utils';
+import {SessionStorageService} from '../../../services/session-storage.service';
 
 declare let jQuery: any;
 
@@ -38,7 +39,7 @@ declare let jQuery: any;
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
 
-      <nb-layout-footer class="bottom-menu">
+      <nb-layout-footer class="bottom-menu" *ngIf="userInfo?.user_type === 'owner'">
         <ul id="main-navigation"  class="nav navbar-pill headerLine">
           
           <li class="pointer" routerLinkActive="active" 
@@ -105,6 +106,7 @@ export class SampleLayoutComponent implements OnDestroy {
   ];
   layout: any = {};
   sidebar: any = {};
+  userInfo: any;
 
   private alive = true;
 
@@ -112,6 +114,7 @@ export class SampleLayoutComponent implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
+              private sessionStorage: SessionStorageService,
               protected sidebarService: NbSidebarService) {
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
@@ -135,26 +138,26 @@ export class SampleLayoutComponent implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
-      
+    this.userInfo = this.sessionStorage.getFromSession('userInfo');
   }
 
   ngAfterViewInit(){
     var value = 0;
-    
+
     jQuery('.bottom-menu').fadeOut();
-    jQuery.fn.scrollEnd = function(callback, timeout) { 
-     
-     
+    jQuery.fn.scrollEnd = function(callback, timeout) {
+
+
       jQuery('.scrollable-container').scroll(function(){
         var $this = jQuery(this);
         var width = $this.width();
         var scrollPos = $this.scrollTop();
 
-        if (scrollPos > value && width < 900) { // scroll down  
+        if (scrollPos > value && width < 900) { // scroll down
             jQuery('.bottom-menu').fadeIn();
         }
         value = scrollPos;
-        
+
         if ($this.data('scrollTimeout')) {
           clearTimeout($this.data('scrollTimeout'));
         }

@@ -34,14 +34,26 @@ import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {UserInfo} from './@core/store/actions/user.action';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import { ReportBugComponent } from './report-bug/report-bug.component';
+import {ReportBugComponent} from './report-bug/report-bug.component';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 import {GamesModule} from './games/games.module';
-
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 import { ExchangeModule } from './exchange/exchange.module';
+
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, `${environment.apiUrl}/translator/get_translations/?language_code=`, '');
 }
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCdsmDvoHA-o2UnraISqN5UKcIt3VPGl94',
+  databaseURL: 'https://angelium-71cf5.firebaseio.com',
+  projectId: 'angelium-71cf5',
+  messagingSenderId: '185609886814',
+  appId: '1:185609886814:web:ee499886fd962d54'
+};
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, ResetPasswordComponent, TermsConditionsComponent, MaintenanceComponent, ReportBugComponent],
@@ -61,6 +73,9 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),

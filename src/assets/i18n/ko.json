@@ -3,6 +3,9 @@
     "admin":"Admin",
     "assets": "자산",
     "amount": "수량",
+    "angelium": "Angelium",
+    "baccarat": "Baccarat",
+    "blackJack": "Black Jack",
     "country": "국가",
     "cancel": "취소",
     "cryptos":{
@@ -72,7 +75,10 @@
     "verificationCode": "인증번호",
     "verified": "인증됨",
     "week": "주",
-    "year": "년"
+    "year": "년",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} 이(가) 필요합니다"
@@ -85,6 +91,10 @@
     "allRightsReservedBy": "All rights reserved by"
   },
   "games":{
+    "blackJack": {
+      "noBalance": "You don't have balance. Please add balance to play.",
+      "playNow": "PLAY NOW"
+    },
     "lottery":{
       "address": "Address",
       "asset": "Asset",

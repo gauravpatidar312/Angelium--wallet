@@ -45,11 +45,4 @@ export const MENU_ITEMS = [
     link: '/pages/admin',
     languageKey: 'admin',
   },
-  {
-    data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
-    title: 'Lottery',
-    icon: 'nb-paper-plane',
-    link: '/games/lottery',
-    languageKey: 'lottery',
-  },
 ];

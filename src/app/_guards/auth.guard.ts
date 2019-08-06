@@ -1,47 +1,48 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-
-import { AuthService } from './auth.service';
-import { Store } from '@ngrx/store';
-import { AppState, selectAuthState } from '../@core/store/app.state';
+import {Injectable} from '@angular/core';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
+import {ToastrService} from '../services/toastr.service';
+import {TranslateService} from '@ngx-translate/core';
+import {SessionStorageService} from '../services/session-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-  excludingUrls: Array<string>;
 
-  getState = null;
-  constructor(private authService: AuthService, private router: Router, private store: Store<AppState>) {
-    this.excludingUrls = ['/login', '/register', 'reset-password'];
-    this.getState = this.store.select(selectAuthState);
+export class AuthGuard implements CanActivate {
+  user: any;
+
+  constructor(private toastrService: ToastrService,
+              public translate: TranslateService,
+              private router: Router,
+              private sessionStorage: SessionStorageService) {
+    this.user = this.sessionStorage.getFromSession('userInfo');
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    // const currentUser = this.authService.isAuthenticated();
-    const self = this;
     return Observable.create((observer: any) => {
-      setTimeout(function () {
-        self.getState.subscribe((auth: any) => {
-          if (auth.isAuthenticated) {
+      const url: string = state.url;
+      const data: any = route.data;
+      if (!this.user)
+        this.user = this.sessionStorage.getFromSession('userInfo');
+
+      setTimeout(() => {
+        if (this.user && url) {
+          if (!data.role || data.role.indexOf(this.user.user_type) >= 0) {
             observer.next(true);
             observer.complete();
           } else {
-            self.router.navigate(['/']);
-            observer.next(false);
+            this.toastrService.danger(this.translate.instant('common.toastr.redirectPageText'), this.translate.instant('common.angelium'));
+            this.router.navigate(['pages/dashboard']);
+            observer.next(true);
             observer.complete();
           }
-        });
-      }, 600);
+        } else {
+          this.router.navigate(['/']);
+          observer.next(false);
+          observer.complete();
+        }
+      }, 0);
     });
-    // console.log('Activate route', state.url);
-    // if (currentUser) {
-    //   return true;
-    // }
-
-    // // not logged in so redirect to login page with the return url
-    // this.router.navigate(['']);
-    // return false;
   }
 }

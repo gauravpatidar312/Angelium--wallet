@@ -3,6 +3,9 @@
     "admin":"Admin",
     "assets": "资产",
     "amount" : "数量",
+    "angelium": "Angelium",
+    "baccarat": "Baccarat",
+    "blackJack": "Black Jack",
     "country": "国家",
     "cancel": "撤销",
     "cryptos":{
@@ -72,7 +75,10 @@
     "verificationCode": "认证码",
     "verified": "验证通过",
     "week": "周",
-    "year": "年"
+    "year": "年",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} 必填"
@@ -85,6 +91,10 @@
     "allRightsReservedBy": "保留所有权利"
   },
   "games":{
+    "blackJack": {
+      "noBalance": "You don't have balance. Please add balance to play.",
+      "playNow": "PLAY NOW"
+    },
     "lottery":{
       "address": "Address",
       "asset": "Asset",

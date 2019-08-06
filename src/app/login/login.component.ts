@@ -8,6 +8,9 @@ import {ToastrService} from '../services/toastr.service';
 import {HttpService} from '../services/http.service';
 import {ShareDataService} from '../services/share-data.service';
 import {Store} from '@ngrx/store';
+
+
+import {MessagingService} from '../messaging.service';
 import {LogIn, UserInfo} from '../@core/store/actions/user.action';
 import {AppState} from '../@core/store/app.state';
 import {AuthEffects} from '../@core/store/effects/auth.effect';
@@ -35,9 +38,14 @@ export class LoginComponent implements OnInit {
               public translate: TranslateService,
               private dialogService: NbDialogService,
               private store: Store<AppState>,
+              private authEffects: AuthEffects,
+              private msgService: MessagingService,
               private httpService: HttpService,
-              private shareDataService: ShareDataService,
-              private authEffects: AuthEffects) {
+              private shareDataService: ShareDataService,) {
+    // const currentUser = this.authService.isAuthenticated();
+    // if (currentUser) {
+    //   this.router.navigate(['/pages/setting']);
+    // }
     this.getCapchaTranslation();
   }
 
@@ -55,6 +63,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      dev_id: [''],
       rememberMe: [false]
     });
 
@@ -93,7 +102,7 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-
+    
   verifyOTP(ref: any) {
     if (!this.tfaOtp)
       return;
@@ -117,7 +126,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmitLogin(dialog: TemplateRef<any>) {
+  async onSubmitLogin(dialog: TemplateRef<any>) {
+    var token = await this.msgService.getToken();
+    this.loginForm.controls.dev_id.setValue(token);
+
     if (!this.isVerifiedCaptcha) {
       this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
       return;

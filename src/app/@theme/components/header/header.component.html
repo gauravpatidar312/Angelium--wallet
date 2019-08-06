@@ -7,13 +7,13 @@
     <div class="logo" (click)="goToHome()"><img class="header-logo" src="/assets/images/header-logo.png"> <!--<span class="logo-text">ANGELIUM</span>--></div>
   </div>
 
-  <ul id="main-navigation" class="nav navbar-pill headerLine">
-    <li class="pointer" routerLinkActive="active" 
+  <ul id="main-navigation" class="nav navbar-pill headerLine" *ngIf="userData?.user_type === 'owner'">
+    <li class="pointer" routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}"
     ><a data-toggle="pill" routerLink="/pages/dashboard">
        <i class="fa fa-wallet"></i> Wallet</a>
     </li>
-    <li class="pointer" routerLinkActive="active" 
+    <li class="pointer" routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}">
       <a data-toggle="pill" routerLink="/exchange">
         <i class="iconsize nb-shuffle"></i> Exchange
