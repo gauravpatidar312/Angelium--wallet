@@ -49,6 +49,8 @@ export class DashboardComponent implements OnInit {
     this.tradeTab1 = false;
     this.tradeTab2 = false;
     this.fatchTradeData = true;
+    this.noDataOpenTrade = false;
+    this.noDataTradeHistory = false;
     this.httpService.post(data, 'exchange/order_open/').subscribe((res?:any)=>{
       if (res.status) {
         this.fatchTradeData = false;
@@ -70,6 +72,8 @@ export class DashboardComponent implements OnInit {
     this.tradeTab1 = false;
     this.tradeTab2 = false;
     this.fatchTradeData = true;
+    this.noDataOpenTrade = false;
+    this.noDataTradeHistory = false;
     this.httpService.post(data, 'exchange/mytrades/').subscribe((res?:any)=>{
       if (res.status) {
         this.fatchTradeData = false;
@@ -78,7 +82,7 @@ export class DashboardComponent implements OnInit {
         if (this.myTradeHistory.length == 0)  
           this.noDataTradeHistory = true;
         else 
-          this.noDataTradeHistory = false; 
+          this.noDataTradeHistory = false;
       }
     }, (err)=>{
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My trade error');
@@ -88,5 +92,4 @@ export class DashboardComponent implements OnInit {
   receiveMessage($event) {
     new TradingView.widget($event);
   }
-
 }

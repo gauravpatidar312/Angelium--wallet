@@ -13,6 +13,8 @@ export class BoardComponent implements OnInit {
   boardTableValue:boolean = false;
   boardBuy = [];
   boardSell = [];
+  noSellData:boolean = false;
+  noBuyData:boolean = false;
   constructor(private shareDataService: ShareDataService,
               private httpService: HttpService) { }
 
@@ -29,6 +31,8 @@ export class BoardComponent implements OnInit {
 
   getBoardData(pair: any){
     let data = {'pair': pair };
+    this.boardBuy = [];
+    this.boardSell = [];  
     this.httpService.post(data, 'exchange/order_book/').subscribe((res?:any)=>{
       if (res.status) {
         this.boardSpinner = false;
