@@ -285,8 +285,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
         .interval(1000)
         .map(() => {
           const value: number = endDate.valueOf() - moment().valueOf();
-          if (value === 0)
-            document.location.reload(true);
+          if (value <= 0)
+            return document.location.reload(true);
           else
             return value;
         })

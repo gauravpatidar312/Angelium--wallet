@@ -21,7 +21,7 @@
       </div>
       <table [hidden]="fetchingWallets" class="table asset-table">
         <tbody>
-        <div class="msg-font" *ngIf="!availableWallets.length"> {{"games.blackJack.noBalance" | translate}}</div>
+        <div class="msg-font" *ngIf="!availableWallets?.length"> {{"games.blackJack.noBalance" | translate}}</div>
         <tr *ngFor="let wallet of availableWallets">
           <td class="text-break center-text">{{wallet.name}}</td>
           <td class="text-break text-success center-text">${{wallet.dollar_amount | number: '1.0-2'}}</td>
