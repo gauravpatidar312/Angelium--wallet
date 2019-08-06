@@ -1,0 +1,37 @@
+<div id="baccarat-game" class="game-container">
+  <div *ngIf="displayGame">
+    <div class="baccarat"></div>
+    <div class="check-fonts"></div>
+    <canvas id="canvas" class='ani_hack' width="1700" height="768"> </canvas>
+    <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>
+    <div id="block_game"></div>
+  </div>
+</div>
+
+<ng-template #selectWalletDialog let-data let-ref="dialogRef">
+  <nb-card class="dialog-width">
+    <nb-card-header>
+      <span class="text-uppercase">{{"common.baccarat" | translate}}</span>
+      <i class="nb-close nb-icon-left fa-2x" (click)="ref.close()"></i>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="text-center" [hidden]="!fetchingWallets">
+        <span class="p-2"><i class="fa fa-spinner fa-spin"></i></span>
+      </div>
+      <table [hidden]="fetchingWallets" class="table asset-table">
+        <tbody>
+        <tr *ngIf="!availableWallets.length"> {{"games.blackJack.noBalance" | translate}}</tr>
+        <tr *ngFor="let wallet of availableWallets">
+          <td class="center-text text-break pt-3 border-top-0">{{wallet.name}}</td>
+          <td class="text-success text-break pt-3 center-text border-top-0">${{wallet.dollar_amount | number: '1.0-2'}}</td>
+          <td class="border-top-0 text-break">
+            <button class="btn btn-block btn-success btn-play" (click)="playNow(wallet, ref)">
+              {{"games.blackJack.playNow" | translate}}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-card-body>
+  </nb-card>
+</ng-template>

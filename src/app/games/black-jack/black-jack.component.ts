@@ -98,7 +98,7 @@ export class BlackJackComponent implements OnInit {
       this.fetchingWallets = false;
       if (res.cryptos) {
         this.availableWallets = _.filter(res.cryptos, (wallet) => {
-          return wallet.dollar_amount > 0 && ['ANL', 'ANLP', 'HEAVEN'].indexOf(wallet.name) === -1;
+          return wallet.dollar_amount > 10 && ['ANL', 'ANLP', 'HEAVEN'].indexOf(wallet.name) === -1;
         });
       }
     }, (err) => {
