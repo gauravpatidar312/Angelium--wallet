@@ -1,15 +1,15 @@
-import { delay, takeWhile } from 'rxjs/operators';
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { LayoutService } from '../../../@core/utils';
-import { TranslateService } from '@ngx-translate/core';
+import {delay, takeWhile} from 'rxjs/operators';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy} from '@angular/core';
+import {NbThemeService} from '@nebular/theme';
+import {LayoutService} from '../../../@core/utils';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-traffic-chart',
   styleUrls: ['./traffic.component.scss'],
   template: `
     <div class="chart-info">
-      <div class="title">{{trafficValue}} 
+      <div class="title">{{trafficValue}}
         <!--
           <span class="title-price">%</span>
         -->
@@ -22,21 +22,21 @@ import { TranslateService } from '@ngx-translate/core';
     </div>
   `,
 })
-export class TrafficChartComponent implements AfterViewInit, OnDestroy {
+export class TrafficChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private alive = true;
 
   @Input() points: number[];
   @Input() trafficValue: number;
 
-  type = this.translate.instant("common.month");
-  types = [this.translate.instant("common.week"), this.translate.instant("common.month"), this.translate.instant("common.year")];
+  type = this.translate.instant('common.month');
+  types = [this.translate.instant('common.week'), this.translate.instant('common.month'), this.translate.instant('common.year')];
   option: any = {};
   echartsIntance: any;
 
   constructor(private theme: NbThemeService,
               private layoutService: LayoutService,
-              private translate:TranslateService) {
+              private translate: TranslateService) {
     this.layoutService.onChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
@@ -44,7 +44,15 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
 
   }
 
+  ngOnChanges(): void {
+    this.onSetChart();
+  }
+
   ngAfterViewInit() {
+    this.onSetChart();
+  }
+
+  onSetChart() {
     this.theme.getJsTheme()
       .pipe(
         delay(1),
@@ -92,13 +100,13 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
             textStyle: {
               color: trafficTheme.tooltipTextColor,
               fontWeight: trafficTheme.tooltipFontWeight,
-              fontSize: 16,
+              fontSize: 12,
             },
             position: 'top',
             backgroundColor: trafficTheme.tooltipBg,
             borderColor: trafficTheme.tooltipBorderColor,
             borderWidth: 3,
-            formatter: '{c0} MB',
+            formatter: '{c0}',
             extraCssText: trafficTheme.tooltipExtraCss,
           },
           series: [
@@ -124,7 +132,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
                   color: trafficTheme.shadowLineDarkBg,
                 },
               },
-              data: this.points.map(p => p - 15),
+              data: this.points,
             },
             {
               type: 'line',
@@ -167,7 +175,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
             },
           ],
         });
-    });
+      });
   }
 
   onChartInit(echarts) {
