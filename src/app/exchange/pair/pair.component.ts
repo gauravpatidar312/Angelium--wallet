@@ -76,7 +76,7 @@ export class PairComponent implements OnInit, AfterViewInit {
           this.pairs.push({
             'width': 355,
             'height': 355,
-            'symbol': val.name.replace('/', ''),
+            'symbol': val.name.replace('/', '').toUpperCase(),
             'interval': 'D',
             "timezone": 'Etc/UTC',
             'theme': 'Dark',

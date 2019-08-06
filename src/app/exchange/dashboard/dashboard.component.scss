@@ -6,14 +6,7 @@
       font-family: nb-theme(font-bebas);
       font-size: 1.75rem;
     }
-    nb-card-body {
-      overflow: visible;
-    }
-  
-  }
-
-  
-
+}
 
 /deep/ .exchange {
   
@@ -101,7 +94,6 @@ ul#main-navigation{
 
 }
 .table td {
-
   padding: 0px 8px;
   text-transform: uppercase;
   font-size: 12px;
@@ -115,7 +107,7 @@ ul#main-navigation{
   border-bottom: 0px solid #dee2e6;
   color: #cee80b;
   font-size: 12px;
-  padding: 0px 0.75rem!important;
+  padding: 0px 0.55rem !important;
   font-family: 'Nunito Sans', sans-serif;
 }
 tbody tr{ font-family: 'Nunito Sans', sans-serif; padding:0px;color: #ffffff; font-size: 12px; cursor: pointer;   font-family: 'Nunito Sans', sans-serif;}
@@ -132,11 +124,10 @@ table tbody tr:nth-of-type(even) {
 
 .available-items{
   min-height:auto!important;
-  max-height:271px !important;
+  max-height:90px !important;
   width: 100%;
-  // overflow-x: hidden;
+  overflow-x: hidden;
   overflow-y: auto!important;
-  overflow-x:auto;
 }
 .available{
   overflow-x:hidden !important;
@@ -185,3 +176,4 @@ table tbody tr:nth-of-type(even) {
         background-color: red;
     }
 }
+.trade-open-history{height: 204px;}

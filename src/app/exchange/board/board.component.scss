@@ -6,9 +6,6 @@
     font-family: nb-theme(font-bebas);
     font-size: 1.75rem;
   }
-  nb-card-body {
-    overflow: visible;
-  }
 }
 nb-card-body {
   padding: 10px 30px
@@ -33,6 +30,7 @@ nb-card-body {
   color: #575bc7;
   font-weight: 400;
 }
+.board{height: 414px;}
 .boardtable{width: 100%;}
 
 .boardtable th{
@@ -41,7 +39,9 @@ nb-card-body {
   font-size: 12px;
   border-bottom: 1px solid #342e73;
 }
-.boardtableEven { background: #87a1b730}
+
+.back-table-sell:nth-child(even) { background: #3c0f2e; } 
+.back-table-buy:nth-child(even) { background: #808c73; } 
 
 .positionSet{
   padding-top: 10px;
@@ -69,22 +69,24 @@ nb-card-body {
 .boardtable tr{
   color:#ffffff;
   font-family: 'Nunito Sans', sans-serif;
-
+}
+.padrt10px{
+  padding-right: 10px!important;
 }
 .boardtable td.changetext{
   text-align: right;
 }
-.tr-position{
-  margin-top: 5px;
 
-}
 .available-items{
   max-height:350px!important;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: hidden!important;
+  overflow-y: auto!important;
 }
-
+.tr-position{
+  margin-top: 5px;
+  height: 127px!important;
+}
 .bigSize{
   font-size: 20px;
 }

@@ -20,15 +20,17 @@ export class TradeHistoryComponent implements OnInit {
       if (val) {
         let data = { 'pair': val.pair };
         this.tradeHistorySpinner = true;
+        this.noHistory = false;
         this.tradeData = [];
         this.httpService.post(data, '/exchange/trades/').subscribe((res:any)=>{
           if(res.status){
             this.tradeHistorySpinner = false;
+            this.noHistory = false;
             this.tradeData = res.data.trades;
-          }
-          if(res.data.trades.length === 0){
-            this.tradeHistorySpinner = false;
-            this.noHistory = true;
+            if (this.tradeData.length == 0) {
+              this.tradeHistorySpinner = false;
+              this.noHistory = true;
+            }
           }
         },err =>{ console.log(err) });   
       }

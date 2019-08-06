@@ -96,7 +96,7 @@ table tbody tr:nth-of-type(even) {
   overflow-x:hidden !important;
 }
 
-/deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
+/deep/ .available-items::-webkit-scrollbar{ width: 3px!important;margin-left:10px; }
 
 .tradingview-widget-container {
   overflow: auto;
