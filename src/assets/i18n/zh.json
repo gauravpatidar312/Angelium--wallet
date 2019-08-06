@@ -3,6 +3,9 @@
     "admin":"Admin",
     "assets": "资产",
     "amount" : "数量",
+    "angelium": "Angelium",
+    "baccarat": "Baccarat",
+    "blackJack": "Black Jack",
     "country": "国家",
     "cancel": "撤销",
     "cryptos":{
@@ -24,6 +27,7 @@
     "email": "电子邮箱",
     "enter": "输入",
     "emailMustBeValid": "电子邮件必须是有效的电子邮件地址",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"获取金额",
     "firstName": "名",
@@ -37,6 +41,7 @@
     "lastMonth": "上个月",
     "lastWeek": "上周",
     "lastName": "姓",
+    "lottery": "Lottery",
     "month": "月",
     "password": "密码",
     "profit": "收益",
@@ -49,7 +54,7 @@
     "repeat": "重复",
     "rate": "利率",
     "resend": "RESEND",
-    "report": "Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "滑动验证",
     "select": "选择",
     "sendSMS": "发送短信",
@@ -70,7 +75,10 @@
     "verificationCode": "认证码",
     "verified": "验证通过",
     "week": "周",
-    "year": "年"
+    "year": "年",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} 必填"
@@ -81,6 +89,42 @@
   },
   "footer":{
     "allRightsReservedBy": "保留所有权利"
+  },
+  "games":{
+    "blackJack": {
+      "noBalance": "You don't have balance. Please add balance to play.",
+      "playNow": "PLAY NOW"
+    },
+    "lottery":{
+      "address": "Address",
+      "asset": "Asset",
+      "betting": "Betting",
+      "betNotAvailable": "There is no bets yet! Be the first and start betting!",
+      "challengeComment": "Challenge comment (Optional)",
+      "changeYourDestiny": "CHALLENGE YOUR DESTINY",
+      "challenger": "Challenger",
+      "comment": "Comment",
+      "howToPay?": "How to Pay?",
+      "ndPrize": "ND PRIZE",
+      "playMessage": "Place your bet with my asset in your wallet. The random number algorithm in the smartContract will fairly prize from all the bet.",
+      "rdPrize": "RD PRIZE",
+      "stPrize": "ST PRIZE",
+      "smartContract": "Smart Contract",
+      "thPrize": "TH PRIZE",
+      "totalBets": "Total Bets",
+      "winners": "Winners",
+      "winningComment": "Winning comment (Optional)",
+      "toastr":{
+        "betAmountMessage": "Please enter betting amount.",
+        "betDisableText": "Betting is disabled!",
+        "bettingSuccessfullyCompleted":"Bet successfully placed!",
+        "noDataFoundCurrentLottery": "Lottery is running, stay tuned. We will announce winners after lottery finishes.",
+        "noDataFoundWinnerList": "Winners have not been announced yet. Stay tuned!",
+        "selectWalletType": "Please select asset.",
+        "betLimitExceed": "Total bets must be less than {{maxBet}}.",
+        "betAmountExceed": "You don't have sufficient balance to place bet."
+      }
+    }
   },
   "pages":{
     "dashboard":{
@@ -96,12 +140,20 @@
       "totalAsset" : "资产总额",
       "securityCamera":{
         "xlove": "XLOVE",
-        "xcasino": "XCASINO",
+        "xgames": "XGAMES",
         "xwish": "XWISH",
         "xtravel": "XTRAVEL",
         "xmall": "XMALL",
         "xschool": "XSCHOOL"
       }
+    },
+    "exchange":{
+      "tradeBuy": "Trade buy",
+      "tradeBuySuccessfully": "Trade buy successfully",
+      "tradeBuyError": "Trade buy error",
+      "tradeSell": "Trade sell",
+      "tradeSellSuccessfully": "Trade sell successfully",
+      "tradeSellError": "Trade sell error"
     },
     "heaven":{
       "enterAmount":"输入金额",
@@ -110,8 +162,11 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "今日天堂之滴",
       "heavenId":"天堂 ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"没有找到数据",
       "plan": "计划",
+      "release": "Release",
+      "releaseInProgress": "RELEASE IN PROGRESS...",
       "received": "已接收",
       "releaseDate": "释放日期",
       "releaseSetting": "释放设置",
@@ -120,9 +175,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"请输入金额",
         "pleaseChoosePlan":"请选择计划。",
-        "releaseSettingSavedSuccessfully":"释放设置已成功保存！",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"交易完成！",
         "youDontHaveSufficientBalance":"您余额不足。"
       }
@@ -146,6 +204,7 @@
       "thereAreNoUsers": "There are no users.",
       "userGrowth":"用户增长",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession": "Load User Session",
         "userDatabase":"用户数据库"
       }
@@ -258,6 +317,7 @@
     },
     "setting": {
       "angel": "ANGEL",
+      "ageConfirmation": "Age Confirmation",
       "reloadCacheMessage" : "Are you sure to clear the cache and reload the page?",
       "currency": "通货",
       "comingSoon": "Coming soon",
@@ -267,11 +327,14 @@
       "clickToReport": "点击报告",
       "clearCache": "Clean Cache",
       "createTicket": "Create Ticket",
+      "disableTFA": "Disable 2FA",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink": "Download QR Code of your referral link",
       "name": "名称",
       "eMail": "E-mail",
+      "enable2FA": "Enable 2FA",
       "goldAngel": "GOLD ANGEL",
+      "googleCode": "Google Code",
       "language": "语言",
       "merge": "合并",
       "mergeYourOldData": "Merge your old data",
@@ -281,6 +344,7 @@
       "on": "ON",
       "off": "OFF",
       "or": "OR",
+      "OTP": "OTP",
       "pinkAngel": "PINK ANGEL",
       "qr": "二维",
       "QRCode": "QR Code",
@@ -289,19 +353,23 @@
       "rank": "排行",
       "referralLink": "推荐链接",
       "reportBug": "报告错误",
+      "scanQRCodeText": "Scan the following QR code or enter the following secret key in Google Authenticator app",
       "support": "支持与帮助",
       "secretKey": "密钥",
       "silverAngel": "SILVER ANGEL",
       "supportTicket": "Support Ticket",
       "2FA": "2FA",
+      "2FAcode": "Enter Google 2FA Code",
       "ticketTitle":"Ticket Title",
       "ticketDescription": "Ticket Description",
       "timezone": "Timezone",
       "toastr":{
+        "ageConfirmationText": "Are you really over 18?",
         "changeUsername": "更改用户名",
         "changeLoginPassword": "更改登录密码",
         "changeTradePassword": "更改交易密码",
         "countryUpdate": "国家更新成功",
+        "disableTFAText": "Are you sure to disable Two Factor Authentication?",
         "enterValueInAllFields": "请在所有字段中输入值。",
         "languageUpdateSuccessfully": "语言更新成功！",
         "linkCopiedSuccessfully": "链接复制成功！",
@@ -317,7 +385,9 @@
         "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "用户头像更改成功",
         "usernameUpdatedSuccessfully": "用户名已成功更新",
-        "usernameMustEnglishWithoutSpace": "用户名必须是英文，没有空格。"
+        "usernameMustEnglishWithoutSpace": "用户名必须是英文，没有空格。",
+        "2FAEnabled": "Two factor authentication activated.",
+        "2FADisabled": "Two factor authentication deactivated."
       },
       "usernameOnlyEnglish": "新用户名（仅支持英文）",
       "usd": "usd",
@@ -352,5 +422,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }

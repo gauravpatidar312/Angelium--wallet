@@ -92,12 +92,17 @@ $nb-themes: nb-register-theme((
 
 $nb-themes: nb-register-theme((
   // app wise variables for each theme
+  color-bg: #100b48,
+  layout-bg: rgba(16, 11, 72, 0.72),
+
+  smart-table-bg-even: #111550,
+
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
-  font-main: Roboto,
-  font-secondary: Avenir,
+  font-main: NunitoSans,
+  font-secondary: NunitoSans,
 
   font-bebas: BebasNeue,
   font-bebas-light: BebasNeueLight,

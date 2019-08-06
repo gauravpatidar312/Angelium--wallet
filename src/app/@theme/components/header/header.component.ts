@@ -97,6 +97,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
           this.toggleSidebar();
       }
     });
+    jQuery('ul.headerLine li a').click(function (e) {
+      jQuery('ul.headerLine li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
+    });
   }
 
   getANXValue() {
@@ -138,6 +142,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   goToHome() {
     this.router.navigate(['pages/dashboard']);
+  }
+
+  goToSetting() {
+    this.router.navigate(['pages/setting']);
   }
 
   startSearch() {

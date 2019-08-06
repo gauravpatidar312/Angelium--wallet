@@ -1,0 +1,55 @@
+<nb-card class="board">
+  <nb-card-header>Board</nb-card-header>
+  <nb-card-body>
+
+    <span class="fetching-spinner" *ngIf="boardSpinner">
+      <i class="fa fa-spinner spinner-color fa-spin"></i>
+    </span>
+
+    <div class="row" *ngIf="boardTableValue">
+      <div class="available-items">
+        <table class="boardtable">
+          <thead>
+            <tr>
+              <th class="text-left">
+                <span class="theading-text">Price</span>
+                <span class="secondaryhead">{{currentPair?.to | uppercase}}</span>
+              </th>
+              <th class="text-center">
+                <span class="theading-text">Amount</span>
+                <span class="secondaryhead">{{currentPair?.from | uppercase}}</span>
+              </th>
+              <th class="text-right">
+                <span class="theading-text">Total</span>
+                <span class="secondaryhead">{{currentPair?.to | uppercase}}</span>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="available-items tr-position">
+        <table class="boardtable">
+          <tr *ngFor="let sell of boardSell">
+            <td class="pink-text positionSet">{{sell.price | number: '1.0-2'}}</td>
+            <td class="text-center positionSet">{{sell.amount | number: '1.0-2'}}</td>
+            <td class="changetext positionSet">{{sell.price * sell.amount | number: '1.0-2'}}</td>
+          </tr>
+          <!-- total -->
+          <tr>
+            <td class="text-center totalfield" colspan="3">
+              <span class="theading-text text-center bigSize">1.41242</span>&nbsp;&nbsp;
+              &nbsp;
+              <span class="text-center bigSize">$ 103.12</span>
+            </td>
+          </tr>
+          <!-- end total -->
+          <tr *ngFor="let sell of boardBuy">
+            <td class="green-text positionSet">{{sell.price | number: '1.0-2'}}</td>
+            <td class="text-center positionSet">{{sell.amount | number: '1.0-2'}}</td>
+            <td class="changetext positionSet">{{sell.price * sell.amount | number: '1.0-2'}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

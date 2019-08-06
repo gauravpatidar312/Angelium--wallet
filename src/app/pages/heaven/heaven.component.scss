@@ -126,7 +126,7 @@
   }
 
   .dropdown-menu {
-    background-color: #3d3780 !important;
+    background-color: #100b48 !important;
     border: 2px solid #7659ff !important;
   }
 
@@ -152,6 +152,10 @@
 
   .navbar-pill {
     justify-content: flex-end;
+  }
+
+  /deep/ .process-padding {
+    padding: 10px 0 10px 21px;
   }
 
   #heavenHistory-navigation li.active > a {
@@ -223,6 +227,12 @@
 
   .total-amount {
     position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        margin-bottom: 0;
+      }
+    }
     span {
       position: absolute;
       &.transfer-amount {
@@ -306,6 +316,20 @@
     font-family: nb-theme(font-bebas-bold);
   }
 
+  /deep/ .btn-success {
+    color: #ffffff !important;
+    background-color: #24de8a !important;
+    border-color: transparent !important;
+  }
+  /deep/ .btn.btn-success {
+    background-color: #24de8a !important;
+    cursor: pointer;
+  }
+
+  /deep/ .release-btn {
+    width: 100%;
+    cursor: pointer;
+  }
   .table_bg:hover {
     background-image: linear-gradient(to right, #00D9BB, #00DA79);
     border: 2px solid #03d87c;
@@ -332,6 +356,12 @@
 
   .myWallets nb-card-body {
     overflow: unset !important;
+    .miner-fee {
+      width: 100%;
+      display: block;
+      text-align: right;
+      padding-right: 15px;
+    }
   }
 
   .font-size-button {
@@ -563,3 +593,16 @@
     white-space: nowrap;
   }
 }
+/deep/ .swal2-title {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/deep/ .swal2-styled.swal2-confirm {
+  background-color: #dc3545 !important;
+}
+
+/deep/ .swal2-styled.swal2-cancel {
+  background-color: #00d977 !important;
+}
+

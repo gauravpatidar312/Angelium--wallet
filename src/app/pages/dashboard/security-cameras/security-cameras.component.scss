@@ -70,6 +70,19 @@
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
+
+    .camera:first-child {
+      border-radius: 7px 0 0;
+    }
+    .camera:nth-child(3) {
+      border-radius: 0 7px 0 0;
+    }
+    .camera:nth-child(4), .camera:nth-child(4) span {
+      border-radius: 0 0 0 7px;
+    }
+    .camera:last-child, .camera:last-child span {
+      border-radius: 0 0 7px;
+    }
   }
 
   .cameras.single-view {
@@ -191,6 +204,23 @@
     }
   }
 
+  @include media-breakpoint-down(md) {
+    .cameras {
+      .camera:first-child {
+        border-radius: 7px 7px 0 0;
+      }
+      .camera:nth-child(3) {
+        border-radius: 0;
+      }
+      .camera:nth-child(4), .camera:nth-child(4) span {
+        border-radius: 0;
+      }
+      .camera:last-child, .camera:last-child span {
+        border-radius: 0 0 7px 7px;
+      }
+    }
+  }
+
   @include media-breakpoint-down(sm) {
     nb-card {
       height: 684px;
@@ -199,5 +229,43 @@
         height: 1368px;
       }
     }
+  }
+}
+
+.close-btn {
+  float: right;
+  font-size: 20px;
+}
+
+.image-div {
+  min-width: 140px;
+}
+
+.image-width {
+  border-radius: 0.5rem;
+  box-shadow: rgb(6, 214, 145) 0 0 4px 0;
+}
+
+.game-name-font {
+  font-size: 1.5rem;
+  font-family: nb-theme(font-bebas);
+}
+
+@include media-breakpoint-down(sm) {
+  /deep/ .image-scoll-card-body {
+    width: 260px;
+  }
+
+  /deep/ .image-div {
+    text-align: center;
+  }
+
+  /deep/ .game-margin {
+    margin-top: 10px;
+  }
+
+  /deep/ .image-width {
+    width: 140px;
+    height: 140px;
   }
 }

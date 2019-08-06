@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="cameras" *ngIf="!isSingleView">
-      <div class="camera col-lg-4" *ngFor="let camera of cameras"
+      <div (click)="onImageClick(camera.title, XGameTemplate)" class="camera pointer col-lg-4" *ngFor="let camera of cameras"
         [style.background-image]="'url(' + camera.source + ')'"
         [hidden]="!camera.display">
         <span>{{ camera.title }}</span>
@@ -43,3 +43,27 @@
     </nb-actions>
   </nb-card-footer> -->
 </nb-card>
+
+<ng-template #XGameTemplate let-data let-XGame="dialogRef">
+  <nb-card>
+    <nb-card-header>
+    {{"pages.dashboard.securityCamera.xgames" | translate}}<i class="nb-close fa-2x pointer close-btn" (click)="XGame.close()"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+        <div class="row">
+          <div class="col-md-4 image-div col-sm-12 pointer">
+            <img class="pointer image-width" (click)="onGameTemplate('lottery')" src="../../assets/images/lottery.jpg">
+            <div class="text-center game-name-font pt-2">{{"common.lottery" | translate}}</div>
+          </div>
+          <div class="col-md-4 game-margin image-div col-sm-12 pointer">
+              <img class="pointer image-width" (click)="onGameTemplate('black-jack')" src="../../assets/images/black_jack.jpg">
+              <div class="text-center game-name-font pt-2">{{"common.blackJack" | translate}}</div>
+          </div>
+          <div class="col-md-4 game-margin image-div col-sm-12 pointer">
+            <img class="pointer image-width" (click)="onGameTemplate('baccarat')" src="../../assets/images/baccarat.jpg">
+            <div class="text-center game-name-font pt-2">{{"common.baccarat" | translate}}</div>
+          </div>
+        </div>
+    </nb-card-body>
+  </nb-card>
+</ng-template>

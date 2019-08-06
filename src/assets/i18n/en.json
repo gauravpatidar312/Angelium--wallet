@@ -1,8 +1,11 @@
 {
-  "common":{
+  "common": {
     "admin":"Admin",
     "assets": "Asset",
     "amount" : "Amount",
+    "angelium": "Angelium",
+    "baccarat": "Baccarat",
+    "blackJack": "Black Jack",
     "country": "Country",
     "cancel": "Cancel",
     "cryptos":{
@@ -24,6 +27,8 @@
     "email": "Email",
     "enter": "Enter",
     "emailMustBeValid": "Email must be a valid email address",
+    "exchange": "exchange",
+    "fee": "FEE",
     "from": "From",
     "fetchingAmount":"Fetching Amount",
     "firstName": "First Name",
@@ -37,6 +42,7 @@
     "lastMonth": "Last Month",
     "lastWeek": "Last Week",
     "lastName": "Last Name",
+    "lottery": "Lottery",
     "month": "Month",
     "password": "Password",
     "profit": "Profit",
@@ -49,7 +55,7 @@
     "repeat": "Repeat",
     "rate": "Rate",
     "resend": "RESEND",
-    "report":"Report",
+    "report": "Report an Issue",
     "slideRightToVerify": "Slide right to verify",
     "select": "Select",
     "sendSMS": "Send SMS",
@@ -70,7 +76,10 @@
     "verificationCode": "Verification code",
     "verified": "Verified",
     "week": "Week",
-    "year": "Year"
+    "year": "Year",
+    "toastr": {
+      "redirectPageText": "You don't have access to view this page."
+    }
   },
   "messages":{
     "required": "{{field}} is required"
@@ -81,6 +90,42 @@
   },
   "footer":{
     "allRightsReservedBy": "All rights reserved by"
+  },
+  "games":{
+    "blackJack": {
+      "noBalance": "You don't have balance. Please add balance to play.",
+      "playNow": "PLAY NOW"
+    },
+    "lottery":{
+      "address": "Address",
+      "asset": "Asset",
+      "betting": "Betting",
+      "betNotAvailable": "There is no bets yet! Be the first and start betting!",
+      "challengeComment": "Challenge comment (Optional)",
+      "changeYourDestiny": "CHALLENGE YOUR DESTINY",
+      "challenger": "Challenger",
+      "comment": "Comment",
+      "howToPay?": "How to Pay?",
+      "ndPrize": "ND PRIZE",
+      "playMessage": "Place your bet with my asset in your wallet. The random number algorithm in the smartContract will fairly prize from all the bet.",
+      "rdPrize": "RD PRIZE",
+      "stPrize": "ST PRIZE",
+      "smartContract": "Smart Contract",
+      "thPrize": "TH PRIZE",
+      "totalBets": "Total Bets",
+      "winners": "Winners",
+      "winningComment": "Winning comment (Optional)",
+      "toastr":{
+        "betAmountMessage": "Please enter betting amount.",
+        "betDisableText": "Betting is disabled!",
+        "bettingSuccessfullyCompleted":"Bet successfully placed!",
+        "noDataFoundCurrentLottery": "Lottery is running, stay tuned. We will announce winners after lottery finishes.",
+        "noDataFoundWinnerList": "Winners have not been announced yet. Stay tuned!",
+        "selectWalletType": "Please select asset.",
+        "betLimitExceed": "Total bets must be less than {{maxBet}}.",
+        "betAmountExceed": "You don't have sufficient balance to place bet."
+      }
+    }
   },
   "pages":{
     "dashboard":{
@@ -96,12 +141,20 @@
       "totalAsset" : "Total Asset",
       "securityCamera":{
         "xlove": "XLOVE",
-        "xcasino": "XCASINO",
+        "xgames": "XGAMES",
         "xwish": "XWISH",
         "xtravel": "XTRAVEL",
         "xmall": "XMALL",
         "xschool": "XSCHOOL"
       }
+    },
+    "exchange":{
+      "tradeBuy": "Trade buy",
+      "tradeBuySuccessfully": "Trade buy successfully",
+      "tradeBuyError": "Trade buy error",
+      "tradeSell": "Trade sell",
+      "tradeSellSuccessfully": "Trade sell successfully",
+      "tradeSellError": "Trade sell error"
     },
     "heaven":{
       "enterAmount":"Enter Amount",
@@ -110,8 +163,11 @@
       "heavenDropHistory": "Heaven Drop History",
       "heavenDropToday": "Heaven Drop Today",
       "heavenId":"Heaven ID",
+      "minerFeeMessage": "Transaction will be confirmed in {{min}} to {{max}} minutes.",
       "noDataFound":"No data found",
       "plan": "Plan",
+      "release": "Release",
+      "releaseInProgress": "RELEASE IN PROGRESS...",
       "received": "Received",
       "releaseDate": "Release date",
       "releaseSetting": "Release setting",
@@ -120,9 +176,12 @@
       "type": "Type",
       "heavenDrop": "Heaven Drop",
       "toastr":{
+        "convertReleaseText": "Are you sure to release the heaven now?",
+        "kycNotApproved": "You need kyc process to be approved to execute this action.",
+        "minerFeeError": "Please select fee for USDT transaction.",
         "pleaseEnterAmount":"Please enter amount",
         "pleaseChoosePlan":"Please choose plan.",
-        "releaseSettingSavedSuccessfully":"Release setting saved successfully!",
+        "releaseSettingSavedSuccessfully":"It has been successful and heaven will be released after 48 hours.",
         "transactionSuccessfullyCompleted":"Transaction successfully completed!",
         "youDontHaveSufficientBalance":"You don't have sufficient balance."
       }
@@ -146,6 +205,7 @@
       "thereAreNoUsers":"There are no users.",
       "userGrowth":"User Growth",
       "toastr": {
+        "hq": "HQ",
         "loadUserSession":"Load User Session",
         "userDatabase":"User Database"
       }
@@ -258,6 +318,7 @@
     },
     "setting": {
       "angel": "ANGEL",
+      "ageConfirmation": "Age Confirmation",
       "reloadCacheMessage" : "Are you sure to clear the cache and reload the page?",
       "currency": "Currency",
       "comingSoon": "Coming soon",
@@ -267,11 +328,14 @@
       "clickToReport": "Click to report",
       "clearCache": "Clean Cache",
       "createTicket": "Create Ticket",
+      "disableTFA": "Disable 2FA",
       "download": "Download",
       "downloadQRCodeOfYourReferralLink":"Download QR Code of your referral link",
       "name": "Name",
       "eMail": "E-mail",
+      "enable2FA": "Enable 2FA",
       "goldAngel": "GOLD ANGEL",
+      "googleCode": "Google Code",
       "language": "Language",
       "merge": "Merge",
       "mergeYourOldData": "Merge your old data",
@@ -281,6 +345,7 @@
       "on": "ON",
       "off": "OFF",
       "or": "OR",
+      "OTP": "OTP",
       "pinkAngel": "PINK ANGEL",
       "qr": "QR",
       "QRCode" : "QR Code",
@@ -289,19 +354,23 @@
       "rank": "Rank",
       "referralLink": "Referral Link",
       "reportBug": "Report bug",
+      "scanQRCodeText": "Scan the following QR code or enter the following secret key in Google Authenticator app",
       "support": "Support",
       "secretKey": "Secret Key",
       "silverAngel": "SILVER ANGEL",
       "supportTicket":"Support Ticket",
       "2FA": "2FA",
+      "2FAcode": "Enter Google 2FA Code",
       "ticketTitle": "Ticket Title",
       "ticketDescription":"Ticket Description",
       "timezone": "Timezone",
       "toastr":{
+        "ageConfirmationText": "Are you really over 18?",
         "changeUsername": "Change Username",
         "changeLoginPassword": "Change Login Password",
         "changeTradePassword": "Change Trade Password",
         "countryUpdate": "Country update successfully",
+        "disableTFAText": "Are you sure to disable Two Factor Authentication?",
         "enterValueInAllFields": "Please enter value in all fields.",
         "languageUpdateSuccessfully": "Language update successfully!",
         "linkCopiedSuccessfully": "Link copied successfully!",
@@ -317,7 +386,9 @@
         "timezoneUpdateSuccessfully": "Timezone updated successfully!",
         "userImageChanged": "User image change successfully",
         "usernameUpdatedSuccessfully": "Username updated successfully",
-        "usernameMustEnglishWithoutSpace": "Username must be in English, without space."
+        "usernameMustEnglishWithoutSpace": "Username must be in English, without space.",
+        "2FAEnabled": "Two factor authentication activated.",
+        "2FADisabled": "Two factor authentication deactivated."
       },
       "usernameOnlyEnglish": "New Username (English only)",
       "usd": "usd",
@@ -352,5 +423,9 @@
         "otcComingSoon": "OTC will be starting from July 12th"
       }
     }
+  },
+  "swal": {
+    "cancel": "Cancel",
+    "yesSure": "Yes, Sure!"
   }
 }

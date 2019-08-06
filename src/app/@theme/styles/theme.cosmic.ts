@@ -118,15 +118,15 @@ export const COSMIC_THEME = {
       chartGradientTo: '#00c7c7',
       chartGradientFrom: '#00d977',
       chartAxisSplitLine: 'rgba(161, 161 ,229, 0.2)',
-      chartShadowBarColor: '#2f296b',
+      chartShadowBarColor: 'rgba(16, 11, 72, 0.72)',
 
       chartLineBottomShadowColor: '#00977e',
 
-      chartInnerLineColor: '#2f296b',
+      chartInnerLineColor: 'rgba(16, 11, 72, 0.72)',
     },
 
     echarts: {
-      bg: '#3d3780',
+      bg: '#100b48',
       textColor: '#ffffff',
       axisLineColor: '#a1a1e5',
       splitLineColor: '#342e73',
@@ -214,7 +214,7 @@ export const COSMIC_THEME = {
     },
 
     profit: {
-      bg: '#3d3780',
+      bg: '#100b48',
       textColor: '#ffffff',
       axisLineColor: '#a1a1e5',
       splitLineColor: '#342e73',

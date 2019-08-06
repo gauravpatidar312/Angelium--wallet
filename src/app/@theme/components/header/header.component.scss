@@ -21,12 +21,24 @@
     /*float: left;
     margin-top: 7px;*/
   }
+   .link {
+      text-decoration: none;
+
+      .icon {
+        font-size: 2rem;
+        color: #06f9a3;
+      }
+   }
+
+  .display-none {
+    display: none;
+  }
 
   .deltacss {
     position: relative;
     padding-left: 10px;
   }
-
+  .headerLine{ line-height: 65px; height: 60px; }
   /deep/ .delta {
     position: absolute;
     display: inline-block;
@@ -172,6 +184,10 @@
     }
   }
 
+  @include media-breakpoint-down(lg) {
+    #main-navigation{ display: none; }
+  }
+
   .toggle-settings /deep/ a {
     display: block;
     text-decoration: none;
@@ -232,7 +248,7 @@
   }
 
   @include media-breakpoint-down(md) {
-
+    #main-navigation{ display: none; }
     nb-action:not(.toggle-settings) {
       border: none;
     }
@@ -255,7 +271,7 @@
   }
 
   @include media-breakpoint-down(sm) {
-
+    #main-navigation{ display: none; }
     nb-user /deep/ .user-name {
       display: none;
     }
@@ -264,6 +280,8 @@
       font-size: 14px;
     }
   }
+
+
 
   @include media-breakpoint-down(is) {
 
@@ -286,3 +304,39 @@
     }
   }
 }
+
+#main-navigation li > a {
+  text-decoration: none;
+  font-family: nb-theme(font-nunito);
+  line-height:63px;
+  font-size: 1.2rem;
+  display: inline-block;
+  color: #ffffff;
+  padding: 0px 15px;
+  border-bottom: 2px solid transparent;
+  font-weight: 400;
+  outline: transparent!important;
+}
+.pointer{ outline: none!important; }
+#main-navigation li > a i{
+  padding-right: 8px;
+  font-size: 17px;
+  float: left;
+  line-height: 63px;
+}
+.iconsize{
+  font-size:24px!important;
+}
+#main-navigation li.active > a i{
+ color:#26df8b;
+}
+#main-navigation li.active > a {
+  border-bottom: 2px solid #26df8b;
+}
+
+.navbar-header {
+  font-family: nb-theme(font-nunito);
+  font-weight: 500;
+  font-size: 22px;
+}
+.navbar-pill { justify-content: flex-end; }

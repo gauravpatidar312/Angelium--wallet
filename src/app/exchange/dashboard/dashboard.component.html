@@ -1,0 +1,188 @@
+<div class="row wrapper">
+
+  <div class="col-lg-2">
+    <ngx-pair (messageEvent)="receiveMessage($event)" class="main one order-1"></ngx-pair>
+    <ngx-trade class="main two"></ngx-trade>
+  </div>
+  <div class="col-lg-7 nopadd mobpaddfix">
+    <nb-card class="main three">
+      <nb-card-body class="trade-chart">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div id="tradingview_58f3c" class="twc"></div>
+        </div>
+        <!-- TradingView Widget END -->
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card class="main four">
+      <nb-card-header >
+        <ul id="main-navigation" class="nav mytradeLine empty_width">
+          <li class="pointer active">
+            <a data-toggle="pill" (click)="getOpenOrder(currentPair.pair)">MY OPEN ORDERS</a>
+          </li>
+          <li class="pointer">
+            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair.pair)">MY TRADE HISTORY</a>
+          </li>
+        </ul>
+      </nb-card-header>
+
+      <nb-card-body>
+        <div class="clearfix"></div>
+        <span class="fetching-spinner" *ngIf="fatchTradeData">
+          <i class="fa fa-spinner spinner-color fa-spin"></i>
+        </span>
+        <div class="row table-responsive" *ngIf="tradeTab1">
+          <div *ngIf="noDataOpenTrade"><span>No open order available</span></div>
+          <!-- <div class="available-items" *ngIf="!noDataOpenTrade">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th class="text-left" width="14%">Time</th>
+                  <th class="text-center" width="14%">Pair</th>
+                  <th class="text-center" width="10%" align="center">Type</th>
+                  <th class="text-center" width="15%">Price</th>
+                  <th class="text-center" width="18%">Amount</th>
+                  <th class="text-center" width="17%">Total Price</th>
+                  <th class="text-right" width="12%" class="text-right">Fill %</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="available-items" *ngIf="!noDataOpenTrade">
+            <table class="table table-striped">
+              <tbody>
+                <tr *ngFor="let buy of tradeBuy">
+                  <td width="14%" class="text-left">{{buy.timestamp | date:'MM-yy hh:mm'}}</td>
+                  <td width="14%" class="text-center">{{buy.pair}}</td>
+                  <td width="10%" class="text-center"><span class="green-text">BUY</span></td>
+                  <td width="15%" class="text-center">{{buy.price}}</td>
+                  <td width="18%" class="text-center">{{buy.amount}}</td>
+                  <td width="17%" class="text-center">{{buy.price * buy.amount}}</td>
+                  <td width="12%" class="text-right">{{buy.filled}}%</td>
+                </tr>
+                <tr *ngFor="let sell of tradeSell">
+                  <td width="14%" class="text-left">{{sell.timestamp | date:'MM-yy hh:mm'}}</td>
+                  <td width="14%" class="text-center">{{sell.pair}}</td>
+                  <td width="10%" class="text-center"><span class="pink-text">SELL</span></td>
+                  <td width="15%" class="text-center">{{sell.price}}</td>
+                  <td width="18%" class="text-center">{{sell.amount}}</td>
+                  <td width="17%" class="text-center">{{sell.price * sell.amount}}</td>
+                  <td width="12%" class="text-right">{{sell.filled}}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+          
+          <table class="table table-condensed" *ngIf="!noDataOpenTrade">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Pair</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total Price</th>
+                <th>Fill %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let buy of tradeBuy">
+                <td >{{buy.timestamp | date:'MM-yy hh:mm'}}</td>
+                <td >{{buy.pair}}</td>
+                <td ><span class="green-text">BUY</span></td>
+                <td >{{buy.price}}</td>
+                <td >{{buy.amount}}</td>
+                <td >{{buy.price * buy.amount}}</td>
+                <td >{{buy.filled}}%</td>
+              </tr>
+              <tr *ngFor="let sell of tradeSell">
+                <td>{{sell.timestamp | date:'MM-yy hh:mm'}}</td>
+                <td>{{sell.pair}}</td>
+                <td><span class="pink-text">SELL</span></td>
+                <td>{{sell.price}}</td>
+                <td>{{sell.amount}}</td>
+                <td>{{sell.price * sell.amount}}</td>
+                <td>{{sell.filled}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row table-responsive" *ngIf="tradeTab2">
+          <div *ngIf="noDataTradeHistory"><span>No trade history available</span></div>
+          <!-- <div class="available-items" *ngIf="!noDataTradeHistory">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th class="text-left" width="14%">Time</th>
+                  <th class="text-center" width="14%">Pair</th>
+                  <th class="text-center" width="10%" align="center">Type</th>
+                  <th class="text-center" width="15%">Price</th>
+                  <th class="text-center" width="18%">Amount</th>
+                  <th class="text-center" width="17%">Total Price</th>
+                  <th class="text-right" width="12%" class="text-right">Fill %</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="available-items" *ngIf="!noDataTradeHistory">
+            <table class="table table-striped">
+              <tbody>
+                <tr *ngFor="let history of myTradeHistory">
+                  <td width="14%" class="text-left">{{history.timestamp | date:'MM.yy hh:mm'}}</td>
+                  <td width="14%" class="text-center">{{history.pair}}</td>
+                  <td width="10%" class="text-center">
+                    <span class="{{history.buy ? 'green-text' : 'pink-text' }}">
+                      {{history.buy ? 'BUY' : 'SELL' }}
+                    </span>
+                  </td>
+                  <td width="15%" class="text-center">{{history.price}}</td>
+                  <td width="18%" class="text-center">{{history.amount}}</td>
+                  <td width="17%" class="text-center">{{history.price * history.amount}}</td>
+                  <td width="12%" class="text-right">{{history.filled}}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+
+          <table class="table table-condensed" *ngIf="!noDataTradeHistory">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Pair</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total Price</th>
+                <th>Fill %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let history of myTradeHistory">
+                <td>{{history.timestamp | date:'MM-yy hh:mm'}}</td>
+                <td>{{history.pair}}</td>
+                <td>
+                  <span class="{{history.buy ? 'green-text' : 'pink-text' }}">
+                    {{history.buy ? 'BUY' : 'SELL' }}
+                  </span>
+                </td>
+                <td>{{history.price}}</td>
+                <td>{{history.amount}}</td>
+                <td>{{history.price * history.amount}}</td>
+                <td>{{history.filled}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+  <div class="col-lg-3">
+    <ngx-board class="main five"></ngx-board>
+    <ngx-trade-history class="main six"></ngx-trade-history>
+  </div>
+
+
+</div>

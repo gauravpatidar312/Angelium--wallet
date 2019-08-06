@@ -1,0 +1,37 @@
+
+<nb-card class="board">
+    <nb-card-header>Pair</nb-card-header>
+
+  <nb-card-body>
+    <div class="clearfix"></div>
+    <span class="fetching-spinner" *ngIf="fatchPaireSpinner">
+      <i class="fa fa-spinner spinner-color fa-spin"></i>
+    </span>
+    <div class="row" *ngIf="fatchPaireData">
+      <div class="available-items">
+        <table class="table table-condensed boardtable">
+          <thead>
+            <tr>
+              <th class="text-left">
+                <span class="theading-text">Pair</span>
+              </th>
+              <th class="text-center">
+                <span class="theading-text">Price</span>
+              </th>
+              <th class="text-right">
+                <span class="theading-text">Change</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pair of pairs">
+              <td width="14%" class="text-left" (click)="clickPair(pair)">{{pair.symbol}}</td>
+              <td width="14%" class="text-center">{{pair.price | number: '1.0-2'}}</td>
+              <td width="12%" class="text-right">{{pair.change | number: '1.0-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

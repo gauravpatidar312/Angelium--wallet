@@ -25,7 +25,7 @@
       text {
         fill: nb-theme(color-fg-heading);
       }
-      
+
 
       .chart-legend {
         .legend-labels {
@@ -45,9 +45,27 @@
         padding-left: 1rem;
         padding-right: 1rem;
       }
-    
+
   }
 }
+
+.dropdown-graph {
+  width: 180px !important;
+}
+
+.fetchingGraphData {
+  height: 100px;
+  background: #100b48;
+  color: #a1a1e5;
+  display: block;
+  font-size: 30px;
+  text-align: center;
+}
+
+.margin-li {
+  margin-right:15px;
+}
+
 .headerhq{
     margin: nb-theme(layout-padding);
     margin-top: 0;
@@ -62,7 +80,7 @@
       right: 0;
       text-align: center;
   }
- 
+
   .main-coverboth {
     display: flex;
     align-items: center;
@@ -75,7 +93,7 @@
     margin-bottom: 20px;
 }
 
-.main-coverboth .icon svg.eva.eva-pantone{  
+.main-coverboth .icon svg.eva.eva-pantone{
     width: 2.6rem;
     height: 2.6rem;
     vertical-align: middle;
@@ -154,16 +172,16 @@ input[type='range']::-webkit-slider-thumb {
 }
 /** FF*/
 input[type="range"]::-moz-range-progress {
-background-color: #43e5f7; 
+background-color: #43e5f7;
 }
-input[type="range"]::-moz-range-track {  
+input[type="range"]::-moz-range-track {
 background-color: #9a905d;
 }
 /* IE*/
 input[type="range"]::-ms-fill-lower {
-background-color: #43e5f7; 
+background-color: #43e5f7;
 }
-input[type="range"]::-ms-fill-upper {  
+input[type="range"]::-ms-fill-upper {
 background-color: #9a905d;
 }
 .chart-container {
@@ -306,7 +324,7 @@ background-color: #9a905d;
   height: .8rem;
   border-radius: 0;
   overflow: hidden;
-  background-color: #2f296b;
+  background-color: rgba(16, 11, 72, 0.72);
 }
 .progress-value {
   height: 100%;
@@ -411,7 +429,7 @@ nb-card {
 
   .chart-margin{ margin: 5px; }
 
-@media (min-width:1200px) and (max-width:1480px){ 
+@media (min-width:1200px) and (max-width:1480px){
   .details label:last-child {
     font-size: 30px;
   }
@@ -419,7 +437,7 @@ nb-card {
     margin-left: 1.5rem;
   }
 }
-@media (min-width:1200px) and (max-width:1367px){ 
+@media (min-width:1200px) and (max-width:1367px){
   .icon {
     width: 6rem;
     font-size: 3.5rem;
@@ -431,7 +449,7 @@ nb-card {
     width: 250px;
   }
 }
-@media (min-width:1200px) and (max-width:1305px){ 
+@media (min-width:1200px) and (max-width:1305px){
   .icon {
     width: 4rem;
     font-size: 2.5rem;
@@ -510,7 +528,7 @@ nb-card {
     padding: 0 .4rem;
     font-size: 12px;
   }
-  
+
 }
 
 @media (max-width: 767.98px) {
@@ -562,7 +580,7 @@ nb-card {
   }
   .details label:last-child {
    font-size: 24px;
-  } 
+  }
 
 }
 @media (max-width: 575.98px) {

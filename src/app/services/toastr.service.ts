@@ -10,6 +10,7 @@ export class ToastrService {
 
   constructor(private toastrService: NbToastrService) {
     this.config.position = 'top-right';
+    this.config.duration = 6000;
   }
 
   danger(message, title, position?: any) {

@@ -22,16 +22,6 @@
     ul.menu-items {
       font-family: nb-theme(font-bebas);
       font-size: 20px;
-
-      a.active {
-        .menu-icon, .menu-title {
-          color: nb-theme(color-success);
-        }
-      }
-
-      span.menu-title {
-        margin-top: 5px;
-      }
     }
   }
 
@@ -39,6 +29,20 @@
     /deep/ .cdk-overlay-container .cdk-overlay-pane {
       left: auto !important;
       right: 2px !important;
+    }
+
+    /deep/ nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding-top: 22px !important;
+    }
+
+    /deep/ nb-sidebar.menu-sidebar .scrollable {
+      border-radius: 0 !important;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    /deep/ nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding-top: 28px;
     }
   }
 }

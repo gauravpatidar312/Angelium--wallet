@@ -5,6 +5,9 @@ import {
 } from '@nebular/theme';
 
 import {StateService} from '../../../@core/utils';
+import {SessionStorageService} from '../../../services/session-storage.service';
+
+declare let jQuery: any;
 
 // TODO: move layouts into the framework
 @Component({
@@ -35,6 +38,26 @@ import {StateService} from '../../../@core/utils';
       <nb-layout-footer fixed>
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
+
+      <nb-layout-footer class="bottom-menu" *ngIf="userInfo?.user_type === 'owner'">
+        <ul id="main-navigation"  class="nav navbar-pill headerLine">
+          
+          <li class="pointer" routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}"
+          ><a data-toggle="pill" routerLink="/pages/dashboard">
+             <i class="fa fa-wallet" style="float:none"></i> Wallet</a>
+          </li>
+
+          <li class="pointer" routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            <a data-toggle="pill" routerLink="/pages/exchange">
+              <i class="iconsize nb-shuffle" style="float:none"></i> Exchange
+            </a>
+          </li>
+        </ul>
+      </nb-layout-footer>
+      
+
     </nb-layout>
   `,
 })
@@ -83,6 +106,7 @@ export class SampleLayoutComponent implements OnDestroy {
   ];
   layout: any = {};
   sidebar: any = {};
+  userInfo: any;
 
   private alive = true;
 
@@ -90,6 +114,7 @@ export class SampleLayoutComponent implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
+              private sessionStorage: SessionStorageService,
               protected sidebarService: NbSidebarService) {
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
@@ -113,6 +138,36 @@ export class SampleLayoutComponent implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+    this.userInfo = this.sessionStorage.getFromSession('userInfo');
+  }
+
+  ngAfterViewInit(){
+    var value = 0;
+
+    jQuery('.bottom-menu').fadeOut();
+    jQuery.fn.scrollEnd = function(callback, timeout) {
+
+
+      jQuery('.scrollable-container').scroll(function(){
+        var $this = jQuery(this);
+        var width = $this.width();
+        var scrollPos = $this.scrollTop();
+
+        if (scrollPos > value && width < 900) { // scroll down
+            jQuery('.bottom-menu').fadeIn();
+        }
+        value = scrollPos;
+
+        if ($this.data('scrollTimeout')) {
+          clearTimeout($this.data('scrollTimeout'));
+        }
+        $this.data('scrollTimeout', setTimeout(callback, timeout));
+      });
+    };
+
+    jQuery(window).scrollEnd(function(){
+      jQuery('.bottom-menu').fadeOut();
+    }, 10000);
   }
 
   ngOnDestroy() {
