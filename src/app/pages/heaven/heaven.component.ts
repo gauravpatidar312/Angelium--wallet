@@ -1,18 +1,18 @@
-import { Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators';
-import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableData } from '../../@core/data/smart-table';
-import { HttpService } from '../../services/http.service';
+import {Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output} from '@angular/core';
+import {DecimalPipe} from '@angular/common';
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
+import {takeWhile} from 'rxjs/operators';
+import {LocalDataSource} from 'ng2-smart-table';
+import {SmartTableData} from '../../@core/data/smart-table';
+import {HttpService} from '../../services/http.service';
 import * as _ from 'lodash';
 
-import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from '../../services/toastr.service';
-import { ShareDataService } from '../../services/share-data.service';
-import { environment } from 'environments/environment';
-import { CustomRendererComponent } from './custom.component';
-import { SessionStorageService } from '../../services/session-storage.service';
+import {TranslateService} from '@ngx-translate/core';
+import {ToastrService} from '../../services/toastr.service';
+import {ShareDataService} from '../../services/share-data.service';
+import {environment} from 'environments/environment';
+import {CustomRendererComponent} from './custom.component';
+import {SessionStorageService} from '../../services/session-storage.service';
 import * as moment from 'moment';
 
 declare let jQuery: any;
@@ -34,9 +34,9 @@ interface CardSettings {
 export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() periodChange = new EventEmitter<string>();
   private alive = true;
-  minerFee : number = 0;
-  minMinutes : number = 0;
-  maxMinutes : number = 0;
+  minerFee: number = 0;
+  minMinutes: number = 0;
+  maxMinutes: number = 0;
   fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   user: any;
@@ -50,14 +50,14 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   heavenDropTypes: string[] = ['week', 'month', 'year'];
   myWallets: string[];
   chartLegend: { iconColor: string; title: string }[];
-  breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
+  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
   heaven_amount: any;
   wallet: any;
   maxAmount: number;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
-  days:any;
+  days: any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
   usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
@@ -215,7 +215,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
             this.source.update(row, row); // to refresh the row to re-render UI.
           });
           instance.onReleaseSaved.subscribe((row) => {
-           this.getHeavenHistory(this.heavenHistoryType); // to API call on release successfully.
+            this.getHeavenHistory(this.heavenHistoryType); // to API call on release successfully.
           });
           instance.onReleaseRefresh.subscribe((row) => {
             this.source.refresh(); // to refresh row on release button click to show spinner.
@@ -267,8 +267,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         filter: false,
         valuePrepareFunction: (cell, row) => {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
       },
-    },
       plan: {
         title: this.translate.instant('pages.heaven.plan'),
         type: 'html',
@@ -346,6 +346,9 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCreateHeaven() {
+    if (this.formSubmitting)
+      return;
+
     if (this.wallet.wallet_type === 'USDT' && !this.minerFee) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
         this.translate.instant('common.heaven'));
@@ -373,12 +376,16 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     else if (this.wallet.wallet_type === 'USDT')
       validateEndpoint = 'validate_usdt/';
     if (validateEndpoint) {
+      this.formSubmitting = true;
       this.httpService.post({'amount': this.heaven_amount}, validateEndpoint).subscribe((res?: any) => {
         if (res.status)
           this.createHeavenApi();
-        else
+        else {
+          this.formSubmitting = false;
           this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.heaven'));
+        }
       }, (err) => {
+        this.formSubmitting = false;
         this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
       });
     } else
@@ -451,6 +458,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
   }
+
   getHeavenGraph() {
     this.httpService.get('heaven-graph/').subscribe((res) => {
       console.log('getHeavenGraph', res);
@@ -518,5 +526,5 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.alive = false;
-}
+  }
 }
