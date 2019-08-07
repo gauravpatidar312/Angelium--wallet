@@ -19,8 +19,6 @@ nb-card-body {
   padding-bottom: 0px!important;
 }
 
-
-
 .theading-text{
   color: #cee80b;
 }
@@ -40,8 +38,7 @@ nb-card-body {
   border-bottom: 1px solid #342e73;
 }
 
-.back-table-sell:nth-child(even) { background: #3c0f2e; } 
-.back-table-buy:nth-child(even) { background: #808c73; } 
+.back-table:nth-child(even) { background: #87a1b730; } 
 
 .positionSet{
   padding-top: 10px;
@@ -85,7 +82,7 @@ nb-card-body {
 }
 .tr-position{
   margin-top: 5px;
-  height: 127px!important;
+  height: 125px !important;
 }
 .bigSize{
   font-size: 20px;

@@ -24,7 +24,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let pair of pairs">
-              <td width="14%" class="text-left" (click)="clickPair(pair)">{{pair.symbol}}</td>
+              <td width="14%" class="text-left" (click)="clickPair(pair)">  
+                {{pair.pair.split('/').join(' / ') | uppercase  }}</td>
               <td width="14%" class="text-center">{{pair.price | number: '1.0-2'}}</td>
               <td width="12%" class="text-right">{{pair.change | number: '1.0-2'}}</td>
             </tr>

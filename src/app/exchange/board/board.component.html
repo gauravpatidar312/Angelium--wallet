@@ -7,6 +7,7 @@
     </span>
 
     <div class="row" *ngIf="boardTableValue">
+
       <div style="width:100%">
         <table class="boardtable">
           <thead>
@@ -29,7 +30,8 @@
       </div>
       <div class="available-items tr-position">
         <table class="boardtable">
-          <tr class="back-table-sell" *ngFor="let sell of boardSell;">
+          <span *ngIf="boardSellAvai">No sell record available</span>
+          <tr class="back-table" *ngFor="let sell of boardSell;">
             <td class="pink-text positionSet" width="30%">{{sell.price | number: '1.0-2'}}</td>
             <td class="text-right positionSet" width="40%">{{sell.amount | number: '1.0-2'}}</td>
             <td class="changetext positionSet padrt10px" width="30%">{{sell.price * sell.amount | number: '1.0-2'}}</td>
@@ -50,8 +52,9 @@
       </div>
 
       <div class="available-items tr-position">
+        <span *ngIf="boardBuyAvai">No buy record available</span>
         <table class="boardtable">
-          <tr class="back-table-buy" *ngFor="let buy of boardBuy">
+          <tr class="back-table" *ngFor="let buy of boardBuy">
             <td class="green-text positionSet" width="30%">{{buy.price | number: '1.0-2'}}</td>
             <td class="text-right positionSet" width="40%">{{buy.amount | number: '1.0-2'}}</td>
             <td class="changetext positionSet padrt10px" width="30%">{{buy.price * buy.amount | number: '1.0-2'}}</td>

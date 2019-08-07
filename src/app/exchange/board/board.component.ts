@@ -15,6 +15,8 @@ export class BoardComponent implements OnInit {
   boardSell = [];
   noSellData:boolean = false;
   noBuyData:boolean = false;
+  boardSellAvai: boolean = false;
+  boardBuyAvai: boolean = false;
   constructor(private shareDataService: ShareDataService,
               private httpService: HttpService) { }
 
@@ -31,14 +33,16 @@ export class BoardComponent implements OnInit {
 
   getBoardData(pair: any){
     let data = {'pair': pair };
-    this.boardBuy = [];
-    this.boardSell = [];  
     this.httpService.post(data, 'exchange/order_book/').subscribe((res?:any)=>{
       if (res.status) {
         this.boardSpinner = false;
         this.boardTableValue = true;
         this.boardBuy = res.data.buy;
         this.boardSell = res.data.sell;
+        if (res.data.sell!=0)  this.boardSellAvai = false;
+        else this.boardSellAvai = true;
+        if (res.data.buy!=0)  this.boardBuyAvai = false;
+        else this.boardBuyAvai = true;
       }
     });
   }
