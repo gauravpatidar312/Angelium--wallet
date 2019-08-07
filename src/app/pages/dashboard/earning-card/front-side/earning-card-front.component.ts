@@ -50,7 +50,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     if (this.currency.order === 3 || this.currency.order === 4 || this.currency.order === 7) {
       this.httpService.get(`currency-statistic/?currency_type=${this.currency.name}`).subscribe((data?: any) => {
         const priceData = _.map(data, 'live_price');
-        this.trafficChartPoints = priceData.map(item => ShareDataService.toFixedDown(Number(item), 8));
+        this.trafficChartPoints = this.currency.order === 3 ? priceData.map(item => ShareDataService.toFixedDown(Number(item), 0)) : priceData.map(item => ShareDataService.toFixedDown(Number(item), 2));
       });
     }
 
