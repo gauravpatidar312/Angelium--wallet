@@ -9,10 +9,7 @@ export class EarningCardComponent {
   flipped = false;
 
   @Input() selectedCurrency: string = 'BTC';
-  @Input() amount: number = 0;
-  @Input() quantity: number = 0;
-  @Input() livePrice: number = 0;
-  @Input() percentage: number = 0;
+  @Input() currency: any;
 
   toggleFlipView() {
     this.flipped = !this.flipped;
