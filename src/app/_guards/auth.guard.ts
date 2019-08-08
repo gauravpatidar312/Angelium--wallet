@@ -20,18 +20,21 @@ export class AuthGuard implements CanActivate {
       .then((user?: any) => {
         const url: string = state.url;
         const data: any = route.data;
-        if (user && url) {
-          if (!data.role || data.role.indexOf(user.user_type) >= 0) {
-            return true;
+
+        return new Promise<boolean>((resolve) => {
+          if (user && url) {
+            if (!data.role || data.role.indexOf(user.user_type) >= 0) {
+              resolve(true);
+            } else {
+              this.toastrService.danger(this.translate.instant('common.toastr.redirectPageText'), this.translate.instant('common.angelium'));
+              this.router.navigate(['pages/dashboard']);
+              resolve(true);
+            }
           } else {
-            this.toastrService.danger(this.translate.instant('common.toastr.redirectPageText'), this.translate.instant('common.angelium'));
-            this.router.navigate(['pages/dashboard']);
-            return true;
+            this.router.navigate(['/']);
+            resolve(false);
           }
-        } else {
-          this.router.navigate(['/']);
-          return false;
-        }
+        });
       });
   }
 }

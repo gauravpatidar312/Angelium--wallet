@@ -23,7 +23,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   walletType: string = 'SELECT';
   selectWallet: any;
   selectedLottery: any;
-  winnerTextMessage: string;
+  noWinnerListText: string;
   betNotAvailable: string;
   betData: any;
   totalBetAmount: any;
@@ -52,6 +52,15 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     this.getWallet();
     this.getLotteryList();
     this.getSmartContract();
+    Observable.interval(15000).takeWhile(() => true).subscribe(() => {
+      this.getPrizeList();
+      this.getBetList();
+    });
+  }
+
+  onRefreshButton() {
+    this.getPrizeList();
+    this.getBetList();
   }
 
   getCurrentLotteryDetail() {
@@ -170,9 +179,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
       if (!this.winnerData.length) {
         if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id)
-          this.winnerTextMessage = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
+          this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
         else
-          this.winnerTextMessage =  this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
+          this.noWinnerListText =  this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
       }
       this.fetchingWinner = false;
     }, (err) => {

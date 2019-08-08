@@ -254,11 +254,25 @@
     color: #00bb66 !important;
   }
 
+  .finishText {
+    color: #ffffff;
+    font-size: 16px;
+  }
+
   .winner-list-spinner {
     display: block;
     font-size: 25px;
     color: #a1a1e5;
     text-align: center;
+  }
+
+  .currentWinnerMessage {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .pull-right {
+    float: right;
   }
 
   #heavenHistory-navigation li.active > a {
