@@ -117,6 +117,14 @@ export class EarningService extends EarningData {
       },
       dailyIncome: 0,
     },
+    ERCUSDT: {
+      liveChart: [],
+      delta: {
+        up: false,
+        value: 0,
+      },
+      dailyIncome: 0,
+    },
   };
 
   getDefaultLiveChartData(elementsNumber: number) {
