@@ -31,7 +31,6 @@ export class TransferComponent implements OnInit {
   sendType: string = 'SELECT';
   receiveType: string =  'SELECT';
   user: any;
-
   fromType: string = 'ANX';
   toType: string =  'SELECT';
   fromTypes: string[] = ['ANX'];
@@ -46,6 +45,7 @@ export class TransferComponent implements OnInit {
   waitFlag: boolean = false;
   myWallets: any = [];
   sendWallet: any = {};
+  sendWallets: any = [];
   receiveWallet: any = {};
   anxWallet: any = {};
   otcWallet: any = {};
@@ -198,16 +198,10 @@ export class TransferComponent implements OnInit {
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       this.myWallets = _.sortBy(res, ['wallet_type']);
-      if (this.isProduction) {
-        /*if (this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-          this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
-              return wallet.wallet_type !== 'USDT';
-            }) || [];
-        }*/
-
-        this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
-      } else
-        this.otcWallets = this.myWallets;
+      this.sendWallets =  _.filter(this.myWallets, (wallet?: any) => {
+          return wallet.wallet_type !== 'ERCUSDT';
+        }) || [];
+      this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
 
       if (!this.myWallets) {
         this.sendType = 'SELECT';
@@ -515,7 +509,10 @@ export class TransferComponent implements OnInit {
         this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
         this.translate.instant('pages.transfer.send'));
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
-          this.myWallets = data;
+          this.myWallets = _.sortBy(data, ['wallet_type']);
+          this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
+              return wallet.wallet_type !== 'ERCUSDT';
+            }) || [];
         });
         this.onChangeWallet('SELECT', 'send');
         this.destination_address = null;

@@ -152,6 +152,8 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
           item.order = 7;
         else if (item.name === 'ANLP')
           item.order = 8;
+        else if (item.name === 'ERCUSDT')
+          item.order = 9;
 
         let enabled = true;
         if (this.isProduction) {

@@ -31,9 +31,9 @@
       {{ currency.percentage > 0 ? currency.percentage : (-1 * currency.percentage) }}%
     </div>
   </div>
-  <ngx-earning-live-update-chart *ngIf="currency.order === 5 || currency.order === 6 || currency.order === 8"
+  <ngx-earning-live-update-chart *ngIf="currency.order === 5 || currency.order === 6 || currency.order === 8 || currency.order === 9"
                                  [liveUpdateChartData]="liveUpdateChartData">
   </ngx-earning-live-update-chart>
-  <ngx-traffic-chart *ngIf="!(currency.order === 5 || currency.order === 6 || currency.order === 8)"
+  <ngx-traffic-chart *ngIf="!(currency.order === 5 || currency.order === 6 || currency.order === 8 || currency.order === 9)"
                      [points]="trafficChartPoints"></ngx-traffic-chart>
 </nb-card-body>

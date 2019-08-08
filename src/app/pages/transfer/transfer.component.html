@@ -27,7 +27,7 @@
                             {{ sendType }}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
-                            <ng-container *ngFor="let wallet of myWallets">
+                            <ng-container *ngFor="let wallet of sendWallets">
                               <li class="dropdown-item"
                                   *ngIf="sendType != wallet.wallet_type"
                                   (click)="onChangeWallet(wallet.wallet_type, 'send')">

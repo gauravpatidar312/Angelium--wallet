@@ -79,7 +79,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   getWallet() {
     this.httpService.get('asset/').subscribe((data?: any) => {
       const cryptosData = _.filter(data.cryptos, (crypto?: any) => {
-        return !(crypto.name === 'ANL' || crypto.name === 'HEAVEN' || crypto.name === 'ANLP');
+        return !(crypto.name === 'ANL' || crypto.name === 'HEAVEN' || crypto.name === 'ANLP' || crypto.name === 'ERCUSDT');
       });
       const walletData = _.map(cryptosData, function (obj?: any) {
         const item: any = {};
