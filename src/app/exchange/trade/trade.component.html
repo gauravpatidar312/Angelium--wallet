@@ -1,5 +1,8 @@
 <nb-card class="trade">
-  <nb-card-header>Trade</nb-card-header>
+  <nb-card-header>Trade
+    <a class="pointer green-text withdraw-text" 
+      (click)="openDialog(WithdrawModel)">withdraw</a>
+  </nb-card-header>
   <nb-card-body>
       <div class="available-items">
     <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
@@ -9,7 +12,7 @@
       <li class="pointer tab-link" data-tab="tab-2">
         <a data-toggle="pill">SELL {{tradeByu.from | uppercase}}</a>
       </li>
-    </ul>
+    </ul>    
 
     <div id="tab-1" class="tab-content active">
       <form (ngSubmit)="submitTradeBuy()">
@@ -38,6 +41,8 @@
             <span class="form-control-feedback">{{tradeByu.to | uppercase}}</span>
           </div>
         </div>
+        <a class="pointer green-text deposit-text"
+            (click)="openDialog(depositModel)">Deposit Now</a>
         <div class="text-center">
           <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large" [disabled]="formSubmittingBuy">
             <span *ngIf="!formSubmittingBuy">Place buy order</span>
@@ -74,6 +79,8 @@
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>
           </div>
         </div>
+        <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">Deposit</a>
+
         <div class="text-center">
           <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large" [disabled]="formSubmittingSell">
             <span *ngIf="!formSubmittingSell">Place Sell order</span>
@@ -86,3 +93,74 @@
   </nb-card-body>
 
 </nb-card>
+
+<ng-template #WithdrawModel let-data let-ref="dialogRef">
+  <nb-card  class="changePassword">
+    <nb-card-header>Withdraw
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <div class="form-group select-btn"
+        [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"  ngbDropdown
+        placement="bottom">
+        <button type="button" 
+          ngbDropdownToggle 
+          class="btn btn-primary dropdownbtn"
+          [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                        'btn-primary': currentTheme !== 'default',
+                        'btn-sm': breakpoint.width <= breakpoints.is}">
+          {{ selectedCrypto }}
+        </button>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li class="dropdown-item" class="dropdown-item {{selectedCrypto === issue ? 'active' : ''}}" *ngFor="let cryto of availableWallets" (click)="changeCrypto(cryto)">
+            {{cryto.name}}
+          </li>
+        </ul>
+      </div>
+
+      <input type="number" [(ngModel)]="withdrawAmount" placeholder="Enter amount" nbInput/>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="submitWithdrawDialog(ref)"
+        [disabled]="submitWithdrawDisable">
+        {{"common.submit" | translate}}
+      </button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelDialog(ref)">{{"common.cancel" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #depositModel let-data let-ref="dialogRef">
+  <nb-card  class="changePassword">
+    <nb-card-header>
+      Deposit
+      <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <div class="form-group select-btn"
+        [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"  ngbDropdown
+        placement="bottom">
+        <button type="button" 
+          ngbDropdownToggle 
+          class="btn btn-primary dropdownbtn"
+          [ngClass]="{'btn-outline-success': currentTheme === 'default',
+                        'btn-primary': currentTheme !== 'default',
+                        'btn-sm': breakpoint.width <= breakpoints.is}">
+          {{ selectedCrypto }}
+        </button>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li class="dropdown-item" class="dropdown-item {{selectedCrypto === issue ? 'active' : ''}}" *ngFor="let cryto of availableWallets" 
+            (click)="changeCrypto(cryto)">
+            {{cryto.name}}
+          </li>
+        </ul>
+      </div>
+      <input type="number" [(ngModel)]="depositAmount" placeholder="Enter amount" nbInput/>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton class="submit-btn" size="small" (click)="submitDepositDialog(ref)"
+        [disabled]="submitDepositDisable">{{"common.submit" | translate}}</button>
+      <button nbButton class="cancel-btn" size="small" (click)="cancelDialog(ref)">{{"common.cancel" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

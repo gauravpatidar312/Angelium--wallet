@@ -6,6 +6,7 @@
     font-family: nb-theme(font-bebas);
     font-size: 1.75rem;
   }
+
   nb-card-body { overflow: visible; }
 }
 /* Hide HTML5 Up and Down arrows. */
@@ -18,7 +19,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 nb-card-body{
-  padding: 0px 20px !important;
+  padding: 0px 12px !important;
 }
 
 .minheight{ min-height: 250px; }
@@ -114,7 +115,7 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
 .available-items{
   min-height:auto!important;
   width: 100%;
-  max-height: 368px!important;
+  max-height: 400px!important;
   // overflow-x: hidden;
   overflow-y: hidden!important;
   overflow-x:hidden;
@@ -125,3 +126,63 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
 }
 
 /deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
+/deep/ .withdraw-text{
+  float: right;
+  font-size: 0.8em;
+  text-transform: lowercase !important;
+}
+/deep/ .withdraw-text { text-decoration: underline !important; }
+
+.deposit-text{
+  margin-top: -4px;
+  float: right;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: underline !important;
+}
+
+@media (max-width: 375px) {
+  .changePassword {
+    width: 250px !important;
+  }
+}
+.image-scoll-card-body {
+  max-height: calc(100vh - 190px);
+  overflow-y: auto;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.nb-icon-left {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.nb-icon-left:hover {
+  color: #00d977;
+  cursor: pointer;
+}
+.submit-btn {
+  float: right;
+  background-color: #00d977 !important;
+}
+
+.cancel-btn {
+  float: left;
+  background-color: #db305b !important;
+  margin-right: 5px;
+}
+/deep/ .dropdown-menu.show {
+  background-color: #100b48 !important;
+  border: 2px solid #7659ff !important;
+}
+/deep/ .dropdown-menu.show .dropdown-item {
+  text-transform: capitalize;
+}
+.select-btn {
+  margin-top: 1.40rem;
+  margin-bottom: 1.40rem;
+}

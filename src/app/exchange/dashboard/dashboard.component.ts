@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
 
   
   ngOnInit() {
+    
     this.shareDataService.currentPair.subscribe((data?:any)=> {
       if (data) {
         this.currentPair = data;
