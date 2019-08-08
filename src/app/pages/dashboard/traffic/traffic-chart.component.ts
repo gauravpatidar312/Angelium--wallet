@@ -85,7 +85,7 @@ export class TrafficChartComponent implements AfterViewInit, OnChanges, OnDestro
               show: false,
             },
             splitLine: {
-              show: true,
+              show: false,
               lineStyle: {
                 color: trafficTheme.colorBlack,
                 opacity: 0.06,
@@ -100,12 +100,12 @@ export class TrafficChartComponent implements AfterViewInit, OnChanges, OnDestro
             textStyle: {
               color: trafficTheme.tooltipTextColor,
               fontWeight: trafficTheme.tooltipFontWeight,
-              fontSize: 12,
+              fontSize: trafficTheme.tooltipFontSize,
             },
             position: 'top',
             backgroundColor: trafficTheme.tooltipBg,
             borderColor: trafficTheme.tooltipBorderColor,
-            borderWidth: 3,
+            borderWidth: trafficTheme.tooltipBorderWidth,
             formatter: '{c0}',
             extraCssText: trafficTheme.tooltipExtraCss,
           },
@@ -113,50 +113,18 @@ export class TrafficChartComponent implements AfterViewInit, OnChanges, OnDestro
             {
               type: 'line',
               symbol: 'circle',
-              symbolSize: 8,
               sampling: 'average',
-              silent: true,
               itemStyle: {
                 normal: {
-                  color: trafficTheme.shadowLineDarkBg,
+                  opacity: 0,
                 },
                 emphasis: {
-                  color: 'rgba(0,0,0,0)',
-                  borderColor: 'rgba(0,0,0,0)',
-                  borderWidth: 0,
+                  opacity: 0,
                 },
               },
               lineStyle: {
                 normal: {
-                  width: 2,
-                  color: trafficTheme.shadowLineDarkBg,
-                },
-              },
-              data: this.points,
-            },
-            {
-              type: 'line',
-              symbol: 'circle',
-              symbolSize: 6,
-              sampling: 'average',
-              itemStyle: {
-                normal: {
-                  color: trafficTheme.itemColor,
-                  borderColor: trafficTheme.itemBorderColor,
-                  borderWidth: 2,
-                },
-                emphasis: {
-                  color: 'white',
-                  borderColor: trafficTheme.itemEmphasisBorderColor,
-                  borderWidth: 2,
-                },
-              },
-              lineStyle: {
-                normal: {
-                  width: 2,
-                  color: trafficTheme.lineBg,
-                  shadowColor: trafficTheme.lineBg,
-                  shadowBlur: trafficTheme.lineShadowBlur,
+                  width: 0,
                 },
               },
               areaStyle: {
