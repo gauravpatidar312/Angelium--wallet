@@ -586,6 +586,12 @@
     }
   }
 
+  @media (min-width: 2500px) {
+    /deep/ ng2-smart-table table tr th:last-child, /deep/ ng2-smart-table table tr td:last-child {
+      display:none;
+    }
+  }
+
   /* headers grid color*/
   /deep/ ng2-smart-table-title > a {
     font-family: nb-theme(font-nunito);
