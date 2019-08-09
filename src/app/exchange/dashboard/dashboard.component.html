@@ -49,23 +49,18 @@
           <div class="available-items">
             <table class="table table-condensed">
               <tbody>
-                <tr *ngFor="let buy of tradeBuy">
-                  <td width="13%" class="text-left">{{buy.timestamp | date:'MM-yy hh:mm'}}</td>
-                  <td width="10%" class="text-center">{{buy.pair}}</td>
-                  <td width="8%" class="text-center"><span class="green-text">BUY</span></td>
-                  <td width="9%" class="text-right">{{buy.price}}</td>
-                  <td width="20%" class="text-right">{{buy.amount}}</td>
-                  <td width="20%" class="text-right">{{buy.price * buy.amount}}</td>
-                  <td width="20%" class="text-right">{{buy.filled}}%</td>
-                </tr>
-                <tr *ngFor="let sell of tradeSell">
-                  <td width="13%" class="text-left">{{sell.timestamp | date:'MM-yy hh:mm'}}</td>
-                  <td width="10%" class="text-center">{{sell.pair}}</td>
-                  <td width="8%" class="text-center"><span class="pink-text">SELL</span></td>
-                  <td width="9%" class="text-right">{{sell.price | number: '1.0-2'}}</td>
-                  <td width="20%" class="text-right">{{sell.amount | number: '1.0-2'}}</td>
-                  <td width="20%" class="text-right">{{sell.price * sell.amount | number: '1.0-2'}}</td>
-                  <td width="20%" class="text-right">{{sell.filled | number: '1.0-2'}}%</td>
+                <tr *ngFor="let order of openOrderBuySell">
+                  <td width="13%" class="text-left">{{order.timestamp | date:'MM-yy hh:mm'}}</td>
+                  <td width="10%" class="text-center">{{order.pair }}</td>
+                  <td width="8%" class="text-center">
+                    <span class="{{order.buy ? 'green-text' : 'pink-text' }}">
+                      {{order.buy ? 'Buy' : 'Sell' }}
+                    </span>
+                  </td>
+                  <td width="9%" class="text-right">{{order.price | number: '1.0-2'}}</td>
+                  <td width="20%" class="text-right">{{order.amount | number: '1.0-2'}}</td>
+                  <td width="20%" class="text-right">{{order.price * order.amount | number: '1.0-2'}}</td>
+                  <td width="20%" class="text-right">{{order.filled | number: '1.0-2'}}%</td>
                 </tr>
               </tbody>
             </table>

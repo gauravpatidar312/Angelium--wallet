@@ -127,11 +127,13 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
 
 /deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
 /deep/ .withdraw-text{
-  float: right;
-  font-size: 0.8em;
-  text-transform: lowercase !important;
+  margin-top: -4px;
+  float: left;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: underline !important;
 }
-/deep/ .withdraw-text { text-decoration: underline !important; }
 
 .deposit-text{
   margin-top: -4px;

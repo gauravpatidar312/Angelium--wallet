@@ -3,7 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
-
+import * as _ from 'lodash';
 declare let jQuery: any;
 declare const TradingView: any;
 
@@ -13,9 +13,8 @@ declare const TradingView: any;
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  tradeBuy = [];
-  tradeSell = [];
-  myTradeHistory = [];
+  myTradeHistory:any = [];
+  openOrderBuySell:any = [];
   tradeTab1:boolean = false;
   tradeTab2:boolean = false;
   fatchTradeData:boolean = false;
@@ -29,7 +28,6 @@ export class DashboardComponent implements OnInit {
 
   
   ngOnInit() {
-    
     this.shareDataService.currentPair.subscribe((data?:any)=> {
       if (data) {
         this.currentPair = data;
@@ -56,9 +54,8 @@ export class DashboardComponent implements OnInit {
       if (res.status) {
         this.fatchTradeData = false;
         this.tradeTab1 = true;
-        this.tradeBuy = res.data.buy;
-        this.tradeSell = res.data.sell;
-        if (this.tradeBuy.length == 0 && this.tradeSell.length == 0) 
+        this.openOrderBuySell = _.concat(res.data.buy, res.data.sell);
+        if (res.data.buy == 0 && res.data.sell == 0) 
           this.noDataOpenTrade = true;
         else
           this.noDataOpenTrade = false; 
@@ -86,7 +83,7 @@ export class DashboardComponent implements OnInit {
           this.noDataTradeHistory = false;
       }
     }, (err)=>{
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My trade error');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My trade history error');
     });
   }
 

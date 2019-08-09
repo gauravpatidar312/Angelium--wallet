@@ -1,8 +1,5 @@
 <nb-card class="trade">
-  <nb-card-header>Trade
-    <a class="pointer green-text withdraw-text" 
-      (click)="openDialog(WithdrawModel)">withdraw</a>
-  </nb-card-header>
+  <nb-card-header>Trade</nb-card-header>
   <nb-card-body>
       <div class="available-items">
     <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
@@ -41,8 +38,10 @@
             <span class="form-control-feedback">{{tradeByu.to | uppercase}}</span>
           </div>
         </div>
-        <a class="pointer green-text deposit-text"
-            (click)="openDialog(depositModel)">Deposit Now</a>
+        <span>
+          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">Withdraw</a>
+          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">Deposit Now</a>
+        </span>
         <div class="text-center">
           <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large" [disabled]="formSubmittingBuy">
             <span *ngIf="!formSubmittingBuy">Place buy order</span>
@@ -79,8 +78,14 @@
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>
           </div>
         </div>
-        <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">Deposit</a>
-
+        <span>
+          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">
+            Withdraw
+          </a>
+          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">
+            Deposit Now
+          </a>
+        </span>
         <div class="text-center">
           <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large" [disabled]="formSubmittingSell">
             <span *ngIf="!formSubmittingSell">Place Sell order</span>

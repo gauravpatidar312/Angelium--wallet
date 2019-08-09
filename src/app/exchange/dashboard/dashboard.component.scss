@@ -6,6 +6,7 @@
       font-family: nb-theme(font-bebas);
       font-size: 1.75rem;
     }
+    nb-card-body { overflow: visible; }
 }
 
 /deep/ .exchange {
@@ -52,9 +53,7 @@
 }
 
 
-nb-card-body {
-  padding: 10px 30px
-  }
+nb-card-body { padding: 10px 30px }
 /deep/ .headsection{
   border-bottom: 0px!important;
   padding-bottom: 0px!important;
@@ -123,15 +122,14 @@ table tbody tr:nth-of-type(even) {
 /deep/ .light-blue-text{ color: #575bc7!important; }
 
 .available-items{
-  min-height:auto!important;
-  max-height:90px !important;
+  min-height:auto !important;
+  max-height:95px !important;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto!important;
+  overflow-y: auto !important;
 }
-.available{
-  overflow-x:hidden !important;
-}
+
+.available{ overflow-x:hidden !important; }
 
 /deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
 
