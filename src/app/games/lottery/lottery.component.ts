@@ -250,7 +250,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
     this.formSubmitting = true;
     this.httpService.post(placeLotteryData, 'game/place-lottery-bet/').subscribe((res?: any) => {
-      if (res.data) {
+      if (res.status) {
         this.formSubmitting = false;
         this.getBetList();
         this.getWinnerList(this.currentLotteryData.lottery_id);
