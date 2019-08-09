@@ -21,6 +21,12 @@
         <div class="time-div" *ngIf="lotteryDate">
           {{lotteryDate}}
         </div>
+        <div class="text-center finishText" *ngIf="currentLotteryData?.status === 'past' && !winnerData?.length">
+          {{"games.lottery.toastr.winnerNotAnnouncedText" | translate}}
+        </div>
+        <div class="text-center finishText" *ngIf=" currentLotteryData?.status === 'past' && winnerData?.length">
+          {{"games.lottery.toastr.winnerAnnouncedText" | translate}}
+        </div>
       </div>
     </div>
   </div>
@@ -44,15 +50,16 @@
                   </label>
                   <span class="float-right" *ngIf="selectWallet">{{(selectWallet?.wallet_amount | number : '1.0-6') + ' ' + (selectWallet?.wallet_type)}}</span>
                   <div class="status-dd-week mb-1 dropdown" ngbDropdown>
-                    <button type="button" ngbDropdownToggle
+                    <button type="button" ngbDropdownToggle [disabled]="currentLotteryData?.status !== 'running'"
                             class="font-avenir btn-primary dropDown-padding btn b-color-wallet">
                       {{walletType}}
                     </button>
                     <ul class="dropdown-menu" ngbDropdownMenu>
-                      <li class="dropdown-item pointer " (click)="onChangeWallet(wallet.wallet_type)"
-                          *ngFor="let wallet of myWallets">
-                        {{ wallet.wallet_type }}
-                      </li>
+                      <ng-container *ngFor="let wallet of myWallets">
+                        <li class="dropdown-item pointer" (click)="onChangeWallet(wallet.wallet_type)" *ngIf="walletType != wallet.wallet_type">
+                          {{ wallet.wallet_type }}
+                        </li>
+                      </ng-container>
                     </ul>
                   </div>
                 </div>
@@ -64,7 +71,7 @@
                   </label>
                   <div class="input-group">
                     <input type="number" onkeydown="if(event.key==='.'){event.preventDefault();}" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
-                           [(ngModel)]="placeLottery.bet_number" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type"
+                           [(ngModel)]="placeLottery.bet_number" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type || currentLotteryData?.status !== 'running'"
                            min="1" step="1" class="form-control input-padding"/>
                     <span class="transfer-amount mr-2"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                     <span class="transfer-amount mr-2" *ngIf="!fetchingAmount">{{ totalBetAmount | number : '1.0-8'}}</span>
@@ -75,13 +82,13 @@
             <div class="col-12 p-0">
               <div class="form-group font-nunitoSans">
                 <label class="label-color"> {{"games.lottery.challengeComment" | translate}} </label>
-                <input type="text" [(ngModel)]="placeLottery.comment" class="form-control input-padding"/>
+                <input type="text" [disabled]="currentLotteryData?.status !== 'running'" [(ngModel)]="placeLottery.comment" class="form-control input-padding"/>
               </div>
             </div>
             <div class="col-12 p-0">
               <div class="form-group font-nunitoSans">
                 <label class="label-color"> {{"games.lottery.winningComment" | translate}} </label>
-                <input type="text" [(ngModel)]="placeLottery.winning_comment" class="form-control input-padding"/>
+                <input type="text" [disabled]="currentLotteryData?.status !== 'running'" [(ngModel)]="placeLottery.winning_comment" class="form-control input-padding"/>
               </div>
             </div>
             <div class="col-12 p-0">
@@ -109,8 +116,11 @@
               <div class="col-6 fix-width padding-remove-xs challenger-header">
                 {{"games.lottery.challenger" | translate}}
               </div>
-              <div class="col-6 padding-left-remove fix-width padding-remove-xs" *ngIf="false">
-                <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
+              <div class="col-6 padding-left-remove fix-width padding-remove-xs">
+                 <span title="Refresh" class="pull-right pointer" (click)="onRefreshButton()">
+                  <i class="fa fa-redo label-color mt-2"></i>
+                </span>
+                <ul id="heavenHistory-navigation" *ngIf="false" class="nav navbar-pill downLine">
                   <li class="pointer active li-margin">
                     <a data-toggle="pill" (click)="isComment=true">{{"games.lottery.comment" | translate}} </a>
                   </li>
@@ -125,7 +135,7 @@
               <nb-list-item *ngIf="fetchingBetList">
                 <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
               </nb-list-item>
-              <nb-list-item [ngClass]="{ 'p-0': !betNotAvailable }" *ngIf="!(betData && fetchingBetList)">
+              <nb-list-item [ngClass]="{ 'p-0': !betNotAvailable }" *ngIf="!(betData?.length && fetchingBetList)">
                 <span>{{betNotAvailable}}</span>
               </nb-list-item>
               <nb-list-item [hidden]="betData && fetchingBetList" *ngFor="let user of betData">
@@ -168,7 +178,11 @@
                       {{selectedLottery?.name}} &nbsp;
                     </button>
                     <ul class="dropdown-menu" ngbDropdownMenu>
-                      <li class="dropdown-item pointer" *ngFor="let lottery of lotteryData" (click)="onChangeLottery(lottery)">{{ lottery?.name }}</li>
+                      <ng-container *ngFor="let lottery of lotteryData">
+                        <li class="dropdown-item pointer" (click)="onChangeLottery(lottery)" *ngIf="selectedLottery?.name != lottery?.name">
+                          {{ lottery?.name }}
+                        </li>
+                      </ng-container>
                     </ul>
                   </div>
                 </div>
@@ -176,13 +190,12 @@
             </div>
           </nb-card-header>
           <nb-card-body>
-            <div class="col-md-12" *ngIf="!winnerData">{{winnerTextMessage}}</div>
             <nb-list id="winnerList">
               <nb-list-item class="spinner-width" [hidden]="!fetchingWinner">
                 <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
               </nb-list-item>
-              <nb-list-item *ngIf="fetchingWinner && !winnerData">
-                <span>{{winnerTextMessage}}</span>
+              <nb-list-item *ngIf="!winnerData?.length" [ngClass]="{'currentWinnerMessage': currentLotteryData?.lottery_id === selectedLottery?.lottery_id}">
+                <span>{{noWinnerListText}}</span>
               </nb-list-item>
               <nb-list-item [hidden]="fetchingWinner && winnerData" *ngFor="let winnerUser of winnerData">
                 <div class="user-container">

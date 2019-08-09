@@ -39,7 +39,7 @@ declare let jQuery: any;
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
 
-      <nb-layout-footer class="bottom-menu" *ngIf="userInfo?.user_type === 'owner'">
+      <nb-layout-footer class="bottom-menu" *ngIf="userInfo?.user_type === 'owner' || userInfo?.user_type === 'company'">
         <ul id="main-navigation"  class="nav navbar-pill headerLine">
           
           <li class="pointer" routerLinkActive="active" 

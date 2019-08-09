@@ -10,7 +10,9 @@
                 {{graph_type}} &nbsp;
               </button>
               <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item pointer" *ngFor="let graph_type of graph_types" (click)="changeGraph(graph_type)">{{ graph_type }}</li>
+                <ng-container *ngFor="let graphType of graph_types">
+                  <li class="dropdown-item pointer" *ngIf="graphType != graph_type" (click)="changeGraph(graphType)">{{ graphType }}</li>
+                </ng-container>
               </ul>
             </div>
           </div>
