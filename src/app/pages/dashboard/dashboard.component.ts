@@ -136,31 +136,35 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       this.gainCard.total_profit_anx = data.total_profit_anx;
       this.fetchingAssetValue = false;
       this.cryptoBalance = _.sortBy(_.filter(data.cryptos, (item) => {
-        if (item.name === 'ANX')
+        item.title = item.name;
+        if (item.name === 'ANX') {
           item.order = 1;
-        else if (item.name === 'HEAVEN')
+        } else if (item.name === 'HEAVEN') {
           item.order = 2;
-        else if (item.name === 'BTC')
+        } else if (item.name === 'BTC') {
           item.order = 3;
-        else if (item.name === 'ETH')
+        } else if (item.name === 'ETH') {
           item.order = 4;
-        else if (item.name === 'ANL')
+        } else if (item.name === 'ANL') {
           item.order = 5;
-        else if (item.name === 'XP')
+        } else if (item.name === 'XP') {
           item.order = 6;
-        else if (item.name === 'USDT')
+        } else if (item.name === 'USDT') {
           item.order = 7;
-        else if (item.name === 'ANLP')
+          item.title = 'USDT (OMNI)';
+        } else if (item.name === 'ANLP') {
           item.order = 8;
-        else if (item.name === 'ERCUSDT')
+        } else if (item.name === 'ERCUSDT') {
           item.order = 9;
+          item.title = 'USDT (ERC20)';
+        }
 
         let enabled = true;
         if (this.isProduction) {
           if (['XP', 'ANLP'].indexOf(item.name) >= 0)
             enabled = false;
           /*else if (item.name === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1)
-            enabled = false;*/
+           enabled = false;*/
         }
         return enabled;
       }), 'order');
