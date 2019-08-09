@@ -97,7 +97,7 @@
                 <ul class="dropdown-menu" ngbDropdownMenu>
                   <li class="dropdown-item" *ngFor="let wallet of myWallets"
                     (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
-                    {{ wallet.wallet_type }}
+                    {{ wallet.title }}
                   </li>
                 </ul>
               </div>
@@ -129,7 +129,7 @@
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
               title="Click to use whole amount">
               {{maxAmount + ' ' + (wallet?.wallet_type) + ' / max' }}
-              </span>          
+              </span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">

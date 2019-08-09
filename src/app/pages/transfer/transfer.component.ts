@@ -197,8 +197,17 @@ export class TransferComponent implements OnInit {
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = _.sortBy(res, ['wallet_type']);
-      this.sendWallets =  _.filter(this.myWallets, (wallet?: any) => {
+      const walletData = _.filter(res, (wallet?: any) => {
+        wallet.title = wallet.wallet_type;
+        if (wallet.wallet_type === 'USDT')
+          wallet.title = 'USDT (OMNI)';
+        else if (wallet.wallet_type === 'ERCUSDT')
+          wallet.title = 'USDT (ERC20)';
+        return wallet.wallet_type !== 'ANX';
+      });
+      this.myWallets = _.sortBy(walletData, ['title']);
+
+      this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
           return wallet.wallet_type !== 'ERCUSDT';
         }) || [];
       this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
@@ -206,7 +215,7 @@ export class TransferComponent implements OnInit {
       if (!this.myWallets) {
         this.sendType = 'SELECT';
         this.receiveType = 'SELECT';
-        this.toType =  'SELECT';
+        this.toType = 'SELECT';
       } else if (this.shareDataService.transferTab) {
         this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
         this.shareDataService.transferTab = null;
@@ -396,7 +405,8 @@ export class TransferComponent implements OnInit {
 
   onChangeWallet(walletType: string, typeValue): void {
     if (typeValue === 'send') {
-      this.sendType = walletType;
+      const walletObject: any = _.find(this.myWallets, ['wallet_type', walletType]) || {};
+      this.sendType = walletObject.title;
       if (this.sendType  !== 'SELECT') {
         this.sendWallet = this.myWallets.find(item => {
           return item.wallet_type === walletType;
@@ -416,7 +426,8 @@ export class TransferComponent implements OnInit {
         this.setAmount(walletType);
       }
     } else if (typeValue === 'receive') {
-      this.receiveType = walletType;
+      const walletObject: any = _.find(this.myWallets, ['wallet_type', walletType]) || {};
+      this.receiveType = walletObject.title;
       this.receiveWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
       });
@@ -509,7 +520,15 @@ export class TransferComponent implements OnInit {
         this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
         this.translate.instant('pages.transfer.send'));
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
-          this.myWallets = _.sortBy(data, ['wallet_type']);
+          const walletData = _.filter(data, (wallet?: any) => {
+            wallet.title = wallet.wallet_type;
+            if (wallet.wallet_type === 'USDT')
+              wallet.title = 'USDT (OMNI)';
+            else if (wallet.wallet_type === 'ERCUSDT')
+              wallet.title = 'USDT (ERC20)';
+            return wallet.wallet_type !== 'ANX';
+          });
+          this.myWallets = _.sortBy(walletData, ['title']);
           this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
               return wallet.wallet_type !== 'ERCUSDT';
             }) || [];

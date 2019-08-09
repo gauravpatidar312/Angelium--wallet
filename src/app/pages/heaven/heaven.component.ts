@@ -296,11 +296,12 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     else if (typeValue === 'heavenDrop')
       this.heavenDropType = period;
     else if (typeValue === 'createHeaven') {
-      this.walletType = period;
-      this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
+      const walletObject: any = _.find(this.myWallets, ['wallet_type', period]);
+      this.walletType = walletObject.title;
+      this.wallet = _.find(this.myWallets, ['wallet_type', period]) || {};
       this.maxAmount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
       this.heaven_amount = this.wallet.wallet_amount;
-      this.setAmount(this.walletType);
+      this.setAmount(period);
     }
     this.periodChange.emit(period);
   }
@@ -440,7 +441,14 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = _.sortBy(res, ['wallet_type']);
+      this.myWallets = _.sortBy(_.map(res, (item) => {
+        item.title = item.wallet_type;
+        if (item.wallet_type === 'USDT')
+          item.title = 'USDT (OMNI)';
+        else if (item.wallet_type === 'ERCUSDT')
+          item.title = 'USDT (ERC20)';
+        return item;
+      }), 'title');
       /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
         this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
             return wallet.wallet_type !== 'USDT';

@@ -83,11 +83,14 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       });
       const walletData = _.map(cryptosData, function (obj?: any) {
         const item: any = {};
+        item.title = obj.name;
         item.wallet_type = obj.name;
         item.wallet_amount = obj.quantity;
+        if (item.wallet_type === 'USDT')
+            item.title = 'USDT (OMNI)';
         return item;
       });
-      this.myWallets = _.sortBy(walletData, ['wallet_type']);
+      this.myWallets = _.sortBy(walletData, ['title']);
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -196,7 +199,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   onChangeWallet(walletType: string): void {
-    this.walletType = walletType;
+    const walletObject: any = _.find(this.myWallets, ['wallet_type', walletType]);
+    this.walletType = walletObject.title;
     if (this.walletType !== 'SELECT') {
       this.selectWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;

@@ -57,7 +57,7 @@
                     <ul class="dropdown-menu" ngbDropdownMenu>
                       <ng-container *ngFor="let wallet of myWallets">
                         <li class="dropdown-item pointer" (click)="onChangeWallet(wallet.wallet_type)" *ngIf="walletType != wallet.wallet_type">
-                          {{ wallet.wallet_type }}
+                          {{ wallet.title }}
                         </li>
                       </ng-container>
                     </ul>
