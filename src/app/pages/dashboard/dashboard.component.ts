@@ -157,7 +157,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
 
         let enabled = true;
         if (this.isProduction) {
-          if (['XP', 'ANLP'].indexOf(item.name) >= 0)
+          if (['ANLP'].indexOf(item.name) >= 0)
             enabled = false;
           /*else if (item.name === 'USDT' && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1)
             enabled = false;*/
