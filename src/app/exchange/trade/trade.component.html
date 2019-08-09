@@ -1,13 +1,13 @@
 <nb-card class="trade">
-  <nb-card-header>Trade</nb-card-header>
+  <nb-card-header>{{"common.trade" | translate}}</nb-card-header>
   <nb-card-body>
       <div class="available-items">
     <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
       <li class="pointer active tab-link" data-tab="tab-1"> 
-        <a data-toggle="pill">BUY {{tradeByu.from | uppercase}}</a>
+        <a data-toggle="pill">{{"pages.exchange.buy" | translate | uppercase}} {{tradeByu.from | uppercase}}</a>
       </li>
       <li class="pointer tab-link" data-tab="tab-2">
-        <a data-toggle="pill">SELL {{tradeByu.from | uppercase}}</a>
+        <a data-toggle="pill">{{"pages.exchange.sell" | translate | uppercase}} {{tradeByu.from | uppercase}}</a>
       </li>
     </ul>    
 
@@ -15,7 +15,7 @@
       <form (ngSubmit)="submitTradeBuy()">
         <div class="form-group">
           <div class="form-group has-feedback">
-            <label class="text-success">Price</label>
+            <label class="text-success">{{"pages.exchange.price" | translate}}</label>
             <label class="label-right">$ 5.1</label>
             <input type="number" class="form-control" name="price" [(ngModel)]="tradeByu.price">
             <span class="form-control-feedback">{{tradeByu.to | uppercase}}</span>
@@ -23,15 +23,15 @@
         </div>
         <div class="form-group">
           <div class="form-group has-feedback">
-            <label class="text-success">Amount</label>
-            <label class="label-max">MAX</label>
+            <label class="text-success">{{"common.amount" | translate}}</label>
+            <label class="label-max">{{"pages.exchange.max" | translate | uppercase}}</label>
             <input type="number" class="form-control" name="amount" [(ngModel)]="tradeByu.amount">
             <span class="form-control-feedback">{{tradeByu.from | uppercase}}</span>
           </div>
         </div>
         <div class="form-group">
           <div class="form-group has-feedback">
-            <label class="text-success">Total</label>
+            <label class="text-success">{{"common.total" | translate}}</label>
             <label class="label-right">$ 5.1</label>
             <input type="text" class="form-control" name="btc" 
               [value]="tradeByu.price * tradeByu.amount" disabled>
@@ -39,12 +39,12 @@
           </div>
         </div>
         <span>
-          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">Withdraw</a>
-          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">Deposit Now</a>
+          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate}}</a>
+          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.depositNow" | translate}}</a>
         </span>
         <div class="text-center">
           <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large" [disabled]="formSubmittingBuy">
-            <span *ngIf="!formSubmittingBuy">Place buy order</span>
+            <span *ngIf="!formSubmittingBuy">{{"pages.exchange.placeBuyOrder" | translate}}</span>
             <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingBuy"></i>
           </button>
         </div>
@@ -55,7 +55,7 @@
       <form (ngSubmit)="submitTradeSell()">
         <div class="form-group">
           <div class="form-group has-feedback">
-            <label class="text-success">Price</label>
+            <label class="text-success">{{"pages.exchange.price" | translate}}</label>
             <label class="label-right">$ 5.1</label>
             <input type="number" class="form-control" name="price" [(ngModel)]="tradeSell.price">
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>
@@ -63,15 +63,15 @@
         </div>
         <div class="form-group">
           <div class="form-group has-feedback">
-            <label class="text-success">Amount</label>
-            <label class="label-max">MAX</label>
+            <label class="text-success">{{"common.amount" | translate}}</label>
+            <label class="label-max">{{"pages.exchange.max" | translate | uppercase}}</label>
             <input type="number" class="form-control" name="amount" [(ngModel)]="tradeSell.amount">
             <span class="form-control-feedback">{{tradeSell.from | uppercase}}</span>
           </div>
         </div>
         <div class="form-group">
           <div class="form-group has-feedback">
-            <label class="text-success">Total</label>
+            <label class="text-success">{{"common.total" | translate}}</label>
             <label class="label-right">$ 5.1</label>
             <input type="text" class="form-control" name="total" 
               [value]="tradeSell.price * tradeSell.amount" disabled>
@@ -80,15 +80,15 @@
         </div>
         <span>
           <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">
-            Withdraw
+              {{"pages.exchange.withdraw" | translate}}
           </a>
           <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">
-            Deposit Now
+              {{"pages.exchange.depositNow" | translate}}
           </a>
         </span>
         <div class="text-center">
           <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large" [disabled]="formSubmittingSell">
-            <span *ngIf="!formSubmittingSell">Place Sell order</span>
+            <span *ngIf="!formSubmittingSell">{{"pages.exchange.placeSellOrder" | translate}}</span>
             <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingSell"></i>
           </button>
         </div>
@@ -101,7 +101,7 @@
 
 <ng-template #WithdrawModel let-data let-ref="dialogRef">
   <nb-card  class="changePassword">
-    <nb-card-header>Withdraw
+    <nb-card-header>{{"pages.exchange.withdraw" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
@@ -117,13 +117,14 @@
           {{ selectedCrypto }}
         </button>
         <ul class="dropdown-menu" ngbDropdownMenu>
-          <li class="dropdown-item" class="dropdown-item {{selectedCrypto === issue ? 'active' : ''}}" *ngFor="let cryto of availableWallets" (click)="changeCrypto(cryto)">
+          <li class="dropdown-item" class="dropdown-item {{selectedCrypto === cryto.name ? 'active' : ''}}" *ngFor="let cryto of availableWallets" (click)="changeCrypto(cryto)">
             {{cryto.name}}
           </li>
         </ul>
       </div>
-
-      <input type="number" [(ngModel)]="withdrawAmount" placeholder="Enter amount" nbInput/>
+      <div class="form-group">
+        <input type="number" [(ngModel)]="withdrawAmount" placeholder="{{'pages.heaven.enterAmount' | translate}}" nbInput/>
+      </div>
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="submit-btn" size="small" (click)="submitWithdrawDialog(ref)"
@@ -138,7 +139,7 @@
 <ng-template #depositModel let-data let-ref="dialogRef">
   <nb-card  class="changePassword">
     <nb-card-header>
-      Deposit
+        {{"pages.exchange.deposit" | translate}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
     </nb-card-header>
     <nb-card-body class="image-scoll-card-body">
@@ -154,17 +155,19 @@
           {{ selectedCrypto }}
         </button>
         <ul class="dropdown-menu" ngbDropdownMenu>
-          <li class="dropdown-item" class="dropdown-item {{selectedCrypto === issue ? 'active' : ''}}" *ngFor="let cryto of availableWallets" 
+          <li class="dropdown-item" class="dropdown-item {{selectedCrypto === cryto.name ? 'active' : ''}}" *ngFor="let cryto of availableWallets" 
             (click)="changeCrypto(cryto)">
             {{cryto.name}}
           </li>
         </ul>
       </div>
-      <input type="number" [(ngModel)]="depositAmount" placeholder="Enter amount" nbInput/>
+      <div class="form-group">
+        <input type="number" [(ngModel)]="depositAmount" placeholder="{{'pages.heaven.enterAmount' | translate}}" nbInput/>
+      </div>
     </nb-card-body>
     <nb-card-footer>
       <button nbButton class="submit-btn" size="small" (click)="submitDepositDialog(ref)"
-        [disabled]="submitDepositDisable">{{"common.submit" | translate}}</button>
+        [disabled]="submitDepositDisable"><span>{{"common.submit" | translate}}</span></button>
       <button nbButton class="cancel-btn" size="small" (click)="cancelDialog(ref)">{{"common.cancel" | translate}}</button>
     </nb-card-footer>
   </nb-card>

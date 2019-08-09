@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
           this.noDataOpenTrade = false; 
       }
     }, (err)=>{ 
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My open trade error');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenTradeError'));
     });
   }
 
@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit {
           this.noDataTradeHistory = false;
       }
     }, (err)=>{
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), 'My trade history error');
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenTradeError'));
     });
   }
 

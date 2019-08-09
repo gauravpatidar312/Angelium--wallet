@@ -1,10 +1,10 @@
 <nb-card class="tradeHistory">
-  <nb-card-header>Trade History</nb-card-header>
+  <nb-card-header>{{"pages.exchange.tradeHistory" | translate}}</nb-card-header>
   <nb-card-body>
     <span class="fetching-spinner" *ngIf="tradeHistorySpinner">
       <i class="fa fa-spinner spinner-color fa-spin"></i>
     </span>
-    <div *ngIf="noHistory"><span>No trade history available</span></div>
+    <div *ngIf="noHistory"><span>{{"pages.exchange.noTradeHistoryAvailable" | translate}}</span></div>
     <div class="row" *ngIf="tradeData">
       <div class="available-items">
         <table class="trade-histary-table">

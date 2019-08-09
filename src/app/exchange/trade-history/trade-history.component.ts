@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 import { HttpService } from '../../services/http.service';
+import {ToastrService} from '../../services/toastr.service';
 import { ShareDataService } from '../../services/share-data.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class TradeHistoryComponent implements OnInit {
   noHistory:boolean = false;
   
   constructor(private httpService:HttpService,
-              private shareDataService: ShareDataService) {}
+              private shareDataService: ShareDataService,
+              private toastrService: ToastrService,
+              private translate: TranslateService,) {}
 
   ngOnInit() {
     this.shareDataService.currentPair.subscribe((val?:any)=> {
@@ -32,7 +36,7 @@ export class TradeHistoryComponent implements OnInit {
               this.noHistory = true;
             }
           }
-        },err =>{ console.log(err) });   
+        },err =>{ this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeHistoryError')); });   
       }
     });
   }

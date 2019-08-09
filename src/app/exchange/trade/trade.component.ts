@@ -96,7 +96,7 @@ export class TradeComponent implements OnInit {
         this.myWallet = res.data.wallet;
       }
     }, err=>{
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('Error'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.walletError'));
     });
   }
 
@@ -136,22 +136,22 @@ export class TradeComponent implements OnInit {
     if (this.tradeByu.price == 0 || this.tradeByu.amount == 0) return;
     if (this.tradeByu.from == 'anx') {
       if (Number(this.tradeByu.amount) >= Number(this.myWallet.eos.anx.balance)) {
-        this.toastrService.info('Insufficient balance', 'ANX');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.anx');
         return;
       }
     }else if (this.tradeByu.from == 'btc') {
       if (Number(this.tradeByu.amount) >= Number(this.myWallet.btc.btc.balance)) {
-        this.toastrService.info('Insufficient btc balance', 'BTC');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.btc');
         return;
       }
     }else if (this.tradeByu.from == 'eth') {
       if (Number(this.tradeByu.amount) >= Number(this.myWallet.eth.eth.balance)) {
-        this.toastrService.info('Insufficient eth balance', 'ETH');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.eth');
         return;
       }
     }else if (this.tradeByu.from == 'usdt') {
       if (Number(this.tradeByu.amount) >= Number(this.myWallet.btc.usdt.balance)) {
-        this.toastrService.info('Insufficient usdt balance', 'USDT');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.usdt');
         return;
       }
     }
@@ -161,11 +161,11 @@ export class TradeComponent implements OnInit {
       if (res.status) {
         this.tradeByu.price = 0;
         this.tradeByu.amount = 0;
-        this.toastrService.success(this.translate.instant('Trade Buy'), this.translate.instant('Trade buy successfully'));
+        this.toastrService.success(this.translate.instant('pages.exchange.toastr.tradeBuy'), this.translate.instant('pages.exchange.toastr.tradeBuySuccessfully'));
       }
     }, err=>{
       this.formSubmittingBuy = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('Trade buy error'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeBuyError'));
     });
   }
 
@@ -173,22 +173,22 @@ export class TradeComponent implements OnInit {
     if (this.tradeSell.price == 0 || this.tradeSell.amount == 0) return;
     if (this.tradeSell.from == 'anx') {
       if (Number(this.tradeSell.amount) >= Number(this.myWallet.eos.anx.balance)) {
-        this.toastrService.info('Insufficient balance', 'ANX');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.anx');
         return;
       }
     }else if (this.tradeSell.from == 'btc') {
       if (Number(this.tradeSell.amount) >= Number(this.myWallet.btc.btc.balance)) {
-        this.toastrService.info('Insufficient btc balance', 'BTC');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.btc');
         return;
       }
     }else if (this.tradeSell.from == 'eth') {
       if (Number(this.tradeSell.amount) >= Number(this.myWallet.eth.eth.balance)) {
-        this.toastrService.info('Insufficient eth balance', 'ETH');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.eth');
         return;
       }
     }else if (this.tradeSell.from == 'usdt') {
       if (Number(this.tradeSell.amount) >= Number(this.myWallet.btc.usdt.balance)) {
-        this.toastrService.info('Insufficient usdt balance', 'USDT');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.usdt');
         return;
       }
     }
@@ -198,11 +198,11 @@ export class TradeComponent implements OnInit {
       if (res.status) {
         this.tradeSell.price = 0;
         this.tradeSell.amount = 0;
-        this.toastrService.success(this.translate.instant('Trade Sell'), this.translate.instant('Trade sell successfully'));
+        this.toastrService.success(this.translate.instant('pages.exchange.toastr.tradeSell'), this.translate.instant('pages.exchange.toastr.tradeSellSuccessfully'));
       }
     }, err=>{
       this.formSubmittingSell = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('Trade sell error'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeSellError'));
     });
   }
 
@@ -210,22 +210,22 @@ export class TradeComponent implements OnInit {
     if (this.withdrawAmount == 0) return;
     if (this.selectedCrypto.toLowerCase() == 'anx') {
       if (Number(this.withdrawAmount) >= Number(this.seletedCryptoData.quantity)) {
-        this.toastrService.info('Insufficient balance', 'ANX');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.anx');
         return;
       }
     }else if (this.selectedCrypto.toLowerCase() == 'btc') {
       if (Number(this.withdrawAmount) >= Number(this.seletedCryptoData.quantity)) {
-        this.toastrService.info('Insufficient balance', 'BTC');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.btc');
         return;
       }
     }else if (this.selectedCrypto.toLowerCase() == 'eth') {
       if (Number(this.withdrawAmount) >= Number(this.seletedCryptoData.quantity)) {
-        this.toastrService.info('Insufficient balance', 'ETH');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.eth');
         return;
       }
     }else if (this.selectedCrypto.toLowerCase() == 'usdt') {
       if (Number(this.withdrawAmount) >= Number(this.seletedCryptoData.quantity)) {
-        this.toastrService.info('Insufficient balance', 'USDT');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.usdt');
         return;
       }
     }
@@ -236,12 +236,13 @@ export class TradeComponent implements OnInit {
       this.cancelDialog(ref);
       if (res.status) {
         this.withdrawAmount = 0;
-        this.toastrService.success(this.translate.instant('Withdraw'), this.translate.instant('withdraw successfully'));
+        this.toastrService.success(this.translate.instant('pages.exchange.toastr.withdraw'), this.translate.instant('pages.exchange.withdrawSuccessfully'));
       }
     }, err=>{
       this.submitWithdrawDisable  = false;
+      this.withdrawAmount = 0;
       this.cancelDialog(ref);
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('Withdraw error'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.withdrawError'));
     });
   }
 
@@ -249,22 +250,22 @@ export class TradeComponent implements OnInit {
     if (this.depositAmount == 0) return;
     if (this.selectedCrypto.toLowerCase() == 'anx') {
       if (Number(this.depositAmount) >= Number(this.myWallet.eos.anx.balance)) {
-        this.toastrService.info('Insufficient balance', 'ANX');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.anx');
         return;
       }
     }else if (this.selectedCrypto.toLowerCase() == 'btc') {
       if (Number(this.depositAmount) >= Number(this.myWallet.btc.btc.balance)) {
-        this.toastrService.info('Insufficient btc balance', 'BTC');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.btc');
         return;
       }
     }else if (this.selectedCrypto.toLowerCase() == 'eth') {
       if (Number(this.depositAmount) >= Number(this.myWallet.eth.eth.balance)) {
-        this.toastrService.info('Insufficient eth balance', 'ETH');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.eth');
         return;
       }
     }else if (this.selectedCrypto.toLowerCase() == 'usdt') {
       if (Number(this.depositAmount) >= Number(this.myWallet.btc.usdt.balance)) {
-        this.toastrService.info('Insufficient usdt balance', 'USDT');
+        this.toastrService.info('pages.exchange.toastr.InsufficientBalance', 'common.cryptos.usdt');
         return;
       }
     }
@@ -276,13 +277,13 @@ export class TradeComponent implements OnInit {
       this.cancelDialog(ref);
       if (res.status) {
         this.depositAmount = 0;
-        this.toastrService.success(this.translate.instant('Deposit'), this.translate.instant('Deposit successfully'));
+        this.toastrService.success(this.translate.instant('pages.exchange.deposit'), this.translate.instant('pages.exchange.toastr.depositSuccessfully'));
       }
     }, err=>{
       this.submitDepositDisable  = false;
       this.depositAmount = 0;
       this.cancelDialog(ref);
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('Deposit error'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.depositError'));
     });
   }
 

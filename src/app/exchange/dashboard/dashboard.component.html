@@ -18,10 +18,10 @@
       <nb-card-header >
         <ul id="main-navigation" class="nav mytradeLine empty_width">
           <li class="pointer active">
-            <a data-toggle="pill" (click)="getOpenOrder(currentPair.pair)">MY OPEN ORDERS</a>
+            <a data-toggle="pill" (click)="getOpenOrder(currentPair.pair)">{{"pages.exchange.myOpenOrders" | translate}}</a>
           </li>
           <li class="pointer">
-            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair.pair)">MY TRADE HISTORY</a>
+            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair.pair)">{{"pages.exchange.myTradeHistory" | translate}}</a>
           </li>
         </ul>
       </nb-card-header>
@@ -31,18 +31,18 @@
         <span class="fetching-spinner" *ngIf="fatchTradeData">
           <i class="fa fa-spinner spinner-color fa-spin"></i>
         </span>
-        <div *ngIf="noDataOpenTrade"><span>No open order available</span></div>
+        <div *ngIf="noDataOpenTrade"><span>{{ "pages.exchange.noOpenOrderAvailable" | translate}}</span></div>
         <div class="table-responsive" *ngIf="tradeTab1">
           <table class="table table-condensed" *ngIf="!noDataOpenTrade">
             <thead>
               <tr>
-                <th width="13%" class="text-left">Time</th>
-                <th width="10%" class="text-center">Pair</th>
-                <th width="8%" class="text-center">Type</th>
-                <th width="9%" class="text-right">Price</th>
-                <th width="20%" class="text-right">Amount</th>
-                <th width="20%" class="text-right">Total Price</th>
-                <th width="20%" class="text-right">Fill %</th>
+                <th width="13%" class="text-left">{{"pages.exchange.time" | translate}}</th>
+                <th width="10%" class="text-center">{{"pages.exchange.Pair" | translate}}</th>
+                <th width="8%" class="text-center">{{"pages.transfer.type" | translate}}</th>
+                <th width="9%" class="text-right">{{"pages.exchange.price" | translate}}</th>
+                <th width="20%" class="text-right">{{"common.amount" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.fill" | translate}} %</th>
               </tr>
             </thead>
           </table>
@@ -67,18 +67,18 @@
           </div>
         </div>
 
-        <div *ngIf="noDataTradeHistory"><span>No trade history available</span></div>
+        <div *ngIf="noDataTradeHistory"><span>{{ "pages.exchange.noTradeHistoryAvailable" | translate}}</span></div>
         <div class="table-responsive" *ngIf="tradeTab2">
           <table class="table table-condensed" *ngIf="!noDataTradeHistory">
             <thead>
               <tr>
-                <th width="13%" class="text-left">Time</th>
-                <th width="10%" class="text-center">Pair</th>
-                <th width="8%" class="text-center">Type</th>
-                <th width="9%" class="text-right">Price</th>
-                <th width="20%" class="text-right">Amount</th>
-                <th width="20%" class="text-right">Total Price</th>
-                <th width="20%" class="text-right">Fill %</th>
+                <th width="13%" class="text-left">{{"pages.exchange.time" | translate}}</th>
+                <th width="10%" class="text-center">{{"pages.exchange.Pair" | translate}}</th>
+                <th width="8%" class="text-center">{{"pages.transfer.type" | translate}}</th>
+                <th width="9%" class="text-right">{{"pages.exchange.price" | translate}}</th>
+                <th width="20%" class="text-right">{{"common.amount" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.fill" | translate}} %</th>
               </tr>
             </thead>
           </table>
