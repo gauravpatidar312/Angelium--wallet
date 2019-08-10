@@ -1,12 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {interval, Subscription} from 'rxjs';
-import {switchMap, takeWhile} from 'rxjs/operators';
+import {takeWhile} from 'rxjs/operators';
 import {LiveUpdateChart, EarningData} from '../../../../@core/data/earning';
 import {Router} from '@angular/router';
 import {ShareDataService} from '../../../../services/share-data.service';
 import {environment} from 'environments/environment';
 import {HttpService} from '../../../../services/http.service';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-earning-card-front',
@@ -15,20 +15,11 @@ import * as _ from 'lodash';
 })
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;
-
   @Input() currency: any;
   @Input() selectedCurrency: string = 'ANX';
 
   isProduction: any = environment.production;
   trafficChartPoints: number[];
-  intervalSubscription: Subscription;
-  currencyType: any = {
-    'ANX': ['OTC'],
-    'HEAVEN': ['HEAVEN'],
-    'BTC': ['SEND'],
-    'ETH': ['SEND'],
-    'USDT': ['SEND'],
-  };
   currencies: any = {
     'ANX': ['OTC'],
     'HEAVEN': ['HEAVEN'],
@@ -49,8 +40,12 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   ngOnInit() {
     if (!(this.currency.order === 5 || this.currency.order === 6 || this.currency.order === 8 || this.currency.order === 9)) {
       this.httpService.get(`currency-statistic/?currency_type=${this.currency.name}`).subscribe((data?: any) => {
-        const priceData = _.map(data, 'live_price');
-        this.trafficChartPoints = this.currency.order === 3 ? priceData.map(item => ShareDataService.toFixedDown(Number(item), 0)) : priceData.map(item => ShareDataService.toFixedDown(Number(item), 2));
+        this.liveUpdateChartData = _.map(data, (item) => {
+          const itemArray: any = {};
+          itemArray.type = this.currency.name;
+          itemArray.value = [moment(item.created, 'YYYY-MM-DD').format('YYYY/MM/DD'), ShareDataService.toFixedDown(Number(item.live_price), 8)];
+          return itemArray;
+        });
       });
     }
 
@@ -96,23 +91,6 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
       .subscribe((earningLiveUpdateCardData: LiveUpdateChart) => {
         this.earningLiveUpdateCardData = earningLiveUpdateCardData;
         this.liveUpdateChartData = earningLiveUpdateCardData.liveChart;
-
-        this.startReceivingLiveData(currency);
-      });
-  }
-
-  startReceivingLiveData(currency) {
-    if (this.intervalSubscription) {
-      this.intervalSubscription.unsubscribe();
-    }
-
-    this.intervalSubscription = interval(200)
-      .pipe(
-        takeWhile(() => this.alive),
-        switchMap(() => this.earningService.getEarningLiveUpdateCardData(currency)),
-      )
-      .subscribe((liveUpdateChartData: any[]) => {
-        this.liveUpdateChartData = [...liveUpdateChartData];
       });
   }
 

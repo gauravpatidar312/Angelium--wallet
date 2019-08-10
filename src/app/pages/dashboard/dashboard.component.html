@@ -44,7 +44,7 @@
   <div class="col-xxl-12">
     <div class="row">
       <div class="col-md-12" *ngIf="fetchingCryptos"><span class="fetchingCryptos"><i class="fa fa-spinner fetchingCryptos-margin spinner-color fa-spin"></i></span></div>
-      <div class="card-padding" [ngClass]="isProduction ? 'col-lg-4 col-md-12 col-sm-12 col-12' : 'col-lg-3 col-md-6 col-sm-6 col-12'" *ngFor="let currency of cryptoBalance">
+      <div class="card-padding col-lg-3 col-md-6 col-sm-6 col-12" *ngFor="let currency of cryptoBalance">
         <ngx-earning-card [selectedCurrency]="currency.title" [currency]="currency" *ngIf="!fetchingCryptos"></ngx-earning-card>
       </div>
     </div>
