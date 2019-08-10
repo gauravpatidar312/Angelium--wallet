@@ -62,9 +62,6 @@ nb-card-body{
 }
 .has-feedback .form-control {
   padding-right: 42.5px;
-  border: 1px solid #fff;
-  border-radius: 0.3rem;
-  background-color: transparent;
 }
 .has-feedback label~.form-control-feedback {
   top: 31px;
@@ -90,8 +87,8 @@ nb-card-body{
   pointer-events: none;
   // color: #575bc7;
 }
-.label-right{ float: right; color: #fff;}
-.label-max{ float: right; color: #fff; }
+.label-right{ float: right; color: #d1d1ff;}
+.label-max{ float: right; color: #d1d1ff; }
 
 .btn-danger{
   background-color: #ff0000!important;
@@ -103,13 +100,21 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-success.pointer {
   font-size: 20px;
   font-family: BebasNeue;
 }
-
 button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
   margin-bottom: 20px;
   width: 100%;
   font-size: 20px;
   font-family: BebasNeue;
+}
 
+button.withdraw-btn {
+  margin-bottom: 0px;
+  width: 100%;
+  font-size: 20px;
+  font-family: BebasNeue;
+  background-image: linear-gradient(to right, #00D9BB, #00DA79);
+  letter-spacing: 2px;
+  padding: 0.5rem;
 }
 
 .available-items{
@@ -127,34 +132,38 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
 
 /deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
 /deep/ .withdraw-text{
-  margin-top: -4px;
+  margin-top: 0px;
   float: left;
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-decoration: underline !important;
+  font-family: nb-theme(font-nunito);
 }
 
 .deposit-text{
-  margin-top: -4px;
+  margin-top: 0px;
   float: right;
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-decoration: underline !important;
 }
-
+.modal-popup-size{
+  min-width: 22rem;
+  min-height: 24rem;
+}
 @media (max-width: 375px) {
-  .changePassword {
+  .modal-popup-size {
     width: 250px !important;
   }
 }
 .image-scoll-card-body {
-  max-height: calc(100vh - 190px);
-  overflow-y: auto;
-  text-align: center;
+  // max-height: calc(100vh - 190px);
+  // overflow-y: auto;
+  // text-align: center;
   margin-top: 10px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 
 .nb-icon-left {
@@ -185,6 +194,15 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
   text-transform: capitalize;
 }
 .select-btn {
-  margin-top: 1.40rem;
-  margin-bottom: 1.40rem;
+  // margin-top: 1.40rem;
+  // margin-bottom: 1.40rem;
+}
+.header-popup{ font-size: 20px; font-family: BebasNeue; }
+.b-color-wallet {
+  background-image: linear-gradient(to right, #ad59ff, #7659ff);
+  border: 1px;
+}
+.dropDown-padding { padding: 14px !important; }
+.font-avenir {
+  font-family: nb-theme(font-avenir);
 }
