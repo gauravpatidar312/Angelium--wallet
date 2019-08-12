@@ -29,7 +29,7 @@
                           <ul class="dropdown-menu" ngbDropdownMenu>
                             <ng-container *ngFor="let wallet of sendWallets">
                               <li class="dropdown-item"
-                                  *ngIf="sendType != wallet.wallet_type"
+                                  *ngIf="sendType != wallet.title"
                                   (click)="onChangeWallet(wallet.wallet_type, 'send')">
                                 {{ wallet.title }}
                               </li>
@@ -44,7 +44,7 @@
                           {{"common.amount" | translate}}
                         </label>
                         <div class="input-group">
-                          <div class="status-dd-week input-group-prepend input-group-btn dropdown" *ngIf="sendType === 'USDT'" ngbDropdown>
+                          <div class="status-dd-week input-group-prepend input-group-btn dropdown" *ngIf="sendWallet?.wallet_type === 'USDT'" ngbDropdown>
                             <button type="button" class="btn btn-primary dropDown-padding font-avenir b-color-wallet" ngbDropdownToggle>
                               <label *ngIf="!minerFee">{{ "common.fee" | translate}}</label>
                               <label class="white-font" *ngIf="minerFee">${{minerFee}}</label>
@@ -62,7 +62,7 @@
                         </div>
                         <span class="available-amount" (click)="setSendMaxValue()" *ngIf="sendWallet?.wallet_type"
                               title="Click to use whole amount">
-                          {{(sendWallet?.wallet_amount | number : '1.0-6') + ' ' + (sendWallet?.wallet_type) + ' / max' }}
+                          {{(sendWallet?.wallet_amount | number : '1.0-6') + ' ' + (sendWallet?.title) + ' / max' }}
                         </span>
                       </div>
                     </div>
@@ -95,7 +95,7 @@
                       </div>
                       <span class="transfer-message font-nunitoSans" *ngIf="sendWallet?.wallet_type === 'BTC' && false">{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
                     </div>
-                    <span class="miner-fee" *ngIf="sendType === 'USDT' && minerFee">{{"pages.heaven.minerFeeMessage" | translate:{"min": minMinutes, "max": maxMinutes} }}</span>
+                    <span class="miner-fee" *ngIf="sendWallet?.wallet_type === 'USDT' && minerFee">{{"pages.heaven.minerFeeMessage" | translate:{"min": minMinutes, "max": maxMinutes} }}</span>
                   </div>
                 </div>
               </div>
