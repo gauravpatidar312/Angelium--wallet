@@ -21,23 +21,33 @@ export class TradeHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.shareDataService.currentPair.subscribe((val?:any)=> {
-      if (val) {
-        let data = { 'pair': val.pair };
-        this.tradeHistorySpinner = true;
+      
+    });
+  }
+  
+  parentData(data: any){
+    if (data) {  
+      this.tradeHistorySpinner = true;
+      this.noHistory = false;
+      this.getTradeHistory(data);
+    }
+  }
+
+  getTradeHistory(data: any){
+    let pairData = { 'pair': data.pair };
+    this.httpService.post(pairData, '/exchange/trades/').subscribe((res:any)=>{
+      if(res.status){
+        this.tradeHistorySpinner = false;
         this.noHistory = false;
-        this.tradeData = [];
-        this.httpService.post(data, '/exchange/trades/').subscribe((res:any)=>{
-          if(res.status){
-            this.tradeHistorySpinner = false;
-            this.noHistory = false;
-            this.tradeData = res.data.trades;
-            if (this.tradeData.length == 0) {
-              this.tradeHistorySpinner = false;
-              this.noHistory = true;
-            }
-          }
-        },err =>{ this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeHistoryError')); });   
+        this.tradeData = res.data.trades;
+        if (res.data.trades == 0) {
+          this.tradeHistorySpinner = false;
+          this.noHistory = true;
+        }
       }
+    }, err=>{
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
+          this.translate.instant('pages.exchange.toastr.tradeHistoryError'));
     });
   }
 }

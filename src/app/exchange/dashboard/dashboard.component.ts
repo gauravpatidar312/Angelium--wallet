@@ -3,6 +3,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
+import {TradeComponent} from '../trade/trade.component';
+import {BoardComponent} from '../board/board.component';
+import {TradeHistoryComponent} from '../trade-history/trade-history.component';
+
 import * as _ from 'lodash';
 declare let jQuery: any;
 declare const TradingView: any;
@@ -24,17 +28,15 @@ export class DashboardComponent implements OnInit {
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
               private shareDataService: ShareDataService,
-              public translate: TranslateService) {}
+              public translate: TranslateService) {
 
-  
-  ngOnInit() {
-    this.shareDataService.currentPair.subscribe((data?:any)=> {
-      if (data) {
-        this.currentPair = data;
-        this.getOpenOrder(data.pair);
-      }
-    });
   }
+
+  @ViewChild(TradeComponent) private tradeComponent: TradeComponent;
+  @ViewChild(BoardComponent) private boardComponent: BoardComponent;
+  @ViewChild(TradeHistoryComponent) private tradeHistoryComponent: TradeHistoryComponent;
+
+  ngOnInit() {}
 
   ngAfterViewInit() {
     jQuery('ul.mytradeLine li a').click(function (e) {
@@ -89,5 +91,12 @@ export class DashboardComponent implements OnInit {
 
   receiveMessage($event) {
     new TradingView.widget($event);
+    if ($event) {
+      this.currentPair = $event;
+      this.getOpenOrder($event.pair);
+      this.tradeComponent.parentData($event);
+      this.boardComponent.parentData($event);
+      this.tradeHistoryComponent.parentData($event);
+    }
   }
 }

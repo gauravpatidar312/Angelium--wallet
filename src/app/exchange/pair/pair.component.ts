@@ -62,7 +62,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   }
 
   clickPair(data){
-    this.shareDataService.changePair(data);
+    // this.shareDataService.changePair(data);
     this.messageEvent.emit(data);
   }
   
@@ -90,7 +90,9 @@ export class PairComponent implements OnInit, AfterViewInit {
             'container_id': 'tradingview_58f3c',
             'price': val.price,
             'change': val.change,
-            'pair': val.name
+            'pair': val.name,
+            'from': val.name.split('/')[0],
+            'to': val.name.split('/')[1]
           });
         });
         this.clickPair(this.pairs[0]);

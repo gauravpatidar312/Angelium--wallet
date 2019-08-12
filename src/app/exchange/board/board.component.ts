@@ -20,16 +20,7 @@ export class BoardComponent implements OnInit {
   constructor(private shareDataService: ShareDataService,
               private httpService: HttpService) { }
 
-  ngOnInit() {
-    this.shareDataService.currentPair.subscribe((data?:any)=> {
-      if (data) {
-        this.boardSpinner = true;
-        this.boardTableValue = false;
-        this.currentPair = data;
-        this.getBoardData(data.pair);
-      }
-    });
-  }
+  ngOnInit() {}
 
   getBoardData(pair: any){
     let data = {'pair': pair };
@@ -43,6 +34,26 @@ export class BoardComponent implements OnInit {
         else this.boardSellAvai = true;
         if (res.data.buy!=0)  this.boardBuyAvai = false;
         else this.boardBuyAvai = true;
+      }
+    });
+  }
+
+  parentData(data: any){
+    if (data) {
+      this.boardSpinner = true;
+      this.boardTableValue = false;
+      this.currentPair = data;
+      this.getBoardData(data.pair);
+      this.getLastTrade(data.pair);
+    }
+  }
+
+  lastTrade:any = {};
+  getLastTrade(pair: any){
+    let data = {'pair': pair };
+    this.httpService.post(data, 'exchange/lasttrade/').subscribe((res?:any)=>{
+      if (res.status) {
+        this.lastTrade = res.data.last_trade;
       }
     });
   }
