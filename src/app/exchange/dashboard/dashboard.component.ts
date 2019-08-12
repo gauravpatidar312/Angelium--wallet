@@ -90,13 +90,29 @@ export class DashboardComponent implements OnInit {
   }
 
   receiveMessage($event) {
+    if ($event.from == 'anx') {
+      jQuery('.tradingview-widget-container').css('display' , 'none');
+      jQuery('.trade-chart-anx').css('display' , 'block');
+    }else{
+      jQuery('.trade-chart-anx').css('display' , 'none');
+      jQuery('.tradingview-widget-container').css('display' , 'block');
+    }
     new TradingView.widget($event);
     if ($event) {
       this.currentPair = $event;
       this.getOpenOrder($event.pair);
+      this.getTradeChartData($event.pair);
       this.tradeComponent.parentData($event);
       this.boardComponent.parentData($event);
       this.tradeHistoryComponent.parentData($event);
     }
+  }
+
+  tradeChartData:any;
+  getTradeChartData(pair: any){
+    let data = {'pair': pair };
+    this.httpService.post(data, 'exchange/chartdata/').subscribe((res?:any)=>{
+      this.tradeChartData = res.data.chart;
+    });
   }
 }

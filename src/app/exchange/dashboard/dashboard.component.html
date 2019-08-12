@@ -10,6 +10,7 @@
         <div class="tradingview-widget-container">
           <div id="tradingview_58f3c" class="twc"></div>
         </div>
+        <ngx-trade-echarts [graphData]="tradeChartData" [graphPair]="currentPair?.symbol"></ngx-trade-echarts>
         <!-- TradingView Widget END -->
       </nb-card-body>
     </nb-card>
@@ -18,10 +19,10 @@
       <nb-card-header >
         <ul id="main-navigation" class="nav mytradeLine empty_width">
           <li class="pointer active">
-            <a data-toggle="pill" (click)="getOpenOrder(currentPair.pair)">{{"pages.exchange.myOpenOrders" | translate}}</a>
+            <a data-toggle="pill" (click)="getOpenOrder(currentPair?.pair)">{{"pages.exchange.myOpenOrders" | translate}}</a>
           </li>
           <li class="pointer">
-            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair.pair)">{{"pages.exchange.myTradeHistory" | translate}}</a>
+            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair?.pair)">{{"pages.exchange.myTradeHistory" | translate}}</a>
           </li>
         </ul>
       </nb-card-header>

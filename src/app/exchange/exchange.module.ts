@@ -1,5 +1,6 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgxEchartsModule } from 'ngx-echarts';
 import { NbDialogModule } from '@nebular/theme';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
@@ -8,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ThemeModule } from '../@theme/theme.module';
 import { PairComponent } from './pair/pair.component';
-
+import { TradeEchartsComponent } from './echarts/trade-echarts.component';
 import { ExchangeRoutingModule } from './exchange-routing.module';
 import { ExchangeComponent } from './exchange.component';
 import { BoardComponent } from './board/board.component';
@@ -31,6 +32,7 @@ const ExChange_COMPONENTS = [
     NgxQRCodeModule,
     TranslateModule,
     NgSelectModule,
+    NgxEchartsModule
   ],
   declarations: [
     ...ExChange_COMPONENTS,
@@ -39,6 +41,7 @@ const ExChange_COMPONENTS = [
     TradeHistoryComponent,
     TradeComponent,
     DashboardComponent,
+    TradeEchartsComponent
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '#' },
