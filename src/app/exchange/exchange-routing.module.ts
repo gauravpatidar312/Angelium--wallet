@@ -12,7 +12,7 @@ const routes: Routes = [{
     path: '',
     component: DashboardComponent,
     canActivate: [AuthGuard],
-    data: {role: [AppConstants.ROLES.ADMIN]}
+    data: {role: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN]}
   }],
 }];
 

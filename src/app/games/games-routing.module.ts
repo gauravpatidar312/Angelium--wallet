@@ -15,19 +15,19 @@ const routes: Routes = [{
       path: 'lottery',
       component: LotteryComponent,
       canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]}
+      data: {role: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN]}
     },
     {
       path: 'black-jack',
       component: BlackJackComponent,
       canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]}
+      data: {role: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN]}
     },
     {
       path: 'baccarat',
       component: BaccaratComponent,
       canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]}
+      data: {role: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN]}
     }],
 }];
 

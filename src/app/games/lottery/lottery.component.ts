@@ -23,7 +23,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   walletType: string = 'SELECT';
   selectWallet: any;
   selectedLottery: any;
-  winnerTextMessage: string;
+  noWinnerListText: string;
   betNotAvailable: string;
   betData: any;
   totalBetAmount: any;
@@ -52,6 +52,15 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     this.getWallet();
     this.getLotteryList();
     this.getSmartContract();
+    Observable.interval(15000).takeWhile(() => true).subscribe(() => {
+      this.getPrizeList();
+      this.getBetList();
+    });
+  }
+
+  onRefreshButton() {
+    this.getPrizeList();
+    this.getBetList();
   }
 
   getCurrentLotteryDetail() {
@@ -70,15 +79,18 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   getWallet() {
     this.httpService.get('asset/').subscribe((data?: any) => {
       const cryptosData = _.filter(data.cryptos, (crypto?: any) => {
-        return !(crypto.name === 'ANL' || crypto.name === 'HEAVEN' || crypto.name === 'ANLP');
+        return !(crypto.name === 'ANL' || crypto.name === 'HEAVEN' || crypto.name === 'ANLP' || crypto.name === 'ERCUSDT');
       });
       const walletData = _.map(cryptosData, function (obj?: any) {
         const item: any = {};
+        item.title = obj.name;
         item.wallet_type = obj.name;
         item.wallet_amount = obj.quantity;
+        if (item.wallet_type === 'USDT')
+            item.title = 'USDT (OMNI)';
         return item;
       });
-      this.myWallets = _.sortBy(walletData, ['wallet_type']);
+      this.myWallets = _.sortBy(walletData, ['title']);
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -170,9 +182,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
       if (!this.winnerData.length) {
         if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id)
-          this.winnerTextMessage = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
+          this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
         else
-          this.winnerTextMessage =  this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
+          this.noWinnerListText =  this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
       }
       this.fetchingWinner = false;
     }, (err) => {
@@ -187,7 +199,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   onChangeWallet(walletType: string): void {
-    this.walletType = walletType;
+    const walletObject: any = _.find(this.myWallets, ['wallet_type', walletType]);
+    this.walletType = walletObject.title;
     if (this.walletType !== 'SELECT') {
       this.selectWallet = this.myWallets.find(item => {
         return item.wallet_type === walletType;
@@ -241,7 +254,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
     this.formSubmitting = true;
     this.httpService.post(placeLotteryData, 'game/place-lottery-bet/').subscribe((res?: any) => {
-      if (res.data) {
+      if (res.status) {
         this.formSubmitting = false;
         this.getBetList();
         this.getWinnerList(this.currentLotteryData.lottery_id);
