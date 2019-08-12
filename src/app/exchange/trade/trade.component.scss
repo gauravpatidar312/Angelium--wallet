@@ -92,7 +92,7 @@ nb-card-body{
 
 .btn-danger{
   background-color: #ff0000!important;
-  
+
 }
 button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-success.pointer {
   margin-bottom: 20px;
@@ -208,4 +208,31 @@ button.withdraw-btn {
 .dropDown-padding { padding: 14px !important; }
 .font-avenir {
   font-family: nb-theme(font-avenir);
+}
+
+.total-amount {
+  position: relative;
+  .input-group-prepend {
+    min-width: 70px;
+    label {
+      color: white;
+      margin-bottom: 0;
+    }
+  }
+  span {
+    position: absolute;
+    &.transfer-amount {
+      font-weight: bold;
+      font-size: 16px;
+      right: 30px;
+      bottom: 13px;
+      color: #00bb66;
+    }
+    &.available-amount {
+      font-size: 14px;
+      cursor: pointer;
+      right: 10px;
+      top: 0;
+    }
+  }
 }

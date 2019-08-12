@@ -3,13 +3,13 @@
   <nb-card-body>
       <div class="available-items">
     <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
-      <li class="pointer active tab-link" data-tab="tab-1"> 
+      <li class="pointer active tab-link" data-tab="tab-1">
         <a data-toggle="pill">{{"pages.exchange.buy" | translate | uppercase}} {{tradeByu.from | uppercase}}</a>
       </li>
       <li class="pointer tab-link" data-tab="tab-2">
         <a data-toggle="pill">{{"pages.exchange.sell" | translate | uppercase}} {{tradeByu.from | uppercase}}</a>
       </li>
-    </ul>    
+    </ul>
 
     <div id="tab-1" class="tab-content active">
       <form (ngSubmit)="submitTradeBuy()">
@@ -20,7 +20,7 @@
               <span *ngIf="!fetchingBuyAmount">
                 ${{ buyWalletDollar | number : '1.0-2' }}
               </span>
-              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin"
                 *ngIf="fetchingBuyAmount"></i></span>
             </label>
             <input type="number" class="form-control" name="price" [(ngModel)]="tradeByu.price"
@@ -43,10 +43,10 @@
               <span *ngIf="!fetchingBuyTotalAmount">
                 ${{ buyTotalWalletDollar | number : '1.0-2' }}
               </span>
-              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin"
                 *ngIf="fetchingBuyTotalAmount"></i></span>
             </label>
-            <input type="text" class="form-control" name="btc" 
+            <input type="text" class="form-control" name="btc"
               [value]="tradeByu.price * tradeByu.amount" disabled>
             <span class="form-control-feedback">{{tradeByu.to | uppercase}}</span>
           </div>
@@ -73,10 +73,10 @@
               <span *ngIf="!fetchingSellAmount">
                 ${{ sellWalletDollar | number : '1.0-2' }}
               </span>
-              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin"
                 *ngIf="fetchingSellAmount"></i></span>
             </label>
-            <input type="number" class="form-control" name="price" 
+            <input type="number" class="form-control" name="price"
               [(ngModel)]="tradeSell.price" (keyup)="setSellAmount(tradeSell.to)">
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>
           </div>
@@ -96,10 +96,10 @@
               <span *ngIf="!fetchingSellTotalAmount">
                 ${{ sellTotalWalletDollar | number : '1.0-2' }}
               </span>
-              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin"
                 *ngIf="fetchingSellTotalAmount"></i></span>
             </label>
-            <input type="text" class="form-control" name="total" 
+            <input type="text" class="form-control" name="total"
               [value]="tradeSell.price * tradeSell.amount" disabled>
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>
           </div>
@@ -156,7 +156,7 @@
       </div>
     </nb-card-body>
     <nb-card-footer>
-      <button class="withdraw-btn btn btn-success pointer" fullwidth   
+      <button class="withdraw-btn btn btn-success pointer" fullwidth
         (click)="submitWithdrawDialog(ref)"
         [disabled]="submitWithdrawDisable">
         {{"pages.exchange.withdraw" | translate}}
@@ -171,35 +171,41 @@
         {{"pages.exchange.deposit" | translate | uppercase}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
     </nb-card-header>
-    <nb-card-body class="image-scoll-card-body">
+    <nb-card-body class="image-scoll-card-body" style="overflow: unset;">
       <div class="form-group font-avenir">
         <label class="text-success">{{"common.from" | translate}}</label>
         <div class="dropdown" ngbDropdown>
           <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet"
             [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
-            {{ seletedCryptoDepositData.name }}
+            {{ cryptoDepositType }}
           </button>
           <ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item" class="dropdown-item {{seletedCryptoDepositData.name === cryto.name ? 'active' : ''}}" *ngFor="let cryto of availableWallets" 
-              (click)="changeDepositCrypto(cryto)">
+            <ng-container *ngFor="let cryto of availableWallets">
+            <li class="dropdown-item" *ngIf="cryptoDepositType != cryto.name"
+              (click)="changeDepositCrypto(cryto.name)">
               {{cryto.name}}
             </li>
+            </ng-container>
           </ul>
         </div>
       </div>
       <br>
-      
-      <div class="form-group">
+
+      <div class="form-group total-amount">
         <label class="text-success">{{"common.amount" | translate}}</label>
-        <label class="label-max font-avenir">{{depositPopupAmount | number: '1.0-2'}} 
-          {{seletedCryptoDepositData.name}} / {{"pages.exchange.max" | translate | uppercase}}
-        </label>
-        <input type="number" class="form-control" [(ngModel)]="depositAmount" placeholder="{{'pages.heaven.enterAmount' | translate}}">
+        <span class="available-amount font-avenir" (click)="setSendMaxValue()" *ngIf="seletedCryptoDepositData.name">
+             {{(depositPopupAmount | number: '1.0-6') + ' ' + (seletedCryptoDepositData?.name) + ' / max' }}
+        </span>
+        <div class="input-group">
+          <input type="number" class="form-control" [disabled]="!seletedCryptoDepositData?.name" (keyup)="setAmount(seletedCryptoDepositData?.name)" [(ngModel)]="depositAmount" placeholder="{{'pages.heaven.enterAmount' | translate}}">
+          <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+          <span class="transfer-amount" *ngIf="!fetchingAmount">${{ seletedCryptoDepositData?.dollar_amount | number : '1.0-2' }}</span>
+        </div>
       </div>
-      
+
     </nb-card-body>
     <nb-card-footer>
-      <button class="withdraw-btn btn btn-success pointer" fullwidth 
+      <button class="withdraw-btn btn btn-success pointer" fullwidth
       (click)="submitDepositDialog(ref)"
       [disabled]="submitDepositDisable"><span>{{"pages.exchange.deposit" | translate}}</span></button>
     </nb-card-footer>
