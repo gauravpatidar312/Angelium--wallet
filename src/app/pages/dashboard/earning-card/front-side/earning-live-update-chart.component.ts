@@ -9,8 +9,7 @@ import * as moment from 'moment';
   template: `
     <div echarts
          class="echart"
-         [options]="option"
-         (chartInit)="onChartInit($event)"></div>
+         [options]="option"></div>
   `,
 })
 export class EarningLiveUpdateChartComponent implements AfterViewInit, OnDestroy, OnChanges {
