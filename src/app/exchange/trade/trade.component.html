@@ -16,8 +16,15 @@
         <div class="form-group">
           <div class="form-group has-feedback">
             <label class="text-success">{{"pages.exchange.price" | translate}}</label>
-            <label class="label-right font-avenir">$ 5.1</label>
-            <input type="number" class="form-control" name="price" [(ngModel)]="tradeByu.price">
+            <label class="label-right font-avenir">
+              <span *ngIf="!fetchingBuyAmount">
+                ${{ buyWalletDollar | number : '1.0-2' }}
+              </span>
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+                *ngIf="fetchingBuyAmount"></i></span>
+            </label>
+            <input type="number" class="form-control" name="price" [(ngModel)]="tradeByu.price"
+              (keyup)="setBuyAmount(tradeByu.to)">
             <span class="form-control-feedback">{{tradeByu.to | uppercase}}</span>
           </div>
         </div>
@@ -25,14 +32,20 @@
           <div class="form-group has-feedback">
             <label class="text-success">{{"common.amount" | translate}}</label>
             <label class="label-max font-avenir">{{"pages.exchange.max" | translate | uppercase}}</label>
-            <input type="number" class="form-control" name="amount" [(ngModel)]="tradeByu.amount">
+            <input type="number" class="form-control" name="amount" [(ngModel)]="tradeByu.amount" (keyup)="setBuyTotalAmount(tradeByu.to)">
             <span class="form-control-feedback">{{tradeByu.from | uppercase}}</span>
           </div>
         </div>
         <div class="form-group">
           <div class="form-group has-feedback">
             <label class="text-success">{{"common.total" | translate}}</label>
-            <label class="label-right font-avenir">$ 5.1</label>
+            <label class="label-right font-avenir">
+              <span *ngIf="!fetchingBuyTotalAmount">
+                ${{ buyTotalWalletDollar | number : '1.0-2' }}
+              </span>
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+                *ngIf="fetchingBuyTotalAmount"></i></span>
+            </label>
             <input type="text" class="form-control" name="btc" 
               [value]="tradeByu.price * tradeByu.amount" disabled>
             <span class="form-control-feedback">{{tradeByu.to | uppercase}}</span>
@@ -56,8 +69,15 @@
         <div class="form-group">
           <div class="form-group has-feedback">
             <label class="text-success">{{"pages.exchange.price" | translate}}</label>
-            <label class="label-right font-avenir">$ 5.1</label>
-            <input type="number" class="form-control" name="price" [(ngModel)]="tradeSell.price">
+            <label class="label-right font-avenir">
+              <span *ngIf="!fetchingSellAmount">
+                ${{ sellWalletDollar | number : '1.0-2' }}
+              </span>
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+                *ngIf="fetchingSellAmount"></i></span>
+            </label>
+            <input type="number" class="form-control" name="price" 
+              [(ngModel)]="tradeSell.price" (keyup)="setSellAmount(tradeSell.to)">
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>
           </div>
         </div>
@@ -65,14 +85,20 @@
           <div class="form-group has-feedback">
             <label class="text-success">{{"common.amount" | translate}}</label>
             <label class="label-max font-avenir">{{"pages.exchange.max" | translate | uppercase}}</label>
-            <input type="number" class="form-control" name="amount" [(ngModel)]="tradeSell.amount">
+            <input type="number" class="form-control" name="amount" [(ngModel)]="tradeSell.amount" (keyup)="setSellTotalAmount(tradeSell.to)">
             <span class="form-control-feedback">{{tradeSell.from | uppercase}}</span>
           </div>
         </div>
         <div class="form-group">
           <div class="form-group has-feedback">
             <label class="text-success">{{"common.total" | translate}}</label>
-            <label class="label-right font-avenir">$ 5.1</label>
+            <label class="label-right font-avenir">
+              <span *ngIf="!fetchingSellTotalAmount">
+                ${{ sellTotalWalletDollar | number : '1.0-2' }}
+              </span>
+              <span class="transfer-amount"><i class="fa fa-spinner fa-spin" 
+                *ngIf="fetchingSellTotalAmount"></i></span>
+            </label>
             <input type="text" class="form-control" name="total" 
               [value]="tradeSell.price * tradeSell.amount" disabled>
             <span class="form-control-feedback">{{tradeSell.to | uppercase}}</span>

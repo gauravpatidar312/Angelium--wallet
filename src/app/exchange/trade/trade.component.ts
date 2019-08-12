@@ -37,6 +37,10 @@ export class TradeComponent implements OnInit {
   withdrawWalletAmount:number = 0;
   insufficientDepositeBalance:boolean = false;
   insufficientWithdrawBalance:boolean = false;
+  fetchingSellAmount: boolean = false;
+  sellWalletDollar:number = 0;
+  fetchingSellTotalAmount: boolean = false;
+  sellTotalWalletDollar:number = 0;
 
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
@@ -87,10 +91,19 @@ export class TradeComponent implements OnInit {
       this.tradeByu.from = data.from;
       this.tradeByu.to = data.to;
       this.tradeByu.pair = data.pair;
+      this.tradeByu.amount = 0;
+      this.tradeByu.price = 0;
+      this.buyWalletDollar = 0;
+      this.buyTotalWalletDollar = 0;
 
       this.tradeSell.from = data.from;
       this.tradeSell.to = data.to;
       this.tradeSell.pair = data.pair;
+      this.tradeSell.amount = 0;
+      this.tradeSell.price = 0;
+      this.sellWalletDollar = 0;
+      this.sellTotalWalletDollar = 0;
+
       this.getWalletDeposit(data.from);
       this.getWalletWithdraw(data.from);
     }
@@ -369,5 +382,77 @@ export class TradeComponent implements OnInit {
 
   cancelDialog(ref) {
     ref.close();
+  }
+
+  fetchingBuyAmount: boolean = false;
+  buyWalletDollar:number = 0;
+  setBuyAmount(walletType) {
+    if (!this.tradeByu.price) {
+      this.buyWalletDollar = 0;
+      return;
+    }
+    this.setBuyTotalAmount(walletType);
+    this.fetchingBuyAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.buyWalletDollar = Number(this.tradeByu.price) * data[walletType.toUpperCase()];
+      this.fetchingBuyAmount = false;
+    }, (err) => {
+      this.fetchingBuyAmount = false;
+      this.buyWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+  
+  fetchingBuyTotalAmount: boolean = false;
+  buyTotalWalletDollar:number = 0;
+  setBuyTotalAmount(walletType) {
+    let totalAmount = Number(this.tradeByu.price * this.tradeByu.amount);
+    if (!totalAmount) {
+      this.buyTotalWalletDollar = 0;
+      return;
+    }
+    this.fetchingBuyTotalAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.buyTotalWalletDollar = Number(this.tradeByu.price * this.tradeByu.amount) * data[walletType.toUpperCase()];
+      this.fetchingBuyTotalAmount = false;
+    }, (err) => {
+      this.fetchingBuyTotalAmount = false;
+      this.buyTotalWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+
+  setSellAmount(walletType) {
+    if (!this.tradeSell.price) {
+      this.sellWalletDollar = 0;
+      return;
+    }
+    this.setSellTotalAmount(walletType);
+    this.fetchingSellAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.sellWalletDollar = Number(this.tradeSell.price) * data[walletType.toUpperCase()];
+      this.fetchingSellAmount = false;
+    }, (err) => {
+      this.fetchingSellAmount = false;
+      this.sellWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+  
+  setSellTotalAmount(walletType) {
+    let totalAmount = Number(this.tradeSell.price * this.tradeSell.amount);
+    if (!totalAmount) {
+      this.sellTotalWalletDollar = 0;
+      return;
+    }
+    this.fetchingSellTotalAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.sellTotalWalletDollar = Number(this.tradeSell.price * this.tradeSell.amount) * data[walletType.toUpperCase()];
+      this.fetchingSellTotalAmount = false;
+    }, (err) => {
+      this.fetchingSellTotalAmount = false;
+      this.sellTotalWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
   }
 }

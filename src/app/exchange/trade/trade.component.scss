@@ -99,12 +99,14 @@ button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-success.pointer {
   width: 100%;
   font-size: 20px;
   font-family: BebasNeue;
+  padding-bottom: 6px;
 }
 button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
   margin-bottom: 20px;
   width: 100%;
   font-size: 20px;
   font-family: BebasNeue;
+  padding-bottom: 6px;
 }
 
 button.withdraw-btn {
@@ -114,7 +116,8 @@ button.withdraw-btn {
   font-family: BebasNeue;
   background-image: linear-gradient(to right, #00D9BB, #00DA79);
   letter-spacing: 2px;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  padding-bottom: 6px;
 }
 
 .available-items{
