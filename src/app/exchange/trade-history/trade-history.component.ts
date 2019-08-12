@@ -19,15 +19,12 @@ export class TradeHistoryComponent implements OnInit {
               private toastrService: ToastrService,
               private translate: TranslateService,) {}
 
-  ngOnInit() {
-    this.shareDataService.currentPair.subscribe((val?:any)=> {
-      
-    });
-  }
+  ngOnInit() {}
   
   parentData(data: any){
     if (data) {  
       this.tradeHistorySpinner = true;
+      this.tradeData = [];
       this.noHistory = false;
       this.getTradeHistory(data);
     }
