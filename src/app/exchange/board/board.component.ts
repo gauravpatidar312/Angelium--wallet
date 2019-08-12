@@ -44,6 +44,17 @@ export class BoardComponent implements OnInit {
       this.boardTableValue = false;
       this.currentPair = data;
       this.getBoardData(data.pair);
+      this.getLastTrade(data.pair);
     }
+  }
+
+  lastTrade:any = {};
+  getLastTrade(pair: any){
+    let data = {'pair': pair };
+    this.httpService.post(data, 'exchange/lasttrade/').subscribe((res?:any)=>{
+      if (res.status) {
+        this.lastTrade = res.data.last_trade;
+      }
+    });
   }
 }
