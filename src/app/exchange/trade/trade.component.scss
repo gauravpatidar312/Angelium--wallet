@@ -7,24 +7,37 @@
     font-size: 1.75rem;
   }
 
-  nb-card-body { overflow: visible; }
+  nb-card-body {
+    overflow: visible;
+  }
 }
+
 /* Hide HTML5 Up and Down arrows. */
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button, input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
-nb-card-body{
-  padding: 0px 12px !important;
+
+nb-card-body {
+  padding: 0 12px !important;
 }
 
-.minheight{ min-height: 250px; }
-.tradeLine{ padding:0px!important; margin: 0px 0px 20px 0px; }
-.tradeLine li{ width:50%!important; }
+.minheight {
+  min-height: 250px;
+}
+
+.tradeLine {
+  padding: 0 !important;
+  margin: 0 0 20px 0;
+}
+
+.tradeLine li {
+  width: 50% !important;
+}
 
 #main-navigation-trade li > a {
   text-decoration: none;
@@ -38,42 +51,57 @@ nb-card-body{
   width: 100%;
 }
 
-#main-navigation-trade li > a i{
+#main-navigation-trade li > a i {
   padding-right: 8px;
   font-size: 17px;
   float: left;
 }
-.tab-content{
+
+.tab-content {
   display: none;
 }
 
-.tab-content.active{
+.tab-content.active {
   display: inherit;
 }
-#main-navigation-trade li.active > a { border-bottom: 2px solid #26df8b; color: #26df8b; }
-#main-navigation-trade li > a { border-bottom: 2px solid #fff; color: #fff; }
 
-.navbar-pill { justify-content: flex-end;
+#main-navigation-trade li.active > a {
+  border-bottom: 2px solid #26df8b;
+  color: #26df8b;
+}
+
+#main-navigation-trade li > a {
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+
+.navbar-pill {
+  justify-content: flex-end;
   white-space: nowrap;
- }
+}
 
 .has-feedback {
   position: relative;
 }
+
 .has-feedback .form-control {
   padding-right: 42.5px;
 }
-.has-feedback label~.form-control-feedback {
+
+.has-feedback label ~ .form-control-feedback {
   top: 31px;
 }
+
 .nb-theme-cosmic .form-control-feedback {
   font-size: 0.875rem;
   font-weight: 400;
 }
+
 .form-group {
   // margin-bottom: 1.70rem;
   font-family: 'Nunito Sans', sans-serif;
 }
+
 .form-control-feedback {
   position: absolute;
   top: 0;
@@ -87,30 +115,38 @@ nb-card-body{
   pointer-events: none;
   // color: #575bc7;
 }
-.label-right{ float: right; color: #d1d1ff;}
-.label-max{ float: right; color: #d1d1ff; }
 
-.btn-danger{
-  background-color: #ff0000!important;
+.label-right {
+  float: right;
+  color: #d1d1ff;
+}
+
+.label-max {
+  float: right;
+  color: #d1d1ff;
+}
+
+.btn-danger {
+  background-color: #ff0000 !important;
 
 }
+
 button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-success.pointer {
   margin-bottom: 20px;
   width: 100%;
   font-size: 20px;
   font-family: BebasNeue;
-  padding-bottom: 6px;
 }
+
 button.font-bebasNeueBold.btn.btn-run.btn-demo.btn-danger.pointer {
   margin-bottom: 20px;
   width: 100%;
   font-size: 20px;
   font-family: BebasNeue;
-  padding-bottom: 6px;
 }
 
 button.withdraw-btn {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   width: 100%;
   font-size: 20px;
   font-family: BebasNeue;
@@ -120,22 +156,25 @@ button.withdraw-btn {
   padding-bottom: 6px;
 }
 
-.available-items{
-  min-height:auto!important;
+.available-items {
+  min-height: auto !important;
   width: 100%;
-  max-height: 400px!important;
+  max-height: 400px !important;
   // overflow-x: hidden;
-  overflow-y: hidden!important;
-  overflow-x:hidden;
+  overflow-y: hidden !important;
+  overflow-x: hidden;
 }
 
-.items_margin{
+.items_margin {
   margin-bottom: 28px;
 }
 
-/deep/ .available-items::-webkit-scrollbar{ width: 3px!important; }
-/deep/ .withdraw-text{
-  margin-top: 0px;
+/deep/ .available-items::-webkit-scrollbar {
+  width: 3px !important;
+}
+
+/deep/ .withdraw-text {
+  margin-top: 0;
   float: left;
   font-size: 1rem;
   font-weight: bold;
@@ -144,7 +183,7 @@ button.withdraw-btn {
   font-family: nb-theme(font-nunito);
 }
 
-.deposit-text{
+.deposit-text {
   margin-top: 0px;
   float: right;
   font-size: 1rem;
@@ -152,21 +191,14 @@ button.withdraw-btn {
   margin-bottom: 12px;
   text-decoration: underline !important;
 }
-.modal-popup-size{
+
+.modal-popup-size {
   min-width: 22rem;
   min-height: 24rem;
 }
-@media (max-width: 375px) {
-  .modal-popup-size {
-    width: 250px !important;
-  }
-}
+
 .image-scoll-card-body {
-  // max-height: calc(100vh - 190px);
-  // overflow-y: auto;
-  // text-align: center;
   margin-top: 10px;
-  // margin-bottom: 10px;
 }
 
 .nb-icon-left {
@@ -179,6 +211,7 @@ button.withdraw-btn {
   color: #00d977;
   cursor: pointer;
 }
+
 .submit-btn {
   float: right;
   background-color: #00d977 !important;
@@ -189,23 +222,30 @@ button.withdraw-btn {
   background-color: #db305b !important;
   margin-right: 5px;
 }
+
 /deep/ .dropdown-menu.show {
   background-color: #100b48 !important;
   border: 2px solid #7659ff !important;
 }
+
 /deep/ .dropdown-menu.show .dropdown-item {
   text-transform: capitalize;
 }
-.select-btn {
-  // margin-top: 1.40rem;
-  // margin-bottom: 1.40rem;
+
+.header-popup {
+  font-size: 20px;
+  font-family: BebasNeue;
 }
-.header-popup{ font-size: 20px; font-family: BebasNeue; }
+
 .b-color-wallet {
   background-image: linear-gradient(to right, #ad59ff, #7659ff);
   border: 1px;
 }
-.dropDown-padding { padding: 14px !important; }
+
+.dropDown-padding {
+  padding: 14px !important;
+}
+
 .font-avenir {
   font-family: nb-theme(font-avenir);
 }
@@ -234,5 +274,15 @@ button.withdraw-btn {
       right: 10px;
       top: 0;
     }
+  }
+}
+
+.overflow-unset {
+  overflow: unset;
+}
+
+@media (max-width: 375px) {
+  .modal-popup-size {
+    width: 250px !important;
   }
 }

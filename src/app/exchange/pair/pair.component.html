@@ -1,12 +1,11 @@
 <nb-card class="pair">
-    <nb-card-header>{{ "pages.exchange.Pair" | translate}}</nb-card-header>
-
+  <nb-card-header>{{ "pages.exchange.Pair" | translate}}</nb-card-header>
   <nb-card-body>
     <div class="clearfix"></div>
-    <span class="fetching-spinner" *ngIf="fatchPaireSpinner">
+    <span class="fetching-spinner" *ngIf="fetchPairSpinner">
       <i class="fa fa-spinner spinner-color fa-spin"></i>
     </span>
-    <div class="row" *ngIf="fatchPaireData">
+    <div class="row" *ngIf="fetchPairData">
       <div class="available-items">
         <table class="table table-condensed boardtable">
           <thead>
@@ -24,10 +23,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let pair of pairs">
-              <td width="14%" class="text-left" (click)="clickPair(pair)">  
+              <td width="14%" class="text-left" [ngClass]="{'currentPair-color' : shareDataService.currentPair.pair === pair.pair}" (click)="clickPair(pair)">
                 {{pair.pair.split('/').join(' / ') | uppercase  }}</td>
-              <td width="14%" class="text-center">{{pair.price | number: '1.0-2'}}</td>
-              <td width="12%" class="text-right">{{pair.change | number: '1.0-2'}}</td>
+              <td width="14%" [ngClass]="{'currentPair-color' : shareDataService.currentPair.pair === pair.pair}" class="text-center">{{pair.price | number: '1.0-2'}}</td>
+              <td width="12%" [ngClass]="{'currentPair-color' : shareDataService.currentPair.pair === pair.pair}" class="text-right">{{pair.change | number: '1.0-2'}}</td>
             </tr>
           </tbody>
         </table>

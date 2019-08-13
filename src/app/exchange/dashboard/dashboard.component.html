@@ -1,7 +1,7 @@
 <div class="row wrapper">
   <div class="col-lg-2">
     <ngx-pair (messageEvent)="receiveMessage($event)" class="main one order-1"></ngx-pair>
-    <ngx-trade class="main two"></ngx-trade>
+    <ngx-trade (messageEvent)="receiveMessage($event)" class="main two"></ngx-trade>
   </div>
   <div class="col-lg-7 nopadd mobpaddfix">
     <nb-card class="main three">
@@ -29,7 +29,7 @@
 
       <nb-card-body>
         <div class="clearfix"></div>
-        <span class="fetching-spinner" *ngIf="fatchTradeData">
+        <span class="fetching-spinner" *ngIf="fetchTradeData">
           <i class="fa fa-spinner spinner-color fa-spin"></i>
         </span>
         <div *ngIf="noDataOpenTrade"><span>{{ "pages.exchange.noOpenOrderAvailable" | translate}}</span></div>
@@ -105,12 +105,9 @@
         </div>
       </nb-card-body>
     </nb-card>
-
   </div>
   <div class="col-lg-3">
     <ngx-board class="main five"></ngx-board>
     <ngx-trade-history class="main six"></ngx-trade-history>
   </div>
-
-
 </div>
