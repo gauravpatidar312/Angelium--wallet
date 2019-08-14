@@ -43,7 +43,7 @@
               </span>
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingBuyTotalAmount"></i></span>
             </label>
-            <input type="text" class="form-control" name="btc" [value]="tradeBuy.price * tradeBuy.amount" disabled>
+            <input type="text" class="form-control" name="btc" [value]="(tradeBuy.price * tradeBuy.amount | number : '1.0-8')" disabled>
             <span class="form-control-feedback mr-2">{{tradeBuy.to | uppercase}}</span>
           </div>
         </div>
@@ -93,7 +93,7 @@
               </span>
               <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingSellTotalAmount"></i></span>
             </label>
-            <input type="text" class="form-control" name="total" [value]="tradeSell.price * tradeSell.amount" disabled>
+            <input type="text" class="form-control" name="total" [value]="(tradeSell.price * tradeSell.amount | number : '1.0-8')" disabled>
             <span class="form-control-feedback mr-2">{{tradeSell.to | uppercase}}</span>
           </div>
         </div>
@@ -122,7 +122,7 @@
     <nb-card-header class="header-popup">{{"pages.exchange.withdraw" | translate | uppercase}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref)"></i>
     </nb-card-header>
-    <nb-card-body class="image-scoll-card-body overflow-unset">
+    <nb-card-body class="body-padding overflow-unset">
       <div class="form-group font-avenir">
         <label class="text-success">{{"common.from" | translate}}</label>
         <div class="dropdown" ngbDropdown>
@@ -143,7 +143,7 @@
       <div class="form-group total-amount">
           <label class="text-success">{{"common.amount" | translate}}</label>
           <span class="available-amount font-avenir" (click)="setSendMaxValueForWithdraw()" *ngIf="selectWalletData?.coin">
-             {{(withdrawWalletAmount | number: '1.0-6') + ' ' + (selectWalletData?.coin) + '/' + ("pages.exchange.max" | translate)}}
+             {{(withdrawWalletAmount | number: '1.0-6') + ' ' + (selectWalletData?.coin) + '/ ' + ("pages.exchange.max" | translate)}}
           </span>
           <div class="input-group">
             <input type="number" [disabled]="!selectWalletData?.coin" class="form-control" (keyup)="setWithDrawAmount(selectWalletData?.coin)"  placeholder="{{'pages.heaven.enterAmount' | translate}}" [(ngModel)]="withdrawAmount">
@@ -169,7 +169,7 @@
         {{"pages.exchange.deposit" | translate | uppercase}}
       <i class="nb-close nb-icon-left fa-2x" (click)="cancelDialog(ref,'deposit')"></i>
     </nb-card-header>
-    <nb-card-body class="image-scoll-card-body overflow-unset">
+    <nb-card-body class="body-padding overflow-unset">
       <div class="form-group font-avenir">
         <label class="text-success">{{"common.from" | translate}}</label>
         <div class="dropdown" ngbDropdown>
@@ -191,7 +191,7 @@
       <div class="form-group total-amount">
         <label class="text-success">{{"common.amount" | translate}}</label>
         <span class="available-amount font-avenir" (click)="setSendMaxValueForDeposit()" *ngIf="seletedCryptoDepositData.name">
-             {{(depositPopupAmount | number: '1.0-6') + ' ' + (seletedCryptoDepositData?.name) + '/' + ("pages.exchange.max" | translate)}}
+             {{(depositPopupAmount | number: '1.0-6') + ' ' + (seletedCryptoDepositData?.name) + '/ ' + ("pages.exchange.max" | translate)}}
         </span>
         <div class="input-group">
           <input type="number" class="form-control" [disabled]="!seletedCryptoDepositData?.name" (keyup)="setDepositAmount(seletedCryptoDepositData?.name)" [(ngModel)]="depositAmount" placeholder="{{'pages.heaven.enterAmount' | translate}}">

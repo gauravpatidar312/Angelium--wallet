@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import { HttpService } from '../../services/http.service';
+import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
-import { ShareDataService } from '../../services/share-data.service';
+import {ShareDataService} from '../../services/share-data.service';
 
 @Component({
   selector: 'ngx-trade-history',
@@ -10,19 +10,19 @@ import { ShareDataService } from '../../services/share-data.service';
   styleUrls: ['./trade-history.component.scss']
 })
 export class TradeHistoryComponent implements OnInit {
-  tradeData:any = [];
-  tradeHistorySpinner:boolean = false;
-  noHistory:boolean = false;
-  
-  constructor(private httpService:HttpService,
+  tradeData: any = [];
+  tradeHistorySpinner: boolean = false;
+  noHistory: boolean = false;
+
+  constructor(private httpService: HttpService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private translate: TranslateService,) {}
+              private translate: TranslateService) {}
 
   ngOnInit() {}
-  
-  parentData(data: any){
-    if (data) {  
+
+  parentData(data: any) {
+    if (data) {
       this.tradeHistorySpinner = true;
       this.tradeData = [];
       this.noHistory = false;
@@ -30,21 +30,22 @@ export class TradeHistoryComponent implements OnInit {
     }
   }
 
-  getTradeHistory(data: any){
-    let pairData = { 'pair': data.pair };
-    this.httpService.post(pairData, '/exchange/trades/').subscribe((res:any)=>{
-      if(res.status){
-        this.tradeHistorySpinner = false;
+  getTradeHistory(data: any) {
+    const pairData = {'pair': data.pair};
+    this.httpService.post(pairData, '/exchange/trades/').subscribe((res: any) => {
+      this.tradeHistorySpinner = false;
+      if (res.status) {
         this.noHistory = false;
         this.tradeData = res.data.trades;
-        if (res.data.trades == 0) {
+        if (res.data.trades === 0) {
           this.tradeHistorySpinner = false;
           this.noHistory = true;
         }
       }
-    }, err=>{
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), 
-          this.translate.instant('pages.exchange.toastr.tradeHistoryError'));
+    }, err => {
+      this.tradeHistorySpinner = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),
+        this.translate.instant('pages.exchange.toastr.tradeHistoryError'));
     });
   }
 }

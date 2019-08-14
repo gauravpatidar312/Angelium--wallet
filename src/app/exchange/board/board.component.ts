@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ShareDataService} from '../../services/share-data.service';
 import {HttpService} from '../../services/http.service';
+import {ToastrService} from '../../services/toastr.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-board',
@@ -13,21 +15,24 @@ export class BoardComponent implements OnInit {
   boardTableValue: boolean = false;
   boardBuy = [];
   boardSell = [];
+  lastTrade: any = {};
   noSellData: boolean = false;
   noBuyData: boolean = false;
   boardSellAvai: boolean = false;
   boardBuyAvai: boolean = false;
 
   constructor(private shareDataService: ShareDataService,
-              private httpService: HttpService) {}
+              private httpService: HttpService,
+              private toastrService: ToastrService,
+              public translate: TranslateService) {}
 
   ngOnInit() {}
 
   getBoardData(pair: any) {
     const data = {'pair': pair};
     this.httpService.post(data, 'exchange/order_book/').subscribe((res?: any) => {
+      this.boardSpinner = false;
       if (res.status) {
-        this.boardSpinner = false;
         this.boardTableValue = true;
         this.boardBuy = res.data.buy;
         this.boardSell = res.data.sell;
@@ -36,6 +41,9 @@ export class BoardComponent implements OnInit {
         if (res.data.buy !== 0) this.boardBuyAvai = false;
         else this.boardBuyAvai = true;
       }
+    }, (err) => {
+      this.boardSpinner = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err),  this.translate.instant('pages.exchange.toastr.board'));
     });
   }
 
@@ -49,14 +57,14 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  lastTrade: any = {};
-
   getLastTrade(pair: any) {
     const data = {'pair': pair};
     this.httpService.post(data, 'exchange/lasttrade/').subscribe((res?: any) => {
       if (res.status) {
         this.lastTrade = res.data.last_trade;
       }
+    }, (err) => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeHistory'));
     });
   }
 }

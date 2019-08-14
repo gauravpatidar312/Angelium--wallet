@@ -46,7 +46,7 @@ declare let jQuery: any;
 
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}">
-            <a data-toggle="pill" routerLink="/pages/exchange">
+            <a data-toggle="pill" routerLink="/exchange">
               <i class="iconsize nb-shuffle" style="float:none"></i> Exchange
             </a>
           </li>
