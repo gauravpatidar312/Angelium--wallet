@@ -1,16 +1,16 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
-import {DecimalPipe} from '@angular/common';
-import {NbDialogService, NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
-import {takeWhile} from 'rxjs/internal/operators';
-import {ShareDataService} from '../../services/share-data.service';
-import {SessionStorageService} from '../../services/session-storage.service';
-import {IndexedDBStorageService} from '../../services/indexeddb-storage.service';
-import {HttpService} from '../../services/http.service';
-import {ToastrService} from '../../services/toastr.service';
-import {ActivatedRoute} from '@angular/router';
-import {environment} from 'environments/environment';
-import {TranslateService} from '@ngx-translate/core';
-import {LocalDataSource} from 'ng2-smart-table';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { NbDialogService, NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
+import { takeWhile } from 'rxjs/internal/operators';
+import { ShareDataService } from '../../services/share-data.service';
+import { SessionStorageService } from '../../services/session-storage.service';
+import { IndexedDBStorageService } from '../../services/indexeddb-storage.service';
+import { HttpService } from '../../services/http.service';
+import { ToastrService } from '../../services/toastr.service';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'environments/environment';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalDataSource } from 'ng2-smart-table';
 import Swal from 'sweetalert2';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -29,12 +29,12 @@ export class TransferComponent implements OnInit {
   fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
   sendType: string = 'SELECT';
-  receiveType: string =  'SELECT';
+  receiveType: string = 'SELECT';
   user: any;
   fromType: string = 'ANX';
-  toType: string =  'SELECT';
+  toType: string = 'SELECT';
   fromTypes: string[] = ['ANX'];
-  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
+  breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
   breakpoints: any;
   setReceiveTab: boolean = false;
   setOTCTab: boolean = false;
@@ -44,6 +44,7 @@ export class TransferComponent implements OnInit {
   toggle: boolean;
   waitFlag: boolean = false;
   myWallets: any = [];
+  resWallets: any = [];
   sendWallet: any = {};
   sendWallets: any = [];
   receiveWallet: any = {};
@@ -58,16 +59,16 @@ export class TransferComponent implements OnInit {
   usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   constructor(private httpService: HttpService,
-              private decimalPipe: DecimalPipe,
-              private dialogService: NbDialogService,
-              private themeService: NbThemeService,
-              private breakpointService: NbMediaBreakpointsService,
-              private shareDataService: ShareDataService,
-              private toastrService: ToastrService,
-              private sessionStorage: SessionStorageService,
-              private storageService: IndexedDBStorageService,
-              private translate: TranslateService,
-              private activatedRoute: ActivatedRoute) {
+    private decimalPipe: DecimalPipe,
+    private dialogService: NbDialogService,
+    private themeService: NbThemeService,
+    private breakpointService: NbMediaBreakpointsService,
+    private shareDataService: ShareDataService,
+    private toastrService: ToastrService,
+    private sessionStorage: SessionStorageService,
+    private storageService: IndexedDBStorageService,
+    private translate: TranslateService,
+    private activatedRoute: ActivatedRoute) {
     this.user = this.sessionStorage.getFromSession('userInfo');
 
     this.breakpoints = this.breakpointService.getBreakpointsMap();
@@ -159,10 +160,10 @@ export class TransferComponent implements OnInit {
           this.waitFlag = true;
           setTimeout(() => {
             this.waitFlag = false;
-            this.storageService.saveToAngeliumSession({'waitTime': null});
+            this.storageService.saveToAngeliumSession({ 'waitTime': null });
           }, seconds);
         } else {
-          this.storageService.saveToAngeliumSession({'waitTime': null});
+          this.storageService.saveToAngeliumSession({ 'waitTime': null });
         }
       }
     }
@@ -201,15 +202,20 @@ export class TransferComponent implements OnInit {
         wallet.title = wallet.wallet_type;
         if (wallet.wallet_type === 'USDT')
           wallet.title = 'USDT (OMNI)';
-        else if (wallet.wallet_type === 'ERCUSDT')
+        else if (wallet.wallet_type === 'USDT (ERC20)')
           wallet.title = 'USDT (ERC20)';
         return wallet.wallet_type !== 'ANX';
       });
       this.myWallets = _.sortBy(walletData, ['title']);
 
+
+      this.resWallets = _.filter(this.myWallets, (wallet?: any) => {
+        return wallet.wallet_type !== 'USDT';
+      }) || [];
+
       this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
-          return wallet.wallet_type !== 'ERCUSDT';
-        }) || [];
+        return wallet.wallet_type !== 'ERCUSDT';
+      }) || [];
       this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
 
       if (!this.myWallets) {
@@ -218,6 +224,8 @@ export class TransferComponent implements OnInit {
         this.toType = 'SELECT';
       } else if (this.shareDataService.transferTab) {
         this.onChangeWallet(this.shareDataService.transferTitle, this.shareDataService.transferTab.toLowerCase());
+        console.log('walletType  --->' + this.shareDataService.transferTitle, 'typeValue  --->' + this.shareDataService.transferTab.toLowerCase())
+
         this.shareDataService.transferTab = null;
         this.shareDataService.transferTitle = null;
       }
@@ -263,31 +271,31 @@ export class TransferComponent implements OnInit {
   copyAddress() {
     if (this.receiveWallet.address)
       this.toastrService.success(this.translate.instant('pages.transfer.toastr.walletAddressCopiedSuccessfully'),
-      this.translate.instant('pages.transfer.toastr.copyAddress'));
+        this.translate.instant('pages.transfer.toastr.copyAddress'));
   }
 
   openTradeDialog(dialog: TemplateRef<any>) {
     if (this.sendWallet.wallet_type === 'USDT' && !this.minerFee) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
-      this.translate.instant('pages.transfer.send'));
+        this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
-      this.translate.instant('pages.transfer.send'));
+        this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
-      this.translate.instant('pages.transfer.send'));
+        this.translate.instant('pages.transfer.send'));
       return;
     }
 
     this.setAmount(this.sendWallet.wallet_type);
 
-    this.dialogService.open(dialog,  {
+    this.dialogService.open(dialog, {
       closeOnBackdropClick: false,
       autoFocus: false,
     });
@@ -296,11 +304,11 @@ export class TransferComponent implements OnInit {
   tradPasswordDialog(ref: any) {
     if (!this.trade_password) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterYourTradePassword'),
-      this.translate.instant('common.tradePassword'));
+        this.translate.instant('common.tradePassword'));
       return;
     }
     const endpoint = 'verify-trade-password/';
-    const apiData = {'trade_password': this.trade_password};
+    const apiData = { 'trade_password': this.trade_password };
     this.httpService.post(apiData, endpoint)
       .subscribe((res?: any) => {
         if (res.status) {
@@ -312,7 +320,7 @@ export class TransferComponent implements OnInit {
         }
       }, err => {
         this.toastrService.danger(this.shareDataService.getErrorMessage(err),
-        this.translate.instant('common.tradePassword'));
+          this.translate.instant('common.tradePassword'));
       });
   }
 
@@ -389,12 +397,12 @@ export class TransferComponent implements OnInit {
         this.otcWallet.toAmount = 0;
         this.otcWallet.toDollar = 0;
         this.toastrService.danger(this.shareDataService.getErrorMessage(err),
-        this.translate.instant('common.fetchingAmount'));
+          this.translate.instant('common.fetchingAmount'));
       });
     }, (err) => {
       this.fetchingAmount = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err),
-      this.translate.instant('common.fetchingAmount'));
+        this.translate.instant('common.fetchingAmount'));
     });
   }
 
@@ -404,10 +412,12 @@ export class TransferComponent implements OnInit {
   }
 
   onChangeWallet(walletType: string, typeValue): void {
+    if (walletType == 'USDT (OMNI)')
+      walletType = 'USDT'
     if (typeValue === 'send') {
       const walletObject: any = _.find(this.myWallets, ['wallet_type', walletType]) || {};
       this.sendType = walletObject.title;
-      if (this.sendType  !== 'SELECT') {
+      if (this.sendType !== 'SELECT') {
         this.sendWallet = this.myWallets.find(item => {
           return item.wallet_type === walletType;
         });
@@ -451,19 +461,19 @@ export class TransferComponent implements OnInit {
   onSendTransfer() {
     if (this.sendWallet.wallet_type === 'USDT' && !this.minerFee) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.minerFeeError'),
-      this.translate.instant('pages.transfer.send'));
+        this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (!this.transfer_amount || !Number(this.transfer_amount) || !this.destination_address) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
-      this.translate.instant('pages.transfer.send'));
+        this.translate.instant('pages.transfer.send'));
       return;
     }
 
     if (Number(this.transfer_amount) > Number(this.sendWallet.wallet_amount)) {
       this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
-      this.translate.instant('pages.transfer.send'));
+        this.translate.instant('pages.transfer.send'));
       return;
     }
 
@@ -479,7 +489,7 @@ export class TransferComponent implements OnInit {
     else if (this.sendWallet.wallet_type === 'USDT')
       validateEndpoint = 'validate_usdt/';
     if (validateEndpoint) {
-      this.httpService.post({'amount': Number(this.transfer_amount)}, validateEndpoint).subscribe((res?: any) => {
+      this.httpService.post({ 'amount': Number(this.transfer_amount) }, validateEndpoint).subscribe((res?: any) => {
         if (res.status)
           this.sendTransferApi();
         else
@@ -509,16 +519,16 @@ export class TransferComponent implements OnInit {
         const currentTime = new Date();
         currentTime.setSeconds(currentTime.getSeconds() + 15);
         // this.sessionStorageService.saveToSession('waitTime', currentTime);
-        this.storageService.saveToAngeliumSession({'waitTime': currentTime});
+        this.storageService.saveToAngeliumSession({ 'waitTime': currentTime });
         setTimeout(() => {
           this.waitFlag = false;
           // this.sessionStorageService.deleteFromSession('waitTime');
-          this.storageService.saveToAngeliumSession({'waitTime': null});
+          this.storageService.saveToAngeliumSession({ 'waitTime': null });
         }, 15000);
 
         this.formSubmitting = false;
         this.toastrService.success(this.translate.instant('pages.transfer.toastr.transferSuccessfullyCompleted'),
-        this.translate.instant('pages.transfer.send'));
+          this.translate.instant('pages.transfer.send'));
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           const walletData = _.filter(data, (wallet?: any) => {
             wallet.title = wallet.wallet_type;
@@ -530,8 +540,8 @@ export class TransferComponent implements OnInit {
           });
           this.myWallets = _.sortBy(walletData, ['title']);
           this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
-              return wallet.wallet_type !== 'ERCUSDT';
-            }) || [];
+            return wallet.wallet_type !== 'ERCUSDT';
+          }) || [];
         });
         this.onChangeWallet('SELECT', 'send');
         this.destination_address = null;
