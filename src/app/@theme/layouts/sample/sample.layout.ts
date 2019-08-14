@@ -50,8 +50,9 @@ declare let jQuery: any;
 
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}">
-            <a data-toggle="pill" routerLink="/pages/exchange">
-              <i class="iconsize nb-shuffle" style="float:none"></i> Exchange
+            <a data-toggle="pill" routerLink="/exchange">
+              <i class="iconsize nb-shuffle" style="float:none"></i>
+              <span class="exchange-position">Exchange</span>
             </a>
           </li>
         </ul>

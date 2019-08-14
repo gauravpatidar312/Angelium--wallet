@@ -24,7 +24,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
   exchangeWallets: any = [];
   myWallets = [];
   depositAmount: number;
-  withdrawAmount: number = 0;
+  withdrawAmount: number;
   selectWalletData: any = {};
   seletedCryptoDepositData: any = {};
   cryptoDepositType: string = this.translate.instant('common.select');
@@ -81,9 +81,10 @@ export class TradeComponent implements OnInit, AfterViewInit {
   getExchangeWallet() {
     this.httpService.get('exchange/wallet/').subscribe((res?: any) => {
       if (res.status) {
-        this.exchangeWallets = _.filter(res.data, (wallet) => {
+        const exchangeData = _.filter(res.data, (wallet) => {
           return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) > -1;
-        });
+        }) || [];
+        this.exchangeWallets = _.sortBy(exchangeData, ['coin']);
       }
     }, err => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
@@ -93,9 +94,10 @@ export class TradeComponent implements OnInit, AfterViewInit {
   getMyWallets() {
     this.httpService.get('asset/').subscribe((res?: any) => {
       if (res.cryptos) {
-        this.myWallets = _.filter(res.cryptos, (wallet) => {
+        const myWalletsData = _.filter(res.cryptos, (wallet) => {
             return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.name) > -1;
           }) || [];
+        this.myWallets = _.sortBy(myWalletsData, ['name']);
       }
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
@@ -104,15 +106,20 @@ export class TradeComponent implements OnInit, AfterViewInit {
 
   getMaxAmount(type) {
     if (type === 'tradeBuy') {
-      if (this.tradeBuy.price === 0 || this.tradeBuy.amount === 0) {
-        this.toastrService.danger('Please enter amount.', this.translate.instant('pages.exchange.wallet'));
+      if (!this.tradeBuy.price || this.tradeBuy.price === 0) {
+        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.enterAmountFirst'), this.translate.instant('pages.exchange.wallet'));
         return;
       }
+
+      const walletData = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
+      this.tradeBuy.amount = ShareDataService.toFixedDown((Number(walletData.balance) / this.tradeBuy.price), 6);
     } else if (type === 'tradeSell') {
-      if (this.tradeSell.price === 0 || this.tradeSell.amount === 0) {
-        this.toastrService.danger('Please enter amount.', this.translate.instant('pages.exchange.wallet'));
+      if (!this.tradeSell.price || this.tradeSell.price === 0) {
+        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.enterAmountFirst'), this.translate.instant('pages.exchange.wallet'));
         return;
       }
+      const walletData = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
+      this.tradeSell.amount = ShareDataService.toFixedDown(Number(walletData.balance), 6);
     }
   }
 
@@ -187,14 +194,22 @@ export class TradeComponent implements OnInit, AfterViewInit {
   submitTradeBuy() {
     if (this.tradeBuy.price === 0 || this.tradeBuy.amount === 0) return;
 
-    const currentWallet = _.find(this.exchangeWallets, ['coin', this.tradeBuy.from.toUpperCase()]) || {};
-    if (Number(this.tradeBuy.price * this.tradeBuy.amount) >= Number(currentWallet.balance)) {
-      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.InsufficientBalance'), 'ANX');
+    const currentWallet = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.from.toUpperCase()]) || {};
+    if (Number(this.tradeBuy.price * this.tradeBuy.amount) > Number(currentWallet.balance)) {
+      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
       return;
     }
 
+    const buyParams = {
+      'ordertype' : 'limit',
+      'pair': this.tradeBuy.pair,
+      'buy': true,
+      'amount': this.tradeBuy.amount,
+      'price': this.tradeBuy.price
+    };
+
     this.formSubmittingBuy = true;
-    this.httpService.post(this.tradeBuy, 'exchange/order_add/').subscribe((res?: any) => {
+    this.httpService.post(buyParams, 'exchange/order_add/').subscribe((res?: any) => {
       this.formSubmittingBuy = false;
       if (res.status) {
         this.tradeBuy.price = 0;
@@ -211,14 +226,21 @@ export class TradeComponent implements OnInit, AfterViewInit {
   submitTradeSell() {
     if (this.tradeSell.price === 0 || this.tradeSell.amount === 0) return;
 
-    const currentWallet = _.find(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
-    if (Number(this.tradeSell.price * this.tradeSell.amount) >= Number(currentWallet.balance)) {
-      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.InsufficientBalance'), 'ANX');
+    const currentWallet = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
+    if (Number(this.tradeSell.amount) > Number(currentWallet.balance)) {
+      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToSell'), this.translate.instant('pages.exchange.toastr.tradeSell'));
       return;
     }
 
+    const sellParams = {
+      'ordertype' : 'limit',
+      'pair': this.tradeSell.pair,
+      'buy': false,
+      'amount': this.tradeSell.amount,
+      'price': this.tradeSell.price
+    };
     this.formSubmittingSell = true;
-    this.httpService.post(this.tradeSell, 'exchange/order_add/').subscribe((res?: any) => {
+    this.httpService.post(sellParams, 'exchange/order_add/').subscribe((res?: any) => {
       this.formSubmittingSell = false;
       if (res.status) {
         this.tradeSell.price = 0;
@@ -234,14 +256,14 @@ export class TradeComponent implements OnInit, AfterViewInit {
 
   submitWithdrawDialog(ref) {
     if (!this.withdrawAmount) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
-        this.translate.instant('pages.transfer.send'));
+      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.pleaseEnterRequiredFieldForWithdraw'),
+        this.translate.instant('pages.transfer.withdraw'));
       return;
     }
 
     if (Number(this.withdrawAmount) > Number(this.selectWalletData.balance)) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
-        this.translate.instant('pages.exchange.deposit'));
+      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToWithdraw'),
+        this.translate.instant('pages.exchange.withdraw'));
       return;
     }
 
@@ -250,26 +272,28 @@ export class TradeComponent implements OnInit, AfterViewInit {
     this.submitWithdrawDisable = true;
     this.httpService.post(params, 'exchange/withdraw/').subscribe((res?: any) => {
       this.submitWithdrawDisable = false;
-      this.cancelDialog(ref, 'withdraw');
       if (res.status) {
         this.withdrawAmount = 0;
+        this.cancelDialog(ref, 'withdraw');
+        this.messageEvent.emit(this.shareDataService.currentPair);
         this.toastrService.success(this.translate.instant('pages.exchange.withdrawSuccessfully'), this.translate.instant('pages.exchange.toastr.withdraw'));
       }
     }, err => {
+      this.submitWithdrawDisable = false;
       this.withdrawAmount = 0;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.withdrawError'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.withdraw'));
     });
   }
 
   submitDepositDialog(ref) {
     if (!this.depositAmount) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
-        this.translate.instant('pages.transfer.send'));
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForDeposit'),
+        this.translate.instant('pages.exchange.deposit'));
       return;
     }
 
     if (Number(this.depositAmount) > Number(this.seletedCryptoDepositData.quantity)) {
-      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToDeposit'),
         this.translate.instant('pages.exchange.deposit'));
       return;
     }

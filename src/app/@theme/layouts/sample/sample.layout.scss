@@ -34,7 +34,6 @@
       padding: 3.4rem 0.25rem;
     }
 
-
     /deep/ .main-container {
       width: $sidebar-width;
       background: nb-theme(color-bg);
@@ -61,15 +60,13 @@
     }
 
     /deep/ .main-container {
-      height:
-        calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
+      height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
       @include nb-ltr(border-top-right-radius, nb-theme(radius));
       @include nb-rtl(border-top-left-radius, nb-theme(radius));
 
       @include nb-for-theme(corporate) {
         border: 1px solid nb-theme(separator);
-        height:
-          calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
+        height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
       }
     }
 
@@ -205,34 +202,56 @@
 #main-navigation li > a {
   text-decoration: none;
   font-family: nb-theme(font-nunito);
-  line-height:63px;
+  line-height: 40px;
   font-size: 1.2rem;
   display: inline-block;
   color: #ffffff;
   padding: 1px 25px;
   border-bottom: 2px solid transparent;
   font-weight: 400;
-  outline: transparent!important;
+  outline: transparent !important;
 }
-.pointer{ outline: none!important; }
-#main-navigation li > a i{
+
+.pointer {
+  outline: none !important;
+}
+
+#main-navigation li > a i {
   padding-right: 8px;
   font-size: 17px;
   float: left;
-  line-height: 63px;
+  line-height: 40px;
 }
-.iconsize{
-  font-size:24px!important;
+
+#main-navigation li > a span.exchange-position {
+    bottom: 4px;
+    position: relative;
 }
-#main-navigation li.active > a i{
-  color:#ffffff;
+
+.iconsize {
+  font-size: 24px !important;
 }
+
+#main-navigation li.active > a i {
+  color: #ffffff;
+}
+
 #main-navigation li.active > a {
   border-bottom: 2px solid #ffffff;
 }
+
 .navbar-header {
   font-family: nb-theme(font-nunito);
   font-weight: 500;
   font-size: 22px;
 }
-.navbar-pill { justify-content: flex-end; }
+
+.navbar-pill {
+  justify-content: flex-end;
+}
+
+@media only screen and (width: 320px) {
+  #main-navigation li > a {
+    padding: 0 !important;
+  }
+}
