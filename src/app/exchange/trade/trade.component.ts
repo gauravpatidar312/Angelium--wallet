@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit, TemplateRef} from '@angular/core';
+import {Output, EventEmitter} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {NbMediaBreakpoint, NbDialogService} from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
 
+import * as _ from 'lodash';
 declare let jQuery: any;
 
 @Component({
@@ -12,90 +15,376 @@ declare let jQuery: any;
   styleUrls: ['./trade.component.scss']
 })
 
-export class TradeComponent implements OnInit {
-  formSubmittingSell:boolean = false;
-  formSubmittingBuy:boolean = false;
+export class TradeComponent implements OnInit, AfterViewInit {
+  @Output() messageEvent = new EventEmitter<any>();
+  formSubmittingSell: boolean = false;
+  formSubmittingBuy: boolean = false;
+  breakpoints: any;
+  breakpoint: NbMediaBreakpoint = {name: '', width: 0};
+  exchangeWallets: any = [];
+  myWallets = [];
+  depositAmount: number;
+  withdrawAmount: number = 0;
+  selectWalletData: any = {};
+  seletedCryptoDepositData: any = {};
+  cryptoDepositType: string = this.translate.instant('common.select');
+  withdrawWalletType: string = this.translate.instant('common.select');
+  submitWithdrawDisable: boolean = false;
+  submitDepositDisable: boolean = false;
+  depositPopupAmount: number = 0;
+  withdrawWalletAmount: number = 0;
+  fetchingSellAmount: boolean = false;
+  sellWalletDollar: number = 0;
+  fetchingSellTotalAmount: boolean = false;
+  sellTotalWalletDollar: number = 0;
+  fetchingAmount: boolean = false;
+  fetchingWithdrawAmount: boolean = false;
+  fetchingBuyAmount: boolean = false;
+  buyWalletDollar: number = 0;
+  fetchingBuyTotalAmount: boolean = false;
+  buyTotalWalletDollar: number = 0;
+  tradeBuy: any = {};
+  tradeSell: any = {};
+
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
               private shareDataService: ShareDataService,
-              public translate: TranslateService,) {
+              public translate: TranslateService,
+              private dialogService: NbDialogService) {}
 
-  }
-  tradeByu = {
-    'ordertype': 'limit',
-    'pair':'anx/btc',
-    'from':'anx',
-    'to':'btc',
-    'amount': 0,
-    'price': 0,
-    'buy': true,
-    'status': 1
-  }
-  tradeSell = {
-    'ordertype': 'limit',
-    'pair': 'anx/btc',
-    'from': 'anx',
-    'to': 'btc',
-    'amount': 0,
-    'price': 0,
-    'buy': false,
-    'status': 1
-  }
-  
-  ngOnInit() {
-    this.shareDataService.currentPair.subscribe((data?:any)=> {
-      if (data) {
-        this.tradeByu.from = data.from;
-        this.tradeByu.to = data.to;
-        this.tradeByu.pair = data.pair;
+  ngOnInit() {}
 
-        this.tradeSell.from = data.from;
-        this.tradeSell.to = data.to;
-        this.tradeSell.pair = data.pair;
+  parentData(data: any) {
+    if (data) {
+      // tradeBuy
+      this.tradeBuy.from = data.from;
+      this.tradeBuy.to = data.to;
+      this.tradeBuy.pair = data.pair;
+      this.tradeBuy.amount = 0;
+      this.tradeBuy.price = 0;
+      this.buyWalletDollar = 0;
+      this.buyTotalWalletDollar = 0;
+      // tradeSell
+      this.tradeSell.from = data.from;
+      this.tradeSell.to = data.to;
+      this.tradeSell.pair = data.pair;
+      this.tradeSell.amount = 0;
+      this.tradeSell.price = 0;
+      this.sellWalletDollar = 0;
+      this.sellTotalWalletDollar = 0;
+
+      this.getExchangeWallet();
+      this.getMyWallets();
+    }
+  }
+
+  getExchangeWallet() {
+    this.httpService.get('exchange/wallet/').subscribe((res?: any) => {
+      if (res.status) {
+        this.exchangeWallets = _.filter(res.data, (wallet) => {
+          return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) > -1;
+        });
       }
+    }, err => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
+    });
+  }
+
+  getMyWallets() {
+    this.httpService.get('asset/').subscribe((res?: any) => {
+      if (res.cryptos) {
+        this.myWallets = _.filter(res.cryptos, (wallet) => {
+            return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.name) > -1;
+          }) || [];
+      }
+    }, (err) => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
+    });
+  }
+
+  getMaxAmount(type) {
+    if (type === 'tradeBuy') {
+      if (this.tradeBuy.price === 0 || this.tradeBuy.amount === 0) {
+        this.toastrService.danger('Please enter amount.', this.translate.instant('pages.exchange.wallet'));
+        return;
+      }
+    } else if (type === 'tradeSell') {
+      if (this.tradeSell.price === 0 || this.tradeSell.amount === 0) {
+        this.toastrService.danger('Please enter amount.', this.translate.instant('pages.exchange.wallet'));
+        return;
+      }
+    }
+  }
+
+  changeWithdrawCrypto(cryptoName?: any) {
+    this.withdrawWalletType = cryptoName;
+    this.selectWalletData = _.find(this.exchangeWallets, ['coin', cryptoName]) || {};
+    this.withdrawWalletAmount = this.selectWalletData.balance;
+    this.withdrawAmount = 0;
+    this.setWithDrawAmount(this.selectWalletData.coin);
+  }
+
+  setWithDrawAmount(walletType) {
+    if (!this.withdrawAmount || !this.selectWalletData || !this.selectWalletData.coin) {
+      this.selectWalletData.dollar_amount = 0;
+      return;
+    }
+
+    this.fetchingWithdrawAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.selectWalletData.dollar_amount = Number(this.withdrawAmount) * data[walletType];
+      this.fetchingWithdrawAmount = false;
+    }, (err) => {
+      this.fetchingWithdrawAmount = false;
+      this.selectWalletData.dollar_amount = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+
+  changeDepositCrypto(cryptoName?: any) {
+    this.cryptoDepositType = cryptoName;
+    this.seletedCryptoDepositData = _.find(this.myWallets, ['name', cryptoName]) || {};
+    this.depositPopupAmount = this.seletedCryptoDepositData.quantity;
+    this.depositAmount = 0;
+    this.setDepositAmount(this.seletedCryptoDepositData.name);
+  }
+
+  setDepositAmount(cryptoType) {
+    if (!this.depositAmount || !this.seletedCryptoDepositData || !this.seletedCryptoDepositData.name) {
+      this.seletedCryptoDepositData.dollar_amount = 0;
+      return;
+    }
+
+    this.fetchingAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.seletedCryptoDepositData.dollar_amount = Number(this.depositAmount) * data[cryptoType];
+      this.fetchingAmount = false;
+    }, (err) => {
+      this.fetchingAmount = false;
+      this.seletedCryptoDepositData.dollar_amount = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+
+  setSendMaxValueForDeposit() {
+    if (!this.seletedCryptoDepositData || !this.seletedCryptoDepositData.quantity) {
+      return;
+    }
+
+    this.depositAmount = this.seletedCryptoDepositData.quantity;
+    this.setDepositAmount(this.seletedCryptoDepositData.name);
+  }
+
+  setSendMaxValueForWithdraw() {
+    if (!this.selectWalletData) {
+      return;
+    }
+
+    this.withdrawAmount = this.selectWalletData.balance;
+    this.setWithDrawAmount(this.selectWalletData.coin);
+  }
+
+  submitTradeBuy() {
+    if (this.tradeBuy.price === 0 || this.tradeBuy.amount === 0) return;
+
+    const currentWallet = _.find(this.exchangeWallets, ['coin', this.tradeBuy.from.toUpperCase()]) || {};
+    if (Number(this.tradeBuy.price * this.tradeBuy.amount) >= Number(currentWallet.balance)) {
+      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.InsufficientBalance'), 'ANX');
+      return;
+    }
+
+    this.formSubmittingBuy = true;
+    this.httpService.post(this.tradeBuy, 'exchange/order_add/').subscribe((res?: any) => {
+      this.formSubmittingBuy = false;
+      if (res.status) {
+        this.tradeBuy.price = 0;
+        this.tradeBuy.amount = 0;
+        this.messageEvent.emit(this.shareDataService.currentPair);
+        this.toastrService.success(this.translate.instant('pages.exchange.toastr.tradeBuySuccessfully'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
+      }
+    }, err => {
+      this.formSubmittingBuy = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeBuy'));
+    });
+  }
+
+  submitTradeSell() {
+    if (this.tradeSell.price === 0 || this.tradeSell.amount === 0) return;
+
+    const currentWallet = _.find(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
+    if (Number(this.tradeSell.price * this.tradeSell.amount) >= Number(currentWallet.balance)) {
+      this.toastrService.danger(this.translate.instant('pages.exchange.toastr.InsufficientBalance'), 'ANX');
+      return;
+    }
+
+    this.formSubmittingSell = true;
+    this.httpService.post(this.tradeSell, 'exchange/order_add/').subscribe((res?: any) => {
+      this.formSubmittingSell = false;
+      if (res.status) {
+        this.tradeSell.price = 0;
+        this.tradeSell.amount = 0;
+        this.messageEvent.emit(this.shareDataService.currentPair);
+        this.toastrService.success(this.translate.instant('pages.exchange.toastr.tradeSellSuccessfully'), this.translate.instant('pages.exchange.toastr.tradeSell'));
+      }
+    }, err => {
+      this.formSubmittingSell = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.tradeSell'));
+    });
+  }
+
+  submitWithdrawDialog(ref) {
+    if (!this.withdrawAmount) {
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
+        this.translate.instant('pages.transfer.send'));
+      return;
+    }
+
+    if (Number(this.withdrawAmount) > Number(this.selectWalletData.balance)) {
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
+        this.translate.instant('pages.exchange.deposit'));
+      return;
+    }
+
+    const params = {'coin': this.selectWalletData.coin.toLowerCase(), 'amount': this.withdrawAmount};
+
+    this.submitWithdrawDisable = true;
+    this.httpService.post(params, 'exchange/withdraw/').subscribe((res?: any) => {
+      this.submitWithdrawDisable = false;
+      this.cancelDialog(ref, 'withdraw');
+      if (res.status) {
+        this.withdrawAmount = 0;
+        this.toastrService.success(this.translate.instant('pages.exchange.withdrawSuccessfully'), this.translate.instant('pages.exchange.toastr.withdraw'));
+      }
+    }, err => {
+      this.withdrawAmount = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.withdrawError'));
+    });
+  }
+
+  submitDepositDialog(ref) {
+    if (!this.depositAmount) {
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.pleaseEnterRequiredFieldForTransfer'),
+        this.translate.instant('pages.transfer.send'));
+      return;
+    }
+
+    if (Number(this.depositAmount) > Number(this.seletedCryptoDepositData.quantity)) {
+      this.toastrService.danger(this.translate.instant('pages.transfer.toastr.youDontHaveSufficientBalanceToSend'),
+        this.translate.instant('pages.exchange.deposit'));
+      return;
+    }
+
+    const params = {'coin': this.seletedCryptoDepositData.name.toLowerCase(), 'amount': this.depositAmount};
+    this.submitDepositDisable = true;
+    this.httpService.post(params, 'exchange/deposit/').subscribe((res?: any) => {
+      this.submitDepositDisable = false;
+      if (res.status) {
+        this.cancelDialog(ref, 'deposit');
+        this.depositAmount = 0;
+        this.messageEvent.emit(this.shareDataService.currentPair);
+        this.toastrService.success(this.translate.instant('pages.exchange.toastr.depositSuccessfully'), this.translate.instant('pages.exchange.deposit'));
+      }
+    }, err => {
+      this.submitDepositDisable = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.deposit'));
+    });
+  }
+
+  openDialog(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog, {
+      closeOnBackdropClick: false,
+      autoFocus: false,
+    });
+  }
+
+  cancelDialog(ref, title) {
+    if (title === 'deposit') {
+      this.cryptoDepositType = this.translate.instant('common.select');
+      this.seletedCryptoDepositData = {};
+      this.depositAmount = 0;
+    } else if (title === 'withdraw') {
+      this.withdrawWalletType = this.translate.instant('common.select');
+      this.selectWalletData = {};
+      this.withdrawAmount = 0;
+    }
+    ref.close();
+  }
+
+  setBuyAmount(walletType) {
+    if (!this.tradeBuy.price) {
+      this.buyWalletDollar = 0;
+      return;
+    }
+    this.setBuyTotalAmount(walletType);
+    this.fetchingBuyAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.buyWalletDollar = Number(this.tradeBuy.price) * data[walletType.toUpperCase()];
+      this.fetchingBuyAmount = false;
+    }, (err) => {
+      this.fetchingBuyAmount = false;
+      this.buyWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+
+  setBuyTotalAmount(walletType) {
+    const totalAmount = Number(this.tradeBuy.price * this.tradeBuy.amount);
+    if (!totalAmount) {
+      this.buyTotalWalletDollar = 0;
+      return;
+    }
+    this.fetchingBuyTotalAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.buyTotalWalletDollar = Number(this.tradeBuy.price * this.tradeBuy.amount) * data[walletType.toUpperCase()];
+      this.fetchingBuyTotalAmount = false;
+    }, (err) => {
+      this.fetchingBuyTotalAmount = false;
+      this.buyTotalWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+
+  setSellAmount(walletType) {
+    if (!this.tradeSell.price) {
+      this.sellWalletDollar = 0;
+      return;
+    }
+    this.setSellTotalAmount(walletType);
+    this.fetchingSellAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.sellWalletDollar = Number(this.tradeSell.price) * data[walletType.toUpperCase()];
+      this.fetchingSellAmount = false;
+    }, (err) => {
+      this.fetchingSellAmount = false;
+      this.sellWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
+  }
+
+  setSellTotalAmount(walletType) {
+    const totalAmount = Number(this.tradeSell.price * this.tradeSell.amount);
+    if (!totalAmount) {
+      this.sellTotalWalletDollar = 0;
+      return;
+    }
+    this.fetchingSellTotalAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      this.sellTotalWalletDollar = Number(this.tradeSell.price * this.tradeSell.amount) * data[walletType.toUpperCase()];
+      this.fetchingSellTotalAmount = false;
+    }, (err) => {
+      this.fetchingSellTotalAmount = false;
+      this.sellTotalWalletDollar = 0;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
     });
   }
 
   ngAfterViewInit() {
     jQuery('ul.tabs li').click(function (e) {
-      var tab_id = jQuery(this).attr('data-tab');
+      const tab_id = jQuery(this).attr('data-tab');
       jQuery('ul.tabs li').removeClass('active');
-        jQuery('.tab-content').removeClass('active');
-    
-        jQuery(this).addClass('active');
-        jQuery("#"+tab_id).addClass('active');
-    });
-  }
-
-  submitTradeBuy(){
-    if (this.tradeByu.price == 0 || this.tradeByu.amount == 0) return;
-    this.formSubmittingBuy = true;
-    this.httpService.post(this.tradeByu, 'exchange/order_add/').subscribe((res?:any)=>{
-      this.formSubmittingBuy = false;
-      if (res.status) {
-        this.tradeByu.price = 0;
-        this.tradeByu.amount = 0;
-        this.toastrService.success(this.translate.instant('pages.exchange.tradeBuy'), this.translate.instant('pages.exchange.tradeBuySuccessfully'));
-      }
-    }, err=>{
-      this.formSubmittingBuy = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.tradeBuyError'));
-    });
-  }
-
-  submitTradeSell(){
-    if (this.tradeSell.price == 0 || this.tradeSell.amount == 0) return;
-    this.formSubmittingSell = true;
-    this.httpService.post(this.tradeSell, 'exchange/order_add/').subscribe((res?:any)=>{
-      this.formSubmittingSell = false;
-      if (res.status) {
-        this.tradeSell.price = 0;
-        this.tradeSell.amount = 0;
-        this.toastrService.success(this.translate.instant('pages.exchange.tradeSell'), this.translate.instant('pages.exchange.tradeSellSuccessfully'));
-      }
-    }, err=>{
-      this.formSubmittingSell = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.tradeSellError'));
+      jQuery('.tab-content').removeClass('active');
+      jQuery(this).addClass('active');
+      jQuery('#' + tab_id).addClass('active');
     });
   }
 }

@@ -7,7 +7,7 @@
     <div class="logo" (click)="goToHome()"><img class="header-logo" src="/assets/images/header-logo.png"> <!--<span class="logo-text">ANGELIUM</span>--></div>
   </div>
 
-  <ul id="main-navigation" class="nav navbar-pill headerLine" *ngIf="userData?.user_type === 'owner'">
+  <ul id="main-navigation" class="nav navbar-pill headerLine" *ngIf="userData?.user_type === 'owner' || userData?.user_type === 'company'">
     <li class="pointer" routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}"
     ><a data-toggle="pill" routerLink="/pages/dashboard">

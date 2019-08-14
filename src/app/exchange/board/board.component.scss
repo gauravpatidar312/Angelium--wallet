@@ -9,7 +9,7 @@
 }
 nb-card-body {
   padding: 10px 30px
-  }
+}
 
 .minheight{
   min-height: 250px;
@@ -87,3 +87,4 @@ nb-card-body {
 .bigSize{
   font-size: 20px;
 }
+/deep/ .trade-chart-anx{ height: 576px;}

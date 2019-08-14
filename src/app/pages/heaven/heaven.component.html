@@ -96,8 +96,8 @@
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                   <li class="dropdown-item" *ngFor="let wallet of myWallets"
-                    (click)="changePeriod(wallet.wallet_type, 'createHeaven')">
-                    {{ wallet.wallet_type }}
+                    (click)="changePeriod(wallet?.wallet_type, 'createHeaven')">
+                    {{ wallet.title }}
                   </li>
                 </ul>
               </div>
@@ -109,7 +109,7 @@
                 {{"common.amount" | translate}}
               </label>
               <div class="input-group">
-                <div class="status-dd-week input-group-prepend input-group-btn dropdown" *ngIf="walletType === 'USDT'" ngbDropdown>
+                <div class="status-dd-week input-group-prepend input-group-btn dropdown" *ngIf="wallet?.wallet_type === 'USDT'" ngbDropdown>
                   <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet">
                     <label *ngIf="!minerFee">{{"common.fee" | translate}}</label>
                     <label *ngIf="minerFee">${{minerFee}}</label>
@@ -128,8 +128,8 @@
               </div>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
               title="Click to use whole amount">
-              {{maxAmount + ' ' + (wallet?.wallet_type) + ' / max' }}
-              </span>          
+              {{maxAmount + ' ' + (wallet?.title) + ' / max' }}
+              </span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
@@ -144,7 +144,7 @@
               </button>
             </div>
           </div>
-          <span class="miner-fee" *ngIf="walletType === 'USDT' && minerFee">{{"pages.heaven.minerFeeMessage" | translate:{"min": minMinutes, "max": maxMinutes} }}</span>
+          <span class="miner-fee" *ngIf="wallet?.wallet_type === 'USDT' && minerFee">{{"pages.heaven.minerFeeMessage" | translate:{"min": minMinutes, "max": maxMinutes} }}</span>
         </div>
       </nb-card-body>
     </nb-card>

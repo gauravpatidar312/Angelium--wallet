@@ -1,7 +1,7 @@
 <div class="row wrapper">
   <div class="col-lg-2">
     <ngx-pair (messageEvent)="receiveMessage($event)" class="main one order-1"></ngx-pair>
-    <ngx-trade class="main two"></ngx-trade>
+    <ngx-trade (messageEvent)="receiveMessage($event)" class="main two"></ngx-trade>
   </div>
   <div class="col-lg-7 nopadd mobpaddfix">
     <nb-card class="main three">
@@ -10,6 +10,7 @@
         <div class="tradingview-widget-container">
           <div id="tradingview_58f3c" class="twc"></div>
         </div>
+        <ngx-trade-echarts [graphData]="tradeChartData" [graphPair]="currentPair?.symbol"></ngx-trade-echarts>
         <!-- TradingView Widget END -->
       </nb-card-body>
     </nb-card>
@@ -18,72 +19,67 @@
       <nb-card-header >
         <ul id="main-navigation" class="nav mytradeLine empty_width">
           <li class="pointer active">
-            <a data-toggle="pill" (click)="getOpenOrder(currentPair.pair)">MY OPEN ORDERS</a>
+            <a data-toggle="pill" (click)="getOpenOrder(currentPair?.pair)">{{"pages.exchange.myOpenOrders" | translate}}</a>
           </li>
           <li class="pointer">
-            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair.pair)">MY TRADE HISTORY</a>
+            <a data-toggle="pill" (click)="getMyTradeHistory(currentPair?.pair)">{{"pages.exchange.myTradeHistory" | translate}}</a>
           </li>
         </ul>
       </nb-card-header>
 
       <nb-card-body>
         <div class="clearfix"></div>
-        <span class="fetching-spinner" *ngIf="fatchTradeData">
+        <span class="fetching-spinner" *ngIf="fetchTradeData">
           <i class="fa fa-spinner spinner-color fa-spin"></i>
         </span>
-        <div *ngIf="noDataOpenTrade"><span>No open order available</span></div>
+        <div *ngIf="noDataOpenTrade"><span>{{ "pages.exchange.noOpenOrderAvailable" | translate}}</span></div>
         <div class="table-responsive" *ngIf="tradeTab1">
           <table class="table table-condensed" *ngIf="!noDataOpenTrade">
             <thead>
               <tr>
-                <th width="13%" class="text-left">Time</th>
-                <th width="10%" class="text-center">Pair</th>
-                <th width="8%" class="text-center">Type</th>
-                <th width="9%" class="text-right">Price</th>
-                <th width="20%" class="text-right">Amount</th>
-                <th width="20%" class="text-right">Total Price</th>
-                <th width="20%" class="text-right">Fill %</th>
+                <th width="13%" class="text-left">{{"pages.exchange.time" | translate}}</th>
+                <th width="10%" class="text-center">{{"pages.exchange.Pair" | translate}}</th>
+                <th width="8%" class="text-center">{{"pages.transfer.type" | translate}}</th>
+                <th width="9%" class="text-right">{{"pages.exchange.price" | translate}}</th>
+                <th width="20%" class="text-right">{{"common.amount" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.fill" | translate}} %</th>
               </tr>
             </thead>
           </table>
           <div class="available-items">
             <table class="table table-condensed">
               <tbody>
-                <tr *ngFor="let buy of tradeBuy">
-                  <td width="13%" class="text-left">{{buy.timestamp | date:'MM-yy hh:mm'}}</td>
-                  <td width="10%" class="text-center">{{buy.pair}}</td>
-                  <td width="8%" class="text-center"><span class="green-text">BUY</span></td>
-                  <td width="9%" class="text-right">{{buy.price}}</td>
-                  <td width="20%" class="text-right">{{buy.amount}}</td>
-                  <td width="20%" class="text-right">{{buy.price * buy.amount}}</td>
-                  <td width="20%" class="text-right">{{buy.filled}}%</td>
-                </tr>
-                <tr *ngFor="let sell of tradeSell">
-                  <td width="13%" class="text-left">{{sell.timestamp | date:'MM-yy hh:mm'}}</td>
-                  <td width="10%" class="text-center">{{sell.pair}}</td>
-                  <td width="8%" class="text-center"><span class="pink-text">SELL</span></td>
-                  <td width="9%" class="text-right">{{sell.price | number: '1.0-2'}}</td>
-                  <td width="20%" class="text-right">{{sell.amount | number: '1.0-2'}}</td>
-                  <td width="20%" class="text-right">{{sell.price * sell.amount | number: '1.0-2'}}</td>
-                  <td width="20%" class="text-right">{{sell.filled | number: '1.0-2'}}%</td>
+                <tr *ngFor="let order of openOrderBuySell">
+                  <td width="13%" class="text-left">{{order.timestamp | date:'MM-yy hh:mm'}}</td>
+                  <td width="10%" class="text-center">{{order.pair }}</td>
+                  <td width="8%" class="text-center">
+                    <span class="{{order.buy ? 'green-text' : 'pink-text' }}">
+                      {{order.buy ? 'Buy' : 'Sell' }}
+                    </span>
+                  </td>
+                  <td width="9%" class="text-right">{{order.price | number: '1.0-2'}}</td>
+                  <td width="20%" class="text-right">{{order.amount | number: '1.0-2'}}</td>
+                  <td width="20%" class="text-right">{{order.price * order.amount | number: '1.0-2'}}</td>
+                  <td width="20%" class="text-right">{{order.filled | number: '1.0-2'}}%</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <div *ngIf="noDataTradeHistory"><span>No trade history available</span></div>
+        <div *ngIf="noDataTradeHistory"><span>{{ "pages.exchange.noTradeHistoryAvailable" | translate}}</span></div>
         <div class="table-responsive" *ngIf="tradeTab2">
           <table class="table table-condensed" *ngIf="!noDataTradeHistory">
             <thead>
               <tr>
-                <th width="13%" class="text-left">Time</th>
-                <th width="10%" class="text-center">Pair</th>
-                <th width="8%" class="text-center">Type</th>
-                <th width="9%" class="text-right">Price</th>
-                <th width="20%" class="text-right">Amount</th>
-                <th width="20%" class="text-right">Total Price</th>
-                <th width="20%" class="text-right">Fill %</th>
+                <th width="13%" class="text-left">{{"pages.exchange.time" | translate}}</th>
+                <th width="10%" class="text-center">{{"pages.exchange.Pair" | translate}}</th>
+                <th width="8%" class="text-center">{{"pages.transfer.type" | translate}}</th>
+                <th width="9%" class="text-right">{{"pages.exchange.price" | translate}}</th>
+                <th width="20%" class="text-right">{{"common.amount" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
+                <th width="20%" class="text-right">{{"pages.exchange.fill" | translate}} %</th>
               </tr>
             </thead>
           </table>
@@ -109,12 +105,9 @@
         </div>
       </nb-card-body>
     </nb-card>
-
   </div>
   <div class="col-lg-3">
     <ngx-board class="main five"></ngx-board>
     <ngx-trade-history class="main six"></ngx-trade-history>
   </div>
-
-
 </div>
