@@ -26,8 +26,6 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     'BTC': ['SEND', 'RECEIVE', 'HEAVEN'],
     'ETH': ['SEND', 'RECEIVE', 'HEAVEN'],
     'USDT': ['SEND', 'RECEIVE', 'HEAVEN'],
-    'USDT (OMNI)': ['SEND', 'HEAVEN'],
-    'USDT (ERC20)': ['RECEIVE', 'HEAVEN'],
   };
   tokenName: string;
   earningLiveUpdateCardData: LiveUpdateChart;
@@ -79,12 +77,6 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     if (currency === 'SEND' || currency === 'RECEIVE' || currency === 'OTC') {
       this.shareDataService.transferTab = currency;
       this.shareDataService.transferTitle = selectedCurrency;
-      if(selectedCurrency == 'USDT (ERC20)'){
-        this.shareDataService.transferTitle = 'ERCUSDT';
-      }
-      if(selectedCurrency == 'USDT (OMNY)'){
-        this.shareDataService.transferTitle = 'USDT';
-      }
       this.router.navigate(['/pages/transfer']);
     } else if (currency === 'HEAVEN') {
       if (selectedCurrency !== 'HEAVEN')

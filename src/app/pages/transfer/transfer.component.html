@@ -119,7 +119,7 @@
                             {{ receiveType}}
                           </button>
                           <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item" *ngFor="let period of resWallets"
+                            <li class="dropdown-item" *ngFor="let period of myWallets"
                                 (click)="onChangeWallet(period['wallet_type'], 'receive')">
                               {{ period['title'] }}
                             </li>
