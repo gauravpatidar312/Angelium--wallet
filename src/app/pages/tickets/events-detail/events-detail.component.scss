@@ -1,0 +1,281 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .dropdown-menu {
+    background-color: #100b48 !important;
+    border: 2px solid #7659ff !important;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #111550;
+  }
+
+  input[type='number']::-webkit-outer-spin-button, input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /deep/ ng2-smart-table .ng2-smart-filters {
+    display: none;
+  }
+
+  .cardbody {
+    overflow: unset;
+  }
+
+  .ticket-button {
+    font-family: nb-theme(font-bebas-bold);
+    font-size: 20px;
+    letter-spacing: 2px;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .font-avenir {
+    font-family: nb-theme(font-avenir);
+  }
+
+  .dropDown-padding {
+    padding: 13px !important;
+  }
+
+  .price-color {
+    color: #00ff00;
+  }
+
+  .b-color-wallet {
+    background-image: linear-gradient(to right, #ad59ff, #7659ff);
+    border: 1px;
+  }
+
+  .image-width {
+    background-image: url('/assets/images/fantasy.jpg');
+    background-size: cover;
+    background-position: center;
+    max-width: 100%;
+    height: calc(100vh - 130px);
+    background-repeat: no-repeat;
+  }
+
+  /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+    position: relative;
+    top: 20px;
+    &:hover {
+      color: #03d87c;
+    }
+  }
+
+  .above-heavenDays {
+    margin-top: 200px;
+  }
+
+  .event-heading {
+    margin-top: 100px;
+    margin-left: 100px;
+
+    .text-style {
+      font-size: 115px;
+      font-family: BebasNeueBold;
+      color: #000000;
+      margin: 0;
+      line-height: 0.9;
+    }
+
+    .date {
+      font-family: BebasNeueBold;
+      color: #000000;
+      text-align: center;
+      font-size: 55px;
+      float: left;
+      letter-spacing: 3px;
+      margin-right: 10px;
+    }
+
+    .venue {
+      font-family: BebasNeueBold;
+      color: #000000;
+      font-size: 25px;
+      float: left;
+      letter-spacing: 2px;
+    }
+  }
+
+  .iframe-style {
+    margin-left: 52px;
+    margin-top: 28px;
+    height: 305px;
+    width: 540px;
+  }
+
+  .btm-margin {
+    margin-top: 20px;
+  }
+
+  .ticket-name {
+    font-size: 30px;
+  }
+
+  .day-header-title {
+    font-size: 22px;
+  }
+
+  .title {
+    font-family: nb-theme(font-bebas);
+    font-size: 2rem;
+    font-weight: nb-theme(font-weight-bold);
+    color: nb-theme(card-fg-heading);
+  }
+
+  .title {
+    font-weight: nb-theme(font-weight-bolder);
+  }
+
+  .font-bebasNeue {
+    font-family: nb-theme(font-bebas);
+  }
+
+  .days-font {
+    font-size: 5.5rem;
+    margin-top: 0;
+    height: 90px;
+    padding-bottom: 0;
+  }
+
+  .days-text {
+    font-size: 1.5rem;
+    margin-right: 7px;
+  }
+
+  .m-t {
+    margin-top: 8%;
+  }
+
+  .table_bg {
+    background: none;
+    border: 2px solid #03d87c;
+    color: #fff;
+    width: 150px;
+    padding: 10px 0;
+    border-radius: 4px;
+    margin: 12px auto;
+    cursor: pointer;
+    font-family: nb-theme(font-bebas-bold);
+    margin-top: 0;
+  }
+
+  .table_bg:hover {
+    background-image: linear-gradient(to right, #00D9BB, #00DA79);
+    border: 2px solid #03d87c;
+    color: #fff;
+    width: 150px;
+    padding: 10px 0;
+    border-radius: 4px;
+    margin: 12px auto;
+    margin-top: 0;
+  }
+
+  .font-size-button {
+    font-size: 1.5rem;
+  }
+
+  .selectedTicket {
+    background-image: linear-gradient(to right, #00D9BB, #00DA79);
+  }
+}
+
+@media only screen and (min-width: 426px) {
+  .video-link {
+    display: none;
+  }
+}
+
+@media only screen and (width: 320px) {
+  .image-width {
+    height: calc(100vh - 394px) !important;
+    font-family: nb-theme(font-bebas-bold);
+    color: #000000;
+    .event-heading {
+      margin-top: 13px !important;
+      margin-left: 60px;
+      .text-style {
+        font-size: 35px !important;
+      }
+      .date {
+        font-size: 13px !important;
+        margin-right: 4px !important;
+      }
+      .venue {
+        font-size: 8px !important;
+      }
+    }
+    .video-link {
+      margin-left: 52px !important;
+      margin-top: 47px !important;
+    }
+  }
+}
+
+@media only screen and (width: 375px) {
+  .image-width {
+    height: calc(100vh - 394px) !important;
+    .event-heading {
+      margin-top: 25px !important;
+      margin-left: 13px !important;
+      .text-style {
+        font-size: 47px !important;
+      }
+      .date {
+        font-size: 20px !important;
+        margin-right: 4px !important;
+      }
+      .venue {
+        font-size: 11px !important;
+      }
+    }
+    .video-link {
+      margin-left: 52px !important;
+      margin-top: 85px !important;
+    }
+  }
+}
+
+@media only screen and (width: 360px) {
+  .image-width {
+    height: calc(100vh - 447px) !important;
+    .event-heading {
+      margin-left: 25px !important;
+      .text-style {
+        font-size: 39px !important;
+      }
+      .date {
+        font-size: 12px !important;
+      }
+      .venue {
+        font-size: 10px !important;
+      }
+    }
+    .video-link {
+      margin-left: 50px !important;
+      margin-top: 53px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .image-width {
+    .iframe-style {
+      display: none;
+    }
+    .video-link {
+      color: #000000;
+      font-family: nb-theme(font-bebas-bold);
+      font-size: 25px;
+      text-decoration: underline;
+      .link-font {
+        color: #000000;
+        cursor: pointer !important;
+      }
+    }
+  }
+}

@@ -22,6 +22,14 @@
     ul.menu-items {
       font-family: nb-theme(font-bebas);
       font-size: 20px;
+
+      .fas.fa-ticket-alt {
+        &:before {
+          font-size: 20px;
+          position: relative;
+          top: -5px;
+        }
+      }
     }
   }
 
