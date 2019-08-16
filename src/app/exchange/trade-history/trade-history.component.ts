@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ngx-trade-history',
@@ -13,34 +14,42 @@ export class TradeHistoryComponent implements OnInit {
   tradeData: any = [];
   tradeHistorySpinner: boolean = false;
   noHistory: boolean = false;
+  tradeHistoryData: any;
+  viewTradeHistory: boolean = false;
 
   constructor(private httpService: HttpService,
               private shareDataService: ShareDataService,
               private toastrService: ToastrService,
-              private translate: TranslateService) {}
+              private translate: TranslateService) {
+  }
 
   ngOnInit() {}
 
   parentData(data: any) {
+    if (this.shareDataService.hideSpinnerForExchange)
+      this.tradeHistoryData = [];
     if (data) {
       this.tradeHistorySpinner = true;
-      this.tradeData = [];
-      this.noHistory = false;
+      this.viewTradeHistory = false;
       this.getTradeHistory(data);
     }
   }
 
   getTradeHistory(data: any) {
-    const pairData = {'pair': data.pair};
-    this.httpService.post(pairData, '/exchange/trades/').subscribe((res: any) => {
+    const pairData = {
+      'pair': data.pair,
+      'timestamp': this.shareDataService.lastFetchDateTime
+    };
+    this.httpService.post(pairData, 'exchange/trades/').subscribe((res: any) => {
       this.tradeHistorySpinner = false;
       if (res.status) {
-        this.noHistory = false;
-        this.tradeData = res.data.trades;
-        if (res.data.trades === 0) {
-          this.tradeHistorySpinner = false;
-          this.noHistory = true;
-        }
+        if (!this.tradeHistoryData)
+          this.tradeHistoryData = res.data;
+        else
+          this.tradeHistoryData = _.merge(this.tradeHistoryData, res.data);
+        this.viewTradeHistory = true;
+        this.tradeData = this.tradeHistoryData.trades;
+        this.noHistory = !this.tradeData.length;
       }
     }, err => {
       this.tradeHistorySpinner = false;

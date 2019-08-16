@@ -1,14 +1,14 @@
 <nb-card class="tradeHistory">
   <nb-card-header>{{"pages.exchange.tradeHistory" | translate}}</nb-card-header>
   <nb-card-body>
-    <span class="fetching-spinner" *ngIf="tradeHistorySpinner">
+    <span class="fetching-spinner" *ngIf="tradeHistorySpinner && shareDataService.hideSpinnerForExchange">
       <i class="fa fa-spinner spinner-color fa-spin"></i>
     </span>
-    <div *ngIf="noHistory"><span>{{"pages.exchange.noTradeHistoryAvailable" | translate}}</span></div>
-    <div class="row" *ngIf="tradeData">
+    <div class="row" *ngIf="viewTradeHistory || !shareDataService.hideSpinnerForExchange">
       <div class="available-items">
         <table class="trade-histary-table">
           <tbody>
+           <span *ngIf="noHistory">{{"pages.exchange.noTradeHistoryAvailable" | translate}}</span>
             <tr *ngFor="let trade of tradeData">
               <td class="{{trade.buy ? 'green-text' : 'pink-text' }}">
                 <span>{{trade.price | number: '1.0-2'}}</span>
@@ -18,7 +18,7 @@
                 <span>{{trade.amount | number: '1.0-2'}}</span>
                 <span class="xrp-position"> XRP</span>
               </td>
-              <td class="changetext">{{trade.timestamp | date:'MM-yy hh:mm'}}</td>
+              <td class="changetext">{{trade.timestamp | date:'MM-DD hh:mm'}}</td>
             </tr>
             <!-- <tr>
               <td class="green-text">1.265.00 XRP</td>

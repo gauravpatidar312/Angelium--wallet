@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, Output, EventEmitter, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
@@ -6,8 +6,9 @@ import {ShareDataService} from '../../services/share-data.service';
 import {TradeComponent} from '../trade/trade.component';
 import {BoardComponent} from '../board/board.component';
 import {TradeHistoryComponent} from '../trade-history/trade-history.component';
-
+import Swal from 'sweetalert2';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 declare let jQuery: any;
 declare const TradingView: any;
 
@@ -25,6 +26,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   noDataOpenTrade: boolean = false;
   noDataTradeHistory: boolean = false;
   currentPair: any;
+  tradeChartData: any;
+  openOrderData: any;
+  viewOpenOrderData: boolean = false;
+  viewTradeHistoryData: boolean = false;
+  tradeHistoryData: any;
 
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
@@ -49,21 +55,53 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.tradeTab1 = false;
     this.tradeTab2 = false;
     this.fetchTradeData = true;
-    this.noDataOpenTrade = false;
-    this.noDataTradeHistory = false;
     this.httpService.post(data, 'exchange/order_open/').subscribe((res?: any) => {
       this.fetchTradeData = false;
       if (res.status) {
         this.tradeTab1 = true;
-        this.openOrderBuySell = _.concat(res.data.buy, res.data.sell);
-        if (!res.data || !(res.data.buy.length && res.data.sell.length))
-          this.noDataOpenTrade = false;
+        if (!this.openOrderData)
+          this.openOrderData = res.data;
         else
-        this.noDataOpenTrade = true;
+          this.openOrderData = _.merge(this.openOrderData, res.data);
+        this.openOrderBuySell = _.concat(this.openOrderData.buy, this.openOrderData.sell);
+        if (!this.openOrderBuySell.length)
+          this.noDataOpenTrade = true;
+        else {
+          this.viewOpenOrderData = true;
+          this.noDataOpenTrade = false;
+        }
       }
     }, (err) => {
       this.fetchTradeData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenTradeError'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+    });
+  }
+
+  onCancelOrder(orderId: string, pair: string) {
+    Swal.fire({
+      title: this.translate.instant('pages.exchange.orderCancel'),
+      text: this.translate.instant('pages.exchange.orderCancelText'),
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('swal.yesSure'),
+      cancelButtonText: this.translate.instant('swal.cancel')
+    }).then((result) => {
+      if (!result.value)
+        return;
+
+      const cancelData = {
+        'order_id': orderId,
+        'pair': pair
+      };
+      this.httpService.post(cancelData, 'exchange/order_cancel/').subscribe((res?: any) => {
+        if (res.status)
+          this.receiveMessage(this.shareDataService.currentPair);
+        else {
+          this.toastrService.danger(res.message, this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+        }
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+      });
     });
   }
 
@@ -72,21 +110,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.tradeTab1 = false;
     this.tradeTab2 = false;
     this.fetchTradeData = true;
-    this.noDataOpenTrade = false;
     this.noDataTradeHistory = false;
     this.httpService.post(data, 'exchange/mytrades/').subscribe((res?: any) => {
       this.fetchTradeData = false;
       if (res.status) {
         this.tradeTab2 = true;
-        this.myTradeHistory = res.data;
-        if (this.myTradeHistory.length === 0)
-          this.noDataTradeHistory = true;
+        if (!this.tradeHistoryData)
+          this.tradeHistoryData = res.data;
         else
-          this.noDataTradeHistory = false;
+          this.tradeHistoryData = _.merge(this.tradeHistoryData, res.data);
+        this.myTradeHistory = this.tradeHistoryData;
+        this.noDataTradeHistory = !this.myTradeHistory.length;
+        if (!this.noDataTradeHistory)
+          this.viewTradeHistoryData = true;
       }
     }, (err) => {
       this.fetchTradeData = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenTradeError'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myTradeHistory'));
     });
   }
 
@@ -98,18 +138,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       jQuery('.trade-chart-anx').css('display', 'none');
       jQuery('.tradingview-widget-container').css('display', 'block');
     }
-    new TradingView.widget($event);
     if ($event) {
+      if (!this.currentPair || this.currentPair.pair !== $event.pair) {
+        this.shareDataService.hideSpinnerForExchange = true;
+        new TradingView.widget($event);
+        this.openOrderData = [];
+        this.tradeHistoryData = [];
+        this.viewOpenOrderData = false;
+        this.viewTradeHistoryData = false;
+      } else
+        this.shareDataService.hideSpinnerForExchange = false;
       this.currentPair = $event;
-      this.getOpenOrder($event.pair);
+      if (this.tradeTab2)
+        this.getMyTradeHistory($event.pair);
+      else
+        this.getOpenOrder($event.pair);
       this.getTradeChartData($event.pair);
       this.tradeComponent.parentData($event);
       this.boardComponent.parentData($event);
       this.tradeHistoryComponent.parentData($event);
+      this.shareDataService.lastFetchDateTime = moment().valueOf();
     }
   }
-
-  tradeChartData: any;
 
   getTradeChartData(pair: any) {
     const data = {'pair': pair};

@@ -13,14 +13,14 @@ export class ShareDataService {
 
   private messagePair = new BehaviorSubject(null);
   currentPair = this.messagePair.asObservable();
-
   private messageSource = new BehaviorSubject<any>('');
   currentData = this.messageSource.asObservable();
-
+  lastFetchDateTime: any;
   autoLogOut = false;
   showNotification = false;
   transferTab: string;
   transferTitle: string;
+  hideSpinnerForExchange: boolean = false;
   constructor(private storageService: IndexedDBStorageService,
               private store: Store<AppState>,
               private translate:TranslateService) {}
@@ -29,7 +29,7 @@ export class ShareDataService {
     this.messageSource.next(data);
   }
 
-  changePair(data: any) { 
+  changePair(data: any) {
     data['from'] = data.pair.split('/')[0];
     data['to'] = data.pair.split('/')[1];
     this.messagePair.next(data);

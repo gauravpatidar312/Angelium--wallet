@@ -3,6 +3,9 @@ import {Output, EventEmitter} from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
 import {NbMediaBreakpoint} from '@nebular/theme';
+import {Observable} from 'rxjs/Rx';
+import {environment} from '../../../environments/environment';
+import * as moment from 'moment';
 declare let jQuery: any;
 
 @Component({
@@ -26,7 +29,9 @@ export class PairComponent implements OnInit, AfterViewInit {
     this.getPairData();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    Observable.interval(environment.exchangeInterval).takeWhile(() => true).subscribe(() => this.messageEvent.emit(this.shareDataService.currentPair));
+  }
 
   ngAfterViewInit() {
     jQuery('ul.downLine li a').click(function (e) {
@@ -39,6 +44,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   }
 
   clickPair(data) {
+    this.shareDataService.lastFetchDateTime = moment().subtract('days', 7).valueOf();
     this.shareDataService.currentPair = data;
     this.messageEvent.emit(data);
   }

@@ -2,12 +2,11 @@
   <nb-card-header>{{"pages.exchange.board" | translate}}</nb-card-header>
   <nb-card-body>
 
-    <span class="fetching-spinner" *ngIf="boardSpinner">
+    <span class="fetching-spinner" *ngIf="boardSpinner && shareDataService.hideSpinnerForExchange">
       <i class="fa fa-spinner spinner-color fa-spin"></i>
     </span>
 
-    <div class="row" *ngIf="boardTableValue">
-
+    <div class="row" *ngIf="boardTableValue || !shareDataService.hideSpinnerForExchange">
       <div style="width:100%">
         <table class="boardtable">
           <thead>
