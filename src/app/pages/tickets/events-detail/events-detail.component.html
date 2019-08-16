@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-12 image-width">
+    <div class="event-heading">
+      <div class="text-style">HEAVENS DAY</div>
+      <span class="date">2019.09.23</span>
+      <span class="venue">SCREEN1 UNITED CINEMA <br /> AQUACITY ODAIBA TOKYO</span>
+      <div class="clearfix"></div>
+    </div>
+    <div class="event-detail">
+      <iframe class="iframe-style" frameborder="0" src="https://www.youtube.com/embed/Qgv3wjotwAs">
+      </iframe>
+      <div class="video-link">
+        <a class="link-font" href="https://www.youtube.com/watch?v=Qgv3wjotwAs&feature=youtu.be">Watch Video</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row btm-margin">
+  <div *ngFor="let ticket of ticketDetails" class="col-md-4">
+    <nb-card>
+      <nb-card-header class="day-header-title title">
+        {{ticket.ticket_name}}
+      </nb-card-header>
+      <nb-card-body class="row font-bebasNeue">
+        <div class="col-12">
+          <div class="text-center ticket-name">{{ticket.description}}</div>
+          <div class="text-success text-center days-font">{{ticket.price |  currency:'USD':'symbol'}}</div>
+        </div>
+      </nb-card-body>
+      <button class="table_bg font-size-button" [ngClass]="{'selectedTicket': selectedTicket?.id === ticket.id}"
+              (click)="onTicketSelect(ticket)">{{"common.select" | translate}}
+      </button>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 myWallets">
+    <nb-card>
+      <nb-card-header>
+        {{"pages.xticket.buyTickets" | translate}}
+      </nb-card-header>
+      <nb-card-body class="cardbody">
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <div class="form-group font-avenir">
+              <div class="status-dd-week dropdown" ngbDropdown>
+                <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet">
+                  <span *ngIf="!walletType">{{"common.select" | translate}}</span>
+                  {{walletType}}
+                </button>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                  <li class="dropdown-item" *ngFor="let wallet of myWallets" (click)="walletType = wallet.wallet_type">{{wallet.wallet_type}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="form-group total-amount font-avenir">
+              <div class="input-group">
+                <input type="number" [(ngModel)]="noOfTickets" class="form-control input-padding font-avenir" placeholder='{{"pages.xticket.noOfTickets" | translate}}' />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <div class="form-group">
+              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!walletType || !noOfTickets || buyingTicket"
+               (click)="buyTickets()">
+                <span *ngIf="!buyingTicket">{{"common.buy" | translate}}</span>
+                <i class="fa fa-spinner fa-spin text-white" *ngIf="buyingTicket"></i>
+                </button>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        {{"pages.xticket.purchasedTickets" | translate}}
+      </nb-card-header>
+      <nb-card-body>
+        <div [hidden]="!fetchingTicketList"><span class="purchased-ticket-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
+        <ng2-smart-table class="table-font" [settings]="settings" [source]="source" *ngIf="!fetchingUsers"
+                         [hidden]="fetchingTicketList" (custom)="onDownloadTicket($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

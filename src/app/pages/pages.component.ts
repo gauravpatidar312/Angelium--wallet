@@ -20,7 +20,7 @@ export class PagesComponent implements OnInit {
 
   constructor(private sessionStorage: SessionStorageService,
               private shareDataService: ShareDataService,
-    public translate: TranslateService) {
+              public translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.setMenuTranslation();
     });

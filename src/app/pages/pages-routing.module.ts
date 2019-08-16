@@ -13,6 +13,9 @@ import {HQComponent} from './hq/hq.component';
 import {ExchangeComponent} from './exchange/exchange.component';
 import {CompanyComponent} from './company/company.component';
 import {AdminComponent} from './admin/admin.component';
+import {EventsListComponent} from './tickets/events-list/events-list.component';
+import {EventsDetailComponent} from './tickets/events-detail/events-detail.component';
+
 import {AppConstants} from '../app.constants';
 import {AuthGuard} from '../_guards/auth.guard';
 
@@ -76,6 +79,18 @@ const routes: Routes = [{
     {
       path: 'admin',
       component: AdminComponent,
+      canActivate: [AuthGuard],
+      data: {role: [AppConstants.ROLES.ADMIN]},
+    },
+    {
+      path: 'xticket',
+      component: EventsListComponent,
+      canActivate: [AuthGuard],
+      data: {role: [AppConstants.ROLES.ADMIN]},
+    },
+    {
+      path: 'xticket/:id',
+      component: EventsDetailComponent,
       canActivate: [AuthGuard],
       data: {role: [AppConstants.ROLES.ADMIN]},
     },

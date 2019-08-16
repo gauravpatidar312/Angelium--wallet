@@ -40,8 +40,9 @@
     {
       "name": "api-performance",
       "urls": [
-        "/api/**",
-        "https://api.angelium.net/**"
+        "https://testwallet.angelium.net/api/**",
+        "https://api.angelium.net/**",
+        "https://fcm.googleapis.com/**"
       ],
       "version": 2,
       "cacheConfig": {

@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule'},
   {path: 'exchange', loadChildren: 'app/exchange/exchange.module#ExchangeModule'},
   {path: 'games', loadChildren: 'app/games/games.module#GamesModule'},
+  //{path: 'xtickets', loadChildren: 'app/tickets/tickets.module#TicketsModule' },
   {
     path: 'login',
     component: LoginComponent

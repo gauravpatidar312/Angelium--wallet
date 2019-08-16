@@ -45,4 +45,11 @@ export const MENU_ITEMS = [
     link: '/pages/admin',
     languageKey: 'admin',
   },
+  {
+    data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
+    title: 'XTicket',
+    icon: 'fas fa-ticket-alt',
+    link: '/pages/xticket/1',
+    languageKey: 'xticket',
+  }
 ];

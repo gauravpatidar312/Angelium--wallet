@@ -19,8 +19,8 @@ export class SecurityCamerasService extends SecurityCamerasData {
       source: '/assets/images/xwish.jpg',
     },
     {
-      title: 'XTRAVEL',
-      source: '/assets/images/xtravel.jpg',
+      title: 'XCOMIC',
+      source: '/assets/images/xcomic.jpg',
     },
     {
       title: 'XMALL',

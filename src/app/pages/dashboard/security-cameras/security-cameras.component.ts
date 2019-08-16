@@ -76,6 +76,8 @@ export class SecurityCamerasComponent implements OnDestroy {
       window.open('http://xlove.angelium.net', '_blank');
     else if (this.userSettingInfo.user_type === 'owner' && title === 'XGAMES')
       this.openDialog(template);
+    else if (title === 'XCOMIC')
+      window.open('/assets/xcomic.pdf', '_blank');
     else
       this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
         this.translate.instant('pages.dashboard.securityCamera.' + title.toLowerCase()));

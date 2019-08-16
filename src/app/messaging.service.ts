@@ -4,7 +4,11 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ToastrService} from './services/toastr.service';
 
-import * as firebase from 'firebase';
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import * as firebase from 'firebase/app';
+
+// Add the Firebase products that you want to use
+import 'firebase/messaging';
 import 'rxjs/add/operator/take';
 
 @Injectable({
@@ -15,6 +19,7 @@ export class MessagingService {
   currentMessage: any = new BehaviorSubject(null);
   isGranted: boolean = false;
   isSupported: boolean = false;
+  token: string = '';
 
   constructor(private db: AngularFireDatabase,
               private afAuth: AngularFireAuth,
@@ -41,21 +46,12 @@ export class MessagingService {
         return this.messaging.getToken();
       })
       .then(token => {
+        this.token = token;
         this.updateToken(token);
       })
       .catch((err) => {
         console.warn('Unable to get permission to notify.', err);
       });
-  }
-
-  async getToken() {
-    try {
-      if (this.isGranted && this.isSupported)
-        return await this.messaging.getToken();
-    } catch (ex) {
-      console.warn('FCM token error: ', ex);
-    }
-    return '';
   }
 
   receiveMessage() {
