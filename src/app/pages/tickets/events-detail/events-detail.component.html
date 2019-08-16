@@ -19,16 +19,16 @@
   <div *ngFor="let ticket of ticketDetails" class="col-md-4">
     <nb-card>
       <nb-card-header class="day-header-title title">
-        {{ticket.ticket_type}}
+        {{ticket.ticket_name}}
       </nb-card-header>
       <nb-card-body class="row font-bebasNeue">
         <div class="col-12">
-          <div class="text-center ticket-name">{{ticket.ticket_name}}</div>
+          <div class="text-center ticket-name">{{ticket.description}}</div>
           <div class="text-success text-center days-font">{{ticket.price |  currency:'USD':'symbol'}}</div>
         </div>
       </nb-card-body>
-      <button class="table_bg font-size-button" [ngClass]="{'selectedTicket':ticketId === ticket.id}"
-              (click)="onTicketSelect(ticket.id, ticket.price, ticket.ticket_type)">{{"common.select" | translate}}
+      <button class="table_bg font-size-button" [ngClass]="{'selectedTicket': selectedTicket?.id === ticket.id}"
+              (click)="onTicketSelect(ticket)">{{"common.select" | translate}}
       </button>
     </nb-card>
   </div>
@@ -63,8 +63,11 @@
           </div>
           <div class="col-md-12 col-lg-4">
             <div class="form-group">
-              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]=" !walletType || !noOfTickets"
-               (click)="buyTickets()">{{"common.buy" | translate}}</button>
+              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!walletType || !noOfTickets || buyingTicket"
+               (click)="buyTickets()">
+                <span *ngIf="!buyingTicket">{{"common.buy" | translate}}</span>
+                <i class="fa fa-spinner fa-spin text-white" *ngIf="buyingTicket"></i>
+                </button>
             </div>
           </div>
         </div>
@@ -79,8 +82,9 @@
         {{"pages.xticket.purchasedTickets" | translate}}
       </nb-card-header>
       <nb-card-body>
+        <div [hidden]="!fetchingTicketList"><span class="purchased-ticket-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
         <ng2-smart-table class="table-font" [settings]="settings" [source]="source" *ngIf="!fetchingUsers"
-                         (custom)="onDownloadTicket($event)">
+                         [hidden]="fetchingTicketList" (custom)="onDownloadTicket($event)">
         </ng2-smart-table>
       </nb-card-body>
     </nb-card>

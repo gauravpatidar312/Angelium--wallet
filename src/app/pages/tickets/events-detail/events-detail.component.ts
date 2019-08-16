@@ -6,6 +6,7 @@ import {HttpService} from '../../../services/http.service';
 import {ShareDataService} from '../../../services/share-data.service';
 import {SessionStorageService} from '../../../services/session-storage.service';
 import {ActivatedRoute} from '@angular/router';
+import {CustomInputComponent} from './custom-input.component';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -21,14 +22,14 @@ export class EventsDetailComponent implements OnInit {
   myWallets: string[] = [];
   ticketDetails: any[] = [];
   walletType: string;
-  ticketType: string;
-  ticketId: number = null;
-  ticketPrice: number = null;
+  selectedTicket: any;
   wallet: any;
   purchaseAmount: number = null;
   fetchingUsers: boolean = false;
   userInfo: any;
   noOfTickets: number = null;
+  buyingTicket: boolean = false;
+  fetchingTicketList: boolean = true;
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -50,13 +51,19 @@ export class EventsDetailComponent implements OnInit {
         title: this.translate.instant('pages.hq.id'),
         type: 'string',
       },
+      name: {
+        title: this.translate.instant('common.name'),
+        type: 'custom',
+        renderComponent: CustomInputComponent,
+        onComponentInitFunction: (instance) => {
+          instance.onInputChange.subscribe((row) => {
+            this.source.update(row, row);
+          });
+        }
+      },
       asset: {
         title: this.translate.instant('common.assets'),
         type: 'string',
-      },
-      ticket: {
-        title: this.translate.instant('pages.xticket.noOfTickets'),
-        type: 'number',
       },
       created: {
         title: this.translate.instant('pages.xticket.purchaseDate'),
@@ -87,7 +94,7 @@ export class EventsDetailComponent implements OnInit {
   }
 
   getEventDetails() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params?: any) => {
       this.eventId = params.id;
     });
     this.httpService.get('event-price-list?event_id=' + this.eventId).subscribe((res?: any) => {
@@ -104,53 +111,91 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
-  onTicketSelect(ticketId, ticketPrice, ticketType) {
-    this.ticketType = ticketType;
-    this.ticketId = ticketId;
-    this.ticketPrice = ticketPrice;
+  onTicketSelect(ticket) {
+    this.selectedTicket = ticket;
   }
 
   buyTickets() {
-    if (!this.ticketType) {
+    if (!this.selectedTicket || !this.selectedTicket.id) {
       this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseSelectTicket'), this.translate.instant('common.xticket'));
       return;
     }
-    this.purchaseAmount = this.ticketPrice * this.noOfTickets;
+    this.buyingTicket = true;
+    this.purchaseAmount = this.selectedTicket.price * this.noOfTickets;
     this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]);
     if (this.purchaseAmount > this.wallet.wallet_dollar_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.xticket'));
+      this.buyingTicket = false;
       return;
     }
     const data = {
       'wallet_type': this.walletType,
       'ticket_qty': this.noOfTickets,
-      'ticket_id': this.ticketId,
+      'ticket_id': this.selectedTicket.id,
       'owner_name': this.userInfo.fullname,
       'owner_email': this.userInfo.email,
       'event_id': this.eventId
     };
     this.httpService.post(data, 'user-purchase/').subscribe((res?: any) => {
+      this.buyingTicket = false;
       if (res.status) {
+        this.toastrService.success(this.translate.instant('pages.xticket.toastr.ticketsPurchased'), this.translate.instant('common.xticket'));
         this.getWalletDetails();
+      } else {
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
       }
     }, (err) => {
+      this.buyingTicket = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
     });
   }
 
   onDownloadTicket(event): void {
+    const ticket = event.data;
+    if (!ticket.name && !ticket.newName) {
+      this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseEnterName'), this.translate.instant('common.xticket'));
+      return;
+    }
+    if (ticket.name) {
+      this.downloadTicket(ticket);
+      return;
+    }
+
+    if (!ticket.newName.match(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/g)) {
+      this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
+      return;
+    }
+
+    const data = {
+      'purchase_id': ticket.id,
+      'name': ticket.newName
+    };
+    this.httpService.put(data, 'xticket-update/')
+      .subscribe((res?: any) => {
+        if (res.status) {
+          this.source.refresh();
+          this.downloadTicket(ticket);
+        } else {
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+        }
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+    });
+  }
+
+  downloadTicket(ticket) {
     const link = document.createElement('a');
-    link.href = event.data.qrcode;
+    link.href = ticket.qrcode;
     link.target = '_blank';
     link.setAttribute('visibility', 'hidden');
-    link.download = 'ticket';
+    link.download = `${ticket.id}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
 
   purchasedTickets() {
+    this.fetchingTicketList = true;
     this.httpService.get(`xticket-list/?event_id=${this.eventId}`).subscribe((res?: any) => {
       res.map((ticket: any) => {
         const wallet = _.findLast(this.myWallets, (item: any) => {
@@ -159,6 +204,7 @@ export class EventsDetailComponent implements OnInit {
         ticket.asset = wallet.wallet_type;
       });
       this.source.load(res);
+      this.fetchingTicketList = false;
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
     });

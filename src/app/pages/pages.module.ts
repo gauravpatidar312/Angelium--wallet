@@ -27,6 +27,7 @@ import { CompanyModule } from './company/company.module';
 import { AdminModule } from './admin/admin.module';
 import {EventsListComponent} from './tickets/events-list/events-list.component';
 import {EventsDetailComponent} from './tickets/events-detail/events-detail.component';
+import { CustomInputComponent } from './tickets/events-detail/custom-input.component';
 
 
 const PAGES_COMPONENTS = [
@@ -66,13 +67,15 @@ const PAGES_COMPONENTS = [
     DialogNamePromptComponent,
     MergeComponent,
     EventsListComponent,
-    EventsDetailComponent
+    EventsDetailComponent,
+    CustomInputComponent,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '#' },
   ],
   entryComponents: [
     DialogNamePromptComponent,
+    CustomInputComponent
   ],
 })
 
