@@ -119,9 +119,9 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     this.httpService.get('dashboard-notification/').subscribe((data?: any) => {
       if (data.length) {
         this.userNotification = data.filter((notify) => notify.type === 'user')
-        .sort((a, b) => new Date(b.created).getTime() - new Date(a.date).getTime());
+        .sort((a, b) => new Date(b.schedule_date || b.created).getTime() - new Date(a.date).getTime());
         this.systemNotification = data.filter((notify) => notify.type === 'system')
-        .sort((a, b) => new Date(b.created).getTime() - new Date(a.date).getTime());
+        .sort((a, b) => new Date(b.schedule_date || b.created).getTime() - new Date(a.date).getTime());
       }
     });
   }
