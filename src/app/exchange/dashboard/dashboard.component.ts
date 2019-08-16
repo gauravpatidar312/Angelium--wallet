@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
-              private shareDataService: ShareDataService,
+              public shareDataService: ShareDataService,
               public translate: TranslateService) {}
 
   @ViewChild(TradeComponent) private tradeComponent: TradeComponent;

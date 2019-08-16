@@ -18,7 +18,7 @@ export class TradeHistoryComponent implements OnInit {
   viewTradeHistory: boolean = false;
 
   constructor(private httpService: HttpService,
-              private shareDataService: ShareDataService,
+              public shareDataService: ShareDataService,
               private toastrService: ToastrService,
               private translate: TranslateService) {
   }

@@ -24,7 +24,7 @@ export class BoardComponent implements OnInit {
   orderBookData: any;
   lastTradeData: any;
 
-  constructor(private shareDataService: ShareDataService,
+  constructor(public shareDataService: ShareDataService,
               private httpService: HttpService,
               private toastrService: ToastrService,
               public translate: TranslateService) {}
