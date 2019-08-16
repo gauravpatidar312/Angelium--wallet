@@ -12,7 +12,7 @@
         </span>
         <nb-list class="text-white" *ngFor="let userNotify of userNotification.slice(0,2);">
           <nb-list-item>
-            <span class="event-title">{{userNotify.title}}</span> <span class="pull-right event-date">{{userNotify.created | date: 'yyyy.MM.dd'}}</span>
+            <span class="event-title">{{userNotify.title}}</span> <span class="pull-right event-date">{{(userNotify.schedule_date || userNotify.created) | date: 'yyyy.MM.dd'}}</span>
           </nb-list-item>
         </nb-list>
       </nb-card-body>
@@ -27,7 +27,7 @@
         </span>
         <nb-list class="text-white" *ngFor="let systemNotify of systemNotification.slice(0,2);">
           <nb-list-item>
-            <span class="event-title">{{systemNotify.title}}</span> <span class="pull-right event-date">{{systemNotify.created | date: 'yyyy.MM.dd'}}</span>
+            <span class="event-title">{{systemNotify.title}}</span> <span class="pull-right event-date">{{(systemNotify.schedule_date || systemNotify.created) | date: 'yyyy.MM.dd'}}</span>
           </nb-list-item>
         </nb-list>
       </nb-card-body>

@@ -14,6 +14,7 @@ export class ToastrService {
   }
 
   danger(message, title, position?: any) {
+    this.config.duration = 30000;
     this.config.status = NbToastStatus.DANGER;
     this.config.position = (position || this.config.position);
     this.toastrService.show(message, title, this.config);
