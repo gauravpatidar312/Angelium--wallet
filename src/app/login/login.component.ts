@@ -1,15 +1,11 @@
 import {Component, TemplateRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {NbDialogService} from '@nebular/theme';
-import {SessionStorageService} from '../services/session-storage.service';
 import {ToastrService} from '../services/toastr.service';
 import {HttpService} from '../services/http.service';
 import {ShareDataService} from '../services/share-data.service';
 import {Store} from '@ngrx/store';
-
-
 import {MessagingService} from '../messaging.service';
 import {LogIn, UserInfo} from '../@core/store/actions/user.action';
 import {AppState} from '../@core/store/app.state';
@@ -88,12 +84,12 @@ export class LoginComponent implements OnInit {
   getCapchaTranslation() {
     if (this.isVerifiedCaptcha) {
       setTimeout(() => {
-        jQuery("#loginSlider").children(".text").text(
+        jQuery('#loginSlider').children('.text').text(
           this.translate.instant('common.verified'));
       }, 0);
     } else {
       setTimeout(() => {
-        jQuery("#loginSlider").children(".text").text(
+        jQuery('#loginSlider').children('.text').text(
           this.translate.instant('common.slideRightToVerify'));
       }, 1000);
     }
@@ -102,7 +98,7 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-    
+
   verifyOTP(ref: any) {
     if (!this.tfaOtp)
       return;
@@ -126,9 +122,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async onSubmitLogin(dialog: TemplateRef<any>) {
-    var token = await this.msgService.getToken();
-    this.loginForm.controls.dev_id.setValue(token);
+  onSubmitLogin(dialog: TemplateRef<any>) {
+    this.loginForm.controls.dev_id.setValue(this.msgService.token);
 
     if (!this.isVerifiedCaptcha) {
       this.toastrService.danger(this.translate.instant('pages.login.toastr.pleaseVerifyCaptcha'), this.translate.instant('pages.login.login'));
