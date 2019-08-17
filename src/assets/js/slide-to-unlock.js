@@ -51,7 +51,7 @@ class slideToUnlock {
         }
 
         if (!("lockText" in this.settings)) {
-            this.settings.lockText = "Slide To Unlock";
+            this.settings.lockText = "";
         }
 
         if (!("unlockText" in this.settings)) {

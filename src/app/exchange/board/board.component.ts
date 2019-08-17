@@ -17,8 +17,6 @@ export class BoardComponent implements OnInit {
   boardBuy = [];
   boardSell = [];
   lastTrade: any = {};
-  noSellData: boolean = false;
-  noBuyData: boolean = false;
   boardSellAvai: boolean = false;
   boardBuyAvai: boolean = false;
   orderBookData: any;

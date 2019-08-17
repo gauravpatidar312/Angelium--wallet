@@ -246,7 +246,7 @@ export class RegisterComponent implements OnDestroy, OnInit {
       setTimeout(() => {
         jQuery('#registerSlider').children('.text').text(
           this.translate.instant('common.slideRightToVerify'));
-      }, 1000);
+      }, 1200);
     }
   }
 }

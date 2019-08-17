@@ -10,7 +10,6 @@ import {HeavenComponent} from './heaven/heaven.component';
 import {MergeComponent} from './merge/merge.component';
 import {RewardComponent} from './reward/reward.component';
 import {HQComponent} from './hq/hq.component';
-import {ExchangeComponent} from './exchange/exchange.component';
 import {CompanyComponent} from './company/company.component';
 import {AdminComponent} from './admin/admin.component';
 import {EventsListComponent} from './tickets/events-list/events-list.component';
@@ -57,12 +56,6 @@ const routes: Routes = [{
       path: 'merge',
       component: MergeComponent,
       canActivate: [AuthGuard]
-    },
-    {
-      path: 'exchange',
-      component: ExchangeComponent,
-      canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]},
     },
     {
       path: 'company',
