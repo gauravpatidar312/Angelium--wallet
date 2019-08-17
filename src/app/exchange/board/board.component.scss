@@ -7,84 +7,103 @@
     font-size: 1.75rem;
   }
 }
+
 nb-card-body {
   padding: 10px 30px
 }
 
-.minheight{
+.minheight {
   min-height: 250px;
 }
-.headsection{
+
+.headsection {
   border-bottom: 0px;
-  padding-bottom: 0px!important;
+  padding-bottom: 0px !important;
 }
 
-.theading-text{
+.theading-text {
   color: #cee80b;
 }
-.secondaryhead{
-  display:block!important;
+
+.secondaryhead {
+  display: block !important;
   font-size: 15px;
   color: #575bc7;
   font-weight: 400;
 }
-.board{height: 414px;}
-.boardtable{width: 100%;}
 
-.boardtable th{
+.board {
+  height: 414px;
+}
+
+.boardtable {
+  width: 100%;
+}
+
+.boardtable th {
   // text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 12px;
   border-bottom: 1px solid #342e73;
 }
 
-.back-table:nth-child(even) { background: #87a1b730; } 
+.back-table:nth-child(even) {
+  background: #87a1b730;
+}
 
-.positionSet{
+.positionSet {
   padding-top: 10px;
 }
 
-.totalfield{
+.totalfield {
   border-bottom: 1px solid #342e73;
   border-top: 1px solid #342e73;
   font-size: 1.2rem !important;
   font-family: nb-theme(font-bebas-book);
-  padding: 5px 0px 0px 0px!important;
+  padding: 5px 0px 0px 0px !important;
   font-weight: 600;
 }
 
-
-.boardtable th span.total{
-  color:#b9e80c;
+.boardtable th span.total {
+  color: #b9e80c;
 }
-.boardtable td{
+
+.boardtable td {
   padding: 0px;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
 }
-.boardtable tr{
-  color:#ffffff;
+
+.boardtable tr {
+  color: #ffffff;
   font-family: 'Nunito Sans', sans-serif;
 }
-.padrt10px{
-  padding-right: 10px!important;
+
+.padrt10px {
+  padding-right: 10px !important;
 }
-.boardtable td.changetext{
+
+.boardtable td.changetext {
   text-align: right;
 }
 
-.available-items{
-  max-height:350px!important;
+.available-items {
+  max-height: 350px !important;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto!important;
+  overflow-y: auto !important;
 }
-.tr-position{
+
+.tr-position {
   margin-top: 5px;
   height: 125px !important;
 }
-.bigSize{
+
+.bigSize {
   font-size: 20px;
 }
-/deep/ .trade-chart-anx{ height: 576px;}
+
+/deep/ .trade-chart-anx {
+  height: 576px;
+}

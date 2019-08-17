@@ -21,7 +21,6 @@ export class PairComponent implements OnInit, AfterViewInit {
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
   myWallets: any = [];
-  setPair: any;
   pairs = [];
 
   constructor(private httpService: HttpService,

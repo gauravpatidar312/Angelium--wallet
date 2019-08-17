@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
@@ -52,13 +52,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getOpenOrder(pair: any) {
     const data = {'pair': pair};
-    this.tradeTab1 = false;
-    this.tradeTab2 = false;
     this.fetchTradeData = true;
     this.httpService.post(data, 'exchange/order_open/').subscribe((res?: any) => {
       this.fetchTradeData = false;
       if (res.status) {
         this.tradeTab1 = true;
+        this.tradeTab2 = false;
         if (!this.openOrderData)
           this.openOrderData = res.data;
         else
@@ -107,14 +106,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getMyTradeHistory(pair: any) {
     const data = {'pair': pair};
-    this.tradeTab1 = false;
-    this.tradeTab2 = false;
     this.fetchTradeData = true;
-    this.noDataTradeHistory = false;
     this.httpService.post(data, 'exchange/mytrades/').subscribe((res?: any) => {
       this.fetchTradeData = false;
       if (res.status) {
         this.tradeTab2 = true;
+        this.tradeTab1 = false;
         if (!this.tradeHistoryData)
           this.tradeHistoryData = res.data;
         else
@@ -146,6 +143,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.tradeHistoryData = [];
         this.viewOpenOrderData = false;
         this.viewTradeHistoryData = false;
+        this.noDataTradeHistory = false;
+        this.noDataOpenTrade = false;
       } else
         this.shareDataService.hideSpinnerForExchange = false;
       this.currentPair = $event;

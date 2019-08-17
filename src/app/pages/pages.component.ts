@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from '../services/session-storage.service';
-import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ShareDataService } from '../services/share-data.service';
 import { MENU_ITEMS } from './pages-menu';
 

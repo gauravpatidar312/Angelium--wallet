@@ -57,22 +57,23 @@ export class TradeComponent implements OnInit, AfterViewInit {
   parentData(data: any) {
     if (data) {
       // tradeBuy
-      this.tradeBuy.from = data.from;
-      this.tradeBuy.to = data.to;
-      this.tradeBuy.pair = data.pair;
-      this.tradeBuy.amount = 0;
-      this.tradeBuy.price = 0;
-      this.buyWalletDollar = 0;
-      this.buyTotalWalletDollar = 0;
-      // tradeSell
-      this.tradeSell.from = data.from;
-      this.tradeSell.to = data.to;
-      this.tradeSell.pair = data.pair;
-      this.tradeSell.amount = 0;
-      this.tradeSell.price = 0;
-      this.sellWalletDollar = 0;
-      this.sellTotalWalletDollar = 0;
-
+      if (this.shareDataService.hideSpinnerForExchange) {
+        this.tradeBuy.from = data.from;
+        this.tradeBuy.to = data.to;
+        this.tradeBuy.pair = data.pair;
+        this.tradeBuy.amount = 0;
+        this.tradeBuy.price = 0;
+        this.buyWalletDollar = 0;
+        this.buyTotalWalletDollar = 0;
+        // tradeSell
+        this.tradeSell.from = data.from;
+        this.tradeSell.to = data.to;
+        this.tradeSell.pair = data.pair;
+        this.tradeSell.amount = 0;
+        this.tradeSell.price = 0;
+        this.sellWalletDollar = 0;
+        this.sellTotalWalletDollar = 0;
+      }
       this.getExchangeWallet();
       this.getMyWallets();
     }
@@ -194,7 +195,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
   submitTradeBuy() {
     if (this.tradeBuy.price === 0 || this.tradeBuy.amount === 0) return;
 
-    const currentWallet = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.from.toUpperCase()]) || {};
+    const currentWallet = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
     if (Number(this.tradeBuy.price * this.tradeBuy.amount) > Number(currentWallet.balance)) {
       this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
       return;

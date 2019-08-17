@@ -15,7 +15,7 @@
 }
 
 nb-card-body {
-  padding: 10px 30px
+  padding: 10px 30px;
 }
 
 .minheight {
@@ -23,8 +23,8 @@ nb-card-body {
 }
 
 .headsection {
-  border-bottom: 0px;
-  padding-bottom: 0px !important;
+  border-bottom: 0;
+  padding-bottom: 0 !important;
 }
 
 .no_set_padding {
@@ -55,7 +55,6 @@ nb-card-body {
 }
 
 .boardtable th {
-  // text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 12px;
   border-bottom: 1px solid #342e73 !important;
@@ -70,7 +69,7 @@ nb-card-body {
 }
 
 .boardtable tr:nth-child(even) {
-  background: #87a1b730
+  background: #87a1b730;
 }
 
 .totalfield {
@@ -78,7 +77,7 @@ nb-card-body {
   border-top: 1px solid #342e73;
   font-size: 1.2rem !important;
   font-family: nb-theme(font-bebas-book);
-  padding: 5px 0px 0px 0px !important;
+  padding: 5px 0 0 0 !important;
   font-weight: 600;
 }
 
@@ -87,7 +86,6 @@ nb-card-body {
 }
 
 .boardtable td {
-  // color:#ffffff;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
@@ -109,7 +107,7 @@ nb-card-body {
 }
 
 tbody tr {
-  padding: 0px;
+  padding: 0;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
