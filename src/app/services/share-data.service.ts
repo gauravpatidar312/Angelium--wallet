@@ -65,7 +65,9 @@ export class ShareDataService {
         msg = err.error[Object.keys(err.error)[0]][0];
       else
         msg = err.error[Object.keys(err.error)[0]];
-    } else if (_.isArray(err[Object.keys(err)[0]]))
+    } else if (err.message)
+      msg = err.message;
+    else if (_.isArray(err[Object.keys(err)[0]]))
       msg = err[Object.keys(err)[0]][0];
     else if (err[Object.keys(err)[0]])
       msg = err[Object.keys(err)[0]];

@@ -88,12 +88,12 @@ export class EventsListComponent implements OnInit {
       if (res.data) {
         this.source.load(res.data);
       } else if (res.message) {
-        this.toastrService.danger(res.message, this.translate.instant('pages.hq.toastr.userDatabase'));
+        this.toastrService.danger(res.message, this.translate.instant('common.xticket'));
       }
       this.fetchingUsers = false;
     }, (err) => {
       this.fetchingUsers = false;
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.hq.toastr.userDatabase'));
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
     });
   }
 

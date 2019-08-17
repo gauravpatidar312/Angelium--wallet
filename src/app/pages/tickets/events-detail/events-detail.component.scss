@@ -15,17 +15,25 @@
     text-align: center;
   }
 
-  tbody tr:nth-child(odd) {
-    background-color: #111550;
-  }
-
   input[type='number']::-webkit-outer-spin-button, input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  /deep/ ng2-smart-table .ng2-smart-filters {
-    display: none;
+  /deep/ ng2-smart-table {
+    .ng2-smart-filters {
+      display: none;
+    }
+    thead th {
+      white-space: nowrap;
+    }
+    tbody tr:nth-child(odd) {
+      background-color: #111550;
+    }
+
+    .min-width {
+      min-width: 200px;
+    }
   }
 
   .cardbody {
@@ -113,11 +121,41 @@
     margin-left: 52px;
     margin-top: 28px;
     height: 305px;
-    width: 540px;
+    width: 542px;
   }
 
   .btm-margin {
     margin-top: 20px;
+  }
+
+  .label-color {
+    color: #00ff00;
+  }
+
+  .total-amount {
+    position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        margin-bottom: 0;
+      }
+    }
+    span {
+      position: absolute;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
+    }
   }
 
   .ticket-name {
@@ -192,6 +230,90 @@
   }
 }
 
+/deep/ .image-scoll-card-body {
+  width: 340px;
+  height: 645px;
+  overflow: auto !important;
+
+  .ticket-img {
+    background-image: url('/assets/images/heavensDay.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 302px;
+    height: 645px;
+
+    .qrcode-margin {
+      font-family: nb-theme(font-bebas-bold);
+      text-align: center;
+      position: relative;
+      color: #ffffff;
+      top: 56%;
+
+      .ticket-name {
+        font-size: 45px;
+        letter-spacing: 2px;
+      }
+
+      .qr-code-class {
+        -webkit-box-shadow: 0 0 5px 2px #212322;
+        box-shadow: 0 0 5px 2px #212322;
+        border: 2px solid #fff;
+      }
+
+      .ticket-title {
+        font-size: 25px;
+        font-family: nb-theme(font-bebas);
+        margin-left: 15px;
+        letter-spacing: 15px;
+      }
+
+      .ticket-name-color {
+        background-color: #ffffff;
+        margin: 1px 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .customer-name {
+          color: #000000;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
+
+.nb-icon-left {
+  font-size: 20px;
+  float: right;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 375px) {
+  /deep/ .image-scoll-card-body {
+    width: 280px;
+    height: 400px;
+    .ticket-img {
+      width: 280px;
+      height: 400px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .ticket-width {
+    max-width: 20% !important;
+    width: 20% !important;
+    flex: 20% !important;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  .days-font {
+    font-size: 3.5rem !important;
+  }
+}
 @media only screen and (min-width: 426px) {
   .video-link {
     display: none;
@@ -237,159 +359,3 @@
     }
   }
 }
-/*
-@media only screen and (width: 320px) and (height: 568px) {
-  .image-width {
-    height: calc(100vh - 393px) !important;
-    font-family: nb-theme(font-bebas-bold);
-    color: #000000;
-
-    .event-heading {
-      margin-top: 9px !important;
-      margin-left: 37px;
-
-      .text-style {
-        font-size: 39px !important;
-      }
-
-      .date {
-        font-size: 10px !important;
-        margin-right: 2px !important;
-      }
-
-      .venue {
-        font-size: 9px !important;
-        letter-spacing: 1px;
-      }
-    }
-
-    .video-link {
-      margin-left: 59px !important;
-      margin-top: 54px !important;
-    }
-  }
-}
-@media only screen and (width: 375px) and (min-height: 812px) {
-  .image-width {
-    height: calc(100vh - 595px)!important;
-    font-family: nb-theme(font-bebas-bold);
-    color: #000000;
-
-    .event-heading {
-      margin-top: 18px !important;
-      margin-left: 37px;
-
-      .text-style {
-        font-size: 39px !important;
-      }
-
-      .date {
-        font-size: 10px !important;
-        margin-right: 2px !important;
-      }
-
-      .venue {
-        font-size: 9px !important;
-        letter-spacing: 1px;
-      }
-    }
-
-    .video-link {
-      margin-left: 52px !important;
-      margin-top: 70px !important;
-    }
-  }
-}
-@media only screen and (width: 360px) and (max-height: 640px) {
-  .image-width {
-    height: calc(100vh - 447px) !important;
-    .event-heading {
-      margin-left: 50px !important;
-      margin-top: 12px !important;
-      .text-style {
-        font-size: 39px !important;
-      }
-      .date {
-        font-size: 12px !important;
-        letter-spacing: 1px !important;
-        margin-right: 3px;
-      }
-      .venue {
-        font-size: 11px !important;
-        letter-spacing: 1px !important;
-      }
-    }
-    .video-link {
-      margin-left: 68px !important;
-      margin-top: 53px !important;
-    }
-  }
-}
-@media only screen and (width: 414px) and (height: 736px) {
-  .image-width {
-    height: calc(100vh - 500px) !important;
-    .event-heading {
-      margin-left: 50px !important;
-      margin-top: 22px !important;
-      .text-style {
-        font-size: 39px !important;
-      }
-      .date {
-        font-size: 12px !important;
-        letter-spacing: 1px !important;
-        margin-right: 3px;
-      }
-      .venue {
-        font-size: 11px !important;
-        letter-spacing: 1px !important;
-      }
-    }
-    .video-link {
-      margin-left: 68px !important;
-      margin-top: 85px !important;
-    }
-  }
-}
-@media only screen and (width: 375px) and (height: 667px) {
-  .image-width {
-    height: calc(100vh - 462px) !important;
-    .event-heading {
-      margin-left: 50px !important;
-      margin-top: 12px !important;
-      .text-style {
-        font-size: 39px !important;
-      }
-      .date {
-        font-size: 12px !important;
-        letter-spacing: 1px !important;
-        margin-right: 3px;
-      }
-      .venue {
-        font-size: 11px !important;
-        letter-spacing: 1px !important;
-      }
-    }
-    .video-link {
-      margin-left: 68px !important;
-      margin-top: 85px !important;
-    }
-  }
-}
-@media only screen and (max-width: 426px) {
-  .image-width {
-    .iframe-style {
-      display: none;
-    }
-    .video-link {
-      color: #000000;
-      font-family: nb-theme(font-bebas-bold);
-      font-size: 25px;
-      text-decoration: underline;
-      .link-font {
-        color: #000000;
-        cursor: pointer !important;
-      }
-    }
-  }
-}
-*/

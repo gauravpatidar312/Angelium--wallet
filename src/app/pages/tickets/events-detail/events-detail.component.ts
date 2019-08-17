@@ -7,10 +7,10 @@ import {ShareDataService} from '../../../services/share-data.service';
 import {SessionStorageService} from '../../../services/session-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {CustomInputComponent} from './custom-input.component';
-
+import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbDialogService} from '@nebular/theme';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-
+declare let jQuery: any;
 @Component({
   selector: 'ngx-events-detail',
   templateUrl: './events-detail.component.html',
@@ -19,8 +19,13 @@ import * as moment from 'moment';
 
 export class EventsDetailComponent implements OnInit {
   eventId: number = null;
-  myWallets: string[] = [];
-  ticketDetails: any[] = [];
+  eventTitle: any;
+  eventDate: any;
+  eventAddressLine1: any;
+  eventAddressLine2: any;
+  eventVideoURL: any;
+  myWallets: any;
+  ticketTypes: any;
   walletType: string;
   selectedTicket: any;
   wallet: any;
@@ -30,22 +35,27 @@ export class EventsDetailComponent implements OnInit {
   noOfTickets: number = null;
   buyingTicket: boolean = false;
   fetchingTicketList: boolean = true;
+  hasNoTickets: boolean = false;
+  ticketData: any;
+  totalAmount: number;
+  fetchingAmount: boolean = false;
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
     actions: {
+      columnTitle: '',
       add: false,
       edit: false,
       delete: false,
       custom: [
         {
+          width: '60px',
           name: 'download',
           title: '<i class="ion-archive"></i>'
         }
       ]
     },
     editable: false,
-    noDataMessage: this.translate.instant('pages.xticket.noTicketPurchased'),
     columns: {
       id: {
         title: this.translate.instant('pages.hq.id'),
@@ -80,6 +90,7 @@ export class EventsDetailComponent implements OnInit {
               private httpService: HttpService,
               private sessionStorage: SessionStorageService,
               private toastrService: ToastrService,
+              private dialogService: NbDialogService,
               private route: ActivatedRoute) {
   }
 
@@ -96,9 +107,22 @@ export class EventsDetailComponent implements OnInit {
   getEventDetails() {
     this.route.params.subscribe((params?: any) => {
       this.eventId = params.id;
+      this.httpService.get('events-list/?event_id=' + this.eventId).subscribe((res?: any) => {
+        if (res.data) {
+          const event = res.data[0];
+          this.eventTitle = event.title;
+          this.eventAddressLine1 = event.adddress_line_1;
+          this.eventAddressLine2 = event.adddress_line_2;
+          this.eventVideoURL = event.video_url;
+        } else if (res.message) {
+          this.toastrService.danger(res.message, this.translate.instant('common.xticket'));
+        }
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+      });
     });
-    this.httpService.get('event-price-list?event_id=' + this.eventId).subscribe((res?: any) => {
-      this.ticketDetails = res.data;
+    this.httpService.get('event-price-list/?event_id=' + this.eventId).subscribe((res?: any) => {
+      this.ticketTypes = res.data;
     });
   }
 
@@ -150,14 +174,18 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
-  onDownloadTicket(event): void {
+  onDownloadTicket(event, template: any): void {
     const ticket = event.data;
     if (!ticket.name && !ticket.newName) {
       this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseEnterName'), this.translate.instant('common.xticket'));
       return;
     }
     if (ticket.name) {
-      this.downloadTicket(ticket);
+      //this.downloadTicket(ticket);
+      this.ticketData = ticket;
+      this.dialogService.open(template, {
+        autoFocus: true
+      });
       return;
     }
 
@@ -180,12 +208,13 @@ export class EventsDetailComponent implements OnInit {
         }
       }, (err) => {
         this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
-    });
+      });
   }
 
   downloadTicket(ticket) {
     const link = document.createElement('a');
-    link.href = ticket.qrcode;
+    //link.href = ticket.qrcode;
+    link.href = 'assets/images/heavensDay.jpg';
     link.target = '_blank';
     link.setAttribute('visibility', 'hidden');
     link.download = `${ticket.id}.jpg`;
@@ -194,14 +223,38 @@ export class EventsDetailComponent implements OnInit {
     document.body.removeChild(link);
   }
 
+  playVideo() {
+    jQuery.fancybox.open({
+      src  : this.eventVideoURL
+    });
+  }
+
+  setAmount(noOfTicket, type) {
+    if (noOfTicket && type && this.selectedTicket.price) {
+      this.fetchingAmount = true;
+      this.httpService.get('live-price/').subscribe(data => {
+        this.totalAmount = (this.selectedTicket.price * noOfTicket) / data[type];
+        this.fetchingAmount = false;
+      }, (err) => {
+        this.fetchingAmount = false;
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+      });
+    }
+  }
+
   purchasedTickets() {
     this.fetchingTicketList = true;
     this.httpService.get(`xticket-list/?event_id=${this.eventId}`).subscribe((res?: any) => {
+      this.hasNoTickets = !res.length;
       res.map((ticket: any) => {
-        const wallet = _.findLast(this.myWallets, (item: any) => {
+        const wallet: any = _.findLast(this.myWallets, (item: any) => {
           return item.id === ticket.wallet_address;
         });
+        const ticketType: any = _.findLast(this.ticketTypes, (item: any) => {
+          return item.id === ticket.ticket;
+        });
         ticket.asset = wallet.wallet_type;
+        ticket.ticket_name = ticketType.ticket_name;
       });
       this.source.load(res);
       this.fetchingTicketList = false;

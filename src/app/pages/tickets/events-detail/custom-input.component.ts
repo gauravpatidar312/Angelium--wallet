@@ -4,7 +4,7 @@ import {ViewCell} from 'ng2-smart-table';
 @Component({
   template: `
     <div>
-      <input class="form-control" [(ngModel)]="rowData.newName" (blur)="nameChange()"
+      <input class="form-control min-width" [(ngModel)]="rowData.newName" (blur)="nameChange()"
              [disabled]="isDisabled" placeholder="Enter Name" type="text">
     </div>`,
 })

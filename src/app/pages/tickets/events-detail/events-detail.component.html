@@ -1,22 +1,23 @@
 <div class="row">
   <div class="col-12 image-width">
     <div class="event-heading">
-      <div class="text-style">HEAVENS DAY</div>
+      <div class="text-style">{{eventTitle}}</div>
       <span class="date">2019.09.23</span>
-      <span class="venue">SCREEN1 UNITED CINEMA <br /> AQUACITY ODAIBA TOKYO</span>
+      <span class="venue">{{eventAddressLine1}} <br /> {{eventAddressLine2}}</span>
       <div class="clearfix"></div>
     </div>
-    <div class="event-detail">
-      <iframe class="iframe-style" frameborder="0" src="https://www.youtube.com/embed/Qgv3wjotwAs">
-      </iframe>
+    <div *ngIf="eventVideoURL" class="event-detail">
+      <a (click)="playVideo()" class="fancybox pointer iframe-style">
+        <img src="../../../../assets/images/eventVideo.png">
+      </a>
       <div class="video-link">
-        <a class="link-font" href="https://www.youtube.com/watch?v=Qgv3wjotwAs&feature=youtu.be">Watch Video</a>
+        <a (click)="playVideo()" class="fancybox link-font">Watch Video</a>
       </div>
     </div>
   </div>
 </div>
 <div class="row btm-margin">
-  <div *ngFor="let ticket of ticketDetails" class="col-md-4">
+  <div *ngFor="let ticket of ticketTypes" class="col-lg-2 col-md-4 col-sm-4 ticket-width">
     <nb-card>
       <nb-card-header class="day-header-title title">
         {{ticket.ticket_name}}
@@ -43,6 +44,9 @@
         <div class="row">
           <div class="col-md-6 col-lg-4">
             <div class="form-group font-avenir">
+              <label class="label-color">
+                {{"common.assets" | translate}}
+              </label>
               <div class="status-dd-week dropdown" ngbDropdown>
                 <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet">
                   <span *ngIf="!walletType">{{"common.select" | translate}}</span>
@@ -55,14 +59,22 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="form-group total-amount font-avenir">
+            <div class="form-group total-amount total-amount font-avenir">
+              <label class="label-color">
+                {{"pages.xticket.noOfTickets" | translate}}
+              </label>
               <div class="input-group">
-                <input type="number" [(ngModel)]="noOfTickets" class="form-control input-padding font-avenir" placeholder='{{"pages.xticket.noOfTickets" | translate}}' />
+                <input type="number" [(ngModel)]="noOfTickets" class="form-control input-padding font-avenir" [disabled]="!walletType"
+                       placeholder='{{"pages.xticket.noOfTickets" | translate}}' (keyup)="setAmount(noOfTickets, walletType)" />
+                <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
+                <span class="transfer-amount" *ngIf="!fetchingAmount">{{ totalAmount | number : '1.0-6' }}</span>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
             <div class="form-group">
+              <label class="mt-3">
+              </label>
               <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!walletType || !noOfTickets || buyingTicket"
                (click)="buyTickets()">
                 <span *ngIf="!buyingTicket">{{"common.buy" | translate}}</span>
@@ -83,10 +95,37 @@
       </nb-card-header>
       <nb-card-body>
         <div [hidden]="!fetchingTicketList"><span class="purchased-ticket-spinner"><i class="fa fa-spinner fa-spin"></i></span></div>
-        <ng2-smart-table class="table-font" [settings]="settings" [source]="source" *ngIf="!fetchingUsers"
-                         [hidden]="fetchingTicketList" (custom)="onDownloadTicket($event)">
-        </ng2-smart-table>
+        <div [hidden]="!hasNoTickets">{{"pages.xticket.noTicketPurchased" | translate}}</div>
+        <div class="overflow-auto">
+          <ng2-smart-table class="table-font" [settings]="settings" [source]="source" *ngIf="!fetchingUsers"
+                           [hidden]="fetchingTicketList || hasNoTickets" (custom)="onDownloadTicket($event, heavensDayTicket)">
+          </ng2-smart-table>
+        </div>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
+
+
+<ng-template #heavensDayTicket let-data let-refTicket="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      {{"common.xticket" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="refTicket.close()"></i>
+    </nb-card-header>
+    <nb-card-body class="image-scoll-card-body">
+      <div class="ticket-img">
+        <div class="qrcode-margin">
+          <div class="ticket-name">{{ticketData?.ticket_name}}</div>
+          <img [src]="ticketData?.qrcode" class="qr-code-class">
+          <div class="ticket-title">{{"common.xticket" | translate}}</div>
+          <div class="ticket-name-color">
+            <span class="customer-name">{{ticketData?.name}}</span>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer class="text-center" *ngIf="false">
+      <button nbButton size="small" (click)="downloadQR()">{{"pages.setting.download" | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

@@ -41,6 +41,7 @@
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/fancybox/dist/css/jquery.fancybox.css",
               "src/app/@theme/styles/styles.scss",
               "src/assets/css/jquery.fancybox.min.css"
             ],
@@ -126,6 +127,7 @@
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/fancybox/dist/css/jquery.fancybox.css",
               "src/app/@theme/styles/styles.scss"
             ],
             "assets": [
