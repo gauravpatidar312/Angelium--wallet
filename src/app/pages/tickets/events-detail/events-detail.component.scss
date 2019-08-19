@@ -21,8 +21,14 @@
   }
 
   /deep/ ng2-smart-table {
-    .ng2-smart-filters {
+    .ng2-smart-filters, .ng2-smart-actions ng2-st-tbody-edit-delete {
       display: none;
+    }
+
+    a.ng2-smart-action.ng2-smart-action-custom-custom {
+      &:hover {
+        color: #03d87c;
+      }
     }
     thead th {
       white-space: nowrap;
@@ -72,14 +78,6 @@
     max-width: 100%;
     height: calc(100vh - 130px);
     background-repeat: no-repeat;
-  }
-
-  /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
-    position: relative;
-    top: 35px;
-    &:hover {
-      color: #03d87c;
-    }
   }
 
   .above-heavenDays {
@@ -186,6 +184,7 @@
     margin-top: 0;
     height: 90px;
     padding-bottom: 0;
+    overflow: hidden;
   }
 
   .days-text {
@@ -230,9 +229,7 @@
   }
 }
 
-/deep/ .image-scoll-card-body {
-  width: 340px;
-  height: 645px;
+/deep/ .image-scroll-card-body {
   overflow: auto !important;
 
   .ticket-img {
@@ -290,14 +287,13 @@
   cursor: pointer;
 }
 
+.btn-download {
+  width: 130px;
+}
+
 @media only screen and (max-width: 375px) {
-  /deep/ .image-scoll-card-body {
-    width: 280px;
-    height: 400px;
-    .ticket-img {
-      width: 280px;
-      height: 400px;
-    }
+  /deep/ .image-scroll-card-body {
+    max-height: 350px;
   }
 }
 

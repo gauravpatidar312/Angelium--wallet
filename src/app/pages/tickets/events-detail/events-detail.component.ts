@@ -8,6 +8,8 @@ import {SessionStorageService} from '../../../services/session-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {CustomInputComponent} from './custom-input.component';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbDialogService} from '@nebular/theme';
+import htmlToImage   from 'html-to-image';
+
 import * as _ from 'lodash';
 import * as moment from 'moment';
 declare let jQuery: any;
@@ -34,11 +36,13 @@ export class EventsDetailComponent implements OnInit {
   userInfo: any;
   noOfTickets: number = null;
   buyingTicket: boolean = false;
+  downloadingTicket: boolean = false;
   fetchingTicketList: boolean = true;
   hasNoTickets: boolean = false;
   ticketData: any;
   totalAmount: number;
   fetchingAmount: boolean = false;
+  ticketImage: any;
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -137,6 +141,12 @@ export class EventsDetailComponent implements OnInit {
 
   onTicketSelect(ticket) {
     this.selectedTicket = ticket;
+    this.setAmount(this.noOfTickets, this.walletType);
+  }
+
+  setWalletType(type) {
+    this.walletType = type;
+    this.setAmount(this.noOfTickets, this.walletType);
   }
 
   buyTickets() {
@@ -174,22 +184,41 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
+  urlToBase64(url, callback) {
+    const xmlHTTP = new XMLHttpRequest();
+    xmlHTTP.open('GET', url, true);
+    xmlHTTP.responseType = 'arraybuffer';
+    xmlHTTP.onload = function(e) {
+      const raw = String.fromCharCode.apply(null, new Uint8Array(this.response));
+      callback('data:image/png;base64,' + btoa(raw));
+    };
+    xmlHTTP.send();
+  }
+
+  openDownloadModal(template) {
+    this.urlToBase64(this.ticketData.qrcode, (base64) => {
+      this.ticketData.qrcode = base64;
+    });
+
+    this.dialogService.open(template, {
+      autoFocus: true
+    });
+  }
+
   onDownloadTicket(event, template: any): void {
     const ticket = event.data;
     if (!ticket.name && !ticket.newName) {
       this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseEnterName'), this.translate.instant('common.xticket'));
       return;
     }
+
+    this.ticketData = ticket;
     if (ticket.name) {
-      //this.downloadTicket(ticket);
-      this.ticketData = ticket;
-      this.dialogService.open(template, {
-        autoFocus: true
-      });
+      this.openDownloadModal(template);
       return;
     }
 
-    if (!ticket.newName.match(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/g)) {
+    if (!ticket.newName.match(/^[a-zA-Z0-9!@#$%^_ +\-\[\]~:|.]*$/g)) {
       this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
       return;
     }
@@ -202,7 +231,8 @@ export class EventsDetailComponent implements OnInit {
       .subscribe((res?: any) => {
         if (res.status) {
           this.source.refresh();
-          this.downloadTicket(ticket);
+          this.ticketData.name = ticket.newName;
+          this.openDownloadModal(template);
         } else {
           this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
         }
@@ -211,16 +241,22 @@ export class EventsDetailComponent implements OnInit {
       });
   }
 
-  downloadTicket(ticket) {
-    const link = document.createElement('a');
-    //link.href = ticket.qrcode;
-    link.href = 'assets/images/heavensDay.jpg';
-    link.target = '_blank';
-    link.setAttribute('visibility', 'hidden');
-    link.download = `${ticket.id}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  downloadTicket(dialog) {
+    this.downloadingTicket = true;
+    htmlToImage.toJpeg(document.getElementById('img-download'))
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.setAttribute('visibility', 'hidden');
+        link.download = `Ticket-${this.ticketData.name}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => {
+          this.downloadingTicket = false;
+          dialog.close();
+        }, 1200);
+      });
   }
 
   playVideo() {

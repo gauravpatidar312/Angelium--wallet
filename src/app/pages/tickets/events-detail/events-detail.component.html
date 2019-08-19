@@ -53,7 +53,7 @@
                   {{walletType}}
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let wallet of myWallets" (click)="walletType = wallet.wallet_type">{{wallet.wallet_type}}</li>
+                  <li class="dropdown-item" *ngFor="let wallet of myWallets" (click)="setWalletType(wallet.wallet_type)">{{wallet.wallet_type}}</li>
                 </ul>
               </div>
             </div>
@@ -75,7 +75,7 @@
             <div class="form-group">
               <label class="mt-3">
               </label>
-              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!walletType || !noOfTickets || buyingTicket"
+              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!walletType || !noOfTickets || buyingTicket || fetchingAmount"
                (click)="buyTickets()">
                 <span *ngIf="!buyingTicket">{{"common.buy" | translate}}</span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="buyingTicket"></i>
@@ -106,14 +106,14 @@
   </div>
 </div>
 
-
 <ng-template #heavensDayTicket let-data let-refTicket="dialogRef">
   <nb-card>
     <nb-card-header>
       {{"common.xticket" | translate}}  <i class="nb-close nb-icon-left fa-2x" (click)="refTicket.close()"></i>
     </nb-card-header>
-    <nb-card-body class="image-scoll-card-body">
-      <div class="ticket-img">
+    <nb-card-body class="image-scroll-card-body">
+      <img *ngIf="ticketImage" [src]="ticketImage" class="qr-code-class">
+      <div id="img-download" class="ticket-img">
         <div class="qrcode-margin">
           <div class="ticket-name">{{ticketData?.ticket_name}}</div>
           <img [src]="ticketData?.qrcode" class="qr-code-class">
@@ -124,8 +124,10 @@
         </div>
       </div>
     </nb-card-body>
-    <nb-card-footer class="text-center" *ngIf="false">
-      <button nbButton size="small" (click)="downloadQR()">{{"pages.setting.download" | translate}}</button>
+    <nb-card-footer class="text-center">
+      <button class="btn btn-download pointer" nbButton size="small" (click)="downloadTicket(refTicket)" [disabled]="downloadingTicket">
+        <i class="fa fa-spinner fa-spin text-white" *ngIf="downloadingTicket"></i>
+        <span *ngIf="!downloadingTicket">{{"pages.setting.download" | translate}}</span></button>
     </nb-card-footer>
   </nb-card>
 </ng-template>
