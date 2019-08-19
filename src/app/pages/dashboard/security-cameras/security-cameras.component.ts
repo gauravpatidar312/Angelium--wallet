@@ -72,9 +72,9 @@ export class SecurityCamerasComponent implements OnDestroy {
   }
 
   onImageClick(title: any, template?: any) {
-    if (this.userSettingInfo.user_type === 'owner' && title === 'XLOVE')
+    if ((this.userSettingInfo.user_type === 'owner' || this.userSettingInfo.user_type === 'company') && title === 'XLOVE')
       window.open('http://xlove.angelium.net', '_blank');
-    else if (this.userSettingInfo.user_type === 'owner' && title === 'XGAMES')
+    else if ((this.userSettingInfo.user_type === 'owner' || this.userSettingInfo.user_type === 'company') && title === 'XGAMES')
       this.openDialog(template);
     else if (title === 'XCOMIC')
       window.open('/assets/xcomic.pdf', '_blank');

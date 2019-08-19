@@ -233,10 +233,8 @@
                           <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting || fetchingAmount"></i>
                         </button>
                       </div>
-                      <span class="transfer-message font-nunitoSans" *ngIf="otcWallet?.wallet_type === 'BTC' && false">
-                      *{{"pages.transfer.minimumAmountForBTCTransfer" | translate}}</span>
-                      <span class="transfer-message font-nunitoSans">
-                        {{"pages.transfer.handlingChargeApplicableOnEachTransaction" | translate}}*</span>
+                      <span class="transfer-message font-nunitoSans mb-1">{{"pages.transfer.transactionTimeText" | translate}}*</span>
+                      <span class="transfer-message font-nunitoSans">{{"pages.transfer.handlingChargeApplicableOnEachTransaction" | translate}}*</span>
                     </div>
                   </div>
                 </div>
