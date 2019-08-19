@@ -11,14 +11,12 @@
            <span *ngIf="noHistory">{{"pages.exchange.noTradeHistoryAvailable" | translate}}</span>
             <tr *ngFor="let trade of tradeData">
               <td class="{{trade.buy ? 'green-text' : 'pink-text' }}">
-                <span>{{trade.price | number: '1.0-2'}}</span>
-                <span class="xrp-position"> XRP</span>
+                <span>{{trade.amount | number: '1.0-8'}} {{currentPair?.from | uppercase}}</span>
               </td>
               <td>
-                <span>{{trade.amount | number: '1.0-2'}}</span>
-                <span class="xrp-position"> XRP</span>
+                <span>{{trade.price | number: '1.0-8'}} {{currentPair?.to | uppercase}}</span>
               </td>
-              <td class="changetext">{{trade.timestamp | date:'MM-dd hh:mm'}}</td>
+              <td class="changetext">{{trade.timestamp | date:'MM.dd hh:mm'}}</td>
             </tr>
           </tbody>
         </table>
