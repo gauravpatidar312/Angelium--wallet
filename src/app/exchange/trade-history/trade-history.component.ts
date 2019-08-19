@@ -11,6 +11,7 @@ import * as _ from 'lodash';
   styleUrls: ['./trade-history.component.scss']
 })
 export class TradeHistoryComponent implements OnInit {
+  currentPair: any;
   tradeData: any = [];
   tradeHistorySpinner: boolean = false;
   noHistory: boolean = false;
@@ -29,6 +30,7 @@ export class TradeHistoryComponent implements OnInit {
     if (this.shareDataService.hideSpinnerForExchange)
       this.tradeHistoryData = [];
     if (data) {
+      this.currentPair = data;
       this.tradeHistorySpinner = true;
       this.viewTradeHistory = false;
       this.getTradeHistory(data);
@@ -48,7 +50,7 @@ export class TradeHistoryComponent implements OnInit {
         else
           this.tradeHistoryData = _.merge(this.tradeHistoryData, res.data);
         this.viewTradeHistory = true;
-        this.tradeData = this.tradeHistoryData.trades;
+        this.tradeData = _.sortBy(this.tradeHistoryData.trades, ['timestamp']).reverse();
         this.noHistory = !this.tradeData.length;
       }
     }, err => {
