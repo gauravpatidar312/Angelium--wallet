@@ -21,11 +21,7 @@ declare let jQuery: any;
 
 export class EventsDetailComponent implements OnInit {
   eventId: number = null;
-  eventTitle: any;
-  eventDate: any;
-  eventAddressLine1: any;
-  eventAddressLine2: any;
-  eventVideoURL: any;
+  eventDetail: any;
   myWallets: any;
   ticketTypes: any;
   walletType: string;
@@ -113,11 +109,7 @@ export class EventsDetailComponent implements OnInit {
       this.eventId = params.id;
       this.httpService.get('events-list/?event_id=' + this.eventId).subscribe((res?: any) => {
         if (res.data) {
-          const event = res.data[0];
-          this.eventTitle = event.title;
-          this.eventAddressLine1 = event.adddress_line_1;
-          this.eventAddressLine2 = event.adddress_line_2;
-          this.eventVideoURL = event.video_url;
+          this.eventDetail = res.data;
         } else if (res.message) {
           this.toastrService.danger(res.message, this.translate.instant('common.xticket'));
         }
@@ -261,7 +253,7 @@ export class EventsDetailComponent implements OnInit {
 
   playVideo() {
     jQuery.fancybox.open({
-      src  : this.eventVideoURL
+      src  : this.eventDetail.video_url
     });
   }
 

@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-12 image-width">
     <div class="event-heading">
-      <div class="text-style">{{eventTitle}}</div>
-      <span class="date">2019.09.23</span>
-      <span class="venue">{{eventAddressLine1}} <br /> {{eventAddressLine2}}</span>
+      <div class="text-style">{{eventDetail?.title}}</div>
+      <span class="date">{{eventDetail?.start_date | date: 'yyyy.MM.dd'}}</span>
+      <span class="venue">{{eventDetail?.adddress_line_1}} <br /> {{eventDetail?.adddress_line_2}}</span>
       <div class="clearfix"></div>
     </div>
-    <div *ngIf="eventVideoURL" class="event-detail">
+    <div *ngIf="eventDetail?.video_url" class="event-detail">
       <a (click)="playVideo()" class="fancybox pointer iframe-style">
         <img src="../../../../assets/images/eventVideo.png">
       </a>
