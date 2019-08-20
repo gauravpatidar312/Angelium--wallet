@@ -199,25 +199,17 @@
   .table_bg {
     background: none;
     border: 2px solid #03d87c;
-    color: #fff;
-    width: 150px;
-    padding: 10px 0;
     border-radius: 4px;
-    margin: 12px auto;
+    color: #fff;
+    width: 110px;
+    padding: 10px 0;
+    margin: 0 auto 12px;
     cursor: pointer;
     font-family: nb-theme(font-bebas-bold);
-    margin-top: 0;
   }
 
   .table_bg:hover {
     background-image: linear-gradient(to right, #00D9BB, #00DA79);
-    border: 2px solid #03d87c;
-    color: #fff;
-    width: 150px;
-    padding: 10px 0;
-    border-radius: 4px;
-    margin: 12px auto;
-    margin-top: 0;
   }
 
   .font-size-button {
@@ -291,7 +283,7 @@
   width: 130px;
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 425px), only screen and (max-height: 810px) {
   /deep/ .image-scroll-card-body {
     max-height: 350px;
   }
@@ -311,28 +303,49 @@
   }
 }
 @media only screen and (min-width: 426px) {
-  .video-link {
+  .mobile-video {
     display: none;
   }
 }
 
+@media only screen and (min-width: 426px) and (max-width: 615px) {
+  .event-heading {
+    margin-left: 25px !important;
+
+    .text-style {
+      font-size: 100px;
+    }
+
+    .date {
+      font-size: 50px;
+    }
+
+    .venue {
+      font-size: 20px;
+    }
+  }
+
+  .iframe-style img {
+    width: 370px;
+    margin-left: 20px;
+  }
+}
+
 @media only screen and (max-width: 425.99px) {
+  .mobile-video {
+    margin-top: 18px;
+  }
+
+  .image-width {
+    .event-detail {
+      display: none;
+    }
+  }
+
   .image-width {
     height: 220px !important;
     .iframe-style {
       display: none;
-    }
-    .video-link {
-      margin-left: 52px !important;
-      margin-top: 70px !important;
-      color: #000000;
-      font-size: 25px;
-      text-decoration: underline;
-      .link-font {
-        font-family: nb-theme(font-bebas-bold);
-        color: #000000;
-        cursor: pointer !important;
-      }
     }
 
     .event-heading {
@@ -340,18 +353,41 @@
       margin-left: 37px;
 
       .text-style {
-        font-size: 39px !important;
+        font-size: 55px !important;
       }
 
       .date {
-        font-size: 10px !important;
+        font-size: 25px !important;
         margin-right: 2px !important;
       }
 
       .venue {
-        font-size: 9px !important;
+        font-size: 11px !important;
         letter-spacing: 1px;
       }
     }
+  }
+}
+
+@media only screen and (max-height: 705px) and (min-width: 601px) {
+  .event-heading {
+    margin-top: 10px !important;
+
+    .text-style {
+      font-size: 100px;
+    }
+
+    .date {
+      font-size: 50px;
+    }
+
+    .venue {
+      font-size: 20px;
+    }
+  }
+
+  .iframe-style img {
+    width: 370px;
+    margin-left: 90px;
   }
 }

@@ -10,25 +10,29 @@
       <a (click)="playVideo()" class="fancybox pointer iframe-style">
         <img src="../../../../assets/images/eventVideo.png">
       </a>
-      <div class="video-link">
-        <a (click)="playVideo()" class="fancybox link-font">Watch Video</a>
-      </div>
     </div>
+  </div>
+</div>
+<div class="row mobile-video">
+  <div class="col-12">
+    <a (click)="playVideo()" class="fancybox pointer">
+      <img class="img-fluid" src="../../../../assets/images/eventVideo.png">
+    </a>
   </div>
 </div>
 <div class="row btm-margin">
   <div *ngFor="let ticket of ticketTypes" class="col-lg-2 col-md-4 col-sm-4 ticket-width">
     <nb-card>
       <nb-card-header class="day-header-title title">
-        {{ticket.ticket_name}}
+        {{ticket?.ticket_name}}
       </nb-card-header>
       <nb-card-body class="row font-bebasNeue">
         <div class="col-12">
-          <div class="text-center ticket-name">{{ticket.description}}</div>
-          <div class="text-success text-center days-font">{{ticket.price |  currency:'USD':'symbol'}}</div>
+          <div class="text-center ticket-name">{{ticket?.description}}</div>
+          <div class="text-success text-center days-font">${{ticket?.price | number:'1.0-2'}}</div>
         </div>
       </nb-card-body>
-      <button class="table_bg font-size-button" [ngClass]="{'selectedTicket': selectedTicket?.id === ticket.id}"
+      <button class="table_bg font-size-button" [ngClass]="{'selectedTicket': selectedTicket?.id === ticket?.id}"
               (click)="onTicketSelect(ticket)">{{"common.select" | translate}}
       </button>
     </nb-card>
