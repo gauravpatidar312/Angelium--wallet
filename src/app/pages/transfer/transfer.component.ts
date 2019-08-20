@@ -209,7 +209,7 @@ export class TransferComponent implements OnInit {
       this.myWallets = _.sortBy(walletData, ['title']);
 
       this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
-          return wallet.wallet_type !== 'ERCUSDT';
+          return wallet.wallet_type !== '';
         }) || [];
       this.receiveWallets = _.filter(this.myWallets, (wallet?: any) => {
           return wallet.wallet_type !== 'USDT';
@@ -536,7 +536,7 @@ export class TransferComponent implements OnInit {
           });
           this.myWallets = _.sortBy(walletData, ['title']);
           this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
-              return wallet.wallet_type !== 'ERCUSDT';
+              return wallet.wallet_type !== '';
             }) || [];
         });
         this.onChangeWallet('SELECT', 'send');
