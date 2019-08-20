@@ -53,11 +53,11 @@
               </label>
               <div class="status-dd-week dropdown" ngbDropdown>
                 <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet">
-                  <span *ngIf="!walletType">{{"common.select" | translate}}</span>
-                  {{walletType}}
+                  <span *ngIf="!selectedWallet">{{"common.select" | translate}}</span>
+                  {{selectedWallet?.title}}
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngFor="let wallet of myWallets" (click)="setWalletType(wallet.wallet_type)">{{wallet.wallet_type}}</li>
+                  <li class="dropdown-item" *ngFor="let wallet of myWallets" (click)="setWalletType(wallet)">{{wallet?.title}}</li>
                 </ul>
               </div>
             </div>
@@ -68,8 +68,8 @@
                 {{"pages.xticket.noOfTickets" | translate}}
               </label>
               <div class="input-group">
-                <input type="number" [(ngModel)]="noOfTickets" class="form-control input-padding font-avenir" [disabled]="!walletType"
-                       placeholder='{{"pages.xticket.noOfTickets" | translate}}' (keyup)="setAmount(noOfTickets, walletType)" />
+                <input type="number" [(ngModel)]="noOfTickets" class="form-control input-padding font-avenir" [disabled]="!selectedWallet"
+                       placeholder='{{"pages.xticket.noOfTickets" | translate}}' (keyup)="setAmount(noOfTickets, selectedWallet)" />
                 <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                 <span class="transfer-amount" *ngIf="!fetchingAmount">{{ totalAmount | number : '1.0-6' }}</span>
               </div>
@@ -79,7 +79,7 @@
             <div class="form-group">
               <label class="mt-3">
               </label>
-              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!walletType || !noOfTickets || buyingTicket || fetchingAmount"
+              <button class="btn btn-block btn-success btn-rectangle ticket-button" [disabled]="!selectedWallet || !noOfTickets || buyingTicket || fetchingAmount"
                (click)="buyTickets()">
                 <span *ngIf="!buyingTicket">{{"common.buy" | translate}}</span>
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="buyingTicket"></i>

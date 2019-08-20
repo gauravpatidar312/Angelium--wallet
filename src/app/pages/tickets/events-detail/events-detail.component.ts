@@ -24,9 +24,8 @@ export class EventsDetailComponent implements OnInit {
   eventDetail: any;
   myWallets: any;
   ticketTypes: any;
-  walletType: string;
   selectedTicket: any;
-  wallet: any;
+  selectedWallet: any;
   purchaseAmount: number = null;
   fetchingUsers: boolean = false;
   userInfo: any;
@@ -124,7 +123,15 @@ export class EventsDetailComponent implements OnInit {
 
   getWalletDetails() {
     this.httpService.get('user-wallet-address/').subscribe((res?: any) => {
-      this.myWallets = res;
+      const walletData = _.filter(res, (wallet?: any) => {
+        wallet.title = wallet.wallet_type;
+        if (wallet.wallet_type === 'USDT')
+          wallet.title = 'USDT (OMNI)';
+        else if (wallet.wallet_type === 'ERCUSDT')
+          wallet.title = 'USDT (ERC20)';
+        return wallet.wallet_type !== 'ANX';
+      });
+      this.myWallets = _.sortBy(walletData, ['title']);
       this.purchasedTickets();
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
@@ -133,12 +140,12 @@ export class EventsDetailComponent implements OnInit {
 
   onTicketSelect(ticket) {
     this.selectedTicket = ticket;
-    this.setAmount(this.noOfTickets, this.walletType);
+    this.setAmount(this.noOfTickets, this.selectedWallet);
   }
 
-  setWalletType(type) {
-    this.walletType = type;
-    this.setAmount(this.noOfTickets, this.walletType);
+  setWalletType(wallet) {
+    this.selectedWallet = wallet;
+    this.setAmount(this.noOfTickets, this.selectedWallet);
   }
 
   buyTickets() {
@@ -148,14 +155,13 @@ export class EventsDetailComponent implements OnInit {
     }
     this.buyingTicket = true;
     this.purchaseAmount = this.selectedTicket.price * this.noOfTickets;
-    this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]);
-    if (this.purchaseAmount > this.wallet.wallet_dollar_amount) {
+    if (this.purchaseAmount > this.selectedWallet.wallet_dollar_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.xticket'));
       this.buyingTicket = false;
       return;
     }
     const data = {
-      'wallet_type': this.walletType,
+      'wallet_type': this.selectedWallet.wallet_type,
       'ticket_qty': this.noOfTickets,
       'ticket_id': this.selectedTicket.id,
       'owner_name': this.userInfo.fullname,
@@ -257,11 +263,11 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
-  setAmount(noOfTicket, type) {
-    if (noOfTicket && type && this.selectedTicket.price) {
+  setAmount(noOfTicket, wallet) {
+    if (noOfTicket && wallet && this.selectedTicket.price) {
       this.fetchingAmount = true;
       this.httpService.get('live-price/').subscribe(data => {
-        this.totalAmount = (this.selectedTicket.price * noOfTicket) / data[type];
+        this.totalAmount = (this.selectedTicket.price * noOfTicket) / data[wallet.wallet_type];
         this.fetchingAmount = false;
       }, (err) => {
         this.fetchingAmount = false;
@@ -277,11 +283,11 @@ export class EventsDetailComponent implements OnInit {
       res.map((ticket: any) => {
         const wallet: any = _.findLast(this.myWallets, (item: any) => {
           return item.id === ticket.wallet_address;
-        });
+        }) || {};
+        ticket.asset = wallet.title;
         const ticketType: any = _.findLast(this.ticketTypes, (item: any) => {
           return item.id === ticket.ticket;
-        });
-        ticket.asset = wallet.wallet_type;
+        }) || {};
         ticket.ticket_name = ticketType.ticket_name;
       });
       this.source.load(res);

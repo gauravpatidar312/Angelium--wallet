@@ -46,6 +46,7 @@ export class TransferComponent implements OnInit {
   myWallets: any = [];
   sendWallet: any = {};
   sendWallets: any = [];
+  receiveWallets: any = [];
   receiveWallet: any = {};
   anxWallet: any = {};
   otcWallet: any = {};
@@ -210,7 +211,12 @@ export class TransferComponent implements OnInit {
       this.sendWallets = _.filter(this.myWallets, (wallet?: any) => {
           return wallet.wallet_type !== 'ERCUSDT';
         }) || [];
-      this.otcWallets = _.filter(this.myWallets, ['wallet_type', 'BTC']) || [];
+      this.receiveWallets = _.filter(this.myWallets, (wallet?: any) => {
+          return wallet.wallet_type !== 'USDT';
+        }) || [];
+      this.otcWallets = _.filter(this.myWallets, (wallet?: any) => {
+          return wallet.wallet_type === 'BTC';
+        }) || [];
 
       if (!this.myWallets) {
         this.sendType = 'SELECT';
