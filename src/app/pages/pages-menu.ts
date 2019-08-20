@@ -32,6 +32,12 @@ export const MENU_ITEMS = [
     languageKey: 'setting',
   },
   {
+    title: 'XTicket',
+    icon: 'fas fa-ticket-alt',
+    link: '/pages/xticket/1',
+    languageKey: 'xticket',
+  },
+  {
     data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
     title: 'Company',
     icon: 'nb-person',
@@ -44,12 +50,5 @@ export const MENU_ITEMS = [
     icon: 'nb-person',
     link: '/pages/admin',
     languageKey: 'admin',
-  },
-  {
-    data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
-    title: 'XTicket',
-    icon: 'fas fa-ticket-alt',
-    link: '/pages/xticket/1',
-    languageKey: 'xticket',
   }
 ];

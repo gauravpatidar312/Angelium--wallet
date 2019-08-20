@@ -7,12 +7,13 @@ import {ShareDataService} from '../../../services/share-data.service';
 import {SessionStorageService} from '../../../services/session-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {CustomInputComponent} from './custom-input.component';
-import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService, NbDialogService} from '@nebular/theme';
-import htmlToImage   from 'html-to-image';
+import {NbDialogService} from '@nebular/theme';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import htmlToImage from 'html-to-image';
 declare let jQuery: any;
+
 @Component({
   selector: 'ngx-events-detail',
   templateUrl: './events-detail.component.html',
@@ -26,7 +27,7 @@ export class EventsDetailComponent implements OnInit {
   ticketTypes: any;
   selectedTicket: any;
   selectedWallet: any;
-  purchaseAmount: number = null;
+  maxAmount: number;
   fetchingUsers: boolean = false;
   userInfo: any;
   noOfTickets: number = null;
@@ -37,7 +38,6 @@ export class EventsDetailComponent implements OnInit {
   ticketData: any;
   totalAmount: number;
   fetchingAmount: boolean = false;
-  ticketImage: any;
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -72,6 +72,10 @@ export class EventsDetailComponent implements OnInit {
       },
       asset: {
         title: this.translate.instant('common.assets'),
+        type: 'string',
+      },
+      ticket_name: {
+        title: this.translate.instant('common.ticket'),
         type: 'string',
       },
       created: {
@@ -131,7 +135,7 @@ export class EventsDetailComponent implements OnInit {
           wallet.title = 'USDT (ERC20)';
         return wallet.wallet_type !== 'ANX';
       });
-      this.myWallets = _.sortBy(walletData, ['title']);
+      this.myWallets = _.orderBy(walletData, ['title']);
       this.purchasedTickets();
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
@@ -140,12 +144,13 @@ export class EventsDetailComponent implements OnInit {
 
   onTicketSelect(ticket) {
     this.selectedTicket = ticket;
-    this.setAmount(this.noOfTickets, this.selectedWallet);
+    this.setAmount();
   }
 
   setWalletType(wallet) {
     this.selectedWallet = wallet;
-    this.setAmount(this.noOfTickets, this.selectedWallet);
+    this.maxAmount = ShareDataService.toFixedDown(this.selectedWallet.wallet_amount, 6);
+    this.setAmount();
   }
 
   buyTickets() {
@@ -153,13 +158,11 @@ export class EventsDetailComponent implements OnInit {
       this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseSelectTicket'), this.translate.instant('common.xticket'));
       return;
     }
-    this.buyingTicket = true;
-    this.purchaseAmount = this.selectedTicket.price * this.noOfTickets;
-    if (this.purchaseAmount > this.selectedWallet.wallet_dollar_amount) {
+    if ((this.selectedTicket.price * this.noOfTickets) > this.selectedWallet.wallet_dollar_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.xticket'));
-      this.buyingTicket = false;
       return;
     }
+
     const data = {
       'wallet_type': this.selectedWallet.wallet_type,
       'ticket_qty': this.noOfTickets,
@@ -168,9 +171,14 @@ export class EventsDetailComponent implements OnInit {
       'owner_email': this.userInfo.email,
       'event_id': this.eventId
     };
+
+    this.buyingTicket = true;
     this.httpService.post(data, 'user-purchase/').subscribe((res?: any) => {
       this.buyingTicket = false;
       if (res.status) {
+        this.noOfTickets = null;
+        this.selectedTicket = null;
+        this.selectedWallet = null;
         this.toastrService.success(this.translate.instant('pages.xticket.toastr.ticketsPurchased'), this.translate.instant('common.xticket'));
         this.getWalletDetails();
       } else {
@@ -196,6 +204,10 @@ export class EventsDetailComponent implements OnInit {
   openDownloadModal(template) {
     this.urlToBase64(this.ticketData.qrcode, (base64) => {
       this.ticketData.qrcode = base64;
+    });
+
+    this.urlToBase64('/assets/images/heavensDay.jpg', (base64) => {
+      jQuery('.image-scroll-card-body .ticket-img').css('background-image', `url('` + base64 + `')`);
     });
 
     this.dialogService.open(template, {
@@ -241,6 +253,7 @@ export class EventsDetailComponent implements OnInit {
 
   downloadTicket(dialog) {
     this.downloadingTicket = true;
+
     htmlToImage.toJpeg(document.getElementById('img-download'))
       .then((dataUrl) => {
         const link = document.createElement('a');
@@ -263,17 +276,23 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
-  setAmount(noOfTicket, wallet) {
-    if (noOfTicket && wallet && this.selectedTicket.price) {
-      this.fetchingAmount = true;
-      this.httpService.get('live-price/').subscribe(data => {
-        this.totalAmount = (this.selectedTicket.price * noOfTicket) / data[wallet.wallet_type];
-        this.fetchingAmount = false;
-      }, (err) => {
-        this.fetchingAmount = false;
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
-      });
+  setAmount() {
+    if (!(this.noOfTickets && this.noOfTickets > 0 && this.selectedWallet && this.selectedTicket.id)) {
+      this.totalAmount = null;
+      return;
     }
+
+    this.fetchingAmount = true;
+    this.httpService.get('live-price/').subscribe(data => {
+      if (!data[this.selectedWallet.wallet_type])
+        this.totalAmount = null;
+      else
+        this.totalAmount = (this.selectedTicket.price * this.noOfTickets) / data[this.selectedWallet.wallet_type];
+      this.fetchingAmount = false;
+    }, (err) => {
+      this.fetchingAmount = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.fetchingAmount'));
+    });
   }
 
   purchasedTickets() {
@@ -290,7 +309,7 @@ export class EventsDetailComponent implements OnInit {
         }) || {};
         ticket.ticket_name = ticketType.ticket_name;
       });
-      this.source.load(res);
+      this.source.load(_.orderBy(res, ['created'], ['desc']));
       this.fetchingTicketList = false;
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));

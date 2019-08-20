@@ -20,6 +20,10 @@
     margin: 0;
   }
 
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
   /deep/ ng2-smart-table {
     .ng2-smart-filters, .ng2-smart-actions ng2-st-tbody-edit-delete {
       display: none;

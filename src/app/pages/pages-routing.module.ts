@@ -53,9 +53,20 @@ const routes: Routes = [{
       canActivate: [AuthGuard]
     },
     {
+      path: 'xticket',
+      component: EventsListComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'xticket/:id',
+      component: EventsDetailComponent,
+      canActivate: [AuthGuard],
+    },
+    {
       path: 'merge',
       component: MergeComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: {role: [AppConstants.ROLES.ADMIN]},
     },
     {
       path: 'company',
@@ -64,26 +75,8 @@ const routes: Routes = [{
       data: {role: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN]},
     },
     {
-      path: 'hq',
-      component: HQComponent,
-      canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]},
-    },
-    {
       path: 'admin',
       component: AdminComponent,
-      canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]},
-    },
-    {
-      path: 'xticket',
-      component: EventsListComponent,
-      canActivate: [AuthGuard],
-      data: {role: [AppConstants.ROLES.ADMIN]},
-    },
-    {
-      path: 'xticket/:id',
-      component: EventsDetailComponent,
       canActivate: [AuthGuard],
       data: {role: [AppConstants.ROLES.ADMIN]},
     },
