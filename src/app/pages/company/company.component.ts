@@ -47,6 +47,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`heaven-all-user-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'Users';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
@@ -61,6 +62,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`heaven-user-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'Users';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
@@ -75,6 +77,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`heaven-plan-user-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'Users';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
@@ -89,6 +92,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`heaven-plan-status-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'USD';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
@@ -103,6 +107,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`heaven-released-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'USD';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
@@ -117,6 +122,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`new-heaven-release-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'USD';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
@@ -131,6 +137,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.fetchingGraphData = true;
     this.httpService.get(`ANX-reward-graph/?graph_type=${value}`).subscribe((res?: any) => {
       this.graphData = res.data;
+      this.graphData.yAxisUnit = 'ANX';
       this.userValue = value;
       this.fetchingGraphData = false;
     }, (err) => {
