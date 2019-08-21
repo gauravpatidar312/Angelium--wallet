@@ -124,6 +124,10 @@
     margin-top: 28px;
     height: 305px;
     width: 542px;
+
+    img {
+      width: 600px;
+    }
   }
 
   .btm-margin {
@@ -262,15 +266,19 @@
       }
 
       .ticket-name-color {
-        background-color: #ffffff;
         margin: 1px 15px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
         .customer-name {
+          width: 100%;
+          background-color: #fff;
           color: #000000;
           font-size: 22px;
+          display: inline-block;
+          line-height: 0.75;
+          padding: 10px 0 5px;
         }
       }
     }

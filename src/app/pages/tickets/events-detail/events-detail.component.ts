@@ -11,7 +11,8 @@ import {NbDialogService} from '@nebular/theme';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas';
+import * as jsPDF from 'jspdf';
 declare let jQuery: any;
 
 @Component({
@@ -206,10 +207,6 @@ export class EventsDetailComponent implements OnInit {
       this.ticketData.qrcode = base64;
     });
 
-    this.urlToBase64('/assets/images/heavensDay.jpg', (base64) => {
-      jQuery('.image-scroll-card-body .ticket-img').css('background-image', `url('` + base64 + `')`);
-    });
-
     this.dialogService.open(template, {
       autoFocus: true
     });
@@ -253,21 +250,18 @@ export class EventsDetailComponent implements OnInit {
 
   downloadTicket(dialog) {
     this.downloadingTicket = true;
-
-    htmlToImage.toJpeg(document.getElementById('img-download'))
-      .then((dataUrl) => {
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.setAttribute('visibility', 'hidden');
-        link.download = `Ticket-${this.ticketData.name}.jpg`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(() => {
+    setTimeout(() => {
+      const elementToPrint = document.getElementById('img-download');
+      html2canvas(elementToPrint, {'scale': 2})
+        .then(canvas => {
+          const pdf = new jsPDF('p', 'px', [350*2, 758*2]);
+          const data = canvas.toDataURL('image/png');
+          pdf.addImage(data, 'PNG', 0, 0, 264*2, 572*2);
+          pdf.save(`Ticket-${this.ticketData.name}.pdf`);
           this.downloadingTicket = false;
           dialog.close();
-        }, 1200);
-      });
+        });
+    }, 0);
   }
 
   playVideo() {
