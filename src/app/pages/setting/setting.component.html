@@ -77,7 +77,7 @@
       <nb-card-header>
         <div class="row">
           <div class="col-8">{{"common.option" | translate}}</div>
-          <div class="col-4 clean-cache-margin text-right"><a class="clean-cache-text pointer" (click)="reloadCache()">{{"pages.setting.clearCache" | translate}}</a></div>
+          <div class="col-4 clean-cache-margin text-right" *ngIf="shareDataService?.newVersion"><a class="clean-cache-text pointer" (click)="reloadCache()">{{"pages.setting.updateApp" | translate}}</a></div>
         </div>
       </nb-card-header>
       <nb-card-body>

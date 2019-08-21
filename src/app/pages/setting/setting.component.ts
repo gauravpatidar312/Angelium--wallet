@@ -10,6 +10,7 @@ import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
 import {SessionStorageService} from '../../services/session-storage.service';
 import {environment} from '../../../environments/environment';
+import {SwUpdate} from '@angular/service-worker';
 import Swal from 'sweetalert2';
 
 import * as _ from 'lodash';
@@ -62,10 +63,11 @@ export class SettingComponent implements OnInit, OnDestroy {
   constructor(private toastrService: ToastrService,
               private dialogService: NbDialogService,
               private httpService: HttpService,
-              private shareDataService: ShareDataService,
+              public shareDataService: ShareDataService,
               private sessionStorage: SessionStorageService,
               public translate: TranslateService,
               private themeService: NbThemeService,
+              private swUpdate: SwUpdate,
               private breakpointService: NbMediaBreakpointsService) {
     this.evaIcons = Object.keys(icons).filter(icon => icon.indexOf('outline') === -1);
 
@@ -157,9 +159,10 @@ export class SettingComponent implements OnInit, OnDestroy {
   }
 
   reloadCache() {
-    if (confirm(this.translate.instant('pages.setting.reloadCacheMessage'))) {
-      document.location.reload(true);
-    }
+    this.swUpdate.activateUpdate()
+      .then(() => {
+        document.location.reload(true);
+      });
   }
 
   extraInfo() {

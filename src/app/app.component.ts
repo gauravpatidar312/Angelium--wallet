@@ -81,6 +81,7 @@ export class AppComponent implements OnInit {
       this.swUpdate.available.subscribe((event) => {
         console.log('current version is ', event.current);
         console.log('available version is ', event.available);
+        this.shareDataService.newVersion = true;
         if (confirm('New version is available. Press OK to reload.')) {
           // Activate new update files and reload the page.
           this.swUpdate.activateUpdate()
