@@ -240,12 +240,49 @@
     width: 302px;
     height: 645px;
 
+    .event-margin {
+      font-family: nb-theme(font-bebas-bold);
+      text-align: center;
+      position: relative;
+      color: #ffffff;
+      top: 14px;
+      line-height: 0.8;
+
+      .event-sub {
+        font-family: nb-theme(font-bebas);
+        font-size: 20px;
+        letter-spacing: 7px;
+        margin-left: 8px;
+      }
+
+      .event-name {
+        font-size: 63px;
+        letter-spacing: 1px;
+        margin-top: 5px;
+      }
+
+      .event-date {
+        font-size: 34px;
+        letter-spacing: 10px;
+        font-family: nb-theme(font-bebas);
+        margin-top: 56px;
+        margin-left: 8px;
+      }
+
+      .event-location {
+        font-family: nb-theme(font-nunito);
+        font-size: 11px;
+        margin-top: 8px;
+        letter-spacing: 0.5px;
+      }
+    }
+
     .qrcode-margin {
       font-family: nb-theme(font-bebas-bold);
       text-align: center;
       position: relative;
       color: #ffffff;
-      top: 56%;
+      top: 30%;
 
       .ticket-name {
         font-size: 45px;

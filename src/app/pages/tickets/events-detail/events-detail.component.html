@@ -120,6 +120,14 @@
     </nb-card-header>
     <nb-card-body class="image-scroll-card-body">
       <div id="img-download" class="ticket-img">
+        <div class="event-margin">
+          <div class="event-sub">ANGELIUM CONFERENCE</div>
+          <div class="event-name">{{eventDetail?.title}}</div>
+          <div class="event-date">{{eventDetail?.start_date | date: 'yyyy . MM . dd'}}</div>
+          <div class="event-location">
+            {{eventDetail?.adddress_line_1 | titlecase}} &nbsp;&nbsp;&nbsp; {{eventDetail?.adddress_line_2 | titlecase}}
+          </div>
+        </div>
         <div class="qrcode-margin">
           <div class="ticket-name">{{ticketData?.ticket_name}}</div>
           <img [src]="ticketData?.qrcode" class="qr-code-class">
