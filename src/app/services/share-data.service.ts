@@ -20,10 +20,11 @@ export class ShareDataService {
   showNotification = false;
   transferTab: string;
   transferTitle: string;
+  newVersion: boolean = false;
   hideSpinnerForExchange: boolean = false;
   constructor(private storageService: IndexedDBStorageService,
               private store: Store<AppState>,
-              private translate:TranslateService) {}
+              private translate: TranslateService) {}
 
   changeData(data: any) {
     this.messageSource.next(data);
