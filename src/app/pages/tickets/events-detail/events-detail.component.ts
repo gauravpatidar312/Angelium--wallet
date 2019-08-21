@@ -252,11 +252,11 @@ export class EventsDetailComponent implements OnInit {
     this.downloadingTicket = true;
     setTimeout(() => {
       const elementToPrint = document.getElementById('img-download');
-      html2canvas(elementToPrint, {'scale': 2})
+      html2canvas(elementToPrint, {'scale': 1})
         .then(canvas => {
-          const pdf = new jsPDF('p', 'px', [350*2, 758*2]);
+          const pdf = new jsPDF('p', 'px', [350, 758]);
           const data = canvas.toDataURL('image/png');
-          pdf.addImage(data, 'PNG', 0, 0, 264*2, 572*2);
+          pdf.addImage(data, 'PNG', 0, 0, 264, 572);
           pdf.save(`Ticket-${this.ticketData.name}.pdf`);
           this.downloadingTicket = false;
           dialog.close();
