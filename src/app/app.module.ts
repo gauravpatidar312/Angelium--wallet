@@ -107,8 +107,20 @@ export class AppModule {
         if (this.shareDataService.autoLogOut) {
           this.storageService.resetStorage();
           this.shareDataService.autoLogOut = false;
-        } else
-          this.store.dispatch(new UserInfo(data));
+        } else {
+          if (window.localStorage.timestamp) { // Check if new tab is open from recent closed tabs
+            let t0 = Number(window.localStorage['timestamp']);
+            if (isNaN(t0)) t0 = 0;
+            const t1 = new Date().getTime();
+            const duration = t1 - t0;
+            if (duration < 20 * 1000) {
+              this.store.dispatch(new UserInfo(data));
+            } else {
+              this.storageService.resetStorage();
+              this.shareDataService.autoLogOut = false;
+            }
+          }
+        }
       } else if (window.localStorage.timestamp) { // Check if new tab is open by logged in user or new session
         let t0 = Number(window.localStorage['timestamp']);
         if (isNaN(t0)) t0 = 0;
