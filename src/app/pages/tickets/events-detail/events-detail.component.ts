@@ -180,6 +180,7 @@ export class EventsDetailComponent implements OnInit {
         this.noOfTickets = null;
         this.selectedTicket = null;
         this.selectedWallet = null;
+        this.totalAmount = null;
         this.toastrService.success(this.translate.instant('pages.xticket.toastr.ticketsPurchased'), this.translate.instant('common.xticket'));
         this.getWalletDetails();
       } else {
@@ -197,14 +198,15 @@ export class EventsDetailComponent implements OnInit {
     xmlHTTP.responseType = 'arraybuffer';
     xmlHTTP.onload = function(e) {
       const raw = String.fromCharCode.apply(null, new Uint8Array(this.response));
-      callback('data:image/png;base64,' + btoa(raw));
+      callback(raw ? ('data:image/jpeg;base64,' + btoa(raw)) : '');
     };
     xmlHTTP.send();
   }
 
   openDownloadModal(template) {
     this.urlToBase64(this.ticketData.qrcode, (base64) => {
-      this.ticketData.qrcode = base64;
+      if (base64)
+        this.ticketData.qrcode = base64;
     });
 
     this.dialogService.open(template, {
@@ -225,7 +227,7 @@ export class EventsDetailComponent implements OnInit {
       return;
     }
 
-    if (!ticket.newName.match(/^[a-zA-Z0-9!@#$%^_ +\-\[\]~:|.]*$/g)) {
+    if (!ticket.newName.match(/^[a-zA-Z +\-\[\]~:|.]*$/g)) {
       this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
       return;
     }
@@ -252,20 +254,13 @@ export class EventsDetailComponent implements OnInit {
     this.downloadingTicket = true;
     setTimeout(() => {
       const elementToPrint = document.getElementById('img-download');
-      html2canvas(elementToPrint, {'scale': 1})
+      html2canvas(elementToPrint, {'scale': 5})
         .then(canvas => {
-          const dataUrl = canvas.toDataURL('image/png');
-          const link = document.createElement('a');
-          link.href = dataUrl;
-          link.setAttribute('visibility', 'hidden');
-          link.download = `Ticket-${this.ticketData.name}.jpg`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => {
-            this.downloadingTicket = false;
-            dialog.close();
-          }, 1200);
+          const pdf = new jsPDF('p', 'px', [350, 758]);
+          pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
+          pdf.save(`Ticket-${this.ticketData.name}.pdf`);
+          this.downloadingTicket = false;
+          dialog.close();
         });
     }, 0);
   }
@@ -277,7 +272,7 @@ export class EventsDetailComponent implements OnInit {
   }
 
   setAmount() {
-    if (!(this.noOfTickets && this.noOfTickets > 0 && this.selectedWallet && this.selectedTicket.id)) {
+    if (!(this.noOfTickets && this.noOfTickets > 0 && this.selectedWallet && this.selectedTicket && this.selectedTicket.id)) {
       this.totalAmount = null;
       return;
     }
