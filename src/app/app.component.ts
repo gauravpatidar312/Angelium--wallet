@@ -11,6 +11,7 @@ import {concat, interval} from 'rxjs';
 import {first} from 'rxjs/operators';
 import {ShareDataService} from './services/share-data.service';
 import {MessagingService} from './messaging.service';
+import {ToastrService} from './services/toastr.service';
 
 declare let jQuery: any;
 @Component({
@@ -34,10 +35,11 @@ export class AppComponent implements OnInit {
               private storageService: IndexedDBStorageService,
               private shareDataService: ShareDataService,
               private authService: AuthService,
-              private msgService: MessagingService) {
+              private msgService: MessagingService,
+              private toastrService: ToastrService) {
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
-        if(event.url === '/' || event.url === '/login') {
+        if (event.url === '/' || event.url === '/login') {
           this.shareDataService.autoLogOut = true;
         }
         const userData = this.sessionStorage.getFromSession('userInfo');
@@ -68,7 +70,7 @@ export class AppComponent implements OnInit {
     this.msgService.getPermission();
     this.msgService.receiveMessage();
     this.message = this.msgService.currentMessage;
-    
+
     this.analytics.trackPageViews();
     if (this.swUpdate.isEnabled) {
       // Allow the app to stabilize first, before starting polling for updates with `interval()`.
@@ -165,12 +167,12 @@ export class AppComponent implements OnInit {
   setLanguage(data: any) {
     if (!data) {
       const languages = [
-        { 'id': 1, 'language': 'English', 'language_code': 'en' },
-        { 'id': 2, 'language': 'Chinese', 'language_code': 'zh' },
-        { 'id': 3, 'language': 'Korean', 'language_code': 'ko' }
+        {'id': 1, 'language': 'English', 'language_code': 'en'},
+        {'id': 2, 'language': 'Chinese', 'language_code': 'zh'},
+        {'id': 3, 'language': 'Korean', 'language_code': 'ko'}
       ];
       const browserDetectLang = navigator.language.split('-')[0];
-      const currectLang = languages.find((data:any)=> {
+      const currectLang = languages.find((data: any) => {
         return data.language_code === browserDetectLang;
       });
       if (currectLang) {
@@ -183,6 +185,23 @@ export class AppComponent implements OnInit {
       }
     } else {
       this.translate.use(data.language_code);
+    }
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  public popstate($event) {
+    const data = $event.currentTarget.location;
+    const rememberUser = this.sessionStorage.getFromLocalStorage('rememberMe');
+    const userData = this.sessionStorage.getFromSession('userInfo');
+    if (data.hash === '#/login') {
+      if (rememberUser && !userData.is_2fa_enable)
+        history.go(1);
+      else if (userData) {
+        setTimeout(() => {
+          this.toastrService.info(this.translate.instant('common.toastr.logOut'), this.translate.instant('common.angelium'));
+        }, 10);
+        this.authService.logout();
+      }
     }
   }
 
