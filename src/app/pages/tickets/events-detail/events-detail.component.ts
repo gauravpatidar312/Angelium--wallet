@@ -253,15 +253,19 @@ export class EventsDetailComponent implements OnInit {
   downloadTicket(dialog) {
     this.downloadingTicket = true;
     setTimeout(() => {
-      const elementToPrint = document.getElementById('img-download');
-      html2canvas(elementToPrint, {'scale': 5})
-        .then(canvas => {
-          const pdf = new jsPDF('p', 'px', [350, 758]);
-          pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
-          pdf.save(`Ticket-${this.ticketData.name}.pdf`);
-          this.downloadingTicket = false;
-          dialog.close();
-        });
+      jQuery('.image-scroll-card-body').css('max-height', '758px');
+      setTimeout(() => {
+        const elementToPrint = document.getElementById('img-download');
+        html2canvas(elementToPrint, {'scale': 5})
+          .then(canvas => {
+              const pdf = new jsPDF('p', 'px', [350, 758]);
+              pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
+              pdf.setProperties({'title': `Ticket-${this.ticketData.name}.pdf`});
+              pdf.output('dataurlnewwindow');
+              this.downloadingTicket = false;
+              dialog.close();
+          });
+      }, 500);
     }, 0);
   }
 

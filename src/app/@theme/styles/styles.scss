@@ -23,6 +23,14 @@
 
   // loading progress bar
   @include ngx-pace-theme();
+
+  @media (max-width: 425px), (max-height: 810px) {
+    ng2-smart-table nav.ng2-smart-pagination-nav {
+      -webkit-box-pack: start !important;
+      -ms-flex-pack: start !important;
+      justify-content: left !important;
+    }
+  }
 };
 .nb-theme-cosmic nb-layout.window-mode .layout nb-layout-header nav{
   padding-top: 0px!important;
