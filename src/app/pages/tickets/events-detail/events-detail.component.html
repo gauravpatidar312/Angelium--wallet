@@ -116,10 +116,11 @@
 <ng-template #heavensDayTicket let-data let-refTicket="dialogRef">
   <nb-card>
     <nb-card-header>
-      {{"common.xticket" | translate}}  <i class="nb-close nb-icon-left fa-2x" [hidden]="downloadingTicket" (click)="refTicket.close()"></i>
+      {{"common.xticket" | translate}}  <i class="nb-close nb-icon-left fa-2x" [hidden]="downloadingTicket || mailingTicket" (click)="refTicket.close()"></i>
     </nb-card-header>
     <nb-card-body class="image-scroll-card-body">
       <div id="img-download" class="ticket-img">
+        <!--<img [src]="ticketData?.img" *ngIf="ticketData?.img">-->
         <div class="event-margin">
           <div class="event-sub">ANGELIUM CONFERENCE</div>
           <div class="event-name">{{eventDetail?.title}}</div>
@@ -139,9 +140,12 @@
       </div>
     </nb-card-body>
     <nb-card-footer class="text-center">
-      <button class="btn btn-download pointer" nbButton size="small" (click)="downloadTicket(refTicket)" [disabled]="downloadingTicket">
+      <button *ngIf="!(deviceInfo.os === 'iOS' || deviceInfo.os === 'Mac')" class="btn btn-download pointer" nbButton size="small" (click)="downloadTicket(refTicket, false)" [disabled]="downloadingTicket || mailingTicket">
         <i class="fa fa-spinner fa-spin text-white" *ngIf="downloadingTicket"></i>
         <span *ngIf="!downloadingTicket">{{"pages.setting.download" | translate}}</span></button>
+      <button class="btn btn-email pointer" nbButton size="small" (click)="downloadTicket(refTicket, true)" [disabled]="downloadingTicket || mailingTicket">
+        <i class="fa fa-spinner fa-spin text-white" *ngIf="mailingTicket"></i>
+        <span *ngIf="!mailingTicket">{{"pages.setting.eMail" | translate}}</span></button>
     </nb-card-footer>
   </nb-card>
 </ng-template>

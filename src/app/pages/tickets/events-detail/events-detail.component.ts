@@ -8,6 +8,7 @@ import {SessionStorageService} from '../../../services/session-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {CustomInputComponent} from './custom-input.component';
 import {NbDialogService} from '@nebular/theme';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -34,11 +35,13 @@ export class EventsDetailComponent implements OnInit {
   noOfTickets: number = null;
   buyingTicket: boolean = false;
   downloadingTicket: boolean = false;
+  mailingTicket: boolean = false;
   fetchingTicketList: boolean = true;
   hasNoTickets: boolean = false;
   ticketData: any;
   totalAmount: number;
   fetchingAmount: boolean = false;
+  deviceInfo: any;
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -95,13 +98,15 @@ export class EventsDetailComponent implements OnInit {
               private sessionStorage: SessionStorageService,
               private toastrService: ToastrService,
               private dialogService: NbDialogService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private deviceService: DeviceDetectorService) {
   }
 
   ngOnInit() {
     this.setUserInfo();
     this.getEventDetails();
     this.getWalletDetails();
+    this.deviceInfo = this.deviceService.getDeviceInfo();
   }
 
   setUserInfo() {
@@ -250,22 +255,59 @@ export class EventsDetailComponent implements OnInit {
       });
   }
 
-  downloadTicket(dialog) {
-    this.downloadingTicket = true;
+  blobToBase64(blob, callback) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      const dataUrl = reader.result.toString();
+      callback(dataUrl);
+    };
+    reader.readAsDataURL(blob);
+  }
+
+  downloadTicket(dialog, isEmail?: boolean) {
+    this.downloadingTicket = !isEmail;
+    this.mailingTicket = isEmail;
     setTimeout(() => {
-      jQuery('.image-scroll-card-body').css('max-height', '758px');
+      const elementToPrint = document.getElementById('img-download');
+      if (this.deviceInfo.os === 'iOS') {
+        elementToPrint.style.marginTop = '-94px';
+      }
       setTimeout(() => {
-        const elementToPrint = document.getElementById('img-download');
         html2canvas(elementToPrint, {'scale': 5})
           .then(canvas => {
               const pdf = new jsPDF('p', 'px', [350, 758]);
+              // this.ticketData.img = canvas.toDataURL('image/jpeg');
               pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
-              pdf.setProperties({'title': `Ticket-${this.ticketData.name}.pdf`});
-              pdf.output('dataurlnewwindow');
-              this.downloadingTicket = false;
-              dialog.close();
+              if (!isEmail) {
+                pdf.setProperties({'title': `Ticket-${this.ticketData.name}.pdf`});
+                const pdfData = pdf.output('blob');
+                this.blobToBase64(pdfData, (base64) => {
+                  window.open(base64, '_blank');
+                });
+                this.downloadingTicket = false;
+                dialog.close();
+              } else {
+                const pdfData = pdf.output('blob');
+                this.blobToBase64(pdfData, (base64) => {
+                  const postData: any = {
+                    'data': base64.split(',')[1],
+                    'name': this.ticketData.name.replace(/^\/+|\/+$/g, '_')
+                  };
+                  this.httpService.post(postData, 'email-ticket/').subscribe((res?: any) => {
+                    if (res && res.status) {
+                      this.mailingTicket = false;
+                      dialog.close();
+                      this.toastrService.success(this.translate.instant('pages.xticket.toastr.emailHasBeenSent'), this.translate.instant('common.xticket'));
+                    } else
+                      this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+                  }, (err) => {
+                    this.mailingTicket = false;
+                    this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+                  });
+                });
+              }
           });
-      }, 500);
+      }, 400);
     }, 0);
   }
 

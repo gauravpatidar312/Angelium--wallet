@@ -27,6 +27,7 @@ import { AdminModule } from './admin/admin.module';
 import {EventsListComponent} from './tickets/events-list/events-list.component';
 import {EventsDetailComponent} from './tickets/events-detail/events-detail.component';
 import { CustomInputComponent } from './tickets/events-detail/custom-input.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 const PAGES_COMPONENTS = [
@@ -52,6 +53,7 @@ const PAGES_COMPONENTS = [
     TranslateModule,
     InternationalPhoneNumberModule,
     NgSelectModule,
+    DeviceDetectorModule.forRoot(),
     NbDateFnsDateModule.forRoot({
       parseOptions: { awareOfUnicodeTokens: true },
       formatOptions: { awareOfUnicodeTokens: true },
