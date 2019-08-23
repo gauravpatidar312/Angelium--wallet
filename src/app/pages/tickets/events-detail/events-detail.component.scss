@@ -330,11 +330,85 @@
 
 .btn-download {
   width: 130px;
+  margin-right: 7px;
+}
+
+.btn-email {
+  width: 130px;
+  margin-left: 7px;
+  background-color: #7659ff !important;
 }
 
 @media only screen and (max-width: 425px), only screen and (max-height: 810px) {
   /deep/ .image-scroll-card-body {
     max-height: calc(100vh - 250px);
+    align-self: center;
+
+    .ticket-img {
+      width: 207px;
+      height: 442px;
+
+      .event-margin {
+        top: 8px;
+
+        .event-sub {
+          font-size: 12px;
+          letter-spacing: 5px;
+          margin-left: 4px;
+        }
+
+        .event-name {
+          font-size: 40px;
+          letter-spacing: 1px;
+          margin-top: 5px;
+        }
+
+        .event-date {
+          font-size: 26px;
+          letter-spacing: 5px;
+          margin-top: 34px;
+          margin-left: 4px;
+        }
+
+        .event-location {
+          font-size: 7px;
+          margin-top: 4px;
+        }
+      }
+
+      .qrcode-margin {
+        top: 30%;
+
+        .ticket-name {
+          font-size: 36px;
+        }
+
+        .qr-code-class {
+          width: 100px;
+        }
+
+        .ticket-title {
+          font-size: 17px;
+          margin-left: 11px;
+          letter-spacing: 10px;
+          margin-top: 4px;
+        }
+
+        .ticket-name-color {
+          margin: 1px 10px;
+
+          .customer-name {
+            width: 100%;
+            background-color: #fff;
+            color: #000000;
+            font-size: 17px;
+            display: inline-block;
+            line-height: 0.75;
+            padding: 8px 0 4px;
+          }
+        }
+      }
+    }
   }
 }
 
