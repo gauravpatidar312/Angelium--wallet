@@ -71,10 +71,10 @@
                   </label>
                   <div class="input-group">
                     <input type="number" onkeydown="if(event.key==='.'){event.preventDefault();}" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
-                           [(ngModel)]="placeLottery.bet_number" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type || currentLotteryData?.status !== 'running'"
+                           [(ngModel)]="placeLottery.bet_number" [required]="true" (keyup)="calculateAmount()" [disabled]="!selectWallet?.wallet_type || currentLotteryData?.status !== 'running' || setDefaultBetNumber"
                            min="1" step="1" class="form-control input-padding"/>
                     <span class="transfer-amount mr-2"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
-                    <span class="transfer-amount mr-2" *ngIf="!fetchingAmount">{{ totalBetAmount | number : '1.0-8'}}</span>
+                    <span class="transfer-amount mr-2" *ngIf="!fetchingAmount">{{ totasetDefaultBetNumberBetAmount | number : '1.0-8'}}</span>
                   </div>
                 </div>
               </div>
