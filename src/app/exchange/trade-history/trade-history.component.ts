@@ -28,7 +28,7 @@ export class TradeHistoryComponent implements OnInit {
 
   parentData(data: any) {
     if (this.shareDataService.hideSpinnerForExchange)
-      this.tradeHistoryData = [];
+      this.tradeHistoryData = {};
     if (data) {
       this.currentPair = data;
       this.tradeHistorySpinner = true;
@@ -47,10 +47,12 @@ export class TradeHistoryComponent implements OnInit {
       if (res.status) {
         if (!this.tradeHistoryData)
           this.tradeHistoryData = res.data;
-        else
-          this.tradeHistoryData = _.merge(this.tradeHistoryData, res.data);
+        else {
+          const tradeHistoryData: any = _.merge(this.tradeHistoryData, res.data);
+          this.tradeHistoryData.trades = _.unionBy(tradeHistoryData.trades, '_id');
+        }
         this.viewTradeHistory = true;
-        this.tradeData = _.sortBy(this.tradeHistoryData.trades, ['timestamp']).reverse();
+        this.tradeData = _.orderBy(this.tradeHistoryData.trades, ['timestamp'], ['desc']);
         this.noHistory = !this.tradeData.length;
       }
     }, err => {

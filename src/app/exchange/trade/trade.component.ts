@@ -195,6 +195,13 @@ export class TradeComponent implements OnInit, AfterViewInit {
   submitTradeBuy() {
     if (this.tradeBuy.price === 0 || this.tradeBuy.amount === 0) return;
 
+    if (this.tradeBuy.pair === 'eth/btc' || this.tradeBuy.pair === 'anx/btc') {
+      if (Number(this.tradeBuy.price * this.tradeBuy.amount) < 0.0005) {
+        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
+        return;
+      }
+    }
+
     const currentWallet = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
     if (Number(this.tradeBuy.price * this.tradeBuy.amount) > Number(currentWallet.balance)) {
       this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
@@ -226,6 +233,13 @@ export class TradeComponent implements OnInit, AfterViewInit {
 
   submitTradeSell() {
     if (this.tradeSell.price === 0 || this.tradeSell.amount === 0) return;
+
+    if (this.tradeSell.pair === 'eth/btc' || this.tradeSell.pair === 'anx/btc') {
+      if (Number(this.tradeSell.price * this.tradeSell.amount) < 0.0005) {
+        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeSell'));
+        return;
+      }
+    }
 
     const currentWallet = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
     if (Number(this.tradeSell.amount) > Number(currentWallet.balance)) {
