@@ -197,7 +197,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
 
     if (this.tradeBuy.pair === 'eth/btc' || this.tradeBuy.pair === 'anx/btc') {
       if (Number(this.tradeBuy.price * this.tradeBuy.amount) < 0.0005) {
-        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
+        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.validateBTCAmountMessage'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
         return;
       }
     }
@@ -236,7 +236,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
 
     if (this.tradeSell.pair === 'eth/btc' || this.tradeSell.pair === 'anx/btc') {
       if (Number(this.tradeSell.price * this.tradeSell.amount) < 0.0005) {
-        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.youDontHaveSufficientBalanceToBuy'), this.translate.instant('pages.exchange.toastr.tradeSell'));
+        this.toastrService.danger(this.translate.instant('pages.exchange.toastr.validateBTCAmountMessage'), this.translate.instant('pages.exchange.toastr.tradeSell'));
         return;
       }
     }
