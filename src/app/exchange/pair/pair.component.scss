@@ -1,4 +1,6 @@
 @import '../../@theme/styles/themes';
+@import '~@nebular/bootstrap/styles/hero-buttons';
+@import '~@nebular/theme/styles/global/typography/typography';
 @import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
@@ -160,4 +162,39 @@ tbody tr:nth-of-type(even) {
 
 .currentPair-color {
   color: #00d977;
+}
+
+.delta {
+  position: absolute;
+  display: inline-block;
+  padding-left: 0.2rem;
+  font-size: 1rem;
+  font-family: nb-theme(font-avenir);
+  right: 20px;
+  @include nb-rtl(left, 1.25rem);
+  @include nb-rtl(right, inherit);
+
+  &::before {
+    position: absolute;
+    content: '';
+    right: 100%;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+
+  &.down {
+    color: #ff5680;
+    &::before {
+      bottom: 4px;
+      border-top: 7px solid #ff5680;
+    }
+  }
+
+  &.up {
+    color: #26df8b;
+    &::before {
+      top: 4px;
+      border-bottom: 7px solid #26df8b;
+    }
+  }
 }
