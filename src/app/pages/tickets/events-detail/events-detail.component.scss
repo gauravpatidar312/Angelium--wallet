@@ -25,6 +25,27 @@
   }
 
   /deep/ ng2-smart-table {
+    .fa-share-square {
+      font-size: 20px;
+    }
+
+    .ng2-smart-actions {
+      width: 80px;
+      text-align: center;
+      min-width: 80px;
+    }
+
+    ng2-st-tbody-custom {
+      .ng2-smart-action-custom-custom {
+        display: inline;
+        border: none !important;
+        padding: 0 5px;
+        &:nth-child(even) {
+          vertical-align: text-bottom;
+        }
+      }
+    }
+
     .ng2-smart-filters, .ng2-smart-actions ng2-st-tbody-edit-delete {
       display: none;
     }
@@ -339,6 +360,21 @@
   background-color: #7659ff !important;
 }
 
+.send-ticket {
+  width: 320px;
+}
+
+.send-button {
+  width: 84px;
+}
+
+.username {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #00ff00;
+  font-family: Avenir;
+}
+
 @media only screen and (max-width: 425px), only screen and (max-height: 810px) {
   /deep/ .image-scroll-card-body {
     max-height: calc(100vh - 250px);
@@ -455,6 +491,10 @@
 }
 
 @media only screen and (max-width: 425.99px) {
+  .send-ticket {
+    width: 250px;
+  }
+
   .mobile-video {
     margin-top: 18px;
   }
