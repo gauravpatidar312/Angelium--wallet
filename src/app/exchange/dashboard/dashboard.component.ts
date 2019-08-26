@@ -60,8 +60,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.tradeTab2 = false;
         if (!this.openOrderData)
           this.openOrderData = res.data;
-        else
+        else {
           this.openOrderData = _.merge(this.openOrderData, res.data);
+          this.openOrderData.buy = _.unionBy(this.openOrderData.buy, '_id');
+          this.openOrderData.sell = _.unionBy(this.openOrderData.sell, '_id');
+        }
         this.openOrderBuySell = _.concat(this.openOrderData.buy, this.openOrderData.sell);
         if (!this.openOrderBuySell.length)
           this.noDataOpenTrade = true;
@@ -139,7 +142,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (!this.currentPair || this.currentPair.pair !== $event.pair) {
         this.shareDataService.hideSpinnerForExchange = true;
         new TradingView.widget($event);
-        this.openOrderData = [];
+        this.openOrderData = {};
         this.tradeHistoryData = [];
         this.viewOpenOrderData = false;
         this.viewTradeHistoryData = false;

@@ -39,8 +39,12 @@ export class BoardComponent implements OnInit {
       if (res.status) {
         if (!this.orderBookData)
           this.orderBookData = res.data;
-        else
-          this.orderBookData = _.merge(this.orderBookData, res.data);
+        else {
+          const orderBookData: any = _.merge(this.orderBookData, res.data);
+          this.orderBookData.buy = _.unionBy(orderBookData.buy, '_id');
+          this.orderBookData.sell = _.unionBy(orderBookData.sell, '_id');
+        }
+
         this.boardTableValue = true;
         this.boardBuy = this.orderBookData.buy;
         this.boardSell = this.orderBookData.sell;
@@ -55,8 +59,8 @@ export class BoardComponent implements OnInit {
 
   parentData(data: any) {
     if (this.shareDataService.hideSpinnerForExchange) {
-      this.lastTradeData = [];
-      this.orderBookData = [];
+      this.lastTradeData = {};
+      this.orderBookData = {};
     }
     if (data) {
       this.boardSpinner = true;
