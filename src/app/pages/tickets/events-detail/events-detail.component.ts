@@ -36,12 +36,14 @@ export class EventsDetailComponent implements OnInit {
   buyingTicket: boolean = false;
   downloadingTicket: boolean = false;
   mailingTicket: boolean = false;
+  sendingTicket: boolean = false;
   fetchingTicketList: boolean = true;
   hasNoTickets: boolean = false;
   ticketData: any;
   totalAmount: number;
   fetchingAmount: boolean = false;
   deviceInfo: any;
+  sendUsername: string;
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -53,8 +55,15 @@ export class EventsDetailComponent implements OnInit {
       custom: [
         {
           width: '60px',
+          display: 'inline-table',
           name: 'download',
           title: '<i class="ion-archive"></i>'
+        },
+        {
+          width: '60px',
+          display: 'inline-table',
+          name: 'send',
+          title: '<i class="fas fa-share-square"></i>'
         }
       ]
     },
@@ -159,7 +168,7 @@ export class EventsDetailComponent implements OnInit {
     this.setAmount();
   }
 
-  buyTickets() {
+  onBuyTickets() {
     if (!this.selectedTicket || !this.selectedTicket.id) {
       this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseSelectTicket'), this.translate.instant('common.xticket'));
       return;
@@ -169,6 +178,25 @@ export class EventsDetailComponent implements OnInit {
       return;
     }
 
+    let validateEndpoint = '';
+    if (this.selectedWallet.wallet_type === 'BTC')
+      validateEndpoint = 'validate_btc/';
+    else if (this.selectedWallet.wallet_type === 'USDT')
+      validateEndpoint = 'validate_usdt/';
+    if (validateEndpoint) {
+      this.httpService.post({'amount': Number(this.totalAmount)}, validateEndpoint).subscribe((res?: any) => {
+        if (res.status)
+          this.buyTickets();
+        else
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+      });
+    } else
+      this.buyTickets();
+  }
+
+  buyTickets() {
     const data = {
       'wallet_type': this.selectedWallet.wallet_type,
       'ticket_qty': this.noOfTickets,
@@ -177,7 +205,6 @@ export class EventsDetailComponent implements OnInit {
       'owner_email': this.userInfo.email,
       'event_id': this.eventId
     };
-
     this.buyingTicket = true;
     this.httpService.post(data, 'user-purchase/').subscribe((res?: any) => {
       this.buyingTicket = false;
@@ -197,11 +224,12 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
+
   urlToBase64(url, callback) {
     const xmlHTTP = new XMLHttpRequest();
     xmlHTTP.open('GET', url, true);
     xmlHTTP.responseType = 'arraybuffer';
-    xmlHTTP.onload = function(e) {
+    xmlHTTP.onload = function (e) {
       const raw = String.fromCharCode.apply(null, new Uint8Array(this.response));
       callback(raw ? ('data:image/jpeg;base64,' + btoa(raw)) : '');
     };
@@ -219,40 +247,48 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
-  onDownloadTicket(event, template: any): void {
-    const ticket = event.data;
-    if (!ticket.name && !ticket.newName) {
-      this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseEnterName'), this.translate.instant('common.xticket'));
-      return;
-    }
-
-    this.ticketData = ticket;
-    if (ticket.name) {
-      this.openDownloadModal(template);
-      return;
-    }
-
-    if (!ticket.newName.match(/^[a-zA-Z +\-\[\]~:|.]*$/g)) {
-      this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
-      return;
-    }
-
-    const data = {
-      'purchase_id': ticket.id,
-      'name': ticket.newName
-    };
-    this.httpService.put(data, 'xticket-update/')
-      .subscribe((res?: any) => {
-        if (res.status) {
-          this.source.refresh();
-          this.ticketData.name = ticket.newName;
-          this.openDownloadModal(template);
-        } else {
-          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
-        }
-      }, (err) => {
-        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+  onCustomAction(event, template: any, sendTicketTemplate: any): void {
+    if (event.action === 'send') {
+      this.ticketData = event.data;
+      this.sendUsername = '';
+      this.dialogService.open(sendTicketTemplate, {
+        autoFocus: true
       });
+    } else {
+      const ticket = event.data;
+      if (!ticket.name && !ticket.newName) {
+        this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseEnterName'), this.translate.instant('common.xticket'));
+        return;
+      }
+
+      this.ticketData = ticket;
+      if (ticket.name) {
+        this.openDownloadModal(template);
+        return;
+      }
+
+      if (!ticket.newName.match(/^[a-zA-Z +\-\[\]~:|.]*$/g)) {
+        this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
+        return;
+      }
+
+      const data = {
+        'purchase_id': ticket.id,
+        'name': ticket.newName
+      };
+      this.httpService.put(data, 'xticket-update/')
+        .subscribe((res?: any) => {
+          if (res.status) {
+            this.source.refresh();
+            this.ticketData.name = ticket.newName;
+            this.openDownloadModal(template);
+          } else {
+            this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+          }
+        }, (err) => {
+          this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+        });
+    }
   }
 
   blobToBase64(blob, callback) {
@@ -275,45 +311,80 @@ export class EventsDetailComponent implements OnInit {
       setTimeout(() => {
         html2canvas(elementToPrint, {'scale': 5})
           .then(canvas => {
-              const pdf = new jsPDF('p', 'px', [350, 758]);
-              // this.ticketData.img = canvas.toDataURL('image/jpeg');
-              pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
-              if (!isEmail) {
-                pdf.setProperties({'title': `Ticket-${this.ticketData.name}.pdf`});
-                const pdfData = pdf.output('blob');
-                this.blobToBase64(pdfData, (base64) => {
-                  window.open(base64, '_blank');
-                });
-                this.downloadingTicket = false;
-                dialog.close();
-              } else {
-                const pdfData = pdf.output('blob');
-                this.blobToBase64(pdfData, (base64) => {
-                  const postData: any = {
-                    'data': base64.split(',')[1],
-                    'name': this.ticketData.name.replace(/^\/+|\/+$/g, '_')
-                  };
-                  this.httpService.post(postData, 'email-ticket/').subscribe((res?: any) => {
-                    if (res && res.status) {
-                      this.mailingTicket = false;
-                      dialog.close();
-                      this.toastrService.success(this.translate.instant('pages.xticket.toastr.emailHasBeenSent'), this.translate.instant('common.xticket'));
-                    } else
-                      this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
-                  }, (err) => {
+            const pdf = new jsPDF('p', 'px', [350, 758]);
+            // this.ticketData.img = canvas.toDataURL('image/jpeg');
+            pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
+            if (!isEmail) {
+              pdf.setProperties({'title': `Ticket-${this.ticketData.name}.pdf`});
+              // Temporary commented.
+              /*const pdfData = pdf.output('blob');
+               this.blobToBase64(pdfData, (base64) => {
+               window.open(base64, '_blank');
+               });*/
+              pdf.output('dataurlnewwindow');
+              this.downloadingTicket = false;
+              dialog.close();
+            } else {
+              const pdfData = pdf.output('blob');
+              this.blobToBase64(pdfData, (base64) => {
+                const postData: any = {
+                  'data': base64.split(',')[1],
+                  'name': this.ticketData.name.replace(/^\/+|\/+$/g, '_')
+                };
+                this.httpService.post(postData, 'email-ticket/').subscribe((res?: any) => {
+                  if (res && res.status) {
                     this.mailingTicket = false;
-                    this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
-                  });
+                    dialog.close();
+                    this.toastrService.success(this.translate.instant('pages.xticket.toastr.emailHasBeenSent'), this.translate.instant('common.xticket'));
+                  } else
+                    this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+                }, (err) => {
+                  this.mailingTicket = false;
+                  this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
                 });
-              }
+              });
+            }
           });
       }, 400);
     }, 0);
   }
 
+  onSendTicket(dialog: any) {
+    if (this.ticketData.is_send) {
+      this.toastrService.danger(this.translate.instant('pages.xticket.toastr.ticketAlreadySent'), this.translate.instant('common.xticket'));
+      return;
+    }
+    if (!this.sendUsername) {
+      this.toastrService.danger(this.translate.instant('pages.setting.toastr.pleaseEnterUsername'), this.translate.instant('common.xticket'));
+      return;
+    }
+    if (!this.sendUsername.match(/^[a-zA-Z0-9!@#$%^_+\-\[\]~:|.]*$/g)) {
+      this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
+      return;
+    }
+
+    const data: any = {
+      'username': this.sendUsername,
+      'user_purchase_id': this.ticketData.id
+    };
+    this.sendingTicket = true;
+    this.httpService.post(data, 'send-ticket/').subscribe((res?: any) => {
+      if (res && res.status) {
+        this.sendingTicket = false;
+        dialog.close();
+        this.toastrService.success(this.translate.instant('pages.xticket.toastr.ticketHasBeenSent'), this.translate.instant('common.xticket'));
+        this.purchasedTickets();
+      } else
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+    }, (err) => {
+      this.sendingTicket = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+    });
+  }
+
   playVideo() {
     jQuery.fancybox.open({
-      src  : this.eventDetail.video_url
+      src: this.eventDetail.video_url
     });
   }
 
@@ -342,13 +413,13 @@ export class EventsDetailComponent implements OnInit {
       this.hasNoTickets = !res.length;
       res.map((ticket: any) => {
         const wallet: any = _.findLast(this.myWallets, (item: any) => {
-          return item.id === ticket.wallet_address;
-        }) || {};
-        ticket.asset = wallet.title;
+            return item.id === ticket.wallet_address;
+          }) || {};
+        ticket.asset = wallet.title || 'N/A';
         const ticketType: any = _.findLast(this.ticketTypes, (item: any) => {
-          return item.id === ticket.ticket;
-        }) || {};
-        ticket.ticket_name = ticketType.ticket_name;
+            return item.id === ticket.ticket;
+          }) || {};
+        ticket.ticket_name = ticketType.ticket_name || 'Invitation';
       });
       this.source.load(_.orderBy(res, ['created'], ['desc']));
       this.fetchingTicketList = false;
