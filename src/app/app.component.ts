@@ -39,6 +39,10 @@ export class AppComponent implements OnInit {
               private toastrService: ToastrService) {
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
+        // Added to check new update on every route.
+        if (this.swUpdate.isEnabled) {
+          this.swUpdate.checkForUpdate();
+        }
         if (event.url === '/' || event.url === '/login') {
           this.shareDataService.autoLogOut = true;
         }

@@ -24,7 +24,9 @@ import {ToastrService} from './services/toastr.service';
 import {AuthService} from './_guards/auth.service';
 import {ShareDataService} from './services/share-data.service';
 import {MaintenanceComponent} from './maintenance/maintenance.component';
+import {HttpService} from './services/http.service';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
 
 import {reducers, AppState} from './@core/store/app.state';
 import {EffectsModule} from '@ngrx/effects';
@@ -39,12 +41,18 @@ import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {GamesModule} from './games/games.module';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { ExchangeModule } from './exchange/exchange.module';
 
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, `${environment.apiUrl}/translator/get_translations/?language_code=`, '');
+export class CustomLoader implements TranslateLoader {
+  constructor(private httpService: HttpService) {}
+  getTranslation(lang: string): Observable<any> {
+    return this.httpService.get(`${environment.apiUrl}/translator/get_translations/?language_code=${lang}`).map(
+      (res: any) => {
+        return res;
+      }
+    );
+  }
 }
 
 const firebaseConfig = {
@@ -69,7 +77,7 @@ const firebaseConfig = {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useClass: CustomLoader,
         deps: [HttpClient]
       }
     }),
