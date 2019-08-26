@@ -53,10 +53,10 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     this.getWallet();
     this.getLotteryList();
     this.getSmartContract();
-    Observable.interval(15000).takeWhile(() => true).subscribe(() => {
+    /*Observable.interval(15000).takeWhile(() => true).subscribe(() => {
       this.getPrizeList();
       this.getBetList();
-    });
+    });*/
   }
 
   onRefreshButton() {
@@ -69,9 +69,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       this.currentLotteryData = res;
       this.selectedLottery = this.currentLotteryData;
       this.setTimer();
-      this.getBetList();
-      this.getWinnerList(this.currentLotteryData.lottery_id);
       this.getPrizeList();
+      this.getBetList();
+      this.getWinnerList(this.currentLotteryData.lottery_id, true);
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.lottery'));
     });
@@ -156,7 +156,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getWinnerList(value) {
+  getWinnerList(value, showPrevWinners?: boolean) {
     jQuery('.spinner-width').height(jQuery('#winnerList').height());
     this.fetchingWinner = true;
     this.httpService.get(`game/get-winners-list/?lottery_id=${value}`).subscribe((res?: any) => {
@@ -184,7 +184,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       if (!this.winnerData.length) {
         if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id) {
           const lotteryDetails = _.orderBy(this.lotteryData, ['end_datetime'], ['desc']);
-          if (lotteryDetails.length > 1) {
+          if (lotteryDetails.length > 1 && showPrevWinners) {
             this.onChangeLottery(lotteryDetails[1]);
           } else
             this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
@@ -266,7 +266,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       if (res.status) {
         this.formSubmitting = false;
         this.getBetList();
-        this.getWinnerList(this.currentLotteryData.lottery_id);
+        // this.getWinnerList(this.currentLotteryData.lottery_id);
         this.getPrizeList();
         this.toastrService.success(this.translate.instant('games.lottery.toastr.bettingSuccessfullyCompleted'), this.translate.instant('common.lottery'));
       }
