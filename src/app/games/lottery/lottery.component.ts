@@ -39,6 +39,7 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   fetchingAmount: boolean = false;
   fetchingWinner: boolean = false;
   fetchingBetList: boolean = false;
+  setDefaultBetNumber: boolean = false;
 
   constructor(private httpService: HttpService,
               private http: HttpClient,
@@ -216,6 +217,10 @@ export class LotteryComponent implements OnInit, AfterViewInit {
         });
       }
     }
+
+    this.setDefaultBetNumber = Number(this.currentLotteryData.bet_amount) <= 0;
+    if (this.setDefaultBetNumber)
+      this.placeLottery.bet_number = 1;
     this.calculateAmount();
   }
 
