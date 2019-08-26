@@ -40,7 +40,7 @@
               <div class="col-md-12 text-center" *ngIf="currentLotteryData?.status != 'running'">
                 {{"games.lottery.toastr.betDisableText" | translate}}
               </div>
-              <div class="col-md-12 mb-3 text-center">
+              <div class="col-md-12 mb-3 text-center font-bebasNeueBold">
                 <span class="text-space">1BET : <span class="span-font-size">{{currentLotteryData?.bet_amount | number : '1.0-0'}} XP</span></span>
               </div>
               <div class="col-lg-6">
@@ -197,10 +197,10 @@
               <nb-list-item *ngIf="!winnerData?.length" [ngClass]="{'currentWinnerMessage': currentLotteryData?.lottery_id === selectedLottery?.lottery_id}">
                 <span>{{noWinnerListText}}</span>
               </nb-list-item>
-              <nb-list-item [hidden]="fetchingWinner && winnerData" *ngFor="let winnerUser of winnerData">
+              <nb-list-item [hidden]="fetchingWinner && winnerData" *ngFor="let winnerUser of winnerData; let i = index">
                 <div class="user-container">
                   <div class="div-flex">
-                    <div class="mr-2 div-id">{{ winnerUser.winner_rank}}</div>
+                    <div class="mr-2 div-id" [ngClass]="{'margin-div-id': i === 0}">{{ winnerUser.winner_rank}}</div>
                     <div class="mr-2 div-prize">{{ winnerUser.prizeText}}</div>
                     <div class="mr-2 div-xpAmount work-break">{{winnerUser.winning_value}} XP</div>
                     <div class="div-picture">

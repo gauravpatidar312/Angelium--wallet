@@ -181,10 +181,14 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       });
 
       if (!this.winnerData.length) {
-        if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id)
-          this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
-        else
-          this.noWinnerListText =  this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
+        if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id) {
+          const lotteryDetails = _.orderBy(this.lotteryData, ['end_datetime'], ['desc']);
+          if (lotteryDetails.length > 1) {
+            this.onChangeLottery(lotteryDetails[1]);
+          } else
+            this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
+        } else
+          this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundWinnerList');
       }
       this.fetchingWinner = false;
     }, (err) => {
