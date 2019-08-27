@@ -136,7 +136,8 @@
                 <span><i class="fa fa-spinner winner-list-spinner fa-spin"></i></span>
               </nb-list-item>
               <nb-list-item [ngClass]="{ 'p-0': !betNotAvailable }" *ngIf="!(betData?.length && fetchingBetList)">
-                <span>{{betNotAvailable}}</span>
+                <span *ngIf="currentLotteryData?.status !== 'upcoming'">{{betNotAvailable}}</span>
+                <span *ngIf="currentLotteryData?.status === 'upcoming'">{{"games.lottery.toastr.betNotAvailableForFuture" | translate}}</span>
               </nb-list-item>
               <nb-list-item [hidden]="betData && fetchingBetList" *ngFor="let user of betData">
                 <div class="user-container" style="display: flex;">

@@ -184,8 +184,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       if (!this.winnerData.length) {
         if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id) {
           const lotteryDetails = _.orderBy(this.lotteryData, ['end_datetime'], ['desc']);
-          if (lotteryDetails.length > 1 && showPrevWinners) {
-            this.onChangeLottery(lotteryDetails[1]);
+          if (lotteryDetails.length > 1 && showPrevWinners && this.currentLotteryData.status !== 'past') {
+            _.remove(lotteryDetails, {'lottery_id': this.currentLotteryData.lottery_id});
+            this.onChangeLottery(lotteryDetails[0]);
           } else
             this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
         } else
