@@ -6,6 +6,7 @@ import {NbMediaBreakpoint} from '@nebular/theme';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../../environments/environment';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 declare let jQuery: any;
 
 @Component({
@@ -22,6 +23,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   breakpoints: any;
   myWallets: any = [];
   pairs = [];
+  currebtPairData: any;
 
   constructor(private httpService: HttpService,
               private shareDataService: ShareDataService) {
@@ -29,7 +31,9 @@ export class PairComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    Observable.interval(environment.exchangeInterval).takeWhile(() => true).subscribe(() => this.messageEvent.emit(this.shareDataService.currentPair));
+    Observable.interval(environment.exchangeInterval).takeWhile(() => true).subscribe(() => {
+      this.getPairData();
+    });
   }
 
   ngAfterViewInit() {
@@ -45,39 +49,46 @@ export class PairComponent implements OnInit, AfterViewInit {
   clickPair(data) {
     this.shareDataService.lastFetchDateTime = moment().subtract('days', 7).valueOf();
     this.shareDataService.currentPair = data;
+    this.currebtPairData = data;
     this.messageEvent.emit(data);
   }
 
   getPairData() {
-    this.fetchPairSpinner = true;
-    this.httpService.get('exchange/traded_pairs/').subscribe((res?: any) => {
+      // this.fetchPairSpinner = !this.shareDataService.hideSpinnerForExchange;
+      this.httpService.get('exchange/traded_pairs/').subscribe((res?: any) => {
       if (res.status) {
         this.fetchPairSpinner = false;
         this.fetchPairData = true;
-        res.data.traded_pairs.map(val => {
-          this.pairs.push({
-            'width': 355,
-            'height': 355,
-            'symbol': val.name.replace('/', '').toUpperCase(),
-            'interval': 'D',
-            'timezone': 'Etc/UTC',
-            'theme': 'Dark',
-            'style': '1',
-            'locale': 'en',
-            'toolbar_bg': '#f1f3f6',
-            'enable_publishing': false,
-            'withdateranges': true,
-            'range': '5d',
-            'allow_symbol_change': true,
-            'container_id': 'tradingview_58f3c',
-            'price': val.price,
-            'change': val.change,
-            'pair': val.name,
-            'from': val.name.split('/')[0],
-            'to': val.name.split('/')[1]
+        if (!this.pairs.length) {
+          res.data.traded_pairs.map(val => {
+            this.pairs.push({
+              'width': 355,
+              'height': 355,
+              'symbol': val.name.replace('/', '').toUpperCase(),
+              'interval': 'D',
+              'timezone': 'Etc/UTC',
+              'theme': 'Dark',
+              'style': '1',
+              'locale': 'en',
+              'toolbar_bg': '#f1f3f6',
+              'enable_publishing': false,
+              'withdateranges': true,
+              'range': '5d',
+              'allow_symbol_change': true,
+              'container_id': 'tradingview_58f3c',
+              'price': val.price,
+              'change': val.change,
+              'pair': val.name,
+              'from': val.name.split('/')[0],
+              'to': val.name.split('/')[1]
+            });
           });
-        });
-        this.clickPair(this.pairs[0]);
+        } else
+          this.pairs = _.merge(this.pairs, res.data.traded_pairs);
+        if (!this.currebtPairData)
+          this.clickPair(this.pairs[0]);
+        else
+          this.clickPair(this.currebtPairData);
       }
     });
   }

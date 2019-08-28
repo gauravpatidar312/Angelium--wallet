@@ -155,7 +155,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.getMyTradeHistory($event.pair);
       else
         this.getOpenOrder($event.pair);
-      this.getTradeChartData($event.pair);
+      if ($event.from === 'anx' || $event.to === 'anx')
+        this.getTradeChartData($event.pair);
       this.tradeComponent.parentData($event);
       this.boardComponent.parentData($event);
       this.tradeHistoryComponent.parentData($event);

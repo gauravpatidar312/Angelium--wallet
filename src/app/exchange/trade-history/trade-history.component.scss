@@ -22,10 +22,20 @@ nb-card-body {
 
 .trade-histary-table th {
   color: #b9e80c;
-  text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 1.2rem;
-  font-family: nb-theme(font-bebas-book);
+  font-size: 12px;
+  border-bottom: 1px solid #342e73;
+}
+
+.theading-text {
+  color: #cee80b;
+}
+
+.secondaryhead {
+  display: block !important;
+  font-size: 15px;
+  color: #575bc7;
+  font-weight: 400;
 }
 
 .trade-histary-table td {
@@ -48,10 +58,11 @@ nb-card-body {
 .available-items {
   height: 352px;
   min-height: 200px !important;
-  max-height: 272px !important;
+  max-height: 240px !important;
   width: 100%;
   overflow-x: auto;
   overflow-y: auto !important;
+  margin-top: 5px;
 }
 
 .tradeHistory {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {ShareDataService} from '../../services/share-data.service';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
@@ -11,6 +11,7 @@ import * as _ from 'lodash';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+  @ViewChild('sellData') private myScrollContainer: ElementRef;
   currentPair: any;
   boardSpinner: boolean = false;
   boardTableValue: boolean = false;
@@ -43,6 +44,16 @@ export class BoardComponent implements OnInit {
           const orderBookData: any = _.merge(this.orderBookData, res.data);
           this.orderBookData.buy = _.unionBy(orderBookData.buy, '_id');
           this.orderBookData.sell = _.unionBy(orderBookData.sell, '_id');
+          // Sell Array
+          const sellData = _.chain(this.orderBookData.sell)
+            .groupBy('price')
+            .map((dataArray, key) => ({price: key, amount: _.sumBy(dataArray, 'amount')})).value();
+          this.orderBookData.sell = _.orderBy(sellData, ['price'], ['asc']);
+          // Buy Array
+          const buyData = _.chain(this.orderBookData.buy)
+            .groupBy('price')
+            .map((dataArray, key) => ({price: key, amount: _.sumBy(dataArray, 'amount')})).value();
+          this.orderBookData.buy = _.orderBy(buyData, ['price'], ['desc']);
         }
 
         this.boardTableValue = true;
@@ -50,6 +61,10 @@ export class BoardComponent implements OnInit {
         this.boardSell = this.orderBookData.sell;
         this.boardSellAvai = !this.boardSell.length;
         this.boardBuyAvai = !this.boardBuy.length;
+
+        setTimeout(() => {
+          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        }, 10);
       }
     }, (err) => {
       this.boardSpinner = false;

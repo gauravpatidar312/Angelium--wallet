@@ -208,9 +208,34 @@ table tbody tr:nth-of-type(even) {
   padding: 15px;
 }
 
-.cancel-underLine {
+.btn-cancelAll {
+  width: 64px;
+  height: 23px;
+  border: 1px solid #dc3545;
+  border-radius: 3px;
+}
+
+.btn-cancelAll:focus {
+  outline: none;
+  border: 1px solid #dc3545 !important;
+}
+
+.cancel-text {
+  font-size: 11px;
   text-decoration: underline !important;
 }
+
+.hidePair {
+  font-size: 12px;
+  top: 9px;
+  position: relative;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/deep/ span.customised-control-description {
+  margin-top: 2px;
+}
+
 @media screen and (max-width: 800px) {
   .four {
     order: 1;
