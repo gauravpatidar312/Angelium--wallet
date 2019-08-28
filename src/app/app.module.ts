@@ -6,6 +6,7 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {CoreModule} from './@core/core.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InternationalPhoneNumberModule} from 'ngx-international-phone-number';
+import {DeviceDetectorModule} from 'ngx-device-detector';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -16,7 +17,7 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {RegisterComponent} from './register/register.component';
 import {TermsConditionsComponent} from './register/terms-conditions/terms-conditions.component';
-import { ParticlesModule } from 'angular-particle';
+import {ParticlesModule} from 'angular-particle';
 
 // services
 import {SessionStorageService} from './services/session-storage.service';
@@ -74,6 +75,7 @@ const firebaseConfig = {
     ExchangeModule,
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    DeviceDetectorModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

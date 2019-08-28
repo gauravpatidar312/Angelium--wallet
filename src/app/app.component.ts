@@ -4,7 +4,6 @@ import {AnalyticsService} from './@core/utils/analytics.service';
 import {NavigationStart, NavigationEnd, Router} from '@angular/router';
 import {HttpService} from './services/http.service';
 import {SessionStorageService} from './services/session-storage.service';
-import {IndexedDBStorageService} from './services/indexeddb-storage.service';
 import {AuthService} from './_guards/auth.service';
 import {SwUpdate} from '@angular/service-worker';
 import {concat, interval} from 'rxjs';
@@ -12,6 +11,8 @@ import {first} from 'rxjs/operators';
 import {ShareDataService} from './services/share-data.service';
 import {MessagingService} from './messaging.service';
 import {ToastrService} from './services/toastr.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
+import Swal from 'sweetalert2';
 
 declare let jQuery: any;
 @Component({
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
   particlewidth: number = 100;
   particleheight: number = 100;
   message: string;
+  deviceInfo: any;
 
   constructor(private appRef: ApplicationRef,
               private analytics: AnalyticsService,
@@ -32,11 +34,15 @@ export class AppComponent implements OnInit {
               private swUpdate: SwUpdate,
               public translate: TranslateService,
               private sessionStorage: SessionStorageService,
-              private storageService: IndexedDBStorageService,
               private shareDataService: ShareDataService,
               private authService: AuthService,
               private msgService: MessagingService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private deviceService: DeviceDetectorService) {
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    if (this.deviceInfo.browser === 'IE') {
+      this.switchBrowser();
+    }
     router.events.subscribe((event?: any) => {
       if (event instanceof NavigationStart) {
         // Added to check new update on every route.
@@ -147,6 +153,18 @@ export class AppComponent implements OnInit {
       },
       'retina_detect': true,
     };
+  }
+
+  switchBrowser() {
+    Swal.fire({
+      title: this.translate.instant('common.angelium'),
+      text: this.translate.instant('common.toastr.IEBrowserMessage'),
+      type: 'warning',
+      showCancelButton: false,
+      confirmButtonText: this.translate.instant('swal.ok'),
+    }).then(() => {
+      window.close();
+    });
   }
 
   setPageClass() {
