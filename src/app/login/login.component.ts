@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
               private authEffects: AuthEffects,
               private msgService: MessagingService,
               private httpService: HttpService,
-              private shareDataService: ShareDataService,) {
+              private shareDataService: ShareDataService) {
     // const currentUser = this.authService.isAuthenticated();
     // if (currentUser) {
     //   this.router.navigate(['/pages/setting']);
