@@ -1,13 +1,16 @@
 <nb-card class="trade">
-  <nb-card-header>{{"common.trade" | translate}}</nb-card-header>
+  <nb-card-header>
+    <span>{{"common.trade" | translate}}</span>
+    <span class="availableBalance">{{availableBalance}}</span>
+  </nb-card-header>
   <nb-card-body>
       <div class="available-items">
     <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
       <li class="pointer active tab-link" data-tab="tab-1">
-        <a data-toggle="pill">{{"pages.exchange.buy" | translate | uppercase}} {{tradeBuy.from | uppercase}}</a>
+        <a data-toggle="pill" (click)="getAvailableBalance('buy')">{{"pages.exchange.buy" | translate | uppercase}} {{tradeBuy.from | uppercase}}</a>
       </li>
       <li class="pointer tab-link" data-tab="tab-2">
-        <a data-toggle="pill">{{"pages.exchange.sell" | translate | uppercase}} {{tradeBuy.from | uppercase}}</a>
+        <a data-toggle="pill" (click)="getAvailableBalance('sell')">{{"pages.exchange.sell" | translate | uppercase}} {{tradeBuy.from | uppercase}}</a>
       </li>
     </ul>
 

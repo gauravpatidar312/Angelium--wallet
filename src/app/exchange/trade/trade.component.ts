@@ -43,6 +43,8 @@ export class TradeComponent implements OnInit, AfterViewInit {
   buyWalletDollar: number = 0;
   fetchingBuyTotalAmount: boolean = false;
   buyTotalWalletDollar: number = 0;
+  availableBalance: any;
+  tradeTab: string = 'buy';
   tradeBuy: any = {};
   tradeSell: any = {};
 
@@ -86,6 +88,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
           return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) > -1;
         }) || [];
         this.exchangeWallets = _.sortBy(exchangeData, ['coin']);
+        this.getAvailableBalance(this.tradeTab);
       }
     }, err => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
@@ -121,6 +124,17 @@ export class TradeComponent implements OnInit, AfterViewInit {
       }
       const walletData = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
       this.tradeSell.amount = ShareDataService.toFixedDown(Number(walletData.balance), 6);
+    }
+  }
+
+  getAvailableBalance(value) {
+    this.tradeTab = value;
+    if (this.tradeTab === 'buy') {
+      const tradeBuyObj: any = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
+      this.availableBalance = ShareDataService.toFixedDown(Number(tradeBuyObj.balance), 8) + ' ' + tradeBuyObj.coin;
+    } else if (this.tradeTab === 'sell') {
+      const tradeSellObj: any  = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
+      this.availableBalance = ShareDataService.toFixedDown(Number(tradeSellObj.balance), 8) + ' ' + tradeSellObj.coin;
     }
   }
 
