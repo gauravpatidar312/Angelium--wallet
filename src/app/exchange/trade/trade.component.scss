@@ -281,6 +281,15 @@ button.withdraw-btn {
   padding-top: 14px !important;
 }
 
+.availableBalance {
+  position: relative;
+  float: right;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  margin-top: 12px;
+  color: #d1d1ff;
+}
+
 @media (max-width: 375px) {
   .modal-popup-size {
     width: 250px !important;

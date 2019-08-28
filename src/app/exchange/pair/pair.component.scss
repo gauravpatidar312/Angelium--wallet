@@ -152,8 +152,8 @@ tbody tr:nth-of-type(even) {
 .available-items {
   max-height: 250px !important;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden !important;
+  overflow-x: auto;
+  overflow-y: auto !important;
 }
 
 .bigSize {
