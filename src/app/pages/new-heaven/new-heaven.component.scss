@@ -1,0 +1,614 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .title {
+    font-family: nb-theme(font-bebas);
+    font-size: 2rem;
+    font-weight: nb-theme(font-weight-bold);
+    color: nb-theme(card-fg-heading);
+  }
+
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    @include nb-ltr(padding, 0 0.5rem 0 0.75rem);
+    @include nb-rtl(padding, 0 0.75rem 0 0.5rem);
+    border-left: 1px solid transparent;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .title {
+    font-weight: nb-theme(font-weight-bolder);
+  }
+
+  /deep/ .font-nunitoSans {
+    font-family: nb-theme(font-nunito);
+  }
+
+  .status {
+    font-family: nb-theme(font-bebas-bold);
+    font-size: 30px;
+    color: nb-theme(card-fg);
+    text-align: right;
+    margin-right: 5px;
+  }
+
+  .delta {
+    position: absolute;
+    display: inline-block;
+    color: nb-theme(color-fg-heading);
+    padding-left: 0.2rem;
+    font-size: 1rem;
+    font-family: nb-theme(font-avenir);
+    right: 20px;
+    @include nb-rtl(left, 1.25rem);
+    @include nb-rtl(right, inherit);
+  }
+  .delta::before {
+    position: absolute;
+    content: '';
+    right: 100%;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+
+  .delta.down::before {
+    bottom: 4px;
+    border-top: 7px solid #ff5680;
+
+  }
+
+  .delta.up::before {
+    top: 4px;
+    border-bottom: 7px solid #26df8b;
+  }
+
+  .chart-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    // margin-bottom: 2.125rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .legends {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: #a1a1e5;
+    padding: 0 0 0 2.85rem;
+  }
+  .legend {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    margin-left: 4rem;
+  }
+  .legend:first-child {
+    margin-left: 0;
+  }
+  .legend-item-color {
+    min-width: 15px;
+    min-height: 15px;
+    border-radius: .2rem;
+  }
+  .legend-title {
+    padding: 0 .75rem;
+    white-space: nowrap;
+  }
+  .dropdown {
+    min-width: 120px;
+  }
+
+  .dropdown-menu {
+    background-color: #100b48 !important;
+    border: 2px solid #7659ff !important;
+  }
+
+  .heaven-drop {
+    word-break: keep-all;
+  }
+  .icon-container {
+    height: 100%;
+    padding: 0;
+  }
+
+  .navbar-header {
+    font-family: nb-theme(font-bebas);
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .heavenHistory-tree {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  .navbar-pill {
+    justify-content: flex-end;
+  }
+
+  /deep/ .process-padding {
+    padding: 10px 0 10px 21px;
+  }
+
+  #heavenHistory-navigation li.active > a {
+    text-decoration: underline 2px;
+    border-radius: 2px;
+    border-bottom: 5px solid #26df8b;
+    text-decoration-color: #26df8b;
+    font-family: nb-theme(font-avenir);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #ffffff;
+  }
+  #heavenHistory-navigation li > a {
+    padding: 10px;
+    text-decoration: none;
+    font-family: nb-theme(font-avenir);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #ffffff;
+  }
+
+  .icon.primary {
+    background-image: -webkit-gradient(linear, left top, right top, from(#ad59ff), to(#7659ff));
+    background-image: linear-gradient(to right, #ad59ff, #7659ff);
+    // -webkit-box-shadow: 0 3px 0 0 #7e4ddb, 0 2px 8px 0 #9259ff, 0 4px 10px 0 rgba(33,7,77,.5);
+    // box-shadow: 0 3px 0 0 #7e4ddb, 0 2px 8px 0 #9259ff, 0 4px 10px 0 rgba(33,7,77,.5);
+  }
+  .icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: .5rem;
+    -webkit-transition: width .4s;
+    transition: width .4s ease;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    color: #fff;
+  }
+  .icon {
+    width: 7rem;
+    height: 100%;
+    font-size: 4.5rem;
+    border-radius: .5rem 0 0 .5rem;
+  }
+
+  nb-card.top-content {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 6rem;
+    overflow: visible;
+    -webkit-box-shadow: 0 4px 10px 0 rgba(33, 7, 77, .5);
+    box-shadow: 0 4px 10px 0 rgba(33, 7, 77, .5);
+  }
+
+  .total-amount {
+    position: relative;
+    .input-group-prepend {
+      min-width: 70px;
+      label {
+        margin-bottom: 0;
+      }
+    }
+    span {
+      position: absolute;
+      &.transfer-amount {
+        font-weight: bold;
+        font-size: 16px;
+        right: 30px;
+        bottom: 13px;
+        color: #00bb66;
+      }
+      &.available-amount {
+        font-size: 14px;
+        cursor: pointer;
+        right: 10px;
+        top: 0;
+      }
+    }
+  }
+
+  .day-header-title {
+    font-size: 22px;
+  }
+
+  .font-bebasNeue {
+    font-family: nb-theme(font-bebas);
+  }
+
+  .font-bebasNeueBold {
+    font-family: nb-theme(font-bebas-bold);
+  }
+
+  .font-avenir {
+    font-family: nb-theme(font-avenir);
+  }
+
+  .days-font {
+    font-size: 7.6rem;
+    height: 110px;
+  }
+
+  .month-day {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    float: left;
+    width: 56px;
+    text-align: right;
+    margin-top: 13px;
+  }
+
+  .month-day-value {
+    font-size: 2.5rem;
+    &.ls-half {
+      letter-spacing: 0.5px;
+    }
+    &.ls-one {
+      letter-spacing: 1px;
+    }
+  }
+
+  .days-text {
+    font-size: 1.5rem;
+    margin-right: 7px;
+  }
+
+  nb-card-header {
+    padding: 0.66rem 1.25rem 0.25rem 1.25rem !important;
+  }
+
+  .m-t {
+    margin-top: 8%;
+  }
+
+  .table_bg {
+    background: none;
+    border: 2px solid #03d87c;
+    color: #fff;
+    width: 150px;
+    padding: 10px 0;
+    border-radius: 4px;
+    margin: 12px auto;
+    cursor: pointer;
+    font-family: nb-theme(font-bebas-bold);
+  }
+
+  /deep/ .btn-success {
+    color: #ffffff !important;
+    background-color: #24de8a !important;
+    border-color: transparent !important;
+  }
+  /deep/ .btn.btn-success {
+    background-color: #24de8a !important;
+    cursor: pointer;
+  }
+
+  /deep/ .release-btn {
+    width: 100%;
+    cursor: pointer;
+  }
+  .table_bg:hover {
+    background-image: linear-gradient(to right, #00D9BB, #00DA79);
+    border: 2px solid #03d87c;
+    color: #fff;
+    width: 150px;
+    padding: 10px 0;
+    border-radius: 4px;
+    margin: 12px auto;
+  }
+  .selectedHeaven {
+    background-image: linear-gradient(to right, #00D9BB, #00DA79);
+  }
+  .btn-run {
+    background-image: linear-gradient(to right, #00D9BB, #00DA79);
+    letter-spacing: 2px;
+    padding: 0.5rem;
+    font-size: 20px;
+  }
+
+  .b-color-wallet {
+    background-image: linear-gradient(to right, #ad59ff, #7659ff);
+    border: 1px;
+  }
+
+  .myWallets nb-card-body {
+    overflow: unset !important;
+    .miner-fee {
+      width: 100%;
+      display: block;
+      text-align: right;
+      padding-right: 15px;
+    }
+  }
+
+  .font-size-button {
+    font-size: 1.5rem;
+  }
+
+  .dropDown-padding {
+    padding: 14px !important;
+  }
+
+  .input-padding {
+    padding: 0.70rem 1.125rem !important;
+  }
+
+  nb-card .icon-container i {
+    font-size: 30px;
+  }
+
+  .heaven-history-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    height: 100px;
+    text-align: center;
+  }
+
+  .li-margin {
+    margin-right: 15px;
+  }
+  .spinner-color {
+    color: #a1a1e5;
+    font-size: 25px;
+  }
+
+  /deep/ ng2-smart-table table tr td .td-width {
+    white-space: nowrap;
+  }
+
+  @include media-breakpoint-down(sm) {
+    nb-card {
+      .icon-container {
+        .icon {
+          width: 5rem !important;
+          font-size: 3rem !important;
+        }
+      }
+      .details {
+        padding-left: 0.25rem !important;
+      }
+      .title {
+        font-size: 1.7rem;
+      }
+      .status {
+        font-size: 2.1rem !important;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .total-amount span {
+      font-size: 14px !important;
+      right: 10px !important;
+    }
+  }
+
+  @media only screen and (width: 1024px) {
+    .days-font {
+      font-size: 6.6rem;
+      height: 100px;
+    }
+
+    .m-t {
+      margin-top: 26%;
+    }
+    .month-day {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      float: left;
+      width: 56px;
+      text-align: right;
+      margin-top: 0;
+    }
+
+    .month-day-value {
+      font-size: 1.59rem;
+    }
+  }
+
+  @media only screen and (width: 768px) {
+    .days-font {
+      font-size: 4rem;
+      height: 60px;
+    }
+    .days-text {
+      font-size: 1.5rem;
+      margin-right: 7px;
+    }
+
+    .m-t {
+      margin-top: 23%;
+    }
+
+    .month-day {
+      font-size: 1.1rem;
+      margin-right: 1px;
+      float: left;
+      width: 50px;
+      text-align: right;
+      margin-top: -2px;
+    }
+
+    .month-day-value {
+      font-size: 1rem;
+    }
+  }
+
+  @media only screen and (width: 375px) {
+    .text-margin {
+      margin-top: 5px;
+    }
+  }
+
+  @media only screen and (width: 320px) {
+    .days-font {
+      font-size: 6.6rem;
+      height: 100px;
+    }
+    .m-t {
+      margin-top: 27%;
+    }
+
+    .status-today-margin {
+      margin-top: 12px !important;
+    }
+    .status {
+      font-size: 1.9rem !important;
+    }
+
+    .month-day {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      float: left;
+      width: 56px;
+      text-align: right;
+      margin-top: 0;
+    }
+    .month-day-value {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1286px) {
+    .month-day {
+      width: 42px;
+    }
+  }
+
+  @media (min-width: 1200px) and (max-width: 1212px) {
+    .month-day {
+      width: 38px;
+    }
+  }
+
+  @media (min-width: 836px) and (max-width: 1030px) {
+    .month-day {
+      width: 33px;
+    }
+  }
+
+  @media (min-width: 840px) and (max-width: 958px) {
+    .month-day {
+      width: 31px;
+    }
+    .month-day-value {
+      font-size: 32px;
+    }
+  }
+
+  .heavenhistory {
+    font-family: nb-theme(font-bebas);
+    font-size: 22px;
+    padding: 1.25rem !important;
+  }
+
+  .heavenhistory-cell {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: nb-theme(font-nunito);
+  }
+
+  /deep/ ng2-smart-table .heaven-history table tr td {
+    font-family: nb-theme(font-nunito);
+    padding: 0.50rem 1.25rem;
+  }
+
+  @media (min-width: 300px) and (max-width: 375px) {
+    .status-margin {
+      margin-top: 12px !important;
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    #heavenHistory-navigation {
+      padding-left: 0;
+    }
+    #heavenHistory-navigation li > a {
+      padding: 5px;
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 480px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /deep/ ng2-smart-table table tr td {
+      font-size: 0.9em;
+      font-family: nb-theme(font-nunito);
+    }
+  }
+
+  @media (min-width: 2500px) {
+    /deep/ ng2-smart-table table tr th:last-child, /deep/ ng2-smart-table table tr td:last-child {
+      display:none;
+    }
+  }
+
+  /* headers grid color*/
+  /deep/ ng2-smart-table-title > a {
+    font-family: nb-theme(font-nunito);
+    font-size: 16px;
+    white-space: nowrap;
+  }
+}
+/deep/ .swal2-title {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/deep/ .swal2-styled.swal2-confirm {
+  background-color: #dc3545 !important;
+}
+
+/deep/ .swal2-styled.swal2-cancel {
+  background-color: #00d977 !important;
+}
+

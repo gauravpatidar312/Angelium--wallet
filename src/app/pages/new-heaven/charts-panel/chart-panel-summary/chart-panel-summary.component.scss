@@ -1,0 +1,86 @@
+@import '../../../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@nebular/theme/styles/global/typography/typography';
+
+@include nb-install-component() {
+  .summary-container {
+    display: flex;
+    flex: 1;
+    background-color: nb-theme(chart-panel-summary-background-color);
+    box-shadow: nb-theme(chart-panel-summary-box-shadow);
+    justify-content: space-between;
+    padding: 1.5rem 4rem 1rem;
+    margin-bottom: 1rem;
+    border:
+      nb-theme(chart-panel-summary-border-width)
+      solid
+      nb-theme(chart-panel-summary-border-color);
+    border-left: none;
+    border-right: none;
+  }
+
+  .delta {
+    position: relative;
+    display: inline-block;
+    color: nb-theme(color-fg-heading);
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    top: 5px;
+    right: -53px;
+    @include nb-rtl(left, 1.25rem);
+    @include nb-rtl(right, inherit);
+
+    &::before {
+      position: absolute;
+      content: '';
+      right: 100%;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    &.down {
+      &::before {
+        bottom: 4px;
+        border-top: 7px solid text-danger();
+      }
+    }
+
+    &.up {
+      &::before {
+        top: 4px;
+        border-bottom: 7px solid text-success();
+      }
+    }
+  }
+
+  .value {
+    font-size: 2rem;
+    color: nb-theme(color-fg-heading);
+  }
+
+  @include media-breakpoint-down(sm) {
+    .value, .title {
+      font-weight: nb-theme(font-weight-bold);
+    }
+
+    .title {
+      font-size: nb-theme(font-size-sm);
+    }
+
+    .value {
+      font-size: nb-theme(font-size-xlg);
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    .summary-container {
+      padding-left: nb-theme(padding);
+      padding-right: nb-theme(padding);
+    }
+
+    .value {
+      margin-top: 0.5rem;
+    }
+  }
+}

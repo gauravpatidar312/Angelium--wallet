@@ -1,0 +1,356 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/bootstrap/styles/hero-buttons';
+@import '~@nebular/theme/styles/global/typography/typography';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+$shadow-green: #00977e;
+
+@include nb-install-component() {
+ /deep/ nb-card {
+    flex-direction: row;
+    align-items: center;
+    height: 6rem;
+    overflow: visible;
+
+    $bevel: btn-hero-bevel(nb-theme(card-bg));
+    $shadow: nb-theme(btn-hero-shadow);
+    box-shadow: $bevel, $shadow;
+
+    .icon-container {
+      height: 100%;
+      padding: 0.625rem;
+
+      /deep/ i {
+        font-size: 30px;
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .status-dd-week {
+      width: 50%;
+      float: right;
+    }
+
+    .dropdown-menu {
+      background-color: #100b48;
+      border: 2px solid #7659ff;
+    }
+
+    .spinner-color{
+      color: #a1a1e5;
+      font-size: 25px;
+    }
+
+    /deep/ nb-progress-bar {
+      height: 0.6rem;
+      margin-top: 1rem;
+
+      .progress-container {
+        height: 0.6rem;
+        border-radius: 0;
+        margin-top: 0.5rem;
+      }
+
+      .progress-value {
+        height: 0.6rem;
+        background: nb-theme(progress-bar-background);
+
+        @include nb-for-theme(cosmic) {
+          box-shadow: 0 0.2rem $shadow-green;
+        }
+
+        @include nb-for-theme(corporate) {
+          height: 100%;
+        }
+      }
+    }
+
+    .delta {
+      position: absolute;
+      display: inline-block;
+      color: nb-theme(color-fg-heading);
+      padding-left: 0.2rem;
+      font-size: 1rem;
+      font-family: nb-theme(font-avenir);
+      right: 20px;
+      @include nb-rtl(left, 1.25rem);
+      @include nb-rtl(right, inherit);
+
+      &::before {
+        position: absolute;
+        content: '';
+        right: 100%;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+      }
+
+      &.down {
+        &::before {
+          bottom: 4px;
+          border-top: 7px solid text-danger();
+        }
+      }
+
+      &.up {
+        &::before {
+          top: 4px;
+          border-bottom: 7px solid text-success();
+        }
+      }
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5.75rem;
+      height: 4.75rem;
+      font-size: 3.75rem;
+      border-radius: nb-theme(card-border-radius);
+      transition: width 0.4s ease;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      color: nb-theme(color-white);
+
+      &.primary {
+        @include btn-hero-primary-gradient();
+        @include btn-hero-primary-bevel-glow-shadow();
+      }
+      &.success {
+        @include btn-hero-success-gradient();
+        @include btn-hero-success-bevel-glow-shadow();
+      }
+      &.info {
+        @include btn-hero-info-gradient();
+        @include btn-hero-info-bevel-glow-shadow();
+      }
+      &.warning {
+        @include btn-hero-warning-gradient();
+        @include btn-hero-warning-bevel-glow-shadow();
+      }
+      &.danger {
+        @include btn-hero-danger-gradient();
+        @include btn-hero-danger-bevel-glow-shadow();
+      }
+      &.secondary {
+        @include btn-hero-secondary-bg();
+        @include btn-hero-secondary-bevel-glow-shadow();
+        color: nb-theme(card-fg);
+      }
+
+      @include nb-for-theme(corporate) {
+        &.primary,
+        &.success,
+        &.info,
+        &.warning,
+        &.danger,
+        &.secondary {
+          box-shadow: none;
+        }
+      }
+    }
+
+   /deep/ &:hover {
+      background: lighten(nb-theme(card-bg), 5%);
+
+      .icon {
+        &.primary {
+          background-image: btn-hero-primary-light-gradient();
+        }
+        &.success {
+          background-image: btn-hero-success-light-gradient();
+        }
+        &.info {
+          background-image: btn-hero-info-light-gradient();
+        }
+        &.warning {
+          background-image: btn-hero-warning-light-gradient();
+        }
+        &.danger {
+          background-image: btn-hero-danger-light-gradient();
+        }
+        &.secondary {
+          background-image: btn-hero-secondary-light-gradient();
+        }
+      }
+    }
+
+    &.off {
+      color: nb-theme(card-fg);
+
+      .icon {
+        color: nb-theme(card-fg);
+
+        &.primary, &.success, &.info, &.warning, &.danger {
+          box-shadow: none;
+          background-image: linear-gradient(to right, transparent, transparent);
+        }
+
+        &.secondary {
+          background: transparent;
+        }
+      }
+
+      .title {
+        color: nb-theme(card-fg);
+      }
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      @include nb-ltr(padding, 0 0.5rem 0 0.75rem);
+      @include nb-rtl(padding, 0 0.75rem 0 0.5rem);
+      border-left: 1px solid transparent;
+    }
+
+    .title {
+      font-family: nb-theme(font-bebas);
+      font-size: 1.9rem;
+      white-space: nowrap;
+      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(card-fg-heading);
+    }
+
+    .status {
+      font-size: 30px;
+      font-family: nb-theme(font-bebas-bold);
+      font-weight: nb-theme(font-weight-bold) !important;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: nb-theme(card-fg);
+      text-align: right;
+      margin-right: 5px;
+      margin-top: 2px;
+    }
+  }
+
+  nb-card .arrow-margin {
+    padding: 28px 9px 27px 0 !important;
+    font-size: 1.6rem !important;
+  }
+
+  @include nb-for-theme(cosmic) {
+   /deep/  nb-card {
+      &.off .icon-container {
+        @include nb-ltr(border-right, 1px solid nb-theme(separator));
+        @include nb-rtl(border-left, 1px solid nb-theme(separator));
+      }
+
+      .icon-container {
+        padding: 0;
+      }
+
+      .details {
+        @include nb-ltr(padding-left, 1.25rem);
+        @include nb-rtl(padding-right, 1.25rem);
+      }
+
+      .icon {
+        width: 7rem;
+        height: 100%;
+        font-size: 4.5rem;
+        @include nb-ltr(border-radius, nb-theme(card-border-radius) 0 0 nb-theme(card-border-radius));
+        @include nb-rtl(border-radius, 0 nb-theme(card-border-radius) nb-theme(card-border-radius) 0);
+      }
+
+      .title {
+        font-weight: nb-theme(font-weight-bolder);
+      }
+
+      .status {
+        font-weight: nb-theme(font-weight-light);
+      }
+    }
+  }
+
+  @include nb-for-theme(corporate) {
+    /deep/ nb-card {
+      .icon-container {
+        height: auto;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    /deep/ nb-card {
+      .icon-container {
+        .icon {
+          width: 5rem !important;
+          font-size: 3rem !important;
+        }
+      }
+      .details {
+        padding-left: 0.25rem !important;
+      }
+      .title {
+        font-size: 1.7rem;
+      }
+      .status {
+        font-size: 2.1rem !important;
+        margin-right: -27px;
+      }
+      .status-dd-week {
+        width: 67% !important;
+        font-size: 0.8rem !important;
+      }
+    }
+
+    nb-card .arrow-margin {
+     margin-top: -34px;
+    }
+
+    /deep/ .nb-theme-cosmic nb-select > button[nbButton] {
+      padding: 0.75rem !important;
+
+      &::after {
+        top: 45% !important;
+      }
+    }
+  }
+
+  @media only screen and (width: 320px) {
+    /deep/ .title {
+      font-size: 1.5rem !important;
+    }
+
+   /deep/ .status {
+      font-size: 1.9rem !important;
+    }
+  }
+
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    .status-dd-week {
+      width: 55% !important;
+    }
+  }
+
+  @media only screen and (min-device-width : 1024px) and (max-device-width : 1170px) {
+    nb-card .arrow-margin {
+      margin-top: -34px;
+    }
+
+    /deep/ .title {
+      width: 200px;
+      margin-top: -8px;
+    }
+
+    /deep/ .status {
+      margin-top: 24px !important;
+      margin-right: -22px !important;
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-device-width : 1200px) and (max-device-width : 1230px) {
+    /deep/ .status-padding {
+      padding-right: 0 !important;
+    }
+  }
+}

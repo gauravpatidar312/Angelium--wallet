@@ -1,0 +1,18 @@
+<nb-flip-card [showToggleButton]="false" [flipped]="flipped">
+  <nb-card-front>
+    <nb-card size="xsmall">
+      <ngx-status-card-front [statusCard]="statusCard">
+        <i [ngClass]="statusCard.iconClass"></i>
+      </ngx-status-card-front>
+      <i class="nb-arrow-right pointer arrow-margin" (click)="toggleFlipView()"></i>
+    </nb-card>
+  </nb-card-front>
+  <nb-card-back>
+    <nb-card size="xsmall">
+      <ngx-status-card-back [statusCard]="statusCard">
+        <i [ngClass]="statusCard.iconClass"></i>
+      </ngx-status-card-back>
+      <i class="nb-arrow-right pointer arrow-margin" (click)="toggleFlipView()"></i>
+    </nb-card>
+  </nb-card-back>
+</nb-flip-card>

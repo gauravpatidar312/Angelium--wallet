@@ -7,6 +7,7 @@ import {SettingComponent} from './setting/setting.component';
 import {TransferComponent} from './transfer/transfer.component';
 import {KYCComponent} from './kyc/kyc.component';
 import {HeavenComponent} from './heaven/heaven.component';
+import {NewHeavenComponent} from './new-heaven/new-heaven.component';
 import {MergeComponent} from './merge/merge.component';
 import {RewardComponent} from './reward/reward.component';
 import {HQComponent} from './hq/hq.component';
@@ -45,6 +46,11 @@ const routes: Routes = [{
     {
       path: 'heaven',
       component: HeavenComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'new-heaven',
+      component: NewHeavenComponent,
       canActivate: [AuthGuard]
     },
     {
