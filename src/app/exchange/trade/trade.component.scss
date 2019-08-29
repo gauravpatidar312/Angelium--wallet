@@ -5,6 +5,11 @@
   nb-card-header {
     font-family: nb-theme(font-bebas);
     font-size: 1.75rem;
+
+    .trade-info-icon {
+      position: relative;
+      bottom: 3px;
+    }
   }
 
   nb-card-body {
@@ -98,7 +103,7 @@ nb-card-body {
 }
 
 .form-group {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: nb-theme(font-nunito);
 }
 
 .form-control-feedback {
@@ -288,6 +293,20 @@ button.withdraw-btn {
   font-size: 11px;
   margin-top: 12px;
   color: #d1d1ff;
+}
+
+.tooltip-icon-fontSize {
+  font-size: 15px;
+}
+
+@media screen and (max-width: 425px) {
+  nb-card-header {
+    padding: 17.5px 5px;
+  }
+
+  nb-card-body {
+    padding: 0 5px !important;
+  }
 }
 
 @media (max-width: 375px) {

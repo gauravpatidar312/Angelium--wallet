@@ -3,6 +3,7 @@
 
 @include nb-install-component() {
   nb-card-header {
+    padding: 11px;
     font-family: nb-theme(font-bebas);
     font-size: 1.75rem;
   }
@@ -52,7 +53,7 @@
 }
 
 nb-card-body {
-  padding: 10px 30px;
+  padding: 10px;
 }
 
 /deep/ .headsection {
@@ -129,12 +130,11 @@ ul#main-navigation {
 }
 
 tbody tr {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: nb-theme(font-nunito);
   padding: 0px;
   color: #ffffff;
   font-size: 12px;
   cursor: pointer;
-  font-family: 'Nunito Sans', sans-serif;
 }
 
 table tbody tr:nth-of-type(even) {
@@ -170,12 +170,7 @@ table tbody tr:nth-of-type(even) {
   min-height: auto !important;
   max-height: 74px !important;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto !important;
-}
-
-.available {
-  overflow-x: hidden !important;
+  overflow: auto !important;
 }
 
 /deep/ .available-items::-webkit-scrollbar {
@@ -229,7 +224,11 @@ table tbody tr:nth-of-type(even) {
   font-size: 12px;
   top: 9px;
   position: relative;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: nb-theme(font-nunito);
+}
+
+.table-height {
+  height: 95px;
 }
 
 /deep/ span.customised-control-description {
@@ -274,4 +273,36 @@ table tbody tr:nth-of-type(even) {
 
 /deep/ .swal2-styled.swal2-cancel {
   background-color: #00d977 !important;
+}
+
+@media screen and (max-width: 425px) {
+  .trade-open-history {
+    height: 290px;
+  }
+
+  #main-navigation li > a {
+    font-size: 20px;
+  }
+
+  nb-card-header {
+    padding: 11px 1px !important;
+  }
+
+  nb-card-body {
+    padding: 10px 5px !important;
+  }
+
+  .table-height {
+    height: 205px;
+  }
+
+  /deep/ .exchange .main-content {
+    padding: 1rem 0.5rem 0 !important;
+  }
+}
+
+@media screen and (width: 320px) {
+  #main-navigation li > a {
+    font-size: 16px;
+  }
 }

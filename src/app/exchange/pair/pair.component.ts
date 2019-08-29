@@ -54,7 +54,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   }
 
   getPairData() {
-      // this.fetchPairSpinner = !this.shareDataService.hideSpinnerForExchange;
+      // this.fetchPairSpinner = !this.shareDataService.showSpinnerForExchange;
       this.httpService.get('exchange/traded_pairs/').subscribe((res?: any) => {
       if (res.status) {
         this.fetchPairSpinner = false;

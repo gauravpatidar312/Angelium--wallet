@@ -137,10 +137,10 @@ html{top: 0 !important;}
 .tablemarginfix{ margin:0px !important; }
 .nopadd{ padding: 0; }
 .nb-theme-cosmic {
-  nb-card,
-  nb-sidebar.menu-sidebar .scrollable,
+  nb-card, nb-sidebar.menu-sidebar .scrollable,
   nb-layout .layout nb-layout-header nav,
-  .layout-container .content nb-layout-footer nav {
+  .layout-container .content nb-layout-footer nav,
+  ngb-tooltip-window .tooltip-inner {
     box-shadow: 0 0 4px #06d691 !important;
     -webkit-box-shadow: 0 0 4px #06d691 !important;
     -moz-box-shadow: 0 0 4px #06d691 !important;
@@ -150,7 +150,7 @@ html{top: 0 !important;}
     padding: 0.25rem !important;
   }
 
-  nb-layout .layout nb-layout-header nav {
+  nb-layout .layout nb-layout-header nav, ngb-tooltip-window .tooltip-inner {
     background: linear-gradient(to bottom, #321a69, #311a77);
   }
 
@@ -174,4 +174,45 @@ html{top: 0 !important;}
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+ngb-tooltip-window.tooltip {
+  font-family: nb-theme(font-nunito) !important;
+  &.bs-tooltip-top {
+    .arrow {
+      &::before {
+        border-top-color: #3f7563 !important;
+      }
+    }
+  }
+  &.bs-tooltip-right {
+    .arrow {
+      &::before {
+        border-right-color: #3f7563 !important;
+      }
+    }
+  }
+  &.bs-tooltip-bottom {
+    .arrow {
+      &::before {
+        border-bottom-color: #3f7563 !important;
+      }
+    }
+  }
+  &.bs-tooltip-left {
+    .arrow {
+      &::before {
+        border-left-color: #3f7563 !important;
+      }
+    }
+  }
+  &.bs-tooltip-top-left {
+    .arrow {
+      left: 3px !important;
+    }
+  }
+
+  .tooltip-inner {
+    max-width: max-content;
+  }
 }

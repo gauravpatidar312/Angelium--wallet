@@ -43,6 +43,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
   buyWalletDollar: number = 0;
   fetchingBuyTotalAmount: boolean = false;
   buyTotalWalletDollar: number = 0;
+  availableWalletType: any;
   availableBalance: any;
   tradeTab: string = 'buy';
   tradeBuy: any = {};
@@ -59,7 +60,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
   parentData(data: any) {
     if (data) {
       // tradeBuy
-      if (this.shareDataService.hideSpinnerForExchange) {
+      if (this.shareDataService.showSpinnerForExchange) {
         this.tradeBuy.from = data.from;
         this.tradeBuy.to = data.to;
         this.tradeBuy.pair = data.pair;
@@ -85,8 +86,15 @@ export class TradeComponent implements OnInit, AfterViewInit {
     this.httpService.get('exchange/wallet/').subscribe((res?: any) => {
       if (res.status) {
         const exchangeData = _.filter(res.data, (wallet) => {
-          return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) > -1;
-        }) || [];
+            let decimalPlaces = 6;
+            if (wallet.coin === 'ANX') {
+              decimalPlaces = 0;
+            } else if (wallet.coin === 'HEAVEN') {
+              decimalPlaces = 2;
+            }
+            wallet.max_balance = ShareDataService.toFixedDown(wallet.balance, decimalPlaces);
+            return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) > -1;
+          }) || [];
         this.exchangeWallets = _.sortBy(exchangeData, ['coin']);
         this.getAvailableBalance(this.tradeTab);
       }
@@ -99,6 +107,13 @@ export class TradeComponent implements OnInit, AfterViewInit {
     this.httpService.get('asset/').subscribe((res?: any) => {
       if (res.cryptos) {
         const myWalletsData = _.filter(res.cryptos, (wallet) => {
+            let decimalPlaces = 6;
+            if (wallet.name === 'ANX') {
+              decimalPlaces = 0;
+            } else if (wallet.name === 'HEAVEN') {
+              decimalPlaces = 2;
+            }
+            wallet.max_quantity = ShareDataService.toFixedDown(wallet.quantity, decimalPlaces);
             return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.name) > -1;
           }) || [];
         this.myWallets = _.sortBy(myWalletsData, ['name']);
@@ -131,17 +146,19 @@ export class TradeComponent implements OnInit, AfterViewInit {
     this.tradeTab = value;
     if (this.tradeTab === 'buy') {
       const tradeBuyObj: any = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
-      this.availableBalance = ShareDataService.toFixedDown(Number(tradeBuyObj.balance), 8) + ' ' + tradeBuyObj.coin;
+      this.availableBalance = ShareDataService.toFixedDown(Number(tradeBuyObj.balance), 8);
+      this.availableWalletType = tradeBuyObj.coin;
     } else if (this.tradeTab === 'sell') {
       const tradeSellObj: any  = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
-      this.availableBalance = ShareDataService.toFixedDown(Number(tradeSellObj.balance), 8) + ' ' + tradeSellObj.coin;
+      this.availableBalance = ShareDataService.toFixedDown(Number(tradeSellObj.balance), 8);
+      this.availableWalletType = tradeSellObj.coin;
     }
   }
 
   changeWithdrawCrypto(cryptoName?: any) {
     this.withdrawWalletType = cryptoName;
     this.selectWalletData = _.find(this.exchangeWallets, ['coin', cryptoName]) || {};
-    this.withdrawWalletAmount = this.selectWalletData.balance;
+    this.withdrawWalletAmount = this.selectWalletData.max_balance;
     this.withdrawAmount = 0;
     this.setWithDrawAmount(this.selectWalletData.coin);
   }
@@ -166,7 +183,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
   changeDepositCrypto(cryptoName?: any) {
     this.cryptoDepositType = cryptoName;
     this.seletedCryptoDepositData = _.find(this.myWallets, ['name', cryptoName]) || {};
-    this.depositPopupAmount = this.seletedCryptoDepositData.quantity;
+    this.depositPopupAmount = this.seletedCryptoDepositData.max_quantity;
     this.depositAmount = 0;
     this.setDepositAmount(this.seletedCryptoDepositData.name);
   }

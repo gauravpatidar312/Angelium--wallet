@@ -73,3 +73,13 @@ nb-card-body {
   float: right;
   margin-right: 30px;
 }
+
+@media screen and (max-width: 425px) {
+  nb-card-header {
+    padding: 17.5px 5px;
+  }
+
+  nb-card-body {
+    padding: 10px 15px !important;
+  }
+}

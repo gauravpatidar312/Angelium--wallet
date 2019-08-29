@@ -27,7 +27,7 @@ export class TradeHistoryComponent implements OnInit {
   ngOnInit() {}
 
   parentData(data: any) {
-    if (this.shareDataService.hideSpinnerForExchange)
+    if (this.shareDataService.showSpinnerForExchange)
       this.tradeHistoryData = {};
     if (data) {
       this.currentPair = data;
