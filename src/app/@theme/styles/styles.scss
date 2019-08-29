@@ -176,6 +176,11 @@ html{top: 0 !important;}
   overflow: hidden;
 }
 
+.swal2-title {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
 ngb-tooltip-window.tooltip {
   font-family: nb-theme(font-nunito) !important;
   &.bs-tooltip-top {

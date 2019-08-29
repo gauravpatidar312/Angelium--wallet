@@ -86,9 +86,17 @@ export class LotteryComponent implements OnInit, AfterViewInit {
         const item: any = {};
         item.title = obj.name;
         item.wallet_type = obj.name;
-        item.wallet_amount = obj.quantity;
-        if (item.wallet_type === 'USDT')
-            item.title = 'USDT (OMNI)';
+        let decimalPlaces = 6;
+        if (item.name === 'ANX') {
+          decimalPlaces = 0;
+        } else if (item.name === 'HEAVEN') {
+          decimalPlaces = 2;
+        } else if (item.name === 'USDT') {
+          item.title = 'USDT (OMNI)';
+        } else if (item.name === 'ERCUSDT') {
+          item.title = 'USDT (ERC20)';
+        }
+        item.wallet_amount = ShareDataService.toFixedDown(obj.quantity, decimalPlaces);
         return item;
       });
       this.myWallets = _.sortBy(walletData, ['title']);
@@ -184,8 +192,9 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       if (!this.winnerData.length) {
         if (this.currentLotteryData.lottery_id === this.selectedLottery.lottery_id) {
           const lotteryDetails = _.orderBy(this.lotteryData, ['end_datetime'], ['desc']);
-          if (lotteryDetails.length > 1 && showPrevWinners) {
-            this.onChangeLottery(lotteryDetails[1]);
+          if (lotteryDetails.length > 1 && showPrevWinners && this.currentLotteryData.status !== 'past') {
+            _.remove(lotteryDetails, {'lottery_id': this.currentLotteryData.lottery_id});
+            this.onChangeLottery(lotteryDetails[0]);
           } else
             this.noWinnerListText = this.translate.instant('games.lottery.toastr.noDataFoundCurrentLottery');
         } else

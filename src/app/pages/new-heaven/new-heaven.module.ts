@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeavenComponent } from './heaven.component';
+import { NewHeavenComponent } from './new-heaven.component';
 import { ECommerceChartsPanelComponent } from './charts-panel/charts-panel.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -23,7 +23,7 @@ import {StatusCardBackComponent} from './status-card/back-side/status-card-back.
 
 @NgModule({
   declarations: [
-    HeavenComponent,
+    NewHeavenComponent,
     ECommerceChartsPanelComponent,
     ChartPanelHeaderComponent,
     ChartPanelSummaryComponent,
@@ -52,5 +52,4 @@ import {StatusCardBackComponent} from './status-card/back-side/status-card-back.
   ],
   entryComponents: [CustomRendererComponent]
 })
-
-export class HeavenModule { }
+export class NewHeavenModule { }

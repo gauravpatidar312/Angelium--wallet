@@ -200,10 +200,16 @@ export class TransferComponent implements OnInit {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
       const walletData = _.filter(res, (wallet?: any) => {
         wallet.title = wallet.wallet_type;
-        if (wallet.wallet_type === 'USDT')
+        let decimalPlaces = 6;
+        if (wallet.name === 'ANX') {
+          decimalPlaces = 0;
+        } else if (wallet.name === 'HEAVEN') {
+          decimalPlaces = 2;
+        } else if (wallet.wallet_type === 'USDT')
           wallet.title = 'USDT (OMNI)';
         else if (wallet.wallet_type === 'ERCUSDT')
           wallet.title = 'USDT (ERC20)';
+        wallet.max_amount = ShareDataService.toFixedDown(wallet.wallet_amount, decimalPlaces);
         return wallet.wallet_type !== 'ANX';
       });
       this.myWallets = _.sortBy(walletData, ['title']);
@@ -233,7 +239,7 @@ export class TransferComponent implements OnInit {
 
         this.httpService.get('asset/').subscribe((data?: any) => {
           const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
-          this.anxWallet.wallet_amount = anxData.quantity || 0;
+          this.anxWallet.wallet_amount = ShareDataService.toFixedDown(anxData.quantity, 0) || 0;
           this.fromOTCAmount = this.anxWallet.wallet_amount;
           this.setOTCAmount();
         });
@@ -528,10 +534,16 @@ export class TransferComponent implements OnInit {
         this.httpService.get('user-wallet-address/').subscribe((data?: any) => {
           const walletData = _.filter(data, (wallet?: any) => {
             wallet.title = wallet.wallet_type;
-            if (wallet.wallet_type === 'USDT')
+            let decimalPlaces = 6;
+            if (wallet.name === 'ANX') {
+              decimalPlaces = 0;
+            } else if (wallet.name === 'HEAVEN') {
+              decimalPlaces = 2;
+            } else if (wallet.wallet_type === 'USDT')
               wallet.title = 'USDT (OMNI)';
             else if (wallet.wallet_type === 'ERCUSDT')
               wallet.title = 'USDT (ERC20)';
+            wallet.max_amount = ShareDataService.toFixedDown(wallet.wallet_amount, decimalPlaces);
             return wallet.wallet_type !== 'ANX';
           });
           this.myWallets = _.sortBy(walletData, ['title']);
@@ -616,8 +628,8 @@ export class TransferComponent implements OnInit {
 
             this.httpService.get('asset/').subscribe((data?: any) => {
               const anxData = _.find(data.cryptos, ['name', 'ANX']) || {};
-              this.anxWallet.wallet_amount = anxData.quantity || 0;
-              this.fromOTCAmount = ShareDataService.toFixedDown(this.anxWallet.wallet_amount, 0);
+              this.anxWallet.wallet_amount = ShareDataService.toFixedDown(anxData.quantity, 0) || 0;
+              this.fromOTCAmount = this.anxWallet.wallet_amount;
               this.setOTCAmount();
             });
           });
