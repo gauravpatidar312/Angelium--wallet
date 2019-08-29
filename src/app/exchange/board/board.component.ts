@@ -73,7 +73,7 @@ export class BoardComponent implements OnInit {
   }
 
   parentData(data: any) {
-    if (this.shareDataService.hideSpinnerForExchange) {
+    if (this.shareDataService.showSpinnerForExchange) {
       this.lastTradeData = {};
       this.orderBookData = {};
     }

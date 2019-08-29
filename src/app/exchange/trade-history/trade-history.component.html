@@ -1,10 +1,10 @@
 <nb-card class="tradeHistory">
   <nb-card-header>{{"pages.exchange.tradeHistory" | translate}}</nb-card-header>
   <nb-card-body>
-    <span class="fetching-spinner" *ngIf="tradeHistorySpinner && shareDataService.hideSpinnerForExchange">
+    <span class="fetching-spinner" *ngIf="tradeHistorySpinner && shareDataService.showSpinnerForExchange">
       <i class="fa fa-spinner spinner-color fa-spin"></i>
     </span>
-    <div class="row" *ngIf="viewTradeHistory || !shareDataService.hideSpinnerForExchange">
+    <div class="row" *ngIf="viewTradeHistory || !shareDataService.showSpinnerForExchange">
       <div style="width:100%">
         <table class="trade-histary-table">
           <thead>

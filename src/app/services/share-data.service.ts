@@ -21,7 +21,7 @@ export class ShareDataService {
   transferTab: string;
   transferTitle: string;
   newVersion: boolean = false;
-  hideSpinnerForExchange: boolean = false;
+  showSpinnerForExchange: boolean = false;
   constructor(private storageService: IndexedDBStorageService,
               private store: Store<AppState>,
               private translate: TranslateService) {}

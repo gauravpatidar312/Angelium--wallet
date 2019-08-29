@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getOpenOrder(pair: any) {
     const data = {'pair': pair};
-    this.fetchTradeData = true;
+    this.fetchTradeData = this.shareDataService.showSpinnerForExchange;
     this.httpService.post(data, 'exchange/order_open/').subscribe((res?: any) => {
       this.fetchTradeData = false;
       if (res.status) {
@@ -109,7 +109,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getMyTradeHistory(pair: any) {
     const data = {'pair': pair};
-    this.fetchTradeData = true;
+    this.fetchTradeData = this.shareDataService.showSpinnerForExchange;
     this.httpService.post(data, 'exchange/mytrades/').subscribe((res?: any) => {
       this.fetchTradeData = false;
       if (res.status) {
@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     if ($event) {
       if (!this.currentPair || this.currentPair.pair !== $event.pair) {
-        this.shareDataService.hideSpinnerForExchange = true;
+        this.shareDataService.showSpinnerForExchange = true;
         new TradingView.widget($event);
         this.openOrderData = {};
         this.tradeHistoryData = [];
@@ -149,7 +149,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.noDataTradeHistory = false;
         this.noDataOpenTrade = false;
       } else
-        this.shareDataService.hideSpinnerForExchange = false;
+        this.shareDataService.showSpinnerForExchange = false;
       this.currentPair = $event;
       if (this.tradeTab2)
         this.getMyTradeHistory($event.pair);

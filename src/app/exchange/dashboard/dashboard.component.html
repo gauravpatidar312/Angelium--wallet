@@ -39,82 +39,65 @@
       </nb-card-header>
 
       <nb-card-body>
-        <div class="clearfix"></div>
-        <span class="fetching-spinner" *ngIf="fetchTradeData && shareDataService.hideSpinnerForExchange">
+        <span class="fetching-spinner" *ngIf="fetchTradeData">
           <i class="fa fa-spinner spinner-color fa-spin"></i>
         </span>
-        <div class="table-responsive" *ngIf="tradeTab1 || !shareDataService.hideSpinnerForExchange">
+        <div class="table-responsive table-height" *ngIf="tradeTab1 && !fetchTradeData">
           <table class="table table-condensed">
             <thead>
-              <div class="overflow-unset" *ngIf="tradeTab1 && noDataOpenTrade">{{ "pages.exchange.noOpenOrderAvailable" | translate}}</div>
-              <tr *ngIf="tradeTab1 && viewOpenOrderData">
-                <th width="13%" class="text-left">{{"pages.exchange.time" | translate}}</th>
-                <th width="10%" class="text-center">{{"pages.exchange.Pair" | translate}}</th>
-                <th width="8%" class="text-center">{{"pages.transfer.type" | translate}}</th>
-                <th width="9%" class="text-right">{{"pages.exchange.price" | translate}}</th>
-                <th width="20%" class="text-right">{{"common.amount" | translate}}</th>
-                <th width="20%" class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
-                <th width="10%" class="text-right">{{"pages.exchange.fill" | translate}} %</th>
-                <th width="10%" class="text-right"><button *ngIf="false" class="btn-cancelAll btn-danger">{{"pages.exchange.cancelAll" | translate}}</button></th>
+              <tr class="overflow-unset" *ngIf="noDataOpenTrade">{{ "pages.exchange.noOpenOrderAvailable" | translate}}</tr>
+              <tr *ngIf="viewOpenOrderData">
+                <th class="text-left">{{"pages.exchange.time" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.Pair" | translate}}</th>
+                <th class="text-right">{{"pages.transfer.type" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.price" | translate}}</th>
+                <th class="text-right">{{"common.amount" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.fill" | translate}} %</th>
+                <th class="text-right"><button *ngIf="false" class="btn-cancelAll btn-danger">{{"pages.exchange.cancelAll" | translate}}</button></th>
               </tr>
             </thead>
+            <tbody *ngIf="viewOpenOrderData">
+            <tr *ngFor="let order of openOrderBuySell">
+              <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
+              <td width="10%" class="text-right">{{order.pair }}</td>
+              <td width="8%" class="text-right"><span class="{{order.buy ? 'green-text' : 'pink-text' }}">{{order.buy ? 'Buy' : 'Sell' }}</span></td>
+              <td width="9%" class="text-right">{{order.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
+              <td width="20%" class="text-right">{{order.amount | number: '1.8-8'}} {{currentPair?.from | uppercase}}</td>
+              <td width="20%" class="text-right">{{order.price * order.amount | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
+              <td width="10%" class="text-right">{{order.filled | number: '1.0-2'}}%</td>
+              <td width="10%" class="text-right"><span><a class="green-text cancel-text" (click)="onCancelOrder(order._id, order.pair)">Cancel</a></span></td>
+            </tr>
+            </tbody>
           </table>
-          <div class="available-items" *ngIf="tradeTab1 && viewOpenOrderData">
-            <table class="table table-condensed">
-              <tbody>
-                <tr *ngFor="let order of openOrderBuySell">
-                  <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
-                  <td width="10%" class="text-center">{{order.pair }}</td>
-                  <td width="8%" class="text-center">
-                    <span class="{{order.buy ? 'green-text' : 'pink-text' }}">
-                      {{order.buy ? 'Buy' : 'Sell' }}
-                    </span>
-                  </td>
-                  <td width="9%" class="text-right">{{order.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
-                  <td width="20%" class="text-right">{{order.amount | number: '1.8-8'}} {{currentPair?.from | uppercase}}</td>
-                  <td width="20%" class="text-right">{{order.price * order.amount | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
-                  <td width="10%" class="text-right">{{order.filled | number: '1.0-2'}}%</td>
-                  <td width="10%" class="text-right"><span><a class="green-text cancel-text" (click)="onCancelOrder(order._id, order.pair)">Cancel</a></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
 
-        <div class="table-responsive" *ngIf="tradeTab2 || !shareDataService.hideSpinnerForExchange">
+        <div class="table-responsive table-height" *ngIf="tradeTab2 && !fetchTradeData">
           <table class="table table-condensed">
             <thead>
-             <div class="overflow-unset" *ngIf="tradeTab2 && noDataTradeHistory">{{ "pages.exchange.noTradeHistoryAvailable" | translate}}</div>
-              <tr *ngIf="tradeTab2 && viewTradeHistoryData">
-                <th width="13%" class="text-left">{{"pages.exchange.time" | translate}}</th>
-                <th width="10%" class="text-center">{{"pages.exchange.Pair" | translate}}</th>
-                <th width="8%" class="text-center">{{"pages.transfer.type" | translate}}</th>
-                <th width="9%" class="text-right">{{"pages.exchange.price" | translate}}</th>
-                <th width="20%" class="text-right">{{"common.amount" | translate}}</th>
-                <th width="20%" class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
-                <th width="20%" class="text-right">{{"pages.exchange.fill" | translate}} %</th>
+             <tr class="overflow-unset" *ngIf=" noDataTradeHistory">{{ "pages.exchange.noTradeHistoryAvailable" | translate}}</tr>
+              <tr *ngIf="viewTradeHistoryData">
+                <th class="text-left">{{"pages.exchange.time" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.Pair" | translate}}</th>
+                <th class="text-right">{{"pages.transfer.type" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.price" | translate}}</th>
+                <th class="text-right">{{"common.amount" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
+                <th class="text-right">{{"pages.exchange.fill" | translate}} %</th>
               </tr>
             </thead>
+            <tbody *ngIf="viewTradeHistoryData">
+            <tr *ngFor="let history of myTradeHistory">
+              <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
+              <td width="10%" class="text-right">{{history.pair}}</td>
+              <td width="8%" class="text-right"><span class="{{history.buy ? 'green-text' : 'pink-text' }}">{{history.buy ? 'BUY' : 'SELL' }}</span></td>
+              <td width="9%" class="text-right">{{history.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
+              <td width="20%" class="text-right">{{history.amount | number: '1.8-8'}} {{currentPair?.from | uppercase}}</td>
+              <td width="20%" class="text-right">{{history.price * history.amount | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
+              <td width="20%" class="text-right">{{history.filled | number: '1.0-2'}}%</td>
+            </tr>
+            </tbody>
           </table>
-          <div class="available-items" *ngIf="tradeTab2 && viewTradeHistoryData">
-            <table class="table table-condensed">
-              <tbody>
-                <tr *ngFor="let history of myTradeHistory">
-                  <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
-                  <td width="10%" class="text-center">{{history.pair}}</td>
-                  <td width="8%" class="text-center">
-                    <span class="{{history.buy ? 'green-text' : 'pink-text' }}">
-                      {{history.buy ? 'BUY' : 'SELL' }}
-                    </span>
-                  </td>
-                  <td width="9%" class="text-right">{{history.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
-                  <td width="20%" class="text-right">{{history.amount | number: '1.8-8'}} {{currentPair?.from | uppercase}}</td>
-                  <td width="20%" class="text-right">{{history.price * history.amount | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
-                  <td width="20%" class="text-right">{{history.filled | number: '1.0-2'}}%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </nb-card-body>
     </nb-card>

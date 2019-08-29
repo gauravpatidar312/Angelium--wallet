@@ -9,7 +9,7 @@
 }
 
 nb-card-body {
-  padding: 10px 30px
+  padding: 10px 30px;
 }
 
 .minheight {
@@ -17,8 +17,8 @@ nb-card-body {
 }
 
 .headsection {
-  border-bottom: 0px;
-  padding-bottom: 0px !important;
+  border-bottom: 0;
+  padding-bottom: 0 !important;
 }
 
 .theading-text {
@@ -60,7 +60,7 @@ nb-card-body {
   border-top: 1px solid #342e73;
   font-size: 1.2rem !important;
   font-family: nb-theme(font-bebas-book);
-  padding: 5px 0px 0px 0px !important;
+  padding: 5px 0 0 0 !important;
   font-weight: 600;
 }
 
@@ -69,7 +69,7 @@ nb-card-body {
 }
 
 .boardtable td {
-  padding: 0px;
+  padding: 0;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
@@ -107,4 +107,26 @@ nb-card-body {
 
 /deep/ .trade-chart-anx {
   height: 578px;
+}
+
+@media screen and (max-width: 425px) {
+ /deep/ .trade-chart-anx {
+    height: 390px;
+  }
+
+  /deep/ .exchange .twc > div {
+    height: 390px !important;
+  }
+
+ /deep/ .exchange .twc > div > div {
+    height: 390px !important;
+  }
+
+  nb-card-header {
+    padding: 17.5px 5px;
+  }
+
+  nb-card-body {
+    padding: 10px 15px !important;
+  }
 }
