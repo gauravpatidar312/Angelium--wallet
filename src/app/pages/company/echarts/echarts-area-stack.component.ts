@@ -83,6 +83,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnChanges, OnDe
         yAxis: [
           {
             type: 'value',
+            name: this.graphData.yAxisUnit,
             axisLine: {
               lineStyle: {
                 color: echarts.axisLineColor,
