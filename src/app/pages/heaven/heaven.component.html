@@ -120,7 +120,7 @@
                   </ul>
                 </div>
                 <input type="number" [required]="true" [(ngModel)]="heaven_amount"
-                placeholder="{{'pages.heaven.enterAmount' | translate}}" step="0.000001"
+                placeholder="{{'pages.heaven.enterAmount' | translate}}" step="0.000001" min="0" oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');"
                 [disabled]="!wallet?.wallet_type" class="form-control input-padding font-avenir"
                 (keyup)="setAmount(wallet?.wallet_type)" />
                 <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
@@ -128,7 +128,7 @@
               </div>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
               title="Click to use whole amount">
-              {{maxAmount + ' ' + (wallet?.title) + ' / max' }}
+              {{(maxAmount | number: '1.0-6') + ' ' + (wallet?.title) + ' / max' }}
               </span>
             </div>
           </div>

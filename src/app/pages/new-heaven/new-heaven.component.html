@@ -119,7 +119,7 @@
                         (click)="setMinerFee(fee)">${{fee}}</li>
                   </ul>
                 </div>
-                <input type="number" [required]="true" [(ngModel)]="heaven_amount"
+                <input type="number" [required]="true" [(ngModel)]="heaven_amount" min="0" oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');"
                        placeholder="{{'pages.heaven.enterAmount' | translate}}" step="0.000001"
                        [disabled]="!wallet?.wallet_type" class="form-control input-padding font-avenir"
                        (keyup)="setAmount(wallet?.wallet_type)" />
@@ -128,7 +128,7 @@
               </div>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
                     title="Click to use whole amount">
-              {{maxAmount + ' ' + (wallet?.title) + ' / max' }}
+              {{(maxAmount | number: '1.0-6') + ' ' + (wallet?.title) + ' / max' }}
               </span>
             </div>
           </div>

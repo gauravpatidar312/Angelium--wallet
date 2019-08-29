@@ -136,10 +136,13 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       this.gainCard.total_profit_anx = data.total_profit_anx;
       this.fetchingAssetValue = false;
       this.cryptoBalance = _.sortBy(_.filter(data.cryptos, (item) => {
+        let decimalPlaces = 6;
         item.title = item.name;
         if (item.name === 'ANX') {
+          decimalPlaces = 0;
           item.order = 1;
         } else if (item.name === 'HEAVEN') {
+          decimalPlaces = 2;
           item.order = 2;
         } else if (item.name === 'BTC') {
           item.order = 3;
@@ -158,6 +161,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
           item.order = 9;
           item.title = 'USDT (ERC20)';
         }
+        item.quantity = ShareDataService.toFixedDown(item.quantity, decimalPlaces);
 
         let enabled = true;
         if (this.isProduction) {

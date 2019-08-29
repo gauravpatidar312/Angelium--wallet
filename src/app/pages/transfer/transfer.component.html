@@ -53,7 +53,7 @@
                               <li class="dropdown-item" (click)="setMinerFee(fee)" *ngFor="let fee of fees">${{fee}}</li>
                             </ul>
                           </div>
-                          <input type="number"  name="transfer_amount" class="form-control font-nunitoSans"
+                          <input type="number"  name="transfer_amount" min="0" oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');" class="form-control font-nunitoSans"
                           placeholder="{{ 'common.amount' | translate }}" step="0.000001"
                           [(ngModel)]="transfer_amount" [disabled]="!sendWallet?.wallet_type"  (keyup)="setAmount(sendWallet?.wallet_type)"
                           value="{{0 | number : '1.0-6' }}">
@@ -62,7 +62,7 @@
                         </div>
                         <span class="available-amount" (click)="setSendMaxValue()" *ngIf="sendWallet?.wallet_type"
                               title="Click to use whole amount">
-                          {{(sendWallet?.wallet_amount | number : '1.0-6') + ' ' + (sendWallet?.title) + ' / max' }}
+                          {{(sendWallet?.max_amount | number : '1.0-6') + ' ' + (sendWallet?.title) + ' / max' }}
                         </span>
                       </div>
                     </div>
@@ -175,14 +175,14 @@
                     <div class="col">
                       <div class="form-group total-amount">
                         <label for="Amount" class="text-link">{{"common.amount" | translate}}</label>
-                        <input type="number" class="font-nunitoSans form-control" placeholder="{{'common.amount' | translate}}"
+                        <input type="number" min="0" oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');" class="font-nunitoSans form-control" placeholder="{{'common.amount' | translate}}"
                                name="fromOTCAmount" step="0.01"
                                [required]="true" [(ngModel)]="fromOTCAmount" (keyup)="setOTCAmount()"
                                value="{{0 | number : '1.0-0' }}">
                         <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                         <span class="transfer-amount" *ngIf="!fetchingAmount">${{ anxWallet?.walletDollar | number : '1.0-2' }}</span>
                         <span class="available-amount" (click)="setAnxMaxValue()" title="Click to use whole amount">
-                          {{((anxWallet?.wallet_amount || 0) | number : '1.0-0') + ' ANX / max' }}
+                          {{((anxWallet?.max_amount || 0) | number : '1.0-0') + ' ANX / max' }}
                         </span>
                       </div>
                     </div>

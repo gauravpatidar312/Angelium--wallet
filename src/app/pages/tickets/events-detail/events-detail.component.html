@@ -68,13 +68,13 @@
                 {{"pages.xticket.noOfTickets" | translate}}
               </label>
               <div class="input-group">
-                <input type="number" [(ngModel)]="noOfTickets" min="0" class="form-control input-padding font-avenir" [disabled]="!selectedWallet"
+                <input type="number" [(ngModel)]="noOfTickets" min="0" oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');" class="form-control input-padding font-avenir" [disabled]="!selectedWallet"
                        placeholder='{{"pages.xticket.noOfTickets" | translate}}' (keyup)="setAmount()"/>
                 <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingAmount"></i></span>
                 <span class="transfer-amount" *ngIf="!fetchingAmount">{{ totalAmount | number : '1.0-6' }}</span>
               </div>
               <span class="available-amount" *ngIf="selectedWallet?.wallet_type">
-                {{maxAmount + ' ' + ("pages.exchange.max" | translate | uppercase) }}
+                {{(maxAmount | number: '1.0-6') + ' ' + ("pages.exchange.max" | translate | uppercase) }}
               </span>
             </div>
           </div>
