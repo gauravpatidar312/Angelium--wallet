@@ -40,6 +40,14 @@
       }
     }
   }
+
+  .user-database-spinner {
+    display: block;
+    font-size: 25px;
+    color: #a1a1e5;
+    height: 40px;
+    text-align: center;
+  }
     @include media-breakpoint-down(sm) {
       nb-tabset /deep/ a{
         padding-left: 1rem;

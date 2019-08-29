@@ -40,6 +40,13 @@ export const MENU_ITEMS = [
   },
   {
     data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
+    title: 'XTicket Master',
+    icon: 'fas fa-ticket-alt',
+    link: '/pages/xticket-master',
+    languageKey: 'xticketMaster',
+  },
+  {
+    data: [AppConstants.ROLES.COMPANY, AppConstants.ROLES.ADMIN],
     title: 'Company',
     icon: 'nb-person',
     link: '/pages/company',

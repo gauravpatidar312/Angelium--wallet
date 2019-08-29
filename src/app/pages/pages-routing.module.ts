@@ -15,6 +15,7 @@ import {CompanyComponent} from './company/company.component';
 import {AdminComponent} from './admin/admin.component';
 import {EventsListComponent} from './tickets/events-list/events-list.component';
 import {EventsDetailComponent} from './tickets/events-detail/events-detail.component';
+import {TicketMasterComponent} from './ticket-master/ticket-master.component';
 
 import {AppConstants} from '../app.constants';
 import {AuthGuard} from '../_guards/auth.guard';
@@ -66,6 +67,11 @@ const routes: Routes = [{
     {
       path: 'xticket/:id',
       component: EventsDetailComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'xticket-master',
+      component: TicketMasterComponent,
       canActivate: [AuthGuard],
     },
     {

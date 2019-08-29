@@ -28,6 +28,7 @@ import { EventsListComponent } from './tickets/events-list/events-list.component
 import { EventsDetailComponent } from './tickets/events-detail/events-detail.component';
 import { CustomInputComponent } from './tickets/events-detail/custom-input.component';
 import { NewHeavenModule } from './new-heaven/new-heaven.module';
+import { TicketMasterComponent } from './ticket-master/ticket-master.component';
 
 
 const PAGES_COMPONENTS = [
@@ -69,6 +70,7 @@ const PAGES_COMPONENTS = [
     EventsListComponent,
     EventsDetailComponent,
     CustomInputComponent,
+    TicketMasterComponent,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '#' },
