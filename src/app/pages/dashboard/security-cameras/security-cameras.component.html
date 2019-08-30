@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="cameras" *ngIf="!isSingleView">
-      <div (click)="onImageClick(camera.title, XGameTemplate)" class="camera pointer col-lg-4" *ngFor="let camera of cameras"
+      <div (click)="onImageClick(camera.title, XGameTemplate, XComicTemplate)" class="camera pointer col-lg-4" *ngFor="let camera of cameras"
         [style.background-image]="'url(' + camera.source + ')'"
         [hidden]="!camera.display">
         <span>{{ camera.title }}</span>
@@ -49,7 +49,7 @@
     <nb-card-header>
     {{"pages.dashboard.securityCamera.xgames" | translate}}<i class="nb-close fa-2x pointer close-btn" (click)="XGame.close()"></i>
     </nb-card-header>
-    <nb-card-body class="image-scoll-card-body">
+    <nb-card-body class="image-scroll-card-body">
         <div class="row">
           <div class="col-md-4 image-div col-sm-12 pointer">
             <img class="pointer image-width" (click)="onGameTemplate('lottery')" src="../../assets/images/lottery.jpg">
@@ -62,6 +62,32 @@
           <div class="col-md-4 game-margin image-div col-sm-12 pointer">
             <img class="pointer image-width" (click)="onGameTemplate('baccarat')" src="../../assets/images/baccarat.jpg">
             <div class="text-center game-name-font pt-2">{{"common.baccarat" | translate}}</div>
+          </div>
+        </div>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+
+<ng-template #XComicTemplate let-data let-XComic="dialogRef">
+  <nb-card>
+    <nb-card-header>
+      {{"pages.dashboard.securityCamera.xcomic" | translate}}<i class="nb-close fa-2x pointer close-btn" (click)="XComic.close()"></i>
+    </nb-card-header>
+    <nb-card-body class="comic-scroll-card-body">
+      <div class="row">
+          <div class="lang-card col-12">
+            <div class="text-center mb-4">
+              <div class="game-name-font ep-heading">{{"common.episode" | translate}}-1</div>
+              <button class="btn lang-btn pointer" (click)="openComic('jp')">Japanese</button>
+              <button class="btn lang-btn pointer" (click)="openComic('cn')">Chinese</button>
+              <button class="btn lang-btn pointer" (click)="openComic('kr')">Korean</button>
+            </div>
+          </div>
+          <div class="lang-card col-12">
+            <div class="text-center">
+              <div class="game-name-font ep-heading">{{"common.episode" | translate}}-2</div>
+              <div class="ep-coming-soon">{{"pages.setting.comingSoon" | translate}}!</div>
+            </div>
           </div>
         </div>
     </nb-card-body>

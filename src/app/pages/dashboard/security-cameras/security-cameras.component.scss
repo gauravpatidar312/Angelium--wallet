@@ -251,8 +251,43 @@
   font-family: nb-theme(font-bebas);
 }
 
+.comic-scroll-card-body {
+  width: 250px;
+
+  .lang-card {
+    text-align: center !important;
+    font-family: nb-theme(font-bebas) !important;
+
+    .episode-font {
+      font-size: 1.5rem;
+    }
+
+    .ep-heading {
+      border-bottom: 1px solid #342e73;
+      padding-bottom: 8px;
+    }
+
+    .ep-coming-soon {
+      margin-top: 10px;
+      font-size: 23px;
+      font-family: nb-theme(font-nunito);
+    }
+
+    .lang-btn {
+      font-family: nb-theme(font-bebas) !important;
+      background-image: linear-gradient(to right, #ad59ff, #7659ff);
+      border: 1px;
+      margin-top: 12px;
+      width: 110px;
+      letter-spacing: 1px;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+
 @include media-breakpoint-down(sm) {
-  /deep/ .image-scoll-card-body {
+  /deep/ .image-scroll-card-body {
     width: 260px;
   }
 
