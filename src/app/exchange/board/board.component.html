@@ -1,4 +1,4 @@
-<nb-card class="board">
+<nb-card class="board" [hidden]="shareDataService.exchangeSectionBlock !== 'trade' && shareDataService.mobileExchangeVersion">
   <nb-card-header>{{"pages.exchange.board" | translate}}</nb-card-header>
   <nb-card-body>
 
@@ -45,7 +45,7 @@
               <span class="theading-text text-center bigSize">
                 {{lastTrade?.price | number: '1.8-8'}}
               </span>&nbsp;&nbsp;&nbsp;
-              <span class="text-center bigSize" *ngIf="false && lastTrade?.price">$ {{lastTrade?.price | number: '1.0-2'}}</span>
+              <span class="text-center bigSize" *ngIf="lastTrade?.usd_price">$ {{lastTrade?.usd_price | number: '1.0-2'}}</span>
             </td>
           </tr>
         </table>

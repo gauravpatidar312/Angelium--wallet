@@ -71,36 +71,36 @@ nb-card-body {
   max-width: 325px;;
 }
 
-#main-navigation li > a {
+#nav-orders li > a, #nav-main-tabs li > a {
   text-decoration: none;
-  font-size: 1.60rem;
+  font-size: 18px;
   font-family: BebasNeue;
   display: inline-block;
   color: #ffffff;
   line-height: 40px;
-  padding: 0px 15px;
+  padding: 0 15px;
   border-bottom: 2px solid transparent;
   font-weight: 400;
   width: 100%;
 }
 
-#main-navigation li > a i {
+#nav-orders li > a i, #nav-main-tabs  li > a i {
   padding-right: 8px;
   font-size: 17px;
   float: left;
 }
 
-#main-navigation li.active > a {
+#nav-orders li.active > a, #nav-main-tabs li.active > a{
   border-bottom: 2px solid #26df8b;
   color: #26df8b;
 }
 
-#main-navigation li > a {
+#nav-orders li > a,  #nav-main-tabs li > a {
   border-bottom: 2px solid #fff;
   color: #fff;
 }
 
-ul#main-navigation {
+ul#nav-orders, ul#nav-main-tabs {
   padding-left: 0px !important;
 }
 
@@ -142,8 +142,12 @@ table tbody tr:nth-of-type(even) {
 }
 
 .tradeLine {
-  padding: 0px !important;
-  margin: 0px 0px 20px 0px;
+  padding: 0 !important;
+  margin: 0 0 20px 0;
+}
+
+#nav-main-tabs li {
+  width: 33.33% !important;
 }
 
 .tradeLine li {
@@ -262,6 +266,28 @@ table tbody tr:nth-of-type(even) {
   overflow: hidden;
 }
 
+.show-block {
+  display: none;
+}
+
+.current-pair-section {
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  padding: 2px;
+  letter-spacing: 1px;
+  font-family: nb-theme(font-bebas);
+}
+
+.current-pair-section .carat-icon {
+  font-size: 16px;
+  color: #26df8b;
+  float: right;
+  margin-top: 6px;
+  margin-right: 10px;
+}
+
 /deep/ .swal2-title {
   color: #000000 !important;
   font-weight: bold !important;
@@ -276,12 +302,24 @@ table tbody tr:nth-of-type(even) {
 }
 
 @media screen and (max-width: 425px) {
-  .trade-open-history {
-    height: 290px;
+  .show-block {
+    display: block;
   }
 
-  #main-navigation li > a {
+  .trade-open-history {
+    height: 603px;
+  }
+
+  #nav-orders li > a {
     font-size: 20px;
+  }
+
+  #nav-orders li {
+    width: 50%;
+  }
+
+  #nav-orders li a {
+    text-align: center;
   }
 
   nb-card-header {
@@ -292,8 +330,16 @@ table tbody tr:nth-of-type(even) {
     padding: 10px 5px !important;
   }
 
+  /deep/ nb-accordion nb-accordion-item-body .item-body {
+    padding: 1px !important;
+  }
+
+  nb-accordion nb-accordion-item {
+    background: none !important;
+  }
+
   .table-height {
-    height: 205px;
+    height: 520px;
   }
 
   /deep/ .exchange .main-content {
@@ -302,7 +348,7 @@ table tbody tr:nth-of-type(even) {
 }
 
 @media screen and (width: 320px) {
-  #main-navigation li > a {
+  #nav-orders li > a {
     font-size: 16px;
   }
 }
