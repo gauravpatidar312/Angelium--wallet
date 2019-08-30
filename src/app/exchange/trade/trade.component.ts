@@ -449,12 +449,9 @@ export class TradeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    jQuery('ul.tabs li').click(function (e) {
-      const tab_id = jQuery(this).attr('data-tab');
-      jQuery('ul.tabs li').removeClass('active');
-      jQuery('.tab-content').removeClass('active');
-      jQuery(this).addClass('active');
-      jQuery('#' + tab_id).addClass('active');
+    jQuery('#card-trade ul.tabs li a').click(function (e) {
+      jQuery('#card-trade ul.tabs li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
     });
   }
 }

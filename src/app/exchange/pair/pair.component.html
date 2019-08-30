@@ -23,7 +23,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let pair of pairs">
-              <td width="40%" class="text-left" [ngClass]="{'currentPair-color' : shareDataService.currentPair.pair === pair.pair}" (click)="clickPair(pair)">
+              <td width="40%" class="text-left pair-name" [ngClass]="{'currentPair-color' : shareDataService.currentPair.pair === pair.pair}" (click)="clickPair(pair)">
                 {{pair.pair.split('/').join(' / ') | uppercase  }}</td>
               <td width="30%" class="text-center">{{pair.price | number: '1.0-8'}}</td>
               <td width="30%" class="text-right"> <div class="delta" [ngClass]="{'up': pair.change > 0, 'down': pair.change < 0}">{{pair.change | number: '1.0-2'}}%</div></td>

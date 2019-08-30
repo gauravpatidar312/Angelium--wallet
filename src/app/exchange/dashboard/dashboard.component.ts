@@ -15,7 +15,10 @@ declare const TradingView: any;
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   myTradeHistory: any = [];
@@ -35,8 +38,24 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
               public shareDataService: ShareDataService,
-              public translate: TranslateService) {}
+              public translate: TranslateService) {
+   const screenWidth = jQuery(window).width();
+    if (screenWidth <= 425) {
+      this.setSection('history');
+      this.shareDataService.mobileExchangeVersion = true;
+    }
+  }
 
+  onResize(event) {
+    if (event.target.innerWidth > 425) // window width
+      this.shareDataService.mobileExchangeVersion = false;
+    else {
+      this.setSection(this.shareDataService.exchangeSectionBlock || 'history');
+      this.shareDataService.mobileExchangeVersion = true;
+    }
+  }
+
+  @ViewChild('accordion') accordion;
   @ViewChild(TradeComponent) private tradeComponent: TradeComponent;
   @ViewChild(BoardComponent) private boardComponent: BoardComponent;
   @ViewChild(TradeHistoryComponent) private tradeHistoryComponent: TradeHistoryComponent;
@@ -44,10 +63,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    jQuery('ul.mytradeLine li a').click(function (e) {
-      jQuery('ul.mytradeLine li.active').removeClass('active');
+    jQuery('ul#nav-main-tabs li a').click(function (e) {
+      jQuery('ul#nav-main-tabs li.active').removeClass('active');
       jQuery(this).parent('li').addClass('active');
     });
+    jQuery('ul#nav-orders li a').click(function (e) {
+      jQuery('ul#nav-orders li.active').removeClass('active');
+      jQuery(this).parent('li').addClass('active');
+    });
+  }
+
+  setSection(value) {
+    this.shareDataService.exchangeSectionBlock = value;
+    if (this.accordion)
+      this.accordion.close();
   }
 
   getOpenOrder(pair: any) {
@@ -140,8 +169,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     if ($event) {
       if (!this.currentPair || this.currentPair.pair !== $event.pair) {
+        if (this.currentPair && this.shareDataService.mobileExchangeVersion)
+          this.accordion.toggle();
         this.shareDataService.showSpinnerForExchange = true;
-        new TradingView.widget($event);
+        if (!($event.from === 'anx' || $event.to === 'anx')) {
+          try {
+            new TradingView.widget($event);
+          } catch (e) {
+            this.toastrService.danger(this.translate.instant('pages.exchange.toastr.tradeViewMessage'), this.translate.instant('common.exchange'));
+          }
+        }
         this.openOrderData = {};
         this.tradeHistoryData = [];
         this.viewOpenOrderData = false;
