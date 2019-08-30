@@ -16,6 +16,7 @@ import { AuthActionTypes, LogIn, LogInFailure, ResetState, UserInfo, SetUserProf
 import { IndexedDBStorageService } from '../../../services/indexeddb-storage.service';
 import {SessionStorageService} from '../../../services/session-storage.service';
 import { Location } from "@angular/common";
+import {environment} from 'environments/environment';
 
 @Injectable()
 export class AuthEffects{
@@ -83,9 +84,14 @@ export class AuthEffects{
       user.user_language = user.user_language || {'id': 0, 'language': 'English', 'language_code': 'en'};
       this.storageService.saveToSession(user);
       this.sessionStorage.saveToLocalStorage('languageData', user.user_language);
-      if (this.router.url !== '' && (this.router.url === '/login' || this.router.url.includes('register') || this.router.url.includes('/reset-password'))) {
+      if (this.router.url !== '' && (this.router.url.includes('/login') || this.router.url.includes('/register') || this.router.url.includes('/reset-password'))) {
           this.translate.use(user.user_language.language_code);
-          this.router.navigate(['/pages/dashboard']);
+          if ((this.sessionStorage.getSessionStorage('redirect_to') || '').toLowerCase() === 'xlove') {
+            this.sessionStorage.removeFromSessionStorage('redirect_to');
+            document.location.href = `${environment.xloveUrl}?login=success&nkt=${user.token}`;
+          } else {
+            this.router.navigate(['/pages/dashboard']);
+          }
       }
     })
   );

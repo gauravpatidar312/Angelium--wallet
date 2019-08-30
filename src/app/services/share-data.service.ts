@@ -37,6 +37,7 @@ export class ShareDataService {
   }
 
   static toFixedDown(number: number, digits: number = 0) {
+    number = number || 0;
     const re = new RegExp('(\\d+\\.\\d{' + digits + '})(\\d)'), m = number.toString().match(re);
     return m ? parseFloat(m[1]) : number.valueOf();
   }
