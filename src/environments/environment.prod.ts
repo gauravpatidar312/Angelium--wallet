@@ -6,5 +6,6 @@
 export const environment = {
   production: true,
   apiUrl: 'https://api.angelium.net/api',
-  exchangeInterval: 20000
+  exchangeInterval: 20000,
+  xloveUrl: 'http://xlove.angelium.net'
 };

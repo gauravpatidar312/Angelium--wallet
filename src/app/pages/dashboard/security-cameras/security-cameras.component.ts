@@ -6,6 +6,7 @@ import {SessionStorageService} from '../../../services/session-storage.service';
 import {ToastrService} from '../../../services/toastr.service';
 import {NbDialogService} from '@nebular/theme';
 import {Router} from '@angular/router';
+import {environment} from 'environments/environment';
 import * as _ from 'lodash';
 
 @Component({
@@ -72,9 +73,9 @@ export class SecurityCamerasComponent implements OnDestroy {
   }
 
   onImageClick(title: any, template?: any) {
-    if ((this.userSettingInfo.user_type === 'owner' || this.userSettingInfo.user_type === 'company') && title === 'XLOVE')
-      window.open('http://xlove.angelium.net', '_blank');
-    else if (title === 'XGAMES') {
+    if ((this.userSettingInfo.user_type === 'owner' || this.userSettingInfo.user_type === 'company') && title === 'XLOVE') {
+      window.open(`${environment.xloveUrl}?login=success&nkt=${this.userSettingInfo.token}`, '_blank');
+    } else if (title === 'XGAMES') {
       if (this.userSettingInfo.user_type === 'owner' || this.userSettingInfo.user_type === 'company')
         this.openDialog(template);
       else
