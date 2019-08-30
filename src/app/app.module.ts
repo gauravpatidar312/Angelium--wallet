@@ -7,6 +7,7 @@ import {CoreModule} from './@core/core.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InternationalPhoneNumberModule} from 'ngx-international-phone-number';
 import {DeviceDetectorModule} from 'ngx-device-detector';
+import {ActivatedRoute} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -104,7 +105,13 @@ export class AppModule {
   constructor(private store: Store<AppState>,
               private sessionStorage: SessionStorageService,
               private shareDataService: ShareDataService,
-              private storageService: IndexedDBStorageService) {
+              private storageService: IndexedDBStorageService,
+              private route: ActivatedRoute) {
+    this.route.queryParams.subscribe((params?: any) => {
+      if (params.redirect_to) {
+        this.sessionStorage.saveToSession('redirect_to', params.redirect_to);
+      }
+    });
     this.checkSession();
   }
 

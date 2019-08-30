@@ -11,5 +11,6 @@
 export const environment = {
   production: false,
   apiUrl: 'https://testwallet.angelium.net/api',
-  exchangeInterval: 20000
+  exchangeInterval: 20000,
+  xloveUrl: 'http://xlove.angelium.net'
 };

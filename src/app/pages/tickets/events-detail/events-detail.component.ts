@@ -79,6 +79,10 @@ export class EventsDetailComponent implements OnInit {
         renderComponent: CustomInputComponent,
         onComponentInitFunction: (instance) => {
           instance.onInputChange.subscribe((row) => {
+            if (row.saveName) {
+              row.saveName = false;
+              this.saveTicketName(row);
+            }
             this.source.update(row, row);
           });
         }
@@ -247,6 +251,39 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
+  saveTicketName(ticket, template?: any) {
+    if (!ticket.newName) {
+      this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseEnterName'), this.translate.instant('common.xticket'));
+      return;
+    }
+    if (!ticket.newName.match(/^[a-zA-Z +\-\[\]~:|.]*$/g)) {
+      this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
+      return;
+    }
+
+    this.ticketData = ticket;
+    const data = {
+      'purchase_id': ticket.id,
+      'name': ticket.newName
+    };
+    this.httpService.put(data, 'xticket-update/')
+      .subscribe((res?: any) => {
+        if (res.status) {
+          this.ticketData.name = ticket.newName;
+          this.source.refresh();
+          if (template) {
+            this.openDownloadModal(template);
+          } else {
+            this.toastrService.success(this.translate.instant('pages.xticket.toastr.nameSavedMessage'), this.translate.instant('common.xticket'));
+          }
+        } else {
+          this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+        }
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+      });
+  }
+
   onCustomAction(event, template: any, sendTicketTemplate: any): void {
     if (event.action === 'send') {
       this.ticketData = event.data;
@@ -261,33 +298,13 @@ export class EventsDetailComponent implements OnInit {
         return;
       }
 
-      this.ticketData = ticket;
       if (ticket.name) {
+        this.ticketData = ticket;
         this.openDownloadModal(template);
         return;
       }
 
-      if (!ticket.newName.match(/^[a-zA-Z +\-\[\]~:|.]*$/g)) {
-        this.toastrService.danger(this.translate.instant('pages.register.enterValueInEnglish'), this.translate.instant('common.xticket'));
-        return;
-      }
-
-      const data = {
-        'purchase_id': ticket.id,
-        'name': ticket.newName
-      };
-      this.httpService.put(data, 'xticket-update/')
-        .subscribe((res?: any) => {
-          if (res.status) {
-            this.source.refresh();
-            this.ticketData.name = ticket.newName;
-            this.openDownloadModal(template);
-          } else {
-            this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
-          }
-        }, (err) => {
-          this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
-        });
+      this.saveTicketName(ticket, template);
     }
   }
 

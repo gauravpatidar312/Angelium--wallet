@@ -4,7 +4,7 @@ import {ViewCell} from 'ng2-smart-table';
 @Component({
   template: `
     <div>
-      <input class="form-control min-width" [(ngModel)]="rowData.newName" (blur)="nameChange()"
+      <input class="form-control min-width" [(ngModel)]="rowData.newName" (keyup.enter)="onHitEnter()" (blur)="nameChange()"
              [disabled]="isDisabled" placeholder="Enter Name" type="text">
     </div>`,
 })
@@ -21,6 +21,11 @@ export class CustomInputComponent implements ViewCell, OnInit {
     this.isDisabled = !!this.rowData.name;
     if (!this.rowData.newName)
       this.rowData.newName = this.rowData.name;
+  }
+
+  onHitEnter() {
+    this.rowData.saveName = true;
+    this.nameChange();
   }
 
   nameChange() {

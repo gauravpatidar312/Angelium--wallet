@@ -64,4 +64,8 @@ export class SessionStorageService {
   removeFromLocalStorage = function(key): any {
     localStorage.removeItem(key);
   };
+
+  removeFromSessionStorage = function(key): any {
+    sessionStorage.removeItem(key);
+  };
 }
