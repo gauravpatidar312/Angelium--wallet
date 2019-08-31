@@ -303,11 +303,28 @@
       text-align: center;
       position: relative;
       color: #ffffff;
-      top: 30%;
+      top: 25%;
 
       .ticket-name {
         font-size: 45px;
         letter-spacing: 2px;
+        line-height: 0.75;
+        margin-bottom: 8px;
+      }
+
+      .seat-number-container {
+        text-align: center;
+        width: 150px;
+        margin: 0 auto 10px;
+        background-color: #fff;
+
+        .seat-number {
+          color: #000000;
+          font-size: 22px;
+          display: inline-block;
+          line-height: 0.75;
+          padding: 10px 0 5px;
+        }
       }
 
       .qr-code-class {
@@ -349,15 +366,12 @@
   cursor: pointer;
 }
 
-.btn-download {
-  width: 130px;
-  margin-right: 7px;
-}
-
-.btn-email {
+.btn-download, .btn-email {
   width: 130px;
   margin-left: 7px;
   background-color: #7659ff !important;
+  padding: 10px !important;
+  font-size: 13px !important;
 }
 
 .send-ticket {
@@ -413,10 +427,19 @@
       }
 
       .qrcode-margin {
-        top: 30%;
+        top: 25%;
 
         .ticket-name {
-          font-size: 36px;
+          font-size: 34px;
+        }
+
+        .seat-number-container {
+          width: 100px;
+
+          .seat-number {
+            font-size: 17px;
+            padding: 8px 0 4px;
+          }
         }
 
         .qr-code-class {
@@ -434,12 +457,7 @@
           margin: 1px 10px;
 
           .customer-name {
-            width: 100%;
-            background-color: #fff;
-            color: #000000;
             font-size: 17px;
-            display: inline-block;
-            line-height: 0.75;
             padding: 8px 0 4px;
           }
         }

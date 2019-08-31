@@ -131,6 +131,9 @@
         </div>
         <div class="qrcode-margin">
           <div class="ticket-name">{{ticketData?.ticket_name}}</div>
+          <div class="seat-number-container">
+            <span class="seat-number">{{ticketData?.seat_number || '-'}}</span>
+          </div>
           <img [src]="ticketData?.qrcode" class="qr-code-class">
           <div class="ticket-title">{{"common.xticket" | translate}}</div>
           <div class="ticket-name-color">
@@ -140,10 +143,10 @@
       </div>
     </nb-card-body>
     <nb-card-footer class="text-center">
-      <button *ngIf="!(deviceInfo.os === 'iOS' || deviceInfo.os === 'Mac')" class="btn btn-download pointer" nbButton size="small" (click)="downloadTicket(refTicket, false)" [disabled]="downloadingTicket || mailingTicket">
-        <i class="fa fa-spinner fa-spin text-white" *ngIf="downloadingTicket"></i>
-        <span *ngIf="!downloadingTicket">{{"pages.setting.download" | translate}}</span></button>
-      <button class="btn btn-email pointer" nbButton size="small" (click)="downloadTicket(refTicket, true)" [disabled]="downloadingTicket || mailingTicket">
+      <a class="btn btn-download pointer" size="small" target="_blank" [href]="ticketData?.ticket_pdf">
+        <span>{{"pages.setting.download" | translate}}</span>
+      </a>
+      <button class="btn btn-email pointer" nbButton size="small" (click)="emailTicket(refTicket, true)" [disabled]="downloadingTicket || mailingTicket">
         <i class="fa fa-spinner fa-spin text-white" *ngIf="mailingTicket"></i>
         <span *ngIf="!mailingTicket">{{"pages.setting.eMail" | translate}}</span></button>
     </nb-card-footer>

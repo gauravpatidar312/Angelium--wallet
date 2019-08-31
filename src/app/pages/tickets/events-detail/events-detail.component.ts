@@ -12,8 +12,6 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import html2canvas from 'html2canvas';
-import * as jsPDF from 'jspdf';
 declare let jQuery: any;
 
 @Component({
@@ -269,8 +267,9 @@ export class EventsDetailComponent implements OnInit {
     this.httpService.put(data, 'xticket-update/')
       .subscribe((res?: any) => {
         if (res.status) {
-          this.ticketData.name = ticket.newName;
-          this.source.refresh();
+          this.ticketData = res.data;
+          this.ticketData.ticket_name = ticket.ticket_name;
+          this.source.update(ticket, this.ticketData);
           if (template) {
             this.openDownloadModal(template);
           } else {
@@ -308,62 +307,23 @@ export class EventsDetailComponent implements OnInit {
     }
   }
 
-  blobToBase64(blob, callback) {
-    const reader = new FileReader();
-    reader.onload = function () {
-      const dataUrl = reader.result.toString();
-      callback(dataUrl);
-    };
-    reader.readAsDataURL(blob);
-  }
-
-  downloadTicket(dialog, isEmail?: boolean) {
+  emailTicket(dialog, isEmail?: boolean) {
     this.downloadingTicket = !isEmail;
     this.mailingTicket = isEmail;
-    setTimeout(() => {
-      const elementToPrint = document.getElementById('img-download');
-      if (this.deviceInfo.os === 'iOS') {
-        elementToPrint.style.marginTop = '-94px';
-      }
-      setTimeout(() => {
-        html2canvas(elementToPrint, {'scale': 5})
-          .then(canvas => {
-            const pdf = new jsPDF('p', 'px', [350, 758]);
-            // this.ticketData.img = canvas.toDataURL('image/jpeg');
-            pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 264, 572);
-            if (!isEmail) {
-              pdf.setProperties({'title': `Ticket-${this.ticketData.name}.pdf`});
-              // Temporary commented.
-              /*const pdfData = pdf.output('blob');
-               this.blobToBase64(pdfData, (base64) => {
-               window.open(base64, '_blank');
-               });*/
-              pdf.output('dataurlnewwindow');
-              this.downloadingTicket = false;
-              dialog.close();
-            } else {
-              const pdfData = pdf.output('blob');
-              this.blobToBase64(pdfData, (base64) => {
-                const postData: any = {
-                  'data': base64.split(',')[1],
-                  'name': this.ticketData.name.replace(/^\/+|\/+$/g, '_')
-                };
-                this.httpService.post(postData, 'email-ticket/').subscribe((res?: any) => {
-                  if (res && res.status) {
-                    this.mailingTicket = false;
-                    dialog.close();
-                    this.toastrService.success(this.translate.instant('pages.xticket.toastr.emailHasBeenSent'), this.translate.instant('common.xticket'));
-                  } else
-                    this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
-                }, (err) => {
-                  this.mailingTicket = false;
-                  this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
-                });
-              });
-            }
-          });
-      }, 400);
-    }, 0);
+    const postData: any = {
+      'purchase_id': this.ticketData.id
+    };
+    this.httpService.post(postData, 'email-ticket/').subscribe((res?: any) => {
+      if (res && res.status) {
+        this.mailingTicket = false;
+        dialog.close();
+        this.toastrService.success(this.translate.instant('pages.xticket.toastr.emailHasBeenSent'), this.translate.instant('common.xticket'));
+      } else
+        this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+    }, (err) => {
+      this.mailingTicket = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
+    });
   }
 
   onSendTicket(dialog: any) {
