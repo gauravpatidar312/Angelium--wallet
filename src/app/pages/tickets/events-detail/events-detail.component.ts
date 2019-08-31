@@ -93,6 +93,10 @@ export class EventsDetailComponent implements OnInit {
         title: this.translate.instant('common.ticket'),
         type: 'string',
       },
+      seat_number: {
+        title: this.translate.instant('pages.xticket.seatNumber'),
+        type: 'string',
+      },
       created: {
         title: this.translate.instant('pages.xticket.purchaseDate'),
         type: 'html',
@@ -226,24 +230,7 @@ export class EventsDetailComponent implements OnInit {
     });
   }
 
-
-  urlToBase64(url, callback) {
-    const xmlHTTP = new XMLHttpRequest();
-    xmlHTTP.open('GET', url, true);
-    xmlHTTP.responseType = 'arraybuffer';
-    xmlHTTP.onload = function (e) {
-      const raw = String.fromCharCode.apply(null, new Uint8Array(this.response));
-      callback(raw ? ('data:image/jpeg;base64,' + btoa(raw)) : '');
-    };
-    xmlHTTP.send();
-  }
-
   openDownloadModal(template) {
-    this.urlToBase64(this.ticketData.qrcode, (base64) => {
-      if (base64)
-        this.ticketData.qrcode = base64;
-    });
-
     this.dialogService.open(template, {
       autoFocus: true
     });
