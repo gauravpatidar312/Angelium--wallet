@@ -72,7 +72,11 @@ export class SecurityCamerasComponent implements OnDestroy {
       this.router.navigate(['/games/baccarat']);
   }
 
-  onImageClick(title: any, template?: any) {
+  openComic(value) {
+    window.open(`/assets/xcomic-${value}.pdf`, '_blank');
+  }
+
+  onImageClick(title: any, template?: any, XComicTemplate?: any) {
     if ((this.userSettingInfo.user_type === 'owner' || this.userSettingInfo.user_type === 'company') && title === 'XLOVE') {
       window.open(`${environment.xloveUrl}?login=success&nkt=${this.userSettingInfo.token}`, '_blank');
     } else if (title === 'XGAMES') {
@@ -80,9 +84,9 @@ export class SecurityCamerasComponent implements OnDestroy {
         this.openDialog(template);
       else
         this.router.navigate(['/games/lottery']);
-    } else if (title === 'XCOMIC')
-      window.open('/assets/xcomic.pdf', '_blank');
-    else
+    } else if (title === 'XCOMIC') {
+      this.openDialog(XComicTemplate);
+    } else
       this.toastrService.info(this.translate.instant('pages.transfer.toastr.featureComingSoonStayTuned'),
         this.translate.instant('pages.dashboard.securityCamera.' + title.toLowerCase()));
   }
