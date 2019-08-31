@@ -209,9 +209,7 @@
               </div>
 
               <div class="form-group sliderCss">
-                <div id="registerSlider"
-                 [attr.data-lock-text]="'common.slideRightToVerify' | translate"
-                 [attr.data-unlock-text]="'common.verified' | translate"> </div>
+                <div id="registerSlider"> </div>
               </div>
 
               <button type="submit" [disabled]="formSubmitting" class="btn btn-demo btn-success pointer registerBtnCss"
@@ -222,7 +220,7 @@
                 <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmitting"></i>
               </button>
 
-              
+
               <div class="form-group">
                 <section class="another-action">
                   <a routerLink="/report/">{{"common.report" | translate}}</a>
@@ -232,8 +230,8 @@
                   </span>
                 </section>
               </div>
-              
-              
+
+
             </form>
           </div>
         </nb-auth-block>
