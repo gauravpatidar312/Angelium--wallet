@@ -73,7 +73,7 @@ export class SecurityCamerasComponent implements OnDestroy {
   }
 
   openComic(value) {
-    window.open(`/assets/xcomic-${value}.pdf`, '_blank');
+    window.open(`/assets/xcomic/ep.1-${value}.pdf`, '_blank');
   }
 
   onImageClick(title: any, template?: any, XComicTemplate?: any) {
