@@ -29,10 +29,15 @@
       font-size: 20px;
     }
 
+    .row-received .ticket-send {
+      display: none;
+    }
+
     .ng2-smart-actions {
       width: 80px;
-      text-align: center;
+      text-align: left;
       min-width: 80px;
+      padding: 0 6px;
     }
 
     ng2-st-tbody-custom {
