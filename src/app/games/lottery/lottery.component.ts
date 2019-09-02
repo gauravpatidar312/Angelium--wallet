@@ -108,7 +108,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   getBetList() {
     this.fetchingBetList = true;
     this.httpService.get(`game/get-bet-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
-      this.betData = _.map(res, (data) => {
+      const betListData = _.orderBy(res, ['id'], ['desc']);
+      this.betData = _.map(betListData, (data) => {
         if (data.level === 1)
           data.level = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
         else if (data.level === 2)
@@ -131,7 +132,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
 
   getPrizeList() {
     this.httpService.get(`game/get-estimated-prize-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
-      this.estimatedWinners = _.map(res, (winner) => {
+      const winnerData = _.orderBy(res, ['winner_rank']);
+      this.estimatedWinners = _.map(winnerData, (winner) => {
         if (winner.winner_rank === 1)
           winner.prizeText = this.translate.instant('games.lottery.stPrize');
         else if (winner.winner_rank === 2)
@@ -168,7 +170,8 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     jQuery('.spinner-width').height(jQuery('#winnerList').height());
     this.fetchingWinner = true;
     this.httpService.get(`game/get-winners-list/?lottery_id=${value}`).subscribe((res?: any) => {
-      this.winnerData = _.map(res, (winner) => {
+      const allWinnerData = _.orderBy(res, ['winner_rank']);
+      this.winnerData = _.map(allWinnerData, (winner) => {
         if (winner.winner_rank === 1)
           winner.prizeText = this.translate.instant('games.lottery.stPrize');
         else if (winner.winner_rank === 2)
