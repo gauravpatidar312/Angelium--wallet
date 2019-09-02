@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   viewOpenOrderData: boolean = false;
   viewTradeHistoryData: boolean = false;
   tradeHistoryData: any;
+  hideOhterPairs:boolean = false;
 
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
@@ -79,6 +80,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.accordion.close();
   }
 
+  onHidePairs() {
+    if (this.tradeTab2)
+      this.getMyTradeHistory(this.hideOhterPairs ? this.currentPair.pair : 'ALL');
+    else
+      this.getOpenOrder(this.hideOhterPairs ? this.currentPair.pair : 'ALL');
+  }
+
   getOpenOrder(pair: any) {
     const data = {'pair': pair};
     this.fetchTradeData = this.shareDataService.showSpinnerForExchange;
@@ -87,13 +95,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (res.status) {
         this.tradeTab1 = true;
         this.tradeTab2 = false;
-        if (!this.openOrderData)
-          this.openOrderData = res.data;
-        else {
-          this.openOrderData = _.merge(this.openOrderData, res.data);
-          this.openOrderData.buy = _.unionBy(this.openOrderData.buy, '_id');
-          this.openOrderData.sell = _.unionBy(this.openOrderData.sell, '_id');
-        }
+        this.openOrderData = res.data;
         this.openOrderBuySell = _.concat(this.openOrderData.buy, this.openOrderData.sell);
         if (!this.openOrderBuySell.length)
           this.noDataOpenTrade = true;
@@ -136,6 +138,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onCancelOrderAll() {
+    this.httpService.get('exchange/order_cencel_all/').subscribe((res?: any) => {
+    }, (err) => {
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+    });
+  }
+
   getMyTradeHistory(pair: any) {
     const data = {'pair': pair};
     this.fetchTradeData = this.shareDataService.showSpinnerForExchange;
@@ -144,10 +153,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (res.status) {
         this.tradeTab2 = true;
         this.tradeTab1 = false;
-        if (!this.tradeHistoryData)
-          this.tradeHistoryData = res.data;
-        else
-          this.tradeHistoryData = _.merge(this.tradeHistoryData, res.data);
+        this.tradeHistoryData = res.data;
         this.myTradeHistory = this.tradeHistoryData;
         this.noDataTradeHistory = !this.myTradeHistory.length;
         if (!this.noDataTradeHistory)
@@ -189,9 +195,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.shareDataService.showSpinnerForExchange = false;
       this.currentPair = $event;
       if (this.tradeTab2)
-        this.getMyTradeHistory($event.pair);
+        this.getMyTradeHistory(this.hideOhterPairs ? $event.pair : 'ALL');
       else
-        this.getOpenOrder($event.pair);
+        this.getOpenOrder(this.hideOhterPairs ? $event.pair : 'ALL');
       if ($event.from === 'anx' || $event.to === 'anx')
         this.getTradeChartData($event.pair);
       this.tradeComponent.parentData($event);

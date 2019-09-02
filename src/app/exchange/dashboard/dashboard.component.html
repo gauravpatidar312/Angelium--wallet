@@ -46,19 +46,19 @@
     <nb-card class="main four trade-open-history" [hidden]="shareDataService.exchangeSectionBlock !== 'orders' && shareDataService.mobileExchangeVersion">
       <nb-card-header>
         <div class="row">
-          <div class="col-lg-8 col-sm-12">
+          <div class="col-md-8 col-sm-12">
             <ul id="nav-orders" class="nav mytradeLine">
               <li class="pointer active">
-                <a data-toggle="pill" (click)="getOpenOrder(currentPair?.pair)">{{"pages.exchange.myOpenOrders" | translate}}</a>
+                <a data-toggle="pill" (click)="getOpenOrder(hideOhterPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myOpenOrders" | translate}}</a>
               </li>
               <li class="pointer">
-                <a data-toggle="pill" (click)="getMyTradeHistory(currentPair?.pair)">{{"pages.exchange.myTradeHistory" | translate}}</a>
+                <a data-toggle="pill" (click)="getMyTradeHistory(hideOhterPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myTradeHistory" | translate}}</a>
               </li>
             </ul>
           </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="float-right" *ngIf="false">
-              <nb-checkbox name="hideOtherParis" class="hidePair">
+          <div class="col-md-4 col-sm-12">
+            <div class="float-right">
+              <nb-checkbox [(ngModel)]="hideOhterPairs" name="hideOtherParis" class="hidePair" (change)="onHidePairs()">
                 Hide Other Pairs
               </nb-checkbox>
             </div>
@@ -82,7 +82,7 @@
                 <th class="text-right">{{"common.amount" | translate}}</th>
                 <th class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
                 <th class="text-right">{{"pages.exchange.fill" | translate}} %</th>
-                <th class="text-right"><button *ngIf="false" class="btn-cancelAll btn-danger">{{"pages.exchange.cancelAll" | translate}}</button></th>
+                <th class="text-right"><button class="btn-cancelAll btn-danger" (click)="onCancelOrderAll()">{{"pages.exchange.cancelAll" | translate}}</button></th>
               </tr>
             </thead>
             <tbody *ngIf="viewOpenOrderData">
