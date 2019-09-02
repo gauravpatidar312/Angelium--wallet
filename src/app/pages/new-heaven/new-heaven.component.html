@@ -92,7 +92,7 @@
               <div class="status-dd-week dropdown" ngbDropdown>
                 <button type="button" ngbDropdownToggle class="font-avenir dropDown-padding btn btn-primary b-color-wallet"
                         [ngClass]="{'btn-sm': breakpoint.width <= breakpoints.is}">
-                  {{ walletType }}
+                  {{ wallet?.title || walletType }}
                 </button>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                   <li class="dropdown-item" *ngFor="let wallet of myWallets"
