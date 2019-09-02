@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1125" height="1865" viewBox="0 0 1125 1865">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #aeff00;
+        stroke-width: 4px;
+      }
+
+      .cls-1, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2, .cls-3 {
+        font-size: 30px;
+        font-family: "Avenir Next";
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill: #aeff00;
+      }
+
+      .cls-3 {
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard 1">
+    <path class="cls-1" d="M330,872.936l464.166-.925V1164.77L330,1165.7V872.936Z" transform="translate(0 -416)"/>
+    <path id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-1" d="M336,1282.64l464.166-.92v146.75L336,1429.4V1282.64Z" transform="translate(0 -416)"/>
+    <path id="Rectangle_1_copy_3" data-name="Rectangle 1 copy 3" class="cls-1" d="M609,1810.94l464.163-.93v292.76L609,2103.7V1810.94Z" transform="translate(0 -416)"/>
+    <path id="Rectangle_1_copy_4" data-name="Rectangle 1 copy 4" class="cls-1" d="M51,1810.94l464.166-.93v292.76L51,2103.7V1810.94Z" transform="translate(0 -416)"/>
+    <path id="Rectangle_1_copy_2" data-name="Rectangle 1 copy 2" class="cls-1" d="M336,1546.79l464.166-.92v146.75L336,1693.55V1546.79Z" transform="translate(0 -416)"/>
+    <text id="_1._Place_bet_2._See_winers_3._Interact" data-name="1. Place bet 2. See winers 3. Interact" class="cls-2" x="477.989" y="624.092">1. Place bet<tspan x="477.989" dy="36">2. See winers</tspan><tspan x="477.989" dy="36">3. Interact</tspan></text>
+    <text id="Lottery_UI" data-name="Lottery UI" class="cls-2" x="501.988" y="513.09">Lottery UI</text>
+    <text id="User" class="cls-3" x="560.989" y="81.09">User</text>
+    <text id="_1._Escrow_bets_2._Decide_winners_3._Random_oraclize" data-name="1. Escrow bets 2. Decide winners 3. Random oraclize" class="cls-2" x="707.988" y="1551.092">1. Escrow bets<tspan x="707.988" dy="36">2. Decide winners</tspan><tspan x="707.988" dy="36">3. Random oraclize</tspan></text>
+    <text id="Smart_Contract" data-name="Smart Contract" class="cls-2" x="741.989" y="1451.092">Smart Contract</text>
+    <text id="_1._Store_info" data-name="1. Store info" class="cls-2" x="204.988" y="1576.09">1. Store info</text>
+    <text id="Mongo_DB" data-name="Mongo DB" class="cls-2" x="213.989" y="1451.092">Mongo DB</text>
+    <text id="Python_API" data-name="Python API" class="cls-2" x="493.989" y="953.09">Python API</text>
+    <text id="Node.js_API" data-name="Node.js API" class="cls-2" x="482.988" y="1215.092">Node.js API</text>
+    <path class="cls-4" d="M455.5,1166h5v104.4H468L458,1282l-10-11.6h7.5V1166Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy" data-name="Shape 1 copy" class="cls-4" d="M535.5,756h5V860.4H548L538,872l-10-11.6h7.5V756Z" transform="translate(0 -416)"/>
+    <path class="cls-4" d="M586.744,635.163v-43.6h-3.837V713.635s-8.023,14.3-17.791,0V640.4H560.93v73.24s-7.674,14.3-18.139,0V591.568h-3.838v43.6s-5.232,11.858-13.953,0V579.012s1.744-13.6,16.047-15.345c0,0.7,41.86,0,41.86,0S596.163,562.62,600,579.012v56.151S595.116,647.021,586.744,635.163Zm-24.418-75.682a16.741,16.741,0,1,1,16.744-16.74A16.743,16.743,0,0,1,562.326,559.481Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_2" data-name="Shape 1 copy 2" class="cls-4" d="M455.5,1430h5v104.4H468L458,1546l-10-11.6h7.5V1430Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_3" data-name="Shape 1 copy 3" class="cls-4" d="M391.5,1694h5v104.4H404L394,1810l-10-11.6h7.5V1694Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_4" data-name="Shape 1 copy 4" class="cls-4" d="M729.5,1694h5v104.4H742L732,1810l-10-11.6h7.5V1694Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_5" data-name="Shape 1 copy 5" class="cls-4" d="M460.5,1810h-5V1705.6H448l10-11.6,10,11.6h-7.5V1810Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_6" data-name="Shape 1 copy 6" class="cls-4" d="M670.5,1810h-5V1705.6H658l10-11.6,10,11.6h-7.5V1810Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_7" data-name="Shape 1 copy 7" class="cls-4" d="M670.5,1545h-5V1440.6H658l10-11.6,10,11.6h-7.5V1545Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_8" data-name="Shape 1 copy 8" class="cls-4" d="M670.5,1282h-5V1177.6H658l10-11.6,10,11.6h-7.5V1282Z" transform="translate(0 -416)"/>
+    <path id="Shape_1_copy_9" data-name="Shape 1 copy 9" class="cls-4" d="M588.5,872h-5V767.6H576L586,756l10,11.6h-7.5V872Z" transform="translate(0 -416)"/>
+  </g>
+</svg>
