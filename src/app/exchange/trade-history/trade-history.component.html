@@ -1,4 +1,4 @@
-<nb-card class="tradeHistory" [hidden]="shareDataService.exchangeSectionBlock !== 'history' && shareDataService.mobileExchangeVersion">
+<nb-card class="tradeHistory" [hidden]="shareDataService.exchangeSectionBlock !== 'tradeBook' && shareDataService.mobileExchangeVersion">
   <nb-card-header>{{"pages.exchange.tradeHistory" | translate}}</nb-card-header>
   <nb-card-body>
     <span class="fetching-spinner" *ngIf="tradeHistorySpinner && shareDataService.showSpinnerForExchange">

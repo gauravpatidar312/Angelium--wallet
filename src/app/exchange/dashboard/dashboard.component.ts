@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
               public translate: TranslateService) {
    const screenWidth = jQuery(window).width();
     if (screenWidth <= 425) {
-      this.setSection('history');
+      this.setSection('trade');
       this.shareDataService.mobileExchangeVersion = true;
     }
   }
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if (event.target.innerWidth > 425) // window width
       this.shareDataService.mobileExchangeVersion = false;
     else {
-      this.setSection(this.shareDataService.exchangeSectionBlock || 'history');
+      this.setSection(this.shareDataService.exchangeSectionBlock || 'trade');
       this.shareDataService.mobileExchangeVersion = true;
     }
   }
@@ -97,9 +97,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.tradeTab2 = false;
         this.openOrderData = res.data;
         this.openOrderBuySell = _.concat(this.openOrderData.buy, this.openOrderData.sell);
-        if (!this.openOrderBuySell.length)
+        if (!this.openOrderBuySell.length) {
           this.noDataOpenTrade = true;
-        else {
+          this.viewOpenOrderData = false;
+        } else {
           this.viewOpenOrderData = true;
           this.noDataOpenTrade = false;
         }
@@ -139,9 +140,29 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   onCancelOrderAll() {
-    this.httpService.get('exchange/order_cencel_all/').subscribe((res?: any) => {
-    }, (err) => {
-      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+    Swal.fire({
+      title: this.translate.instant('pages.exchange.toastr.cancelAllOrders'),
+      text: this.translate.instant('pages.exchange.toastr.cancelAllOrdersText'),
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('swal.yesSure'),
+      cancelButtonText: this.translate.instant('swal.cancel')
+    }).then((result) => {
+      if (!result.value)
+        return;
+
+      const cancelAllData = {
+        'pair': this.hideOhterPairs ? this.currentPair.pair : 'ALL'
+      };
+      this.httpService.post(cancelAllData, 'exchange/order_cancel_all/').subscribe((res?: any) => {
+        if (res.status)
+          this.receiveMessage(this.shareDataService.currentPair);
+        else {
+          this.toastrService.danger(res.message, this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+        }
+      }, (err) => {
+        this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.toastr.myOpenOrders'));
+      });
     });
   }
 
@@ -155,9 +176,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.tradeTab1 = false;
         this.tradeHistoryData = res.data;
         this.myTradeHistory = this.tradeHistoryData;
-        this.noDataTradeHistory = !this.myTradeHistory.length;
-        if (!this.noDataTradeHistory)
+        if (!this.myTradeHistory.length) {
+          this.noDataTradeHistory = true;
+          this.viewTradeHistoryData = false;
+        } else {
           this.viewTradeHistoryData = true;
+          this.noDataTradeHistory = false;
+        }
       }
     }, (err) => {
       this.fetchTradeData = false;

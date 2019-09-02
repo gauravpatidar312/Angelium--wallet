@@ -6,6 +6,7 @@ import {
 
 import {StateService} from '../../../@core/utils';
 import {SessionStorageService} from '../../../services/session-storage.service';
+import {Router} from '@angular/router';
 
 declare let jQuery: any;
 
@@ -39,7 +40,7 @@ declare let jQuery: any;
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
 
-      <nb-layout-footer class="bottom-menu" *ngIf="userInfo?.user_type === 'owner' || userInfo?.user_type === 'company'">
+      <nb-layout-footer class="bottom-menu" *ngIf="(userInfo?.user_type === 'owner' || userInfo?.user_type === 'company') && routerUrl != '/exchange'">
         <ul id="main-navigation"  class="nav navbar-pill headerLine">
           
           <li class="pointer" routerLinkActive="active" 
@@ -108,6 +109,7 @@ export class SampleLayoutComponent implements OnDestroy {
   layout: any = {};
   sidebar: any = {};
   userInfo: any;
+  routerUrl: any;
 
   private alive = true;
 
@@ -116,7 +118,8 @@ export class SampleLayoutComponent implements OnDestroy {
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
               private sessionStorage: SessionStorageService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              private router: Router) {
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((layout: string) => this.layout = layout);
@@ -140,6 +143,7 @@ export class SampleLayoutComponent implements OnDestroy {
         }
       });
     this.userInfo = this.sessionStorage.getFromSession('userInfo');
+    this.routerUrl = router.url;
   }
 
   ngAfterViewInit(){

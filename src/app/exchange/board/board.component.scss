@@ -110,8 +110,16 @@ nb-card-body {
 }
 
 @media screen and (max-width: 425px) {
- /deep/ .trade-chart-anx {
+  /deep/ .trade-chart-anx {
     height: 390px;
+  }
+
+  .board {
+    height: 326px;
+  }
+
+  .hide-section {
+    display: none;
   }
 
   /deep/ .exchange .twc > div {

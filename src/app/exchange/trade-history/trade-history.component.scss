@@ -40,7 +40,7 @@ nb-card-body {
 
 .trade-histary-table td {
   color: #ffffff;
-  padding: 0px 8px;
+  padding: 0 8px;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
@@ -75,6 +75,9 @@ nb-card-body {
 }
 
 @media screen and (max-width: 425px) {
+  .tradeHistory {
+    height: calc(100vh - 205px);
+  }
   nb-card-header {
     padding: 17.5px 5px;
   }

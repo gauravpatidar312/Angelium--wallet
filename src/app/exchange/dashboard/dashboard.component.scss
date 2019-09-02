@@ -147,7 +147,7 @@ table tbody tr:nth-of-type(even) {
 }
 
 #nav-main-tabs li {
-  width: 33.33% !important;
+  width: 25% !important;
 }
 
 .tradeLine li {
@@ -270,12 +270,18 @@ table tbody tr:nth-of-type(even) {
   display: none;
 }
 
+.tabs-position {
+  position: absolute;
+  bottom: 0;
+  z-index: 1111;
+  width: 96%;
+}
+
 .current-pair-section {
   font-size: 20px;
   color: #ffffff;
-  margin-bottom: 5px;
-  margin-left: 7px;
-  padding: 2px;
+  margin: 5px 5px 10px 5px;
+  padding: 10px 5px;
   letter-spacing: 1px;
   font-family: nb-theme(font-bebas);
 }
@@ -284,8 +290,11 @@ table tbody tr:nth-of-type(even) {
   font-size: 16px;
   color: #26df8b;
   float: right;
-  margin-top: 6px;
-  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.order-card {
+  overflow: auto !important;
 }
 
 /deep/ .swal2-title {
@@ -307,7 +316,7 @@ table tbody tr:nth-of-type(even) {
   }
 
   .trade-open-history {
-    height: 603px;
+    height: calc(100vh - 205px);
   }
 
   #nav-orders li > a {
@@ -316,6 +325,12 @@ table tbody tr:nth-of-type(even) {
 
   #nav-orders li {
     width: 50%;
+  }
+
+  /deep/ nb-layout-footer nav {
+    background-color: rgba(16, 11, 72, 0.72);
+    color: #a1a1e5;
+    margin: 0 -10px;
   }
 
   #nav-orders li a {
@@ -339,7 +354,7 @@ table tbody tr:nth-of-type(even) {
   }
 
   .table-height {
-    height: 520px;
+    height: 100%;
   }
 
   /deep/ .exchange .main-content {
