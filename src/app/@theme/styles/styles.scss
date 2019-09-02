@@ -126,6 +126,7 @@
 .nb-theme-cosmic .table tr td, .nb-theme-cosmic .table .table tr th{ word-break: break-all;}
 
 .scrollable-container {
+  overflow: auto !important;
   -webkit-overflow-scrolling: touch;
    opacity: 0.85;
 }
