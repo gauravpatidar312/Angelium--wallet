@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   viewOpenOrderData: boolean = false;
   viewTradeHistoryData: boolean = false;
   tradeHistoryData: any;
-  hideOhterPairs:boolean = false;
+  hideOtherPairs: boolean = false;
 
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
@@ -82,9 +82,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   onHidePairs() {
     if (this.tradeTab2)
-      this.getMyTradeHistory(this.hideOhterPairs ? this.currentPair.pair : 'ALL');
+      this.getMyTradeHistory(this.hideOtherPairs ? this.currentPair.pair : 'ALL');
     else
-      this.getOpenOrder(this.hideOhterPairs ? this.currentPair.pair : 'ALL');
+      this.getOpenOrder(this.hideOtherPairs ? this.currentPair.pair : 'ALL');
   }
 
   getOpenOrder(pair: any) {
@@ -152,7 +152,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         return;
 
       const cancelAllData = {
-        'pair': this.hideOhterPairs ? this.currentPair.pair : 'ALL'
+        'pair': this.hideOtherPairs ? this.currentPair.pair : 'ALL'
       };
       this.httpService.post(cancelAllData, 'exchange/order_cancel_all/').subscribe((res?: any) => {
         if (res.status)
@@ -220,9 +220,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.shareDataService.showSpinnerForExchange = false;
       this.currentPair = $event;
       if (this.tradeTab2)
-        this.getMyTradeHistory(this.hideOhterPairs ? $event.pair : 'ALL');
+        this.getMyTradeHistory(this.hideOtherPairs ? $event.pair : 'ALL');
       else
-        this.getOpenOrder(this.hideOhterPairs ? $event.pair : 'ALL');
+        this.getOpenOrder(this.hideOtherPairs ? $event.pair : 'ALL');
       if ($event.from === 'anx' || $event.to === 'anx')
         this.getTradeChartData($event.pair);
       this.tradeComponent.parentData($event);

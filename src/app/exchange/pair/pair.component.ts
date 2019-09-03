@@ -23,7 +23,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   breakpoints: any;
   myWallets: any = [];
   pairs = [];
-  currebtPairData: any;
+  currentPairData: any;
 
   constructor(private httpService: HttpService,
               private shareDataService: ShareDataService) {
@@ -49,7 +49,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   clickPair(data) {
     this.shareDataService.lastFetchDateTime = moment().subtract('days', 7).valueOf();
     this.shareDataService.currentPair = data;
-    this.currebtPairData = data;
+    this.currentPairData = data;
     this.messageEvent.emit(data);
   }
 
@@ -85,10 +85,10 @@ export class PairComponent implements OnInit, AfterViewInit {
           });
         } else
           this.pairs = _.merge(this.pairs, res.data.traded_pairs);
-        if (!this.currebtPairData)
+        if (!this.currentPairData)
           this.clickPair(this.pairs[0]);
         else
-          this.clickPair(this.currebtPairData);
+          this.clickPair(this.currentPairData);
       }
     });
   }
