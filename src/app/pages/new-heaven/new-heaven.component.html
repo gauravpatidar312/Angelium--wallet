@@ -128,7 +128,7 @@
               </div>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
                     title="Click to use whole amount">
-              {{(maxAmount | number: '1.0-6') + ' ' + (wallet?.title) + ' / max' }}
+              {{(maxAmount | number: '1.0-6') + ' ' + (wallet?.title) + " / " + ('pages.exchange.max' | translate) }}"
               </span>
             </div>
           </div>
@@ -208,20 +208,10 @@
   <div class="col-md-12">
     <nb-card>
       <nb-card-header class="row heavenhistory">
-        <div class="col-6">
+        <div class="col-12">
           <div class="navbar-header heavenHistory-tree">
             {{"pages.heaven.heavenHistory" | translate}}
           </div>
-        </div>
-        <div class="col-6">
-          <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
-            <li class="pointer li-margin">
-              <a data-toggle="pill" (click)="getHeavenHistory('today')">{{'common.today'|translate}}</a>
-            </li>
-            <li class="active pointer">
-              <a data-toggle="pill" (click)="getHeavenHistory('total')">{{'common.total'|translate}}</a>
-            </li>
-          </ul>
         </div>
       </nb-card-header>
       <nb-card-body id="heaven-history">

@@ -1,5 +1,3 @@
-
-
 import {Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
@@ -44,7 +42,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   user: any;
   heavenDrop: any;
   totalHeaven: any;
-  heavenHistoryType: string = 'total';
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
@@ -56,7 +53,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   breakpoints: any;
   heaven_amount: any;
   wallet: any;
-  maxAmount: number;
+  maxAmount: number = 0;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   days: any;
@@ -116,7 +113,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getHeavenGraph();
     this.getANXHistory();
     this.getHeavenReleaseSettings();
-    this.getHeavenHistory('total');
+    this.getHeavenHistory();
     this.getHeavenDropHistory();
   }
 
@@ -150,35 +147,27 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     mode: 'inline',
     noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
     columns: {
-      hid: {
+      heaven_id: {
         title: this.translate.instant('pages.heaven.heavenId'),
         type: 'html',
         filter: false,
-        valuePrepareFunction: (cell, row) => {
+        valuePrepareFunction: (cell) => {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
       heaven_amount: {
-        title: this.translate.instant('common.amount'),
+        title: this.translate.instant('pages.heaven.heavenAmount'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
-        },
-      },
-      currency_type: {
-        title: this.translate.instant('common.assets'),
-        type: 'html',
-        filter: false,
-        valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">${row.title}</span></div>`;
         },
       },
       plan: {
         title: this.translate.instant('pages.heaven.plan'),
         type: 'html',
         filter: false,
-        valuePrepareFunction: (cell, row) => {
+        valuePrepareFunction: (cell) => {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
@@ -186,7 +175,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         title: this.translate.instant('pages.heaven.received'),
         type: 'html',
         filter: false,
-        valuePrepareFunction: (cell, row) => {
+        valuePrepareFunction: (cell) => {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">ANX</span></div>`;
         },
       },
@@ -194,7 +183,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         title: this.translate.instant('pages.heaven.entryDate'),
         type: 'html',
         filter: false,
-        valuePrepareFunction: (cell, row) => {
+        valuePrepareFunction: (cell) => {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
@@ -202,7 +191,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         title: this.translate.instant('pages.heaven.releaseDate'),
         type: 'html',
         filter: false,
-        valuePrepareFunction: (cell, row) => {
+        valuePrepareFunction: (cell) => {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
@@ -217,7 +206,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
             this.source.update(row, row); // to refresh the row to re-render UI.
           });
           instance.onReleaseSaved.subscribe((row) => {
-            this.getHeavenHistory(this.heavenHistoryType); // to API call on release successfully.
+            this.getHeavenHistory(); // to API call on release successfully.
           });
           instance.onReleaseRefresh.subscribe((row) => {
             this.source.refresh(); // to refresh row on release button click to show spinner.
@@ -247,24 +236,8 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
-      user_heaven_id: {
+      hid: {
         title: this.translate.instant('pages.heaven.heavenId'),
-        type: 'html',
-        filter: false,
-        valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
-        },
-      },
-      heaven_amount: {
-        title: this.translate.instant('common.amount'),
-        type: 'html',
-        filter: false,
-        valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
-        },
-      },
-      currency_type: {
-        title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
@@ -279,12 +252,12 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
-      anx_bonus: {
+      amount: {
         title: this.translate.instant('pages.heaven.heavenDrop'),
         type: 'html',
         filter: false,
         valuePrepareFunction: (cell, row) => {
-          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">ANX</span></div>`;
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">${row.title}</span></div>`;
         },
       },
     },
@@ -415,7 +388,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         this.selectedHeavenPlan = null;
         this.changePeriod('SELECT', 'createHeaven');
         this.setAmount('SELECT');
-        this.getHeavenHistory('total');
+        this.getHeavenHistory();
       } else {
         this.formSubmitting = false;
         this.toastrService.danger(res.message, this.translate.instant('common.heaven'));
@@ -462,7 +435,10 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (this.shareDataService.transferTitle) {
         this.walletType = this.shareDataService.transferTitle;
         this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = this.wallet.wallet_amount;
+        if (this.wallet) {
+          this.maxAmount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
+          this.heaven_amount = this.wallet.wallet_amount;
+        }
         this.setAmount(this.walletType);
         this.shareDataService.transferTitle = null;
       }
@@ -487,17 +463,23 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     // });
   }
 
-  getHeavenHistory(value) {
-    this.heavenHistoryType = value;
+  getHeavenHistory() {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
-    this.httpService.get(`heaven-history/?filter_type=${this.heavenHistoryType}`).subscribe((res?: any) => {
+    this.httpService.get('heaven/history/').subscribe((res?: any) => {
+      _.map(res.results, (obj) => {
+        obj.title = obj.currency_type;
+        if (obj.currency_type === 'USDT')
+          obj.title = 'USDT (OMNI)';
+        else if (obj.currency_type === 'ERCUSDT')
+          obj.title = 'USDT (ERC20)';
+      });
       const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.total_received = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.total_received, 0), '1.0-0');
-        obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
+        obj.total_received = ShareDataService.toFixedDown(obj.total_received, 0);
+        obj.heaven_amount = ShareDataService.toFixedDown(obj.heaven_amount, 6);
         return obj;
       });
       this.source.load(heaven_history_data);
@@ -511,12 +493,19 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   getHeavenDropHistory() {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history-Drop').height());
     this.fetchHeavenDropHistory = true;
-    this.httpService.get(`anx-heaven-history/`).subscribe((res?: any) => {
-      const data = _.orderBy(res, ['created', 'user_heaven_id'], ['desc']);
+    this.httpService.get('heaven/bonus-history/').subscribe((res?: any) => {
+      _.map(res, (obj) => {
+        obj.plan = this.translate.instant('common.heaven') + ' ' + obj.plan;
+        obj.title = obj.currency_type;
+        if (obj.currency_type === 'USDT')
+          obj.title = 'USDT (OMNI)';
+        else if (obj.currency_type === 'ERCUSDT')
+          obj.title = 'USDT (ERC20)';
+      });
+      const data = _.orderBy(res, ['created', 'hid'], ['desc']);
       const heaven_drop_history_data = _.map(data, (obj?: any) => {
         obj.created = moment(obj.created, 'DD-MM-YYYY').format('YYYY.MM.DD');
-        obj.anx_bonus = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.anx_bonus, 0), '1.0-0');
-        obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
+        obj.amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.amount, 6), '1.0-6');
         return obj;
       });
       this.source_heavenDrop.load(_.sortBy(heaven_drop_history_data, ['created']).reverse());
