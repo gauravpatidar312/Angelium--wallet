@@ -5,7 +5,7 @@
     </ng-template>
     <span>{{"common.trade" | translate}}</span><span class="pointer ml-2 trade-info-icon" [ngbTooltip]="tipContent" data-placement="top-left">
     <i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
-    <span class="availableBalance">{{availableBalance | number : '1.0-8'}} {{availableWalletType}}</span>
+    <span class="availableBalance">{{availableExchangeBalance | number : '1.0-8'}} {{availableExchangeWalletType}}</span>
   </nb-card-header>
   <nb-card-body>
     <div class="available-items">
@@ -55,17 +55,18 @@
               <span *ngIf="!fetchingBuyTotalAmount">
                 ${{ buyTotalWalletDollar | number : '1.0-2' }}
               </span>
-                <span class="transfer-amount"><i class="fa fa-spinner fa-spin"
-                                                 *ngIf="fetchingBuyTotalAmount"></i></span>
+                <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingBuyTotalAmount"></i></span>
               </label>
-              <input type="text" class="form-control" name="btc"
-                     [value]="(tradeBuy.price * tradeBuy.amount | number : '1.0-8')" disabled>
+              <input type="text" class="form-control" name="btc" [value]="(tradeBuy.price * tradeBuy.amount | number : '1.0-8')" disabled>
               <span class="form-control-feedback mr-2">{{tradeBuy.to | uppercase}}</span>
             </div>
           </div>
           <span>
           <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate | uppercase}}</a>
-          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+           <span class="float-right">
+             <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+             <span class="pointer mr-2 text-right trade-info-icon" [ngbTooltip]="angeliumBalanceContent" data-placement="top-right"><i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
+           </span>
         </span>
           <div class="text-center">
             <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large"
@@ -121,12 +122,11 @@
             </div>
           </div>
           <span>
-          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">
-              {{"pages.exchange.withdraw" | translate |uppercase }}
-          </a>
-          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">
-            {{"pages.exchange.deposit" | translate | uppercase}}
-          </a>
+            <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate |uppercase }}</a>
+            <span class="float-right">
+             <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+             <span class="pointer mr-2 text-right trade-info-icon" [ngbTooltip]="angeliumBalanceContent" data-placement="top-right"><i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
+           </span>
         </span>
           <div class="text-center">
             <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large"
@@ -148,7 +148,7 @@
     </ng-template>
     <span>{{"common.trade" | translate}}</span><span class="pointer ml-2 trade-info-icon" [ngbTooltip]="tipContent" data-placement="top-left">
     <i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
-    <span class="availableBalance">{{availableBalance | number : '1.0-8'}} {{availableWalletType}}</span>
+    <span class="availableBalance">{{availableExchangeBalance | number : '1.0-8'}} {{availableExchangeWalletType}}</span>
   </nb-card-header>
   <nb-card-body>
     <div class="available-items">
@@ -201,7 +201,7 @@
             </div>
             <div class="col-6">
               <div class="text-center">
-                <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large"
+                <button type="submit" class="font-bebasNeueBold btn btn-run btn-font-size btn-demo btn-success pointer" size="large"
                         [disabled]="formSubmittingBuy || tradeBuy.price <= 0 || tradeBuy.amount <= 0">
                   <span *ngIf="!formSubmittingBuy">{{"pages.exchange.placeBuyOrder" | translate}}</span>
                   <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingBuy"></i>
@@ -211,9 +211,12 @@
           </div>
           <div>
             <span>
-                <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate | uppercase}}</a>
-                <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+              <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate | uppercase}}</a>
+              <span class="float-right">
+                  <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+                  <span class="pointer mr-2 text-right trade-info-icon" [ngbTooltip]="angeliumBalanceContent" data-placement="top-right"><i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
               </span>
+            </span>
           </div>
         </form>
       </div>
@@ -258,7 +261,7 @@
             </div>
             <div class="col-6">
               <div class="text-center">
-                <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large"
+                <button type="submit" class="font-bebasNeueBold btn btn-run btn-font-size btn-demo btn-danger pointer" size="large"
                         [disabled]="formSubmittingSell || tradeSell.price <= 0 || tradeSell.amount <= 0">
                   <span *ngIf="!formSubmittingSell">{{"pages.exchange.placeSellOrder" | translate}}</span>
                   <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingSell"></i>
@@ -267,13 +270,12 @@
             </div>
           </div>
           <span>
-          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">
-              {{"pages.exchange.withdraw" | translate |uppercase }}
-          </a>
-          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">
-            {{"pages.exchange.deposit" | translate | uppercase}}
-          </a>
-        </span>
+            <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate | uppercase}}</a>
+            <span class="float-right">
+                <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+                <span class="pointer mr-2 text-right trade-info-icon" [ngbTooltip]="angeliumBalanceContent" data-placement="top-right"><i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
+            </span>
+          </span>
         </form>
       </div>
     </div>
@@ -383,4 +385,8 @@
       </button>
     </nb-card-footer>
   </nb-card>
+</ng-template>
+
+<ng-template #angeliumBalanceContent>
+  <span>{{"pages.exchange.toastr.angeliumBalance" | translate}} {{availableDepositBalance | number : '1.0-8'}} {{availableDepositWalletType}}</span>
 </ng-template>

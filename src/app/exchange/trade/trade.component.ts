@@ -5,6 +5,7 @@ import {NbMediaBreakpoint, NbDialogService} from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
+import Swal from 'sweetalert2';
 
 import * as _ from 'lodash';
 declare let jQuery: any;
@@ -43,8 +44,10 @@ export class TradeComponent implements OnInit, AfterViewInit {
   buyWalletDollar: number = 0;
   fetchingBuyTotalAmount: boolean = false;
   buyTotalWalletDollar: number = 0;
-  availableWalletType: any;
-  availableBalance: any;
+  availableExchangeWalletType: any;
+  availableExchangeBalance: any;
+  availableDepositWalletType: any;
+  availableDepositBalance: any;
   tradeTab: string = 'buy';
   tradeBuy: any = {};
   tradeSell: any = {};
@@ -97,6 +100,8 @@ export class TradeComponent implements OnInit, AfterViewInit {
           }) || [];
         this.exchangeWallets = _.sortBy(exchangeData, ['coin']);
         this.getAvailableBalance(this.tradeTab);
+        if (this.shareDataService.showSpinnerForExchange)
+          this.getPairBalance();
       }
     }, err => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
@@ -114,9 +119,10 @@ export class TradeComponent implements OnInit, AfterViewInit {
               decimalPlaces = 2;
             }
             wallet.max_quantity = ShareDataService.toFixedDown(wallet.quantity, decimalPlaces);
-            return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.name) > -1;
+            return ['ANX', 'BTC', 'ERCUSDT', 'ETH'].indexOf(wallet.name) > -1;
           }) || [];
         this.myWallets = _.sortBy(myWalletsData, ['name']);
+        this.getAvailableBalance(this.tradeTab);
       }
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.exchange.wallet'));
@@ -142,16 +148,40 @@ export class TradeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getPairBalance() {
+    const pairForm: any = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
+    const pairTo: any = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
+    if (this.shareDataService.showSpinnerForExchange && pairForm && pairTo && (pairForm.balance === 0 || pairTo.balance === 0)) {
+      Swal.fire({
+        title: this.translate.instant('common.exchange'),
+        text: this.translate.instant('pages.exchange.toastr.pairBalanceMessage', {'pair': this.tradeSell.from.toUpperCase() + '/' + this.tradeBuy.to.toUpperCase(), 'form': this.tradeSell.from.toUpperCase(), 'to': this.tradeBuy.to.toUpperCase()}),
+        type: 'warning',
+        showCancelButton: false,
+        confirmButtonText: this.translate.instant('swal.ok'),
+      });
+    }
+  }
+
   getAvailableBalance(value) {
     this.tradeTab = value;
     if (this.tradeTab === 'buy') {
-      const tradeBuyObj: any = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
-      this.availableBalance = ShareDataService.toFixedDown(Number(tradeBuyObj.balance), 8);
-      this.availableWalletType = tradeBuyObj.coin;
+      // widthDraw
+      const tradeExchangeBuyObj: any = _.findLast(this.exchangeWallets, ['coin', this.tradeBuy.to.toUpperCase()]) || {};
+      this.availableExchangeBalance = ShareDataService.toFixedDown(Number(tradeExchangeBuyObj.balance), 8);
+      this.availableExchangeWalletType = tradeExchangeBuyObj.coin;
+      // deposit
+      const tradeDepositBuyObj: any = _.findLast(this.myWallets, ['name', (this.tradeBuy.to.toUpperCase() === 'USDT' ? 'ERCUSDT' : this.tradeBuy.to.toUpperCase())]) || {};
+      this.availableDepositBalance = ShareDataService.toFixedDown(Number(tradeDepositBuyObj.quantity), 8);
+      this.availableDepositWalletType = tradeDepositBuyObj.name === 'ERCUSDT' ? 'USDT' : tradeDepositBuyObj.name;
     } else if (this.tradeTab === 'sell') {
-      const tradeSellObj: any  = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
-      this.availableBalance = ShareDataService.toFixedDown(Number(tradeSellObj.balance), 8);
-      this.availableWalletType = tradeSellObj.coin;
+      // widthDraw
+      const tradeExchangeSellObj: any = _.findLast(this.exchangeWallets, ['coin', this.tradeSell.from.toUpperCase()]) || {};
+      this.availableExchangeBalance = ShareDataService.toFixedDown(Number(tradeExchangeSellObj.balance), 8);
+      this.availableExchangeWalletType = tradeExchangeSellObj.coin;
+      // deposit
+      const tradeDepositSellObj: any = _.findLast(this.myWallets, ['name', (this.tradeBuy.from.toUpperCase() === 'USDT' ? 'ERCUSDT' : this.tradeBuy.from.toUpperCase())]) || {};
+      this.availableDepositBalance = ShareDataService.toFixedDown(Number(tradeDepositSellObj.quantity), 8);
+      this.availableDepositWalletType = tradeDepositSellObj.name === 'ERCUSDT' ? 'USDT' : tradeDepositSellObj.name;
     }
   }
 

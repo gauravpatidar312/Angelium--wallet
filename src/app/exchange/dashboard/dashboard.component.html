@@ -55,16 +55,16 @@
           <div class="col-md-8 col-sm-12">
             <ul id="nav-orders" class="nav mytradeLine">
               <li class="pointer active">
-                <a data-toggle="pill" (click)="getOpenOrder(hideOhterPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myOpenOrders" | translate}}</a>
+                <a data-toggle="pill" (click)="getOpenOrder(hideOtherPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myOpenOrders" | translate}}</a>
               </li>
               <li class="pointer">
-                <a data-toggle="pill" (click)="getMyTradeHistory(hideOhterPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myTradeHistory" | translate}}</a>
+                <a data-toggle="pill" (click)="getMyTradeHistory(hideOtherPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myTradeHistory" | translate}}</a>
               </li>
             </ul>
           </div>
           <div class="col-md-4 col-sm-12">
             <div class="float-right">
-              <nb-checkbox [(ngModel)]="hideOhterPairs" name="hideOtherParis" class="hidePair" (change)="onHidePairs()">
+              <nb-checkbox [(ngModel)]="hideOtherPairs" name="hideOtherParis" class="hidePair" (change)="onHidePairs()">
                 Hide Other Pairs
               </nb-checkbox>
             </div>
