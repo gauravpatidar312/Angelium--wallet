@@ -397,7 +397,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   createHeavenApi() {
     const obj: any = {
-      'heaven_amount': this.heaven_amount,
+      'invest_amount': this.heaven_amount,
       'plan': this.selectedHeavenPlan,
       'user_wallet': this.wallet.id,
     };
@@ -406,7 +406,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.formSubmitting = true;
-    this.httpService.post(obj, 'create-heaven/').subscribe((res?: any) => {
+    this.httpService.post(obj, 'heaven/create/').subscribe((res?: any) => {
       if (res.status) {
         this.formSubmitting = false;
         this.toastrService.success(this.translate.instant('pages.heaven.toastr.transactionSuccessfullyCompleted'), this.translate.instant('common.heaven'));
@@ -443,13 +443,13 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = _.sortBy(_.map(res, (item) => {
+      this.myWallets = _.sortBy(_.filter(res, (item) => {
         item.title = item.wallet_type;
         if (item.wallet_type === 'USDT')
           item.title = 'USDT (OMNI)';
         else if (item.wallet_type === 'ERCUSDT')
           item.title = 'USDT (ERC20)';
-        return item;
+        return item.wallet_type !== 'USDT';
       }), 'title');
       /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
        this.myWallets = _.filter(this.myWallets, (wallet?: any) => {

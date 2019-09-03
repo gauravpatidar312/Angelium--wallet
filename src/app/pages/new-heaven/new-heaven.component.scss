@@ -2,6 +2,27 @@
 @import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
+  .offer-text-color {
+    color: #d1d1ff;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .another-heaven {
+    color: #26df8b;
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .another-arrow {
+    font-size: 61px !important;
+  }
+
+  .plan-container {
+    padding: 0 50px;
+    text-align: center;
+  }
+
   .title {
     font-family: nb-theme(font-bebas);
     font-size: 2rem;
@@ -9,7 +30,7 @@
     color: nb-theme(card-fg-heading);
   }
 
-  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button, input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
@@ -85,7 +106,6 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    // margin-bottom: 2.125rem;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -268,6 +288,7 @@
   }
 
   .days-font {
+    display: inline;
     font-size: 7.6rem;
     height: 110px;
   }
@@ -281,27 +302,18 @@
     margin-top: 13px;
   }
 
-  .month-day-value {
-    font-size: 2.5rem;
-    &.ls-half {
-      letter-spacing: 0.5px;
-    }
-    &.ls-one {
-      letter-spacing: 1px;
-    }
-  }
-
   .days-text {
-    font-size: 1.5rem;
-    margin-right: 7px;
+    display: inline;
+    font-size: 35px;
+    margin-left: 7px;
   }
 
   nb-card-header {
-    padding: 0.66rem 1.25rem 0.25rem 1.25rem !important;
+    padding: 0.66rem 1.25rem 0.25rem !important;
   }
 
   .m-t {
-    margin-top: 8%;
+    margin-top: 25px;
   }
 
   .table_bg {
@@ -373,7 +385,7 @@
   }
 
   .input-padding {
-    padding: 0.70rem 1.125rem !important;
+    padding: 0.7rem 1.125rem !important;
   }
 
   nb-card .icon-container i {
@@ -444,10 +456,6 @@
       text-align: right;
       margin-top: 0;
     }
-
-    .month-day-value {
-      font-size: 1.59rem;
-    }
   }
 
   @media only screen and (width: 768px) {
@@ -472,10 +480,6 @@
       text-align: right;
       margin-top: -2px;
     }
-
-    .month-day-value {
-      font-size: 1rem;
-    }
   }
 
   @media only screen and (width: 375px) {
@@ -485,6 +489,13 @@
   }
 
   @media only screen and (width: 320px) {
+    .m-t[_ngcontent-c10] {
+      margin-top: 25px !important;
+    }
+    .another-heaven {
+      font-size: 19px;
+    }
+
     .days-font {
       font-size: 6.6rem;
       height: 100px;
@@ -498,18 +509,6 @@
     }
     .status {
       font-size: 1.9rem !important;
-    }
-
-    .month-day {
-      font-size: 1.5rem;
-      margin-right: 15px;
-      float: left;
-      width: 56px;
-      text-align: right;
-      margin-top: 0;
-    }
-    .month-day-value {
-      font-size: 1.5rem;
     }
   }
 
@@ -534,9 +533,6 @@
   @media (min-width: 840px) and (max-width: 958px) {
     .month-day {
       width: 31px;
-    }
-    .month-day-value {
-      font-size: 32px;
     }
   }
 
@@ -611,4 +607,3 @@
 /deep/ .swal2-styled.swal2-cancel {
   background-color: #00d977 !important;
 }
-
