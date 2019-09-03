@@ -299,9 +299,52 @@ button.withdraw-btn {
   font-size: 15px;
 }
 
+.trade-mobile-block {
+  display: none;
+}
+
+.trade-desktop-block {
+  display: flex;
+}
+
 @media screen and (max-width: 425px) {
   nb-card-header {
-    padding: 17.5px 5px;
+    padding: 10px 5px;
+  }
+
+  nb-card {
+    font-size: 12px;
+    margin-bottom: 10px !important;
+  }
+
+  /deep/ #tab-1 .form-group, /deep/ #tab-2 .form-group {
+    margin-bottom: 6px;
+  }
+
+  /deep/ #tab-1 .btn-success, /deep/ #tab-2 .btn-danger {
+    margin-bottom: 12px !important;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .withdraw-text, .deposit-text {
+    font-size: 12px;
+  }
+
+  .form-control-feedback {
+    right: 10px;
+  }
+
+  .tradeLine {
+    margin: 0 0 5px 0;
+  }
+
+  .trade-mobile-block {
+    display: flex;
+  }
+
+  .trade-desktop-block {
+    display: none;
   }
 
   nb-card-body {

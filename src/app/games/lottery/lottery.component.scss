@@ -148,9 +148,11 @@
     color: #ffffff;
     text-align: right;
   }
+
   .div-name {
     font-size: 22px;
     color: #26df8b !important;
+    min-width: 170px;
   }
 
   .div-user-name {
@@ -159,7 +161,7 @@
   }
 
   .info-user-width {
-    width: 100px;
+    min-width: 170px;
   }
 
   /deep/ .user-picture.background {
@@ -330,8 +332,16 @@
   }
 
   .smartContract {
-    max-height: 400px;
+    max-height: 670px;
     color: #d1d1ff;
+    margin: 0 !important;
+  }
+
+  .architecture {
+    display: block;
+    width: 100%;
+    max-height: 645px;
+    margin-top: 25px;
   }
 
   /deep/ nb-list-item {

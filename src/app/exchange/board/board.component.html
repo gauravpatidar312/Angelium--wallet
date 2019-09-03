@@ -1,5 +1,5 @@
 <nb-card class="board" [hidden]="shareDataService.exchangeSectionBlock !== 'trade' && shareDataService.mobileExchangeVersion">
-  <nb-card-header>{{"pages.exchange.board" | translate}}</nb-card-header>
+  <nb-card-header class="hide-section">{{"pages.exchange.board" | translate}}</nb-card-header>
   <nb-card-body>
 
     <span class="fetching-spinner" *ngIf="boardSpinner && shareDataService.showSpinnerForExchange">

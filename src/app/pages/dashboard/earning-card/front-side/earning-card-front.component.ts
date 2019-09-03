@@ -25,7 +25,8 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
     'HEAVEN': ['HEAVEN'],
     'BTC': ['SEND', 'RECEIVE', 'HEAVEN'],
     'ETH': ['SEND', 'RECEIVE', 'HEAVEN'],
-    'USDT': ['SEND', 'RECEIVE', 'HEAVEN'],
+    'USDT': ['SEND', 'HEAVEN'],
+    'ERCUSDT': ['RECEIVE', 'HEAVEN'],
   };
   tokenName: string;
   earningLiveUpdateCardData: LiveUpdateChart;

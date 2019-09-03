@@ -1,22 +1,28 @@
 <div class="show-block">
-  <div class="col-sm-12 current-pair-section pointer" (click)="accordion.toggle()">
-    {{currentPair?.pair | uppercase}} <i class="fa fa-caret-down carat-icon"></i>
-  </div>
-  <nb-card>
-    <div class="col-sm-12">
+  <nb-card class="current-pair-section">
+    <div class="pointer" (click)="accordion.toggle()">
+      {{currentPair?.pair | uppercase}} <i class="fa fa-caret-down carat-icon"></i>
+    </div>
+  </nb-card>
+
+  <nb-layout-footer class="tabs-position">
+    <div class="col-sm-12 p-0">
       <ul id="nav-main-tabs" class="nav mytradeLine">
         <li class="pointer li-width active">
-          <a  class="text-center" data-toggle="pill" (click)="setSection('history')">History</a>
+          <a class="text-center text-nowrap" data-toggle="pill" (click)="setSection('trade')">{{"pages.exchange.trade" | translate}}</a>
         </li>
         <li class="pointer li-width">
-          <a class="text-center" data-toggle="pill" (click)="setSection('trade')">Trade</a>
+          <a  class="text-center text-nowrap" data-toggle="pill" (click)="setSection('tradeBook')">{{"pages.exchange.tradeBook" | translate}}</a>
         </li>
         <li class="pointer li-width">
-          <a class="text-center" data-toggle="pill" (click)="setSection('orders')">Orders</a>
+          <a class="text-center text-nowrap" data-toggle="pill" (click)="setSection('myOrders')">{{"pages.exchange.myOrders" | translate}}</a>
+        </li>
+        <li class="pointer li-width">
+          <a class="text-center text-nowrap" data-toggle="pill" (click)="setSection('chart')">{{"pages.exchange.chart" | translate}}</a>
         </li>
       </ul>
     </div>
-  </nb-card>
+  </nb-layout-footer>
 </div>
 
   <div class="row wrapper">
@@ -32,7 +38,7 @@
     <ngx-trade (messageEvent)="receiveMessage($event)" class="main two"></ngx-trade>
   </div>
   <div class="col-lg-7 nopadd mobpaddfix">
-    <nb-card class="main three" [hidden]="shareDataService.exchangeSectionBlock !== 'history' && shareDataService.mobileExchangeVersion">
+    <nb-card class="main three" [hidden]="shareDataService.exchangeSectionBlock !== 'chart' && shareDataService.mobileExchangeVersion">
       <nb-card-body class="trade-chart">
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
@@ -43,22 +49,22 @@
       </nb-card-body>
     </nb-card>
 
-    <nb-card class="main four trade-open-history" [hidden]="shareDataService.exchangeSectionBlock !== 'orders' && shareDataService.mobileExchangeVersion">
+    <nb-card class="main four trade-open-history" [hidden]="shareDataService.exchangeSectionBlock !== 'myOrders' && shareDataService.mobileExchangeVersion">
       <nb-card-header>
         <div class="row">
-          <div class="col-lg-8 col-sm-12">
+          <div class="col-md-8 col-sm-12">
             <ul id="nav-orders" class="nav mytradeLine">
               <li class="pointer active">
-                <a data-toggle="pill" (click)="getOpenOrder(currentPair?.pair)">{{"pages.exchange.myOpenOrders" | translate}}</a>
+                <a data-toggle="pill" (click)="getOpenOrder(hideOhterPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myOpenOrders" | translate}}</a>
               </li>
               <li class="pointer">
-                <a data-toggle="pill" (click)="getMyTradeHistory(currentPair?.pair)">{{"pages.exchange.myTradeHistory" | translate}}</a>
+                <a data-toggle="pill" (click)="getMyTradeHistory(hideOhterPairs ? currentPair?.pair : 'ALL')">{{"pages.exchange.myTradeHistory" | translate}}</a>
               </li>
             </ul>
           </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="float-right" *ngIf="false">
-              <nb-checkbox name="hideOtherParis" class="hidePair">
+          <div class="col-md-4 col-sm-12">
+            <div class="float-right">
+              <nb-checkbox [(ngModel)]="hideOhterPairs" name="hideOtherParis" class="hidePair" (change)="onHidePairs()">
                 Hide Other Pairs
               </nb-checkbox>
             </div>
@@ -66,7 +72,7 @@
         </div>
       </nb-card-header>
 
-      <nb-card-body>
+      <nb-card-body class="order-card">
         <span class="fetching-spinner" *ngIf="fetchTradeData">
           <i class="fa fa-spinner spinner-color fa-spin"></i>
         </span>
@@ -82,7 +88,7 @@
                 <th class="text-right">{{"common.amount" | translate}}</th>
                 <th class="text-right">{{"pages.exchange.totalPrice" | translate}}</th>
                 <th class="text-right">{{"pages.exchange.fill" | translate}} %</th>
-                <th class="text-right"><button *ngIf="false" class="btn-cancelAll btn-danger">{{"pages.exchange.cancelAll" | translate}}</button></th>
+                <th class="text-right"><button class="btn-cancelAll btn-danger" (click)="onCancelOrderAll()">{{"pages.exchange.cancelAll" | translate}}</button></th>
               </tr>
             </thead>
             <tbody *ngIf="viewOpenOrderData">

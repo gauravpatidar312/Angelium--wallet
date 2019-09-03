@@ -1,4 +1,4 @@
-<nb-card id="card-trade" class="trade" [hidden]="shareDataService.exchangeSectionBlock !== 'trade' && shareDataService.mobileExchangeVersion">
+<nb-card id="card-trade" class="trade trade-desktop-block ">
   <nb-card-header>
     <ng-template #tipContent>
       <span>{{"pages.exchange.handlingChargeText" | translate}}</span>
@@ -135,6 +135,145 @@
               <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingSell"></i>
             </button>
           </div>
+        </form>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card id="card-trade" class="trade trade-mobile-block" [hidden]="shareDataService.exchangeSectionBlock !== 'trade' && shareDataService.mobileExchangeVersion">
+  <nb-card-header>
+    <ng-template #tipContent>
+      <span>{{"pages.exchange.handlingChargeText" | translate}}</span>
+    </ng-template>
+    <span>{{"common.trade" | translate}}</span><span class="pointer ml-2 trade-info-icon" [ngbTooltip]="tipContent" data-placement="top-left">
+    <i class="fa fa-question-circle tooltip-icon-fontSize"></i></span>
+    <span class="availableBalance">{{availableBalance | number : '1.0-8'}} {{availableWalletType}}</span>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="available-items">
+      <ul id="main-navigation-trade" class="nav navbar-pill tradeLine tabs text-center">
+        <li class="pointer active tab-link" data-tab="tab-m1">
+          <a data-toggle="pill" (click)="getAvailableBalance('buy')">{{"pages.exchange.buy" | translate | uppercase}}
+            {{tradeBuy.from | uppercase}}</a>
+        </li>
+        <li class="pointer tab-link" data-tab="tab-m2">
+          <a data-toggle="pill" (click)="getAvailableBalance('sell')">{{"pages.exchange.sell" | translate | uppercase}}
+            {{tradeBuy.from | uppercase}}</a>
+        </li>
+      </ul>
+
+      <div id="tab-m1" class="tab-content active">
+        <form (ngSubmit)="submitTradeBuy()">
+          <div class="row">
+            <div class="col-6 form-group has-feedback">
+              <label class="text-success">{{"pages.exchange.price" | translate}}</label>
+              <label class="label-right font-avenir">
+              <span *ngIf="!fetchingBuyAmount">
+                ${{ buyWalletDollar | number : '1.0-2' }}
+              </span>
+                <span class="transfer-amount" *ngIf="fetchingBuyAmount"><i class="fa fa-spinner fa-spin"></i></span>
+              </label>
+              <input type="number" class="form-control" step="0.00000001" name="price" min="0"
+                     oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');"
+                     [(ngModel)]="tradeBuy.price" (keyup)="setBuyAmount(tradeBuy.to)">
+              <span class="form-control-feedback mr-2">{{tradeBuy.to | uppercase}}</span>
+            </div>
+            <div class="col-6 form-group has-feedback">
+              <label class="text-success">{{"common.amount" | translate}}</label>
+              <label class="label-max font-avenir pointer" (click)="getMaxAmount('tradeBuy')">{{"pages.exchange.max" | translate | uppercase}}</label>
+              <input type="number" class="form-control" step="0.00000001" min="0" oninput="validity.valid||(value='');"
+                     onpaste="validity.valid||(value='');" name="amount" [(ngModel)]="tradeBuy.amount"
+                     (keyup)="setBuyTotalAmount(tradeBuy.to)">
+              <span class="form-control-feedback mr-2">{{tradeBuy.from | uppercase}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 form-group has-feedback">
+              <label class="text-success">{{"common.total" | translate}}</label><br>
+              <label class="font-avenir">
+                <span>{{(tradeBuy.price * tradeBuy.amount | number : '1.0-8')}}</span>
+                <span class="mr-2">{{tradeBuy.to | uppercase}}</span>
+                <span *ngIf="!fetchingBuyTotalAmount">
+                [ ${{ buyTotalWalletDollar | number : '1.0-2' }} ]
+              </span>
+              </label>
+            </div>
+            <div class="col-6">
+              <div class="text-center">
+                <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-success pointer" size="large"
+                        [disabled]="formSubmittingBuy || tradeBuy.price <= 0 || tradeBuy.amount <= 0">
+                  <span *ngIf="!formSubmittingBuy">{{"pages.exchange.placeBuyOrder" | translate}}</span>
+                  <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingBuy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span>
+                <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">{{"pages.exchange.withdraw" | translate | uppercase}}</a>
+                <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">{{"pages.exchange.deposit" | translate | uppercase}}</a>
+              </span>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-m2" class="tab-content">
+        <form (ngSubmit)="submitTradeSell()">
+          <div class="row">
+            <div class="col-6 form-group has-feedback">
+              <label class="text-success">{{"pages.exchange.price" | translate}}</label>
+              <label class="label-right font-avenir">
+              <span *ngIf="!fetchingSellAmount">
+                ${{ sellWalletDollar | number : '1.0-2' }}
+              </span>
+                <span class="transfer-amount"><i class="fa fa-spinner fa-spin" *ngIf="fetchingSellAmount"></i></span>
+              </label>
+              <input type="number" class="form-control" name="price" step="0.00000001" min="0"
+                     oninput="validity.valid||(value='');" onpaste="validity.valid||(value='');"
+                     [(ngModel)]="tradeSell.price" (keyup)="setSellAmount(tradeSell.to)">
+              <span class="form-control-feedback mr-2">{{tradeSell.to | uppercase}}</span>
+            </div>
+            <div class="col-6 form-group has-feedback">
+              <label class="text-success">{{"common.amount" | translate}}</label>
+              <label class="label-max font-avenir pointer" (click)="getMaxAmount('tradeSell')">{{"pages.exchange.max" |
+                translate | uppercase}}</label>
+              <input type="number" step="0.00000001" min="0" oninput="validity.valid||(value='');"
+                     onpaste="validity.valid||(value='');" class="form-control" name="amount"
+                     [(ngModel)]="tradeSell.amount" (keyup)="setSellTotalAmount(tradeSell.to)">
+              <span class="form-control-feedback mr-2">{{tradeSell.from | uppercase}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 form-group has-feedback">
+              <label class="text-success">{{"common.total" | translate}}</label><br>
+              <label class="font-avenir">
+                <span>{{(tradeSell.price * tradeSell.amount | number : '1.0-8')}}</span>
+                <span class="mr-2">{{tradeSell.to | uppercase}}</span>
+                <span *ngIf="!fetchingSellTotalAmount">
+                 [ ${{ sellTotalWalletDollar | number : '1.0-2' }} ]
+                </span>
+              </label>
+            </div>
+            <div class="col-6">
+              <div class="text-center">
+                <button type="submit" class="font-bebasNeueBold btn btn-run btn-demo btn-danger pointer" size="large"
+                        [disabled]="formSubmittingSell || tradeSell.price <= 0 || tradeSell.amount <= 0">
+                  <span *ngIf="!formSubmittingSell">{{"pages.exchange.placeSellOrder" | translate}}</span>
+                  <i class="fa fa-spinner fa-spin text-white" *ngIf="formSubmittingSell"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <span>
+          <a class="pointer green-text withdraw-text" (click)="openDialog(WithdrawModel)">
+              {{"pages.exchange.withdraw" | translate |uppercase }}
+          </a>
+          <a class="pointer green-text deposit-text" (click)="openDialog(depositModel)">
+            {{"pages.exchange.deposit" | translate | uppercase}}
+          </a>
+        </span>
         </form>
       </div>
     </div>

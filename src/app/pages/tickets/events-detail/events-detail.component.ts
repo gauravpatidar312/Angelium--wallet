@@ -61,9 +61,12 @@ export class EventsDetailComponent implements OnInit {
           width: '60px',
           display: 'inline-table',
           name: 'send',
-          title: '<i class="fas fa-share-square"></i>'
+          title: '<i class="fas fa-share-square ticket-send"></i>'
         }
       ]
+    },
+    rowClassFunction: (row) => {
+      return row.data.is_send ? 'row-received' : '';
     },
     editable: false,
     columns: {
