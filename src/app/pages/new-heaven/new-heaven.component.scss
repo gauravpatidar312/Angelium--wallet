@@ -170,33 +170,8 @@
     margin-top: 8px;
   }
 
-  .navbar-pill {
-    justify-content: flex-end;
-  }
-
   /deep/ .process-padding {
     padding: 10px 0 10px 21px;
-  }
-
-  #heavenHistory-navigation li.active > a {
-    text-decoration: underline 2px;
-    border-radius: 2px;
-    border-bottom: 5px solid #26df8b;
-    text-decoration-color: #26df8b;
-    font-family: nb-theme(font-avenir);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.25;
-    color: #ffffff;
-  }
-  #heavenHistory-navigation li > a {
-    padding: 10px;
-    text-decoration: none;
-    font-family: nb-theme(font-avenir);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.25;
-    color: #ffffff;
   }
 
   .icon.primary {
@@ -400,9 +375,6 @@
     text-align: center;
   }
 
-  .li-margin {
-    margin-right: 15px;
-  }
   .spinner-color {
     color: #a1a1e5;
     font-size: 25px;
@@ -556,15 +528,6 @@
   @media (min-width: 300px) and (max-width: 375px) {
     .status-margin {
       margin-top: 12px !important;
-    }
-  }
-
-  @media (min-width: 300px) and (max-width: 480px) {
-    #heavenHistory-navigation {
-      padding-left: 0;
-    }
-    #heavenHistory-navigation li > a {
-      padding: 5px;
     }
   }
 

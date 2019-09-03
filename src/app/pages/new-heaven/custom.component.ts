@@ -78,10 +78,10 @@ export class CustomRendererComponent implements ViewCell, OnInit {
   releaseSettingChange(data, planType, valueType) {
     this.value = valueType;
     const apiData = {
-      'hid': data.hid,
+      'hid': data.heaven_id,
       'release_settings': planType,
     };
-    this.httpService.put(apiData, 'heaven-release-settings/').subscribe((res?: any) => {
+    this.httpService.put(apiData, 'heaven/release-settings/').subscribe((res?: any) => {
       if (!res.status)
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.heavenHistory'));
     }, (err) => {
