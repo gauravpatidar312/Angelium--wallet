@@ -54,7 +54,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   breakpoints: any;
   heaven_amount: any;
   wallet: any;
-  maxAmount: number;
+  maxAmount: number = 0;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
   days: any;
@@ -460,7 +460,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (this.shareDataService.transferTitle) {
         this.walletType = this.shareDataService.transferTitle;
         this.wallet = _.find(this.myWallets, ['wallet_type', this.walletType]) || {};
-        this.heaven_amount = this.wallet.wallet_amount;
+        if (this.wallet) {
+          this.maxAmount = ShareDataService.toFixedDown(this.wallet.wallet_amount, 6);
+          this.heaven_amount = this.wallet.wallet_amount;
+        }
         this.setAmount(this.walletType);
         this.shareDataService.transferTitle = null;
       }
