@@ -128,7 +128,7 @@
               </div>
               <span class="available-amount" (click)="setMaxValue()" *ngIf="wallet?.wallet_type"
               title="Click to use whole amount">
-              {{(maxAmount | number: '1.0-6') + ' ' + (wallet?.title) + ' / max' }}
+              {{(maxAmount | number: '1.0-6') + ' ' + (wallet?.title) + ' / ' + ("pages.exchange.max" | translate) }}
               </span>
             </div>
           </div>
