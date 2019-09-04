@@ -271,7 +271,7 @@ table tbody tr:nth-of-type(even) {
 }
 
 .tabs-position {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   z-index: 1111;
   width: 96%;

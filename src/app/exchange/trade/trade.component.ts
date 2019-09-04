@@ -283,6 +283,8 @@ export class TradeComponent implements OnInit, AfterViewInit {
       if (res.status) {
         this.tradeBuy.price = 0;
         this.tradeBuy.amount = 0;
+        this.buyWalletDollar = 0;
+        this.buyTotalWalletDollar = 0;
         this.messageEvent.emit(this.shareDataService.currentPair);
         this.toastrService.success(this.translate.instant('pages.exchange.toastr.tradeBuySuccessfully'), this.translate.instant('pages.exchange.toastr.tradeBuy'));
       }
@@ -321,6 +323,8 @@ export class TradeComponent implements OnInit, AfterViewInit {
       if (res.status) {
         this.tradeSell.price = 0;
         this.tradeSell.amount = 0;
+        this.sellWalletDollar = 0;
+        this.sellTotalWalletDollar = 0;
         this.messageEvent.emit(this.shareDataService.currentPair);
         this.toastrService.success(this.translate.instant('pages.exchange.toastr.tradeSellSuccessfully'), this.translate.instant('pages.exchange.toastr.tradeSell'));
       }
