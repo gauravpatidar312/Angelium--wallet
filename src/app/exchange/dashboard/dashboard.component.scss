@@ -310,6 +310,24 @@ table tbody tr:nth-of-type(even) {
   background-color: #00d977 !important;
 }
 
+@media only screen and (min-device-width : 1200px) and (max-device-width : 1450px) {
+  .col-pair {
+    max-width: 25% !important;
+    flex: 0 0 25% !important;
+  }
+
+  .col-chart {
+    max-width: 50% !important;
+    flex: 0 0 50% !important;
+    padding: 0 !important;
+  }
+
+  .col-board {
+    max-width: 25% !important;
+    flex: 0 0 25% !important;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .show-block {
     display: block;
