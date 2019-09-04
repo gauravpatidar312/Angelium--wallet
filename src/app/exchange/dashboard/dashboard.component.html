@@ -93,7 +93,7 @@
             </thead>
             <tbody *ngIf="viewOpenOrderData">
             <tr *ngFor="let order of openOrderBuySell">
-              <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
+              <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd HH:mm:ss'}}</td>
               <td width="10%" class="text-right">{{order.pair }}</td>
               <td width="8%" class="text-right"><span class="{{order.buy ? 'green-text' : 'pink-text' }}">{{order.buy ? 'Buy' : 'Sell' }}</span></td>
               <td width="9%" class="text-right">{{order.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
@@ -122,7 +122,7 @@
             </thead>
             <tbody *ngIf="viewTradeHistoryData">
             <tr *ngFor="let history of myTradeHistory">
-              <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
+              <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd HH:mm:ss'}}</td>
               <td width="10%" class="text-right">{{history.pair}}</td>
               <td width="8%" class="text-right"><span class="{{history.buy ? 'green-text' : 'pink-text' }}">{{history.buy ? 'BUY' : 'SELL' }}</span></td>
               <td width="9%" class="text-right">{{history.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
