@@ -72,7 +72,7 @@
                               <input nbInput placeholder="{{'pages.kyc.dob'|translate}}" [nbDatepicker]="userDOB"
                                 class="form-control font-nunitoSans dob-input-margin" style="border-radius: 0.5rem;"
                                 [(ngModel)]="userData.kyc_info.datefield" [disabled]="isKYCUploaded">
-                              <nb-datepicker #userDOB format="yyyy-MM-dd"></nb-datepicker>
+                              <nb-datepicker [max]="maxDate" #userDOB format="yyyy.MM.dd"></nb-datepicker>
                             </div>
                           </div>
                         </div>
@@ -97,7 +97,7 @@
                     <ng-container *ngIf="!isKYCUploaded">
                       <input type="file" style="display: none" #idFront (change)="fileChangeEvent($event, 'front')"
                         accept="image/x-png,image/gif,image/jpeg" />
-                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idFront.click()"
+                      <button type="button" class="font-nunitoSans btn btn-primary pointer btn-browse" (click)="idFront.click()"
                         [disabled]="isKYCUploaded"> {{"pages.kyc.browse" | translate}} </button>
                     </ng-container>
                     <ng-container *ngIf="false && isKYCUploaded">
@@ -117,7 +117,7 @@
                     <ng-container *ngIf="!isKYCUploaded">
                       <input type="file" style="display: none" #idBack (change)="fileChangeEvent($event, 'back')"
                         accept="image/x-png,image/gif,image/jpeg" />
-                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="idBack.click()"
+                      <button type="button" class="font-nunitoSans btn btn-primary pointer btn-browse" (click)="idBack.click()"
                         [disabled]="isKYCUploaded"> {{"pages.kyc.browse" | translate}} </button>
                     </ng-container>
                     <ng-container *ngIf="false && isKYCUploaded">
@@ -137,7 +137,7 @@
                     <ng-container *ngIf="!isKYCUploaded">
                       <input type="file" style="display: none" #selfie (change)="fileChangeEvent($event, 'selfie')"
                         accept="image/x-png,image/gif,image/jpeg" />
-                      <button type="button" class="font-nunitoSans btn btn-primary pointer" (click)="selfie.click()"
+                      <button type="button" class="font-nunitoSans btn btn-primary pointer btn-browse" (click)="selfie.click()"
                         [disabled]="isKYCUploaded"> {{"pages.kyc.browse" | translate}} </button>
                     </ng-container>
                     <ng-container *ngIf="false && isKYCUploaded">
