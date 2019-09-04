@@ -28,16 +28,12 @@ export class TicketMasterComponent implements OnInit {
       },
       issued_date: {
         title: this.translate.instant('pages.xticket.purchaseDate'),
-        type: 'html',
-        valuePrepareFunction: (cell, row) => {
-          return `${moment(cell).format('YYYY.MM.DD')}`;
-        },
+        type: 'string',
       },
       ticket_type: {
         title: this.translate.instant('pages.xticket.type'),
         type: 'string',
       },
-
       name: {
         title: this.translate.instant('common.name'),
         type: 'string',
@@ -67,6 +63,9 @@ export class TicketMasterComponent implements OnInit {
     this.fetchingTicketList = true;
     this.httpService.get('ticket-list/?event_id=1').subscribe((res?: any) => {
       if (res) {
+        _.map(res, (obj) => {
+          obj.issued_date = moment(obj.issued_date).format('YYYY.MM.DD');
+        });
         this.source.load(_.orderBy(res, ['issued_date'], ['desc']));
         this.fetchingTicketList = false;
       } else {
