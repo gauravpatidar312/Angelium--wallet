@@ -26,7 +26,7 @@
 </div>
 
   <div class="row wrapper">
-  <div class="col-lg-2">
+  <div class="col-xl-2 col-lg-3 col-pair">
     <nb-accordion *ngIf="shareDataService.mobileExchangeVersion">
       <nb-accordion-item #accordion class="item">
         <nb-accordion-item-body>
@@ -37,7 +37,7 @@
     <ngx-pair *ngIf="!shareDataService.mobileExchangeVersion" (messageEvent)="receiveMessage($event)" class="main one order-1"></ngx-pair>
     <ngx-trade (messageEvent)="receiveMessage($event)" class="main two"></ngx-trade>
   </div>
-  <div class="col-lg-7 nopadd mobpaddfix">
+  <div class="col-xl-7 col-lg-6 col-chart nopadd mobpaddfix">
     <nb-card class="main three" [hidden]="shareDataService.exchangeSectionBlock !== 'chart' && shareDataService.mobileExchangeVersion">
       <nb-card-body class="trade-chart">
         <!-- TradingView Widget BEGIN -->
@@ -136,7 +136,8 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-lg-3">
+
+  <div class="col-xl-3 col-lg-3 col-board">
     <ngx-board class="main five"></ngx-board>
     <ngx-trade-history class="main six"></ngx-trade-history>
   </div>
