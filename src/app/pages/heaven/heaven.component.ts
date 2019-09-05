@@ -39,6 +39,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxMinutes: number = 0;
   fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
+  showRewardText: boolean = false;
   user: any;
   heavenDrop: any;
   totalHeaven: any;
@@ -164,7 +165,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
-      currency_type: {
+      currency_title: {
         title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
@@ -493,12 +494,21 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
     this.httpService.get(`heaven-history/?filter_type=${this.heavenHistoryType}`).subscribe((res?: any) => {
+      this.showRewardText = _.some(res.results, (obj?: any) => {
+        return obj.total_received < 1;
+      });
       const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.total_received = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.total_received, 0), '1.0-0');
         obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
+        obj.currency_title = obj.currency_type;
+        if (obj.currency_type === 'ERCUSDT') {
+          obj.currency_title = 'USDT (ERC20)';
+        } else if (obj.currency_type === 'USDT') {
+          obj.currency_title = 'USDT (OMNI)';
+        }
         return obj;
       });
       this.source.load(heaven_history_data);

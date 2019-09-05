@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   formSubmitting: boolean = false;
   otpSubmitting: boolean = false;
-  isVerifiedCaptcha = false;
+  isVerifiedCaptcha: boolean = false;
   rememberMe: boolean = false;
   tfaOtp: string;
   user: any;
