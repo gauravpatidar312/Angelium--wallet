@@ -38,17 +38,15 @@ export class LoginComponent implements OnInit {
               private msgService: MessagingService,
               private httpService: HttpService,
               private shareDataService: ShareDataService) {
-    // const currentUser = this.authService.isAuthenticated();
-    // if (currentUser) {
-    //   this.router.navigate(['/pages/setting']);
-    // }
     this.getCapchaTranslation();
   }
 
   ngOnInit() {
     jQuery(document).ready(() => {
-      jQuery("#loginSlider").slideToUnlock({useData: true});
-      jQuery(document).on("veryfiedCaptcha", (event, arg) => {
+      setTimeout(() => {
+        jQuery('#loginSlider').slideToUnlock({useData: true});
+      }, 200);
+      jQuery(document).on('veryfiedCaptcha', (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
           this.getCapchaTranslation();

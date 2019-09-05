@@ -68,7 +68,9 @@ export class RegisterComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.getLanguageData();
     jQuery(document).ready(() => {
-      jQuery('#registerSlider').slideToUnlock({useData: true});
+      setTimeout(() => {
+        jQuery('#registerSlider').slideToUnlock({useData: true});
+      }, 200);
       jQuery(document).on('veryfiedCaptcha', (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;

@@ -195,7 +195,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
         this.toastrService.danger(this.translate.instant('pages.kyc.toastr.minAge13years'), this.translate.instant('common.kyc'));
         return;
       }
-      const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy.MM.dd');
+      const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
       formData.append('datefield', formatedData);
     } else {
       this.toastrService.danger(
