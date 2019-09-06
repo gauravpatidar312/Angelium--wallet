@@ -42,14 +42,13 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   showRewardText: boolean = false;
   user: any;
   heavenDrop: any;
-  totalHeaven: any;
   heavenHistoryType: string = 'total';
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
   types: string[] = ['week', 'month', 'year'];
   heavenDropTypes: string[] = ['week', 'month', 'year'];
-  myWallets: string[];
+  myWallets: any[];
   chartLegend: { iconColor: string; title: string }[];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -58,10 +57,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxAmount: number = 0;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
-  days: any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
-  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   totalHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
@@ -85,8 +82,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.todayHeavenDropCard,
   ];
 
-  constructor(private service: SmartTableData,
-              private decimalPipe: DecimalPipe,
+  constructor(private decimalPipe: DecimalPipe,
               private shareDataService: ShareDataService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -102,11 +98,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
-
-    this.translate.get('days').subscribe((res: any) => {
-      this.days = res;
-      console.log(res);
-    });
   }
 
   ngOnInit() {
@@ -442,13 +433,13 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = _.sortBy(_.map(res, (item) => {
+      this.myWallets = _.sortBy(_.filter(res, (item) => {
         item.title = item.wallet_type;
         if (item.wallet_type === 'USDT')
           item.title = 'USDT (OMNI)';
         else if (item.wallet_type === 'ERCUSDT')
           item.title = 'USDT (ERC20)';
-        return item;
+        return item.wallet_type !== 'ANX';
       }), 'title');
       /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
         this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
@@ -473,13 +464,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getHeavenGraph() {
     this.httpService.get('heaven-graph/').subscribe((res) => {
-      console.log('getHeavenGraph', res);
     });
   }
 
   getANXHistory() {
     this.httpService.get('anx-history/').subscribe((res) => {
-      console.log('anx-history', res);
     });
   }
 
