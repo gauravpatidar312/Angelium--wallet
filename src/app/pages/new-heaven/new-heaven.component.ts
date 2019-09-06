@@ -41,7 +41,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   isProduction: any = environment.production;
   user: any;
   heavenDrop: any;
-  totalHeaven: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
@@ -56,10 +55,8 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxAmount: number = 0;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
-  days: any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
-  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   totalHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
@@ -83,8 +80,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.todayHeavenDropCard,
   ];
 
-  constructor(private service: SmartTableData,
-              private decimalPipe: DecimalPipe,
+  constructor(private decimalPipe: DecimalPipe,
               private shareDataService: ShareDataService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -100,11 +96,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
-
-    this.translate.get('days').subscribe((res: any) => {
-      this.days = res;
-      console.log(res);
-    });
   }
 
   ngOnInit() {
@@ -447,13 +438,11 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getHeavenGraph() {
     this.httpService.get('heaven-graph/').subscribe((res) => {
-      console.log('getHeavenGraph', res);
     });
   }
 
   getANXHistory() {
     this.httpService.get('anx-history/').subscribe((res) => {
-      console.log('anx-history', res);
     });
   }
 

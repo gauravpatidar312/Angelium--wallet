@@ -157,7 +157,7 @@ export class EventsDetailComponent implements OnInit {
           wallet.title = 'USDT (OMNI)';
         else if (wallet.wallet_type === 'ERCUSDT')
           wallet.title = 'USDT (ERC20)';
-        return wallet.wallet_type !== 'ANX';
+        return wallet;
       });
       this.myWallets = _.orderBy(walletData, ['title']);
       this.purchasedTickets();
