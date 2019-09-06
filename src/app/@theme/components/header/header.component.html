@@ -1,22 +1,22 @@
 <div class="header-container" [class.left]="position === 'normal'" [class.right]="position === 'inverse'">
   <div class="logo-containter">
-    <a (click)="goToSetting()" class='mt-2 link pointer display-none' aria-label='Back'>
+    <a (click)="goToHome()" class='mt-2 link pointer display-none' aria-label='Back'>
       <i class='icon nb-arrow-thin-left'></i>
     </a>
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
     <div class="logo" (click)="goToHome()"><img class="header-logo" src="/assets/images/header-logo.png"> <!--<span class="logo-text">ANGELIUM</span>--></div>
   </div>
 
-  <ul id="main-navigation" class="nav navbar-pill headerLine" *ngIf="userData?.user_type === 'owner' || userData?.user_type === 'company'">
+  <ul id="main-navigation" class="nav navbar-pill headerLine" *ngIf="userData?.user_type === 'owner' || userData?.user_type === 'company' || userData?.user_type === 'tester'">
     <li class="pointer" routerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}"
-    ><a data-toggle="pill" routerLink="/pages/dashboard">
-       <i class="fa fa-wallet"></i> Wallet</a>
+      [routerLinkActiveOptions]="{exact: true}">
+      <a data-toggle="pill" routerLink="/pages/dashboard">
+       <i class="fa fa-wallet"></i> {{"common.wallet" | translate}}</a>
     </li>
     <li class="pointer" routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}">
       <a data-toggle="pill" routerLink="/exchange">
-        <i class="iconsize nb-shuffle"></i> Exchange
+        <i class="iconsize nb-shuffle"></i> {{"common.exchange" | translate}}
       </a>
     </li>
   </ul>

@@ -415,11 +415,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           item.title = 'USDT (ERC20)';
         return item.wallet_type !== 'USDT';
       }), 'title');
-      /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-       this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
-       return wallet.wallet_type !== 'USDT';
-       }) || [];
-       }*/
 
       if (!this.myWallets) {
         this.walletType = this.translate.instant('common.select');

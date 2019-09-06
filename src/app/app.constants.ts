@@ -3,5 +3,6 @@ export class AppConstants {
     ADMIN: 'owner',
     COMPANY: 'company',
     USER: 'user',
+    TESTER: 'tester'
   };
 }

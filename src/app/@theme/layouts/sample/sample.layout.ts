@@ -40,20 +40,20 @@ declare let jQuery: any;
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
 
-      <nb-layout-footer class="bottom-menu" *ngIf="(userInfo?.user_type === 'owner' || userInfo?.user_type === 'company') && routerUrl != '/exchange'">
+      <nb-layout-footer class="bottom-menu" *ngIf="(userInfo?.user_type === 'owner' || userInfo?.user_type === 'company' || userInfo?.user_type === 'tester') && routerUrl != '/exchange'">
         <ul id="main-navigation"  class="nav navbar-pill headerLine">
           
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}"
           ><a data-toggle="pill" routerLink="/pages/dashboard">
-             <i class="fa fa-wallet" style="float:none"></i> Wallet</a>
+             <i class="fa fa-wallet" style="float:none"></i> {{"common.wallet" | translate}}</a>
           </li>
 
           <li class="pointer" routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}">
             <a data-toggle="pill" routerLink="/exchange">
               <i class="iconsize nb-shuffle" style="float:none"></i>
-              <span class="exchange-position">Exchange</span>
+              <span class="exchange-position">{{"common.exchange" | translate}}</span>
             </a>
           </li>
         </ul>
