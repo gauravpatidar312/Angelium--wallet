@@ -43,9 +43,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     jQuery(document).ready(() => {
-      setTimeout(() => {
-        jQuery('#loginSlider').slideToUnlock({useData: true});
-      }, 200);
+      jQuery('#loginSlider').slideToUnlock({useData: true});
       jQuery(document).on('veryfiedCaptcha', (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
