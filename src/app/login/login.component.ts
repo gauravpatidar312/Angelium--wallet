@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   formSubmitting: boolean = false;
   otpSubmitting: boolean = false;
-  isVerifiedCaptcha = false;
+  isVerifiedCaptcha: boolean = false;
   rememberMe: boolean = false;
   tfaOtp: string;
   user: any;
@@ -38,17 +38,13 @@ export class LoginComponent implements OnInit {
               private msgService: MessagingService,
               private httpService: HttpService,
               private shareDataService: ShareDataService) {
-    // const currentUser = this.authService.isAuthenticated();
-    // if (currentUser) {
-    //   this.router.navigate(['/pages/setting']);
-    // }
     this.getCapchaTranslation();
   }
 
   ngOnInit() {
     jQuery(document).ready(() => {
-      jQuery("#loginSlider").slideToUnlock({useData: true});
-      jQuery(document).on("veryfiedCaptcha", (event, arg) => {
+      jQuery('#loginSlider').slideToUnlock({useData: true});
+      jQuery(document).on('veryfiedCaptcha', (event, arg) => {
         if (arg === 'verified') {
           this.isVerifiedCaptcha = true;
           this.getCapchaTranslation();

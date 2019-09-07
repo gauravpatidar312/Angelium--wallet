@@ -3,7 +3,6 @@ import {DecimalPipe} from '@angular/common';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
 import {takeWhile} from 'rxjs/operators';
 import {LocalDataSource} from 'ng2-smart-table';
-import {SmartTableData} from '../../@core/data/smart-table';
 import {HttpService} from '../../services/http.service';
 import {ReleaseSettingComponent} from './releaseSetting.component';
 import {ReleaseSettingOneComponent} from './releaseSettingOne.component';
@@ -46,12 +45,10 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   heavenDropVersion: string = this.translate.instant('common.heaven') + ' 2.0';
   showHeavenTwo: boolean = true;
   showHeavenTwoDrop: boolean = true;
-  totalHeaven: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
   types: string[] = ['week', 'month', 'year'];
-  heavenDropTypes: string[] = ['week', 'month', 'year'];
   myWallets: string[];
   chartLegend: { iconColor: string; title: string }[];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
@@ -63,7 +60,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   fetchingAmount: boolean = false;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
-  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   totalHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
@@ -87,8 +83,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.todayHeavenDropCard,
   ];
 
-  constructor(private service: SmartTableData,
-              private decimalPipe: DecimalPipe,
+  constructor(private decimalPipe: DecimalPipe,
               private shareDataService: ShareDataService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -576,11 +571,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           item.title = 'USDT (ERC20)';
         return item.wallet_type !== 'USDT';
       }), 'title');
-      /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-       this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
-       return wallet.wallet_type !== 'USDT';
-       }) || [];
-       }*/
 
       if (!this.myWallets) {
         this.walletType = this.translate.instant('common.select');

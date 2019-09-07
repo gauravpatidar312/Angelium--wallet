@@ -227,6 +227,7 @@
       <nb-card-body id="heaven-history">
         <div [hidden]="!fetchHeavenHistory"><span class="heaven-history-spinner"><i
               class="fa fa-spinner fa-spin"></i></span></div>
+        <div class="text-right mb-2" *ngIf="showRewardText">{{'pages.heaven.heavenNotRewardedText' | translate}}</div>
         <div style="overflow: auto;">
           <ng2-smart-table class="heaven-history" [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
           </ng2-smart-table>

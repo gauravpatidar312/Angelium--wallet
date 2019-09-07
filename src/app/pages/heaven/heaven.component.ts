@@ -39,16 +39,16 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxMinutes: number = 0;
   fees: number[] = [10, 20, 30];
   isProduction: any = environment.production;
+  showRewardText: boolean = false;
   user: any;
   heavenDrop: any;
-  totalHeaven: any;
   heavenHistoryType: string = 'total';
   heavenType: string = 'week';
   heavenDropType: string = 'week';
   walletType: string = this.translate.instant('common.select');
   types: string[] = ['week', 'month', 'year'];
   heavenDropTypes: string[] = ['week', 'month', 'year'];
-  myWallets: string[];
+  myWallets: any[];
   chartLegend: { iconColor: string; title: string }[];
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   breakpoints: any;
@@ -57,10 +57,8 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxAmount: number = 0;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
-  days: any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
-  usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
 
   totalHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
@@ -84,8 +82,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.todayHeavenDropCard,
   ];
 
-  constructor(private service: SmartTableData,
-              private decimalPipe: DecimalPipe,
+  constructor(private decimalPipe: DecimalPipe,
               private shareDataService: ShareDataService,
               private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService,
@@ -101,11 +98,6 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
-
-    this.translate.get('days').subscribe((res: any) => {
-      this.days = res;
-      console.log(res);
-    });
   }
 
   ngOnInit() {
@@ -164,7 +156,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
           return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
         },
       },
-      currency_type: {
+      currency_title: {
         title: this.translate.instant('common.assets'),
         type: 'html',
         filter: false,
@@ -441,19 +433,14 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getWallets() {
     this.httpService.get('user-wallet-address/').subscribe((res) => {
-      this.myWallets = _.sortBy(_.map(res, (item) => {
+      this.myWallets = _.sortBy(_.filter(res, (item) => {
         item.title = item.wallet_type;
         if (item.wallet_type === 'USDT')
           item.title = 'USDT (OMNI)';
         else if (item.wallet_type === 'ERCUSDT')
           item.title = 'USDT (ERC20)';
-        return item;
+        return item.wallet_type !== 'ANX';
       }), 'title');
-      /*if (this.isProduction && this.usernameForOTC.indexOf(this.user.username.toLowerCase()) === -1) {
-        this.myWallets = _.filter(this.myWallets, (wallet?: any) => {
-            return wallet.wallet_type !== 'USDT';
-          }) || [];
-      }*/
 
       if (!this.myWallets) {
         this.walletType = this.translate.instant('common.select');
@@ -472,13 +459,11 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getHeavenGraph() {
     this.httpService.get('heaven-graph/').subscribe((res) => {
-      console.log('getHeavenGraph', res);
     });
   }
 
   getANXHistory() {
     this.httpService.get('anx-history/').subscribe((res) => {
-      console.log('anx-history', res);
     });
   }
 
@@ -493,12 +478,21 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
     this.httpService.get(`heaven-history/?filter_type=${this.heavenHistoryType}`).subscribe((res?: any) => {
+      this.showRewardText = _.some(res.results, (obj?: any) => {
+        return obj.total_received < 1;
+      });
       const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
         obj.total_received = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.total_received, 0), '1.0-0');
         obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
+        obj.currency_title = obj.currency_type;
+        if (obj.currency_type === 'ERCUSDT') {
+          obj.currency_title = 'USDT (ERC20)';
+        } else if (obj.currency_type === 'USDT') {
+          obj.currency_title = 'USDT (OMNI)';
+        }
         return obj;
       });
       this.source.load(heaven_history_data);

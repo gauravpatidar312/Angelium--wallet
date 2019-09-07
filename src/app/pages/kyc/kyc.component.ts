@@ -5,8 +5,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {SessionStorageService} from '../../services/session-storage.service';
 import {ToastrService} from '../../services/toastr.service';
 import {HttpService} from '../../services/http.service';
-import {DatePipe} from '@angular/common'
+import {DatePipe} from '@angular/common';
 import {ShareDataService} from '../../services/share-data.service';
+
+import * as moment from 'moment';
 
 declare let jQuery: any;
 
@@ -17,6 +19,7 @@ declare let jQuery: any;
 })
 export class KYCComponent implements AfterViewInit, OnDestroy {
 
+  maxDate: Date;
   private alive = true;
   @Output() periodChange = new EventEmitter<string>();
   typeOfDay: string;
@@ -67,6 +70,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
               private toastrService: ToastrService,
               private shareDataService: ShareDataService,
               public translate: TranslateService) {
+    this.maxDate = moment().subtract(13, 'years').toDate();
     this.breakpoints = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(takeWhile(() => this.alive))
@@ -111,14 +115,13 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
   setStepper(status) {
     if (status === 'pending') {
       this.firstStep = this.translate.instant('pages.kyc.submitted');
-      this.stepper.steps.first.completed = true;
-    }
-    else if (status === 'confirmed') {
+      this.stepper.steps.toArray()[1].completed = true;
+    } else if (status === 'confirmed') {
       this.stepper.steps.map((step) => {
         step.completed = true;
       });
-    }
-    else if (status === 'failed') {
+    } else if (status === 'failed') {
+      this.stepper.steps.first.interacted = true;
       this.firstStep = this.translate.instant('pages.kyc.failed');
     }
   }
@@ -188,6 +191,10 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
 
     const formData: FormData = new FormData();
     if (this.userData.kyc_info && this.userData.kyc_info.datefield) {
+      if (this.userData.kyc_info.datefield > this.maxDate) {
+        this.toastrService.danger(this.translate.instant('pages.kyc.toastr.minAge13years'), this.translate.instant('common.kyc'));
+        return;
+      }
       const formatedData = this.datepipe.transform(this.userData.kyc_info.datefield, 'yyyy-MM-dd');
       formData.append('datefield', formatedData);
     } else {

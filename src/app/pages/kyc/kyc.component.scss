@@ -237,6 +237,11 @@
    margin: 0 25px;
   }
 }
+@media only screen and (min-width: 992px) and (max-width: 1385px) {
+  .btn-browse {
+    padding: 8px !important;
+  }
+}
 
 @media only screen and (width: 1024px) {
   .dob-input-margin {

@@ -26,7 +26,7 @@
 </div>
 
   <div class="row wrapper">
-  <div class="col-lg-2">
+  <div class="col-xl-2 col-lg-3 col-pair">
     <nb-accordion *ngIf="shareDataService.mobileExchangeVersion">
       <nb-accordion-item #accordion class="item">
         <nb-accordion-item-body>
@@ -37,7 +37,7 @@
     <ngx-pair *ngIf="!shareDataService.mobileExchangeVersion" (messageEvent)="receiveMessage($event)" class="main one order-1"></ngx-pair>
     <ngx-trade (messageEvent)="receiveMessage($event)" class="main two"></ngx-trade>
   </div>
-  <div class="col-lg-7 nopadd mobpaddfix">
+  <div class="col-xl-7 col-lg-6 col-chart nopadd mobpaddfix">
     <nb-card class="main three" [hidden]="shareDataService.exchangeSectionBlock !== 'chart' && shareDataService.mobileExchangeVersion">
       <nb-card-body class="trade-chart">
         <!-- TradingView Widget BEGIN -->
@@ -93,7 +93,7 @@
             </thead>
             <tbody *ngIf="viewOpenOrderData">
             <tr *ngFor="let order of openOrderBuySell">
-              <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
+              <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd HH:mm:ss'}}</td>
               <td width="10%" class="text-right">{{order.pair }}</td>
               <td width="8%" class="text-right"><span class="{{order.buy ? 'green-text' : 'pink-text' }}">{{order.buy ? 'Buy' : 'Sell' }}</span></td>
               <td width="9%" class="text-right">{{order.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
@@ -122,7 +122,7 @@
             </thead>
             <tbody *ngIf="viewTradeHistoryData">
             <tr *ngFor="let history of myTradeHistory">
-              <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd hh:mm:ss'}}</td>
+              <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd HH:mm:ss'}}</td>
               <td width="10%" class="text-right">{{history.pair}}</td>
               <td width="8%" class="text-right"><span class="{{history.buy ? 'green-text' : 'pink-text' }}">{{history.buy ? 'BUY' : 'SELL' }}</span></td>
               <td width="9%" class="text-right">{{history.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
@@ -136,7 +136,8 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-lg-3">
+
+  <div class="col-xl-3 col-lg-3 col-board">
     <ngx-board class="main five"></ngx-board>
     <ngx-trade-history class="main six"></ngx-trade-history>
   </div>
