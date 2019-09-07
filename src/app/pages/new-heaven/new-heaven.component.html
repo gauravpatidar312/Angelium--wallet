@@ -208,9 +208,24 @@
   <div class="col-md-12">
     <nb-card>
       <nb-card-header class="row heavenhistory">
-        <div class="col-12">
+        <div class="col-6 hh-title">
           <div class="navbar-header heavenHistory-tree">
             {{"pages.heaven.heavenHistory" | translate}}
+          </div>
+        </div>
+        <div class="col-6 hh-select">
+          <div class="heaven-dropdown dropdown dropdown-width ghost-dropdown" ngbDropdown >
+            <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
+              {{heavenVersion}}
+            </button>
+            <ul class="dropdown-menu" ngbDropdownMenu>
+              <li class="dropdown-item" (click)="changeHeaven('Heaven 1.0')">
+                {{"common.heaven" | translate}} 1.0
+              </li>
+              <li class="dropdown-item" (click)="changeHeaven('Heaven 2.0')">
+                {{"common.heaven" | translate}} 2.0
+              </li>
+            </ul>
           </div>
         </div>
       </nb-card-header>
@@ -218,7 +233,9 @@
         <div [hidden]="!fetchHeavenHistory"><span class="heaven-history-spinner"><i
           class="fa fa-spinner fa-spin"></i></span></div>
         <div style="overflow: auto;">
-          <ng2-smart-table class="heaven-history" [settings]="settings" [source]="source" *ngIf="!fetchHeavenHistory">
+          <ng2-smart-table class="heaven-history" [settings]="heavenOneSettings" [source]="heavenOneSource" *ngIf="!showHeavenTwo && !fetchHeavenHistory">
+          </ng2-smart-table>
+          <ng2-smart-table class="heaven-history" [settings]="settings" [source]="source" *ngIf="showHeavenTwo && !fetchHeavenHistory">
           </ng2-smart-table>
         </div>
       </nb-card-body>
@@ -229,27 +246,34 @@
   <div class="col-md-12">
     <nb-card>
       <nb-card-header class="row heavenhistory">
-        <div class="col-md-12">
-          <div class="navbar-header heavenHistory-tree">
+        <div class="col-6 hh-title">
+          <div class="navbar-header heavenHistory-tree heavenDrop-title">
             {{"pages.heaven.heavenDropHistory" | translate}}
           </div>
         </div>
-        <!-- <div class="col-md-6 heavenHistoryColumn">
-           <ul id="heavenHistory-navigation" class="nav navbar-pill downLine">
-             <li class="pointer li-margin">
-               <a data-toggle="pill" (click)="getHeavenHistory('today')">{{'common.today'|translate}}</a>
-             </li>
-             <li class="active pointer li-margin">
-               <a data-toggle="pill" (click)="getHeavenHistory('total')">{{'common.total'|translate}}</a>
-             </li>
-           </ul>
-         </div>-->
+        <div class="col-6 hh-select">
+          <div class="dropdown dropdown-width ghost-dropdown" ngbDropdown >
+            <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>
+              {{heavenDropVersion}}
+            </button>
+            <ul class="dropdown-menu" ngbDropdownMenu>
+              <li class="dropdown-item" (click)="changeHeavenDrop('Heaven 1.0')">
+                {{"common.heaven" | translate}} 1.0
+              </li>
+              <li class="dropdown-item" (click)="changeHeavenDrop('Heaven 2.0')">
+                {{"common.heaven" | translate}} 2.0
+              </li>
+            </ul>
+          </div>
+        </div>
       </nb-card-header>
       <nb-card-body id="heaven-drop-history">
         <div [hidden]="!fetchHeavenDropHistory"><span class="heaven-history-spinner"><i
           class="fa fa-spinner fa-spin"></i></span></div>
         <div style="overflow: auto;">
-          <ng2-smart-table [settings]="heavenDrops" [source]="source_heavenDrop" *ngIf="!fetchHeavenDropHistory">
+          <ng2-smart-table [settings]="heavenOneDrops" [source]="heavenOneDropSource" *ngIf="!showHeavenTwoDrop && !fetchHeavenDropHistory">
+          </ng2-smart-table>
+          <ng2-smart-table [settings]="heavenDrops" [source]="source_heavenDrop" *ngIf="showHeavenTwoDrop && !fetchHeavenDropHistory">
           </ng2-smart-table>
         </div>
       </nb-card-body>

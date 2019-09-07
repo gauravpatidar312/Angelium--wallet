@@ -5,14 +5,15 @@ import {takeWhile} from 'rxjs/operators';
 import {LocalDataSource} from 'ng2-smart-table';
 import {SmartTableData} from '../../@core/data/smart-table';
 import {HttpService} from '../../services/http.service';
-import * as _ from 'lodash';
-
+import {ReleaseSettingComponent} from './releaseSetting.component';
+import {ReleaseSettingOneComponent} from './releaseSettingOne.component';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastrService} from '../../services/toastr.service';
 import {ShareDataService} from '../../services/share-data.service';
 import {environment} from 'environments/environment';
-import {CustomRendererComponent} from './custom.component';
 import {SessionStorageService} from '../../services/session-storage.service';
+
+import * as _ from 'lodash';
 import * as moment from 'moment';
 
 declare let jQuery: any;
@@ -41,6 +42,10 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   isProduction: any = environment.production;
   user: any;
   heavenDrop: any;
+  heavenVersion: string = this.translate.instant('common.heaven') + ' 2.0';
+  heavenDropVersion: string = this.translate.instant('common.heaven') + ' 2.0';
+  showHeavenTwo: boolean = true;
+  showHeavenTwoDrop: boolean = true;
   totalHeaven: any;
   heavenType: string = 'week';
   heavenDropType: string = 'week';
@@ -56,7 +61,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   maxAmount: number = 0;
   formSubmitting: boolean = false;
   fetchingAmount: boolean = false;
-  days: any;
   fetchHeavenHistory: boolean = false;
   fetchHeavenDropHistory: boolean = false;
   usernameForOTC: any = ['forex711', 'ramy', 'riogrande', 'xwalker', 'xwalker-n', 'mr.angelium'];
@@ -100,19 +104,11 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(([oldValue, newValue]) => {
         this.breakpoint = newValue;
       });
-
-    this.translate.get('days').subscribe((res: any) => {
-      this.days = res;
-      console.log(res);
-    });
   }
 
   ngOnInit() {
     this.getWallets();
     this.getHeavenDrop();
-    this.getHeavenGraph();
-    this.getANXHistory();
-    this.getHeavenReleaseSettings();
     this.getHeavenHistory();
     this.getHeavenDropHistory();
   }
@@ -120,24 +116,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedHeavenPlan = '';
 
   settings = {
-    // add: {
-    //   addButtonContent: '<i class="nb-plus"></i>',
-    //   createButtonContent: '<i class="nb-checkmark"></i>',
-    //   cancelButtonContent: '<i class="nb-close"></i>',
-    // },
-    // edit: {
-    //   editButtonContent: '<i class="nb-edit"></i>',
-    //   saveButtonContent: '<i class="nb-checkmark"></i>',
-    //   cancelButtonContent: '<i class="nb-close"></i>',
-    // },
-    // delete: {
-    //   deleteButtonContent: '<i class="nb-trash"></i>',
-    //   confirmDelete: true,
-    // },
-    // add: '',
-    // edit: '',
-    // delete: '',
-
     hideSubHeader: true,
     actions: false,
     pager: {
@@ -198,7 +176,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       release_settings: {
         title: this.translate.instant('pages.heaven.releaseSetting'),
         type: 'custom',
-        renderComponent: CustomRendererComponent,
+        renderComponent: ReleaseSettingComponent,
         filter: false,
         class: 'heavenhistory-cell text-center td-width',
         onComponentInitFunction: (instance) => {
@@ -217,6 +195,87 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   source: LocalDataSource = new LocalDataSource();
+
+  heavenOneSettings = {
+    hideSubHeader: true,
+    actions: false,
+    pager: {
+      display: true,
+    },
+    editable: true,
+    mode: 'inline',
+    noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
+    columns: {
+      hid: {
+        title: this.translate.instant('pages.heaven.heavenId'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      heaven_amount: {
+        title: this.translate.instant('pages.heaven.heavenAmount'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}<span class="text-success"> ${row.currencyTitle}</span></div>`;
+        },
+      },
+      plan: {
+        title: this.translate.instant('pages.heaven.plan'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      total_received: {
+        title: this.translate.instant('pages.heaven.received'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">ANX</span></div>`;
+        },
+      },
+      entry_date: {
+        title: this.translate.instant('pages.heaven.entryDate'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      release_date: {
+        title: this.translate.instant('pages.heaven.releaseDate'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      release_settings: {
+        title: this.translate.instant('pages.heaven.releaseSetting'),
+        type: 'custom',
+        renderComponent: ReleaseSettingOneComponent,
+        filter: false,
+        class: 'heavenhistory-cell text-center td-width',
+        onComponentInitFunction: (instance) => {
+          instance.onReleaseFailed.subscribe((row) => {
+            this.source.update(row, row); // to refresh the row to re-render UI.
+          });
+          instance.onReleaseSaved.subscribe((row) => {
+            this.getHeavenOneHistory(); // to API call on release successfully.
+          });
+          instance.onReleaseRefresh.subscribe((row) => {
+            this.source.refresh(); // to refresh row on release button click to show spinner.
+          });
+        }
+      },
+    },
+  };
+
+  heavenOneSource: LocalDataSource = new LocalDataSource();
 
   heavenDrops = {
     hideSubHeader: true,
@@ -264,6 +323,99 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   source_heavenDrop: LocalDataSource = new LocalDataSource();
+
+  heavenOneDrops = {
+    hideSubHeader: true,
+    actions: false,
+    pager: {
+      display: true,
+    },
+    editable: true,
+    mode: 'inline',
+    noDataMessage: this.translate.instant('pages.heaven.noDataFound'),
+    columns: {
+      created: {
+        title: this.translate.instant('common.date'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      user_heaven_id: {
+        title: this.translate.instant('pages.heaven.heavenId'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      heaven_amount: {
+        title: this.translate.instant('pages.heaven.heavenAmount'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}<span class="text-success"> ${row.currencyTitle}</span></div>`;
+        },
+      },
+      plan: {
+        title: this.translate.instant('pages.heaven.plan'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell}</div>`;
+        },
+      },
+      anx_bonus: {
+        title: this.translate.instant('pages.heaven.heavenDrop'),
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (cell, row) => {
+          return `<div class="heavenhistory-cell font-nunitoSans td-width">${cell} <span class="text-success">ANX</span></div>`;
+        },
+      },
+    },
+  };
+
+  heavenOneDropSource: LocalDataSource = new LocalDataSource();
+
+  changeHeaven(heavenVersion: String) {
+    if (heavenVersion === 'Heaven 1.0') {
+      this.heavenVersion = this.translate.instant('common.heaven') + ' 1.0';
+      this.showHeavenTwo = false;
+      this.getHeavenOneHistory();
+    } else {
+      this.heavenVersion = this.translate.instant('common.heaven') + ' 2.0';
+      this.showHeavenTwo = true;
+      this.getHeavenHistory();
+    }
+  }
+
+  getHeavenOneHistory() {
+    jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
+    this.fetchHeavenHistory = true;
+    this.httpService.get('heaven-history/?filter_type=total').subscribe((res?: any) => {
+      const data = _.orderBy(res.results, ['hid'], ['desc']);
+      const heaven_history_data = _.map(data, (obj?: any) => {
+        obj.currencyTitle = obj.currency_type;
+        if (obj.currency_type === 'ERCUSDT') {
+          obj.currencyTitle = 'USDT (ERC20)';
+        } else if (obj.currency_type === 'USDT') {
+          obj.currencyTitle = 'USDT (OMNI)';
+        }
+        obj.entry_date = moment(obj.entry_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.release_date = moment(obj.release_date, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.total_received = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.total_received, 0), '1.0-0');
+        obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
+        return obj;
+      });
+      this.heavenOneSource.load(heaven_history_data);
+      this.fetchHeavenHistory = false;
+    }, (err) => {
+      this.fetchHeavenHistory = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+    });
+  }
 
   changePeriod(period: string, typeValue: string): void {
     if (typeValue === 'heaven')
@@ -445,24 +597,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  getHeavenGraph() {
-    this.httpService.get('heaven-graph/').subscribe((res) => {
-      console.log('getHeavenGraph', res);
-    });
-  }
-
-  getANXHistory() {
-    this.httpService.get('anx-history/').subscribe((res) => {
-      console.log('anx-history', res);
-    });
-  }
-
-  getHeavenReleaseSettings() {
-    // this.httpService.get('heaven-release-settings').subscribe((res) => {
-    //   console.log('settings', res);
-    // });
-  }
-
   getHeavenHistory() {
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
@@ -486,6 +620,43 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fetchHeavenHistory = false;
     }, (err) => {
       this.fetchHeavenHistory = false;
+      this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
+    });
+  }
+
+  changeHeavenDrop(heavenVersion: string) {
+    if (heavenVersion === 'Heaven 1.0') {
+      this.heavenDropVersion = this.translate.instant('common.heaven') + ' 1.0';
+      this.showHeavenTwoDrop = false;
+      this.getHeavenOneDropHistory();
+    } else {
+      this.heavenDropVersion = this.translate.instant('common.heaven') + ' 2.0';
+      this.showHeavenTwoDrop = true;
+      this.getHeavenDropHistory();
+    }
+  }
+
+  getHeavenOneDropHistory() {
+    jQuery('.heaven-history-spinner').height(jQuery('#heaven-history-Drop').height());
+    this.fetchHeavenDropHistory = true;
+    this.httpService.get('anx-heaven-history/').subscribe((res?: any) => {
+      const data = _.orderBy(res, ['created', 'user_heaven_id'], ['desc']);
+      const heaven_drop_history_data = _.map(data, (obj?: any) => {
+        obj.currencyTitle = obj.currency_type;
+        if (obj.currency_type === 'ERCUSDT') {
+          obj.currencyTitle = 'USDT (ERC20)';
+        } else if (obj.currency_type === 'USDT') {
+          obj.currencyTitle = 'USDT (OMNI)';
+        }
+        obj.created = moment(obj.created, 'DD-MM-YYYY').format('YYYY.MM.DD');
+        obj.anx_bonus = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.anx_bonus, 0), '1.0-0');
+        obj.heaven_amount = this.decimalPipe.transform(ShareDataService.toFixedDown(obj.heaven_amount, 6), '1.0-6');
+        return obj;
+      });
+      this.heavenOneDropSource.load(_.sortBy(heaven_drop_history_data, ['created']).reverse());
+      this.fetchHeavenDropHistory = false;
+    }, (err) => {
+      this.fetchHeavenDropHistory = false;
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.heaven'));
     });
   }
