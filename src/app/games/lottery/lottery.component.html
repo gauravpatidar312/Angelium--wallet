@@ -149,7 +149,7 @@
                     <div [ngClass]="{'label-color': user.comment}"
                          class="user-name div-user-name work-break font-bebasNeueBold">{{ user.username }}
                     </div>
-                    <div class="user-title work-break">{{ user.level}}  {{user.rank}}</div>
+                    <div class="user-title work-break">{{ user.infinity_text }}  {{user.rank}}</div>
                   </div>
                   <div class="ml-4" *ngIf="user.comment && isComment">
                     <div class="message">{{user.comment}}</div>
@@ -166,7 +166,7 @@
 
     <div class="row">
       <div class="col-12 padding-row">
-        <nb-card>
+        <nb-card class="winners-list-card">
           <nb-card-header>
             <div class="row">
               <div class="col-6 fix-width padding-remove-xs challenger-header">
@@ -210,7 +210,7 @@
                     </div>
                     <div class="info-container mr-2">
                       <div class="user-name div-name work-break font-bebasNeueBold">{{ winnerUser.username }}</div>
-                      <div class="user-title work-break">{{ winnerUser.level }}  {{winnerUser.rank}}</div>
+                      <div class="user-title work-break">{{ winnerUser.infinity_text }}  {{winnerUser.rank}}</div>
                     </div>
                     <div class="ml-4" *ngIf="winnerUser.winning_comment">
                       <div class="message">{{winnerUser.winning_comment}}</div>

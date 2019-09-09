@@ -110,14 +110,14 @@ export class LotteryComponent implements OnInit, AfterViewInit {
     this.httpService.get(`game/get-bet-list/?lottery_id=${this.currentLotteryData.lottery_id}`).subscribe((res?: any) => {
       const betListData = _.orderBy(res, ['id'], ['desc']);
       this.betData = _.map(betListData, (data) => {
-        if (data.level === 1)
-          data.level = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
-        else if (data.level === 2)
-          data.level = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
-        else if (data.level === 3)
-          data.level = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
+        if (data.infinity_mark === 1)
+          data.infinity_text = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
+        else if (data.infinity_mark === 2)
+          data.infinity_text = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
+        else if (data.infinity_mark === 3)
+          data.infinity_text = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
         else
-          data.level = _.lowerCase(this.translate.instant('pages.setting.angel'));
+          data.infinity_text = _.lowerCase(this.translate.instant('pages.setting.angel'));
         return data;
       });
 
@@ -181,14 +181,14 @@ export class LotteryComponent implements OnInit, AfterViewInit {
         else
           winner.prizeText = this.translate.instant('games.lottery.thPrize');
 
-        if (winner.level === 1)
-          winner.level = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
-        else if (winner.level === 2)
-          winner.level = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
-        else if (winner.level === 3)
-          winner.level = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
+        if (winner.infinity_mark === 1)
+          winner.infinity_text = _.lowerCase(this.translate.instant('pages.setting.silverAngel'));
+        else if (winner.infinity_mark === 2)
+          winner.infinity_text = _.lowerCase(this.translate.instant('pages.setting.goldAngel'));
+        else if (winner.infinity_mark === 3)
+          winner.infinity_text = _.lowerCase(this.translate.instant('pages.setting.pinkAngel'));
         else
-          winner.level = _.lowerCase(this.translate.instant('pages.setting.angel'));
+          winner.infinity_text = _.lowerCase(this.translate.instant('pages.setting.angel'));
         return winner;
       });
 
@@ -243,25 +243,30 @@ export class LotteryComponent implements OnInit, AfterViewInit {
   }
 
   onPlaceLottery() {
+    this.formSubmitting = true;
     if (!(this.selectWallet && this.selectWallet.wallet_type)) {
       this.toastrService.danger(this.translate.instant('games.lottery.toastr.selectWalletType'), this.translate.instant('common.lottery'));
+      this.formSubmitting = false;
       return;
     }
 
     if (!this.placeLottery.bet_number) {
       this.toastrService.danger(this.translate.instant('games.lottery.toastr.betAmountMessage'), this.translate.instant('common.lottery'));
+      this.formSubmitting = false;
       return;
     }
 
     if (Number(this.placeLottery.bet_number) > Number(this.currentLotteryData.max_bet)) {
       this.toastrService.danger(this.translate.instant('games.lottery.toastr.betLimitExceed', {'maxBet': this.currentLotteryData.max_bet}),
         this.translate.instant('common.lottery'));
+      this.formSubmitting = false;
       return;
     }
 
     if (Number(this.totalBetAmount) > Number(this.selectWallet.wallet_amount)) {
       this.toastrService.danger(this.translate.instant('games.lottery.toastr.betAmountExceed'),
         this.translate.instant('common.lottery'));
+      this.formSubmitting = false;
       return;
     }
 
@@ -273,7 +278,6 @@ export class LotteryComponent implements OnInit, AfterViewInit {
       'winning_comment': this.placeLottery.winning_comment || ''
     };
 
-    this.formSubmitting = true;
     this.httpService.post(placeLotteryData, 'game/place-lottery-bet/').subscribe((res?: any) => {
       if (res.status) {
         this.formSubmitting = false;
