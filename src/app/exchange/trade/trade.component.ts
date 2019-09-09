@@ -51,6 +51,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
   tradeTab: string = 'buy';
   tradeBuy: any = {};
   tradeSell: any = {};
+  currentPairData: any = {};
 
   constructor(private httpService: HttpService,
               private toastrService: ToastrService,
@@ -79,6 +80,9 @@ export class TradeComponent implements OnInit, AfterViewInit {
         this.tradeSell.price = 0;
         this.sellWalletDollar = 0;
         this.sellTotalWalletDollar = 0;
+        // currentPairData
+        this.currentPairData.from = _.upperCase(data.from);
+        this.currentPairData.to = _.upperCase(data.to);
       }
       this.getExchangeWallet();
       this.getMyWallets();
@@ -96,9 +100,12 @@ export class TradeComponent implements OnInit, AfterViewInit {
               decimalPlaces = 2;
             }
             wallet.max_balance = ShareDataService.toFixedDown(wallet.balance, decimalPlaces);
-            return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) > -1;
+            return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) >= 0;
           }) || [];
-        this.exchangeWallets = _.sortBy(exchangeData, ['coin']);
+        const currentPairExchangeData = _.filter(exchangeData, (wallet) => {
+          return [this.currentPairData.from, this.currentPairData.to].indexOf(wallet.coin) >= 0;
+        }) || [];
+        this.exchangeWallets = _.sortBy(currentPairExchangeData, ['coin']);
         this.getAvailableBalance(this.tradeTab);
         if (this.shareDataService.showSpinnerForExchange)
           this.getPairBalance();
@@ -112,16 +119,21 @@ export class TradeComponent implements OnInit, AfterViewInit {
     this.httpService.get('asset/').subscribe((res?: any) => {
       if (res.cryptos) {
         const myWalletsData = _.filter(res.cryptos, (wallet) => {
+            wallet.title = wallet.name;
             let decimalPlaces = 6;
             if (wallet.name === 'ANX') {
               decimalPlaces = 0;
             } else if (wallet.name === 'HEAVEN') {
               decimalPlaces = 2;
-            }
+            } else if (wallet.name === 'ERCUSDT')
+              wallet.title = 'USDT (ERC20)';
             wallet.max_quantity = ShareDataService.toFixedDown(wallet.quantity, decimalPlaces);
-            return ['ANX', 'BTC', 'ERCUSDT', 'ETH'].indexOf(wallet.name) > -1;
+            return ['ANX', 'BTC', 'ERCUSDT', 'ETH'].indexOf(wallet.name) >= 0;
           }) || [];
-        this.myWallets = _.sortBy(myWalletsData, ['name']);
+        const currentPairMyWalletData = _.filter(myWalletsData, (wallet) => {
+          return [(this.currentPairData.from === 'USDT' ? 'ERCUSDT' : this.currentPairData.from), (this.currentPairData.to === 'USDT' ? 'ERCUSDT' : this.currentPairData.to)].indexOf(wallet.name) >= 0;
+        }) || [];
+        this.myWallets = _.sortBy(currentPairMyWalletData, ['title']);
         this.getAvailableBalance(this.tradeTab);
       }
     }, (err) => {
@@ -211,8 +223,8 @@ export class TradeComponent implements OnInit, AfterViewInit {
   }
 
   changeDepositCrypto(cryptoName?: any) {
-    this.cryptoDepositType = cryptoName;
     this.seletedCryptoDepositData = _.find(this.myWallets, ['name', cryptoName]) || {};
+    this.cryptoDepositType = this.seletedCryptoDepositData.title;
     this.depositPopupAmount = this.seletedCryptoDepositData.max_quantity;
     this.depositAmount = 0;
     this.setDepositAmount(this.seletedCryptoDepositData.name);
