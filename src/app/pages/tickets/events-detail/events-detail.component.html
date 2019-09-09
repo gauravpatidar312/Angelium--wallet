@@ -32,8 +32,10 @@
           <div class="text-success text-center days-font">${{ticket?.price | number:'1.0-2'}}</div>
         </div>
       </nb-card-body>
-      <button class="table_bg font-size-button" [ngClass]="{'selectedTicket': selectedTicket?.id === ticket?.id}"
-              (click)="onTicketSelect(ticket)">{{"common.select" | translate}}
+      <button class="font-size-button" [disabled]="!ticket?.available_slot" [ngClass]="{'selectedTicket': selectedTicket?.id === ticket?.id, 'table_bg': ticket?.available_slot, 'sold-out': !ticket.available_slot}"
+              (click)="onTicketSelect(ticket)">
+        <span *ngIf="ticket?.available_slot !== 0">{{"common.select" | translate}}</span>
+        <span *ngIf="ticket?.available_slot === 0">{{"pages.xticket.soldOut" | translate}}</span>
       </button>
     </nb-card>
   </div>
@@ -74,7 +76,7 @@
                 <span class="transfer-amount" *ngIf="!fetchingAmount">{{ totalAmount | number : '1.0-6' }}</span>
               </div>
               <span class="available-amount" *ngIf="selectedWallet?.wallet_type">
-                {{(maxAmount | number: '1.0-6') + ' ' + ("pages.exchange.max" | translate | uppercase) }}
+                {{(maxAmount | number: (selectedWallet?.wallet_type === 'ANX' ? '1.0-0' : '1.0-6')) + ' ' + ("pages.exchange.max" | translate | uppercase) }}
               </span>
             </div>
           </div>

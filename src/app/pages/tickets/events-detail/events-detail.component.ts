@@ -186,6 +186,10 @@ export class EventsDetailComponent implements OnInit {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.xticket'));
       return;
     }
+    if (this.noOfTickets > this.selectedTicket.available_slot) {
+      this.toastrService.danger(this.translate.instant('pages.xticket.toastr.fewSlotsAvailable', {'slots': this.selectedTicket.available_slot}), this.translate.instant('common.xticket'));
+      return;
+    }
 
     let validateEndpoint = '';
     if (this.selectedWallet.wallet_type === 'BTC')

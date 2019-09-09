@@ -242,6 +242,17 @@
     font-family: nb-theme(font-bebas-bold);
   }
 
+  .sold-out {
+    background: none;
+    border: 2px solid nb-theme(color-danger);
+    border-radius: 4px;
+    color: nb-theme(color-danger);
+    width: 110px;
+    padding: 10px 0;
+    margin: 0 auto 12px;
+    font-family: nb-theme(font-bebas-bold);
+  }
+
   .table_bg:hover {
     background-image: linear-gradient(to right, #00D9BB, #00DA79);
   }

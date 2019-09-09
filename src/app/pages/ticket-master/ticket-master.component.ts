@@ -34,6 +34,10 @@ export class TicketMasterComponent implements OnInit {
         title: this.translate.instant('pages.xticket.type'),
         type: 'string',
       },
+      seat_number: {
+        title: this.translate.instant('pages.xticket.seatNumber'),
+        type: 'string',
+      },
       name: {
         title: this.translate.instant('common.name'),
         type: 'string',
