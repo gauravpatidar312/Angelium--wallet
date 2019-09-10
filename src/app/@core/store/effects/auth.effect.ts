@@ -15,8 +15,10 @@ import { AuthService } from '../../../_guards/auth.service';
 import { AuthActionTypes, LogIn, LogInFailure, ResetState, UserInfo, SetUserProfile, UpdateUserInfo, AskOTPFor2FA } from '../actions/user.action';
 import { IndexedDBStorageService } from '../../../services/indexeddb-storage.service';
 import {SessionStorageService} from '../../../services/session-storage.service';
-import { Location } from "@angular/common";
+import { Location } from '@angular/common';
 import {environment} from 'environments/environment';
+
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthEffects{
@@ -90,6 +92,9 @@ export class AuthEffects{
             this.sessionStorage.removeFromSessionStorage('redirect_to');
             document.location.href = `${environment.xloveUrl}?login=success&nkt=${user.token}`;
           } else {
+            if (moment.utc().utcOffset(8) >= moment.utc('2019-09-22T16:00').utcOffset(8) && moment.utc().utcOffset(8) < moment.utc('2019-09-24T16:00').utcOffset(8)) {
+              this.sessionStorage.saveToLocalStorage('showUltraHeavenAlert', true);
+            }
             this.router.navigate(['/pages/dashboard']);
           }
       }

@@ -15,11 +15,12 @@ import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.compo
 import { ProfitChartComponent } from './charts-panel/charts/profit-chart.component';
 import { ChartModule } from 'angular2-chartjs';
 import { SolarComponent } from './solar/solar.component';
-import { CustomRendererComponent } from './custom.component';
 import { TranslateModule } from '@ngx-translate/core';
 import {StatusCardComponent} from './status-card/status-card.component';
 import {StatusCardFrontComponent} from './status-card/front-side/status-card-front.component';
 import {StatusCardBackComponent} from './status-card/back-side/status-card-back.component';
+import {ReleaseSettingOneComponent} from './releaseSettingOne.component';
+import {ReleaseSettingComponent} from './releaseSetting.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {StatusCardBackComponent} from './status-card/back-side/status-card-back.
     ProfitChartComponent,
     ECommerceLegendChartComponent,
     SolarComponent,
-    CustomRendererComponent,
+    ReleaseSettingComponent,
+    ReleaseSettingOneComponent,
     StatusCardComponent,
     StatusCardFrontComponent,
     StatusCardBackComponent
@@ -50,6 +52,6 @@ import {StatusCardBackComponent} from './status-card/back-side/status-card-back.
     }),
     LeafletModule.forRoot(),
   ],
-  entryComponents: [CustomRendererComponent]
+  entryComponents: [ReleaseSettingComponent, ReleaseSettingOneComponent]
 })
 export class NewHeavenModule { }

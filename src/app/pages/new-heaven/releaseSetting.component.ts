@@ -51,7 +51,7 @@ declare let jQuery: any;
     </div>`
 })
 
-export class CustomRendererComponent implements ViewCell, OnInit {
+export class ReleaseSettingComponent implements ViewCell, OnInit {
   @Input() value: any;    // This hold the cell value
   @Input() rowData: any;  // This holds the entire row object
   @Output() onReleaseFailed: EventEmitter<any> = new EventEmitter();

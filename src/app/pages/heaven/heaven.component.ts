@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, OnDestroy, AfterViewInit, Output} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 import {NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService} from '@nebular/theme';
+import {Router} from '@angular/router';
 import {takeWhile} from 'rxjs/operators';
 import {LocalDataSource} from 'ng2-smart-table';
-import {SmartTableData} from '../../@core/data/smart-table';
 import {HttpService} from '../../services/http.service';
 import * as _ from 'lodash';
 
@@ -89,6 +89,7 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
               private httpService: HttpService,
               private toastrService: ToastrService,
               private sessionStorage: SessionStorageService,
+              private router: Router,
               public translate: TranslateService) {
     this.user = this.sessionStorage.getFromSession('userInfo');
 
@@ -101,6 +102,10 @@ export class HeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    if (moment.utc().utcOffset(8) >= moment.utc('2019-09-22T16:00').utcOffset(8)) {
+      return this.router.navigate(['pages/new-heaven']);
+    }
+
     this.getWallets();
     this.getHeavenDrop();
     this.getHeavenGraph();
