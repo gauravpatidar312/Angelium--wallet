@@ -117,6 +117,7 @@ export class KYCComponent implements AfterViewInit, OnDestroy {
       this.firstStep = this.translate.instant('pages.kyc.submitted');
       this.stepper.steps.toArray()[1].completed = true;
     } else if (status === 'confirmed') {
+      this.firstStep = this.translate.instant('pages.kyc.submitted');
       this.stepper.steps.map((step) => {
         step.completed = true;
       });
