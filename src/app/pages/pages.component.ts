@@ -4,6 +4,8 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ShareDataService } from '../services/share-data.service';
 import { MENU_ITEMS } from './pages-menu';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'ngx-pages',
   styleUrls: ['pages.component.scss'],
@@ -43,7 +45,12 @@ export class PagesComponent implements OnInit {
         this.setVisibility(child);
       });
     }
-    item.title = this.translate.instant('common.'+item.languageKey);
+    item.title = this.translate.instant('common.' + item.languageKey);
+
+    if (!item.hidden) {
+      if (item.link === '/pages/heaven' && moment.utc().utcOffset(8) >= moment.utc('2019-09-22T16:00').utcOffset(8))
+        item.link = '/pages/new-heaven';
+    }
   }
 
   ngOnInit() {

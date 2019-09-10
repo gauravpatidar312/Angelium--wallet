@@ -8,6 +8,7 @@ import {ShareDataService} from '../../services/share-data.service';
 import {environment} from '../../../environments/environment';
 import {ToastrService} from '../../services/toastr.service';
 
+import Swal from 'sweetalert2';
 import * as _ from 'lodash';
 
 declare let jQuery: any;
@@ -111,6 +112,16 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
             el[0].scrollIntoView();
           }
         }, 800);
+     }
+     if (this.sessionStorage.getFromLocalStorage('showUltraHeavenAlert')) {
+       this.sessionStorage.removeFromLocalStorage('showUltraHeavenAlert');
+       Swal.fire({
+         title: this.translate.instant('pages.heaven.ultraHeaven'),
+         text: this.translate.instant('pages.heaven.toastr.ultraHeavenStarted'),
+         type: 'info',
+         showCancelButton: false,
+         confirmButtonText: this.translate.instant('swal.ok'),
+       });
      }
   }
 
