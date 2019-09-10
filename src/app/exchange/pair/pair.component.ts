@@ -1,12 +1,12 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import {Output, EventEmitter} from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {ShareDataService} from '../../services/share-data.service';
 import {NbMediaBreakpoint} from '@nebular/theme';
 import {Observable} from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
 import {environment} from '../../../environments/environment';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 declare let jQuery: any;
 
 @Component({
@@ -15,7 +15,7 @@ declare let jQuery: any;
   styleUrls: ['./pair.component.scss'],
 })
 
-export class PairComponent implements OnInit, AfterViewInit {
+export class PairComponent implements OnInit, AfterViewInit, OnDestroy  {
   @Output() messageEvent = new EventEmitter<any>();
   fetchPairSpinner: boolean = false;
   fetchPairData: boolean = false;
@@ -24,6 +24,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   myWallets: any = [];
   pairs = [];
   currentPairData: any;
+  private onDestroyObservable = new Subject<any>();
 
   constructor(private httpService: HttpService,
               private shareDataService: ShareDataService) {
@@ -31,7 +32,7 @@ export class PairComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    Observable.interval(environment.exchangeInterval).takeWhile(() => true).subscribe(() => {
+    Observable.interval(environment.exchangeInterval).takeUntil((this.onDestroyObservable)).subscribe(() => {
       this.getPairData();
     });
   }
@@ -83,13 +84,13 @@ export class PairComponent implements OnInit, AfterViewInit {
               'to': val.name.split('/')[1]
             });
           });
-        } else
-          this.pairs = _.merge(this.pairs, res.data.traded_pairs);
-        if (!this.currentPairData)
-          this.clickPair(this.pairs[0]);
-        else
-          this.clickPair(this.currentPairData);
+        }
+        this.clickPair(!this.currentPairData ? this.pairs[0] : this.currentPairData);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.onDestroyObservable.next();
   }
 }
