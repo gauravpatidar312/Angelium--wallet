@@ -173,7 +173,11 @@ export class EventsDetailComponent implements OnInit {
 
   setWalletType(wallet) {
     this.selectedWallet = wallet;
-    this.maxAmount = ShareDataService.toFixedDown(this.selectedWallet.wallet_amount, 6);
+    let decimalPlaces = 6;
+    if (this.selectedWallet.wallet_type === 'ANX') {
+      decimalPlaces = 0;
+    }
+    this.maxAmount = ShareDataService.toFixedDown(this.selectedWallet.wallet_amount, decimalPlaces);
     this.setAmount();
   }
 
