@@ -34,12 +34,7 @@ export class RegisterComponent implements OnDestroy, OnInit {
   breakpoints: any;
   breakpoint: NbMediaBreakpoint = {name: '', width: 0};
   selectedLang: string = 'SELECT';
-  languageData = [
-    // {'language': 'English', 'code': 'en'},
-    // {'language': 'Chinese', 'code': 'zh'},
-    // {'language': 'Japanese', 'code': 'ja'},
-    // {'language': 'Korean', 'code': 'ko'}
-  ];
+  languageData = [];
 
   @ViewChild('otpForm') otpForm: NgForm;
 
@@ -230,8 +225,8 @@ export class RegisterComponent implements OnDestroy, OnInit {
   changeLanguage(lan: any) {
     lan = lan || {'id': 1, 'language': 'English', 'language_code': 'en'};
     this.selectedLang = lan.language;
-    this.translate.use(lan.language_code);
     this.registerForm.controls.user_language.setValue(lan.id);
+    this.translate.use(lan.language_code);
     this.sessionStorageService.saveToLocalStorage('languageData', lan);
     this.getCapchaTranslation();
   }

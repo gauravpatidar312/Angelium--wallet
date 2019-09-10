@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   particleheight: number = 100;
   message: string;
   deviceInfo: any;
+  userData: any;
 
   constructor(private appRef: ApplicationRef,
               private analytics: AnalyticsService,
@@ -48,14 +49,14 @@ export class AppComponent implements OnInit {
         if (event.url === '/' || event.url === '/login') {
           this.shareDataService.autoLogOut = true;
         }
-        const userData = this.sessionStorage.getFromSession('userInfo');
-        if (!userData || (userData && !userData.is_admin)) {
+        this.userData = this.userData || this.sessionStorage.getFromSession('userInfo');
+        if (!this.userData || (this.userData && !this.userData.is_admin)) {
           this.httpService.get('maintenance/').subscribe((res?: any) => {
             if (res.is_under_maintenance) {
               if (event.url !== '/maintenance')
                 this.router.navigate(['/maintenance']);
             } else if (event.url === '/maintenance') {
-              if (userData)
+              if (this.userData)
                 this.router.navigate(['/pages/dashboard']);
               else
                 this.router.navigate(['']);
@@ -184,23 +185,24 @@ export class AppComponent implements OnInit {
 
   setLanguage(data: any) {
     if (!data) {
-      const languages = [
-        {'id': 1, 'language': 'English', 'language_code': 'en'},
-        {'id': 2, 'language': 'Chinese', 'language_code': 'zh'},
-        {'id': 3, 'language': 'Korean', 'language_code': 'ko'}
-      ];
-      const browserDetectLang = navigator.language.split('-')[0];
-      const currectLang = languages.find((data: any) => {
-        return data.language_code === browserDetectLang;
+      this.userData = this.userData || this.sessionStorage.getFromSession('userInfo');
+      this.httpService.get('languages/').subscribe(res => {
+        const languages: any = res;
+        const browserDetectLang = (navigator.language || '').split('-')[0];
+        let currentLang = languages.find((lang: any) => {
+          return lang.language_code === browserDetectLang;
+        });
+        if (!currentLang) {
+          currentLang = languages.find((lang: any) => {
+            return lang.language_code === 'en';
+          });
+        }
+        if (this.userData && this.userData.user_language) {
+          currentLang = this.userData.user_language;
+        }
+        this.translate.use(currentLang.language_code);
+        this.sessionStorage.saveToLocalStorage('languageData', currentLang);
       });
-      if (currectLang) {
-        this.translate.use(currectLang.language_code);
-        this.sessionStorage.saveToLocalStorage('languageData', currectLang);
-      } else {
-        const language = {id: 1, language: 'English', language_code: 'en'};
-        this.sessionStorage.saveToLocalStorage('languageData', language);
-        this.translate.setDefaultLang('en');
-      }
     } else {
       this.translate.use(data.language_code);
     }
@@ -210,11 +212,11 @@ export class AppComponent implements OnInit {
   public popstate($event) {
     const data = $event.currentTarget.location;
     const rememberUser = this.sessionStorage.getFromLocalStorage('rememberMe');
-    const userData = this.sessionStorage.getFromSession('userInfo');
+    this.userData = this.userData || this.sessionStorage.getFromSession('userInfo');
     if (data.hash === '#/login') {
-      if (rememberUser && !userData.is_2fa_enable)
+      if (rememberUser && !this.userData.is_2fa_enable)
         history.go(1);
-      else if (userData) {
+      else if (this.userData) {
         setTimeout(() => {
           this.toastrService.info(this.translate.instant('common.toastr.logOut'), this.translate.instant('common.angelium'));
         }, 10);
@@ -225,8 +227,8 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:beforeunload', ['$event'])
   public beforeunloadHandler($event) {
-    const userData = this.sessionStorage.getFromSession('userInfo');
-    if (userData) {
+    this.userData = this.userData || this.sessionStorage.getFromSession('userInfo');
+    if (this.userData) {
       window.localStorage['timestamp'] = new Date().getTime();
     }
   }
