@@ -286,8 +286,9 @@
     padding: 0.66rem 1.25rem 0.25rem !important;
   }
 
-  .m-t {
+  .another-heaven-container {
     margin-top: 25px;
+    padding: 0;
   }
 
   .table_bg {
@@ -433,9 +434,6 @@
       height: 100px;
     }
 
-    .m-t {
-      margin-top: 26%;
-    }
   }
 
   @media only screen and (width: 768px) {
@@ -446,10 +444,6 @@
     .days-text {
       font-size: 1.5rem;
       margin-right: 7px;
-    }
-
-    .m-t {
-      margin-top: 23%;
     }
 
   }
@@ -476,19 +470,20 @@
   }
 
   @media only screen and (width: 320px) {
-    .m-t[_ngcontent-c10] {
-      margin-top: 25px !important;
-    }
     .another-heaven {
       font-size: 19px;
+      i {
+        font-size: 53px;
+      }
     }
 
-    .days-font {
-      font-size: 6.6rem;
-      height: 100px;
-    }
-    .m-t {
-      margin-top: 27%;
+    .days-container {
+      padding: 0;
+
+      .days-font {
+        font-size: 6.6rem;
+        height: 100px;
+      }
     }
 
     .status-today-margin {
@@ -503,6 +498,10 @@
     /deep/ ng2-smart-table table tr td {
       font-size: 0.9em;
       font-family: nb-theme(font-nunito);
+    }
+
+    .plan-container {
+      padding: 0 15px;
     }
   }
 
