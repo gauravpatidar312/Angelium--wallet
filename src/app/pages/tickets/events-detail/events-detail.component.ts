@@ -178,12 +178,15 @@ export class EventsDetailComponent implements OnInit {
   }
 
   onBuyTickets() {
+    this.buyingTicket = true;
     if (!this.selectedTicket || !this.selectedTicket.id) {
       this.toastrService.danger(this.translate.instant('pages.xticket.toastr.pleaseSelectTicket'), this.translate.instant('common.xticket'));
+      this.buyingTicket = false;
       return;
     }
     if ((this.selectedTicket.price * this.noOfTickets) > this.selectedWallet.wallet_dollar_amount) {
       this.toastrService.danger(this.translate.instant('pages.heaven.toastr.youDontHaveSufficientBalance'), this.translate.instant('common.xticket'));
+      this.buyingTicket = false;
       return;
     }
     if (this.noOfTickets > this.selectedTicket.available_slot) {
@@ -200,9 +203,12 @@ export class EventsDetailComponent implements OnInit {
       this.httpService.post({'amount': Number(this.totalAmount)}, validateEndpoint).subscribe((res?: any) => {
         if (res.status)
           this.buyTickets();
-        else
+        else {
           this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('common.xticket'));
+          this.buyingTicket = false;
+        }
       }, (err) => {
+        this.buyingTicket = false;
         this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('common.xticket'));
       });
     } else
@@ -218,7 +224,6 @@ export class EventsDetailComponent implements OnInit {
       'owner_email': this.userInfo.email,
       'event_id': this.eventId
     };
-    this.buyingTicket = true;
     this.httpService.post(data, 'user-purchase/').subscribe((res?: any) => {
       this.buyingTicket = false;
       if (res.status) {

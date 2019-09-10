@@ -331,6 +331,13 @@
     border: 2px solid #7659ff !important;
   }
 
+  .winners-list-card {
+    /deep/ .dropdown-menu {
+      max-height: 194px;
+      overflow: auto;
+    }
+  }
+
   .smartContract {
     max-height: 670px;
     color: #d1d1ff;
