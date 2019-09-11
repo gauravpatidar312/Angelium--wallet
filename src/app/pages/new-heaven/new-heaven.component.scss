@@ -2,6 +2,21 @@
 @import '~@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
+  .legend {
+    .anx-background {
+      background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);
+    }
+    .heaven-background {
+      background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);
+    }
+  }
+
+  .font-avenir {
+    .label-color {
+      color: #00ff00;
+    }
+  }
+
   .dropdown-width {
     max-width: 250px;
     float: right;
@@ -367,6 +382,10 @@
     font-size: 30px;
   }
 
+  .smart-table-container {
+    overflow: auto;
+  }
+
   .heaven-history-spinner {
     display: block;
     font-size: 25px;
@@ -434,13 +453,20 @@
       height: 100px;
     }
 
+    .another-arrow {
+      i {
+        margin-left: 20px !important;
+      }
+    }
+  }
+
+  @media only screen and (width: 1440px) {
+    .plan-container {
+      padding: 0 10px;
+    }
   }
 
   @media only screen and (width: 768px) {
-    .days-font {
-      font-size: 4rem;
-      height: 60px;
-    }
     .days-text {
       font-size: 1.5rem;
       margin-right: 7px;
@@ -501,7 +527,7 @@
     }
 
     .plan-container {
-      padding: 0 15px;
+      padding: 0 5px !important;
     }
   }
 
@@ -509,6 +535,38 @@
     /deep/ ng2-smart-table table tr td {
       font-size: 0.9em;
       font-family: nb-theme(font-nunito);
+    }
+
+    .plan-container {
+      padding: 0;
+    }
+
+    .another-heaven {
+      font-size: 16px;
+    }
+
+    .another-arrow {
+      i {
+        margin: 0;
+        color: #26df8b;
+        font-size: 40px;
+      }
+    }
+
+    .offer-text-color {
+      font-size: 18px;
+    }
+
+    .days-font {
+      font-size: 50px;
+    }
+
+    .another-heaven-container {
+      margin-top: 10px;
+    }
+
+    .bonus-font {
+      margin-top: 8px;
     }
   }
 

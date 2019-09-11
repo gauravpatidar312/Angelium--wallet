@@ -1,4 +1,4 @@
-<div class="row" *ngIf="false">
+<div class="row">
   <div class="col-12 col-lg-6" *ngFor="let statusCard of statusCards">
     <ngx-status-card [statusCard]="statusCard">
     </ngx-status-card>
@@ -86,7 +86,7 @@
         <div class="row">
           <div class="col-md-6 col-lg-4">
             <div class="form-group font-avenir">
-              <label style="color: #00ff00">
+              <label class="label-color">
                 {{"common.from" | translate}}
               </label>
               <div class="status-dd-week dropdown" ngbDropdown>
@@ -105,7 +105,7 @@
           </div>
           <div class="col-md-6 col-lg-4">
             <div class="form-group total-amount font-avenir">
-              <label style="color: #00ff00">
+              <label class="label-color">
                 {{"common.amount" | translate}}
               </label>
               <div class="input-group">
@@ -157,14 +157,12 @@
         <div class="chart-header">
           <div class="legends">
             <div class="legend">
-              <div class="legend-item-color"
-                   style="background: linear-gradient(90deg, rgb(63, 202, 185) 0%, rgb(66, 215, 127) 100%);">
+              <div class="legend-item-color anx-background">
               </div>
               <div class="legend-title">{{"common.cryptos.anx" | translate}}</div>
             </div>
             <div class="legend">
-              <div class="legend-item-color"
-                   style="background: linear-gradient(90deg, rgb(156, 72, 255) 0%, rgb(108, 72, 232) 100%);">
+              <div class="legend-item-color heaven-background">
               </div>
               <div class="legend-title">{{'common.heaven'|translate}}</div>
             </div>
@@ -232,7 +230,8 @@
       <nb-card-body id="heaven-history">
         <div [hidden]="!fetchHeavenHistory"><span class="heaven-history-spinner"><i
           class="fa fa-spinner fa-spin"></i></span></div>
-        <div style="overflow: auto;">
+        <div class="text-right mb-2" *ngIf="showRewardText && !showHeavenTwo">{{'pages.heaven.heavenNotRewardedText' | translate}}</div>
+        <div class="smart-table-container">
           <ng2-smart-table class="heaven-history" [settings]="heavenOneSettings" [source]="heavenOneSource" *ngIf="!showHeavenTwo && !fetchHeavenHistory">
           </ng2-smart-table>
           <ng2-smart-table class="heaven-history" [settings]="settings" [source]="source" *ngIf="showHeavenTwo && !fetchHeavenHistory">
@@ -270,7 +269,7 @@
       <nb-card-body id="heaven-drop-history">
         <div [hidden]="!fetchHeavenDropHistory"><span class="heaven-history-spinner"><i
           class="fa fa-spinner fa-spin"></i></span></div>
-        <div style="overflow: auto;">
+        <div class="smart-table-container">
           <ng2-smart-table [settings]="heavenOneDrops" [source]="heavenOneDropSource" *ngIf="!showHeavenTwoDrop && !fetchHeavenDropHistory">
           </ng2-smart-table>
           <ng2-smart-table [settings]="heavenDrops" [source]="source_heavenDrop" *ngIf="showHeavenTwoDrop && !fetchHeavenDropHistory">
