@@ -96,9 +96,9 @@
               <td width="13%" class="text-left">{{order.timestamp | date:'yyyy.MM.dd HH:mm:ss'}}</td>
               <td width="10%" class="text-right">{{order.pair }}</td>
               <td width="8%" class="text-right"><span class="{{order.buy ? 'green-text' : 'pink-text' }}">{{order.buy ? 'Buy' : 'Sell' }}</span></td>
-              <td width="9%" class="text-right">{{order.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
-              <td width="20%" class="text-right">{{order.amount | number: '1.8-8'}} {{currentPair?.from | uppercase}}</td>
-              <td width="20%" class="text-right">{{order.price * order.amount | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
+              <td width="9%" class="text-right">{{order.price | number: '1.8-8'}} {{order?.to | uppercase}}</td>
+              <td width="20%" class="text-right">{{order.amount | number: '1.8-8'}} {{order?.from | uppercase}}</td>
+              <td width="20%" class="text-right">{{order.price * order.amount | number: '1.8-8'}} {{order?.to | uppercase}}</td>
               <td width="10%" class="text-right">{{order.filled | number: '1.0-2'}}%</td>
               <td width="10%" class="text-right"><span><a class="green-text cancel-text" (click)="onCancelOrder(order._id, order.pair)">Cancel</a></span></td>
             </tr>
@@ -125,9 +125,9 @@
               <td width="13%" class="text-left">{{history.timestamp | date:'yyyy.MM.dd HH:mm:ss'}}</td>
               <td width="10%" class="text-right">{{history.pair}}</td>
               <td width="8%" class="text-right"><span class="{{history.buy ? 'green-text' : 'pink-text' }}">{{history.buy ? 'BUY' : 'SELL' }}</span></td>
-              <td width="9%" class="text-right">{{history.price | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
-              <td width="20%" class="text-right">{{history.amount | number: '1.8-8'}} {{currentPair?.from | uppercase}}</td>
-              <td width="20%" class="text-right">{{history.price * history.amount | number: '1.8-8'}} {{currentPair?.to | uppercase}}</td>
+              <td width="9%" class="text-right">{{history.price | number: '1.8-8'}} {{history?.to | uppercase}}</td>
+              <td width="20%" class="text-right">{{history.amount | number: '1.8-8'}} {{history?.from | uppercase}}</td>
+              <td width="20%" class="text-right">{{history.price * history.amount | number: '1.8-8'}} {{history?.to | uppercase}}</td>
               <td width="20%" class="text-right">{{history.filled | number: '1.0-2'}}%</td>
             </tr>
             </tbody>
