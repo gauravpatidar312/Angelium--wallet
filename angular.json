@@ -79,6 +79,25 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
+            },
+            "stage": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stage.ts"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
             }
           }
         },
@@ -90,6 +109,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ngx-admin-anx:build:production"
+            },
+            "stage": {
+              "browserTarget": "ngx-admin-anx:build:stage"
             }
           }
         },
