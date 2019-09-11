@@ -93,12 +93,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
     this.httpService.get('exchange/wallet/').subscribe((res?: any) => {
       if (res.status) {
         const exchangeData = _.filter(res.data, (wallet) => {
-            let decimalPlaces = 6;
-            if (wallet.coin === 'ANX') {
-              decimalPlaces = 0;
-            } else if (wallet.coin === 'HEAVEN') {
-              decimalPlaces = 2;
-            }
+            let decimalPlaces = 8;
             wallet.max_balance = ShareDataService.toFixedDown(wallet.balance, decimalPlaces);
             return ['ANX', 'BTC', 'USDT', 'ETH'].indexOf(wallet.coin) >= 0;
           }) || [];
@@ -183,7 +178,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
       this.availableExchangeWalletType = tradeExchangeBuyObj.coin;
       // deposit
       const tradeDepositBuyObj: any = _.findLast(this.myWallets, ['name', (this.tradeBuy.to.toUpperCase() === 'USDT' ? 'ERCUSDT' : this.tradeBuy.to.toUpperCase())]) || {};
-      this.availableDepositBalance = ShareDataService.toFixedDown(Number(tradeDepositBuyObj.quantity), 8);
+      this.availableDepositBalance = tradeDepositBuyObj.max_quantity;
       this.availableDepositWalletType = tradeDepositBuyObj.name === 'ERCUSDT' ? 'USDT' : tradeDepositBuyObj.name;
     } else if (this.tradeTab === 'sell') {
       // widthDraw
@@ -192,7 +187,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
       this.availableExchangeWalletType = tradeExchangeSellObj.coin;
       // deposit
       const tradeDepositSellObj: any = _.findLast(this.myWallets, ['name', (this.tradeBuy.from.toUpperCase() === 'USDT' ? 'ERCUSDT' : this.tradeBuy.from.toUpperCase())]) || {};
-      this.availableDepositBalance = ShareDataService.toFixedDown(Number(tradeDepositSellObj.quantity), 8);
+      this.availableDepositBalance = tradeDepositSellObj.max_quantity;
       this.availableDepositWalletType = tradeDepositSellObj.name === 'ERCUSDT' ? 'USDT' : tradeDepositSellObj.name;
     }
   }

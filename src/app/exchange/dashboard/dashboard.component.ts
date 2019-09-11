@@ -97,6 +97,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.tradeTab2 = false;
         this.openOrderData = res.data;
         const openOrderBuySell = _.concat(this.openOrderData.buy, this.openOrderData.sell);
+        _.map(openOrderBuySell, (obj?: any) => {
+          const splitPair = _.split(obj.pair, '/');
+          obj.from = splitPair[0];
+          obj.to = splitPair[1];
+          return obj;
+        });
         this.openOrderBuySell = _.orderBy(openOrderBuySell, ['timestamp'], ['desc']);
         if (!this.openOrderBuySell.length) {
           this.noDataOpenTrade = true;
@@ -175,6 +181,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (res.status) {
         this.tradeTab2 = true;
         this.tradeTab1 = false;
+        _.map(res.data, (obj?: any) => {
+          const splitPair = _.split(obj.pair, '/');
+          obj.from = splitPair[0];
+          obj.to = splitPair[1];
+          return obj;
+        });
         this.tradeHistoryData = _.orderBy(res.data, ['timestamp'], ['desc']);
         this.myTradeHistory = this.tradeHistoryData;
         if (!this.myTradeHistory.length) {
