@@ -310,7 +310,7 @@
         <label class="text-success">{{"common.amount" | translate}}</label>
         <span class="available-amount font-avenir" (click)="setSendMaxValueForWithdraw()"
               *ngIf="selectWalletData?.coin">
-             {{(withdrawWalletAmount | number: '1.0-6') + ' ' + (selectWalletData?.coin) + ' / ' + ("pages.exchange.max" | translate)}}
+             {{(withdrawWalletAmount | number: '1.0-8') + ' ' + (selectWalletData?.coin) + ' / ' + ("pages.exchange.max" | translate)}}
           </span>
         <div class="input-group">
           <input type="number" min="0" step="0.000001" oninput="validity.valid||(value='');"
@@ -388,5 +388,5 @@
 </ng-template>
 
 <ng-template #angeliumBalanceContent>
-  <span>{{"pages.exchange.toastr.angeliumBalance" | translate}} {{availableDepositBalance | number : '1.0-8'}} {{availableDepositWalletType}}</span>
+  <span>{{"pages.exchange.toastr.angeliumBalance" | translate}} {{availableDepositBalance | number : '1.0-6'}} {{availableDepositWalletType}}</span>
 </ng-template>
