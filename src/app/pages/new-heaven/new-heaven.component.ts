@@ -20,7 +20,6 @@ declare let jQuery: any;
 interface CardSettings {
   title: string;
   value: number;
-  value_anx: number;
   fetchingValue: boolean;
   iconClass: string;
   type: string;
@@ -43,6 +42,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   heavenDrop: any;
   heavenVersion: string = this.translate.instant('common.heaven') + ' 2.0';
   heavenDropVersion: string = this.translate.instant('common.heaven') + ' 2.0';
+  showRewardText: boolean = false;
   showHeavenTwo: boolean = true;
   showHeavenTwoDrop: boolean = true;
   heavenType: string = 'week';
@@ -64,7 +64,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   totalHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropTotal'),
     value: 0,
-    value_anx: 0,
     fetchingValue: true,
     iconClass: 'fa fa-university',
     type: 'primary',
@@ -72,7 +71,6 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   todayHeavenDropCard: CardSettings = {
     title: this.translate.instant('pages.heaven.heavenDropToday'),
     value: 0,
-    value_anx: 0,
     fetchingValue: true,
     iconClass: 'nb-bar-chart',
     type: 'primary',
@@ -250,7 +248,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
       release_settings: {
-        title: this.translate.instant('pages.heaven.releaseSetting'),
+        title: this.translate.instant('pages.heaven.transferSetting'),
         type: 'custom',
         renderComponent: ReleaseSettingOneComponent,
         filter: false,
@@ -387,9 +385,13 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenOneHistory() {
+    this.showRewardText = false;
     jQuery('.heaven-history-spinner').height(jQuery('#heaven-history').height());
     this.fetchHeavenHistory = true;
     this.httpService.get('heaven-history/?filter_type=total').subscribe((res?: any) => {
+      this.showRewardText = _.some(res.results, (obj?: any) => {
+        return obj.total_received < 1;
+      });
       const data = _.orderBy(res.results, ['hid'], ['desc']);
       const heaven_history_data = _.map(data, (obj?: any) => {
         obj.currencyTitle = obj.currency_type;
@@ -550,10 +552,8 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.httpService.get('heaven-drop/').subscribe((res?: any) => {
       this.totalHeavenDropCard.fetchingValue = false;
       this.totalHeavenDropCard.value = res.heaven_drop_total;
-      this.totalHeavenDropCard.value_anx = res.heaven_drop_total_anx;
       this.todayHeavenDropCard.fetchingValue = false;
       this.todayHeavenDropCard.value = res.heaven_drop_today;
-      this.todayHeavenDropCard.value_anx = res.heaven_drop_today_anx;
     }, (err) => {
       this.totalHeavenDropCard.fetchingValue = false;
       this.todayHeavenDropCard.fetchingValue = false;

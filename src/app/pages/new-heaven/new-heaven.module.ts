@@ -18,7 +18,6 @@ import { SolarComponent } from './solar/solar.component';
 import { TranslateModule } from '@ngx-translate/core';
 import {StatusCardComponent} from './status-card/status-card.component';
 import {StatusCardFrontComponent} from './status-card/front-side/status-card-front.component';
-import {StatusCardBackComponent} from './status-card/back-side/status-card-back.component';
 import {ReleaseSettingOneComponent} from './releaseSettingOne.component';
 import {ReleaseSettingComponent} from './releaseSetting.component';
 
@@ -36,7 +35,6 @@ import {ReleaseSettingComponent} from './releaseSetting.component';
     ReleaseSettingOneComponent,
     StatusCardComponent,
     StatusCardFrontComponent,
-    StatusCardBackComponent
   ],
   imports: [
     CommonModule,

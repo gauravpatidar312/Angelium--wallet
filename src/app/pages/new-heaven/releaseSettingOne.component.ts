@@ -29,27 +29,17 @@ declare let jQuery: any;
         {{value}}
       </button>
       <ul class="dropdown-menu" ngbDropdownMenu>
-        <li class="dropdown-item"
-            (click)="releaseSettingChange(rowData, 'ultra', 'Ultra Heaven')">
-          {{'pages.heaven.ultraHeaven' | translate}}
+        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '30', 'Heaven 30')">
+          Heaven 30
         </li>
-        <li class="dropdown-item" *ngIf="rowData.plan ==='Heaven 30'"
-            (click)="releaseSettingChange(rowData, '30', 'Heaven 30')">
-          {{"common.heaven" | translate}} 30
+        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '60', 'Heaven 60')">
+          Heaven 60
         </li>
-        <li class="dropdown-item" *ngIf="rowData.plan ==='Heaven 30'"
-            (click)="releaseSettingChange(rowData, '60', 'Heaven 60')">
-          {{"common.heaven" | translate}} 60
+        <li class="dropdown-item" (click)="releaseSettingChange(rowData, '90', 'Ultra Heaven 90')">
+          Ultra Heaven 90
         </li>
-        <li class="dropdown-item" *ngIf="rowData.plan ==='Heaven 30'"
-            (click)="releaseSettingChange(rowData, '90', 'Heaven 90')">
-          {{"common.heaven" | translate}} 90
-        </li>
-        <li class="dropdown-item" *ngIf="currentDate < releaseDate"
-            (click)="releaseSettingChange(rowData, 'release', 'Stop')">Stop
-        </li>
-        <li class="dropdown-item" *ngIf="currentDate >= releaseDate"
-            (click)="releaseSettingChange(rowData, 'release', 'Release')">Release
+        <li class="dropdown-item" (click)="onReleaseSetting(rowData)">
+          Release
         </li>
       </ul>
     </div>`
