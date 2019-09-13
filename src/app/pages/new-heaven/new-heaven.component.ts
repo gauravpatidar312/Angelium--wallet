@@ -549,7 +549,7 @@ export class NewHeavenComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getHeavenDrop() {
-    this.httpService.get('heaven-drop/').subscribe((res?: any) => {
+    this.httpService.get('heaven/drop/').subscribe((res?: any) => {
       this.totalHeavenDropCard.fetchingValue = false;
       this.totalHeavenDropCard.value = res.heaven_drop_total;
       this.todayHeavenDropCard.fetchingValue = false;

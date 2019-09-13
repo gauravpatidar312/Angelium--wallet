@@ -72,12 +72,14 @@ export class ReleaseSettingOneComponent implements ViewCell, OnInit {
   releaseSettingChange(data, planType, valueType) {
     this.value = valueType;
     const apiData = {
-      'hid': data.hid,
-      'release_settings': planType,
+      'old_heaven_id': data.hid,
+      'new_plan': planType,
     };
-    this.httpService.put(apiData, 'heaven/release-settings/').subscribe((res?: any) => {
+    this.httpService.put(apiData, 'heaven/migrate_heaven/').subscribe((res?: any) => {
       if (!res.status)
         this.toastrService.danger(this.shareDataService.getErrorMessage(res), this.translate.instant('pages.heaven.heavenHistory'));
+      else
+        this.onReleaseSaved.emit(this.rowData);
     }, (err) => {
       this.toastrService.danger(this.shareDataService.getErrorMessage(err), this.translate.instant('pages.heaven.heavenHistory'));
     });
@@ -105,7 +107,7 @@ export class ReleaseSettingOneComponent implements ViewCell, OnInit {
 
       this.rowData.fetchHeavenRelease = true;
       this.onReleaseRefresh.emit(this.rowData);
-      this.httpService.post({heaven_id: data.hid}, 'heaven-release/').subscribe((res?: any) => {
+      this.httpService.post({'heaven_id': data.hid}, 'heaven/release/').subscribe((res?: any) => {
         if (res.status) {
           this.rowData.fetchHeavenRelease = false;
           this.onReleaseRefresh.emit(this.rowData);
