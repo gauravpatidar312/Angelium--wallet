@@ -45,6 +45,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {GamesModule} from './games/games.module';
 
 import { ExchangeModule } from './exchange/exchange.module';
+import { XloveModule } from './xlove/xlove.module';
 
 export class CustomLoader implements TranslateLoader {
   constructor(private httpService: HttpService) {}
@@ -74,6 +75,7 @@ const firebaseConfig = {
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, InternationalPhoneNumberModule, ParticlesModule,
     ExchangeModule,
+    XloveModule,
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     DeviceDetectorModule.forRoot(),
